@@ -1,0 +1,135 @@
+// Satriano Atelier — Faz 1 MVP data model.
+// Single product (Polo T-shirt) is hardcoded in the app for now, so there is
+// no Product table yet — Fabric is the only product-variation dimension.
+// A Product table is deferred to Faz 3 (second product type).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OrderStatus {
+  DRAFT
+  PROFORMA_SENT
+  APPROVED
+  PAID
+  IN_PRODUCTION
+}
+
+enum LogoPlacement {
+  LEFT_CHEST
+  RIGHT_SLEEVE
+}
+
+enum PaymentMethod {
+  VIRTUAL_POS
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  taxId     String?
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users  User[]
+  orders Order[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  companyId String
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model Fabric {
+  id             String   @id @default(cuid())
+  name           String   @unique
+  description    String?
+  imageUrl       String?
+  colorway       String?
+  unitPriceCents Int
+  setupFeeCents  Int      @default(0)
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  orderLines OrderLine[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  companyId     String
+  status        OrderStatus @default(DRAFT)
+  setupFeeCents Int         @default(0)
+  totalCents    Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  company    Company     @relation(fields: [companyId], references: [id])
+  lines      OrderLine[]
+  logoAssets LogoAsset[]
+  proforma   Proforma?
+  payment    Payment?
+}
+
+model OrderLine {
+  id             String @id @default(cuid())
+  orderId        String
+  fabricId       String
+  size           String
+  quantity       Int
+  // Snapshot of Fabric.unitPriceCents at order time — Fabric's live price
+  // can change later, but a placed order's ledger must not.
+  unitPriceCents Int
+
+  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fabric Fabric @relation(fields: [fabricId], references: [id])
+}
+
+model LogoAsset {
+  id         String        @id @default(cuid())
+  orderId    String
+  storageUrl String
+  placement  LogoPlacement
+  uploadedAt DateTime      @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Proforma {
+  id         String    @id @default(cuid())
+  orderId    String    @unique
+  refNo      String    @unique
+  pdfUrl     String?
+  sentAt     DateTime?
+  validUntil DateTime?
+  createdAt  DateTime  @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id        String        @id @default(cuid())
+  orderId   String        @unique
+  method    PaymentMethod @default(VIRTUAL_POS)
+  status    PaymentStatus @default(PENDING)
+  posRef    String?
+  createdAt DateTime      @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}

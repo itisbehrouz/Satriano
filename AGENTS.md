@@ -3,3 +3,9 @@
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
+
+# Language Rule (Strict)
+- The client and target audience are international (non-Turkish).
+- All UI text, date formats (e.g., `en-US`), API error messages, PDF outputs, code comments, and documentation MUST be 100% in **English only**.
+- Do NOT add Turkish text anywhere in the project codebase, database seed, UI, or API responses.
+

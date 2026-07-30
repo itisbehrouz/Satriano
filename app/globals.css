@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------- */
+/* Satriano Atelier — B2B Manufacturing Portal Design System              */
+/* Source of truth: /DESIGN.md (project root), OFFICIAL 2026-07-30        */
+/* ---------------------------------------------------------------------- */
+
+@theme {
+  /* Canvas & Surface Colors */
+  --color-bg-page: #F5F7FA;
+  --color-background: #F5F7FA;
+  --color-surface: #FFFFFF;
+  --color-surface-dim: #0B1E3D;
+
+  /* Header & Footer Brand Block */
+  --color-header: #0B1E3D;
+  --color-text-on-header: #E8ECF3;
+
+  /* Interactive Accent (Everyday Action Blue) */
+  --color-accent: #2E5AAC;
+  --color-accent-hover: #24498E;
+
+  /* Brand Mark (Logo Gold ONLY — max 1 small signature accent per view) */
+  --color-brand-mark: #DBB671;
+  --color-gold: #DBB671;
+
+  /* Text Roles */
+  --color-text-primary: #1A2233;
+  --color-on-surface: #1A2233;
+  --color-text-secondary: #5B6B85;
+  --color-on-surface-variant: #5B6B85;
+
+  /* Borders & Outlines */
+  --color-outline: #D1D5DB;
+  --color-outline-variant: #E5E7EB;
+
+  /* Status Colors */
+  --color-status-success-text: #0F6E56;
+  --color-status-success-bg: #E1F5EE;
+  --color-status-warning-text: #854F0B;
+  --color-status-warning-bg: #FAEEDA;
+  --color-status-info-text: #185FA5;
+  --color-status-info-bg: #E6F1FB;
+  --color-status-error-text: #A32D2D;
+  --color-status-error-bg: #FCEBEB;
+
+  /* Typography Font Families */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-baskervville), Georgia, serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.font-logo {
+  font-family: var(--font-baskervville), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.max-w-container-max {
+  max-width: 1440px;
+}
+
+/* Tabular numbers for all price and numeric displays */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F5F7FA;
+  color: #1A2233;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
