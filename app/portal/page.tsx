@@ -46,14 +46,39 @@ export default function PortalPage() {
     window.location.href = "/konfigurator";
   }
 
-  function handleRegister(e: React.FormEvent) {
+  async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
     if (!companyName.trim() || !corpEmail.trim() || !fullName.trim()) {
       setRegError("Please fill out all required company and contact fields.");
       return;
     }
     setRegError(null);
-    setView("SUBMITTED");
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          companyName,
+          website,
+          industry,
+          annualVolume,
+          fullName,
+          jobTitle,
+          corpEmail,
+          phone,
+          needs,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to submit application.");
+      }
+
+      setView("SUBMITTED");
+    } catch (err) {
+      console.error(err);
+      setRegError("Failed to submit application. Please try again.");
+    }
   }
 
   return (
