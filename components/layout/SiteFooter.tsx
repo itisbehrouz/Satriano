@@ -38,7 +38,7 @@ export function SiteFooter() {
               <img
                 src="/Satrinao.png"
                 alt="Satriano Atelier"
-                className="h-9 w-auto object-contain"
+                className="h-[45px] md:h-[48px] w-auto object-contain"
               />
             </Link>
             <p className="text-xs text-[#8DA0C4] leading-relaxed max-w-sm">

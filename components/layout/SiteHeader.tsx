@@ -24,7 +24,7 @@ export function SiteHeader() {
           <img
             src="/Satrinao.png"
             alt="Satriano Atelier"
-            className="h-9 md:h-10 w-auto object-contain"
+            className="h-[45px] md:h-[50px] w-auto object-contain"
           />
         </Link>
 
