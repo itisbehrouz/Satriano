@@ -78,7 +78,7 @@ export default function HomePage() {
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A2233] leading-tight tracking-tight">
-                  Industrial White-Label Garment Manufacturing
+                  Your product. Your price. Your brand. <span className="text-[#2E5AAC]">We manufacture it.</span>
                 </h1>
 
                 <p className="text-base md:text-lg text-[#5B6B85] max-w-2xl leading-relaxed">
