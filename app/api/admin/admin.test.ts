@@ -1,12 +1,21 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { GET as getOrders } from "@/app/api/admin/orders/route";
 import { PATCH as updateOrder } from "@/app/api/admin/orders/[orderId]/route";
 import { POST as loginAdmin } from "@/app/api/admin/login/route";
 import { GET as getApplications } from "@/app/api/applications/route";
-import { getAdminAccessKey } from "@/lib/adminAuth";
+import { middleware } from "@/middleware";
+import { NextRequest } from "next/server";
+import { getAdminAccessKey, verifyAdminToken, createAdminToken } from "@/lib/adminAuth";
 
 describe("Admin Authentication & Security Audit Test Suite", () => {
   const validAccessKey = getAdminAccessKey();
+
+  it("Verifies jose SignJWT & jwtVerify creates valid token with HS256 algorithm", async () => {
+    const token = await createAdminToken();
+    expect(typeof token).toBe("string");
+    const isValid = await verifyAdminToken(token);
+    expect(isValid).toBe(true);
+  });
 
   it("Rejects unauthenticated requests to GET /api/admin/orders with 401", async () => {
     const req = new Request("http://localhost/api/admin/orders", { method: "GET" });
@@ -64,5 +73,12 @@ describe("Admin Authentication & Security Audit Test Suite", () => {
     });
     const res = await getOrders(req);
     expect(res.status).toBe(200);
+  });
+
+  it("Middleware redirects unauthenticated requests targeting /admin/orders to /admin login gate", async () => {
+    const req = new NextRequest("http://localhost/admin/orders");
+    const res = await middleware(req);
+    expect(res.status).toBe(307);
+    expect(res.headers.get("location")).toContain("/admin");
   });
 });

@@ -1,3 +1,4 @@
+import { CompactSign, jwtVerify } from "jose";
 import crypto from "crypto";
 
 const DEFAULT_TEST_KEY =
@@ -9,22 +10,9 @@ export function getAdminAccessKey(): string {
   return process.env.ADMIN_ACCESS_KEY || DEFAULT_TEST_KEY;
 }
 
-export function getAdminJwtSecret(): string {
-  return process.env.ADMIN_JWT_SECRET || DEFAULT_TEST_JWT_SECRET;
-}
-
-function base64UrlEncode(str: string): string {
-  return Buffer.from(str)
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-}
-
-function base64UrlDecode(str: string): string {
-  let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
-  while (base64.length % 4) base64 += "=";
-  return Buffer.from(base64, "base64").toString("utf-8");
+export function getAdminJwtSecret(): Uint8Array {
+  const secret = process.env.ADMIN_JWT_SECRET || DEFAULT_TEST_JWT_SECRET;
+  return Uint8Array.from(Buffer.from(secret, "utf-8"));
 }
 
 /**
@@ -45,50 +33,38 @@ export function verifyAdminKey(inputKey: string): boolean {
 }
 
 /**
- * Creates a signed JWT token for httpOnly session cookies
+ * Creates a spec-compliant signed JWT token using audited `jose` library (CompactSign)
  */
 export async function createAdminToken(): Promise<string> {
-  const header = base64UrlEncode(JSON.stringify({ alg: "HS256", typ: "JWT" }));
-  const payload = base64UrlEncode(
-    JSON.stringify({
-      role: "admin",
-      atelier: "satriano",
-      exp: Math.floor(Date.now() / 1000) + 86400,
-    })
-  );
   const secret = getAdminJwtSecret();
-  const signature = crypto
-    .createHmac("sha256", secret)
-    .update(`${header}.${payload}`)
-    .digest("base64url");
+  const payloadBytes = Uint8Array.from(
+    Buffer.from(
+      JSON.stringify({
+        role: "admin",
+        atelier: "satriano",
+        iat: Math.floor(Date.now() / 1000),
+        exp: Math.floor(Date.now() / 1000) + 86400,
+      }),
+      "utf-8"
+    )
+  );
 
-  return `${header}.${payload}.${signature}`;
+  const jws = new CompactSign(payloadBytes);
+  jws.setProtectedHeader({ alg: "HS256" });
+  return await jws.sign(secret);
 }
 
 /**
- * Verifies a signed JWT token
+ * Verifies a signed JWT token using audited `jose` library (jwtVerify) with pinned HS256 algorithm
  */
 export async function verifyAdminToken(token: string): Promise<boolean> {
   if (!token || typeof token !== "string") return false;
-  const parts = token.split(".");
-  if (parts.length !== 3) return false;
-
-  const [header, payload, signature] = parts;
-  const secret = getAdminJwtSecret();
-  const expectedSig = crypto
-    .createHmac("sha256", secret)
-    .update(`${header}.${payload}`)
-    .digest("base64url");
-
-  if (signature !== expectedSig) return false;
-
   try {
-    const parsedPayload = JSON.parse(base64UrlDecode(payload));
-    if (parsedPayload.role !== "admin") return false;
-    if (parsedPayload.exp && Math.floor(Date.now() / 1000) > parsedPayload.exp) {
-      return false;
-    }
-    return true;
+    const secret = getAdminJwtSecret();
+    const { payload } = await jwtVerify(token, secret, {
+      algorithms: ["HS256"], // Explicitly pin algorithm to prevent algorithm-confusion attacks
+    });
+    return (payload as any).role === "admin";
   } catch {
     return false;
   }
