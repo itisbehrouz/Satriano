@@ -8,18 +8,18 @@ const NAVIGATION_LINKS = [
 ];
 
 const LEGAL_COMPLIANCE_LINKS = [
-  { label: "Terms of Service", href: "#terms" },
-  { label: "Privacy Policy", href: "#privacy" },
-  { label: "B2B Supply & Manufacturing Terms", href: "#supply-agreement" },
-  { label: "Security & Data Protection", href: "#security" },
-  { label: "Cookie Policy", href: "#cookies" },
-  { label: "Supply Chain Transparency & Ethics", href: "#ethics" },
+  { label: "Terms of Service", href: "/legal/terms" },
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "B2B Supply & Manufacturing Terms", href: "/legal/supply-terms" },
+  { label: "Security & Data Protection", href: "/legal/security" },
+  { label: "Cookie Policy", href: "/legal/cookies" },
+  { label: "Supply Chain Transparency & Ethics", href: "/legal/ethics" },
 ];
 
 const QUALITY_OPERATIONS_LINKS = [
-  { label: "ISO 9001 Quality Assurance", href: "#quality" },
-  { label: "Fabric & Material Standards", href: "#fabrics" },
-  { label: "Global B2B Logistics Support", href: "#logistics" },
+  { label: "ISO 9001 Quality Assurance", href: "/legal/supply-terms#quality" },
+  { label: "Fabric & Material Standards", href: "/legal/supply-terms#fabrics" },
+  { label: "Global B2B Logistics Support", href: "/legal/supply-terms#logistics" },
   { label: "Proforma Invoice Verification", href: "/portal" },
 ];
 
@@ -84,12 +84,12 @@ export function SiteFooter() {
             <ul className="space-y-2.5 text-xs text-[#8DA0C4]">
               {QUALITY_OPERATIONS_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="hover:text-[#E8ECF3] transition-colors block"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -103,12 +103,12 @@ export function SiteFooter() {
             <ul className="space-y-2.5 text-xs text-[#8DA0C4]">
               {LEGAL_COMPLIANCE_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="hover:text-[#E8ECF3] transition-colors block"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
