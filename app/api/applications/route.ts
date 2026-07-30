@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 export async function POST(req: Request) {
   try {
@@ -50,15 +51,8 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const authHeader = req.headers.get("authorization");
-    const sessionCookie = req.headers.get("cookie");
-
-    // Server-side admin verification (Section 9)
-    const isAuthenticated =
-      authHeader?.includes("satriano2026") ||
-      sessionCookie?.includes("sat_portal_console_auth=true");
-
-    if (!isAuthenticated) {
+    const isAuth = await verifyAdminRequest(req);
+    if (!isAuth) {
       return NextResponse.json(
         { error: "Unauthorized access to Portal Console applications API." },
         { status: 401 }

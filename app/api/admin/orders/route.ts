@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 import type { OrderStatus } from "@/app/generated/prisma/enums";
 
 export async function GET(request: Request) {
   try {
+    const isAuth = await verifyAdminRequest(request);
+    if (!isAuth) {
+      return NextResponse.json(
+        { error: "Unauthorized access to admin orders API." },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const statusFilter = searchParams.get("status") as OrderStatus | null;
 

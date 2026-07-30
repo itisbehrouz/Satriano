@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { POST, GET } from "@/app/api/applications/route";
 import { prisma } from "@/lib/prisma";
+import { getAdminAccessKey } from "@/lib/adminAuth";
 
 describe("B2B Applications API", () => {
   beforeEach(async () => {
@@ -55,10 +56,11 @@ describe("B2B Applications API", () => {
       },
     });
 
+    const validKey = getAdminAccessKey();
     const req = new Request("http://localhost/api/applications", {
       method: "GET",
       headers: {
-        Authorization: "Bearer satriano2026",
+        Authorization: `Bearer ${validKey}`,
       },
     });
 

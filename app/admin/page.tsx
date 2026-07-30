@@ -19,6 +19,7 @@ const TABS: { id: FilterTab; label: string }[] = [
 
 export default function AdminDashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [checkingSession, setCheckingSession] = useState<boolean>(true);
   const [accessKey, setAccessKey] = useState<string>("");
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -27,33 +28,63 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Check existing session auth on mount
+  // Check server-verified signed httpOnly cookie session on mount
   useEffect(() => {
-    const sessionAuth = sessionStorage.getItem("sat_portal_console_auth");
-    if (sessionAuth === "true") {
-      setIsAuthenticated(true);
+    async function checkSession() {
+      try {
+        const res = await fetch("/api/admin/session");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.authenticated) {
+            setIsAuthenticated(true);
+          }
+        }
+      } catch (err) {
+        console.error("Session check error:", err);
+      } finally {
+        setCheckingSession(false);
+      }
     }
+    checkSession();
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!accessKey.trim()) {
       setAuthError("Please enter your corporate access key.");
       return;
     }
-    // Accept valid admin key (e.g. satriano2026 or any non-empty key for dev/admin)
-    if (accessKey.trim().toLowerCase() === "satriano2026" || accessKey.trim().length >= 4) {
-      sessionStorage.setItem("sat_portal_console_auth", "true");
+
+    setAuthError(null);
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accessKey }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setAuthError(data.error || "Invalid access key.");
+        return;
+      }
+
       setIsAuthenticated(true);
-      setAuthError(null);
-    } else {
-      setAuthError("Invalid access key. Authorized personnel only.");
+      setAccessKey("");
+    } catch (err) {
+      console.error("Login error:", err);
+      setAuthError("Server authentication error. Please try again.");
     }
   };
 
-  const handleSignOut = () => {
-    sessionStorage.removeItem("sat_portal_console_auth");
-    setIsAuthenticated(false);
+  const handleSignOut = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch (err) {
+      console.error("Logout error:", err);
+    } finally {
+      setIsAuthenticated(false);
+    }
   };
 
   const fetchOrders = useCallback(async () => {
@@ -69,8 +100,7 @@ export default function AdminDashboardPage() {
       const data = await res.json();
       setOrders(data.orders || []);
     } catch (err) {
-      setError("Error loading orders from server.");
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Failed to load orders");
     } finally {
       setLoading(false);
     }
@@ -82,14 +112,38 @@ export default function AdminDashboardPage() {
     }
   }, [isAuthenticated, fetchOrders]);
 
-  const totalRevenueCents = orders
-    .filter((o) => o.status === "PAID" || o.status === "IN_PRODUCTION")
-    .reduce((acc, o) => acc + o.totalCents, 0);
+  const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
+    try {
+      const res = await fetch(`/api/admin/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
 
-  const inProductionCount = orders.filter((o) => o.status === "IN_PRODUCTION").length;
-  const paidCount = orders.filter((o) => o.status === "PAID").length;
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Failed to update status");
+        return;
+      }
 
-  // UNAUTHENTICATED: Render Secure Portal Console Login Screen
+      await fetchOrders();
+    } catch {
+      alert("Failed to update status. Please try again.");
+    }
+  };
+
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center font-sans">
+        <div className="text-sm text-[#5B6B85] flex items-center gap-2">
+          <span className="w-4 h-4 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
+          Verifying Portal Console session...
+        </div>
+      </div>
+    );
+  }
+
+  // Render Login Gate if unauthenticated
   if (!isAuthenticated) {
     return (
       <>
@@ -148,21 +202,21 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {authError && (
-                  <div className="p-3 bg-[#FCEBEB] border border-[#A32D2D] text-[#A32D2D] text-xs rounded">
+                  <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
                     {authError}
                   </div>
                 )}
 
                 <button
                   type="submit"
-                  className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-2.5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
                 >
-                  Authenticate &amp; Access Console →
+                  Authenticate &amp; Unlock Console
                 </button>
               </form>
 
               <div className="mt-6 pt-4 border-t border-[#E5E7EB] text-center text-[11px] text-[#5B6B85]">
-                Strictly restricted to Satriano Atelier authorized managers.
+                Internal security audit logged. Unauthorized access attempts are monitored.
               </div>
             </div>
           </div>
@@ -172,99 +226,83 @@ export default function AdminDashboardPage() {
     );
   }
 
-  // AUTHENTICATED: Render Full Portal Console Dashboard
+  // Render Admin Operations Console
   return (
     <>
       <SiteHeader />
-      <main className="min-h-screen bg-[#F5F7FA] p-6 md:p-8 max-w-container-max mx-auto text-[#1A2233]">
-        <header className="mb-8 bg-white border border-[#D1D5DB] rounded-lg p-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+        <div className="w-full max-w-container-max mx-auto space-y-6">
+          {/* Top Bar Header */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0B1E3D] text-white text-xs font-semibold uppercase tracking-wider rounded mb-2">
-                <span className="w-2 h-2 rounded-full bg-[#DBB671] inline-block" />
-                Portal Console Operations
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
+                  Portal Console
+                </h1>
+                <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-2 py-0.5 rounded border border-[#B3D6F6]">
+                  Production Ledger
+                </span>
               </div>
-              <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                Order Management Ledger
-              </h1>
-              <p className="text-xs md:text-sm text-[#5B6B85] mt-1">
-                Scannable order ledger &amp; manual production status transitions.
+              <p className="text-xs text-[#5B6B85] mt-1">
+                Internal order management, proforma status verification &amp; factory pipeline tracking.
               </p>
             </div>
-            <div className="flex items-center gap-3 self-start md:self-auto">
+
+            <div className="flex items-center gap-3">
               <button
-                onClick={() => fetchOrders()}
-                className="px-4 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors"
+                onClick={fetchOrders}
+                className="px-3.5 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >
-                Refresh Orders
+                <span className="material-symbols-outlined text-sm">refresh</span>
+                Refresh Ledger
               </button>
               <button
                 onClick={handleSignOut}
-                className="px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] text-[#5B6B85] text-xs font-semibold uppercase tracking-wider rounded transition-colors"
+                className="px-3.5 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >
+                <span className="material-symbols-outlined text-sm">logout</span>
                 Sign Out
               </button>
             </div>
           </div>
-        </header>
 
-        {/* Metrics Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="p-5 border border-[#D1D5DB] bg-white rounded-lg">
-            <div className="text-xs uppercase font-semibold tracking-wider text-[#5B6B85] mb-1">
-              Total Filtered Orders
-            </div>
-            <div className="text-3xl font-bold text-[#1A2233] tabular-nums">
-              {orders.length}
-            </div>
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap gap-2 border-b border-[#D1D5DB] pb-3">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-3.5 py-2 text-xs font-medium rounded transition-colors ${
+                  activeTab === tab.id
+                    ? "bg-[#0B1E3D] text-white font-semibold shadow-sm"
+                    : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
-          <div className="p-5 border border-[#D1D5DB] bg-white rounded-lg">
-            <div className="text-xs uppercase font-semibold tracking-wider text-[#5B6B85] mb-1">
-              Ready for Manufacturing
+
+          {/* Main Table Content */}
+          {loading ? (
+            <div className="bg-white border border-[#D1D5DB] rounded-lg p-12 text-center text-sm text-[#5B6B85] shadow-sm">
+              <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+              <p>Loading production orders ledger...</p>
             </div>
-            <div className="text-3xl font-bold text-[#2E5AAC] tabular-nums">
-              {paidCount + inProductionCount}
+          ) : error ? (
+            <div className="bg-white border border-[#F8B4B4] rounded-lg p-6 text-center text-sm text-[#C5221F]">
+              <p className="font-semibold mb-1">Ledger Error</p>
+              <p className="text-xs">{error}</p>
             </div>
-          </div>
-          <div className="p-5 border border-[#D1D5DB] bg-white rounded-lg">
-            <div className="text-xs uppercase font-semibold tracking-wider text-[#5B6B85] mb-1">
-              Paid Revenue Total
+          ) : (
+            <div className="bg-white border border-[#D1D5DB] rounded-lg shadow-sm overflow-hidden">
+              <AdminOrderTable
+                orders={orders}
+                onStatusChange={fetchOrders}
+              />
             </div>
-            <div className="text-3xl font-bold text-[#0F6E56] tabular-nums">
-              ${(totalRevenueCents / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}
-            </div>
-          </div>
+          )}
         </div>
-
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2 border-b border-[#D1D5DB] mb-6">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
-                activeTab === tab.id
-                  ? "border-[#2E5AAC] text-[#2E5AAC] bg-white rounded-t"
-                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Content Table */}
-        {loading ? (
-          <div className="p-12 text-center border border-[#D1D5DB] bg-white rounded-lg text-[#5B6B85]">
-            Loading order ledgers...
-          </div>
-        ) : error ? (
-          <div className="p-6 border border-[#A32D2D] bg-[#FCEBEB] text-[#A32D2D] rounded-lg">
-            {error}
-          </div>
-        ) : (
-          <AdminOrderTable orders={orders} onStatusChange={fetchOrders} />
-        )}
       </main>
       <SiteFooter />
     </>

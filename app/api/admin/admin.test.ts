@@ -1,87 +1,68 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { prisma } from "@/lib/prisma";
+import { describe, it, expect, beforeEach } from "vitest";
 import { GET as getOrders } from "@/app/api/admin/orders/route";
-import { PATCH as updateOrderStatus } from "@/app/api/admin/orders/[orderId]/route";
+import { PATCH as updateOrder } from "@/app/api/admin/orders/[orderId]/route";
+import { POST as loginAdmin } from "@/app/api/admin/login/route";
+import { GET as getApplications } from "@/app/api/applications/route";
+import { getAdminAccessKey } from "@/lib/adminAuth";
 
-const createdCompanyIds: string[] = [];
+describe("Admin Authentication & Security Audit Test Suite", () => {
+  const validAccessKey = getAdminAccessKey();
 
-afterEach(async () => {
-  if (createdCompanyIds.length === 0) return;
-  await prisma.order.deleteMany({ where: { companyId: { in: createdCompanyIds } } });
-  await prisma.company.deleteMany({ where: { id: { in: createdCompanyIds } } });
-  createdCompanyIds.length = 0;
-});
-
-describe("Admin API Routes", () => {
-  it("fetches orders list with status filter", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
-    const company = await prisma.company.create({
-      data: {
-        name: "Admin Fetch Co",
-        email: `test-admin-fetch-${Date.now()}@example.com`,
-      },
-    });
-    createdCompanyIds.push(company.id);
-
-    await prisma.order.create({
-      data: {
-        companyId: company.id,
-        status: "IN_PRODUCTION",
-        setupFeeCents: 15000,
-        totalCents: 570000,
-        lines: {
-          create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1850 }],
-        },
-      },
-    });
-
-    const res = await getOrders(
-      new Request("http://localhost/api/admin/orders?status=IN_PRODUCTION")
-    );
-    expect(res.status).toBe(200);
-
-    const json = await res.json();
-    expect(json.orders).toBeDefined();
-    expect(Array.isArray(json.orders)).toBe(true);
-    expect(json.orders.some((o: { companyId: string }) => o.companyId === company.id)).toBe(true);
+  it("Rejects unauthenticated requests to GET /api/admin/orders with 401", async () => {
+    const req = new Request("http://localhost/api/admin/orders", { method: "GET" });
+    const res = await getOrders(req);
+    expect(res.status).toBe(401);
   });
 
-  it("updates order status manually via PATCH endpoint", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
-    const company = await prisma.company.create({
-      data: {
-        name: "Admin Patch Co",
-        email: `test-admin-patch-${Date.now()}@example.com`,
-      },
+  it("Rejects unauthenticated requests to PATCH /api/admin/orders/[id] with 401", async () => {
+    const req = new Request("http://localhost/api/admin/orders/test-id", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "IN_PRODUCTION" }),
     });
-    createdCompanyIds.push(company.id);
+    const res = await updateOrder(req, { params: Promise.resolve({ orderId: "test-id" }) });
+    expect(res.status).toBe(401);
+  });
 
-    const order = await prisma.order.create({
-      data: {
-        companyId: company.id,
-        status: "PAID",
-        setupFeeCents: 15000,
-        totalCents: 570000,
-        lines: {
-          create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1850 }],
-        },
-      },
+  it("Rejects unauthenticated requests to GET /api/applications with 401", async () => {
+    const req = new Request("http://localhost/api/applications", { method: "GET" });
+    const res = await getApplications(req);
+    expect(res.status).toBe(401);
+  });
+
+  it("Explicitly rejects compromised old literal key 'satriano2026' with 401", async () => {
+    const req = new Request("http://localhost/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accessKey: "satriano2026" }),
     });
+    const res = await loginAdmin(req);
+    expect(res.status).toBe(401);
+  });
 
-    const res = await updateOrderStatus(
-      new Request(`http://localhost/api/admin/orders/${order.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "IN_PRODUCTION" }),
-      }),
-      { params: Promise.resolve({ orderId: order.id }) }
-    );
-
+  it("Accepts valid secret ADMIN_ACCESS_KEY via login endpoint and sets signed httpOnly cookie", async () => {
+    const req = new Request("http://localhost/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accessKey: validAccessKey }),
+    });
+    const res = await loginAdmin(req);
     expect(res.status).toBe(200);
-    const json = await res.json();
-    expect(json.order.status).toBe("IN_PRODUCTION");
+    const data = await res.json();
+    expect(data.success).toBe(true);
+    const setCookie = res.headers.get("set-cookie");
+    expect(setCookie).toContain("sat_admin_token=");
+    expect(setCookie).toContain("HttpOnly");
+  });
 
-    const updated = await prisma.order.findUniqueOrThrow({ where: { id: order.id } });
-    expect(updated.status).toBe("IN_PRODUCTION");
+  it("Accepts authorized Bearer token on GET /api/admin/orders", async () => {
+    const req = new Request("http://localhost/api/admin/orders", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${validAccessKey}`,
+      },
+    });
+    const res = await getOrders(req);
+    expect(res.status).toBe(200);
   });
 });

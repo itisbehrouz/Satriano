@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 import type { OrderStatus } from "@/app/generated/prisma/enums";
 
 export async function PATCH(
@@ -7,6 +8,14 @@ export async function PATCH(
   { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
+    const isAuth = await verifyAdminRequest(request);
+    if (!isAuth) {
+      return NextResponse.json(
+        { error: "Unauthorized access to admin order update API." },
+        { status: 401 }
+      );
+    }
+
     const { orderId } = await params;
     const body = await request.json().catch(() => null);
 
