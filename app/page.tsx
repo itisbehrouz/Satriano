@@ -67,184 +67,188 @@ export default function HomePage() {
       <SiteHeader />
       <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
         {/* Operations Hero Banner */}
-        <section className="w-full px-4 md:px-8 py-10 md:py-16 max-w-container-max mx-auto border-b border-[#E5E7EB]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column: B2B Supplier Pitch */}
-            <div className="lg:col-span-7 flex flex-col gap-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#D1D5DB] text-[#2E5AAC] text-xs font-semibold uppercase tracking-wider rounded self-start">
-                <span className="w-2 h-2 rounded-full bg-[#2E5AAC] inline-block" />
-                B2B Made-to-Order Supplier Portal
-              </div>
-
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A2233] leading-tight tracking-tight">
-                Industrial White-Label Garment Manufacturing
-              </h1>
-
-              <p className="text-base md:text-lg text-[#5B6B85] max-w-2xl leading-relaxed">
-                A reliable, no-nonsense portal for B2B apparel buyers. Configure materials, sizing matrices, and brand logos with live cost transparency and instant proforma generation.
-              </p>
-
-              {/* Primary Action Buttons */}
-              <div className="flex flex-wrap gap-4 mt-2">
-                <Link
-                  href="/konfigurator"
-                  className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-sm font-medium px-6 py-3 rounded transition-colors inline-flex items-center gap-2"
-                >
-                  Configure Polo Shirt Order →
-                </Link>
-                <Link
-                  href="/categories"
-                  className="bg-white border border-[#D1D5DB] hover:bg-[#E5E7EB]/50 text-[#1A2233] text-sm font-medium px-6 py-3 rounded transition-colors"
-                >
-                  Browse All Categories &amp; Subcategories
-                </Link>
-              </div>
-
-              {/* Operations Metrics Bar */}
-              <div className="grid grid-cols-3 gap-4 pt-6 mt-4 border-t border-[#E5E7EB]">
-                <div className="bg-white p-3 border border-[#E5E7EB] rounded">
-                  <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
-                    MOQ Batch
-                  </div>
-                  <div className="text-xl font-semibold text-[#1A2233] mt-0.5 tabular-nums">
-                    50 Units
-                  </div>
+        <section className="w-full border-b border-[#E5E7EB]">
+          <div className="max-w-[1440px] mx-auto px-8 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column: B2B Supplier Pitch */}
+              <div className="lg:col-span-7 flex flex-col gap-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#D1D5DB] text-[#2E5AAC] text-xs font-semibold uppercase tracking-wider rounded self-start">
+                  <span className="w-2 h-2 rounded-full bg-[#2E5AAC] inline-block" />
+                  B2B Made-to-Order Supplier Portal
                 </div>
-                <div className="bg-white p-3 border border-[#E5E7EB] rounded">
-                  <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
-                    Lead Time
-                  </div>
-                  <div className="text-xl font-semibold text-[#2E5AAC] mt-0.5 tabular-nums">
-                    14 Days
-                  </div>
-                </div>
-                <div className="bg-white p-3 border border-[#E5E7EB] rounded">
-                  <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
-                    Pricing
-                  </div>
-                  <div className="text-xl font-semibold text-[#0F6E56] mt-0.5 tabular-nums">
-                    100% Live
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Right Column: Visual Preview */}
-            <div className="lg:col-span-5">
-              <div className="bg-white border border-[#D1D5DB] rounded-lg p-4 shadow-sm">
-                <div className="relative aspect-[4/3] overflow-hidden rounded border border-[#E5E7EB] bg-[#F5F7FA]">
-                  <img
-                    className="w-full h-full object-cover"
-                    alt="Atelier manufacturing line."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlBd-CWUQgSPzOsybEVdE1DvR4w4ZI2c2pukCqoclqK68buwsqkB2OLtukpunEw-w1NJBv0_zjaQncdoNtW0f0wRFYiKJpr_WYCRBy3WsGZsggpr_vHdIcDgUnxtciptjFMejOYOb4r6OyWa0TDPd14yG5Bq6LUbKMbOK_19zciAkfm1tM0csCh0FXkqScwCbhIxOvDkx8XHGATrcImgHnUpa4Tj2MONCwaI7AHJuNyu6NggtZkmDJVnlTVaZFfwnzOfR0GA2gb6KF"
-                  />
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#0B1E3D]/95 text-white p-3 rounded text-xs font-mono">
-                    <div className="flex justify-between font-bold text-[#E8ECF3]">
-                      <span>LIVE PRODUCT: POLO SHIRT</span>
-                      <span className="text-[#DBB671]">MOQ: 50 PCS</span>
-                    </div>
-                    <div className="text-[#8DA0C4] text-[11px] mt-1">
-                      Predefined Sizing (XS-3XL) • Vector Logo Embroidery
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1A2233] leading-tight tracking-tight">
+                  Industrial White-Label Garment Manufacturing
+                </h1>
 
-        {/* Product Catalog Section (Grouped by Category Titles with Subcategory Cards) */}
-        <section className="w-full px-4 md:px-8 py-12 max-w-container-max mx-auto border-b border-[#E5E7EB]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                Manufacturing Catalog
-              </h2>
-              <p className="text-sm text-[#5B6B85] mt-1">
-                Grouped by product lines. Select any subcategory to configure your custom order specs.
-              </p>
-            </div>
-            <Link
-              href="/categories"
-              className="text-xs font-semibold text-[#2E5AAC] hover:underline uppercase tracking-wider whitespace-nowrap"
-            >
-              View Full Interactive Catalog Page →
-            </Link>
-          </div>
+                <p className="text-base md:text-lg text-[#5B6B85] max-w-2xl leading-relaxed">
+                  A reliable, no-nonsense portal for B2B apparel buyers. Configure materials, sizing matrices, and brand logos with live cost transparency and instant proforma generation.
+                </p>
 
-          <div className="space-y-12">
-            {MANUFACTURING_CATEGORIES.map((cat) => (
-              <div key={cat.id} className="border-t border-[#E5E7EB] pt-8">
-                {/* Category Title Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#1A2233] flex items-center gap-3">
-                      {cat.title}
-                      <span className="text-xs font-medium text-[#5B6B85] bg-[#E5E7EB] px-2.5 py-0.5 rounded">
-                        {cat.subDescription}
-                      </span>
-                    </h3>
-                  </div>
+                {/* Primary Action Buttons */}
+                <div className="flex flex-wrap gap-4 mt-2">
                   <Link
-                    href={cat.href}
-                    className="text-xs font-semibold text-[#2E5AAC] hover:underline"
+                    href="/konfigurator"
+                    className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-sm font-medium px-6 py-3 rounded transition-colors inline-flex items-center gap-2"
                   >
-                    View All {cat.title} →
+                    Configure Polo Shirt Order →
+                  </Link>
+                  <Link
+                    href="/categories"
+                    className="bg-white border border-[#D1D5DB] hover:bg-[#E5E7EB]/50 text-[#1A2233] text-sm font-medium px-6 py-3 rounded transition-colors"
+                  >
+                    Browse All Categories &amp; Subcategories
                   </Link>
                 </div>
 
-                {/* Subcategory Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {cat.subcategories.map((sub) => (
-                    <div
-                      key={sub.id}
-                      className="bg-white border border-[#D1D5DB] rounded-lg overflow-hidden flex flex-col hover:border-[#2E5AAC] transition-all shadow-sm group"
-                    >
-                      <div className="h-52 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
-                        <img
-                          src={sub.image}
-                          alt={sub.title}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <span className="absolute top-2.5 left-2.5 bg-[#0B1E3D]/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded">
-                          MOQ {sub.moq}
-                        </span>
-                      </div>
-                      <div className="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                          <h4 className="text-base font-semibold text-[#1A2233] group-hover:text-[#2E5AAC] transition-colors">
-                            {sub.title}
-                          </h4>
-                          <p className="text-xs text-[#5B6B85] mt-1 line-clamp-2 leading-relaxed">
-                            {sub.description}
-                          </p>
-                        </div>
-                        <div className="pt-3 mt-3 border-t border-[#E5E7EB] flex items-center justify-between">
-                          <span className="text-[11px] font-medium text-[#5B6B85]">
-                            {sub.fabricCount}
-                          </span>
-                          <Link
-                            href="/konfigurator"
-                            className="text-xs font-semibold text-[#2E5AAC] hover:underline"
-                          >
-                            Configure →
-                          </Link>
-                        </div>
-                      </div>
+                {/* Operations Metrics Bar */}
+                <div className="grid grid-cols-3 gap-4 pt-6 mt-4 border-t border-[#E5E7EB]">
+                  <div className="bg-white p-3 border border-[#E5E7EB] rounded">
+                    <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
+                      MOQ Batch
                     </div>
-                  ))}
+                    <div className="text-xl font-semibold text-[#1A2233] mt-0.5 tabular-nums">
+                      50 Units
+                    </div>
+                  </div>
+                  <div className="bg-white p-3 border border-[#E5E7EB] rounded">
+                    <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
+                      Lead Time
+                    </div>
+                    <div className="text-xl font-semibold text-[#2E5AAC] mt-0.5 tabular-nums">
+                      14 Days
+                    </div>
+                  </div>
+                  <div className="bg-white p-3 border border-[#E5E7EB] rounded">
+                    <div className="text-xs text-[#5B6B85] uppercase tracking-wider font-medium">
+                      Pricing
+                    </div>
+                    <div className="text-xl font-semibold text-[#0F6E56] mt-0.5 tabular-nums">
+                      100% Live
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {/* Right Column: Visual Preview */}
+              <div className="lg:col-span-5">
+                <div className="bg-white border border-[#D1D5DB] rounded-lg p-4 shadow-sm">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded border border-[#E5E7EB] bg-[#F5F7FA]">
+                    <img
+                      className="w-full h-full object-cover"
+                      alt="Atelier manufacturing line."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlBd-CWUQgSPzOsybEVdE1DvR4w4ZI2c2pukCqoclqK68buwsqkB2OLtukpunEw-w1NJBv0_zjaQncdoNtW0f0wRFYiKJpr_WYCRBy3WsGZsggpr_vHdIcDgUnxtciptjFMejOYOb4r6OyWa0TDPd14yG5Bq6LUbKMbOK_19zciAkfm1tM0csCh0FXkqScwCbhIxOvDkx8XHGATrcImgHnUpa4Tj2MONCwaI7AHJuNyu6NggtZkmDJVnlTVaZFfwnzOfR0GA2gb6KF"
+                    />
+                    <div className="absolute bottom-3 left-3 right-3 bg-[#0B1E3D]/95 text-white p-3 rounded text-xs font-mono">
+                      <div className="flex justify-between font-bold text-[#E8ECF3]">
+                        <span>LIVE PRODUCT: POLO SHIRT</span>
+                        <span className="text-[#DBB671]">MOQ: 50 PCS</span>
+                      </div>
+                      <div className="text-[#8DA0C4] text-[11px] mt-1">
+                        Predefined Sizing (XS-3XL) • Vector Logo Embroidery
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Operational Workflow (Redesigned with Connected Process Cards & Visual Badges) */}
+        {/* Product Catalog Section */}
+        <section className="w-full border-b border-[#E5E7EB]">
+          <div className="max-w-[1440px] mx-auto px-8 py-16">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
+                  Manufacturing Catalog
+                </h2>
+                <p className="text-sm text-[#5B6B85] mt-1">
+                  Grouped by product lines. Select any subcategory to configure your custom order specs.
+                </p>
+              </div>
+              <Link
+                href="/categories"
+                className="text-xs font-semibold text-[#2E5AAC] hover:underline uppercase tracking-wider whitespace-nowrap"
+              >
+                View Full Interactive Catalog Page →
+              </Link>
+            </div>
+
+            <div className="space-y-12">
+              {MANUFACTURING_CATEGORIES.map((cat) => (
+                <div key={cat.id} className="border-t border-[#E5E7EB] pt-8">
+                  {/* Category Title Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
+                    <div>
+                      <h3 className="text-xl font-semibold text-[#1A2233] flex items-center gap-3">
+                        {cat.title}
+                        <span className="text-xs font-medium text-[#5B6B85] bg-[#E5E7EB] px-2.5 py-0.5 rounded">
+                          {cat.subDescription}
+                        </span>
+                      </h3>
+                    </div>
+                    <Link
+                      href={cat.href}
+                      className="text-xs font-semibold text-[#2E5AAC] hover:underline"
+                    >
+                      View All {cat.title} →
+                    </Link>
+                  </div>
+
+                  {/* Subcategory Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {cat.subcategories.map((sub) => (
+                      <div
+                        key={sub.id}
+                        className="bg-white border border-[#D1D5DB] rounded-lg overflow-hidden flex flex-col hover:border-[#2E5AAC] transition-all shadow-sm group"
+                      >
+                        <div className="h-52 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
+                          <img
+                            src={sub.image}
+                            alt={sub.title}
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <span className="absolute top-2.5 left-2.5 bg-[#0B1E3D]/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded">
+                            MOQ {sub.moq}
+                          </span>
+                        </div>
+                        <div className="p-4 flex-grow flex flex-col justify-between">
+                          <div>
+                            <h4 className="text-base font-semibold text-[#1A2233] group-hover:text-[#2E5AAC] transition-colors">
+                              {sub.title}
+                            </h4>
+                            <p className="text-xs text-[#5B6B85] mt-1 line-clamp-2 leading-relaxed">
+                              {sub.description}
+                            </p>
+                          </div>
+                          <div className="pt-3 mt-3 border-t border-[#E5E7EB] flex items-center justify-between">
+                            <span className="text-[11px] font-medium text-[#5B6B85]">
+                              {sub.fabricCount}
+                            </span>
+                            <Link
+                              href="/konfigurator"
+                              className="text-xs font-semibold text-[#2E5AAC] hover:underline"
+                            >
+                              Configure →
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Operational Workflow (Strict DevTools Specs: Padding 64px 32px 64px 32px, Margin 240px 240px, Content 1376px) */}
         <section
           id="workflow"
-          className="w-full py-16 px-4 md:px-8 border-b border-[#E5E7EB] bg-white"
+          className="w-full bg-white border-b border-[#E5E7EB]"
         >
-          <div className="max-w-container-max mx-auto">
+          <div className="max-w-[1440px] mx-auto px-8 py-16">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#E6F1FB] text-[#185FA5] border border-[#B3D6F6] text-xs font-semibold uppercase tracking-wider rounded mb-3">
@@ -264,7 +268,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Workflow Step Grid with Visual Process Cards */}
+            {/* Workflow Step Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
               {OPERATIONAL_STEPS.map((step, idx) => (
                 <div
@@ -308,47 +312,46 @@ export default function HomePage() {
         </section>
 
         {/* B2B Portal Standards Grid */}
-        <section
-          id="standards"
-          className="w-full py-16 px-4 md:px-8 max-w-container-max mx-auto"
-        >
-          <div className="mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F5F7FA] text-[#5B6B85] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider rounded mb-3">
-              European Quality Guarantees
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-              B2B Portal Standards
-            </h2>
-            <p className="text-sm text-[#5B6B85] mt-1">
-              Industrial apparel manufacturing protocol engineered for corporate procurement teams.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {CAPABILITIES.map((cap) => (
-              <div
-                key={cap.title}
-                className="p-6 bg-white border border-[#D1D5DB] rounded-lg flex flex-col gap-3 hover:border-[#2E5AAC] hover:shadow-md transition-all group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-[#E6F1FB] text-[#2E5AAC] flex items-center justify-center group-hover:bg-[#2E5AAC] group-hover:text-white transition-colors">
-                  <span className="material-symbols-outlined text-xl">
-                    {cap.icon}
-                  </span>
-                </div>
-                <h3 className="text-base font-semibold text-[#1A2233] mt-1">
-                  {cap.title}
-                </h3>
-                <p className="text-xs text-[#5B6B85] leading-relaxed">
-                  {cap.description}
-                </p>
+        <section id="standards" className="w-full">
+          <div className="max-w-[1440px] mx-auto px-8 py-16">
+            <div className="mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#5B6B85] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider rounded mb-3">
+                European Quality Guarantees
               </div>
-            ))}
+              <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
+                B2B Portal Standards
+              </h2>
+              <p className="text-sm text-[#5B6B85] mt-1">
+                Industrial apparel manufacturing protocol engineered for corporate procurement teams.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {CAPABILITIES.map((cap) => (
+                <div
+                  key={cap.title}
+                  className="p-6 bg-white border border-[#D1D5DB] rounded-lg flex flex-col gap-3 hover:border-[#2E5AAC] hover:shadow-md transition-all group shadow-sm"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[#E6F1FB] text-[#2E5AAC] flex items-center justify-center group-hover:bg-[#2E5AAC] group-hover:text-white transition-colors">
+                    <span className="material-symbols-outlined text-xl">
+                      {cap.icon}
+                    </span>
+                  </div>
+                  <h3 className="text-base font-semibold text-[#1A2233] mt-1">
+                    {cap.title}
+                  </h3>
+                  <p className="text-xs text-[#5B6B85] leading-relaxed">
+                    {cap.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* CTA Banner */}
         <section className="w-full bg-[#0B1E3D] text-white py-14 px-4 md:px-8 border-t border-[#132A52]">
-          <div className="max-w-container-max mx-auto text-center flex flex-col items-center gap-4">
+          <div className="max-w-[1440px] mx-auto text-center flex flex-col items-center gap-4">
             <h2 className="text-2xl md:text-3xl font-semibold text-[#E8ECF3]">
               Ready to configure your B2B order?
             </h2>
