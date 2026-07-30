@@ -1,18 +1,24 @@
 import { CompactSign, jwtVerify } from "jose";
 import crypto from "crypto";
 
-const DEFAULT_TEST_KEY =
-  "4d8f5ca650f30cef990e8a69abfbdb3d9f6fc42bb1c21b69a7adf736b1bd3ed6";
-const DEFAULT_TEST_JWT_SECRET =
-  "9833f048bb00e1597a42664ddfadef5fae24f2f4220c11857477fa7fe92b1809";
-
 export function getAdminAccessKey(): string {
-  return process.env.ADMIN_ACCESS_KEY || DEFAULT_TEST_KEY;
+  const key = process.env.ADMIN_ACCESS_KEY;
+  if (!key || key.trim() === "") {
+    throw new Error(
+      "CRITICAL SECURITY FAILURE: ADMIN_ACCESS_KEY environment variable is not configured."
+    );
+  }
+  return key.trim();
 }
 
 export function getAdminJwtSecret(): Uint8Array {
-  const secret = process.env.ADMIN_JWT_SECRET || DEFAULT_TEST_JWT_SECRET;
-  return Uint8Array.from(Buffer.from(secret, "utf-8"));
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret || secret.trim() === "") {
+    throw new Error(
+      "CRITICAL SECURITY FAILURE: ADMIN_JWT_SECRET environment variable is not configured."
+    );
+  }
+  return Uint8Array.from(Buffer.from(secret.trim(), "utf-8"));
 }
 
 /**

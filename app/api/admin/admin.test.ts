@@ -5,12 +5,25 @@ import { POST as loginAdmin } from "@/app/api/admin/login/route";
 import { GET as getApplications } from "@/app/api/applications/route";
 import { middleware } from "@/middleware";
 import { NextRequest } from "next/server";
-import { getAdminAccessKey, verifyAdminToken, createAdminToken } from "@/lib/adminAuth";
+import {
+  getAdminAccessKey,
+  verifyAdminToken,
+  createAdminToken,
+} from "@/lib/adminAuth";
 
 describe("Admin Authentication & Security Audit Test Suite", () => {
   const validAccessKey = getAdminAccessKey();
 
-  it("Verifies jose SignJWT & jwtVerify creates valid token with HS256 algorithm", async () => {
+  it("Fails fast (throws hard error) if ADMIN_ACCESS_KEY env variable is missing", () => {
+    const originalEnv = process.env.ADMIN_ACCESS_KEY;
+    delete process.env.ADMIN_ACCESS_KEY;
+    expect(() => getAdminAccessKey()).toThrow(
+      "CRITICAL SECURITY FAILURE: ADMIN_ACCESS_KEY environment variable is not configured."
+    );
+    process.env.ADMIN_ACCESS_KEY = originalEnv;
+  });
+
+  it("Verifies jose CompactSign & jwtVerify creates valid token with HS256 algorithm", async () => {
     const token = await createAdminToken();
     expect(typeof token).toBe("string");
     const isValid = await verifyAdminToken(token);
