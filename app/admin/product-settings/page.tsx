@@ -67,6 +67,15 @@ interface Category {
   subcategories: Subcategory[];
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export default function AdminProductSettingsPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -74,10 +83,47 @@ export default function AdminProductSettingsPage() {
   const [allFits, setAllFits] = useState<FitDef[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Edit MOQ state
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [editMoqPerFabric, setEditMoqPerFabric] = useState<number>(50);
   const [editMoqCombined, setEditMoqCombined] = useState<string>("");
   const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
+
+  // Modal visibility states
+  const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
+  const [addSubcategoryCategory, setAddSubcategoryCategory] = useState<Category | null>(null);
+  const [addProductContext, setAddProductContext] = useState<{ cat: Category; sub: Subcategory } | null>(null);
+
+  // Modal form fields: Category
+  const [catName, setCatName] = useState("");
+  const [catSlug, setCatSlug] = useState("");
+  const [catDesc, setCatDesc] = useState("");
+  const [catSubmitting, setCatSubmitting] = useState(false);
+  const [catError, setCatError] = useState<string | null>(null);
+
+  // Modal form fields: Subcategory
+  const [subName, setSubName] = useState("");
+  const [subSlug, setSubSlug] = useState("");
+  const [subDesc, setSubDesc] = useState("");
+  const [subSizeSystemIds, setSubSizeSystemIds] = useState<string[]>([]);
+  const [subSubmitting, setSubSubmitting] = useState(false);
+  const [subError, setSubError] = useState<string | null>(null);
+
+  // Modal form fields: Product
+  const [prodName, setProdName] = useState("");
+  const [prodSlug, setProdSlug] = useState("");
+  const [prodDesc, setProdDesc] = useState("");
+  const [prodLeadTime, setProdLeadTime] = useState<number>(14);
+  const [prodMoqPerFabric, setProdMoqPerFabric] = useState<number>(50);
+  const [prodMoqCombined, setProdMoqCombined] = useState<string>("");
+  const [prodFabricName, setProdFabricName] = useState("");
+  const [prodPriceMinDollars, setProdPriceMinDollars] = useState<string>("19.50");
+  const [prodPriceMaxDollars, setProdPriceMaxDollars] = useState<string>("24.00");
+  const [prodSetupFeeDollars, setProdSetupFeeDollars] = useState<string>("0.00");
+  const [prodFitIds, setProdFitIds] = useState<string[]>([]);
+  const [prodSubmitting, setProdSubmitting] = useState(false);
+  const [prodError, setProdError] = useState<string | null>(null);
 
   useEffect(() => {
     async function checkSessionAndFetch() {
@@ -118,6 +164,174 @@ export default function AdminProductSettingsPage() {
       setError("Network error loading catalog");
     } finally {
       setLoading(false);
+    }
+  }
+
+  // --- CATEGORY CREATION ---
+  async function handleCreateCategory(e: React.FormEvent) {
+    e.preventDefault();
+    setCatError(null);
+    if (!catName.trim() || !catSlug.trim()) {
+      setCatError("Category name and slug are required.");
+      return;
+    }
+
+    setCatSubmitting(true);
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "category",
+          data: {
+            name: catName,
+            slug: catSlug,
+            description: catDesc,
+          },
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        setCatError(json.error || "Failed to create category.");
+        return;
+      }
+
+      // Reset and close
+      setCatName("");
+      setCatSlug("");
+      setCatDesc("");
+      setShowAddCategoryModal(false);
+      fetchCatalog();
+    } catch {
+      setCatError("Network error creating category.");
+    } finally {
+      setCatSubmitting(false);
+    }
+  }
+
+  // --- SUBCATEGORY CREATION ---
+  async function handleCreateSubcategory(e: React.FormEvent) {
+    e.preventDefault();
+    if (!addSubcategoryCategory) return;
+    setSubError(null);
+
+    if (!subName.trim() || !subSlug.trim()) {
+      setSubError("Subcategory name and slug are required.");
+      return;
+    }
+
+    setSubSubmitting(true);
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "subcategory",
+          data: {
+            categoryId: addSubcategoryCategory.id,
+            name: subName,
+            slug: subSlug,
+            description: subDesc,
+            sizeSystemIds: subSizeSystemIds,
+          },
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        setSubError(json.error || "Failed to create subcategory.");
+        return;
+      }
+
+      setSubName("");
+      setSubSlug("");
+      setSubDesc("");
+      setSubSizeSystemIds([]);
+      setAddSubcategoryCategory(null);
+      fetchCatalog();
+    } catch {
+      setSubError("Network error creating subcategory.");
+    } finally {
+      setSubSubmitting(false);
+    }
+  }
+
+  // --- PRODUCT CREATION ---
+  async function handleCreateProduct(e: React.FormEvent) {
+    e.preventDefault();
+    if (!addProductContext) return;
+    setProdError(null);
+
+    if (!prodName.trim() || !prodSlug.trim()) {
+      setProdError("Product name and slug are required.");
+      return;
+    }
+
+    if (!prodFabricName.trim()) {
+      setProdError("Initial fabric name is required.");
+      return;
+    }
+
+    const priceMinCents = Math.round(parseFloat(prodPriceMinDollars) * 100);
+    const priceMaxCents = Math.round(parseFloat(prodPriceMaxDollars) * 100);
+    const setupFeeCents = Math.round((parseFloat(prodSetupFeeDollars) || 0) * 100);
+
+    if (isNaN(priceMinCents) || isNaN(priceMaxCents) || priceMinCents <= 0 || priceMaxCents <= 0) {
+      setProdError("Valid positive fabric prices are required.");
+      return;
+    }
+
+    if (priceMinCents > priceMaxCents) {
+      setProdError("Fabric min price cannot exceed max price.");
+      return;
+    }
+
+    const combinedVal = prodMoqCombined.trim() === "" ? null : parseInt(prodMoqCombined, 10);
+
+    setProdSubmitting(true);
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "product",
+          data: {
+            subcategoryId: addProductContext.sub.id,
+            name: prodName,
+            slug: prodSlug,
+            description: prodDesc,
+            leadTimeDays: prodLeadTime,
+            moqPerFabric: prodMoqPerFabric,
+            moqCombinedMultiFabric: isNaN(combinedVal as number) ? null : combinedVal,
+            fitIds: prodFitIds,
+            initialFabric: {
+              name: prodFabricName,
+              priceMinCents,
+              priceMaxCents,
+              setupFeeCents,
+            },
+          },
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        setProdError(json.error || "Failed to create product.");
+        return;
+      }
+
+      setProdName("");
+      setProdSlug("");
+      setProdDesc("");
+      setProdFabricName("");
+      setProdFitIds([]);
+      setAddProductContext(null);
+      fetchCatalog();
+    } catch {
+      setProdError("Network error creating product.");
+    } finally {
+      setProdSubmitting(false);
     }
   }
 
@@ -307,24 +521,95 @@ export default function AdminProductSettingsPage() {
               {/* TAB 1: Category -> Subcategory -> Product */}
               {activeTab === "catalog" && (
                 <div className="space-y-8">
+                  {/* Category Section Action Header */}
+                  <div className="bg-white border border-[#D1D5DB] rounded-lg p-5 flex items-center justify-between shadow-sm">
+                    <div>
+                      <h2 className="text-base font-bold text-[#1A2233]">Master Garment Hierarchy</h2>
+                      <p className="text-xs text-[#5B6B85] mt-0.5">
+                        Define 3-level product structure, custom fabric lines, and two-tier MOQs.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCatName("");
+                        setCatSlug("");
+                        setCatDesc("");
+                        setCatError(null);
+                        setShowAddCategoryModal(true);
+                      }}
+                      className="min-h-[44px] bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                    >
+                      <span className="material-symbols-outlined text-base">add_circle</span>
+                      <span>+ Add Category</span>
+                    </button>
+                  </div>
+
                   {categories.map((cat) => (
                     <div key={cat.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                      <div className="border-b border-[#E5E7EB] pb-3 mb-6">
-                        <h2 className="text-xl font-bold text-[#1A2233]">{cat.name}</h2>
-                        <p className="text-xs text-[#5B6B85] mt-0.5">{cat.description}</p>
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E5E7EB] pb-4 mb-6 gap-4">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h2 className="text-xl font-bold text-[#1A2233]">{cat.name}</h2>
+                            <span className="text-xs font-mono text-[#5B6B85] bg-[#F5F7FA] px-2 py-0.5 rounded border border-[#E5E7EB]">
+                              slug: {cat.slug}
+                            </span>
+                          </div>
+                          <p className="text-xs text-[#5B6B85] mt-0.5">{cat.description || "No description"}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSubName("");
+                            setSubSlug("");
+                            setSubDesc("");
+                            setSubSizeSystemIds([]);
+                            setSubError(null);
+                            setAddSubcategoryCategory(cat);
+                          }}
+                          className="min-h-[44px] bg-white border border-[#2E5AAC] text-[#2E5AAC] hover:bg-[#E6F1FB] text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5"
+                        >
+                          <span className="material-symbols-outlined text-base">add</span>
+                          <span>+ Add Subcategory</span>
+                        </button>
                       </div>
 
                       <div className="space-y-6">
                         {cat.subcategories.map((sub) => (
                           <div key={sub.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]/50">
-                            <div className="flex justify-between items-center mb-3 border-b border-[#E5E7EB] pb-2">
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 border-b border-[#E5E7EB] pb-3 gap-3">
                               <div>
                                 <h3 className="text-base font-bold text-[#1A2233] flex items-center gap-2">
-                                  {sub.name}
-                                  <span className="text-xs font-normal text-[#5B6B85]">({sub.products.length} products)</span>
+                                  <span>{sub.name}</span>
+                                  <span className="text-xs font-normal text-[#5B6B85]">
+                                    ({sub.products.length} {sub.products.length === 1 ? "product" : "products"})
+                                  </span>
                                 </h3>
+                                <span className="text-xs font-mono text-[#5B6B85]">slug: {sub.slug}</span>
                               </div>
-                              <span className="text-xs font-mono text-[#5B6B85]">slug: {sub.slug}</span>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setProdName("");
+                                  setProdSlug("");
+                                  setProdDesc("");
+                                  setProdLeadTime(14);
+                                  setProdMoqPerFabric(50);
+                                  setProdMoqCombined("");
+                                  setProdFabricName("");
+                                  setProdPriceMinDollars("19.50");
+                                  setProdPriceMaxDollars("24.00");
+                                  setProdSetupFeeDollars("0.00");
+                                  setProdFitIds([]);
+                                  setProdError(null);
+                                  setAddProductContext({ cat, sub });
+                                }}
+                                className="min-h-[36px] bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors inline-flex items-center gap-1 shadow-sm"
+                              >
+                                <span className="material-symbols-outlined text-sm">add</span>
+                                <span>+ Add Product</span>
+                              </button>
                             </div>
 
                             <div className="overflow-x-auto">
@@ -344,7 +629,10 @@ export default function AdminProductSettingsPage() {
 
                                     return (
                                       <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
-                                        <td className="p-3 font-semibold text-[#1A2233]">{prod.name}</td>
+                                        <td className="p-3 font-semibold text-[#1A2233]">
+                                          <div>{prod.name}</div>
+                                          <div className="text-[11px] font-mono text-[#5B6B85]">/{prod.slug}</div>
+                                        </td>
                                         <td className="p-3 font-semibold text-[#2E5AAC]">
                                           {prod.moqPerFabric ?? prod.moq ?? 50} pcs
                                         </td>
@@ -446,7 +734,7 @@ export default function AdminProductSettingsPage() {
                       8 Standard Garment Fit Dimensions
                     </h2>
                     <p className="text-xs text-[#5B6B85] mb-6">
-                      Toggle allowed fit options per product. Products in excluded categories (e.g. Accessories, Socks) have 0 fits linked and omit the fit step in the configurator.
+                      Toggle allowed fit options per product. Products in excluded categories have 0 fits linked and omit the fit step in the configurator.
                     </p>
 
                     <div className="space-y-8">
@@ -516,98 +804,535 @@ export default function AdminProductSettingsPage() {
 
               {/* TAB 3: Regional Size Systems */}
               {activeTab === "sizing" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {sizeSystems.map((sys) => (
-                    <div key={sys.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                      <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-3 mb-4">
-                        <h3 className="text-lg font-bold text-[#1A2233]">
-                          {sys.name} System <span className="text-[#2E5AAC]">({sys.region})</span>
-                        </h3>
-                        <span className="text-xs bg-[#E6F1FB] text-[#185FA5] font-semibold px-2 py-0.5 rounded">
-                          {sys.options.length} Size Labels
-                        </span>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {sys.options.map((opt) => (
-                          <span
-                            key={opt.id}
-                            className="bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] px-3 py-1.5 rounded text-xs font-semibold"
-                          >
-                            {opt.label}
+                <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm space-y-6">
+                  <h2 className="text-lg font-bold text-[#1A2233]">
+                    Active CAD Sizing Standards &amp; Options
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sizeSystems.map((sys) => (
+                      <div key={sys.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]/50">
+                        <div className="flex justify-between items-center mb-3">
+                          <h3 className="font-bold text-sm text-[#1A2233]">{sys.name}</h3>
+                          <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 bg-[#E6F1FB] text-[#185FA5] rounded">
+                            {sys.region} Region
                           </span>
-                        ))}
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {sys.options.map((opt) => (
+                            <span key={opt.id} className="bg-white border border-[#D1D5DB] text-xs font-semibold px-2 py-1 rounded text-[#1A2233]">
+                              {opt.label}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* TAB 4: Product Fabrics & Price Ranges */}
+              {/* TAB 4: Fabrics & Pricing */}
               {activeTab === "fabrics" && (
-                <div className="space-y-6">
-                  {categories.map((cat) => (
-                    <div key={cat.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                      <h3 className="text-lg font-bold text-[#1A2233] mb-4 border-b border-[#E5E7EB] pb-2">
-                        {cat.name} — Product-Scoped Fabric Options
-                      </h3>
-
-                      <div className="space-y-6">
-                        {cat.subcategories.map((sub) => (
-                          <div key={sub.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]">
-                            <h4 className="text-sm font-bold text-[#1A2233] mb-3">
-                              Subcategory: {sub.name}
-                            </h4>
-
-                            <div className="space-y-4">
-                              {sub.products.map((prod) => (
-                                <div key={prod.id} className="bg-white p-4 rounded border border-[#D1D5DB]">
-                                  <h5 className="text-xs font-semibold text-[#2E5AAC] mb-2 uppercase tracking-wider">
-                                    Product: {prod.name} ({prod.fabrics.length} materials)
-                                  </h5>
-
-                                  {prod.fabrics.length === 0 ? (
-                                    <p className="text-xs text-[#5B6B85] italic">Uses global fallback fabric options.</p>
-                                  ) : (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                      {prod.fabrics.map((fab) => (
-                                        <div key={fab.id} className="bg-[#F5F7FA] p-3 rounded border border-[#E5E7EB]">
-                                          <div className="flex justify-between items-start mb-1">
-                                            <span className="font-semibold text-xs text-[#1A2233]">{fab.name}</span>
-                                            <button
-                                              type="button"
-                                              onClick={() => toggleFabricActive(fab.id, fab.active)}
-                                              className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
-                                                fab.active ? "bg-[#E1F5EE] text-[#0F6E56]" : "bg-[#FCEBEB] text-[#A32D2D]"
-                                              }`}
-                                            >
-                                              {fab.active ? "Active" : "Off"}
-                                            </button>
-                                          </div>
-                                          <div className="text-xs text-[#2E5AAC] font-semibold tabular-nums mt-1">
-                                            ${(fab.priceMinCents / 100).toFixed(2)} – ${(fab.priceMaxCents / 100).toFixed(2)} / unit
-                                          </div>
-                                          <div className="text-[11px] text-[#5B6B85] tabular-nums mt-0.5">
-                                            Setup: ${(fab.setupFeeCents / 100).toFixed(2)}
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
+                <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm space-y-6">
+                  <h2 className="text-lg font-bold text-[#1A2233]">
+                    Fabric Cost Tiering &amp; Setup Fee Configuration
+                  </h2>
+                  <div className="space-y-4">
+                    {categories.flatMap((c) => c.subcategories.flatMap((s) => s.products.flatMap((p) => p.fabrics))).map((fab) => (
+                      <div key={fab.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border border-[#E5E7EB] rounded bg-white gap-4">
+                        <div>
+                          <div className="font-bold text-sm text-[#1A2233]">{fab.name}</div>
+                          <div className="text-xs text-[#5B6B85]">
+                            Price Range: ${(fab.priceMinCents / 100).toFixed(2)} - ${(fab.priceMaxCents / 100).toFixed(2)} / unit | Setup Fee: ${(fab.setupFeeCents / 100).toFixed(2)}
                           </div>
-                        ))}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => toggleFabricActive(fab.id, fab.active)}
+                          className={`min-h-[36px] px-3 py-1.5 rounded text-xs font-semibold transition-colors ${
+                            fab.active
+                              ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
+                              : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
+                          }`}
+                        >
+                          {fab.active ? "Active" : "Off"}
+                        </button>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
             </>
           )}
         </div>
       </main>
+
+      {/* --- MODAL 1: ADD CATEGORY --- */}
+      {showAddCategoryModal && (
+        <div className="fixed inset-0 bg-[#0B1E3D]/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 max-w-md w-full shadow-lg space-y-5">
+            <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-3">
+              <h3 className="text-base font-bold text-[#1A2233] flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#2E5AAC]">add_circle</span>
+                <span>Add New Category</span>
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowAddCategoryModal(false)}
+                className="text-[#5B6B85] hover:text-[#1A2233] min-h-[32px] px-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateCategory} className="space-y-4">
+              <div>
+                <label htmlFor="catName" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Category Name *
+                </label>
+                <input
+                  id="catName"
+                  type="text"
+                  required
+                  value={catName}
+                  onChange={(e) => {
+                    setCatName(e.target.value);
+                    setCatSlug(slugify(e.target.value));
+                  }}
+                  placeholder="e.g. Footwear"
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="catSlug" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Category Slug *
+                </label>
+                <input
+                  id="catSlug"
+                  type="text"
+                  required
+                  value={catSlug}
+                  onChange={(e) => setCatSlug(slugify(e.target.value))}
+                  placeholder="e.g. footwear"
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm font-mono text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="catDesc" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Description
+                </label>
+                <textarea
+                  id="catDesc"
+                  rows={2}
+                  value={catDesc}
+                  onChange={(e) => setCatDesc(e.target.value)}
+                  placeholder="Optional category summary..."
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                />
+              </div>
+
+              {catError && (
+                <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F] font-semibold">
+                  {catError}
+                </div>
+              )}
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowAddCategoryModal(false)}
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={catSubmitting}
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                >
+                  {catSubmitting ? "Creating..." : "Create Category"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* --- MODAL 2: ADD SUBCATEGORY --- */}
+      {addSubcategoryCategory && (
+        <div className="fixed inset-0 bg-[#0B1E3D]/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 max-w-md w-full shadow-lg space-y-5">
+            <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-3">
+              <h3 className="text-base font-bold text-[#1A2233] flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#2E5AAC]">add</span>
+                <span>Add Subcategory to {addSubcategoryCategory.name}</span>
+              </h3>
+              <button
+                type="button"
+                onClick={() => setAddSubcategoryCategory(null)}
+                className="text-[#5B6B85] hover:text-[#1A2233] min-h-[32px] px-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateSubcategory} className="space-y-4">
+              <div>
+                <label htmlFor="subName" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Subcategory Name *
+                </label>
+                <input
+                  id="subName"
+                  type="text"
+                  required
+                  value={subName}
+                  onChange={(e) => {
+                    setSubName(e.target.value);
+                    setSubSlug(slugify(e.target.value));
+                  }}
+                  placeholder="e.g. Hoodies & Sweatshirts"
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subSlug" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Subcategory Slug *
+                </label>
+                <input
+                  id="subSlug"
+                  type="text"
+                  required
+                  value={subSlug}
+                  onChange={(e) => setSubSlug(slugify(e.target.value))}
+                  placeholder="e.g. hoodies-sweatshirts"
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm font-mono text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subDesc" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Description
+                </label>
+                <textarea
+                  id="subDesc"
+                  rows={2}
+                  value={subDesc}
+                  onChange={(e) => setSubDesc(e.target.value)}
+                  placeholder="Optional subcategory summary..."
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                />
+              </div>
+
+              {sizeSystems.length > 0 && (
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5">
+                    Link Size Systems
+                  </label>
+                  <div className="space-y-1.5 max-h-32 overflow-y-auto border border-[#E5E7EB] p-2 rounded bg-[#F5F7FA]">
+                    {sizeSystems.map((sys) => {
+                      const isChecked = subSizeSystemIds.includes(sys.id);
+
+                      return (
+                        <label key={sys.id} className="flex items-center gap-2 text-xs text-[#1A2233] cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setSubSizeSystemIds([...subSizeSystemIds, sys.id]);
+                              } else {
+                                setSubSizeSystemIds(subSizeSystemIds.filter((id) => id !== sys.id));
+                              }
+                            }}
+                            className="rounded border-[#D1D5DB] text-[#2E5AAC]"
+                          />
+                          <span>{sys.name} ({sys.region})</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {subError && (
+                <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F] font-semibold">
+                  {subError}
+                </div>
+              )}
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setAddSubcategoryCategory(null)}
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={subSubmitting}
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                >
+                  {subSubmitting ? "Creating..." : "Create Subcategory"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* --- MODAL 3: ADD PRODUCT --- */}
+      {addProductContext && (
+        <div className="fixed inset-0 bg-[#0B1E3D]/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 max-w-xl w-full shadow-lg space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-3">
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#2E5AAC]">
+                  {addProductContext.cat.name} → {addProductContext.sub.name}
+                </div>
+                <h3 className="text-base font-bold text-[#1A2233]">Add New Product Item</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAddProductContext(null)}
+                className="text-[#5B6B85] hover:text-[#1A2233] min-h-[32px] px-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateProduct} className="space-y-5">
+              {/* Product Basic Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="prodName" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Product Name *
+                  </label>
+                  <input
+                    id="prodName"
+                    type="text"
+                    required
+                    value={prodName}
+                    onChange={(e) => {
+                      setProdName(e.target.value);
+                      setProdSlug(slugify(e.target.value));
+                    }}
+                    placeholder="e.g. Oxford Dress Shirt"
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="prodSlug" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Product Slug *
+                  </label>
+                  <input
+                    id="prodSlug"
+                    type="text"
+                    required
+                    value={prodSlug}
+                    onChange={(e) => setProdSlug(slugify(e.target.value))}
+                    placeholder="e.g. oxford-dress-shirt"
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm font-mono text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="prodDesc" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Product Description
+                </label>
+                <textarea
+                  id="prodDesc"
+                  rows={2}
+                  value={prodDesc}
+                  onChange={(e) => setProdDesc(e.target.value)}
+                  placeholder="Custom garment specifications and weave detail..."
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                />
+              </div>
+
+              {/* MOQ & Production Parameters */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-[#E5E7EB] pt-4">
+                <div>
+                  <label htmlFor="prodLeadTime" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Lead Time (Days)
+                  </label>
+                  <input
+                    id="prodLeadTime"
+                    type="number"
+                    min={1}
+                    value={prodLeadTime}
+                    onChange={(e) => setProdLeadTime(parseInt(e.target.value, 10) || 14)}
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="prodMoqPerFabric" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Single-Fabric MOQ *
+                  </label>
+                  <input
+                    id="prodMoqPerFabric"
+                    type="number"
+                    min={1}
+                    required
+                    value={prodMoqPerFabric}
+                    onChange={(e) => setProdMoqPerFabric(parseInt(e.target.value, 10) || 50)}
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="prodMoqCombined" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Combined Multi-Fabric MOQ
+                  </label>
+                  <input
+                    id="prodMoqCombined"
+                    type="number"
+                    min={1}
+                    placeholder="Optional (e.g. 150)"
+                    value={prodMoqCombined}
+                    onChange={(e) => setProdMoqCombined(e.target.value)}
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                  />
+                </div>
+              </div>
+
+              {/* Initial Fabric Option */}
+              <div className="border-t border-[#E5E7EB] pt-4 space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#2E5AAC]">
+                  Initial Fabric Option (Required for Configurator)
+                </h4>
+                <div>
+                  <label htmlFor="prodFabricName" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Fabric Line Name *
+                  </label>
+                  <input
+                    id="prodFabricName"
+                    type="text"
+                    required
+                    value={prodFabricName}
+                    onChange={(e) => setProdFabricName(e.target.value)}
+                    placeholder="e.g. 100% Egyptian Giza Cotton (140/2 Twill)"
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] min-h-[44px]"
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label htmlFor="priceMin" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                      Min Price ($) *
+                    </label>
+                    <input
+                      id="priceMin"
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      required
+                      value={prodPriceMinDollars}
+                      onChange={(e) => setProdPriceMinDollars(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="priceMax" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                      Max Price ($) *
+                    </label>
+                    <input
+                      id="priceMax"
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      required
+                      value={prodPriceMaxDollars}
+                      onChange={(e) => setProdPriceMaxDollars(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="setupFee" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                      Setup Fee ($)
+                    </label>
+                    <input
+                      id="setupFee"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={prodSetupFeeDollars}
+                      onChange={(e) => setProdSetupFeeDollars(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Fit Assignment */}
+              {allFits.length > 0 && (
+                <div className="border-t border-[#E5E7EB] pt-4">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-2">
+                    Allowed Garment Fits (Kalıp)
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {allFits.map((fit) => {
+                      const isChecked = prodFitIds.includes(fit.id);
+
+                      return (
+                        <label
+                          key={fit.id}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs cursor-pointer select-none transition-colors ${
+                            isChecked
+                              ? "bg-[#E6F1FB] border-[#2E5AAC] text-[#185FA5] font-semibold"
+                              : "bg-white border-[#D1D5DB] text-[#5B6B85] hover:border-[#94A3B8]"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setProdFitIds([...prodFitIds, fit.id]);
+                              } else {
+                                setProdFitIds(prodFitIds.filter((id) => id !== fit.id));
+                              }
+                            }}
+                            className="h-3.5 w-3.5 text-[#2E5AAC] rounded border-[#D1D5DB]"
+                          />
+                          <span>{fit.name}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {prodError && (
+                <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F] font-semibold">
+                  {prodError}
+                </div>
+              )}
+
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setAddProductContext(null)}
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={prodSubmitting}
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                >
+                  {prodSubmitting ? "Creating Product..." : "Create Product"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <SiteFooter />
     </>
   );
