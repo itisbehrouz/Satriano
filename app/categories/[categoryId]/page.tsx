@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { MANUFACTURING_CATEGORIES } from "@/lib/categoriesData";
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{
@@ -12,13 +14,29 @@ interface PageProps {
 
 export default async function CategoryDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const category = MANUFACTURING_CATEGORIES.find(
-    (c) => c.id === resolvedParams.categoryId
-  );
+  const categoryId = resolvedParams.categoryId;
+
+  const category = await prisma.category.findFirst({
+    where: {
+      active: true,
+      OR: [{ id: categoryId }, { slug: categoryId }],
+    },
+    include: {
+      subcategories: {
+        where: { active: true },
+        orderBy: { sortOrder: "asc" },
+      },
+    },
+  });
 
   if (!category) {
     notFound();
   }
+
+  const otherCategories = await prisma.category.findMany({
+    where: { active: true, NOT: { id: category.id } },
+    orderBy: { sortOrder: "asc" },
+  });
 
   return (
     <>
@@ -35,7 +53,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
               Categories
             </Link>
             <span>/</span>
-            <span className="font-semibold text-[#1A2233]">{category.title}</span>
+            <span className="font-semibold text-[#1A2233]">{category.name}</span>
           </nav>
 
           {/* Category Banner Header */}
@@ -47,10 +65,10 @@ export default async function CategoryDetailPage({ params }: PageProps) {
                   B2B Manufacturing Category
                 </div>
                 <h1 className="text-3xl md:text-4xl font-semibold text-[#1A2233]">
-                  {category.title}
+                  {category.name}
                 </h1>
                 <p className="text-sm md:text-base text-[#5B6B85] mt-2 max-w-2xl">
-                  {category.subDescription}. Customized directly in our European atelier to your exact brand specifications.
+                  {category.description}. Customized directly in our European atelier to your exact brand specifications.
                 </p>
               </div>
 
@@ -101,20 +119,21 @@ export default async function CategoryDetailPage({ params }: PageProps) {
               >
                 {/* Fixed Image Container */}
                 <div className="h-60 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={sub.image}
-                    alt={sub.title}
+                    src={sub.imageUrl || category.imageUrl || "/images/catalog/tops.png"}
+                    alt={sub.name}
                     className="w-full h-full object-cover object-center"
                   />
                   <span className="absolute top-3 left-3 bg-[#0B1E3D]/90 text-white text-[11px] font-semibold px-2.5 py-1 rounded">
-                    MOQ {sub.moq}
+                    MOQ {sub.moq ?? 50} Units
                   </span>
                 </div>
 
                 <div className="p-6 flex-grow flex flex-col justify-between">
                   <div>
                     <h3 className="text-xl font-semibold text-[#1A2233] mb-2">
-                      {sub.title}
+                      {sub.name}
                     </h3>
                     <p className="text-xs text-[#5B6B85] leading-relaxed mb-4">
                       {sub.description}
@@ -122,17 +141,14 @@ export default async function CategoryDetailPage({ params }: PageProps) {
 
                     <div className="flex flex-wrap gap-2 text-[11px] font-medium text-[#5B6B85] mb-4">
                       <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                        {sub.fabricCount}
-                      </span>
-                      <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                        Lead: {sub.leadTime}
+                        Lead: {sub.leadTimeDays ?? 14} Days
                       </span>
                     </div>
                   </div>
 
                   <div className="pt-4 border-t border-[#E5E7EB]">
                     <Link
-                      href={`/konfigurator/${sub.id}`}
+                      href={`/konfigurator/${sub.slug}`}
                       className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
                     >
                       Configure Order Spec →
@@ -149,17 +165,15 @@ export default async function CategoryDetailPage({ params }: PageProps) {
               Explore Other Manufacturing Categories
             </h3>
             <div className="flex flex-wrap gap-3">
-              {MANUFACTURING_CATEGORIES.filter((c) => c.id !== category.id).map(
-                (otherCat) => (
-                  <Link
-                    key={otherCat.id}
-                    href={otherCat.href}
-                    className="bg-[#F5F7FA] hover:bg-[#E6F1FB] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold px-4 py-2.5 rounded transition-colors"
-                  >
-                    {otherCat.title} →
-                  </Link>
-                )
-              )}
+              {otherCategories.map((otherCat) => (
+                <Link
+                  key={otherCat.id}
+                  href={`/categories/${otherCat.slug}`}
+                  className="bg-[#F5F7FA] hover:bg-[#E6F1FB] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold px-4 py-2.5 rounded transition-colors"
+                >
+                  {otherCat.name} →
+                </Link>
+              ))}
             </div>
           </div>
         </div>

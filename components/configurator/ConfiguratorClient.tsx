@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { LogoPlacement } from "@/app/generated/prisma/enums";
 import { FabricPicker, type FabricOption } from "@/components/configurator/FabricPicker";
-import { SizeQtyTable } from "@/components/configurator/SizeQtyTable";
+import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/SizeQtyTable";
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
 import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
@@ -14,6 +14,7 @@ interface ConfiguratorClientProps {
   subcategoryTitle?: string;
   subcategoryDescription?: string;
   categoryTitle?: string;
+  sizeSystems?: SizeSystemDef[];
 }
 
 export function ConfiguratorClient({
@@ -21,10 +22,12 @@ export function ConfiguratorClient({
   subcategoryTitle,
   subcategoryDescription,
   categoryTitle,
+  sizeSystems = [],
 }: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
-  const [sizeQuantities, setSizeQuantities] = useState(DEFAULT_SIZE_QUANTITIES);
+  const [activeRegion, setActiveRegion] = useState<"EU" | "US">("EU");
+  const [sizeQuantities, setSizeQuantities] = useState<Record<string, number>>(DEFAULT_SIZE_QUANTITIES);
   const [customerTargetPrice, setCustomerTargetPrice] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [placement, setPlacement] = useState<LogoPlacement>("LEFT_CHEST");
@@ -139,9 +142,12 @@ export function ConfiguratorClient({
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">grid_on</span>
-              2. Sizing &amp; Unit Matrix
+              2. Regional Sizing &amp; Unit Matrix
             </h2>
             <SizeQtyTable
+              sizeSystems={sizeSystems}
+              activeRegion={activeRegion}
+              onRegionChange={setActiveRegion}
               quantities={sizeQuantities}
               onChange={setSizeQuantities}
             />

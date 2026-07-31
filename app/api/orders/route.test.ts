@@ -23,7 +23,7 @@ function postOrders(body: unknown) {
 
 describe("POST /api/orders", () => {
   it("creates an order in PENDING_REVIEW status with setup fee and target budget", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
 
     const response = await postOrders({
       fabricId: fabric.id,
@@ -53,7 +53,7 @@ describe("POST /api/orders", () => {
   });
 
   it("upserts the company by email instead of creating duplicates", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const email = `test-order-route-${Date.now()}@example.com`;
 
     const first = await postOrders({
@@ -105,7 +105,7 @@ describe("POST /api/orders", () => {
   });
 
   it("returns 400 and creates no company when every quantity is zero", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const email = `test-order-route-${Date.now()}@example.com`;
 
     const response = await postOrders({
@@ -121,7 +121,7 @@ describe("POST /api/orders", () => {
   });
 
   it("creates an order with a logo asset when logoUrl is provided", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const email = `test-order-logo-${Date.now()}@example.com`;
 
     const response = await postOrders({

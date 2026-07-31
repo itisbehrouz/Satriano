@@ -36,7 +36,7 @@ describe("POST /api/proforma", () => {
   });
 
   it("generates proforma, sends email, sets finalPriceCents, and updates order status to PROFORMA_SENT", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const company = await prisma.company.create({
       data: {
         name: "Proforma Test Co",

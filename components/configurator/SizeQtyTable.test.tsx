@@ -3,14 +3,14 @@ import { useState } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SizeQtyTable } from "@/components/configurator/SizeQtyTable";
-import { DEFAULT_SIZE_QUANTITIES, type SizeQuantities } from "@/lib/configuratorLogic";
+import { DEFAULT_SIZE_QUANTITIES } from "@/lib/configuratorLogic";
 
-// Controlled inputs only behave realistically in tests if the value prop is
-// fed back after every change, exactly like the real page will do.
-function ControlledSizeQtyTable({ onChange }: { onChange: (q: SizeQuantities) => void }) {
+function ControlledSizeQtyTable({ onChange }: { onChange: (q: Record<string, number>) => void }) {
   const [quantities, setQuantities] = useState(DEFAULT_SIZE_QUANTITIES);
   return (
     <SizeQtyTable
+      activeRegion="EU"
+      onRegionChange={() => {}}
       quantities={quantities}
       onChange={(next) => {
         setQuantities(next);
@@ -22,14 +22,20 @@ function ControlledSizeQtyTable({ onChange }: { onChange: (q: SizeQuantities) =>
 
 describe("SizeQtyTable", () => {
   it("renders a row per size with the current quantity", () => {
-    render(<SizeQtyTable quantities={DEFAULT_SIZE_QUANTITIES} onChange={() => {}} />);
+    render(
+      <SizeQtyTable
+        activeRegion="EU"
+        onRegionChange={() => {}}
+        quantities={DEFAULT_SIZE_QUANTITIES}
+        onChange={() => {}}
+      />,
+    );
 
-    expect(screen.getByLabelText("S")).toHaveValue(50);
-    expect(screen.getByLabelText("M")).toHaveValue(100);
-    expect(screen.getByLabelText("L")).toHaveValue(100);
-    expect(screen.getByLabelText("XL")).toHaveValue(50);
-    expect(screen.getByLabelText("XS")).toHaveValue(0);
-    expect(screen.getByLabelText("XXL")).toHaveValue(0);
+    expect(screen.getByLabelText("S EU")).toHaveValue(50);
+    expect(screen.getByLabelText("M EU")).toHaveValue(100);
+    expect(screen.getByLabelText("L EU")).toHaveValue(100);
+    expect(screen.getByLabelText("XL EU")).toHaveValue(50);
+    expect(screen.getByLabelText("XS EU")).toHaveValue(0);
   });
 
   it("calls onChange with only the edited size updated, others preserved", async () => {
@@ -37,21 +43,18 @@ describe("SizeQtyTable", () => {
     const user = userEvent.setup();
     render(<ControlledSizeQtyTable onChange={onChange} />);
 
-    await user.clear(screen.getByLabelText("M"));
-    await user.type(screen.getByLabelText("M"), "75");
+    await user.clear(screen.getByLabelText("M EU"));
+    await user.type(screen.getByLabelText("M EU"), "75");
 
     const lastCall = onChange.mock.calls.at(-1)?.[0];
     expect(lastCall).toEqual({ ...DEFAULT_SIZE_QUANTITIES, M: 75 });
   });
 
   it("sanitizes a negative value to 0 via parseQuantityInput", () => {
-    // fireEvent delivers the final "-5" in one change event, like a paste or
-    // autofill would — per-keystroke typing is covered by parseQuantityInput's
-    // own unit tests in lib/configuratorLogic.test.ts.
     const onChange = vi.fn();
     render(<ControlledSizeQtyTable onChange={onChange} />);
 
-    fireEvent.change(screen.getByLabelText("XS"), { target: { value: "-5" } });
+    fireEvent.change(screen.getByLabelText("XS EU"), { target: { value: "-5" } });
 
     const lastCall = onChange.mock.calls.at(-1)?.[0];
     expect(lastCall?.XS).toBe(0);

@@ -230,7 +230,15 @@ export default function AdminPage() {
             </div>
 
             <div className="flex items-center gap-3">
+              <Link
+                href="/admin/product-settings"
+                className="px-3.5 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-sm">settings</span>
+                Product &amp; Catalog Settings
+              </Link>
               <button
+                type="button"
                 onClick={fetchOrders}
                 className="px-3.5 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >

@@ -64,19 +64,81 @@ model User {
   company Company @relation(fields: [companyId], references: [id])
 }
 
+model Category {
+  id            String        @id @default(uuid())
+  name          String
+  slug          String        @unique
+  description   String?
+  sortOrder     Int           @default(0)
+  active        Boolean       @default(true)
+  imageUrl      String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  subcategories Subcategory[]
+}
+
+model Subcategory {
+  id            String                  @id @default(uuid())
+  categoryId    String
+  category      Category                @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name          String
+  slug          String                  @unique
+  description   String?
+  imageUrl      String?
+  leadTimeDays  Int?                    @default(14)
+  moq           Int?                    @default(50)
+  active        Boolean                 @default(true)
+  sortOrder     Int                     @default(0)
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  sizeSystems   SubcategorySizeSystem[]
+  fabrics       Fabric[]
+}
+
+model SizeSystem {
+  id            String                  @id @default(uuid())
+  name          String                  // "Alpha", "Waist", "Chest", "Shoe", "OneSize"
+  region        String                  // "EU" or "US"
+  options       SizeOption[]
+  subcategories SubcategorySizeSystem[]
+  orderLines    OrderLine[]
+}
+
+model SizeOption {
+  id           String     @id @default(uuid())
+  sizeSystemId String
+  sizeSystem   SizeSystem @relation(fields: [sizeSystemId], references: [id], onDelete: Cascade)
+  label        String     // "M", "44", "42", "XS", "One Size"
+  sortOrder    Int        @default(0)
+}
+
+model SubcategorySizeSystem {
+  id            String      @id @default(uuid())
+  subcategoryId String
+  subcategory   Subcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  sizeSystemId  String
+  sizeSystem    SizeSystem  @relation(fields: [sizeSystemId], references: [id], onDelete: Cascade)
+
+  @@unique([subcategoryId, sizeSystemId])
+}
+
 model Fabric {
-  id             String   @id @default(cuid())
-  name           String   @unique
-  description    String?
-  imageUrl       String?
-  colorway       String?
-  priceMinCents  Int
-  priceMaxCents  Int
-  setupFeeCents  Int      @default(0)
-  active         Boolean  @default(true)
-  createdAt      DateTime @default(now())
+  id            String       @id @default(cuid())
+  subcategoryId String?
+  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  name          String
+  description   String?
+  imageUrl      String?
+  colorway      String?
+  priceMinCents Int
+  priceMaxCents Int
+  setupFeeCents Int          @default(0)
+  active        Boolean      @default(true)
+  createdAt     DateTime     @default(now())
 
   orderLines OrderLine[]
+
+  @@unique([name, subcategoryId])
 }
 
 model Order {
@@ -98,15 +160,18 @@ model Order {
 }
 
 model OrderLine {
-  id             String @id @default(cuid())
+  id             String      @id @default(cuid())
   orderId        String
   fabricId       String
+  sizeSystemId   String?
+  selectedSize   String?
   size           String
   quantity       Int
   unitPriceCents Int
 
-  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  fabric Fabric @relation(fields: [fabricId], references: [id])
+  order      Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fabric     Fabric      @relation(fields: [fabricId], references: [id])
+  sizeSystem SizeSystem? @relation(fields: [sizeSystemId], references: [id], onDelete: SetNull)
 }
 
 model LogoAsset {

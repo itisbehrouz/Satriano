@@ -1,9 +1,22 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { MANUFACTURING_CATEGORIES } from "@/lib/categoriesData";
+import { prisma } from "@/lib/prisma";
 
-export default function CategoriesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CategoriesPage() {
+  const categories = await prisma.category.findMany({
+    where: { active: true },
+    include: {
+      subcategories: {
+        where: { active: true },
+        orderBy: { sortOrder: "asc" },
+      },
+    },
+    orderBy: { sortOrder: "asc" },
+  });
+
   return (
     <>
       <SiteHeader />
@@ -17,7 +30,7 @@ export default function CategoriesPage() {
                 B2B White-Label Garment Catalog
               </div>
               <h1 className="text-2xl md:text-4xl font-semibold text-[#1A2233]">
-                Manufacturing Categories & Subcategories
+                Manufacturing Categories &amp; Subcategories
               </h1>
               <p className="text-sm text-[#5B6B85] mt-1.5 max-w-2xl leading-relaxed">
                 Explore our comprehensive garment production lines. Select any specific subcategory to configure your custom order specs.
@@ -33,29 +46,29 @@ export default function CategoriesPage() {
 
           {/* Grouped Category Sections */}
           <div className="space-y-16">
-            {MANUFACTURING_CATEGORIES.map((cat) => (
-              <section key={cat.id} className="scroll-mt-24" id={cat.id}>
+            {categories.map((cat) => (
+              <section key={cat.id} className="scroll-mt-24" id={cat.slug}>
                 {/* Category Section Title Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-[#1A2233] pb-4 mb-8 gap-4">
                   <div>
                     <div className="flex items-center gap-3">
                       <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                        {cat.title}
+                        {cat.name}
                       </h2>
                       <span className="bg-[#E6F1FB] text-[#185FA5] text-xs font-semibold px-2.5 py-0.5 rounded">
                         {cat.subcategories.length} Subcategories
                       </span>
                     </div>
                     <p className="text-xs md:text-sm text-[#5B6B85] mt-1 font-medium">
-                      {cat.subDescription}
+                      {cat.description}
                     </p>
                   </div>
 
                   <Link
-                    href={cat.href}
+                    href={`/categories/${cat.slug}`}
                     className="inline-flex items-center gap-2 text-xs font-semibold text-[#2E5AAC] hover:text-[#24498E] uppercase tracking-wider"
                   >
-                    View All {cat.title} Specs →
+                    View All {cat.name} Specs →
                   </Link>
                 </div>
 
@@ -68,13 +81,14 @@ export default function CategoriesPage() {
                     >
                       {/* Subcategory Photo Container */}
                       <div className="h-60 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={sub.image}
-                          alt={sub.title}
+                          src={sub.imageUrl || cat.imageUrl || "/images/catalog/tops.png"}
+                          alt={sub.name}
                           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                         />
                         <span className="absolute top-3 left-3 bg-[#0B1E3D]/90 text-white text-[11px] font-semibold px-2.5 py-1 rounded">
-                          MOQ {sub.moq}
+                          MOQ {sub.moq ?? 50} Units
                         </span>
                       </div>
 
@@ -82,7 +96,7 @@ export default function CategoriesPage() {
                       <div className="p-6 flex-grow flex flex-col justify-between">
                         <div>
                           <h3 className="text-lg font-semibold text-[#1A2233] mb-2 group-hover:text-[#2E5AAC] transition-colors">
-                            {sub.title}
+                            {sub.name}
                           </h3>
                           <p className="text-xs text-[#5B6B85] leading-relaxed mb-4">
                             {sub.description}
@@ -90,17 +104,14 @@ export default function CategoriesPage() {
 
                           <div className="flex flex-wrap gap-2 text-[11px] font-medium text-[#5B6B85] mb-4">
                             <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                              {sub.fabricCount}
-                            </span>
-                            <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                              Lead: {sub.leadTime}
+                              Lead: {sub.leadTimeDays ?? 14} Days
                             </span>
                           </div>
                         </div>
 
                         <div className="pt-4 border-t border-[#E5E7EB]">
                           <Link
-                            href={`/konfigurator/${sub.id}`}
+                            href={`/konfigurator/${sub.slug}`}
                             className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
                           >
                             Configure Spec →

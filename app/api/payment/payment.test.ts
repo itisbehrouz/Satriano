@@ -17,7 +17,7 @@ afterEach(async () => {
 
 describe("Payment API Routes", () => {
   it("creates a checkout session and pending payment record", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const company = await prisma.company.create({
       data: {
         name: "Payment Test Co",
@@ -57,7 +57,7 @@ describe("Payment API Routes", () => {
   });
 
   it("updates order status to PAID when webhook receives checkout.session.completed event", async () => {
-    const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const company = await prisma.company.create({
       data: {
         name: "Webhook Test Co",
