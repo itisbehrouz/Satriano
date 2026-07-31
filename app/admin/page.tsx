@@ -150,19 +150,7 @@ export default function AdminDashboardPage() {
         <SiteHeader />
         <main className="min-h-[80vh] bg-[#F5F7FA] text-[#1A2233] py-16 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
           <div className="w-full max-w-md mx-auto">
-            {/* Logo Brand Lockup */}
-            <div className="text-center mb-8">
-              <Link href="/" className="inline-block">
-                <img
-                  src="/Satrinao.png"
-                  alt="Satriano Atelier"
-                  className="h-10 w-auto mx-auto object-contain"
-                />
-                <span className="text-[11px] font-sans uppercase tracking-widest text-[#5B6B85] mt-2 block">
-                  Internal Operations
-                </span>
-              </Link>
-            </div>
+
 
             <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
               <div className="text-center mb-6">

@@ -86,19 +86,7 @@ export default function PortalPage() {
       <SiteHeader />
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
         <div className="w-full max-w-xl mx-auto">
-          {/* Logo Brand Lockup (The ONLY place Baskerville + Gold #DBB671 appear together) */}
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-block group">
-              <img
-                src="/Satrinao.png"
-                alt="Satriano Atelier"
-                className="h-10 md:h-12 w-auto mx-auto object-contain"
-              />
-              <span className="text-[11px] font-sans uppercase tracking-widest text-[#5B6B85] mt-2 block">
-                B2B Manufacturing Portal
-              </span>
-            </Link>
-          </div>
+
 
           {/* VIEW 1: CLIENT PORTAL LOGIN */}
           {view === "LOGIN" && (
