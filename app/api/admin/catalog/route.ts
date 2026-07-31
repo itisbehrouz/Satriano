@@ -73,7 +73,7 @@ export async function POST(request: Request) {
 
     // 1. CREATE CATEGORY
     if (target === "category") {
-      const { name, slug, description, sortOrder } = data;
+      const { name, slug, description, sortOrder, imageUrl } = data;
       if (!name || typeof name !== "string" || !name.trim()) {
         return NextResponse.json({ error: "Category name is required." }, { status: 400 });
       }
@@ -99,6 +99,7 @@ export async function POST(request: Request) {
           slug: cleanSlug,
           description: description?.trim() || null,
           sortOrder: order,
+          imageUrl: typeof imageUrl === "string" ? imageUrl.trim() || null : null,
         },
       });
 
@@ -107,7 +108,7 @@ export async function POST(request: Request) {
 
     // 2. CREATE SUBCATEGORY
     if (target === "subcategory") {
-      const { categoryId, name, slug, description, sortOrder, sizeSystemIds } = data;
+      const { categoryId, name, slug, description, sortOrder, sizeSystemIds, imageUrl } = data;
       if (!categoryId || typeof categoryId !== "string") {
         return NextResponse.json({ error: "Parent category ID is required." }, { status: 400 });
       }
@@ -143,6 +144,7 @@ export async function POST(request: Request) {
           slug: cleanSlug,
           description: description?.trim() || null,
           sortOrder: order,
+          imageUrl: typeof imageUrl === "string" ? imageUrl.trim() || null : null,
         },
       });
 
@@ -171,6 +173,7 @@ export async function POST(request: Request) {
         moqCombinedMultiFabric,
         fitIds,
         initialFabric,
+        imageUrl,
       } = data;
 
       if (!subcategoryId || typeof subcategoryId !== "string") {
@@ -222,6 +225,7 @@ export async function POST(request: Request) {
           name: name.trim(),
           slug: cleanSlug,
           description: description?.trim() || null,
+          imageUrl: typeof imageUrl === "string" ? imageUrl.trim() || null : null,
           leadTimeDays: typeof leadTimeDays === "number" ? leadTimeDays : 14,
           moqPerFabric: typeof moqPerFabric === "number" ? moqPerFabric : 50,
           moqCombinedMultiFabric: typeof moqCombinedMultiFabric === "number" ? moqCombinedMultiFabric : null,
@@ -272,11 +276,27 @@ export async function PATCH(request: Request) {
 
     const { target, id, data } = body;
 
+    if (target === "category" && typeof id === "string") {
+      const updated = await prisma.category.update({
+        where: { id },
+        data: {
+          ...(typeof data.active === "boolean" ? { active: data.active } : {}),
+          ...(typeof data.name === "string" ? { name: data.name.trim() } : {}),
+          ...(typeof data.description === "string" ? { description: data.description.trim() || null } : {}),
+          ...(typeof data.imageUrl === "string" || data.imageUrl === null ? { imageUrl: data.imageUrl?.trim() || null } : {}),
+        },
+      });
+      return NextResponse.json({ success: true, category: updated });
+    }
+
     if (target === "subcategory" && typeof id === "string") {
       const updated = await prisma.subcategory.update({
         where: { id },
         data: {
           ...(typeof data.active === "boolean" ? { active: data.active } : {}),
+          ...(typeof data.name === "string" ? { name: data.name.trim() } : {}),
+          ...(typeof data.description === "string" ? { description: data.description.trim() || null } : {}),
+          ...(typeof data.imageUrl === "string" || data.imageUrl === null ? { imageUrl: data.imageUrl?.trim() || null } : {}),
         },
       });
       return NextResponse.json({ success: true, subcategory: updated });
@@ -293,6 +313,7 @@ export async function PATCH(request: Request) {
           ...(data.moqCombinedMultiFabric === null || typeof data.moqCombinedMultiFabric === "number"
             ? { moqCombinedMultiFabric: data.moqCombinedMultiFabric }
             : {}),
+          ...(typeof data.imageUrl === "string" || data.imageUrl === null ? { imageUrl: data.imageUrl?.trim() || null } : {}),
         },
       });
       return NextResponse.json({ success: true, product: updated });

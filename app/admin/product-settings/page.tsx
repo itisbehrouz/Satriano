@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
 
 interface SizeOption {
   id: string;
@@ -99,6 +100,7 @@ export default function AdminProductSettingsPage() {
   const [catName, setCatName] = useState("");
   const [catSlug, setCatSlug] = useState("");
   const [catDesc, setCatDesc] = useState("");
+  const [catImageUrl, setCatImageUrl] = useState<string | null>(null);
   const [catSubmitting, setCatSubmitting] = useState(false);
   const [catError, setCatError] = useState<string | null>(null);
 
@@ -107,6 +109,7 @@ export default function AdminProductSettingsPage() {
   const [subSlug, setSubSlug] = useState("");
   const [subDesc, setSubDesc] = useState("");
   const [subSizeSystemIds, setSubSizeSystemIds] = useState<string[]>([]);
+  const [subImageUrl, setSubImageUrl] = useState<string | null>(null);
   const [subSubmitting, setSubSubmitting] = useState(false);
   const [subError, setSubError] = useState<string | null>(null);
 
@@ -122,6 +125,7 @@ export default function AdminProductSettingsPage() {
   const [prodPriceMaxDollars, setProdPriceMaxDollars] = useState<string>("24.00");
   const [prodSetupFeeDollars, setProdSetupFeeDollars] = useState<string>("0.00");
   const [prodFitIds, setProdFitIds] = useState<string[]>([]);
+  const [prodImageUrl, setProdImageUrl] = useState<string | null>(null);
   const [prodSubmitting, setProdSubmitting] = useState(false);
   const [prodError, setProdError] = useState<string | null>(null);
 
@@ -187,6 +191,7 @@ export default function AdminProductSettingsPage() {
             name: catName,
             slug: catSlug,
             description: catDesc,
+            imageUrl: catImageUrl,
           },
         }),
       });
@@ -201,6 +206,7 @@ export default function AdminProductSettingsPage() {
       setCatName("");
       setCatSlug("");
       setCatDesc("");
+      setCatImageUrl(null);
       setShowAddCategoryModal(false);
       fetchCatalog();
     } catch {
@@ -234,6 +240,7 @@ export default function AdminProductSettingsPage() {
             slug: subSlug,
             description: subDesc,
             sizeSystemIds: subSizeSystemIds,
+            imageUrl: subImageUrl,
           },
         }),
       });
@@ -248,6 +255,7 @@ export default function AdminProductSettingsPage() {
       setSubSlug("");
       setSubDesc("");
       setSubSizeSystemIds([]);
+      setSubImageUrl(null);
       setAddSubcategoryCategory(null);
       fetchCatalog();
     } catch {
@@ -301,6 +309,7 @@ export default function AdminProductSettingsPage() {
             name: prodName,
             slug: prodSlug,
             description: prodDesc,
+            imageUrl: prodImageUrl,
             leadTimeDays: prodLeadTime,
             moqPerFabric: prodMoqPerFabric,
             moqCombinedMultiFabric: isNaN(combinedVal as number) ? null : combinedVal,
@@ -326,6 +335,7 @@ export default function AdminProductSettingsPage() {
       setProdDesc("");
       setProdFabricName("");
       setProdFitIds([]);
+      setProdImageUrl(null);
       setAddProductContext(null);
       fetchCatalog();
     } catch {
@@ -535,6 +545,7 @@ export default function AdminProductSettingsPage() {
                         setCatName("");
                         setCatSlug("");
                         setCatDesc("");
+                        setCatImageUrl(null);
                         setCatError(null);
                         setShowAddCategoryModal(true);
                       }}
@@ -564,6 +575,7 @@ export default function AdminProductSettingsPage() {
                             setSubSlug("");
                             setSubDesc("");
                             setSubSizeSystemIds([]);
+                            setSubImageUrl(null);
                             setSubError(null);
                             setAddSubcategoryCategory(cat);
                           }}
@@ -602,6 +614,7 @@ export default function AdminProductSettingsPage() {
                                   setProdPriceMaxDollars("24.00");
                                   setProdSetupFeeDollars("0.00");
                                   setProdFitIds([]);
+                                  setProdImageUrl(null);
                                   setProdError(null);
                                   setAddProductContext({ cat, sub });
                                 }}
@@ -932,6 +945,12 @@ export default function AdminProductSettingsPage() {
                 />
               </div>
 
+              <CatalogImageUploader
+                imageUrl={catImageUrl}
+                onImageUrlChange={setCatImageUrl}
+                label="Category Image"
+              />
+
               {catError && (
                 <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F] font-semibold">
                   {catError}
@@ -1024,6 +1043,12 @@ export default function AdminProductSettingsPage() {
                   className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                 />
               </div>
+
+              <CatalogImageUploader
+                imageUrl={subImageUrl}
+                onImageUrlChange={setSubImageUrl}
+                label="Subcategory Image"
+              />
 
               {sizeSystems.length > 0 && (
                 <div>
@@ -1153,6 +1178,12 @@ export default function AdminProductSettingsPage() {
                   className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                 />
               </div>
+
+              <CatalogImageUploader
+                imageUrl={prodImageUrl}
+                onImageUrlChange={setProdImageUrl}
+                label="Product Image"
+              />
 
               {/* MOQ & Production Parameters */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-[#E5E7EB] pt-4">
