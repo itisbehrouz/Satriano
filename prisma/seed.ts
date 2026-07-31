@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Starting Satriano Atelier Complete 8-Value Fit Seeding...");
+  console.log("🌱 Starting Satriano Atelier Seeding with Two-Tier MOQ Values...");
 
   // 1. Seed Size Systems & Options
   const sizeSystemDefs = [
@@ -119,7 +119,7 @@ async function main() {
     createdFits[fitDef.code] = fit.id;
   }
 
-  // 3. 3-Level Catalog Matrix: Category -> Subcategory -> Products
+  // 3. 3-Level Catalog Matrix with Two-Tier MOQs
   const catalog = [
     {
       name: "Tops",
@@ -141,7 +141,8 @@ async function main() {
               description: "Crisp Oxford & Fine Poplin Tailored Formal Dress Shirt.",
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Italian Poplin Cotton (120/2)", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
@@ -154,7 +155,8 @@ async function main() {
               description: "Relaxed Fit Cotton & Chambray Button-Down Casual Shirt.",
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Washed Cotton Chambray", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
@@ -166,7 +168,8 @@ async function main() {
               description: "100% Normandy Linen Resort & Summer Shirt.",
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "French Washed Linen", priceMinCents: 2600, priceMaxCents: 3400, setupFeeCents: 15000 },
@@ -187,7 +190,8 @@ async function main() {
               description: "Bespoke Pique & Organic Cotton Short Sleeve Polo Shirt.",
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
@@ -201,7 +205,8 @@ async function main() {
               description: "Heavyweight Textured Pique Polo with Ribbed Collar.",
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavyweight Pique Cotton", priceMinCents: 1600, priceMaxCents: 2100, setupFeeCents: 15000 },
@@ -213,7 +218,8 @@ async function main() {
               description: "Moisture-Wicking & Anti-Odor Athletic Polo Shirt.",
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Technical Poly-Spandex Blend", priceMinCents: 2100, priceMaxCents: 2600, setupFeeCents: 15000 },
@@ -234,7 +240,8 @@ async function main() {
               description: "Fine Gauge Merino Wool Pullover Sweater.",
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Extra-Fine Merino Wool", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 20000 },
@@ -246,7 +253,8 @@ async function main() {
               description: "Cashmere Blend Roll-Neck Knitwear.",
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Cashmere Cotton Knit", priceMinCents: 4500, priceMaxCents: 5800, setupFeeCents: 20000 },
@@ -258,7 +266,8 @@ async function main() {
               description: "Button-Front Ribbed Knit Cardigan Jacket.",
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavy Lambswool Blend", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 20000 },
@@ -279,7 +288,8 @@ async function main() {
               description: "220gsm Organic Cotton Heavyweight Crewneck T-Shirt.",
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 12,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "220gsm Heavy Organic Jersey", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 12000 },
@@ -291,7 +301,8 @@ async function main() {
               description: "Tailored Slim Fit Cotton V-Neck T-Shirt.",
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 12,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Mercerized Combed Cotton", priceMinCents: 1300, priceMaxCents: 1800, setupFeeCents: 12000 },
@@ -312,7 +323,8 @@ async function main() {
               description: "Heavy French Terry Fleece Pullover Hoodie with Kangaroo Pocket.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 40,
+              moqCombinedMultiFabric: 200,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "400gsm Heavy French Terry", priceMinCents: 2600, priceMaxCents: 3500, setupFeeCents: 15000 },
@@ -324,7 +336,8 @@ async function main() {
               description: "Full-Zip Fleece Hoodie with YKK Hardware.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 40,
+              moqCombinedMultiFabric: 200,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Brushed Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3700, setupFeeCents: 15000 },
@@ -336,7 +349,8 @@ async function main() {
               description: "Classic Athletic Raglan Crewneck Sweatshirt.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 40,
+              moqCombinedMultiFabric: 200,
               fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavy Loopback Cotton Fleece", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
@@ -366,7 +380,8 @@ async function main() {
               description: "Pleated & Flat-Front Tailored Wool Dress Pants.",
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Super 110s Wool Gabardine", priceMinCents: 3500, priceMaxCents: 4500, setupFeeCents: 18000 },
@@ -378,7 +393,8 @@ async function main() {
               description: "Stretch Cotton Twill Smart Casual Chino Trousers.",
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Stretch Cotton Twill", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
@@ -390,7 +406,8 @@ async function main() {
               description: "Modern Flat-Front Wool-Linen Blend Trousers.",
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Tropical Wool Linen", priceMinCents: 3200, priceMaxCents: 4100, setupFeeCents: 18000 },
@@ -411,7 +428,8 @@ async function main() {
               description: "Japanese Selvedge & Stretch Cotton Denim Jeans.",
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "13.5oz Japanese Selvedge Denim", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 18000 },
@@ -423,7 +441,8 @@ async function main() {
               description: "Classic 5-Pocket Straight Cut Denim Jeans.",
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Rigid Organic Denim", priceMinCents: 3400, priceMaxCents: 4400, setupFeeCents: 18000 },
@@ -444,7 +463,8 @@ async function main() {
               description: "Smart Casual Stretch Cotton Chino Shorts.",
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Washed Cotton Twill", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
@@ -456,7 +476,8 @@ async function main() {
               description: "Relaxed Drawstring Linen Summer Shorts.",
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Pure Washed Linen", priceMinCents: 2000, priceMaxCents: 2600, setupFeeCents: 15000 },
@@ -468,7 +489,8 @@ async function main() {
               description: "Utility Flap-Pocket Ripstop Cotton Shorts.",
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Cotton Ripstop", priceMinCents: 2100, priceMaxCents: 2700, setupFeeCents: 15000 },
@@ -489,7 +511,8 @@ async function main() {
               description: "Slim Tapered Athletic Fleece Jogger Pants.",
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Brushed Back Fleece", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
@@ -501,7 +524,8 @@ async function main() {
               description: "Relaxed Straight-Leg Heavyweight Loopback Sweatpants.",
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 300,
               fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Loopback Cotton", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
@@ -531,7 +555,8 @@ async function main() {
               description: "Weatherproof Bonded Softshell Outerwear Jacket.",
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Bonded Weatherproof Shell", priceMinCents: 4500, priceMaxCents: 6000, setupFeeCents: 20000 },
@@ -543,7 +568,8 @@ async function main() {
               description: "Italian Full-Grain Nappa Leather Flight Bomber Jacket.",
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Italian Nappa Leather", priceMinCents: 9500, priceMaxCents: 14000, setupFeeCents: 25000 },
@@ -555,7 +581,8 @@ async function main() {
               description: "4-Pocket Utility Weatherproof Field Shell Jacket.",
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Waxed Cotton Canvas", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
@@ -576,7 +603,8 @@ async function main() {
               description: "Classic Belted Cotton Gabardine Trench Coat.",
               imageUrl: "/images/subcategories/outerwear-coats.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 30,
+              moqCombinedMultiFabric: 150,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Gabardine Cotton Canvas", priceMinCents: 6800, priceMaxCents: 8500, setupFeeCents: 25000 },
@@ -588,7 +616,8 @@ async function main() {
               description: "Single-Breasted Minimalist Raincoat Mac.",
               imageUrl: "/images/subcategories/outerwear-coats.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Waterproof Cotton Twill", priceMinCents: 6200, priceMaxCents: 7800, setupFeeCents: 22000 },
@@ -609,7 +638,8 @@ async function main() {
               description: "Heavyweight Melton Virgin Wool Tailored Overcoat.",
               imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Melton Wool & Cashmere", priceMinCents: 8500, priceMaxCents: 12000, setupFeeCents: 25000 },
@@ -621,7 +651,8 @@ async function main() {
               description: "Luxury Pure Cashmere Notch-Lapel Overcoat.",
               imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 30,
+              moqCombinedMultiFabric: 150,
               fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "100% Italian Cashmere", priceMinCents: 13500, priceMaxCents: 18500, setupFeeCents: 30000 },
@@ -642,7 +673,8 @@ async function main() {
               description: "Lightweight Patch-Pocket Casual Linen Blazer.",
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Hopsack Wool Blend", priceMinCents: 4800, priceMaxCents: 6200, setupFeeCents: 20000 },
@@ -654,7 +686,8 @@ async function main() {
               description: "Breathable Open-Weave Cotton Hopsack Jacket.",
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Open-Weave Cotton Hopsack", priceMinCents: 4400, priceMaxCents: 5800, setupFeeCents: 20000 },
@@ -684,7 +717,8 @@ async function main() {
               description: "Super 120s Virgin Wool Jacket & Trousers Suit Set.",
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 35,
+              moqCombinedMultiFabric: 175,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 130s Italian Wool", priceMinCents: 12000, priceMaxCents: 16500, setupFeeCents: 30000 },
@@ -696,7 +730,8 @@ async function main() {
               description: "Bespoke Suit Set including Matching Tailored Vest.",
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 30,
+              moqCombinedMultiFabric: 150,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 150s Fine Wool & Silk", priceMinCents: 15500, priceMaxCents: 21000, setupFeeCents: 35000 },
@@ -717,7 +752,8 @@ async function main() {
               description: "Black Barathea Wool Tuxedo with Silk Grosgrain Lapels.",
               imageUrl: "/images/subcategories/formal-tuxedos.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 35,
+              moqCombinedMultiFabric: 175,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Barathea Wool & Silk Satin", priceMinCents: 14000, priceMaxCents: 19000, setupFeeCents: 30000 },
@@ -729,7 +765,8 @@ async function main() {
               description: "Luxury Cotton-Silk Velvet Tuxedo Dinner Jacket.",
               imageUrl: "/images/subcategories/formal-tuxedos.jpg",
               leadTimeDays: 21,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Cotton-Silk Velvet", priceMinCents: 12500, priceMaxCents: 17000, setupFeeCents: 30000 },
@@ -750,7 +787,8 @@ async function main() {
               description: "Structured Brass-Button Navy Hopsack Formal Blazer.",
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Refined Wool Flannel", priceMinCents: 5200, priceMaxCents: 6800, setupFeeCents: 20000 },
@@ -762,7 +800,8 @@ async function main() {
               description: "Heavy Flannel Peak-Lapel Double-Breasted Blazer.",
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Heavy Italian Wool Flannel", priceMinCents: 5600, priceMaxCents: 7200, setupFeeCents: 20000 },
@@ -783,7 +822,8 @@ async function main() {
               description: "Peak-Lapel Double-Breasted Wool Waistcoat.",
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 120s Wool Satin Back", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
@@ -795,7 +835,8 @@ async function main() {
               description: "Single-Breasted 5-Button Suit Vest.",
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 14,
-              moq: 50,
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
               fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Fine Wool Twill", priceMinCents: 2500, priceMaxCents: 3200, setupFeeCents: 15000 },
@@ -825,8 +866,9 @@ async function main() {
               description: "Matching Zip Track Jacket & Tapered Pants Set.",
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "Bonded Technical Fleece", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 15000 },
               ],
@@ -837,8 +879,9 @@ async function main() {
               description: "Stand-Collar Athletic Zip Track Top.",
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 65,
+              moqCombinedMultiFabric: 325,
+              fits: [],
               fabrics: [
                 { name: "Performance Tricot Knit", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -849,8 +892,9 @@ async function main() {
               description: "Zip-Hem Ergonomic Performance Track Pants.",
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 65,
+              moqCombinedMultiFabric: 325,
+              fits: [],
               fabrics: [
                 { name: "Tricot Poly Blend", priceMinCents: 2000, priceMaxCents: 2600, setupFeeCents: 15000 },
               ],
@@ -870,8 +914,9 @@ async function main() {
               description: "Lightweight Breathable Performance Running Shirt.",
               imageUrl: "/images/subcategories/sportswear-performance.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
+              fits: [],
               fabrics: [
                 { name: "Recycled Elastane Knit", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
               ],
@@ -882,8 +927,9 @@ async function main() {
               description: "Ergonomic Muscle Support Seamless Compression Shirt.",
               imageUrl: "/images/subcategories/sportswear-performance.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
+              fits: [],
               fabrics: [
                 { name: "Seamless Nylon-Spandex", priceMinCents: 2100, priceMaxCents: 2800, setupFeeCents: 15000 },
               ],
@@ -903,8 +949,9 @@ async function main() {
               description: "Lightweight Zip-Pocket Athletic Training Shorts.",
               imageUrl: "/images/subcategories/sportswear-activewear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: null,
+              fits: [],
               fabrics: [
                 { name: "Four-Way Stretch Microfiber", priceMinCents: 1600, priceMaxCents: 2200, setupFeeCents: 15000 },
               ],
@@ -915,8 +962,9 @@ async function main() {
               description: "High-Rise Seamless Athletic Tights & Trousers.",
               imageUrl: "/images/subcategories/sportswear-activewear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: null,
+              fits: [],
               fabrics: [
                 { name: "High-Compression Poly-Spandex", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -945,8 +993,9 @@ async function main() {
               description: "19mm Pure Mulberry Silk Piping Pajama Set.",
               imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "19mm Mulberry Silk", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
               ],
@@ -957,8 +1006,9 @@ async function main() {
               description: "Shawl Collar Plush Organic Terry Bathrobe.",
               imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "Organic Cotton Velour Terry", priceMinCents: 4200, priceMaxCents: 5600, setupFeeCents: 18000 },
               ],
@@ -978,8 +1028,9 @@ async function main() {
               description: "Micro-Modal & Organic Cotton Elastic Waistband Trunks.",
               imageUrl: "/images/subcategories/loungewear-underwear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 100,
+              moqCombinedMultiFabric: 500,
+              fits: [],
               fabrics: [
                 { name: "Micro-Modal Cotton Blend", priceMinCents: 900, priceMaxCents: 1400, setupFeeCents: 10000 },
               ],
@@ -990,8 +1041,9 @@ async function main() {
               description: "Zero-Chafe Micro-Modal Athletic Trunks.",
               imageUrl: "/images/subcategories/loungewear-underwear.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 100,
+              moqCombinedMultiFabric: 500,
+              fits: [],
               fabrics: [
                 { name: "Pure Micro-Modal Elastane", priceMinCents: 1000, priceMaxCents: 1500, setupFeeCents: 10000 },
               ],
@@ -1011,8 +1063,9 @@ async function main() {
               description: "Relaxed Fit Organic Loopback Fleece Lounge Shirt.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 80,
+              moqCombinedMultiFabric: 400,
+              fits: [],
               fabrics: [
                 { name: "Organic Heavy Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
               ],
@@ -1023,8 +1076,9 @@ async function main() {
               description: "Soft Jersey & Linen Lounge Trousers with Drawstring.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "Modal Cotton Jersey", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -1044,8 +1098,9 @@ async function main() {
               description: "Ribbed Mercerized Cotton Fine Gauge Socks.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 10,
-              moq: 100,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "Mercerized Ribbed Cotton", priceMinCents: 450, priceMaxCents: 750, setupFeeCents: 8000 },
               ],
@@ -1056,8 +1111,9 @@ async function main() {
               description: "Thermal Regulating Fine Gauge Merino Wool Socks.",
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 10,
-              moq: 100,
-              fits: [], // Excluded
+              moqPerFabric: 50,
+              moqCombinedMultiFabric: 250,
+              fits: [],
               fabrics: [
                 { name: "Extra-Fine Merino Wool Blend", priceMinCents: 650, priceMaxCents: 950, setupFeeCents: 8000 },
               ],
@@ -1086,8 +1142,9 @@ async function main() {
               description: "Full-Grain Italian Leather Goodyear Welted Oxfords.",
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 10,
+              moqCombinedMultiFabric: 50,
+              fits: [],
               fabrics: [
                 { name: "Full-Grain Italian Calfskin", priceMinCents: 8500, priceMaxCents: 12500, setupFeeCents: 25000 },
               ],
@@ -1098,8 +1155,9 @@ async function main() {
               description: "Hand-Stitched Italian Leather & Suede Slip-On Loafers.",
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 10,
+              moqCombinedMultiFabric: 50,
+              fits: [],
               fabrics: [
                 { name: "Italian Suede & Leather", priceMinCents: 7800, priceMaxCents: 11000, setupFeeCents: 25000 },
               ],
@@ -1110,8 +1168,9 @@ async function main() {
               description: "Minimalist Margom Sole Nappa Leather Cupsole Sneakers.",
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 10,
+              moqCombinedMultiFabric: 50,
+              fits: [],
               fabrics: [
                 { name: "Smooth Nappa Calfskin", priceMinCents: 6500, priceMaxCents: 9500, setupFeeCents: 22000 },
               ],
@@ -1131,8 +1190,9 @@ async function main() {
               description: "Hand-Burnished Full-Grain Leather Dress Belt.",
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 24,
+              moqCombinedMultiFabric: 120,
+              fits: [],
               fabrics: [
                 { name: "Vegetable Tanned Leather", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 12000 },
               ],
@@ -1143,8 +1203,9 @@ async function main() {
               description: "Italian Calf Suede Casual Belt with Brass Hardware.",
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 24,
+              moqCombinedMultiFabric: 120,
+              fits: [],
               fabrics: [
                 { name: "Italian Suede Leather", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 12000 },
               ],
@@ -1164,8 +1225,9 @@ async function main() {
               description: "Handmade Seven-Fold Italian Silk Jacquard Tie.",
               imageUrl: "/images/subcategories/accessories-ties.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 60,
+              moqCombinedMultiFabric: 600, // Intentional literal ratio per prompt
+              fits: [],
               fabrics: [
                 { name: "7-Fold Woven Silk", priceMinCents: 1800, priceMaxCents: 2600, setupFeeCents: 10000 },
               ],
@@ -1176,8 +1238,9 @@ async function main() {
               description: "Self-Tie Pure Silk Grosgrain Formal Bowtie.",
               imageUrl: "/images/subcategories/accessories-ties.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 20,
+              moqCombinedMultiFabric: 100,
+              fits: [],
               fabrics: [
                 { name: "Pure Silk Satin Grosgrain", priceMinCents: 1400, priceMaxCents: 2000, setupFeeCents: 10000 },
               ],
@@ -1197,8 +1260,9 @@ async function main() {
               description: "Mongolian Cashmere Fringed Winter Scarf.",
               imageUrl: "/images/subcategories/accessories-scarves.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 20,
+              moqCombinedMultiFabric: 100,
+              fits: [],
               fabrics: [
                 { name: "100% Mongolian Cashmere", priceMinCents: 3500, priceMaxCents: 4800, setupFeeCents: 15000 },
               ],
@@ -1209,8 +1273,9 @@ async function main() {
               description: "Hand-Rolled Edge Mulberry Silk Twill Pocket Square.",
               imageUrl: "/images/subcategories/accessories-scarves.jpg",
               leadTimeDays: 14,
-              moq: 50,
-              fits: [], // Excluded
+              moqPerFabric: 20,
+              moqCombinedMultiFabric: 100,
+              fits: [],
               fabrics: [
                 { name: "Silk Twill (Hand-Rolled)", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 8000 },
               ],
@@ -1290,7 +1355,18 @@ async function main() {
               description: prodDef.description,
               imageUrl: prodDef.imageUrl,
               leadTimeDays: prodDef.leadTimeDays,
-              moq: prodDef.moq,
+              moq: prodDef.moqPerFabric,
+              moqPerFabric: prodDef.moqPerFabric,
+              moqCombinedMultiFabric: prodDef.moqCombinedMultiFabric,
+            },
+          });
+        } else {
+          product = await prisma.product.update({
+            where: { id: product.id },
+            data: {
+              moq: prodDef.moqPerFabric,
+              moqPerFabric: prodDef.moqPerFabric,
+              moqCombinedMultiFabric: prodDef.moqCombinedMultiFabric,
             },
           });
         }
@@ -1342,7 +1418,7 @@ async function main() {
     }
   }
 
-  console.log("🌱 8-Value Fit Seeding & Category Exclusions completed successfully!");
+  console.log("🌱 Two-Tier MOQ Seeding completed successfully!");
 }
 
 main()

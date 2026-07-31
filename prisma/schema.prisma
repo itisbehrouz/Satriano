@@ -96,22 +96,24 @@ model Subcategory {
 }
 
 model Product {
-  id            String       @id @default(uuid())
-  subcategoryId String
-  subcategory   Subcategory  @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
-  name          String
-  slug          String       @unique
-  description   String?
-  imageUrl      String?
-  leadTimeDays  Int?         @default(14)
-  moq           Int?         @default(50)
-  active        Boolean      @default(true)
-  sortOrder     Int          @default(0)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  fabrics       Fabric[]
-  fits          ProductFit[]
-  orderLines    OrderLine[]
+  id                     String       @id @default(uuid())
+  subcategoryId          String
+  subcategory            Subcategory  @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  name                   String
+  slug                   String       @unique
+  description            String?
+  imageUrl               String?
+  leadTimeDays           Int?         @default(14)
+  moq                    Int?         @default(50)
+  moqPerFabric           Int          @default(50)
+  moqCombinedMultiFabric Int?
+  active                 Boolean      @default(true)
+  sortOrder              Int          @default(0)
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @updatedAt
+  fabrics                Fabric[]
+  fits                   ProductFit[]
+  orderLines             OrderLine[]
 }
 
 model Fit {

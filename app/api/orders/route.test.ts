@@ -52,6 +52,21 @@ describe("POST /api/orders", () => {
     expect(order.company.name).toBe("Test Order Route Co");
   });
 
+  it("rejects order when total units are below the required per-fabric MOQ", async () => {
+    const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
+
+    const response = await postOrders({
+      fabricId: fabric.id,
+      companyName: "Low Qty Co",
+      companyEmail: `low-qty-${Date.now()}@example.com`,
+      sizeQuantities: [{ size: "M", quantity: 30 }], // 30 < 80 MOQ
+    });
+
+    expect(response.status).toBe(400);
+    const json = await response.json();
+    expect(json.error).toContain("Minimum order quantity");
+  });
+
   it("upserts the company by email instead of creating duplicates", async () => {
     const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
     const email = `test-order-route-${Date.now()}@example.com`;
@@ -60,7 +75,7 @@ describe("POST /api/orders", () => {
       fabricId: fabric.id,
       companyName: "First Name",
       companyEmail: email,
-      sizeQuantities: [{ size: "S", quantity: 10 }],
+      sizeQuantities: [{ size: "S", quantity: 100 }],
     });
     const firstJson = await first.json();
     const firstOrder = await prisma.order.findUniqueOrThrow({ where: { id: firstJson.orderId } });
@@ -70,7 +85,7 @@ describe("POST /api/orders", () => {
       fabricId: fabric.id,
       companyName: "Updated Name",
       companyEmail: email,
-      sizeQuantities: [{ size: "L", quantity: 5 }],
+      sizeQuantities: [{ size: "L", quantity: 120 }],
     });
     const secondJson = await second.json();
     const secondOrder = await prisma.order.findUniqueOrThrow({
@@ -128,7 +143,7 @@ describe("POST /api/orders", () => {
       fabricId: fabric.id,
       companyName: "Branded Company",
       companyEmail: email,
-      sizeQuantities: [{ size: "M", quantity: 50 }],
+      sizeQuantities: [{ size: "M", quantity: 100 }],
       logoUrl: "/uploads/test-logo.svg",
       logoPlacement: "RIGHT_SLEEVE",
     });

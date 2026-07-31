@@ -85,6 +85,10 @@ export async function PATCH(request: Request) {
           ...(typeof data.active === "boolean" ? { active: data.active } : {}),
           ...(typeof data.leadTimeDays === "number" ? { leadTimeDays: data.leadTimeDays } : {}),
           ...(typeof data.moq === "number" ? { moq: data.moq } : {}),
+          ...(typeof data.moqPerFabric === "number" ? { moqPerFabric: data.moqPerFabric } : {}),
+          ...(data.moqCombinedMultiFabric === null || typeof data.moqCombinedMultiFabric === "number"
+            ? { moqCombinedMultiFabric: data.moqCombinedMultiFabric }
+            : {}),
         },
       });
       return NextResponse.json({ success: true, product: updated });

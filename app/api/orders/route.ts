@@ -23,9 +23,38 @@ export async function POST(request: Request) {
   const rawFitId = body?.fitId as string | undefined;
   const rawProductId = body?.productId as string | undefined;
 
-  const fabric = await prisma.fabric.findUnique({ where: { id: fabricId } });
+  const fabric = await prisma.fabric.findUnique({
+    where: { id: fabricId },
+    include: { product: true },
+  });
   if (!fabric || !fabric.active) {
     return NextResponse.json({ error: "Fabric not found" }, { status: 404 });
+  }
+
+  // Determine Product and per-fabric MOQ
+  let product = fabric.product;
+  if (!product && rawProductId) {
+    product = await prisma.product.findUnique({ where: { id: rawProductId } });
+  }
+
+  const requiredMoqPerFabric = product?.moqPerFabric ?? product?.moq ?? 50;
+  const productName = product?.name || "this item";
+
+  const pricing = computeOrderPricing({ fabric, sizeQuantities });
+  if (pricing.totalUnits === 0) {
+    return NextResponse.json(
+      { error: "Order must include at least one unit" },
+      { status: 400 },
+    );
+  }
+
+  if (pricing.totalUnits < requiredMoqPerFabric) {
+    return NextResponse.json(
+      {
+        error: `Minimum order quantity for ${productName} in this fabric selection is ${requiredMoqPerFabric} units.`,
+      },
+      { status: 400 },
+    );
   }
 
   let selectedFitName: string | undefined = undefined;
@@ -34,14 +63,6 @@ export async function POST(request: Request) {
     if (fitRecord) {
       selectedFitName = fitRecord.name;
     }
-  }
-
-  const pricing = computeOrderPricing({ fabric, sizeQuantities });
-  if (pricing.totalUnits === 0) {
-    return NextResponse.json(
-      { error: "Order must include at least one unit" },
-      { status: 400 },
-    );
   }
 
   const company = await prisma.company.upsert({
@@ -60,7 +81,7 @@ export async function POST(request: Request) {
       lines: {
         create: pricing.lineItems.map((line) => ({
           fabricId: fabric.id,
-          productId: rawProductId || fabric.productId || null,
+          productId: product?.id || null,
           fitId: rawFitId || null,
           selectedFit: selectedFitName || null,
           size: line.size,

@@ -41,6 +41,8 @@ interface Product {
   description?: string;
   leadTimeDays?: number;
   moq?: number;
+  moqPerFabric?: number;
+  moqCombinedMultiFabric?: number | null;
   active: boolean;
   fabrics: Fabric[];
   fits: Array<{ fit: FitDef }>;
@@ -72,6 +74,9 @@ export default function AdminProductSettingsPage() {
   const [allFits, setAllFits] = useState<FitDef[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [editMoqPerFabric, setEditMoqPerFabric] = useState<number>(50);
+  const [editMoqCombined, setEditMoqCombined] = useState<string>("");
   const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
 
   useEffect(() => {
@@ -128,6 +133,30 @@ export default function AdminProductSettingsPage() {
         }),
       });
       if (res.ok) fetchCatalog();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function saveProductMoqs(prodId: string) {
+    const combinedVal = editMoqCombined.trim() === "" ? null : parseInt(editMoqCombined, 10);
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "product",
+          id: prodId,
+          data: {
+            moqPerFabric: editMoqPerFabric,
+            moqCombinedMultiFabric: isNaN(combinedVal as number) ? null : combinedVal,
+          },
+        }),
+      });
+      if (res.ok) {
+        setEditingProductId(null);
+        fetchCatalog();
+      }
     } catch (e) {
       console.error(e);
     }
@@ -206,7 +235,7 @@ export default function AdminProductSettingsPage() {
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2E5AAC] mb-1">
                 <Link href="/admin" className="hover:underline">Admin Console</Link>
                 <span>/</span>
-                <span>Product Settings &amp; Dimensions</span>
+                <span>Product Settings &amp; Two-Tier MOQs</span>
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
                 Category → Subcategory → Product Management
@@ -232,7 +261,7 @@ export default function AdminProductSettingsPage() {
                   : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
               }`}
             >
-              Catalog Structure
+              Catalog &amp; Two-Tier MOQs
             </button>
             <button
               type="button"
@@ -303,46 +332,101 @@ export default function AdminProductSettingsPage() {
                                 <thead>
                                   <tr className="bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#5B6B85] uppercase font-semibold">
                                     <th className="p-3">Product Item</th>
-                                    <th className="p-3">Slug</th>
+                                    <th className="p-3">Single-Fabric MOQ</th>
+                                    <th className="p-3">Combined Multi-Fabric MOQ</th>
                                     <th className="p-3">Fits</th>
-                                    <th className="p-3">MOQ</th>
-                                    <th className="p-3 text-right">Status / Action</th>
+                                    <th className="p-3 text-right">Status / Edit MOQs</th>
                                   </tr>
                                 </thead>
                                 <tbody className="divide-y divide-[#E5E7EB]">
-                                  {sub.products.map((prod) => (
-                                    <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
-                                      <td className="p-3 font-semibold text-[#1A2233]">{prod.name}</td>
-                                      <td className="p-3 font-mono text-[#5B6B85]">{prod.slug}</td>
-                                      <td className="p-3">
-                                        {prod.fits.length === 0 ? (
-                                          <span className="text-[#5B6B85] italic text-[11px]">Excluded (0)</span>
-                                        ) : (
-                                          <div className="flex flex-wrap gap-1">
-                                            {prod.fits.map((pf) => (
-                                              <span key={pf.fit.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-1.5 py-0.5 rounded">
-                                                {pf.fit.name}
-                                              </span>
-                                            ))}
-                                          </div>
-                                        )}
-                                      </td>
-                                      <td className="p-3 font-medium">{prod.moq ?? 50} units</td>
-                                      <td className="p-3 text-right">
-                                        <button
-                                          type="button"
-                                          onClick={() => toggleProductActive(prod.id, prod.active)}
-                                          className={`px-3 py-1 rounded text-[11px] font-semibold transition-colors ${
-                                            prod.active
-                                              ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
-                                              : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
-                                          }`}
-                                        >
-                                          {prod.active ? "Active" : "Disabled"}
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ))}
+                                  {sub.products.map((prod) => {
+                                    const isEditingThis = editingProductId === prod.id;
+
+                                    return (
+                                      <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
+                                        <td className="p-3 font-semibold text-[#1A2233]">{prod.name}</td>
+                                        <td className="p-3 font-semibold text-[#2E5AAC]">
+                                          {prod.moqPerFabric ?? prod.moq ?? 50} pcs
+                                        </td>
+                                        <td className="p-3 font-medium text-[#1A2233]">
+                                          {prod.moqCombinedMultiFabric ? `${prod.moqCombinedMultiFabric} pcs` : "N/A"}
+                                        </td>
+                                        <td className="p-3">
+                                          {prod.fits.length === 0 ? (
+                                            <span className="text-[#5B6B85] italic text-[11px]">Excluded (0)</span>
+                                          ) : (
+                                            <div className="flex flex-wrap gap-1">
+                                              {prod.fits.map((pf) => (
+                                                <span key={pf.fit.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                                                  {pf.fit.name}
+                                                </span>
+                                              ))}
+                                            </div>
+                                          )}
+                                        </td>
+                                        <td className="p-3 text-right">
+                                          {isEditingThis ? (
+                                            <div className="flex items-center justify-end gap-2">
+                                              <input
+                                                type="number"
+                                                className="w-16 border rounded px-1.5 py-1 text-xs"
+                                                title="Single Fabric MOQ"
+                                                value={editMoqPerFabric}
+                                                onChange={(e) => setEditMoqPerFabric(parseInt(e.target.value, 10))}
+                                              />
+                                              <input
+                                                type="number"
+                                                className="w-16 border rounded px-1.5 py-1 text-xs"
+                                                placeholder="Combined"
+                                                title="Combined Multi-Fabric MOQ"
+                                                value={editMoqCombined}
+                                                onChange={(e) => setEditMoqCombined(e.target.value)}
+                                              />
+                                              <button
+                                                type="button"
+                                                onClick={() => saveProductMoqs(prod.id)}
+                                                className="bg-[#0F6E56] text-white px-2 py-1 rounded text-[11px] font-semibold"
+                                              >
+                                                Save
+                                              </button>
+                                              <button
+                                                type="button"
+                                                onClick={() => setEditingProductId(null)}
+                                                className="border text-[#5B6B85] px-2 py-1 rounded text-[11px]"
+                                              >
+                                                Cancel
+                                              </button>
+                                            </div>
+                                          ) : (
+                                            <div className="flex items-center justify-end gap-2">
+                                              <button
+                                                type="button"
+                                                onClick={() => {
+                                                  setEditingProductId(prod.id);
+                                                  setEditMoqPerFabric(prod.moqPerFabric ?? prod.moq ?? 50);
+                                                  setEditMoqCombined(prod.moqCombinedMultiFabric ? String(prod.moqCombinedMultiFabric) : "");
+                                                }}
+                                                className="border border-[#D1D5DB] bg-white hover:bg-[#F5F7FA] px-2 py-1 rounded text-[11px] font-semibold text-[#2E5AAC]"
+                                              >
+                                                Edit MOQs
+                                              </button>
+                                              <button
+                                                type="button"
+                                                onClick={() => toggleProductActive(prod.id, prod.active)}
+                                                className={`px-3 py-1 rounded text-[11px] font-semibold transition-colors ${
+                                                  prod.active
+                                                    ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
+                                                    : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
+                                                }`}
+                                              >
+                                                {prod.active ? "Active" : "Off"}
+                                              </button>
+                                            </div>
+                                          )}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
                                 </tbody>
                               </table>
                             </div>
