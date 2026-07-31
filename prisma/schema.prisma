@@ -50,18 +50,7 @@ model Company {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users  User[]
   orders Order[]
-}
-
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  companyId String
-  createdAt DateTime @default(now())
-
-  company Company @relation(fields: [companyId], references: [id])
 }
 
 model Category {

@@ -3,9 +3,6 @@
 import { useRef } from "react";
 import type { LogoPlacement } from "@/app/generated/prisma/enums";
 
-const POLO_BLUEPRINT_IMAGE_URL =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuBTSAoeVOLT6Iov43g3gTpmIBcHwl3CyklUgPMGB5RmKVWGK7L55GJkovkY3AHlt3IqofdbYnoqluUfo6tW0tM8mcRIjOKVa3-wo4QAh1BgXYOXV08PVc2MZWZSsGW6mURb0lkmQGZq245OFkbZEoTgDw5-rrEfzsm3gma9NjaWytDQWN3VpC-SulDRDje6PhXp9TCL8yDWEziwUFKoC5-eP0VoFsL33nwSpfz-Ng71pLl3bHwAftghmYB0P_wy-9S5Rrm_WUVAbCsN";
-
 const PLACEMENT_OPTIONS: { value: LogoPlacement; label: string }[] = [
   { value: "LEFT_CHEST", label: "Left Chest" },
   { value: "RIGHT_SLEEVE", label: "Right Sleeve" },
@@ -65,18 +62,20 @@ export function LogoUploader({
           Logo Placement Spec
         </h3>
         <div
-          className="flex-grow flex items-center justify-center bg-[#F5F7FA] rounded border border-[#E5E7EB] relative overflow-hidden p-4"
+          className="flex-grow flex flex-col items-center justify-center bg-[#F5F7FA] rounded border border-[#E5E7EB] relative overflow-hidden p-6"
           style={{ minHeight: 180 }}
         >
-          <div
-            className="absolute inset-0 opacity-40 bg-cover bg-center"
-            style={{ backgroundImage: `url('${POLO_BLUEPRINT_IMAGE_URL}')` }}
-          />
+          <div className="flex items-center gap-2 text-[#5B6B85] mb-4">
+            <span className="material-symbols-outlined text-3xl">stitching</span>
+            <span className="text-xs font-semibold uppercase tracking-widest">
+              Atelier Placement Guide
+            </span>
+          </div>
           <div className="relative z-10 flex gap-3">
             {PLACEMENT_OPTIONS.map((option) => (
               <label
                 key={option.value}
-                className="flex items-center gap-2 cursor-pointer bg-white px-3 py-2 border border-[#D1D5DB] rounded shadow-sm hover:border-[#2E5AAC]"
+                className="flex items-center gap-2 cursor-pointer bg-white px-3.5 py-2 border border-[#D1D5DB] rounded shadow-sm hover:border-[#2E5AAC] transition-colors"
               >
                 <input
                   type="radio"
