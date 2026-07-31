@@ -18,10 +18,13 @@ export async function GET(request: Request) {
 
     const validStatuses: OrderStatus[] = [
       "DRAFT",
+      "PENDING_REVIEW",
       "PROFORMA_SENT",
       "APPROVED",
       "PAID",
       "IN_PRODUCTION",
+      "SHIPPED",
+      "CANCELLED",
     ];
 
     const whereClause =

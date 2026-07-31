@@ -94,4 +94,20 @@ describe("Admin Authentication & Security Audit Test Suite", () => {
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toContain("/admin");
   });
+
+  it("Accepts SHIPPED and CANCELLED status filter parameters on GET /api/admin/orders", async () => {
+    const reqShipped = new Request("http://localhost/api/admin/orders?status=SHIPPED", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${validAccessKey}` },
+    });
+    const resShipped = await getOrders(reqShipped);
+    expect(resShipped.status).toBe(200);
+
+    const reqCancelled = new Request("http://localhost/api/admin/orders?status=CANCELLED", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${validAccessKey}` },
+    });
+    const resCancelled = await getOrders(reqCancelled);
+    expect(resCancelled.status).toBe(200);
+  });
 });

@@ -36,6 +36,7 @@ interface AdminOrderTableProps {
 }
 
 const ALL_STATUSES: OrderStatus[] = [
+  "DRAFT",
   "PENDING_REVIEW",
   "PROFORMA_SENT",
   "APPROVED",
@@ -160,6 +161,24 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                     {totalUnits} pcs ({order.lines[0]?.fabric?.name || "Standard Fabric"}
                     {order.lines[0]?.selectedFit ? ` • ${order.lines[0].selectedFit}` : ""})
                   </div>
+                  {order.logoAssets && order.logoAssets.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {order.logoAssets.map((logo, idx) => (
+                        <a
+                          key={idx}
+                          href={logo.storageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 bg-[#E6F1FB] hover:bg-[#B3D6F6] text-[#185FA5] text-[11px] font-semibold px-2 py-1 rounded border border-[#B3D6F6] transition-colors"
+                          title={`Open vector logo (${logo.placement})`}
+                        >
+                          <span className="material-symbols-outlined text-[13px]">attachment</span>
+                          <span>Logo ({logo.placement})</span>
+                          <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </td>
                 <td className="p-4">
                   <div className="mb-1">

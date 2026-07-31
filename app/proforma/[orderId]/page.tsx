@@ -198,14 +198,25 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
             </div>
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-t-2 border-on-surface pt-6">
-              <div className="mb-6 md:mb-0">
-                <div className="flex items-center gap-2 text-gold bg-gold/10 py-2 px-4 border border-gold w-max">
-                  <span className="material-symbols-outlined text-[18px]">schedule</span>
-                  <span className="font-label-md text-label-md uppercase tracking-widest">
-                    Status: {order.status}
-                  </span>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2 text-gold bg-gold/10 py-2 px-4 border border-gold w-max">
+                    <span className="material-symbols-outlined text-[18px]">schedule</span>
+                    <span className="font-label-md text-label-md uppercase tracking-widest">
+                      Status: {order.status}
+                    </span>
+                  </div>
+                  {order.proforma?.pdfUrl && (
+                    <a
+                      href={order.proforma.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm w-max"
+                    >
+                      <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
+                      <span>Download Official Proforma PDF</span>
+                    </a>
+                  )}
                 </div>
-              </div>
               <div className="w-full md:w-1/2 lg:w-1/3">
                 <div className="flex justify-between py-2 border-b border-outline-variant">
                   <span className="font-body-md text-body-md text-on-surface-variant">

@@ -77,6 +77,8 @@ describe("POST /api/proforma", () => {
     expect(updatedOrder.finalPriceCents).toBe(1850);
     expect(updatedOrder.totalCents).toBe(570000);
     expect(updatedOrder.proforma).not.toBeNull();
+    expect(updatedOrder.proforma?.pdfUrl).toBeDefined();
+    expect(typeof updatedOrder.proforma?.pdfUrl).toBe("string");
     expect(updatedOrder.proforma?.refNo).toBeDefined();
   });
 });

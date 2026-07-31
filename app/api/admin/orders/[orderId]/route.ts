@@ -25,10 +25,13 @@ export async function PATCH(
 
     const validStatuses: OrderStatus[] = [
       "DRAFT",
+      "PENDING_REVIEW",
       "PROFORMA_SENT",
       "APPROVED",
       "PAID",
       "IN_PRODUCTION",
+      "SHIPPED",
+      "CANCELLED",
     ];
 
     if (!validStatuses.includes(body.status)) {

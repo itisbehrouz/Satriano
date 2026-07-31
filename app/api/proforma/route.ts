@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateProformaPdf } from "@/lib/pdfGenerator";
 import { sendProformaEmail } from "@/lib/email";
+import { supabase } from "@/lib/supabase";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 
@@ -69,15 +70,48 @@ export async function POST(request: Request) {
     });
 
     const pdfBuffer = Buffer.from(pdfUint8Array);
-
-    // Save PDF to public/proformas directory
-    const proformaDir = path.join(process.cwd(), "public", "proformas");
-    await mkdir(proformaDir, { recursive: true });
     const filename = `${refNo}.pdf`;
-    const filePath = path.join(proformaDir, filename);
-    await writeFile(filePath, pdfBuffer);
+    let pdfUrl = `/proformas/${filename}`;
 
-    const pdfUrl = `/proformas/${filename}`;
+    // Upload PDF to Supabase Storage for persistent cloud availability
+    if (supabase) {
+      const { data, error } = await supabase.storage
+        .from("proformas")
+        .upload(filename, pdfBuffer, {
+          contentType: "application/pdf",
+          upsert: true,
+        });
+
+      if (!error && data) {
+        const { data: publicUrlData } = supabase.storage
+          .from("proformas")
+          .getPublicUrl(data.path);
+        pdfUrl = publicUrlData.publicUrl;
+      } else {
+        // Fallback to 'logos' bucket if 'proformas' bucket doesn't exist yet
+        const { data: fallbackData, error: fallbackError } = await supabase.storage
+          .from("logos")
+          .upload(`proformas/${filename}`, pdfBuffer, {
+            contentType: "application/pdf",
+            upsert: true,
+          });
+        if (!fallbackError && fallbackData) {
+          const { data: publicUrlData } = supabase.storage
+            .from("logos")
+            .getPublicUrl(fallbackData.path);
+          pdfUrl = publicUrlData.publicUrl;
+        }
+      }
+    }
+
+    // Local filesystem copy for dev environment
+    try {
+      const proformaDir = path.join(process.cwd(), "public", "proformas");
+      await mkdir(proformaDir, { recursive: true });
+      await writeFile(path.join(proformaDir, filename), pdfBuffer);
+    } catch {
+      // Local write non-fatal on serverless
+    }
 
     // Send Email
     await sendProformaEmail({

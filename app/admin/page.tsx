@@ -10,9 +10,10 @@ const TABS = [
   { id: "ALL", label: "All Orders" },
   { id: "PENDING_REVIEW", label: "Pending Review" },
   { id: "PROFORMA_SENT", label: "Proforma Sent" },
-  { id: "PAYMENT_CONFIRMED", label: "Payment Confirmed" },
+  { id: "PAID", label: "Paid / Confirmed" },
   { id: "IN_PRODUCTION", label: "In Production" },
   { id: "SHIPPED", label: "Shipped" },
+  { id: "CANCELLED", label: "Cancelled" },
 ];
 
 export default function AdminPage() {
@@ -50,7 +51,11 @@ export default function AdminPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/admin/orders");
+      const url =
+        activeTab && activeTab !== "ALL"
+          ? `/api/admin/orders?status=${encodeURIComponent(activeTab)}`
+          : "/api/admin/orders";
+      const res = await fetch(url);
 
       if (res.status === 401) {
         setIsAuthenticated(false);
