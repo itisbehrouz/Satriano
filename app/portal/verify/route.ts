@@ -24,6 +24,23 @@ export async function GET(req: Request) {
       return NextResponse.redirect(loginUrl);
     }
 
+    // Re-verify that the application is STILL APPROVED at login verification time
+    const application = await prisma.b2bApplication.findFirst({
+      where: {
+        corpEmail: {
+          equals: tokenRecord.email,
+          mode: "insensitive",
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (!application || application.status !== "APPROVED") {
+      const loginUrl = new URL("/portal", req.url);
+      loginUrl.searchParams.set("error", "account_not_approved");
+      return NextResponse.redirect(loginUrl);
+    }
+
     // Single-use enforcement: mark token as used immediately
     await prisma.magicLinkToken.update({
       where: { id: tokenRecord.id },

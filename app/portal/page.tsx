@@ -40,6 +40,8 @@ function PortalPageContent() {
     const errorParam = searchParams.get("error");
     if (errorParam === "link_expired_or_used") {
       setLoginError("This login link has expired or was already used. Please request a new link.");
+    } else if (errorParam === "account_not_approved") {
+      setLoginError("Your B2B partner application is not currently approved. Access is restricted to approved corporate partners.");
     } else if (errorParam === "invalid_token" || errorParam === "verification_failed") {
       setLoginError("Invalid or corrupted magic link. Please enter your email to get a new link.");
     }

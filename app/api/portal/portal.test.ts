@@ -6,12 +6,17 @@ import { prisma } from "@/lib/prisma";
 import { createCustomerToken } from "@/lib/customerAuth";
 
 describe("B2B Customer Portal Auth & Orders API", () => {
-  const testEmail = "portal-test-client@example.com";
+  const approvedEmail = "approved-client@example.com";
+  const rejectedEmail = "rejected-client@example.com";
+  const unknownEmail = "unknown-client@example.com";
 
   beforeEach(async () => {
-    // Clean up test data
+    // Clean up test tokens and applications
     await prisma.magicLinkToken.deleteMany({
-      where: { email: testEmail },
+      where: { email: { in: [approvedEmail, rejectedEmail, unknownEmail] } },
+    });
+    await prisma.b2bApplication.deleteMany({
+      where: { corpEmail: { in: [approvedEmail, rejectedEmail, unknownEmail] } },
     });
   });
 
@@ -26,30 +31,98 @@ describe("B2B Customer Portal Auth & Orders API", () => {
     expect(res.status).toBe(400);
   });
 
-  it("POST /api/portal/magic-link creates token and returns generic success message", async () => {
+  it("POST /api/portal/magic-link creates token ONLY for APPROVED application", async () => {
+    // Seed APPROVED application
+    await prisma.b2bApplication.create({
+      data: {
+        companyName: "Approved Partner Co",
+        fullName: "Approved Officer",
+        corpEmail: approvedEmail,
+        status: "APPROVED",
+      },
+    });
+
     const req = new Request("http://localhost/api/portal/magic-link", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: testEmail }),
+      body: JSON.stringify({ email: approvedEmail }),
     });
 
     const res = await magicLinkPOST(req);
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.success).toBe(true);
-    expect(json.message).toContain("If an account exists");
+    expect(json.message).toContain("If an approved account exists");
 
-    const tokens = await prisma.magicLinkToken.findMany({ where: { email: testEmail } });
+    const tokens = await prisma.magicLinkToken.findMany({ where: { email: approvedEmail } });
     expect(tokens.length).toBe(1);
     expect(tokens[0].usedAt).toBeNull();
   });
 
+  it("POST /api/portal/magic-link creates NO token for REJECTED or UNKNOWN email, but returns IDENTICAL response", async () => {
+    // Seed REJECTED application
+    await prisma.b2bApplication.create({
+      data: {
+        companyName: "Rejected Partner Co",
+        fullName: "Rejected Officer",
+        corpEmail: rejectedEmail,
+        status: "REJECTED",
+      },
+    });
+
+    // Case B: REJECTED email request
+    const reqRejected = new Request("http://localhost/api/portal/magic-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: rejectedEmail }),
+    });
+
+    const resRejected = await magicLinkPOST(reqRejected);
+    expect(resRejected.status).toBe(200);
+    const jsonRejected = await resRejected.json();
+    expect(jsonRejected.success).toBe(true);
+    expect(jsonRejected.message).toBe("If an approved account exists for this email, we've sent a login link.");
+
+    // Assert NO token created in DB for REJECTED application
+    const rejectedTokens = await prisma.magicLinkToken.findMany({ where: { email: rejectedEmail } });
+    expect(rejectedTokens.length).toBe(0);
+
+    // Case C: UNKNOWN email request
+    const reqUnknown = new Request("http://localhost/api/portal/magic-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: unknownEmail }),
+    });
+
+    const resUnknown = await magicLinkPOST(reqUnknown);
+    expect(resUnknown.status).toBe(200);
+    const jsonUnknown = await resUnknown.json();
+    expect(jsonUnknown.success).toBe(true);
+    expect(jsonUnknown.message).toBe("If an approved account exists for this email, we've sent a login link.");
+
+    // Assert IDENTICAL JSON response across cases
+    expect(jsonRejected).toEqual(jsonUnknown);
+
+    // Assert NO token created in DB for UNKNOWN application
+    const unknownTokens = await prisma.magicLinkToken.findMany({ where: { email: unknownEmail } });
+    expect(unknownTokens.length).toBe(0);
+  });
+
   it("POST /api/portal/magic-link rate limits after 3 requests in 15 minutes", async () => {
-    // Create 3 existing tokens created recently
+    // Seed APPROVED application
+    await prisma.b2bApplication.create({
+      data: {
+        companyName: "Approved Partner Co",
+        fullName: "Approved Officer",
+        corpEmail: approvedEmail,
+        status: "APPROVED",
+      },
+    });
+
     for (let i = 0; i < 3; i++) {
       await prisma.magicLinkToken.create({
         data: {
-          email: testEmail,
+          email: approvedEmail,
           token: `rate-limit-token-${i}-${Date.now()}`,
           expiresAt: new Date(Date.now() + 15 * 60 * 1000),
         },
@@ -59,23 +132,33 @@ describe("B2B Customer Portal Auth & Orders API", () => {
     const req = new Request("http://localhost/api/portal/magic-link", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: testEmail }),
+      body: JSON.stringify({ email: approvedEmail }),
     });
 
     const res = await magicLinkPOST(req);
     expect(res.status).toBe(429);
   });
 
-  it("GET /portal/verify enforces single-use token and sets customer session cookie", async () => {
+  it("GET /portal/verify re-verifies APPROVED status at verify time, enforces single-use, and sets session cookie", async () => {
+    // Seed APPROVED application
+    await prisma.b2bApplication.create({
+      data: {
+        companyName: "Approved Partner Co",
+        fullName: "Approved Officer",
+        corpEmail: approvedEmail,
+        status: "APPROVED",
+      },
+    });
+
     const createdToken = await prisma.magicLinkToken.create({
       data: {
-        email: testEmail,
+        email: approvedEmail,
         token: `verify-test-token-${Date.now()}`,
         expiresAt: new Date(Date.now() + 15 * 60 * 1000),
       },
     });
 
-    // 1st request: valid token
+    // 1st request: valid token + APPROVED application
     const req1 = new Request(`http://localhost/portal/verify?token=${createdToken.token}`, {
       method: "GET",
     });
@@ -100,26 +183,36 @@ describe("B2B Customer Portal Auth & Orders API", () => {
     expect(res2.headers.get("location")).toContain("link_expired_or_used");
   });
 
-  it("GET /portal/verify rejects expired token", async () => {
-    const expiredToken = await prisma.magicLinkToken.create({
+  it("GET /portal/verify rejects token if application status was revoked/rejected", async () => {
+    // Seed REJECTED application (revoked after token creation)
+    await prisma.b2bApplication.create({
       data: {
-        email: testEmail,
-        token: `expired-token-${Date.now()}`,
-        expiresAt: new Date(Date.now() - 1000), // Expired 1 second ago
+        companyName: "Revoked Partner Co",
+        fullName: "Revoked Officer",
+        corpEmail: rejectedEmail,
+        status: "REJECTED",
       },
     });
 
-    const req = new Request(`http://localhost/portal/verify?token=${expiredToken.token}`, {
+    const tokenForRevoked = await prisma.magicLinkToken.create({
+      data: {
+        email: rejectedEmail,
+        token: `revoked-test-token-${Date.now()}`,
+        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+      },
+    });
+
+    const req = new Request(`http://localhost/portal/verify?token=${tokenForRevoked.token}`, {
       method: "GET",
     });
 
     const res = await verifyGET(req);
     expect(res.status).toBe(307);
-    expect(res.headers.get("location")).toContain("link_expired_or_used");
+    expect(res.headers.get("location")).toContain("account_not_approved");
   });
 
   it("GET /api/portal/orders authorizes valid customer session and returns orders", async () => {
-    const customerToken = await createCustomerToken(testEmail);
+    const customerToken = await createCustomerToken(approvedEmail);
 
     const req = new Request("http://localhost/api/portal/orders", {
       method: "GET",
@@ -132,7 +225,7 @@ describe("B2B Customer Portal Auth & Orders API", () => {
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.success).toBe(true);
-    expect(json.email).toBe(testEmail);
+    expect(json.email).toBe(approvedEmail);
     expect(Array.isArray(json.orders)).toBe(true);
   });
 });

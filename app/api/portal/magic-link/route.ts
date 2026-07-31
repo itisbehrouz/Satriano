@@ -17,6 +17,28 @@ export async function POST(req: Request) {
 
     const email = rawEmail.toLowerCase().trim();
 
+    // Response message constant to guarantee identical response across all cases
+    const genericResponse = NextResponse.json({
+      success: true,
+      message: "If an approved account exists for this email, we've sent a login link.",
+    });
+
+    // Check B2bApplication status - MUST be APPROVED
+    const application = await prisma.b2bApplication.findFirst({
+      where: {
+        corpEmail: {
+          equals: email,
+          mode: "insensitive",
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (!application || application.status !== "APPROVED") {
+      // Security: Return IDENTICAL success response without creating token or sending email
+      return genericResponse;
+    }
+
     // Rate Limit: Max 3 magic-link requests per email in 15 minutes
     const fifteenMinsAgo = new Date(Date.now() - 15 * 60 * 1000);
     const recentRequestsCount = await prisma.magicLinkToken.count({
@@ -52,11 +74,7 @@ export async function POST(req: Request) {
 
     await sendMagicLinkEmail({ to: email, magicLinkUrl });
 
-    // Generic security response preventing email enumeration
-    return NextResponse.json({
-      success: true,
-      message: "If an account exists for this email, we've sent a login link.",
-    });
+    return genericResponse;
   } catch (error) {
     console.error("Error creating magic link token:", error);
     return NextResponse.json(
