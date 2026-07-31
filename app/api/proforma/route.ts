@@ -71,13 +71,10 @@ export async function POST(request: Request) {
 
     const pdfBuffer = Buffer.from(pdfUint8Array);
     const filename = `${refNo}.pdf`;
-    let pdfUrl = `/proformas/${filename}`;
+    let pdfUrl = `/api/proforma/pdf/${order.id}`;
 
-    // Upload PDF to Supabase Storage for persistent cloud availability
+    // Upload PDF to private Supabase Storage bucket 'proformas'
     if (supabase) {
-      // Attempt to ensure dedicated 'proformas' bucket exists
-      await supabase.storage.createBucket("proformas", { public: true }).catch(() => null);
-
       const { data, error } = await supabase.storage
         .from("proformas")
         .upload(filename, pdfBuffer, {
@@ -85,25 +82,24 @@ export async function POST(request: Request) {
           upsert: true,
         });
 
-      if (!error && data) {
-        const { data: publicUrlData } = supabase.storage
-          .from("proformas")
-          .getPublicUrl(data.path);
-        pdfUrl = publicUrlData.publicUrl;
-      } else {
-        // Fallback to 'logos' bucket if 'proformas' bucket doesn't exist yet
-        const { data: fallbackData, error: fallbackError } = await supabase.storage
+      if (error) {
+        console.warn("Proforma private bucket upload notice:", error.message);
+        // Fallback upload to logos bucket if proformas bucket does not exist
+        await supabase.storage
           .from("logos")
           .upload(`proformas/${filename}`, pdfBuffer, {
             contentType: "application/pdf",
             upsert: true,
-          });
-        if (!fallbackError && fallbackData) {
-          const { data: publicUrlData } = supabase.storage
-            .from("logos")
-            .getPublicUrl(fallbackData.path);
-          pdfUrl = publicUrlData.publicUrl;
-        }
+          })
+          .catch(() => null);
+      }
+
+      // Generate a fresh signed URL for the immediate API response
+      const { data: signedData } = await supabase.storage
+        .from("proformas")
+        .createSignedUrl(filename, 3600);
+      if (signedData?.signedUrl) {
+        pdfUrl = signedData.signedUrl;
       }
     }
 
@@ -115,6 +111,9 @@ export async function POST(request: Request) {
     } catch {
       // Local write non-fatal on serverless
     }
+
+    // Store dynamic endpoint /api/proforma/pdf/[orderId] in database for persistent non-expiring links
+    const dbPdfUrl = `/api/proforma/pdf/${order.id}`;
 
     // Send Email
     await sendProformaEmail({
@@ -137,14 +136,14 @@ export async function POST(request: Request) {
       prisma.proforma.upsert({
         where: { orderId: order.id },
         update: {
-          pdfUrl,
+          pdfUrl: dbPdfUrl,
           sentAt: new Date(),
           validUntil,
         },
         create: {
           orderId: order.id,
           refNo,
-          pdfUrl,
+          pdfUrl: dbPdfUrl,
           sentAt: new Date(),
           validUntil,
         },
