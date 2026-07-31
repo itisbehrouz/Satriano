@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { supabase } from "@/lib/supabase";
+import { verifyAdminRequest } from "@/lib/adminAuth";
+import { verifyCustomerRequest } from "@/lib/customerAuth";
 
 export async function GET(
   request: Request,
@@ -12,14 +14,29 @@ export async function GET(
       return NextResponse.json({ error: "orderId is required" }, { status: 400 });
     }
 
-    const proforma = await prisma.proforma.findUnique({
-      where: { orderId },
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: { company: true, proforma: true },
     });
 
-    if (!proforma) {
+    if (!order || !order.proforma) {
       return NextResponse.json({ error: "Proforma not found" }, { status: 404 });
     }
 
+    const isAdmin = await verifyAdminRequest(request);
+    const customerSession = await verifyCustomerRequest(request);
+
+    // Authorize if admin OR customer owning this company email
+    if (!isAdmin) {
+      if (!customerSession || customerSession.email !== order.company.email) {
+        return NextResponse.json(
+          { error: "Unauthorized access to proforma PDF." },
+          { status: 401 }
+        );
+      }
+    }
+
+    const proforma = order.proforma;
     const filename = `${proforma.refNo}.pdf`;
 
     if (supabase) {

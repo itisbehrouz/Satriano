@@ -261,3 +261,12 @@ model B2bApplication {
   reviewedAt   DateTime?
   reviewedBy   String?
 }
+
+model MagicLinkToken {
+  id        String    @id @default(uuid())
+  email     String
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}

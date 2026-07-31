@@ -1,18 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 
 type PortalView = "LOGIN" | "REGISTER" | "SUBMITTED";
 
-export default function PortalPage() {
+function PortalPageContent() {
+  const searchParams = useSearchParams();
   const [view, setView] = useState<PortalView>("LOGIN");
 
-  // Login form state
+  // Magic link login state
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginSending, setLoginSending] = useState(false);
+  const [loginSuccessMessage, setLoginSuccessMessage] = useState<string | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
 
   // Application form state
@@ -33,15 +36,46 @@ export default function PortalPage() {
 
   const [regError, setRegError] = useState<string | null>(null);
 
-  function handleLogin(e: React.FormEvent) {
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam === "link_expired_or_used") {
+      setLoginError("This login link has expired or was already used. Please request a new link.");
+    } else if (errorParam === "invalid_token" || errorParam === "verification_failed") {
+      setLoginError("Invalid or corrupted magic link. Please enter your email to get a new link.");
+    }
+  }, [searchParams]);
+
+  async function handleMagicLinkSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim() || !password.trim()) {
-      setLoginError("Please enter your corporate email and password.");
+    if (!email.trim() || !email.includes("@")) {
+      setLoginError("Please enter a valid corporate email address.");
       return;
     }
+
     setLoginError(null);
-    // Redirect to configurator upon successful login credentials
-    window.location.href = "/konfigurator";
+    setLoginSuccessMessage(null);
+    setLoginSending(true);
+
+    try {
+      const res = await fetch("/api/portal/magic-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        throw new Error(json.error || "Failed to send magic link.");
+      }
+
+      setLoginSuccessMessage(
+        json.message || "If an account exists for this email, we've sent a login link."
+      );
+    } catch (err: any) {
+      setLoginError(err.message || "Failed to request magic link. Please try again.");
+    } finally {
+      setLoginSending(false);
+    }
   }
 
   async function handleRegister(e: React.FormEvent) {
@@ -79,7 +113,7 @@ export default function PortalPage() {
     }
   }
 
-  // 1. MINIMAL FOCUSED LOGIN / REGISTER SCREENS (No Header/Footer, Fixed Return Icon, Centered Logo + Form)
+  // 1. MINIMAL FOCUSED LOGIN / REGISTER SCREENS
   if (view === "LOGIN" || view === "REGISTER") {
     return (
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
@@ -104,7 +138,7 @@ export default function PortalPage() {
             </Link>
           </div>
 
-          {/* VIEW 1: CLIENT PORTAL LOGIN */}
+          {/* VIEW 1: CLIENT PORTAL MAGIC LINK LOGIN */}
           {view === "LOGIN" && (
             <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
               <div className="text-center mb-8">
@@ -112,88 +146,95 @@ export default function PortalPage() {
                   Client Portal Access
                 </h1>
                 <p className="text-xs text-[#5B6B85] mt-1.5 leading-relaxed">
-                  Access your custom orders, sizing configurations, and live proforma quotes.
+                  Enter your registered corporate email to receive a secure, passwordless magic login link.
                 </p>
               </div>
 
-              <form onSubmit={handleLogin} className="space-y-5">
-                <div>
-                  <label
-                    htmlFor="loginEmail"
-                    className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5"
+              {loginSuccessMessage ? (
+                <div className="p-6 bg-[#E6F1FB] border border-[#B3D6F6] rounded-lg text-center space-y-3">
+                  <div className="w-12 h-12 bg-[#2E5AAC] text-white rounded-full flex items-center justify-center mx-auto">
+                    <span className="material-symbols-outlined text-2xl">mark_email_read</span>
+                  </div>
+                  <h3 className="text-sm font-bold text-[#1A2233]">Check Your Corporate Inbox</h3>
+                  <p className="text-xs text-[#5B6B85] leading-relaxed">
+                    {loginSuccessMessage}
+                  </p>
+                  <p className="text-[11px] text-[#5B6B85] italic pt-2">
+                    The link expires in 15 minutes and can only be used once.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginSuccessMessage(null);
+                      setEmail("");
+                    }}
+                    className="mt-3 text-xs font-semibold text-[#2E5AAC] hover:underline"
                   >
-                    Corporate Email Address *
-                  </label>
-                  <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#5B6B85] text-lg">
-                      mail
-                    </span>
-                    <input
-                      id="loginEmail"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="executive@company.com"
-                      className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
-                    />
-                  </div>
+                    ← Send to a different email
+                  </button>
                 </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1.5">
+              ) : (
+                <form onSubmit={handleMagicLinkSubmit} className="space-y-5">
+                  <div>
                     <label
-                      htmlFor="loginPassword"
-                      className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85]"
+                      htmlFor="loginEmail"
+                      className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5"
                     >
-                      Password *
+                      Corporate Email Address *
                     </label>
-                    <a
-                      href="#forgot"
-                      className="text-xs font-medium text-[#2E5AAC] hover:underline"
-                    >
-                      Forgot password?
-                    </a>
+                    <div className="relative">
+                      <span className="material-symbols-outlined absolute left-3 top-3 text-[#5B6B85] text-lg">
+                        mail
+                      </span>
+                      <input
+                        id="loginEmail"
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="executive@company.com"
+                        className="w-full pl-10 pr-3 py-3 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                      />
+                    </div>
                   </div>
-                  <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#5B6B85] text-lg">
-                      lock
-                    </span>
-                    <input
-                      id="loginPassword"
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
-                    />
-                  </div>
-                </div>
 
-                {loginError && (
-                  <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
-                    {loginError}
-                  </div>
-                )}
+                  {loginError && (
+                    <div className="p-3.5 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F] font-medium flex items-center gap-2">
+                      <span className="material-symbols-outlined text-base">error</span>
+                      <span>{loginError}</span>
+                    </div>
+                  )}
 
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
-                >
-                  Sign In to Client Portal
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    disabled={loginSending}
+                    className="w-full min-h-[44px] py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm flex items-center justify-center gap-2"
+                  >
+                    {loginSending ? (
+                      <>
+                        <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Sending Magic Link...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-base">send</span>
+                        <span>Send Passwordless Login Link</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
 
               <div className="mt-8 pt-6 border-t border-[#E5E7EB] text-center">
                 <p className="text-xs text-[#5B6B85]">
                   New B2B client? Apply for corporate ordering privileges.
                 </p>
                 <button
+                  type="button"
                   onClick={() => setView("REGISTER")}
-                  className="mt-2 text-xs font-semibold text-[#2E5AAC] hover:underline uppercase tracking-wider"
+                  className="mt-2 min-h-[44px] text-xs font-semibold text-[#2E5AAC] hover:underline uppercase tracking-wider inline-flex items-center gap-1"
                 >
-                  Become a B2B Partner →
+                  <span>Become a B2B Partner →</span>
                 </button>
               </div>
             </div>
@@ -231,7 +272,7 @@ export default function PortalPage() {
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="Apex Brands Ltd."
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                     <div>
@@ -243,7 +284,7 @@ export default function PortalPage() {
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="https://apexbrands.com"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                     <div>
@@ -253,7 +294,7 @@ export default function PortalPage() {
                       <select
                         value={industry}
                         onChange={(e) => setIndustry(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       >
                         <option value="Wholesale Apparel">Wholesale Apparel</option>
                         <option value="Fashion Brand / Retailer">Fashion Brand / Retailer</option>
@@ -269,7 +310,7 @@ export default function PortalPage() {
                       <select
                         value={annualVolume}
                         onChange={(e) => setAnnualVolume(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       >
                         <option value="100 - 500 units">100 - 500 units / year</option>
                         <option value="500 - 2,000 units">500 - 2,000 units / year</option>
@@ -296,7 +337,7 @@ export default function PortalPage() {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Sarah Jenkins"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                     <div>
@@ -308,7 +349,7 @@ export default function PortalPage() {
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         placeholder="Head of Procurement"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                     <div>
@@ -321,7 +362,7 @@ export default function PortalPage() {
                         value={corpEmail}
                         onChange={(e) => setCorpEmail(e.target.value)}
                         placeholder="s.jenkins@apexbrands.com"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                     <div>
@@ -333,7 +374,7 @@ export default function PortalPage() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+44 20 7946 0912"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
                       />
                     </div>
                   </div>
@@ -345,7 +386,7 @@ export default function PortalPage() {
                     3. Specific Production Requirements
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-[#5B6B85]">
-                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer min-h-[44px]">
                       <input
                         type="checkbox"
                         checked={needs.customDye}
@@ -354,7 +395,7 @@ export default function PortalPage() {
                       />
                       <span>Custom Fabric Dye Lots</span>
                     </label>
-                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer min-h-[44px]">
                       <input
                         type="checkbox"
                         checked={needs.bespokeTailoring}
@@ -363,7 +404,7 @@ export default function PortalPage() {
                       />
                       <span>Bespoke CAD Pattern Grading</span>
                     </label>
-                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer min-h-[44px]">
                       <input
                         type="checkbox"
                         checked={needs.privateLabelPackaging}
@@ -372,7 +413,7 @@ export default function PortalPage() {
                       />
                       <span>Private Label Packaging &amp; Hangtags</span>
                     </label>
-                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer min-h-[44px]">
                       <input
                         type="checkbox"
                         checked={needs.expeditedLogistics}
@@ -394,13 +435,13 @@ export default function PortalPage() {
                   <button
                     type="button"
                     onClick={() => setView("LOGIN")}
-                    className="w-1/3 py-3 bg-[#F5F7FA] hover:bg-[#E5E7EB] text-[#5B6B85] text-xs font-semibold uppercase tracking-wider rounded border border-[#D1D5DB] transition-colors"
+                    className="w-1/3 min-h-[44px] py-3 bg-[#F5F7FA] hover:bg-[#E5E7EB] text-[#5B6B85] text-xs font-semibold uppercase tracking-wider rounded border border-[#D1D5DB] transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="w-2/3 py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
+                    className="w-2/3 min-h-[44px] py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
                   >
                     Submit Partnership Application
                   </button>
@@ -413,7 +454,7 @@ export default function PortalPage() {
     );
   }
 
-  // 2. SUBMITTED CONFIRMATION VIEW (Retains Full Header & Footer Layout)
+  // 2. SUBMITTED CONFIRMATION VIEW
   return (
     <>
       <SiteHeader />
@@ -436,36 +477,16 @@ export default function PortalPage() {
               Thank you for submitting your corporate details for <strong>{companyName || "your company"}</strong>. Our B2B account management team is reviewing your profile and will contact <strong>{corpEmail || "your email"}</strong> within 1 business day.
             </p>
 
-            <div className="mt-8 p-4 bg-[#F5F7FA] border border-[#E5E7EB] rounded text-left space-y-3">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1A2233]">
-                Next Steps in the Onboarding Process:
-              </h4>
-              <div className="space-y-2 text-xs text-[#5B6B85]">
-                <div className="flex gap-2">
-                  <span className="font-mono text-[#2E5AAC] font-bold">1.</span>
-                  <span><strong>Verification:</strong> Tax registration &amp; corporate domain check.</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-mono text-[#2E5AAC] font-bold">2.</span>
-                  <span><strong>Access Key:</strong> Secure invitation token sent via email.</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-mono text-[#2E5AAC] font-bold">3.</span>
-                  <span><strong>First Order:</strong> Instant configurator access with custom MOQs.</span>
-                </div>
-              </div>
-            </div>
-
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
               <Link
                 href="/"
-                className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+                className="min-h-[44px] inline-flex items-center justify-center bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
               >
                 Back to Homepage
               </Link>
               <Link
                 href="/konfigurator"
-                className="bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+                className="min-h-[44px] inline-flex items-center justify-center bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
               >
                 Launch Order Configurator
               </Link>
@@ -477,3 +498,18 @@ export default function PortalPage() {
     </>
   );
 }
+
+export default function PortalPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center font-sans text-xs text-[#5B6B85]">
+          <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+        </div>
+      }
+    >
+      <PortalPageContent />
+    </Suspense>
+  );
+}
+
