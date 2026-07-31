@@ -11,9 +11,17 @@ import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configurator
 
 interface ConfiguratorClientProps {
   fabrics: FabricOption[];
+  subcategoryTitle?: string;
+  subcategoryDescription?: string;
+  categoryTitle?: string;
 }
 
-export function ConfiguratorClient({ fabrics }: ConfiguratorClientProps) {
+export function ConfiguratorClient({
+  fabrics,
+  subcategoryTitle,
+  subcategoryDescription,
+  categoryTitle,
+}: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
   const [sizeQuantities, setSizeQuantities] = useState(DEFAULT_SIZE_QUANTITIES);
@@ -79,6 +87,9 @@ export function ConfiguratorClient({ fabrics }: ConfiguratorClientProps) {
     }
   }
 
+  const titleText = subcategoryTitle ? `Configure Order: ${subcategoryTitle}` : "Configure Order: Classic Polo Shirt";
+  const descriptionText = subcategoryDescription || "Select luxury materials, size unit matrix, and custom vector logo branding.";
+
   return (
     <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-10 bg-[#F5F7FA] text-[#1A2233]">
       {/* Header Info Banner */}
@@ -86,13 +97,13 @@ export function ConfiguratorClient({ fabrics }: ConfiguratorClientProps) {
         <div className="flex justify-between items-start flex-wrap gap-4">
           <div>
             <div className="text-xs uppercase font-semibold tracking-wider text-[#2E5AAC] mb-1">
-              Made-To-Order Manufacturing Spec
+              Made-To-Order Manufacturing Spec {categoryTitle ? `• ${categoryTitle}` : ""}
             </div>
             <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-              Configure Order: Classic Polo Shirt
+              {titleText}
             </h1>
             <p className="text-sm text-[#5B6B85] mt-1">
-              Select luxury materials, size unit matrix, and custom vector logo branding.
+              {descriptionText}
             </p>
           </div>
           <div className="bg-[#E6F1FB] text-[#185FA5] border border-[#B3D6F6] text-xs font-semibold px-3 py-1.5 rounded">

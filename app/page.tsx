@@ -227,7 +227,7 @@ export default function HomePage() {
                               {sub.fabricCount}
                             </span>
                             <Link
-                              href="/konfigurator"
+                              href={`/konfigurator/${sub.id}`}
                               className="text-xs font-semibold text-[#2E5AAC] hover:underline"
                             >
                               Configure →

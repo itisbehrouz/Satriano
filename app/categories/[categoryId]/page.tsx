@@ -132,7 +132,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
 
                   <div className="pt-4 border-t border-[#E5E7EB]">
                     <Link
-                      href="/konfigurator"
+                      href={`/konfigurator/${sub.id}`}
                       className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
                     >
                       Configure Order Spec →

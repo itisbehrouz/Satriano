@@ -295,3 +295,17 @@ export const MANUFACTURING_CATEGORIES: CategoryItem[] = [
     ],
   },
 ];
+
+export function getSubcategoryById(subId: string): {
+  category: CategoryItem;
+  subcategory: SubcategoryItem;
+} | null {
+  for (const cat of MANUFACTURING_CATEGORIES) {
+    const sub = cat.subcategories.find((s) => s.id === subId);
+    if (sub) {
+      return { category: cat, subcategory: sub };
+    }
+  }
+  return null;
+}
+
