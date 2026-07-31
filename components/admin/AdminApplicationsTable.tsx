@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 export interface B2bApplicationItem {
   id: string;
@@ -108,15 +108,15 @@ export function AdminApplicationsTable({
       )}
 
       <div className="overflow-x-auto border border-[#D1D5DB] rounded-lg bg-white shadow-sm">
-        <table className="w-full text-left border-collapse">
+        <table className="w-full text-left border-collapse min-w-[900px]">
           <thead>
             <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
-              <th className="p-4">App Ref / Date</th>
-              <th className="p-4">Company &amp; Industry</th>
-              <th className="p-4">Contact Officer</th>
-              <th className="p-4">Email Verification</th>
-              <th className="p-4">Status</th>
-              <th className="p-4 text-right">Actions</th>
+              <th className="p-4 w-[15%]">App Ref / Date</th>
+              <th className="p-4 w-[25%]">Company &amp; Industry</th>
+              <th className="p-4 w-[20%]">Contact Officer</th>
+              <th className="p-4 w-[15%]">Email Verification</th>
+              <th className="p-4 w-[12%]">Status</th>
+              <th className="p-4 w-[13%] text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
@@ -131,15 +131,15 @@ export function AdminApplicationsTable({
               });
 
               return (
-                <tbody key={app.id} className="divide-y divide-[#E5E7EB]">
+                <Fragment key={app.id}>
                   <tr className="hover:bg-[#F5F7FA]/60 transition-colors">
-                    <td className="p-4 font-mono text-xs">
+                    <td className="p-4 font-mono text-xs align-top">
                       <div className="font-bold text-[#1A2233]">
                         #{app.id.slice(-8).toUpperCase()}
                       </div>
                       <div className="text-[#5B6B85] text-[11px] mt-0.5">{dateStr}</div>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4 align-top">
                       <div className="font-semibold text-[#1A2233]">{app.companyName}</div>
                       {app.website ? (
                         <a
@@ -160,32 +160,32 @@ export function AdminApplicationsTable({
                         </div>
                       )}
                     </td>
-                    <td className="p-4">
+                    <td className="p-4 align-top">
                       <div className="font-semibold text-[#1A2233]">{app.fullName}</div>
                       <div className="text-xs text-[#2E5AAC]">{app.corpEmail}</div>
                       {app.jobTitle && (
                         <div className="text-[11px] text-[#5B6B85]">{app.jobTitle}</div>
                       )}
                     </td>
-                    <td className="p-4">
+                    <td className="p-4 align-top">
                       {isEmailVerified ? (
-                        <span className="inline-flex items-center gap-1 bg-[#E1F5EE] text-[#0F6E56] text-xs font-semibold px-2 py-0.5 rounded border border-[#A6E5CE]">
+                        <span className="inline-flex items-center gap-1 bg-[#E1F5EE] text-[#0F6E56] text-xs font-semibold px-2.5 py-1 rounded border border-[#A6E5CE]">
                           <span className="material-symbols-outlined text-sm">mark_email_read</span>
                           <span>Verified</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 bg-[#FAEEDA] text-[#854F0B] text-xs font-semibold px-2 py-0.5 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
+                        <span className="inline-flex items-center gap-1 bg-[#FAEEDA] text-[#854F0B] text-xs font-semibold px-2.5 py-1 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
                           <span className="material-symbols-outlined text-sm">pending_actions</span>
                           <span>Unverified</span>
                         </span>
                       )}
                     </td>
-                    <td className="p-4">
+                    <td className="p-4 align-top">
                       <ApplicationStatusBadge status={app.status} />
                     </td>
-                    <td className="p-4 text-right">
+                    <td className="p-4 text-right align-top">
                       <div className="flex items-center justify-end gap-2 flex-wrap">
-                        {/* Expand/Collapse Full Specs Button (44px min height) */}
+                        {/* Expand/Collapse Full Specs Button */}
                         <button
                           type="button"
                           onClick={() => setExpandedId(isExpanded ? null : app.id)}
@@ -331,9 +331,9 @@ export function AdminApplicationsTable({
                             {app.status !== "APPROVED" && (
                               <button
                                 type="button"
-                                disabled={isUpdating}
+                                disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "APPROVED")}
-                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
                               >
                                 <span className="material-symbols-outlined text-base">check_circle</span>
                                 <span>Approve Application</span>
@@ -342,9 +342,9 @@ export function AdminApplicationsTable({
                             {app.status !== "REJECTED" && (
                               <button
                                 type="button"
-                                disabled={isUpdating}
+                                disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "REJECTED")}
-                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] rounded transition-colors inline-flex items-center gap-1.5"
+                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
                               >
                                 <span className="material-symbols-outlined text-base">cancel</span>
                                 <span>Reject Application</span>
@@ -355,7 +355,7 @@ export function AdminApplicationsTable({
                       </td>
                     </tr>
                   )}
-                </tbody>
+                </Fragment>
               );
             })}
           </tbody>
