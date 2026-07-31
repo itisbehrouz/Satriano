@@ -1,0 +1,233 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import {
+  AdminApplicationsTable,
+  B2bApplicationItem,
+} from "@/components/admin/AdminApplicationsTable";
+
+const APPLICATION_TABS = [
+  { id: "ALL", label: "All Applications" },
+  { id: "SUBMITTED", label: "Submitted (New)" },
+  { id: "UNDER_REVIEW", label: "Under Review" },
+  { id: "APPROVED", label: "Approved Partners" },
+  { id: "REJECTED", label: "Rejected" },
+];
+
+export default function AdminApplicationsPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [applications, setApplications] = useState<B2bApplicationItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState("ALL");
+
+  useEffect(() => {
+    async function checkSessionAndFetch() {
+      try {
+        const sessionRes = await fetch("/api/admin/session");
+        if (sessionRes.ok) {
+          const data = await sessionRes.json();
+          if (data.authenticated) {
+            setIsAuthenticated(true);
+            return;
+          }
+        }
+      } catch {
+        // Session check failed
+      }
+      setIsAuthenticated(false);
+      setLoading(false);
+    }
+
+    checkSessionAndFetch();
+  }, []);
+
+  async function fetchApplications() {
+    setLoading(true);
+    setError(null);
+    try {
+      const url =
+        activeTab && activeTab !== "ALL"
+          ? `/api/applications?status=${encodeURIComponent(activeTab)}`
+          : "/api/applications";
+
+      const res = await fetch(url);
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch B2B partner applications.");
+      }
+
+      const data = await res.json();
+      setApplications(data.applications || []);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load B2B applications. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchApplications();
+    }
+  }, [isAuthenticated, activeTab]);
+
+  async function handleSignOut() {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {
+      // Signout failed
+    }
+    setIsAuthenticated(false);
+  }
+
+  if (isAuthenticated === false) {
+    return (
+      <>
+        <SiteHeader />
+        <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4 font-sans">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center shadow-sm">
+            <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
+            <p className="text-sm text-[#5B6B85] mb-6">
+              Please authenticate via the Corporate Access Gate at /admin to manage B2B partner applications.
+            </p>
+            <Link
+              href="/admin"
+              className="inline-flex items-center justify-center min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+            >
+              Go to Admin Login →
+            </Link>
+          </div>
+        </main>
+        <SiteFooter />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <SiteHeader />
+      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+        <div className="w-full max-w-container-max mx-auto space-y-6">
+          {/* Top Bar Header */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
+                  Portal Console
+                </h1>
+                <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-2.5 py-1 rounded border border-[#B3D6F6]">
+                  B2B Applications Review
+                </span>
+              </div>
+              <p className="text-xs text-[#5B6B85] mt-1">
+                Evaluate corporate manufacturing partner applications, verify company credentials &amp; assign partnership status.
+              </p>
+            </div>
+
+            {/* Navigation Actions (44px min touch target) */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <Link
+                href="/admin"
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">receipt_long</span>
+                <span>Production Order Ledger</span>
+              </Link>
+              <Link
+                href="/admin/product-settings"
+                className="min-h-[44px] px-4 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">settings</span>
+                <span>Catalog Settings</span>
+              </Link>
+              <button
+                type="button"
+                onClick={fetchApplications}
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">refresh</span>
+                <span>Refresh</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">logout</span>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Module Navigation Tabs */}
+          <div className="flex items-center gap-2 border-b border-[#D1D5DB] pb-3 overflow-x-auto">
+            <Link
+              href="/admin"
+              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            >
+              <span className="material-symbols-outlined text-base">orders</span>
+              <span>Production Orders</span>
+            </Link>
+            <span className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded bg-[#0B1E3D] text-white shadow-sm flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-base">assignment_ind</span>
+              <span>B2B Applications ({applications.length})</span>
+            </span>
+            <Link
+              href="/admin/product-settings"
+              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            >
+              <span className="material-symbols-outlined text-base">inventory_2</span>
+              <span>Product Settings &amp; MOQs</span>
+            </Link>
+          </div>
+
+          {/* Status Filter Tabs (44px min touch target) */}
+          <div className="flex flex-wrap gap-2 border-b border-[#D1D5DB] pb-3">
+            {APPLICATION_TABS.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`min-h-[44px] px-4 py-2 text-xs font-medium rounded transition-colors ${
+                  activeTab === tab.id
+                    ? "bg-[#2E5AAC] text-white font-semibold shadow-sm"
+                    : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Main Table Content */}
+          {loading ? (
+            <div className="bg-white border border-[#D1D5DB] rounded-lg p-12 text-center text-sm text-[#5B6B85] shadow-sm">
+              <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+              <p>Loading B2B partner applications...</p>
+            </div>
+          ) : error ? (
+            <div className="bg-white border border-[#F8B4B4] rounded-lg p-6 text-center text-sm text-[#C5221F]">
+              <p className="font-semibold mb-1">Applications Error</p>
+              <p className="text-xs">{error}</p>
+            </div>
+          ) : (
+            <AdminApplicationsTable
+              applications={applications}
+              onStatusChange={fetchApplications}
+            />
+          )}
+        </div>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

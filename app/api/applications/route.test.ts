@@ -70,4 +70,38 @@ describe("B2B Applications API", () => {
     expect(Array.isArray(data.applications)).toBe(true);
     expect(data.applications.length).toBeGreaterThan(0);
   });
+
+  it("PATCH /api/applications/[id] updates status to APPROVED and sets reviewedAt and reviewedBy", async () => {
+    const { PATCH } = await import("@/app/api/applications/[id]/route");
+
+    const created = await prisma.b2bApplication.create({
+      data: {
+        companyName: "Test Patch Corp",
+        fullName: "Patch Contact",
+        corpEmail: "test-app-patch@example.com",
+        status: "SUBMITTED",
+      },
+    });
+
+    const validKey = getAdminAccessKey();
+    const req = new Request(`http://localhost/api/applications/${created.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${validKey}`,
+      },
+      body: JSON.stringify({
+        status: "APPROVED",
+        reviewedBy: "admin",
+      }),
+    });
+
+    const res = await PATCH(req, { params: Promise.resolve({ id: created.id }) });
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.success).toBe(true);
+    expect(data.application.status).toBe("APPROVED");
+    expect(data.application.reviewedBy).toBe("admin");
+    expect(data.application.reviewedAt).not.toBeNull();
+  });
 });

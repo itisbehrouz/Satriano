@@ -234,30 +234,60 @@ export default function AdminPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
+              <Link
+                href="/admin/applications"
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">assignment_ind</span>
+                <span>B2B Applications</span>
+              </Link>
               <Link
                 href="/admin/product-settings"
-                className="px-3.5 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
+                className="min-h-[44px] px-4 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >
-                <span className="material-symbols-outlined text-sm">settings</span>
-                Product &amp; Catalog Settings
+                <span className="material-symbols-outlined text-base">settings</span>
+                <span>Catalog Settings</span>
               </Link>
               <button
                 type="button"
                 onClick={fetchOrders}
-                className="px-3.5 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >
-                <span className="material-symbols-outlined text-sm">refresh</span>
-                Refresh Ledger
+                <span className="material-symbols-outlined text-base">refresh</span>
+                <span>Refresh Ledger</span>
               </button>
               <button
+                type="button"
                 onClick={handleSignOut}
-                className="px-3.5 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
               >
-                <span className="material-symbols-outlined text-sm">logout</span>
-                Sign Out
+                <span className="material-symbols-outlined text-base">logout</span>
+                <span>Sign Out</span>
               </button>
             </div>
+          </div>
+
+          {/* Module Navigation Tabs */}
+          <div className="flex items-center gap-2 border-b border-[#D1D5DB] pb-3 overflow-x-auto">
+            <span className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded bg-[#0B1E3D] text-white shadow-sm flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-base">orders</span>
+              <span>Production Orders ({orders.length})</span>
+            </span>
+            <Link
+              href="/admin/applications"
+              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            >
+              <span className="material-symbols-outlined text-base">assignment_ind</span>
+              <span>B2B Applications</span>
+            </Link>
+            <Link
+              href="/admin/product-settings"
+              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            >
+              <span className="material-symbols-outlined text-base">inventory_2</span>
+              <span>Product Settings &amp; MOQs</span>
+            </Link>
           </div>
 
           {/* Filter Tabs */}
@@ -265,10 +295,11 @@ export default function AdminPage() {
             {TABS.map((tab) => (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-3.5 py-2 text-xs font-medium rounded transition-colors ${
+                className={`min-h-[44px] px-4 py-2 text-xs font-medium rounded transition-colors ${
                   activeTab === tab.id
-                    ? "bg-[#0B1E3D] text-white font-semibold shadow-sm"
+                    ? "bg-[#2E5AAC] text-white font-semibold shadow-sm"
                     : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
                 }`}
               >
