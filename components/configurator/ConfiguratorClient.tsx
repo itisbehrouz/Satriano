@@ -4,13 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { LogoPlacement } from "@/app/generated/prisma/enums";
 import { FabricPicker, type FabricOption } from "@/components/configurator/FabricPicker";
+import { FitPicker, type FitOption } from "@/components/configurator/FitPicker";
 import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/SizeQtyTable";
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
 import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
 
 interface ConfiguratorClientProps {
+  productId?: string;
   fabrics: FabricOption[];
+  fits?: FitOption[];
   subcategoryTitle?: string;
   subcategoryDescription?: string;
   categoryTitle?: string;
@@ -18,7 +21,9 @@ interface ConfiguratorClientProps {
 }
 
 export function ConfiguratorClient({
+  productId,
   fabrics,
+  fits = [],
   subcategoryTitle,
   subcategoryDescription,
   categoryTitle,
@@ -26,6 +31,7 @@ export function ConfiguratorClient({
 }: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
+  const [selectedFitId, setSelectedFitId] = useState(fits[0]?.id ?? "");
   const [activeRegion, setActiveRegion] = useState<"EU" | "US">("EU");
   const [sizeQuantities, setSizeQuantities] = useState<Record<string, number>>(DEFAULT_SIZE_QUANTITIES);
   const [customerTargetPrice, setCustomerTargetPrice] = useState("");
@@ -77,6 +83,8 @@ export function ConfiguratorClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fabricId: selectedFabricId,
+          productId: productId || undefined,
+          fitId: selectedFitId || undefined,
           companyName,
           companyEmail,
           sizeQuantities: toSizeQuantityArray(sizeQuantities),
@@ -99,7 +107,7 @@ export function ConfiguratorClient({
   }
 
   const titleText = subcategoryTitle ? `Configure Order: ${subcategoryTitle}` : "Configure Order: Classic Polo Shirt";
-  const descriptionText = subcategoryDescription || "Select luxury materials, size unit matrix, and custom vector logo branding.";
+  const descriptionText = subcategoryDescription || "Select luxury materials, garment fit, size unit matrix, and custom vector logo branding.";
 
   return (
     <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-10 bg-[#F5F7FA] text-[#1A2233]">
@@ -139,10 +147,24 @@ export function ConfiguratorClient({
             )}
           </section>
 
+          {fits.length > 0 && (
+            <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
+              <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#2E5AAC]">checkroom</span>
+                2. Garment Fit (Kalıp) Selection
+              </h2>
+              <FitPicker
+                fits={fits}
+                selectedFitId={selectedFitId}
+                onSelect={setSelectedFitId}
+              />
+            </section>
+          )}
+
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">grid_on</span>
-              2. Regional Sizing &amp; Unit Matrix
+              {fits.length > 0 ? "3" : "2"}. Regional Sizing &amp; Unit Matrix
             </h2>
             <SizeQtyTable
               sizeSystems={sizeSystems}
@@ -156,7 +178,7 @@ export function ConfiguratorClient({
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">upload_file</span>
-              3. Vector Logo &amp; Placement
+              {fits.length > 0 ? "4" : "3"}. Vector Logo &amp; Placement
             </h2>
             <LogoUploader
               file={logoFile}
@@ -169,7 +191,7 @@ export function ConfiguratorClient({
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">corporate_fare</span>
-              4. Company Information &amp; Target Budget
+              {fits.length > 0 ? "5" : "4"}. Company Information &amp; Target Budget
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>

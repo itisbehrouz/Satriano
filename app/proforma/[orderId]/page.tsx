@@ -120,6 +120,16 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                       </dd>
                     </div>
                   )}
+                  {order.lines[0]?.selectedFit && (
+                    <div>
+                      <dt className="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-1">
+                        Garment Fit (Kalıp)
+                      </dt>
+                      <dd className="font-body-lg text-body-lg text-on-surface font-semibold text-[#2E5AAC]">
+                        {order.lines[0].selectedFit}
+                      </dd>
+                    </div>
+                  )}
                 </dl>
               </div>
 

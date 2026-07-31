@@ -19,6 +19,7 @@ export interface AdminOrder {
   lines: Array<{
     size: string;
     quantity: number;
+    selectedFit?: string | null;
     fabric: { name: string };
   }>;
   logoAssets: Array<{
@@ -156,7 +157,8 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                     Target: {targetBudgetStr}
                   </div>
                   <div className="text-[#5B6B85] text-xs tabular-nums mt-0.5">
-                    {totalUnits} pcs ({order.lines[0]?.fabric?.name || "Standard Fabric"})
+                    {totalUnits} pcs ({order.lines[0]?.fabric?.name || "Standard Fabric"}
+                    {order.lines[0]?.selectedFit ? ` • ${order.lines[0].selectedFit}` : ""})
                   </div>
                 </td>
                 <td className="p-4">

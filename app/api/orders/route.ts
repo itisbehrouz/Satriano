@@ -20,9 +20,20 @@ export async function POST(request: Request) {
     logoPlacement,
   } = validation.data;
 
+  const rawFitId = body?.fitId as string | undefined;
+  const rawProductId = body?.productId as string | undefined;
+
   const fabric = await prisma.fabric.findUnique({ where: { id: fabricId } });
   if (!fabric || !fabric.active) {
     return NextResponse.json({ error: "Fabric not found" }, { status: 404 });
+  }
+
+  let selectedFitName: string | undefined = undefined;
+  if (rawFitId) {
+    const fitRecord = await prisma.fit.findUnique({ where: { id: rawFitId } });
+    if (fitRecord) {
+      selectedFitName = fitRecord.name;
+    }
   }
 
   const pricing = computeOrderPricing({ fabric, sizeQuantities });
@@ -49,6 +60,9 @@ export async function POST(request: Request) {
       lines: {
         create: pricing.lineItems.map((line) => ({
           fabricId: fabric.id,
+          productId: rawProductId || fabric.productId || null,
+          fitId: rawFitId || null,
+          selectedFit: selectedFitName || null,
           size: line.size,
           quantity: line.quantity,
           unitPriceCents: line.priceMinCents, // Store min range as reference

@@ -26,6 +26,12 @@ export default async function ProductConfiguratorPage({
         where: { active: true },
         orderBy: { priceMinCents: "asc" },
       },
+      fits: {
+        include: {
+          fit: true,
+        },
+        orderBy: { fit: { sortOrder: "asc" } },
+      },
       subcategory: {
         include: {
           category: true,
@@ -54,6 +60,7 @@ export default async function ProductConfiguratorPage({
           where: { active: true },
           include: {
             fabrics: { where: { active: true }, orderBy: { priceMinCents: "asc" } },
+            fits: { include: { fit: true } },
           },
           take: 1,
         },
@@ -126,6 +133,26 @@ export default async function ProductConfiguratorPage({
     fabrics = globalFabrics;
   }
 
+  let fits = product.fits.map((pf) => ({
+    id: pf.fit.id,
+    name: pf.fit.name,
+    code: pf.fit.code,
+    description: pf.fit.description,
+  }));
+
+  if (fits.length === 0) {
+    const globalFits = await prisma.fit.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: "asc" },
+    });
+    fits = globalFits.map((f) => ({
+      id: f.id,
+      name: f.name,
+      code: f.code,
+      description: f.description,
+    }));
+  }
+
   const formattedSizeSystems = product.subcategory.sizeSystems.map((ss) => ({
     id: ss.sizeSystem.id,
     name: ss.sizeSystem.name,
@@ -141,7 +168,9 @@ export default async function ProductConfiguratorPage({
     <>
       <SiteHeader />
       <ConfiguratorClient
+        productId={product.id}
         fabrics={fabrics}
+        fits={fits}
         subcategoryTitle={product.name}
         subcategoryDescription={product.description || ""}
         categoryTitle={`${product.subcategory.category.name} • ${product.subcategory.name}`}
