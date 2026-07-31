@@ -75,6 +75,9 @@ export async function POST(request: Request) {
 
     // Upload PDF to Supabase Storage for persistent cloud availability
     if (supabase) {
+      // Attempt to ensure dedicated 'proformas' bucket exists
+      await supabase.storage.createBucket("proformas", { public: true }).catch(() => null);
+
       const { data, error } = await supabase.storage
         .from("proformas")
         .upload(filename, pdfBuffer, {
