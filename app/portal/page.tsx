@@ -456,27 +456,28 @@ function PortalPageContent() {
     );
   }
 
-  // 2. SUBMITTED CONFIRMATION VIEW
+  // 2. SUBMITTED CONFIRMATION VIEW (Requires email verification before admin review)
   return (
     <>
       <SiteHeader />
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-16 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
         <div className="w-full max-w-xl mx-auto">
           <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm text-center">
-            <div className="w-16 h-16 bg-[#E6F1FB] text-[#2E5AAC] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#B3D6F6]">
-              <span className="material-symbols-outlined text-3xl">task_alt</span>
+            <div className="w-16 h-16 bg-[#FAEEDA] text-[#854F0B] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#F5D8A0]">
+              <span className="material-symbols-outlined text-3xl">mark_email_unread</span>
             </div>
 
-            <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-3 py-1 rounded border border-[#B3D6F6]">
-              Application Received • Under Review
+            <span className="bg-[#FAEEDA] text-[#854F0B] text-[10px] uppercase font-semibold px-3 py-1.5 rounded border border-[#F5D8A0] inline-flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-sm">pending_actions</span>
+              <span>Application Received • Verify Your Email</span>
             </span>
 
             <h1 className="text-2xl font-semibold text-[#1A2233] mt-4">
-              Partnership Application Submitted
+              Please Verify Your Corporate Email
             </h1>
 
-            <p className="text-xs text-[#5B6B85] mt-2 max-w-md mx-auto leading-relaxed">
-              Thank you for submitting your corporate details for <strong>{companyName || "your company"}</strong>. Our B2B account management team is reviewing your profile and will contact <strong>{corpEmail || "your email"}</strong> within 1 business day.
+            <p className="text-xs text-[#5B6B85] mt-3 max-w-lg mx-auto leading-relaxed">
+              We&apos;ve sent a verification link to <strong>{corpEmail || "your email address"}</strong>. Please check your inbox and click the link to confirm your email — your application for <strong>{companyName || "your company"}</strong> will then be reviewed by our B2B account team.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
