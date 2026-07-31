@@ -22,7 +22,7 @@ function postOrders(body: unknown) {
 }
 
 describe("POST /api/orders", () => {
-  it("creates an order with the correct totals and returns its id", async () => {
+  it("creates an order in PENDING_REVIEW status with setup fee and target budget", async () => {
     const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
 
     const response = await postOrders({
@@ -30,11 +30,13 @@ describe("POST /api/orders", () => {
       companyName: "Test Order Route Co",
       companyEmail: `test-order-route-${Date.now()}@example.com`,
       sizeQuantities: [{ size: "M", quantity: 300 }],
+      customerTargetPriceCents: 1850,
     });
 
     expect(response.status).toBe(201);
     const json = await response.json();
     expect(json.orderId).toBeTypeOf("string");
+    expect(json.status).toBe("PENDING_REVIEW");
 
     const order = await prisma.order.findUniqueOrThrow({
       where: { id: json.orderId },
@@ -42,13 +44,11 @@ describe("POST /api/orders", () => {
     });
     createdCompanyIds.push(order.companyId);
 
-    // Pique Cotton: 1850/unit * 300 + 15000 setup = 570000 (matches the
-    // configurator mockup's $5,700.00).
-    expect(order.totalCents).toBe(570000);
+    expect(order.status).toBe("PENDING_REVIEW");
     expect(order.setupFeeCents).toBe(15000);
-    expect(order.status).toBe("DRAFT");
+    expect(order.totalCents).toBe(0);
+    expect(order.customerTargetPriceCents).toBe(1850);
     expect(order.lines).toHaveLength(1);
-    expect(order.lines[0]).toMatchObject({ size: "M", quantity: 300, unitPriceCents: 1850 });
     expect(order.company.name).toBe("Test Order Route Co");
   });
 

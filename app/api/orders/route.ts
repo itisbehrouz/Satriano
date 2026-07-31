@@ -10,7 +10,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: validation.error }, { status: 400 });
   }
 
-  const { fabricId, companyName, companyEmail, sizeQuantities, logoUrl, logoPlacement } = validation.data;
+  const {
+    fabricId,
+    companyName,
+    companyEmail,
+    sizeQuantities,
+    customerTargetPriceCents,
+    logoUrl,
+    logoPlacement,
+  } = validation.data;
 
   const fabric = await prisma.fabric.findUnique({ where: { id: fabricId } });
   if (!fabric || !fabric.active) {
@@ -34,15 +42,16 @@ export async function POST(request: Request) {
   const order = await prisma.order.create({
     data: {
       companyId: company.id,
-      status: "DRAFT",
+      status: "PENDING_REVIEW",
       setupFeeCents: pricing.setupFeeCents,
-      totalCents: pricing.totalCents,
+      totalCents: 0, // Set to 0 until admin feasibility review sets finalPriceCents
+      customerTargetPriceCents: customerTargetPriceCents || null,
       lines: {
         create: pricing.lineItems.map((line) => ({
           fabricId: fabric.id,
           size: line.size,
           quantity: line.quantity,
-          unitPriceCents: line.unitPriceCents,
+          unitPriceCents: line.priceMinCents, // Store min range as reference
         })),
       },
       ...(logoUrl
@@ -58,5 +67,5 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json({ orderId: order.id }, { status: 201 });
+  return NextResponse.json({ orderId: order.id, status: order.status }, { status: 201 });
 }

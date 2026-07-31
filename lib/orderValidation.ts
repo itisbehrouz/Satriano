@@ -5,6 +5,7 @@ export interface CreateOrderInput {
   companyName: string;
   companyEmail: string;
   sizeQuantities: SizeQuantity[];
+  customerTargetPriceCents?: number;
   logoUrl?: string;
   logoPlacement?: "LEFT_CHEST" | "RIGHT_SLEEVE";
 }
@@ -32,8 +33,15 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
     return { valid: false, error: "Request body must be an object" };
   }
 
-  const { fabricId, companyName, companyEmail, sizeQuantities, logoUrl, logoPlacement } =
-    body as Record<string, unknown>;
+  const {
+    fabricId,
+    companyName,
+    companyEmail,
+    sizeQuantities,
+    customerTargetPriceCents,
+    logoUrl,
+    logoPlacement,
+  } = body as Record<string, unknown>;
 
   if (typeof fabricId !== "string" || fabricId.trim() === "") {
     return { valid: false, error: "fabricId is required" };
@@ -58,6 +66,11 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
     };
   }
 
+  let validatedTargetPrice: number | undefined = undefined;
+  if (typeof customerTargetPriceCents === "number" && customerTargetPriceCents > 0) {
+    validatedTargetPrice = Math.round(customerTargetPriceCents);
+  }
+
   let validatedLogoUrl: string | undefined = undefined;
   if (typeof logoUrl === "string" && logoUrl.trim() !== "") {
     validatedLogoUrl = logoUrl.trim();
@@ -75,6 +88,7 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
       companyName: companyName.trim(),
       companyEmail: companyEmail.trim().toLowerCase(),
       sizeQuantities,
+      customerTargetPriceCents: validatedTargetPrice,
       logoUrl: validatedLogoUrl,
       logoPlacement: validatedPlacement,
     },

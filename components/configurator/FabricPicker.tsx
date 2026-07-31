@@ -5,7 +5,8 @@ export interface FabricOption {
   name: string;
   description: string | null;
   imageUrl: string | null;
-  unitPriceCents: number;
+  priceMinCents: number;
+  priceMaxCents: number;
   setupFeeCents: number;
 }
 
@@ -52,7 +53,7 @@ export function FabricPicker({ fabrics, selectedFabricId, onSelect }: FabricPick
                 </p>
               )}
               <p className="text-xs font-semibold text-[#2E5AAC] tabular-nums">
-                Base: {formatCents(fabric.unitPriceCents)} / unit
+                Est. Range: {formatCents(fabric.priceMinCents)} – {formatCents(fabric.priceMaxCents)} / unit
               </p>
             </label>
             <div className="absolute top-3 right-3 hidden peer-checked:block text-[#2E5AAC]">

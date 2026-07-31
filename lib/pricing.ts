@@ -5,7 +5,8 @@ export interface SizeQuantity {
 
 export interface PricingInput {
   fabric: {
-    unitPriceCents: number;
+    priceMinCents: number;
+    priceMaxCents: number;
     setupFeeCents: number;
   };
   sizeQuantities: SizeQuantity[];
@@ -14,16 +15,20 @@ export interface PricingInput {
 export interface PricingLineItem {
   size: string;
   quantity: number;
-  unitPriceCents: number;
-  lineTotalCents: number;
+  priceMinCents: number;
+  priceMaxCents: number;
 }
 
 export interface PricingResult {
   lineItems: PricingLineItem[];
   totalUnits: number;
-  subtotalCents: number;
+  priceMinCents: number;
+  priceMaxCents: number;
+  estimatedSubtotalMinCents: number;
+  estimatedSubtotalMaxCents: number;
   setupFeeCents: number;
-  totalCents: number;
+  estimatedTotalMinCents: number;
+  estimatedTotalMaxCents: number;
 }
 
 export function computeOrderPricing({ fabric, sizeQuantities }: PricingInput): PricingResult {
@@ -38,19 +43,24 @@ export function computeOrderPricing({ fabric, sizeQuantities }: PricingInput): P
     .map(({ size, quantity }) => ({
       size,
       quantity,
-      unitPriceCents: fabric.unitPriceCents,
-      lineTotalCents: quantity * fabric.unitPriceCents,
+      priceMinCents: fabric.priceMinCents,
+      priceMaxCents: fabric.priceMaxCents,
     }));
 
   const totalUnits = lineItems.reduce((sum, line) => sum + line.quantity, 0);
-  const subtotalCents = lineItems.reduce((sum, line) => sum + line.lineTotalCents, 0);
+  const estimatedSubtotalMinCents = totalUnits * fabric.priceMinCents;
+  const estimatedSubtotalMaxCents = totalUnits * fabric.priceMaxCents;
   const setupFeeCents = totalUnits > 0 ? fabric.setupFeeCents : 0;
 
   return {
     lineItems,
     totalUnits,
-    subtotalCents,
+    priceMinCents: fabric.priceMinCents,
+    priceMaxCents: fabric.priceMaxCents,
+    estimatedSubtotalMinCents,
+    estimatedSubtotalMaxCents,
     setupFeeCents,
-    totalCents: subtotalCents + setupFeeCents,
+    estimatedTotalMinCents: estimatedSubtotalMinCents + setupFeeCents,
+    estimatedTotalMaxCents: estimatedSubtotalMaxCents + setupFeeCents,
   };
 }

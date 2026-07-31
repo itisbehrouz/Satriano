@@ -19,6 +19,7 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
     include: {
       company: true,
       lines: { include: { fabric: true } },
+      proforma: true,
     },
   });
 
@@ -27,12 +28,12 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
   }
 
   const totalUnits = order.lines.reduce((sum, line) => sum + line.quantity, 0);
-  const subtotalCents = order.lines.reduce(
-    (sum, line) => sum + line.quantity * line.unitPriceCents,
-    0,
-  );
-  const refNo = `ORD-${order.id.slice(-8).toUpperCase()}`;
+  const refNo = order.proforma?.refNo || `ORD-${order.id.slice(-8).toUpperCase()}`;
   const primaryFabric = order.lines[0]?.fabric;
+  const isPendingReview = order.status === "PENDING_REVIEW" || !order.finalPriceCents;
+
+  const unitPriceToDisplay = order.finalPriceCents || primaryFabric?.priceMinCents || 0;
+  const subtotalCents = totalUnits * unitPriceToDisplay;
 
   return (
     <>
@@ -40,12 +41,26 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
       <main className="flex-grow w-full py-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
         <div className="mb-8 max-w-4xl mx-auto">
           <h1 className="font-headline-lg text-headline-lg text-on-surface mb-2">
-            Proforma Review
+            {isPendingReview ? "Order Feasibility Review" : "Proforma Review"}
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant">
-            Please review your order details before authorizing production.
+            {isPendingReview
+              ? "Your order specifications are currently under manual review by our atelier production team."
+              : "Please review your finalized order details before authorizing production."}
           </p>
         </div>
+
+        {isPendingReview && (
+          <div className="max-w-4xl mx-auto mb-8 bg-[#E6F1FB] border border-[#B3D6F6] rounded-lg p-6 text-[#185FA5]">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="material-symbols-outlined text-2xl">hourglass_top</span>
+              <h2 className="text-lg font-semibold">Feasibility Review In Progress</h2>
+            </div>
+            <p className="text-sm leading-relaxed">
+              We have received your custom manufacturing order for <strong>{totalUnits} units</strong>. Our master tailors are inspecting material availability and target budget parameters ({order.customerTargetPriceCents ? `$${(order.customerTargetPriceCents / 100).toFixed(2)}/unit` : "Estimated range"}). You will receive a notification at <strong>{order.company.email}</strong> once your final proforma invoice is ready.
+            </p>
+          </div>
+        )}
 
         <article className="max-w-4xl mx-auto bg-surface-container-lowest border border-gold shadow-sm relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-[4px] bg-gold" />
@@ -53,7 +68,7 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
             <div className="flex flex-col md:flex-row justify-between border-b border-outline-variant pb-8 mb-8 gap-8">
               <div>
                 <h2 className="font-headline-md text-headline-md text-on-surface mb-1">
-                  Proforma Invoice
+                  {isPendingReview ? "Manufacturing Spec Summary" : "Proforma Invoice"}
                 </h2>
                 <p className="font-label-sm text-label-sm text-outline uppercase tracking-widest">
                   Ref: {refNo}
@@ -87,10 +102,12 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                   <div>
                     <dt className="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-1">
-                      Garment Type
+                      Target Budget
                     </dt>
                     <dd className="font-body-lg text-body-lg text-on-surface">
-                      Bespoke Polo T-Shirt
+                      {order.customerTargetPriceCents
+                        ? `${formatCents(order.customerTargetPriceCents)} / unit`
+                        : "Guidance Range Only"}
                     </dd>
                   </div>
                   {primaryFabric && (
@@ -141,7 +158,7 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                         Quantity
                       </th>
                       <th className="p-4 border-b border-outline-variant font-medium text-right">
-                        Total
+                        Est. Total
                       </th>
                     </tr>
                   </thead>
@@ -154,10 +171,14 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                         }`}
                       >
                         <td className="p-4">{line.size}</td>
-                        <td className="p-4 text-right">{formatCents(line.unitPriceCents)}</td>
+                        <td className="p-4 text-right">
+                          {isPendingReview ? "Pending Review" : formatCents(unitPriceToDisplay)}
+                        </td>
                         <td className="p-4 text-right">{line.quantity}</td>
                         <td className="p-4 text-right">
-                          {formatCents(line.quantity * line.unitPriceCents)}
+                          {isPendingReview
+                            ? "Pending Review"
+                            : formatCents(line.quantity * unitPriceToDisplay)}
                         </td>
                       </tr>
                     ))}
@@ -186,14 +207,6 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                 </div>
                 <div className="flex justify-between py-2 border-b border-outline-variant">
                   <span className="font-body-md text-body-md text-on-surface-variant">
-                    Subtotal
-                  </span>
-                  <span className="font-label-md text-label-md text-on-surface">
-                    {formatCents(subtotalCents)}
-                  </span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-outline-variant">
-                  <span className="font-body-md text-body-md text-on-surface-variant">
                     Setup &amp; Digitization
                   </span>
                   <span className="font-label-md text-label-md text-on-surface">
@@ -205,35 +218,13 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                     Final Total
                   </span>
                   <span className="font-headline-md text-headline-md text-on-surface">
-                    {formatCents(order.totalCents)}
+                    {isPendingReview ? "Pending Review" : formatCents(order.totalCents)}
                   </span>
                 </div>
               </div>
             </div>
           </div>
         </article>
-
-        <div className="max-w-4xl mx-auto mt-12 flex flex-col sm:flex-row justify-end items-center gap-6">
-          <button
-            type="button"
-            disabled
-            title="Coming soon"
-            className="w-full sm:w-auto px-8 py-4 border border-gold text-gold font-label-md text-label-md uppercase tracking-widest text-center opacity-40 cursor-not-allowed"
-          >
-            Request changes
-          </button>
-          <button
-            type="button"
-            disabled
-            title="Coming soon"
-            className="w-full sm:w-auto px-8 py-4 bg-gold text-on-gold font-label-md text-label-md uppercase tracking-widest text-center opacity-40 cursor-not-allowed"
-          >
-            Approve &amp; proceed to payment
-          </button>
-        </div>
-        <p className="max-w-4xl mx-auto text-center font-label-sm text-label-sm text-outline mt-4">
-          Approval and payment are not wired up yet — this is a preview of your submitted order.
-        </p>
       </main>
       <SiteFooter />
     </>

@@ -13,6 +13,10 @@ export async function POST(request: Request) {
     }
 
     const orderId = body.orderId.trim();
+    const inputFinalPriceCents =
+      typeof body.finalPriceCents === "number" && body.finalPriceCents > 0
+        ? Math.round(body.finalPriceCents)
+        : null;
 
     const order = await prisma.order.findUnique({
       where: { id: orderId },
@@ -29,12 +33,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
+    const finalPriceCents = inputFinalPriceCents ?? order.finalPriceCents;
+    if (!finalPriceCents || finalPriceCents <= 0) {
+      return NextResponse.json(
+        { error: "finalPriceCents is required before generating proforma" },
+        { status: 400 }
+      );
+    }
+
+    const totalUnits = order.lines.reduce((sum, line) => sum + line.quantity, 0);
+    const subtotalCents = totalUnits * finalPriceCents;
+    const totalCents = subtotalCents + order.setupFeeCents;
+
     const refNo =
       order.proforma?.refNo ||
       `PRO-${new Date().getFullYear()}-${order.id.slice(-6).toUpperCase()}`;
     const validUntil = new Date(Date.now() + 30 * 86400 * 1000);
 
-    // Generate PDF
+    // Generate PDF with finalized unit price
     const pdfUint8Array = await generateProformaPdf({
       refNo,
       orderId: order.id,
@@ -46,10 +62,10 @@ export async function POST(request: Request) {
         fabricName: line.fabric.name,
         size: line.size,
         quantity: line.quantity,
-        unitPriceCents: line.unitPriceCents,
+        unitPriceCents: finalPriceCents,
       })),
       setupFeeCents: order.setupFeeCents,
-      totalCents: order.totalCents,
+      totalCents,
     });
 
     const pdfBuffer = Buffer.from(pdfUint8Array);
@@ -71,11 +87,15 @@ export async function POST(request: Request) {
       pdfBuffer,
     });
 
-    // Update DB: Update order status to PROFORMA_SENT and upsert Proforma record
+    // Update DB: Update order status to PROFORMA_SENT, finalPriceCents, totalCents, and upsert Proforma record
     await prisma.$transaction([
       prisma.order.update({
         where: { id: order.id },
-        data: { status: "PROFORMA_SENT" },
+        data: {
+          status: "PROFORMA_SENT",
+          finalPriceCents,
+          totalCents,
+        },
       }),
       prisma.proforma.upsert({
         where: { orderId: order.id },
@@ -98,6 +118,8 @@ export async function POST(request: Request) {
       success: true,
       refNo,
       orderId: order.id,
+      finalPriceCents,
+      totalCents,
       pdfUrl,
       status: "PROFORMA_SENT",
     });

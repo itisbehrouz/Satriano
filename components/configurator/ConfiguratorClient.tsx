@@ -25,6 +25,7 @@ export function ConfiguratorClient({
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
   const [sizeQuantities, setSizeQuantities] = useState(DEFAULT_SIZE_QUANTITIES);
+  const [customerTargetPrice, setCustomerTargetPrice] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [placement, setPlacement] = useState<LogoPlacement>("LEFT_CHEST");
   const [companyName, setCompanyName] = useState("");
@@ -62,6 +63,12 @@ export function ConfiguratorClient({
         uploadedLogoUrl = uploadJson.url || uploadJson.storageUrl;
       }
 
+      const targetPriceVal = parseFloat(customerTargetPrice);
+      const targetPriceCents =
+        !isNaN(targetPriceVal) && targetPriceVal > 0
+          ? Math.round(targetPriceVal * 100)
+          : undefined;
+
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -70,6 +77,7 @@ export function ConfiguratorClient({
           companyName,
           companyEmail,
           sizeQuantities: toSizeQuantityArray(sizeQuantities),
+          customerTargetPriceCents: targetPriceCents,
           logoUrl: uploadedLogoUrl,
           logoPlacement: placement,
         }),
@@ -107,7 +115,7 @@ export function ConfiguratorClient({
             </p>
           </div>
           <div className="bg-[#E6F1FB] text-[#185FA5] border border-[#B3D6F6] text-xs font-semibold px-3 py-1.5 rounded">
-            Live Pricing Active
+            Feasibility Review Active
           </div>
         </div>
       </div>
@@ -119,21 +127,31 @@ export function ConfiguratorClient({
               <span className="material-symbols-outlined text-[#2E5AAC]">layers</span>
               1. Material Selection
             </h2>
-            <FabricPicker
-              fabrics={fabrics}
-              selectedFabricId={selectedFabricId}
-              onSelect={setSelectedFabricId}
+            {selectedFabric && (
+              <FabricPicker
+                fabrics={fabrics}
+                selectedFabricId={selectedFabricId}
+                onSelect={setSelectedFabricId}
+              />
+            )}
+          </section>
+
+          <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
+            <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#2E5AAC]">grid_on</span>
+              2. Sizing &amp; Unit Matrix
+            </h2>
+            <SizeQtyTable
+              quantities={sizeQuantities}
+              onChange={setSizeQuantities}
             />
           </section>
 
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-[#1A2233] mb-1 flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#2E5AAC]">branding_watermark</span>
-              2. Vector Branding &amp; Placement
+            <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#2E5AAC]">upload_file</span>
+              3. Vector Logo &amp; Placement
             </h2>
-            <p className="text-xs text-[#5B6B85] mb-4">
-              Upload your brand vector logo asset (.ai, .eps, .svg) for single-needle embroidery or printing.
-            </p>
             <LogoUploader
               file={logoFile}
               onFileChange={setLogoFile}
@@ -144,64 +162,67 @@ export function ConfiguratorClient({
 
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#2E5AAC]">straighten</span>
-              3. Size &amp; Quantity Matrix
+              <span className="material-symbols-outlined text-[#2E5AAC]">corporate_fare</span>
+              4. Company Information &amp; Target Budget
             </h2>
-            <SizeQtyTable quantities={sizeQuantities} onChange={setSizeQuantities} />
-          </section>
-
-          <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#2E5AAC]">domain</span>
-              4. Corporate Account Details
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
-              <div className="space-y-1">
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85]"
-                  htmlFor="companyName"
-                >
-                  Company Name *
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#1A2233] mb-1">
+                  Company Name <span className="text-[#A32D2D]">*</span>
                 </label>
                 <input
-                  id="companyName"
                   type="text"
+                  required
+                  placeholder="Acme Manufacturing Ltd"
                   value={companyName}
-                  onChange={(event) => setCompanyName(event.target.value)}
-                  placeholder="e.g. Acme Apparel Corp"
-                  className="w-full px-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  className="w-full border border-[#D1D5DB] rounded px-3 py-2 text-sm focus:border-[#2E5AAC] focus:outline-none"
                 />
               </div>
-              <div className="space-y-1">
-                <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85]"
-                  htmlFor="companyEmail"
-                >
-                  Proforma Email *
+              <div>
+                <label className="block text-xs font-semibold text-[#1A2233] mb-1">
+                  Corporate Email <span className="text-[#A32D2D]">*</span>
                 </label>
                 <input
-                  id="companyEmail"
                   type="email"
+                  required
+                  placeholder="procurement@acme.com"
                   value={companyEmail}
-                  onChange={(event) => setCompanyEmail(event.target.value)}
-                  placeholder="buyer@acmeapparel.com"
-                  className="w-full px-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                  onChange={(e) => setCompanyEmail(e.target.value)}
+                  className="w-full border border-[#D1D5DB] rounded px-3 py-2 text-sm focus:border-[#2E5AAC] focus:outline-none"
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[#1A2233] mb-1">
+                Your Target Price / Budget Per Unit ($ USD) <span className="text-[#5B6B85] font-normal">(Optional)</span>
+              </label>
+              <input
+                type="number"
+                step="0.50"
+                min="1"
+                placeholder="e.g. 18.50"
+                value={customerTargetPrice}
+                onChange={(e) => setCustomerTargetPrice(e.target.value)}
+                className="w-full sm:w-1/2 border border-[#D1D5DB] rounded px-3 py-2 text-sm focus:border-[#2E5AAC] focus:outline-none"
+              />
+              <p className="text-xs text-[#5B6B85] mt-1">
+                Provide your target unit budget. Our production team evaluates feasibility during review.
+              </p>
             </div>
           </section>
         </div>
 
-        <div className="lg:col-span-4 mt-2 lg:mt-0">
-          {selectedFabric && (
-            <PriceSidebar
-              fabric={selectedFabric}
-              sizeQuantities={toSizeQuantityArray(sizeQuantities)}
-              onSubmit={handleSubmit}
-              submitting={submitting}
-              errorMessage={submitError}
-            />
-          )}
+        <div className="lg:col-span-4">
+          <PriceSidebar
+            fabric={selectedFabric}
+            sizeQuantities={toSizeQuantityArray(sizeQuantities)}
+            customerTargetPrice={customerTargetPrice}
+            onSubmit={handleSubmit}
+            submitting={submitting}
+            errorMessage={submitError}
+          />
         </div>
       </div>
     </main>

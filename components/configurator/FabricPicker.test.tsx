@@ -9,7 +9,8 @@ const fabrics: FabricOption[] = [
     name: "Pique Cotton",
     description: "Classic, breathable texture.",
     imageUrl: null,
-    unitPriceCents: 1850,
+    priceMinCents: 1500,
+    priceMaxCents: 2000,
     setupFeeCents: 15000,
   },
   {
@@ -17,21 +18,22 @@ const fabrics: FabricOption[] = [
     name: "Organic Cotton",
     description: "Sustainable, ultra-soft feel.",
     imageUrl: null,
-    unitPriceCents: 2200,
+    priceMinCents: 1900,
+    priceMaxCents: 2400,
     setupFeeCents: 15000,
   },
 ];
 
 describe("FabricPicker", () => {
-  it("renders each fabric's name, description, and formatted unit price", () => {
+  it("renders each fabric's name, description, and formatted estimated unit price range", () => {
     render(
       <FabricPicker fabrics={fabrics} selectedFabricId="fabric-pique" onSelect={() => {}} />,
     );
 
     expect(screen.getByText("Pique Cotton")).toBeInTheDocument();
     expect(screen.getByText("Classic, breathable texture.")).toBeInTheDocument();
-    expect(screen.getByText("Base: $18.50 / unit")).toBeInTheDocument();
-    expect(screen.getByText("Base: $22.00 / unit")).toBeInTheDocument();
+    expect(screen.getByText("Est. Range: $15.00 – $20.00 / unit")).toBeInTheDocument();
+    expect(screen.getByText("Est. Range: $19.00 – $24.00 / unit")).toBeInTheDocument();
   });
 
   it("marks the selected fabric's radio input as checked", () => {

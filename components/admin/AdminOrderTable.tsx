@@ -9,6 +9,8 @@ export interface AdminOrder {
   status: OrderStatus;
   totalCents: number;
   setupFeeCents: number;
+  customerTargetPriceCents?: number | null;
+  finalPriceCents?: number | null;
   createdAt: string;
   company: {
     name: string;
@@ -33,15 +35,20 @@ interface AdminOrderTableProps {
 }
 
 const ALL_STATUSES: OrderStatus[] = [
-  "DRAFT",
+  "PENDING_REVIEW",
   "PROFORMA_SENT",
   "APPROVED",
   "PAID",
   "IN_PRODUCTION",
+  "SHIPPED",
+  "CANCELLED",
 ];
 
 export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps) {
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [activeModalOrderId, setActiveModalOrderId] = useState<string | null>(null);
+  const [inputFinalPricePerUnit, setInputFinalPricePerUnit] = useState<string>("");
+  const [actionError, setActionError] = useState<string | null>(null);
 
   async function handleStatusUpdate(orderId: string, newStatus: OrderStatus) {
     setUpdatingId(orderId);
@@ -56,6 +63,38 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
       }
     } catch (error) {
       console.error("Failed to update status", error);
+    } finally {
+      setUpdatingId(null);
+    }
+  }
+
+  async function handleApproveAndSendProforma(order: AdminOrder) {
+    const val = parseFloat(inputFinalPricePerUnit);
+    if (isNaN(val) || val <= 0) {
+      setActionError("Please enter a valid final unit price ($)");
+      return;
+    }
+
+    const finalPriceCents = Math.round(val * 100);
+    setUpdatingId(order.id);
+    setActionError(null);
+
+    try {
+      const res = await fetch("/api/proforma", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId: order.id, finalPriceCents }),
+      });
+      if (res.ok) {
+        setActiveModalOrderId(null);
+        setInputFinalPricePerUnit("");
+        if (onStatusChange) onStatusChange();
+      } else {
+        const json = await res.json();
+        setActionError(json.error || "Failed to generate proforma");
+      }
+    } catch {
+      setActionError("Network error while sending proforma.");
     } finally {
       setUpdatingId(null);
     }
@@ -76,17 +115,23 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
           <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
             <th className="p-4">Order Ref / Date</th>
             <th className="p-4">Corporate Client</th>
-            <th className="p-4">Units &amp; Total</th>
-            <th className="p-4">Status</th>
+            <th className="p-4">Target Budget &amp; Spec</th>
+            <th className="p-4">Status &amp; Final Price</th>
             <th className="p-4 text-right">Actions</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
           {orders.map((order) => {
             const totalUnits = order.lines.reduce((acc, l) => acc + l.quantity, 0);
-            const formattedTotal = `$${(order.totalCents / 100).toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-            })}`;
+            const targetBudgetStr = order.customerTargetPriceCents
+              ? `$${(order.customerTargetPriceCents / 100).toFixed(2)}/unit`
+              : "Not Specified";
+            const finalPriceStr = order.finalPriceCents
+              ? `$${(order.finalPriceCents / 100).toFixed(2)}/unit`
+              : "Pending Review";
+            const formattedTotal = order.totalCents > 0
+              ? `$${(order.totalCents / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}`
+              : "Pending Review";
             const dateStr = new Date(order.createdAt).toLocaleDateString("en-US");
 
             return (
@@ -107,39 +152,99 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                   <div className="text-[#5B6B85] text-xs mt-0.5">{order.company.email}</div>
                 </td>
                 <td className="p-4">
-                  <div className="font-bold text-[#1A2233] tabular-nums">{formattedTotal}</div>
+                  <div className="text-xs font-semibold text-[#2E5AAC]">
+                    Target: {targetBudgetStr}
+                  </div>
                   <div className="text-[#5B6B85] text-xs tabular-nums mt-0.5">
-                    {totalUnits} pcs ({order.lines[0]?.fabric?.name || "Polo"})
+                    {totalUnits} pcs ({order.lines[0]?.fabric?.name || "Standard Fabric"})
                   </div>
                 </td>
                 <td className="p-4">
-                  <OrderStatusBadge status={order.status} />
+                  <div className="mb-1">
+                    <OrderStatusBadge status={order.status} />
+                  </div>
+                  <div className="text-xs font-semibold text-[#1A2233]">
+                    Total: {formattedTotal}
+                  </div>
+                  <div className="text-[11px] text-[#5B6B85]">
+                    Unit: {finalPriceStr}
+                  </div>
                 </td>
                 <td className="p-4 text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    <select
-                      value={order.status}
-                      disabled={updatingId === order.id}
-                      onChange={(e) =>
-                        handleStatusUpdate(order.id, e.target.value as OrderStatus)
-                      }
-                      className="bg-[#F5F7FA] border border-[#D1D5DB] text-xs px-2.5 py-1.5 rounded focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
-                    >
-                      {ALL_STATUSES.map((st) => (
-                        <option key={st} value={st}>
-                          Set: {st}
-                        </option>
-                      ))}
-                    </select>
-                    {order.proforma?.pdfUrl && (
-                      <a
-                        href={order.proforma.pdfUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[#2E5AAC] border border-[#2E5AAC]/40 hover:bg-[#E6F1FB] text-xs font-semibold px-2.5 py-1 rounded transition-colors"
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={order.status}
+                        disabled={updatingId === order.id}
+                        onChange={(e) =>
+                          handleStatusUpdate(order.id, e.target.value as OrderStatus)
+                        }
+                        className="bg-[#F5F7FA] border border-[#D1D5DB] text-xs px-2.5 py-1.5 rounded focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       >
-                        PDF
-                      </a>
+                        {ALL_STATUSES.map((st) => (
+                          <option key={st} value={st}>
+                            Set: {st}
+                          </option>
+                        ))}
+                      </select>
+
+                      {order.proforma?.pdfUrl && (
+                        <a
+                          href={order.proforma.pdfUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#2E5AAC] border border-[#2E5AAC]/40 hover:bg-[#E6F1FB] text-xs font-semibold px-2.5 py-1.5 rounded transition-colors whitespace-nowrap"
+                        >
+                          PDF
+                        </a>
+                      )}
+                    </div>
+
+                    {order.status === "PENDING_REVIEW" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveModalOrderId(order.id);
+                          setInputFinalPricePerUnit(
+                            order.customerTargetPriceCents
+                              ? (order.customerTargetPriceCents / 100).toFixed(2)
+                              : "18.50"
+                          );
+                          setActionError(null);
+                        }}
+                        className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors whitespace-nowrap"
+                      >
+                        Set Price &amp; Send Proforma
+                      </button>
+                    )}
+
+                    {activeModalOrderId === order.id && (
+                      <div className="bg-[#E6F1FB] border border-[#B3D6F6] p-3 rounded text-left mt-2 w-full max-w-xs">
+                        <label className="block text-[11px] font-semibold text-[#185FA5] mb-1">
+                          Set Final Price / Unit ($ USD):
+                        </label>
+                        <div className="flex gap-2">
+                          <input
+                            type="number"
+                            step="0.25"
+                            value={inputFinalPricePerUnit}
+                            onChange={(e) => setInputFinalPricePerUnit(e.target.value)}
+                            className="w-full text-xs px-2 py-1 border border-[#D1D5DB] rounded"
+                            placeholder="18.50"
+                          />
+                          <button
+                            type="button"
+                            disabled={updatingId === order.id}
+                            onClick={() => handleApproveAndSendProforma(order)}
+                            className="bg-[#0F6E56] hover:bg-[#0B5240] text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap"
+                          >
+                            Approve
+                          </button>
+                        </div>
+                        {actionError && (
+                          <div className="text-[11px] text-[#A32D2D] mt-1">{actionError}</div>
+                        )}
+                      </div>
                     )}
                   </div>
                 </td>

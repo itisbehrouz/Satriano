@@ -23,13 +23,14 @@ export default async function SubcategoryConfiguratorPage({
 
   const fabrics = await prisma.fabric.findMany({
     where: { active: true },
-    orderBy: { unitPriceCents: "asc" },
+    orderBy: { priceMinCents: "asc" },
     select: {
       id: true,
       name: true,
       description: true,
       imageUrl: true,
-      unitPriceCents: true,
+      priceMinCents: true,
+      priceMaxCents: true,
       setupFeeCents: true,
     },
   });

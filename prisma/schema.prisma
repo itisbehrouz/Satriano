@@ -11,10 +11,13 @@ datasource db {
 
 enum OrderStatus {
   DRAFT
+  PENDING_REVIEW
   PROFORMA_SENT
   APPROVED
   PAID
   IN_PRODUCTION
+  SHIPPED
+  CANCELLED
 }
 
 enum LogoPlacement {
@@ -67,7 +70,8 @@ model Fabric {
   description    String?
   imageUrl       String?
   colorway       String?
-  unitPriceCents Int
+  priceMinCents  Int
+  priceMaxCents  Int
   setupFeeCents  Int      @default(0)
   active         Boolean  @default(true)
   createdAt      DateTime @default(now())
@@ -76,13 +80,15 @@ model Fabric {
 }
 
 model Order {
-  id            String      @id @default(cuid())
-  companyId     String
-  status        OrderStatus @default(DRAFT)
-  setupFeeCents Int         @default(0)
-  totalCents    Int         @default(0)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id                       String      @id @default(cuid())
+  companyId                String
+  status                   OrderStatus @default(PENDING_REVIEW)
+  setupFeeCents            Int         @default(0)
+  totalCents               Int         @default(0)
+  customerTargetPriceCents Int?
+  finalPriceCents          Int?
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
 
   company    Company     @relation(fields: [companyId], references: [id])
   lines      OrderLine[]

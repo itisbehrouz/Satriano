@@ -4,25 +4,25 @@ import userEvent from "@testing-library/user-event";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
 
 describe("PriceSidebar", () => {
-  it("reproduces the configurator mockup: Pique Cotton, 300 units -> $5,700.00", () => {
+  it("renders estimated price range and totals: Pique Cotton ($15-$20), 300 units", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", unitPriceCents: 1850, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
         sizeQuantities={[{ size: "M", quantity: 300 }]}
       />,
     );
 
-    expect(screen.getByText(/fabric base \(pique cotton\)/i)).toBeInTheDocument();
-    expect(screen.getByText("$18.50")).toBeInTheDocument();
+    expect(screen.getByText(/fabric range \(pique cotton\)/i)).toBeInTheDocument();
+    expect(screen.getByText("$15.00 – $20.00 / unit")).toBeInTheDocument();
     expect(screen.getByText("$150.00")).toBeInTheDocument();
     expect(screen.getByText("300")).toBeInTheDocument();
-    expect(screen.getByText("$5,700.00")).toBeInTheDocument();
+    expect(screen.getByText("$4,650.00 – $6,150.00")).toBeInTheDocument();
   });
 
-  it("reproduces the proforma mockup total from a multi-size order", () => {
+  it("renders estimated total range from a multi-size order", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Custom", unitPriceCents: 4500, setupFeeCents: 25000 }}
+        fabric={{ name: "Custom", priceMinCents: 4000, priceMaxCents: 5000, setupFeeCents: 25000 }}
         sizeQuantities={[
           { size: "S", quantity: 150 },
           { size: "M", quantity: 300 },
@@ -33,18 +33,18 @@ describe("PriceSidebar", () => {
     );
 
     expect(screen.getByText("800")).toBeInTheDocument();
-    expect(screen.getByText("$36,250.00")).toBeInTheDocument();
+    expect(screen.getByText("$32,250.00 – $40,250.00")).toBeInTheDocument();
   });
 
   it("disables the submit button when total units is 0", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", unitPriceCents: 1850, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
         sizeQuantities={[{ size: "M", quantity: 0 }]}
       />,
     );
 
-    expect(screen.getByRole("button", { name: /submit configuration/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /submit order for feasibility review/i })).toBeDisabled();
   });
 
   it("calls onSubmit when the submit button is clicked with a non-empty order", async () => {
@@ -52,13 +52,13 @@ describe("PriceSidebar", () => {
     const user = userEvent.setup();
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", unitPriceCents: 1850, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
         sizeQuantities={[{ size: "M", quantity: 300 }]}
         onSubmit={onSubmit}
       />,
     );
 
-    await user.click(screen.getByRole("button", { name: /submit configuration/i }));
+    await user.click(screen.getByRole("button", { name: /submit order for feasibility review/i }));
 
     expect(onSubmit).toHaveBeenCalledOnce();
   });
@@ -66,7 +66,7 @@ describe("PriceSidebar", () => {
   it("disables the button and shows a submitting label while submitting", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", unitPriceCents: 1850, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
         sizeQuantities={[{ size: "M", quantity: 300 }]}
         submitting
       />,
@@ -78,7 +78,7 @@ describe("PriceSidebar", () => {
   it("renders an error message when provided", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", unitPriceCents: 1850, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
         sizeQuantities={[{ size: "M", quantity: 300 }]}
         errorMessage="Company name and email are required."
       />,

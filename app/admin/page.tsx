@@ -8,6 +8,7 @@ import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable"
 
 const TABS = [
   { id: "ALL", label: "All Orders" },
+  { id: "PENDING_REVIEW", label: "Pending Review" },
   { id: "PROFORMA_SENT", label: "Proforma Sent" },
   { id: "PAYMENT_CONFIRMED", label: "Payment Confirmed" },
   { id: "IN_PRODUCTION", label: "In Production" },

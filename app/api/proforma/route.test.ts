@@ -31,11 +31,11 @@ describe("POST /api/proforma", () => {
   });
 
   it("returns 404 for non-existing orderId", async () => {
-    const res = await postProforma({ orderId: "non-existent-order-id" });
+    const res = await postProforma({ orderId: "non-existent-order-id", finalPriceCents: 1850 });
     expect(res.status).toBe(404);
   });
 
-  it("generates proforma, sends email, and updates order status to PROFORMA_SENT", async () => {
+  it("generates proforma, sends email, sets finalPriceCents, and updates order status to PROFORMA_SENT", async () => {
     const fabric = await prisma.fabric.findUniqueOrThrow({ where: { name: "Pique Cotton" } });
     const company = await prisma.company.create({
       data: {
@@ -48,21 +48,24 @@ describe("POST /api/proforma", () => {
     const order = await prisma.order.create({
       data: {
         companyId: company.id,
-        status: "DRAFT",
+        status: "PENDING_REVIEW",
         setupFeeCents: 15000,
-        totalCents: 570000,
+        totalCents: 0,
+        customerTargetPriceCents: 1800,
         lines: {
-          create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1850 }],
+          create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1500 }],
         },
       },
     });
 
-    const response = await postProforma({ orderId: order.id });
+    const response = await postProforma({ orderId: order.id, finalPriceCents: 1850 });
     expect(response.status).toBe(200);
 
     const json = await response.json();
     expect(json.success).toBe(true);
     expect(json.status).toBe("PROFORMA_SENT");
+    expect(json.finalPriceCents).toBe(1850);
+    expect(json.totalCents).toBe(570000);
     expect(json.pdfUrl).toBeDefined();
 
     const updatedOrder = await prisma.order.findUniqueOrThrow({
@@ -71,6 +74,8 @@ describe("POST /api/proforma", () => {
     });
 
     expect(updatedOrder.status).toBe("PROFORMA_SENT");
+    expect(updatedOrder.finalPriceCents).toBe(1850);
+    expect(updatedOrder.totalCents).toBe(570000);
     expect(updatedOrder.proforma).not.toBeNull();
     expect(updatedOrder.proforma?.refNo).toBeDefined();
   });

@@ -2,25 +2,23 @@ import { describe, expect, it } from "vitest";
 import { computeOrderPricing } from "@/lib/pricing";
 
 describe("computeOrderPricing", () => {
-  it("matches the configurator mockup: Pique Cotton, 300 units, single size", () => {
-    // stitch_satriano_atelier_b2b_platform/configurator_polo_t_shirt: $18.50/unit,
-    // $150.00 setup, 300 total units -> $5,700.00 estimated total.
+  it("computes estimated unit price ranges and totals: Pique Cotton ($15-$20), 300 units", () => {
     const result = computeOrderPricing({
-      fabric: { unitPriceCents: 1850, setupFeeCents: 15000 },
+      fabric: { priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
       sizeQuantities: [{ size: "M", quantity: 300 }],
     });
 
     expect(result.totalUnits).toBe(300);
-    expect(result.subtotalCents).toBe(555000);
+    expect(result.estimatedSubtotalMinCents).toBe(450000);
+    expect(result.estimatedSubtotalMaxCents).toBe(600000);
     expect(result.setupFeeCents).toBe(15000);
-    expect(result.totalCents).toBe(570000);
+    expect(result.estimatedTotalMinCents).toBe(465000);
+    expect(result.estimatedTotalMaxCents).toBe(615000);
   });
 
-  it("matches the proforma mockup: multi-size ledger with setup & digitization", () => {
-    // stitch_satriano_atelier_b2b_platform/proforma_review: €45.00/unit,
-    // €250.00 setup, S150/M300/L250/XL100 -> €36,000 subtotal, €36,250 total.
+  it("calculates multi-size ledger range with setup fee", () => {
     const result = computeOrderPricing({
-      fabric: { unitPriceCents: 4500, setupFeeCents: 25000 },
+      fabric: { priceMinCents: 4000, priceMaxCents: 5000, setupFeeCents: 25000 },
       sizeQuantities: [
         { size: "S", quantity: 150 },
         { size: "M", quantity: 300 },
@@ -30,22 +28,15 @@ describe("computeOrderPricing", () => {
     });
 
     expect(result.totalUnits).toBe(800);
-    expect(result.subtotalCents).toBe(3600000);
-    expect(result.totalCents).toBe(3625000);
-    expect(result.lineItems).toEqual([
-      { size: "S", quantity: 150, unitPriceCents: 4500, lineTotalCents: 675000 },
-      { size: "M", quantity: 300, unitPriceCents: 4500, lineTotalCents: 1350000 },
-      { size: "L", quantity: 250, unitPriceCents: 4500, lineTotalCents: 1125000 },
-      { size: "XL", quantity: 100, unitPriceCents: 4500, lineTotalCents: 450000 },
-    ]);
+    expect(result.estimatedSubtotalMinCents).toBe(3200000);
+    expect(result.estimatedSubtotalMaxCents).toBe(4000000);
+    expect(result.estimatedTotalMinCents).toBe(3225000);
+    expect(result.estimatedTotalMaxCents).toBe(4025000);
   });
 
   it("omits zero-quantity sizes from the line-item ledger", () => {
-    // Configurator table always sends all six sizes (XS..XXL); untouched
-    // sizes stay at 0 and shouldn't produce a ledger row (matches proforma
-    // mockup, which only lists S/M/L/XL — no XS/XXL rows).
     const result = computeOrderPricing({
-      fabric: { unitPriceCents: 1850, setupFeeCents: 15000 },
+      fabric: { priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
       sizeQuantities: [
         { size: "XS", quantity: 0 },
         { size: "S", quantity: 50 },
@@ -62,7 +53,7 @@ describe("computeOrderPricing", () => {
 
   it("returns an all-zero result for an empty order (no setup fee charged)", () => {
     const result = computeOrderPricing({
-      fabric: { unitPriceCents: 1850, setupFeeCents: 15000 },
+      fabric: { priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
       sizeQuantities: [
         { size: "S", quantity: 0 },
         { size: "M", quantity: 0 },
@@ -71,15 +62,17 @@ describe("computeOrderPricing", () => {
 
     expect(result.lineItems).toEqual([]);
     expect(result.totalUnits).toBe(0);
-    expect(result.subtotalCents).toBe(0);
+    expect(result.estimatedSubtotalMinCents).toBe(0);
+    expect(result.estimatedSubtotalMaxCents).toBe(0);
     expect(result.setupFeeCents).toBe(0);
-    expect(result.totalCents).toBe(0);
+    expect(result.estimatedTotalMinCents).toBe(0);
+    expect(result.estimatedTotalMaxCents).toBe(0);
   });
 
   it("throws on a negative quantity", () => {
     expect(() =>
       computeOrderPricing({
-        fabric: { unitPriceCents: 1850, setupFeeCents: 15000 },
+        fabric: { priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
         sizeQuantities: [{ size: "M", quantity: -1 }],
       }),
     ).toThrow(RangeError);
@@ -88,7 +81,7 @@ describe("computeOrderPricing", () => {
   it("throws on a non-integer quantity", () => {
     expect(() =>
       computeOrderPricing({
-        fabric: { unitPriceCents: 1850, setupFeeCents: 15000 },
+        fabric: { priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
         sizeQuantities: [{ size: "M", quantity: 1.5 }],
       }),
     ).toThrow(RangeError);
