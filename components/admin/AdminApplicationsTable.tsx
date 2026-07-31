@@ -14,6 +14,7 @@ export interface B2bApplicationItem {
   phone?: string | null;
   needs?: any;
   status: "SUBMITTED" | "UNDER_REVIEW" | "APPROVED" | "REJECTED";
+  emailVerifiedAt?: string | Date | null;
   createdAt: string | Date;
   reviewedAt?: string | Date | null;
   reviewedBy?: string | null;
@@ -113,7 +114,7 @@ export function AdminApplicationsTable({
               <th className="p-4">App Ref / Date</th>
               <th className="p-4">Company &amp; Industry</th>
               <th className="p-4">Contact Officer</th>
-              <th className="p-4">Est. Annual Volume</th>
+              <th className="p-4">Email Verification</th>
               <th className="p-4">Status</th>
               <th className="p-4 text-right">Actions</th>
             </tr>
@@ -122,6 +123,7 @@ export function AdminApplicationsTable({
             {applications.map((app) => {
               const isExpanded = expandedId === app.id;
               const isUpdating = updatingId === app.id;
+              const isEmailVerified = app.emailVerifiedAt !== null && app.emailVerifiedAt !== undefined;
               const dateStr = new Date(app.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
@@ -165,8 +167,18 @@ export function AdminApplicationsTable({
                         <div className="text-[11px] text-[#5B6B85]">{app.jobTitle}</div>
                       )}
                     </td>
-                    <td className="p-4 text-xs font-semibold text-[#1A2233]">
-                      {app.annualVolume ? app.annualVolume : "Not Specified"}
+                    <td className="p-4">
+                      {isEmailVerified ? (
+                        <span className="inline-flex items-center gap-1 bg-[#E1F5EE] text-[#0F6E56] text-xs font-semibold px-2 py-0.5 rounded border border-[#A6E5CE]">
+                          <span className="material-symbols-outlined text-sm">mark_email_read</span>
+                          <span>Verified</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 bg-[#FAEEDA] text-[#854F0B] text-xs font-semibold px-2 py-0.5 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
+                          <span className="material-symbols-outlined text-sm">pending_actions</span>
+                          <span>Unverified</span>
+                        </span>
+                      )}
                     </td>
                     <td className="p-4">
                       <ApplicationStatusBadge status={app.status} />
@@ -186,26 +198,28 @@ export function AdminApplicationsTable({
                           <span>{isExpanded ? "Hide Details" : "View Full Specs"}</span>
                         </button>
 
-                        {/* Approve Button (44px min height, WCAG AA compliant contrast) */}
+                        {/* Approve Button */}
                         {app.status !== "APPROVED" && (
                           <button
                             type="button"
-                            disabled={isUpdating}
+                            disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "APPROVED")}
-                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-50 rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                            title={!isEmailVerified ? "Cannot approve: email not verified by applicant" : "Approve application"}
+                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
                           >
                             <span className="material-symbols-outlined text-base">check_circle</span>
                             <span>Approve</span>
                           </button>
                         )}
 
-                        {/* Reject Button (44px min height, WCAG AA compliant contrast) */}
+                        {/* Reject Button */}
                         {app.status !== "REJECTED" && (
                           <button
                             type="button"
-                            disabled={isUpdating}
+                            disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "REJECTED")}
-                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-50 rounded transition-colors inline-flex items-center gap-1.5"
+                            title={!isEmailVerified ? "Cannot reject: email not verified by applicant" : "Reject application"}
+                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
                           >
                             <span className="material-symbols-outlined text-base">cancel</span>
                             <span>Reject</span>

@@ -19,6 +19,19 @@ export async function PATCH(
     const body = await req.json();
     const { status, reviewedBy } = body;
 
+    const existingApp = await prisma.b2bApplication.findUnique({ where: { id } });
+    if (!existingApp) {
+      return NextResponse.json({ error: "Application not found." }, { status: 404 });
+    }
+
+    // Server-side enforcement: Admin CANNOT approve or reject an unverified application!
+    if ((status === "APPROVED" || status === "REJECTED") && existingApp.emailVerifiedAt === null) {
+      return NextResponse.json(
+        { error: "Cannot approve or reject an application before the applicant's email address has been verified." },
+        { status: 400 }
+      );
+    }
+
     const application = await prisma.b2bApplication.update({
       where: { id },
       data: {

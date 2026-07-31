@@ -246,20 +246,32 @@ model Payment {
 }
 
 model B2bApplication {
-  id           String            @id @default(cuid())
-  companyName  String
-  website      String?
-  industry     String?
-  annualVolume String?
-  fullName     String
-  jobTitle     String?
-  corpEmail    String
-  phone        String?
-  needs        Json?
-  status       ApplicationStatus @default(SUBMITTED)
-  createdAt    DateTime          @default(now())
-  reviewedAt   DateTime?
-  reviewedBy   String?
+  id                      String                   @id @default(cuid())
+  companyName             String
+  website                 String?
+  industry                String?
+  annualVolume            String?
+  fullName                String
+  jobTitle                String?
+  corpEmail               String
+  phone                   String?
+  needs                   Json?
+  status                  ApplicationStatus        @default(SUBMITTED)
+  emailVerifiedAt         DateTime?
+  createdAt               DateTime                 @default(now())
+  reviewedAt              DateTime?
+  reviewedBy              String?
+  emailVerificationTokens EmailVerificationToken[]
+}
+
+model EmailVerificationToken {
+  id            String         @id @default(uuid())
+  applicationId String
+  application   B2bApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  token         String         @unique
+  expiresAt     DateTime
+  usedAt        DateTime?
+  createdAt     DateTime       @default(now())
 }
 
 model MagicLinkToken {

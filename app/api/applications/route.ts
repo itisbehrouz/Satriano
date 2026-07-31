@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { verifyAdminRequest } from "@/lib/adminAuth";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -32,11 +34,34 @@ export async function POST(req: Request) {
         annualVolume: annualVolume || null,
         fullName,
         jobTitle: jobTitle || null,
-        corpEmail,
+        corpEmail: corpEmail.toLowerCase().trim(),
         phone: phone || null,
         needs: needs || {},
         status: "SUBMITTED",
+        emailVerifiedAt: null,
       },
+    });
+
+    // Create EmailVerificationToken (24h expiry)
+    const token = crypto.randomBytes(32).toString("hex");
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+    await prisma.emailVerificationToken.create({
+      data: {
+        applicationId: application.id,
+        token,
+        expiresAt,
+      },
+    });
+
+    // Send verification email
+    const host = req.headers.get("host") || "satriano.vercel.app";
+    const protocol = host.includes("localhost") ? "http" : "https";
+    const verificationUrl = `${protocol}://${host}/portal/verify-email?token=${token}`;
+
+    await sendVerificationEmail({
+      to: application.corpEmail,
+      verificationUrl,
     });
 
     return NextResponse.json({ success: true, application }, { status: 201 });
