@@ -4,6 +4,9 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { prisma } from "@/lib/prisma";
 import { formatCents } from "@/lib/formatCurrency";
 
+// Render proforma review page on demand for every request
+export const dynamic = "force-dynamic";
+
 interface ProformaPageProps {
   params: Promise<{ orderId: string }>;
 }
