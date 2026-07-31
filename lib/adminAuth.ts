@@ -1,5 +1,4 @@
 import { CompactSign, jwtVerify } from "jose";
-import crypto from "crypto";
 
 export function getAdminAccessKey(): string {
   const key = process.env.ADMIN_ACCESS_KEY;
@@ -18,24 +17,30 @@ export function getAdminJwtSecret(): Uint8Array {
       "CRITICAL SECURITY FAILURE: ADMIN_JWT_SECRET environment variable is not configured."
     );
   }
-  return Uint8Array.from(Buffer.from(secret.trim(), "utf-8"));
+  return Uint8Array.from(new TextEncoder().encode(secret.trim()));
 }
 
 /**
- * Timing-safe string comparison to prevent side-channel timing attacks
+ * Edge-compatible constant-time string comparison to prevent side-channel timing attacks
+ * without importing Node.js 'crypto' module.
  */
 export function verifyAdminKey(inputKey: string): boolean {
   if (!inputKey || typeof inputKey !== "string") return false;
 
   const expectedKey = getAdminAccessKey();
-  const inputBuffer = Buffer.from(inputKey.trim());
-  const expectedBuffer = Buffer.from(expectedKey.trim());
+  const inputBuf = Uint8Array.from(new TextEncoder().encode(inputKey.trim()));
+  const expectedBuf = Uint8Array.from(new TextEncoder().encode(expectedKey.trim()));
 
-  if (inputBuffer.length !== expectedBuffer.length) {
+  if (inputBuf.length !== expectedBuf.length) {
     return false;
   }
 
-  return crypto.timingSafeEqual(inputBuffer, expectedBuffer);
+  let result = 0;
+  for (let i = 0; i < inputBuf.length; i++) {
+    result |= inputBuf[i] ^ expectedBuf[i];
+  }
+
+  return result === 0;
 }
 
 /**
@@ -44,14 +49,13 @@ export function verifyAdminKey(inputKey: string): boolean {
 export async function createAdminToken(): Promise<string> {
   const secret = getAdminJwtSecret();
   const payloadBytes = Uint8Array.from(
-    Buffer.from(
+    new TextEncoder().encode(
       JSON.stringify({
         role: "admin",
         atelier: "satriano",
         iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + 86400,
-      }),
-      "utf-8"
+      })
     )
   );
 
