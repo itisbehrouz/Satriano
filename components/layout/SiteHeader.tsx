@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,10 +13,11 @@ const MENU_ITEMS = [
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-[#0B1E3D] text-[#E8ECF3] border-b border-[#132A52] sticky top-0 z-50 w-full shadow-sm">
-      <div className="flex justify-between items-center w-full px-4 md:px-8 py-3.5 max-w-container-max mx-auto">
+      <div className="flex justify-between items-center w-full px-3 md:px-8 py-3 max-w-container-max mx-auto">
         {/* Official Brand Logo Image */}
         <Link
           href="/"
@@ -24,11 +26,11 @@ export function SiteHeader() {
           <img
             src="/Satrinao.png"
             alt="Satriano Atelier"
-            className="h-[45px] md:h-[50px] w-auto object-contain"
+            className="h-9 md:h-[50px] w-auto object-contain"
           />
         </Link>
 
-        {/* Navigation Items */}
+        {/* Desktop Navigation Items */}
         <nav className="hidden md:flex gap-8 items-center text-xs font-semibold tracking-wider uppercase">
           {MENU_ITEMS.map((item) => {
             const isActive = pathname === item.href;
@@ -49,17 +51,53 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Primary Action Button: Client Portal with Icon */}
-        <div className="flex items-center gap-4">
+        {/* Primary Action & Mobile Menu Controls */}
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/portal"
-            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs uppercase font-semibold tracking-wider px-5 py-2.5 rounded transition-colors inline-flex items-center gap-2"
+            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
           >
             <span className="material-symbols-outlined text-base">account_circle</span>
-            Client Portal
+            <span>Client Portal</span>
           </Link>
+
+          {/* Accessible Mobile Nav Toggle with Visible Text Label & 44px Touch Target */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            className="md:hidden inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded transition-colors"
+          >
+            <span className="material-symbols-outlined text-lg">
+              {mobileMenuOpen ? "close" : "menu"}
+            </span>
+            <span>{mobileMenuOpen ? "Close" : "Menu"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Collapsible Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden bg-[#081733] border-t border-[#132A52] px-4 py-3 space-y-2">
+          {MENU_ITEMS.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block text-xs font-semibold tracking-wider uppercase py-2.5 px-3 rounded transition-colors ${
+                  isActive
+                    ? "bg-[#132A52] text-[#DBB671]"
+                    : "text-[#8DA0C4] hover:text-[#E8ECF3] hover:bg-[#132A52]/50"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      )}
     </header>
   );
 }
