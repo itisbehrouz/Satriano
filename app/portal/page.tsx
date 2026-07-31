@@ -15,22 +15,20 @@ export default function PortalPage() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState<string | null>(null);
 
-  // Registration form state
+  // Application form state
   const [companyName, setCompanyName] = useState("");
   const [website, setWebsite] = useState("");
   const [industry, setIndustry] = useState("Wholesale Apparel");
   const [annualVolume, setAnnualVolume] = useState("500 - 2,000 units");
-
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [corpEmail, setCorpEmail] = useState("");
   const [phone, setPhone] = useState("");
-
   const [needs, setNeeds] = useState({
-    bespokeTailoring: true,
-    bulkOrders: false,
-    rawMaterials: false,
-    sourcingServices: false,
+    customDye: false,
+    bespokeTailoring: false,
+    privateLabelPackaging: false,
+    expeditedLogistics: false,
   });
 
   const [regError, setRegError] = useState<string | null>(null);
@@ -81,12 +79,30 @@ export default function PortalPage() {
     }
   }
 
-  return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
-        <div className="w-full max-w-xl mx-auto">
+  // 1. MINIMAL FOCUSED LOGIN / REGISTER SCREENS (No Header/Footer, Fixed Return Icon, Centered Logo + Form)
+  if (view === "LOGIN" || view === "REGISTER") {
+    return (
+      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
+        {/* Fixed Top-Left Return Link */}
+        <Link
+          href="/"
+          className="fixed top-6 left-6 flex items-center gap-2 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] px-3.5 py-2 rounded shadow-sm transition-colors z-50"
+        >
+          <span className="material-symbols-outlined text-base">arrow_back</span>
+          <span>Return to Homepage</span>
+        </Link>
 
+        <div className="w-full max-w-xl mx-auto my-auto">
+          {/* Centered Brand Logo */}
+          <div className="text-center mb-6">
+            <Link href="/" className="inline-block">
+              <img
+                src="/Satrinao.png"
+                alt="Satriano Atelier"
+                className="h-10 md:h-11 w-auto mx-auto object-contain"
+              />
+            </Link>
+          </div>
 
           {/* VIEW 1: CLIENT PORTAL LOGIN */}
           {view === "LOGIN" && (
@@ -134,13 +150,9 @@ export default function PortalPage() {
                     </label>
                     <a
                       href="#forgot"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        alert("Password reset instructions sent to your registered corporate email.");
-                      }}
-                      className="text-[11px] font-medium text-[#2E5AAC] hover:underline"
+                      className="text-xs font-medium text-[#2E5AAC] hover:underline"
                     >
-                      Forgot Password?
+                      Forgot password?
                     </a>
                   </div>
                   <div className="relative">
@@ -153,147 +165,111 @@ export default function PortalPage() {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
+                      placeholder="••••••••••••"
                       className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                     />
                   </div>
                 </div>
 
                 {loginError && (
-                  <div className="p-3 bg-[#FCEBEB] border border-[#A32D2D] text-[#A32D2D] text-xs rounded">
+                  <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
                     {loginError}
                   </div>
                 )}
 
-                {/* Primary Action: Accent Blue #2E5AAC (No Gold Button Fills) */}
                 <button
                   type="submit"
-                  className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
                 >
-                  Sign In to Portal →
+                  Sign In to Client Portal
                 </button>
               </form>
 
-              <div className="relative my-6 text-center">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[#E5E7EB]" />
-                </div>
-                <span className="relative bg-white px-3 text-[11px] uppercase font-semibold text-[#5B6B85]">
-                  OR
-                </span>
-              </div>
-
-              <div className="space-y-3">
+              <div className="mt-8 pt-6 border-t border-[#E5E7EB] text-center">
+                <p className="text-xs text-[#5B6B85]">
+                  New B2B client? Apply for corporate ordering privileges.
+                </p>
                 <button
-                  type="button"
                   onClick={() => setView("REGISTER")}
-                  className="w-full bg-[#F5F7FA] hover:bg-[#E6F1FB] hover:text-[#2E5AAC] border border-[#D1D5DB] text-[#1A2233] text-xs font-semibold uppercase tracking-wider py-3 px-6 rounded transition-colors text-center block"
+                  className="mt-2 text-xs font-semibold text-[#2E5AAC] hover:underline uppercase tracking-wider"
                 >
-                  Request B2B Corporate Account
+                  Become a B2B Partner →
                 </button>
-                <Link
-                  href="/konfigurator"
-                  className="w-full text-[#2E5AAC] hover:underline text-xs font-semibold text-center block py-1"
-                >
-                  Direct Guest Order Configurator →
-                </Link>
-              </div>
-
-              <div className="mt-8 pt-4 border-t border-[#E5E7EB] text-center text-[11px] text-[#5B6B85] flex justify-center gap-4">
-                <a href="#security" className="hover:underline">
-                  Security Policy
-                </a>
-                <span>•</span>
-                <a href="#terms" className="hover:underline">
-                  Terms of Service
-                </a>
               </div>
             </div>
           )}
 
-          {/* VIEW 2: BECOME A PARTNER / CORPORATE ACCOUNT APPLICATION */}
+          {/* VIEW 2: BECOME A B2B PARTNER APPLICATION FORM */}
           {view === "REGISTER" && (
             <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
               <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold uppercase tracking-wider rounded mb-2 border border-[#B3D6F6]">
+                  Step 1 of 3 • Corporate Account Setup
+                </div>
                 <h1 className="text-2xl font-semibold text-[#1A2233]">
-                  Become a B2B Partner
+                  Apply for B2B Partnership
                 </h1>
                 <p className="text-xs text-[#5B6B85] mt-1.5 leading-relaxed">
-                  Apply for a corporate account to access our bespoke configurator, volume pricing, and global logistics support.
+                  Join our white-label manufacturing network for custom garment production lines.
                 </p>
               </div>
 
-              {/* Step Progress Bar */}
-              <div className="grid grid-cols-3 gap-2 mb-8 text-center text-xs font-semibold">
-                <div className="bg-[#E6F1FB] text-[#185FA5] border border-[#B3D6F6] py-2 rounded">
-                  1. Business Details
-                </div>
-                <div className="bg-[#F5F7FA] text-[#5B6B85] border border-[#E5E7EB] py-2 rounded">
-                  2. Contact Info
-                </div>
-                <div className="bg-[#F5F7FA] text-[#5B6B85] border border-[#E5E7EB] py-2 rounded">
-                  3. Requirements
-                </div>
-              </div>
-
               <form onSubmit={handleRegister} className="space-y-6">
-                {/* Company Information */}
+                {/* Section A: Company Information */}
                 <div>
-                  <h2 className="text-sm font-semibold text-[#1A2233] uppercase tracking-wider mb-3 flex items-center gap-2 border-b border-[#E5E7EB] pb-2">
-                    <span className="material-symbols-outlined text-[#2E5AAC] text-base">
-                      domain
-                    </span>
-                    Company Information
-                  </h2>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[#1A2233] pb-2 border-b border-[#E5E7EB] mb-4">
+                    1. Company Details
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                        Company Name *
+                        Company Legal Name *
                       </label>
                       <input
                         type="text"
                         required
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder="Atelier Holdings LLC"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        placeholder="Apex Brands Ltd."
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                        Website URL
+                        Corporate Website
                       </label>
                       <input
-                        type="text"
+                        type="url"
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
-                        placeholder="https://company.com"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        placeholder="https://apexbrands.com"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                        Industry
+                        Industry / Business Type
                       </label>
                       <select
                         value={industry}
                         onChange={(e) => setIndustry(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       >
                         <option value="Wholesale Apparel">Wholesale Apparel</option>
-                        <option value="Luxury Retail Brand">Luxury Retail Brand</option>
-                        <option value="Corporate Uniforms">Corporate Uniforms</option>
-                        <option value="Hospitality & Hotel Group">Hospitality &amp; Hotel Group</option>
+                        <option value="Fashion Brand / Retailer">Fashion Brand / Retailer</option>
+                        <option value="Corporate Merchandising">Corporate Merchandising</option>
+                        <option value="Sportswear & Activewear">Sportswear &amp; Activewear</option>
+                        <option value="Workwear & Uniforms">Workwear &amp; Uniforms</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                        Annual Volume Est.
+                        Est. Annual Garment Volume
                       </label>
                       <select
                         value={annualVolume}
                         onChange={(e) => setAnnualVolume(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       >
                         <option value="100 - 500 units">100 - 500 units / year</option>
                         <option value="500 - 2,000 units">500 - 2,000 units / year</option>
@@ -304,14 +280,11 @@ export default function PortalPage() {
                   </div>
                 </div>
 
-                {/* Contact Representative */}
+                {/* Section B: Contact Representative */}
                 <div>
-                  <h2 className="text-sm font-semibold text-[#1A2233] uppercase tracking-wider mb-3 flex items-center gap-2 border-b border-[#E5E7EB] pb-2">
-                    <span className="material-symbols-outlined text-[#2E5AAC] text-base">
-                      person
-                    </span>
-                    Contact Representative
-                  </h2>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[#1A2233] pb-2 border-b border-[#E5E7EB] mb-4">
+                    2. Primary Contact Representative
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
@@ -322,8 +295,8 @@ export default function PortalPage() {
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="John Doe"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        placeholder="Sarah Jenkins"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                     <div>
@@ -335,7 +308,7 @@ export default function PortalPage() {
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         placeholder="Head of Procurement"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                     <div>
@@ -347,175 +320,157 @@ export default function PortalPage() {
                         required
                         value={corpEmail}
                         onChange={(e) => setCorpEmail(e.target.value)}
-                        placeholder="johndoe@company.com"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        placeholder="s.jenkins@apexbrands.com"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                        Phone Number
+                        Phone / WhatsApp
                       </label>
                       <input
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+1 (555) 000-0000"
-                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-xs text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                        placeholder="+44 20 7946 0912"
+                        className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Manufacturing Needs */}
+                {/* Section C: Production Requirements */}
                 <div>
-                  <h2 className="text-sm font-semibold text-[#1A2233] uppercase tracking-wider mb-3 flex items-center gap-2 border-b border-[#E5E7EB] pb-2">
-                    <span className="material-symbols-outlined text-[#2E5AAC] text-base">
-                      manufacturing
-                    </span>
-                    Manufacturing Needs
-                  </h2>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <label className="flex items-center gap-2 cursor-pointer bg-[#F5F7FA] p-2.5 rounded border border-[#E5E7EB]">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[#1A2233] pb-2 border-b border-[#E5E7EB] mb-3">
+                    3. Specific Production Requirements
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-[#5B6B85]">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={needs.customDye}
+                        onChange={(e) => setNeeds({ ...needs, customDye: e.target.checked })}
+                        className="rounded border-[#D1D5DB] text-[#2E5AAC]"
+                      />
+                      <span>Custom Fabric Dye Lots</span>
+                    </label>
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
                       <input
                         type="checkbox"
                         checked={needs.bespokeTailoring}
-                        onChange={(e) =>
-                          setNeeds({ ...needs, bespokeTailoring: e.target.checked })
-                        }
-                        className="text-[#2E5AAC] focus:ring-[#2E5AAC]"
+                        onChange={(e) => setNeeds({ ...needs, bespokeTailoring: e.target.checked })}
+                        className="rounded border-[#D1D5DB] text-[#2E5AAC]"
                       />
-                      <span className="font-medium text-[#1A2233]">Bespoke Tailoring</span>
+                      <span>Bespoke CAD Pattern Grading</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer bg-[#F5F7FA] p-2.5 rounded border border-[#E5E7EB]">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={needs.bulkOrders}
-                        onChange={(e) =>
-                          setNeeds({ ...needs, bulkOrders: e.target.checked })
-                        }
-                        className="text-[#2E5AAC] focus:ring-[#2E5AAC]"
+                        checked={needs.privateLabelPackaging}
+                        onChange={(e) => setNeeds({ ...needs, privateLabelPackaging: e.target.checked })}
+                        className="rounded border-[#D1D5DB] text-[#2E5AAC]"
                       />
-                      <span className="font-medium text-[#1A2233]">Bulk Orders</span>
+                      <span>Private Label Packaging &amp; Hangtags</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer bg-[#F5F7FA] p-2.5 rounded border border-[#E5E7EB]">
+                    <label className="flex items-center gap-2 p-2.5 bg-[#F5F7FA] rounded border border-[#E5E7EB] cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={needs.rawMaterials}
-                        onChange={(e) =>
-                          setNeeds({ ...needs, rawMaterials: e.target.checked })
-                        }
-                        className="text-[#2E5AAC] focus:ring-[#2E5AAC]"
+                        checked={needs.expeditedLogistics}
+                        onChange={(e) => setNeeds({ ...needs, expeditedLogistics: e.target.checked })}
+                        className="rounded border-[#D1D5DB] text-[#2E5AAC]"
                       />
-                      <span className="font-medium text-[#1A2233]">Raw Materials</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer bg-[#F5F7FA] p-2.5 rounded border border-[#E5E7EB]">
-                      <input
-                        type="checkbox"
-                        checked={needs.sourcingServices}
-                        onChange={(e) =>
-                          setNeeds({ ...needs, sourcingServices: e.target.checked })
-                        }
-                        className="text-[#2E5AAC] focus:ring-[#2E5AAC]"
-                      />
-                      <span className="font-medium text-[#1A2233]">Sourcing Services</span>
+                      <span>Expedited Air Freight Delivery</span>
                     </label>
                   </div>
                 </div>
 
                 {regError && (
-                  <div className="p-3 bg-[#FCEBEB] border border-[#A32D2D] text-[#A32D2D] text-xs rounded">
+                  <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
                     {regError}
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded transition-colors flex items-center justify-center gap-2"
-                >
-                  Submit Partnership Application →
-                </button>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setView("LOGIN")}
+                    className="w-1/3 py-3 bg-[#F5F7FA] hover:bg-[#E5E7EB] text-[#5B6B85] text-xs font-semibold uppercase tracking-wider rounded border border-[#D1D5DB] transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="w-2/3 py-3 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
+                  >
+                    Submit Partnership Application
+                  </button>
+                </div>
               </form>
-
-              <div className="mt-6 text-center">
-                <button
-                  type="button"
-                  onClick={() => setView("LOGIN")}
-                  className="text-xs text-[#2E5AAC] hover:underline font-medium"
-                >
-                  Already have an account? Sign In
-                </button>
-              </div>
             </div>
           )}
+        </div>
+      </main>
+    );
+  }
 
-          {/* VIEW 3: APPLICATION SUBMITTED CONFIRMATION */}
-          {view === "SUBMITTED" && (
-            <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 md:p-10 shadow-sm text-center">
-              <div className="w-14 h-14 bg-[#E1F5EE] text-[#0F6E56] border border-[#A6E5CE] rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="material-symbols-outlined text-3xl">check_circle</span>
-              </div>
+  // 2. SUBMITTED CONFIRMATION VIEW (Retains Full Header & Footer Layout)
+  return (
+    <>
+      <SiteHeader />
+      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-16 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
+        <div className="w-full max-w-xl mx-auto">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm text-center">
+            <div className="w-16 h-16 bg-[#E6F1FB] text-[#2E5AAC] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#B3D6F6]">
+              <span className="material-symbols-outlined text-3xl">task_alt</span>
+            </div>
 
-              <h1 className="text-2xl font-semibold text-[#1A2233] mb-3">
-                Application Submitted
-              </h1>
-              <p className="text-xs md:text-sm text-[#5B6B85] max-w-md mx-auto leading-relaxed mb-8">
-                Thank you for your interest in Satriano Atelier. Our B2B compliance team is reviewing your business credentials. You will receive a response within 24-48 hours.
-              </p>
+            <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-3 py-1 rounded border border-[#B3D6F6]">
+              Application Received • Under Review
+            </span>
 
-              {/* Process Steps */}
-              <div className="border-t border-b border-[#E5E7EB] py-6 my-6">
-                <div className="text-xs uppercase font-semibold tracking-wider text-[#1A2233] mb-6">
-                  What Happens Next
+            <h1 className="text-2xl font-semibold text-[#1A2233] mt-4">
+              Partnership Application Submitted
+            </h1>
+
+            <p className="text-xs text-[#5B6B85] mt-2 max-w-md mx-auto leading-relaxed">
+              Thank you for submitting your corporate details for <strong>{companyName || "your company"}</strong>. Our B2B account management team is reviewing your profile and will contact <strong>{corpEmail || "your email"}</strong> within 1 business day.
+            </p>
+
+            <div className="mt-8 p-4 bg-[#F5F7FA] border border-[#E5E7EB] rounded text-left space-y-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1A2233]">
+                Next Steps in the Onboarding Process:
+              </h4>
+              <div className="space-y-2 text-xs text-[#5B6B85]">
+                <div className="flex gap-2">
+                  <span className="font-mono text-[#2E5AAC] font-bold">1.</span>
+                  <span><strong>Verification:</strong> Tax registration &amp; corporate domain check.</span>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                  <div className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
-                    <div className="text-xs font-bold text-[#2E5AAC] mb-1 font-mono">01</div>
-                    <div className="text-xs font-semibold text-[#1A2233] mb-1">
-                      Document Verification
-                    </div>
-                    <div className="text-[11px] text-[#5B6B85]">
-                      Compliance team reviews your industry credentials.
-                    </div>
-                  </div>
-
-                  <div className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
-                    <div className="text-xs font-bold text-[#2E5AAC] mb-1 font-mono">02</div>
-                    <div className="text-xs font-semibold text-[#1A2233] mb-1">
-                      Expert Allocation
-                    </div>
-                    <div className="text-[11px] text-[#5B6B85]">
-                      A dedicated account manager is assigned to your profile.
-                    </div>
-                  </div>
-
-                  <div className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
-                    <div className="text-xs font-bold text-[#2E5AAC] mb-1 font-mono">03</div>
-                    <div className="text-xs font-semibold text-[#1A2233] mb-1">
-                      Portal Access
-                    </div>
-                    <div className="text-[11px] text-[#5B6B85]">
-                      Upon approval, receive credentials to our bespoke configurator.
-                    </div>
-                  </div>
+                <div className="flex gap-2">
+                  <span className="font-mono text-[#2E5AAC] font-bold">2.</span>
+                  <span><strong>Access Key:</strong> Secure invitation token sent via email.</span>
                 </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                <Link
-                  href="/"
-                  className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
-                >
-                  Back to Homepage
-                </Link>
-                <Link
-                  href="/konfigurator"
-                  className="bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
-                >
-                  Launch Order Configurator
-                </Link>
+                <div className="flex gap-2">
+                  <span className="font-mono text-[#2E5AAC] font-bold">3.</span>
+                  <span><strong>First Order:</strong> Instant configurator access with custom MOQs.</span>
+                </div>
               </div>
             </div>
-          )}
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+              <Link
+                href="/"
+                className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+              >
+                Back to Homepage
+              </Link>
+              <Link
+                href="/konfigurator"
+                className="bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+              >
+                Launch Order Configurator
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
       <SiteFooter />

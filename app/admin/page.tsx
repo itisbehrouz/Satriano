@@ -1,34 +1,30 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import type { OrderStatus } from "@/app/generated/prisma/enums";
-import { AdminOrderTable, type AdminOrder } from "@/components/admin/AdminOrderTable";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable";
 
-type FilterTab = "ALL" | OrderStatus;
-
-const TABS: { id: FilterTab; label: string }[] = [
+const TABS = [
   { id: "ALL", label: "All Orders" },
-  { id: "DRAFT", label: "Draft" },
   { id: "PROFORMA_SENT", label: "Proforma Sent" },
-  { id: "PAID", label: "Paid" },
+  { id: "PAYMENT_CONFIRMED", label: "Payment Confirmed" },
   { id: "IN_PRODUCTION", label: "In Production" },
+  { id: "SHIPPED", label: "Shipped" },
 ];
 
-export default function AdminDashboardPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [checkingSession, setCheckingSession] = useState<boolean>(true);
-  const [accessKey, setAccessKey] = useState<string>("");
+export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [accessKey, setAccessKey] = useState("");
   const [authError, setAuthError] = useState<string | null>(null);
 
-  const [activeTab, setActiveTab] = useState<FilterTab>("ALL");
   const [orders, setOrders] = useState<AdminOrder[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState("ALL");
 
-  // Check server-verified signed httpOnly cookie session on mount
+  // Verify existing session cookie on mount
   useEffect(() => {
     async function checkSession() {
       try {
@@ -37,24 +33,53 @@ export default function AdminDashboardPage() {
           const data = await res.json();
           if (data.authenticated) {
             setIsAuthenticated(true);
+            return;
           }
         }
-      } catch (err) {
-        console.error("Session check error:", err);
-      } finally {
-        setCheckingSession(false);
+      } catch {
+        // Session check failed
       }
+      setIsAuthenticated(false);
     }
+
     checkSession();
   }, []);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!accessKey.trim()) {
-      setAuthError("Please enter your corporate access key.");
-      return;
-    }
+  async function fetchOrders() {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/orders");
 
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        setAuthError("Session expired. Please authenticate with your Corporate Access Key.");
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch production orders.");
+      }
+
+      const data = await res.json();
+      setOrders(data.orders || []);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load production orders. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Fetch orders when authenticated or active tab changes
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchOrders();
+    }
+  }, [isAuthenticated, activeTab]);
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
     setAuthError(null);
     try {
       const res = await fetch("/api/admin/login", {
@@ -65,156 +90,123 @@ export default function AdminDashboardPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        setAuthError(data.error || "Invalid access key.");
-        return;
+        throw new Error(data.error || "Authentication failed.");
       }
 
       setIsAuthenticated(true);
       setAccessKey("");
-    } catch (err) {
-      console.error("Login error:", err);
-      setAuthError("Server authentication error. Please try again.");
+    } catch (err: any) {
+      setAuthError(err.message || "Invalid Corporate Access Key.");
     }
-  };
+  }
 
-  const handleSignOut = async () => {
+  async function handleSignOut() {
     try {
       await fetch("/api/admin/logout", { method: "POST" });
-    } catch (err) {
-      console.error("Logout error:", err);
-    } finally {
-      setIsAuthenticated(false);
-    }
-  };
-
-  const fetchOrders = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const url =
-        activeTab === "ALL"
-          ? "/api/admin/orders"
-          : `/api/admin/orders?status=${activeTab}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch orders");
-      const data = await res.json();
-      setOrders(data.orders || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load orders");
-    } finally {
-      setLoading(false);
-    }
-  }, [activeTab]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchOrders();
-    }
-  }, [isAuthenticated, fetchOrders]);
-
-  const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
-    try {
-      const res = await fetch(`/api/admin/orders/${orderId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.error || "Failed to update status");
-        return;
-      }
-
-      await fetchOrders();
     } catch {
-      alert("Failed to update status. Please try again.");
+      // Signout fetch failed
     }
-  };
+    setIsAuthenticated(false);
+  }
 
-  if (checkingSession) {
+  // Loading state while checking session
+  if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center font-sans">
-        <div className="text-sm text-[#5B6B85] flex items-center gap-2">
-          <span className="w-4 h-4 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
-          Verifying Portal Console session...
+        <div className="text-center text-xs text-[#5B6B85]">
+          <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+          <p>Verifying Portal Console session...</p>
         </div>
       </div>
     );
   }
 
-  // Render Login Gate if unauthenticated
+  // Render Minimal Focused Login Gate if unauthenticated (No SiteHeader/SiteFooter, Fixed Return Icon, Centered Logo)
   if (!isAuthenticated) {
     return (
-      <>
-        <SiteHeader />
-        <main className="min-h-[80vh] bg-[#F5F7FA] text-[#1A2233] py-16 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
-          <div className="w-full max-w-md mx-auto">
+      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
+        {/* Fixed Top-Left Return Link */}
+        <Link
+          href="/"
+          className="fixed top-6 left-6 flex items-center gap-2 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] px-3.5 py-2 rounded shadow-sm transition-colors z-50"
+        >
+          <span className="material-symbols-outlined text-base">arrow_back</span>
+          <span>Return to Homepage</span>
+        </Link>
 
+        <div className="w-full max-w-md mx-auto my-auto">
+          {/* Centered Brand Logo */}
+          <div className="text-center mb-6">
+            <Link href="/" className="inline-block">
+              <img
+                src="/Satrinao.png"
+                alt="Satriano Atelier"
+                className="h-10 w-auto mx-auto object-contain"
+              />
+            </Link>
+          </div>
 
-            <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
-              <div className="text-center mb-6">
-                <div className="w-12 h-12 bg-[#0B1E3D] text-white rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="material-symbols-outlined text-xl">admin_panel_settings</span>
-                </div>
-                <h1 className="text-xl font-semibold text-[#1A2233]">
-                  Portal Console Access
-                </h1>
-                <p className="text-xs text-[#5B6B85] mt-1 leading-relaxed">
-                  Authorized personnel access to order management &amp; factory status ledgers.
-                </p>
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 bg-[#0B1E3D] text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+                <span className="material-symbols-outlined text-xl">admin_panel_settings</span>
               </div>
+              <h1 className="text-xl font-semibold text-[#1A2233]">
+                Portal Console Access
+              </h1>
+              <p className="text-xs text-[#5B6B85] mt-1 leading-relaxed">
+                Authorized personnel access to order management &amp; factory status ledgers.
+              </p>
+            </div>
 
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="accessKey"
-                    className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5"
-                  >
-                    Corporate Access Key *
-                  </label>
-                  <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#5B6B85] text-lg">
-                      key
-                    </span>
-                    <input
-                      id="accessKey"
-                      type="password"
-                      required
-                      value={accessKey}
-                      onChange={(e) => setAccessKey(e.target.value)}
-                      placeholder="Enter security key..."
-                      className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                {authError && (
-                  <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
-                    {authError}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="w-full py-2.5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label
+                  htmlFor="accessKey"
+                  className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5"
                 >
-                  Authenticate &amp; Unlock Console
-                </button>
-              </form>
-
-              <div className="mt-6 pt-4 border-t border-[#E5E7EB] text-center text-[11px] text-[#5B6B85]">
-                Internal security audit logged. Unauthorized access attempts are monitored.
+                  Corporate Access Key *
+                </label>
+                <div className="relative">
+                  <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#5B6B85] text-lg">
+                    key
+                  </span>
+                  <input
+                    id="accessKey"
+                    type="password"
+                    required
+                    value={accessKey}
+                    onChange={(e) => setAccessKey(e.target.value)}
+                    placeholder="Enter security key..."
+                    className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                  />
+                </div>
               </div>
+
+              {authError && (
+                <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
+                  {authError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-2.5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
+              >
+                Authenticate &amp; Unlock Console
+              </button>
+            </form>
+
+            <div className="mt-6 pt-4 border-t border-[#E5E7EB] text-center text-[11px] text-[#5B6B85]">
+              Internal security audit logged. Unauthorized access attempts are monitored.
             </div>
           </div>
-        </main>
-        <SiteFooter />
-      </>
+        </div>
+      </main>
     );
   }
 
-  // Render Admin Operations Console
+  // Render Full Admin Operations Console (Retains Full Header & Footer Layout for Authenticated Officers)
   return (
     <>
       <SiteHeader />
