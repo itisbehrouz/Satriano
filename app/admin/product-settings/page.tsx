@@ -18,6 +18,13 @@ interface SizeSystem {
   options: SizeOption[];
 }
 
+interface FitDef {
+  id: string;
+  name: string;
+  code: string;
+  description?: string;
+}
+
 interface Fabric {
   id: string;
   name: string;
@@ -36,6 +43,7 @@ interface Product {
   moq?: number;
   active: boolean;
   fabrics: Fabric[];
+  fits: Array<{ fit: FitDef }>;
 }
 
 interface Subcategory {
@@ -61,9 +69,10 @@ export default function AdminProductSettingsPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [sizeSystems, setSizeSystems] = useState<SizeSystem[]>([]);
+  const [allFits, setAllFits] = useState<FitDef[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fabrics">("catalog");
+  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
 
   useEffect(() => {
     async function checkSessionAndFetch() {
@@ -96,6 +105,7 @@ export default function AdminProductSettingsPage() {
         const json = await res.json();
         setCategories(json.categories || []);
         setSizeSystems(json.sizeSystems || []);
+        setAllFits(json.fits || []);
       } else {
         setError("Failed to load catalog settings");
       }
@@ -115,6 +125,28 @@ export default function AdminProductSettingsPage() {
           target: "product",
           id: prodId,
           data: { active: !currentActive },
+        }),
+      });
+      if (res.ok) fetchCatalog();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function toggleProductFitLink(productId: string, currentFitIds: string[], targetFitId: string) {
+    const isLinked = currentFitIds.includes(targetFitId);
+    const newFitIds = isLinked
+      ? currentFitIds.filter((id) => id !== targetFitId)
+      : [...currentFitIds, targetFitId];
+
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "productFits",
+          id: productId,
+          data: { fitIds: newFitIds },
         }),
       });
       if (res.ok) fetchCatalog();
@@ -174,7 +206,7 @@ export default function AdminProductSettingsPage() {
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2E5AAC] mb-1">
                 <Link href="/admin" className="hover:underline">Admin Console</Link>
                 <span>/</span>
-                <span>3-Level Product Settings</span>
+                <span>Product Settings &amp; Dimensions</span>
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
                 Category → Subcategory → Product Management
@@ -190,7 +222,7 @@ export default function AdminProductSettingsPage() {
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex border-b border-[#D1D5DB] mb-8 gap-2">
+          <div className="flex border-b border-[#D1D5DB] mb-8 gap-2 flex-wrap">
             <button
               type="button"
               onClick={() => setActiveTab("catalog")}
@@ -200,7 +232,18 @@ export default function AdminProductSettingsPage() {
                   : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
               }`}
             >
-              Category → Subcategory → Products
+              Catalog Structure
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("fits")}
+              className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
+                activeTab === "fits"
+                  ? "border-[#2E5AAC] text-[#2E5AAC]"
+                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
+              }`}
+            >
+              Garment Fits (Kalıp)
             </button>
             <button
               type="button"
@@ -227,7 +270,7 @@ export default function AdminProductSettingsPage() {
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-[#5B6B85]">Loading 3-level catalog settings…</div>
+            <div className="p-12 text-center text-[#5B6B85]">Loading catalog settings…</div>
           ) : error ? (
             <div className="p-4 bg-[#FCEBEB] text-[#A32D2D] rounded text-sm">{error}</div>
           ) : (
@@ -251,15 +294,8 @@ export default function AdminProductSettingsPage() {
                                   {sub.name}
                                   <span className="text-xs font-normal text-[#5B6B85]">({sub.products.length} products)</span>
                                 </h3>
-                                <div className="flex gap-1 mt-1">
-                                  {sub.sizeSystems.map((ss) => (
-                                    <span key={ss.sizeSystem.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-2 py-0.5 rounded">
-                                      {ss.sizeSystem.name} ({ss.sizeSystem.region})
-                                    </span>
-                                  ))}
-                                </div>
                               </div>
-                              <span className="text-xs font-mono text-[#5B6B85]">subcategoryId: {sub.slug}</span>
+                              <span className="text-xs font-mono text-[#5B6B85]">slug: {sub.slug}</span>
                             </div>
 
                             <div className="overflow-x-auto">
@@ -268,8 +304,8 @@ export default function AdminProductSettingsPage() {
                                   <tr className="bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#5B6B85] uppercase font-semibold">
                                     <th className="p-3">Product Item</th>
                                     <th className="p-3">Slug</th>
+                                    <th className="p-3">Fits</th>
                                     <th className="p-3">MOQ</th>
-                                    <th className="p-3">Lead Time</th>
                                     <th className="p-3 text-right">Status / Action</th>
                                   </tr>
                                 </thead>
@@ -278,8 +314,20 @@ export default function AdminProductSettingsPage() {
                                     <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
                                       <td className="p-3 font-semibold text-[#1A2233]">{prod.name}</td>
                                       <td className="p-3 font-mono text-[#5B6B85]">{prod.slug}</td>
+                                      <td className="p-3">
+                                        {prod.fits.length === 0 ? (
+                                          <span className="text-[#5B6B85] italic text-[11px]">Excluded (0)</span>
+                                        ) : (
+                                          <div className="flex flex-wrap gap-1">
+                                            {prod.fits.map((pf) => (
+                                              <span key={pf.fit.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-1.5 py-0.5 rounded">
+                                                {pf.fit.name}
+                                              </span>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </td>
                                       <td className="p-3 font-medium">{prod.moq ?? 50} units</td>
-                                      <td className="p-3 font-medium">{prod.leadTimeDays ?? 14} days</td>
                                       <td className="p-3 text-right">
                                         <button
                                           type="button"
@@ -306,7 +354,83 @@ export default function AdminProductSettingsPage() {
                 </div>
               )}
 
-              {/* TAB 2: Regional Size Systems */}
+              {/* TAB 2: Garment Fits (Kalıp) Management */}
+              {activeTab === "fits" && (
+                <div className="space-y-6">
+                  <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
+                    <h2 className="text-lg font-bold text-[#1A2233] mb-2">
+                      8 Standard Garment Fit Dimensions
+                    </h2>
+                    <p className="text-xs text-[#5B6B85] mb-6">
+                      Toggle allowed fit options per product. Products in excluded categories (e.g. Accessories, Socks) have 0 fits linked and omit the fit step in the configurator.
+                    </p>
+
+                    <div className="space-y-8">
+                      {categories.map((cat) => (
+                        <div key={cat.id} className="border-t border-[#E5E7EB] pt-6">
+                          <h3 className="text-base font-bold text-[#1A2233] mb-4">
+                            Category: {cat.name}
+                          </h3>
+
+                          <div className="space-y-4">
+                            {cat.subcategories.map((sub) => (
+                              <div key={sub.id} className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
+                                <h4 className="text-xs font-semibold uppercase text-[#5B6B85] mb-3">
+                                  Subcategory: {sub.name}
+                                </h4>
+
+                                <div className="space-y-3">
+                                  {sub.products.map((prod) => {
+                                    const linkedFitIds = prod.fits.map((pf) => pf.fit.id);
+
+                                    return (
+                                      <div key={prod.id} className="bg-white p-4 rounded border border-[#D1D5DB]">
+                                        <div className="flex justify-between items-center mb-3">
+                                          <span className="font-bold text-sm text-[#1A2233]">{prod.name}</span>
+                                          <span className="text-xs text-[#5B6B85]">
+                                            ({linkedFitIds.length} fits linked)
+                                          </span>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-3">
+                                          {allFits.map((fit) => {
+                                            const isChecked = linkedFitIds.includes(fit.id);
+
+                                            return (
+                                              <label
+                                                key={fit.id}
+                                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded border text-xs cursor-pointer select-none transition-colors ${
+                                                  isChecked
+                                                    ? "bg-[#E6F1FB] border-[#2E5AAC] text-[#185FA5] font-semibold"
+                                                    : "bg-white border-[#D1D5DB] text-[#5B6B85] hover:border-[#94A3B8]"
+                                                }`}
+                                              >
+                                                <input
+                                                  type="checkbox"
+                                                  checked={isChecked}
+                                                  onChange={() => toggleProductFitLink(prod.id, linkedFitIds, fit.id)}
+                                                  className="h-3.5 w-3.5 text-[#2E5AAC] rounded border-[#D1D5DB]"
+                                                />
+                                                {fit.name}
+                                              </label>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 3: Regional Size Systems */}
               {activeTab === "sizing" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {sizeSystems.map((sys) => (
@@ -335,7 +459,7 @@ export default function AdminProductSettingsPage() {
                 </div>
               )}
 
-              {/* TAB 3: Product Fabrics & Price Ranges */}
+              {/* TAB 4: Product Fabrics & Price Ranges */}
               {activeTab === "fabrics" && (
                 <div className="space-y-6">
                   {categories.map((cat) => (

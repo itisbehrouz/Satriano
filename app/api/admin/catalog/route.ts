@@ -24,6 +24,9 @@ export async function GET(request: Request) {
             products: {
               include: {
                 fabrics: true,
+                fits: {
+                  include: { fit: true },
+                },
               },
               orderBy: { sortOrder: "asc" },
             },
@@ -40,7 +43,12 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json({ categories, sizeSystems });
+    const allFits = await prisma.fit.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: "asc" },
+    });
+
+    return NextResponse.json({ categories, sizeSystems, fits: allFits });
   } catch (error) {
     console.error("Failed to fetch admin catalog", error);
     return NextResponse.json({ error: "Failed to fetch catalog" }, { status: 500 });
@@ -80,6 +88,24 @@ export async function PATCH(request: Request) {
         },
       });
       return NextResponse.json({ success: true, product: updated });
+    }
+
+    if (target === "productFits" && typeof id === "string" && Array.isArray(data.fitIds)) {
+      // Clear existing product fit links
+      await prisma.productFit.deleteMany({
+        where: { productId: id },
+      });
+
+      // Insert selected fit links
+      if (data.fitIds.length > 0) {
+        await prisma.productFit.createMany({
+          data: data.fitIds.map((fitId: string) => ({
+            productId: id,
+            fitId,
+          })),
+        });
+      }
+      return NextResponse.json({ success: true });
     }
 
     if (target === "fabric" && typeof id === "string") {

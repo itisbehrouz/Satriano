@@ -116,8 +116,8 @@ model Product {
 
 model Fit {
   id          String       @id @default(uuid())
-  name        String       // "Slim Fit", "Regular Fit", "Relaxed Fit", "Oversized Fit"
-  code        String       @unique // "SLIM", "REGULAR", "RELAXED", "OVERSIZED"
+  name        String       @unique // "Slim Fit", "Regular Fit", "Relaxed Fit", "Tailored Fit", "Skinny Fit", "Tapered Fit", "Modern Fit", "Oversized"
+  code        String       @unique // "SLIM", "REGULAR", "RELAXED", "TAILORED", "SKINNY", "TAPERED", "MODERN", "OVERSIZED"
   description String?
   sortOrder   Int          @default(0)
   active      Boolean      @default(true)

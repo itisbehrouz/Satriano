@@ -6,7 +6,7 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Starting Satriano Atelier DB Seeding with Fit Dimension...");
+  console.log("🌱 Starting Satriano Atelier Complete 8-Value Fit Seeding...");
 
   // 1. Seed Size Systems & Options
   const sizeSystemDefs = [
@@ -47,7 +47,7 @@ async function main() {
     createdSystems[`${sys.name}_${sys.region}`] = sizeSys.id;
   }
 
-  // 2. Seed Fit Dimensions
+  // 2. Seed 8 Standard Fit Values
   const fitDefs = [
     {
       code: "SLIM",
@@ -68,10 +68,34 @@ async function main() {
       sortOrder: 3,
     },
     {
-      code: "OVERSIZED",
-      name: "Oversized Fit",
-      description: "Contemporary streetwear silhouette with dropped shoulders and boxy chest.",
+      code: "TAILORED",
+      name: "Tailored Fit",
+      description: "Refined architectural cut balancing chest comfort with a narrow tapered waist.",
       sortOrder: 4,
+    },
+    {
+      code: "SKINNY",
+      name: "Skinny Fit",
+      description: "Ultra-slim form-fitting cut tight through the thigh, knee, and leg opening.",
+      sortOrder: 5,
+    },
+    {
+      code: "TAPERED",
+      name: "Tapered Fit",
+      description: "Roomy through seat and thigh, narrowing sharply down towards the ankle.",
+      sortOrder: 6,
+    },
+    {
+      code: "MODERN",
+      name: "Modern Fit",
+      description: "Slightly trimmer than regular fit without restricting armhole or shoulder mobility.",
+      sortOrder: 7,
+    },
+    {
+      code: "OVERSIZED",
+      name: "Oversized",
+      description: "Contemporary streetwear silhouette featuring dropped shoulders and boxy body.",
+      sortOrder: 8,
     },
   ];
 
@@ -118,7 +142,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Italian Poplin Cotton (120/2)", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
                 { name: "Royal Twill Oxford", priceMinCents: 2500, priceMaxCents: 3200, setupFeeCents: 15000 },
@@ -131,7 +155,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Washed Cotton Chambray", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
               ],
@@ -143,7 +167,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-shirts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "French Washed Linen", priceMinCents: 2600, priceMaxCents: 3400, setupFeeCents: 15000 },
               ],
@@ -164,7 +188,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
                 { name: "Organic Cotton", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
@@ -178,7 +202,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavyweight Pique Cotton", priceMinCents: 1600, priceMaxCents: 2100, setupFeeCents: 15000 },
               ],
@@ -190,7 +214,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Technical Poly-Spandex Blend", priceMinCents: 2100, priceMaxCents: 2600, setupFeeCents: 15000 },
               ],
@@ -211,7 +235,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Extra-Fine Merino Wool", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 20000 },
               ],
@@ -223,7 +247,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Cashmere Cotton Knit", priceMinCents: 4500, priceMaxCents: 5800, setupFeeCents: 20000 },
               ],
@@ -235,7 +259,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-sweaters.png",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavy Lambswool Blend", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 20000 },
               ],
@@ -256,7 +280,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 12,
               moq: 50,
-              fits: ["REGULAR", "RELAXED", "OVERSIZED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "220gsm Heavy Organic Jersey", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 12000 },
               ],
@@ -268,7 +292,7 @@ async function main() {
               imageUrl: "/images/subcategories/tops-polos.png",
               leadTimeDays: 12,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Mercerized Combed Cotton", priceMinCents: 1300, priceMaxCents: 1800, setupFeeCents: 12000 },
               ],
@@ -289,7 +313,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED", "OVERSIZED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "400gsm Heavy French Terry", priceMinCents: 2600, priceMaxCents: 3500, setupFeeCents: 15000 },
               ],
@@ -301,7 +325,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Brushed Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3700, setupFeeCents: 15000 },
               ],
@@ -313,7 +337,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED", "OVERSIZED"],
+              fits: ["SLIM", "REGULAR", "RELAXED", "TAILORED"],
               fabrics: [
                 { name: "Heavy Loopback Cotton Fleece", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
               ],
@@ -343,7 +367,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Super 110s Wool Gabardine", priceMinCents: 3500, priceMaxCents: 4500, setupFeeCents: 18000 },
               ],
@@ -355,7 +379,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR", "RELAXED"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Stretch Cotton Twill", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
               ],
@@ -367,7 +391,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-trousers.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Tropical Wool Linen", priceMinCents: 3200, priceMaxCents: 4100, setupFeeCents: 18000 },
               ],
@@ -388,7 +412,7 @@ async function main() {
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "13.5oz Japanese Selvedge Denim", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 18000 },
               ],
@@ -400,7 +424,7 @@ async function main() {
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Rigid Organic Denim", priceMinCents: 3400, priceMaxCents: 4400, setupFeeCents: 18000 },
               ],
@@ -421,7 +445,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Washed Cotton Twill", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
               ],
@@ -433,7 +457,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Pure Washed Linen", priceMinCents: 2000, priceMaxCents: 2600, setupFeeCents: 15000 },
               ],
@@ -445,7 +469,7 @@ async function main() {
               imageUrl: "/images/subcategories/bottoms-shorts.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Cotton Ripstop", priceMinCents: 2100, priceMaxCents: 2700, setupFeeCents: 15000 },
               ],
@@ -466,7 +490,7 @@ async function main() {
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Brushed Back Fleece", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -478,7 +502,7 @@ async function main() {
               imageUrl: "/images/catalog/bottoms.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED", "OVERSIZED"],
+              fits: ["SKINNY", "SLIM", "TAPERED", "REGULAR", "RELAXED"],
               fabrics: [
                 { name: "Heavy Loopback Cotton", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
               ],
@@ -508,7 +532,7 @@ async function main() {
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Bonded Weatherproof Shell", priceMinCents: 4500, priceMaxCents: 6000, setupFeeCents: 20000 },
               ],
@@ -520,7 +544,7 @@ async function main() {
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Italian Nappa Leather", priceMinCents: 9500, priceMaxCents: 14000, setupFeeCents: 25000 },
               ],
@@ -532,7 +556,7 @@ async function main() {
               imageUrl: "/images/catalog/outerwear.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Waxed Cotton Canvas", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
               ],
@@ -553,7 +577,7 @@ async function main() {
               imageUrl: "/images/subcategories/outerwear-coats.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Gabardine Cotton Canvas", priceMinCents: 6800, priceMaxCents: 8500, setupFeeCents: 25000 },
               ],
@@ -565,7 +589,7 @@ async function main() {
               imageUrl: "/images/subcategories/outerwear-coats.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Waterproof Cotton Twill", priceMinCents: 6200, priceMaxCents: 7800, setupFeeCents: 22000 },
               ],
@@ -586,7 +610,7 @@ async function main() {
               imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "Melton Wool & Cashmere", priceMinCents: 8500, priceMaxCents: 12000, setupFeeCents: 25000 },
               ],
@@ -598,7 +622,7 @@ async function main() {
               imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["REGULAR", "SLIM", "OVERSIZED"],
               fabrics: [
                 { name: "100% Italian Cashmere", priceMinCents: 13500, priceMaxCents: 18500, setupFeeCents: 30000 },
               ],
@@ -619,7 +643,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Hopsack Wool Blend", priceMinCents: 4800, priceMaxCents: 6200, setupFeeCents: 20000 },
               ],
@@ -631,7 +655,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Open-Weave Cotton Hopsack", priceMinCents: 4400, priceMaxCents: 5800, setupFeeCents: 20000 },
               ],
@@ -661,7 +685,7 @@ async function main() {
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 130s Italian Wool", priceMinCents: 12000, priceMaxCents: 16500, setupFeeCents: 30000 },
               ],
@@ -673,7 +697,7 @@ async function main() {
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 150s Fine Wool & Silk", priceMinCents: 15500, priceMaxCents: 21000, setupFeeCents: 35000 },
               ],
@@ -694,7 +718,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-tuxedos.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Barathea Wool & Silk Satin", priceMinCents: 14000, priceMaxCents: 19000, setupFeeCents: 30000 },
               ],
@@ -706,7 +730,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-tuxedos.jpg",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Cotton-Silk Velvet", priceMinCents: 12500, priceMaxCents: 17000, setupFeeCents: 30000 },
               ],
@@ -727,7 +751,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Refined Wool Flannel", priceMinCents: 5200, priceMaxCents: 6800, setupFeeCents: 20000 },
               ],
@@ -739,7 +763,7 @@ async function main() {
               imageUrl: "/images/subcategories/formal-blazers.jpg",
               leadTimeDays: 18,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Heavy Italian Wool Flannel", priceMinCents: 5600, priceMaxCents: 7200, setupFeeCents: 20000 },
               ],
@@ -760,7 +784,7 @@ async function main() {
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Super 120s Wool Satin Back", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
               ],
@@ -772,7 +796,7 @@ async function main() {
               imageUrl: "/images/catalog/formal_wear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: ["SLIM", "REGULAR", "MODERN"],
               fabrics: [
                 { name: "Fine Wool Twill", priceMinCents: 2500, priceMaxCents: 3200, setupFeeCents: 15000 },
               ],
@@ -802,7 +826,7 @@ async function main() {
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Bonded Technical Fleece", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 15000 },
               ],
@@ -814,7 +838,7 @@ async function main() {
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Performance Tricot Knit", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -826,7 +850,7 @@ async function main() {
               imageUrl: "/images/catalog/sportswear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Tricot Poly Blend", priceMinCents: 2000, priceMaxCents: 2600, setupFeeCents: 15000 },
               ],
@@ -847,7 +871,7 @@ async function main() {
               imageUrl: "/images/subcategories/sportswear-performance.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Recycled Elastane Knit", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
               ],
@@ -859,7 +883,7 @@ async function main() {
               imageUrl: "/images/subcategories/sportswear-performance.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Seamless Nylon-Spandex", priceMinCents: 2100, priceMaxCents: 2800, setupFeeCents: 15000 },
               ],
@@ -880,7 +904,7 @@ async function main() {
               imageUrl: "/images/subcategories/sportswear-activewear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Four-Way Stretch Microfiber", priceMinCents: 1600, priceMaxCents: 2200, setupFeeCents: 15000 },
               ],
@@ -892,7 +916,7 @@ async function main() {
               imageUrl: "/images/subcategories/sportswear-activewear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "High-Compression Poly-Spandex", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -922,7 +946,7 @@ async function main() {
               imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "19mm Mulberry Silk", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
               ],
@@ -934,7 +958,7 @@ async function main() {
               imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Organic Cotton Velour Terry", priceMinCents: 4200, priceMaxCents: 5600, setupFeeCents: 18000 },
               ],
@@ -955,7 +979,7 @@ async function main() {
               imageUrl: "/images/subcategories/loungewear-underwear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Micro-Modal Cotton Blend", priceMinCents: 900, priceMaxCents: 1400, setupFeeCents: 10000 },
               ],
@@ -967,7 +991,7 @@ async function main() {
               imageUrl: "/images/subcategories/loungewear-underwear.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["SLIM", "REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Pure Micro-Modal Elastane", priceMinCents: 1000, priceMaxCents: 1500, setupFeeCents: 10000 },
               ],
@@ -988,7 +1012,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Organic Heavy Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
               ],
@@ -1000,7 +1024,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR", "RELAXED"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Modal Cotton Jersey", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
               ],
@@ -1021,7 +1045,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 10,
               moq: 100,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Mercerized Ribbed Cotton", priceMinCents: 450, priceMaxCents: 750, setupFeeCents: 8000 },
               ],
@@ -1033,7 +1057,7 @@ async function main() {
               imageUrl: "/images/catalog/loungewear.png",
               leadTimeDays: 10,
               moq: 100,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Extra-Fine Merino Wool Blend", priceMinCents: 650, priceMaxCents: 950, setupFeeCents: 8000 },
               ],
@@ -1063,7 +1087,7 @@ async function main() {
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Full-Grain Italian Calfskin", priceMinCents: 8500, priceMaxCents: 12500, setupFeeCents: 25000 },
               ],
@@ -1075,7 +1099,7 @@ async function main() {
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Italian Suede & Leather", priceMinCents: 7800, priceMaxCents: 11000, setupFeeCents: 25000 },
               ],
@@ -1087,7 +1111,7 @@ async function main() {
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 21,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Smooth Nappa Calfskin", priceMinCents: 6500, priceMaxCents: 9500, setupFeeCents: 22000 },
               ],
@@ -1108,7 +1132,7 @@ async function main() {
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Vegetable Tanned Leather", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 12000 },
               ],
@@ -1120,7 +1144,7 @@ async function main() {
               imageUrl: "/images/catalog/accessories.png",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Italian Suede Leather", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 12000 },
               ],
@@ -1141,7 +1165,7 @@ async function main() {
               imageUrl: "/images/subcategories/accessories-ties.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "7-Fold Woven Silk", priceMinCents: 1800, priceMaxCents: 2600, setupFeeCents: 10000 },
               ],
@@ -1153,7 +1177,7 @@ async function main() {
               imageUrl: "/images/subcategories/accessories-ties.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Pure Silk Satin Grosgrain", priceMinCents: 1400, priceMaxCents: 2000, setupFeeCents: 10000 },
               ],
@@ -1174,7 +1198,7 @@ async function main() {
               imageUrl: "/images/subcategories/accessories-scarves.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "100% Mongolian Cashmere", priceMinCents: 3500, priceMaxCents: 4800, setupFeeCents: 15000 },
               ],
@@ -1186,7 +1210,7 @@ async function main() {
               imageUrl: "/images/subcategories/accessories-scarves.jpg",
               leadTimeDays: 14,
               moq: 50,
-              fits: ["REGULAR"],
+              fits: [], // Excluded
               fabrics: [
                 { name: "Silk Twill (Hand-Rolled)", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 8000 },
               ],
@@ -1271,23 +1295,20 @@ async function main() {
           });
         }
 
-        // Link allowed fits
-        if (prodDef.fits) {
+        // Link allowed fits (clear previous if updating)
+        await prisma.productFit.deleteMany({
+          where: { productId: product.id },
+        });
+
+        if (prodDef.fits && prodDef.fits.length > 0) {
           for (const fitCode of prodDef.fits) {
             const fitId = createdFits[fitCode];
             if (fitId) {
-              await prisma.productFit.upsert({
-                where: {
-                  productId_fitId: {
-                    productId: product.id,
-                    fitId,
-                  },
-                },
-                create: {
+              await prisma.productFit.create({
+                data: {
                   productId: product.id,
                   fitId,
                 },
-                update: {},
               });
             }
           }
@@ -1321,7 +1342,7 @@ async function main() {
     }
   }
 
-  console.log("🌱 Database Seeding with Fit Dimension completed successfully!");
+  console.log("🌱 8-Value Fit Seeding & Category Exclusions completed successfully!");
 }
 
 main()
