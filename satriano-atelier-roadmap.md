@@ -1,212 +1,131 @@
-# Satriano Atelier — MVP Architecture Blueprint (v4 — expanded scope, English-only)
+# Satriano Atelier — Roadmap v5 (as of July 31, 2026)
 
-**Scope:** B2B Made-to-Order e-commerce + multi-category product catalog + B2B partner portal + workflow automation
-**Capacity assumption:** Solo developer, ~2 hours/day
-**Estimated duration:** 14-18 weeks (revised from v3's 10-14 weeks — see "Why the estimate changed" below)
-**Development environment:** Google Antigravity
-**Cost principle:** Zero fixed cost — usage/commission-based services only (Vercel free tier, Supabase free tier, Stripe transaction fees)
-
-> **Why the estimate changed (v3 → v4):** v3 already expanded once, from a single product type to a 7-group, multi-category catalog. As of July 31, 2026, three further modules were built that were not in v3's scope: a B2B customer portal (login + partner application + approval flow), an admin console gated by a "Corporate Access Key," and six legal/compliance pages. This is not a return to the original cancelled roadmap (state machine, roles, stock tracking — 5.5-7 months); the core workflow (proforma → payment → production) is still a single order at a time, with no cart. But the added modules are real subsystems with their own state and, in one case, an unverified security mechanism — so the estimate and scope boundaries below have been revised to reflect what actually exists and what still needs verification.
+**Previous version:** v4 (pre-Product restructure, single-level Subcategory catalog, auto-calculated pricing model)
+**This version:** consolidates every architectural change, production infrastructure setup, and admin panel inventory completed since v4.
 
 ---
 
-## 1. MVP Scope Boundaries (Current)
+## 1. Catalog Architecture — Fully Restructured
 
-- ✅ Multi-category / subcategory catalog (7 main groups + 21 subcategories — see Section 4)
-- ✅ Single payment method: **Stripe** (domestic + international card acceptance, no monthly fee)
-- ✅ Single language (English — customer base is outside Turkey)
-- ✅ Simple admin panel — order list + product/category management, no complex role system
-- ✅ Size list is product-specific and editable from the admin panel (no free-text measurement, no hardcoding either)
-- ✅ No cart — one product is configured at a time and goes straight to proforma
-- ✅ **B2B partner portal** (login + 3-step application + approval-pending screen) — *promoted from Phase 3 backlog; frontend already built, backend confirmed missing — decided to build in full (see Section 4a)*
-- ✅ **Admin console gated by "Corporate Access Key"** — *decided: server-side validation. Must protect both the page and every admin API route, not just the UI gate — see Section 9*
-- ✅ **Six legal/compliance pages** (Terms, Privacy, B2B Supply Terms, Security, Cookies, Ethics) — static content, low risk
-- ✅ Product photography: AI-generated, high resolution. No strict faceless/no-model rule — both human-featured and faceless images are acceptable; consistency approach across the 21 subcategories is still open (see Section 10)
-- ❌ Second payment method (bank transfer / B2B net terms) — Phase 3
-- ❌ Automatic DPI/color checking — Phase 3
-- ❌ Advanced search/filtering (price range, multi-filter combinations) — Phase 3
-- ❌ Order history view inside the B2B portal — Phase 3 (the portal itself is now in-scope, but this specific feature is not)
+**Old (v4):** Category → Subcategory (2 levels), Fabric scoped to Subcategory, hardcoded `lib/categoriesData.ts`.
 
----
+**New (v5):** **Category → Subcategory → Product** (3 levels), fully database-backed.
 
-## 2. Technology Stack
+- **7 Categories** (Tops, Bottoms, Outerwear, Formal Wear, Sportswear, Underwear & Loungewear, Accessories)
+- **~28 Subcategories**
+- **65 Products** — each with its own Fabric/price set, Fit options, and MOQ values
+- Previously merged names (e.g. "Dress & Casual Shirts") were fully split into separate Products
 
-*(unchanged from v3)*
-
-| Layer | Technology | Why |
-|---|---|---|
-| Framework | **Next.js (React)** | Frontend + API routes in one project, native fit with Vercel |
-| Database | **Supabase (PostgreSQL, free tier)** | Auth, storage, and DB in one service |
-| File storage | **Supabase Storage** | For logo/vector files, 1GB free tier |
-| PDF generation | **@react-pdf/renderer** or **pdf-lib** | Open source, for the proforma invoice |
-| Email | **Resend** or **Nodemailer + Gmail SMTP** | For sending the proforma |
-| Payment | **Stripe** | Domestic + international card acceptance, no monthly fee |
-| Hosting | **Vercel (free tier)** | Native fit for Next.js, automatic deploys |
+### New dimensions added:
+- **Fit:** 8 values (Slim, Regular, Relaxed, Tailored, Skinny, Tapered, Modern, Oversized). 41 products have Fit options linked; 24 products (Sportswear, Underwear & Loungewear, Accessories) deliberately excluded since fit/cut isn't a meaningful dimension for those.
+- **Size System (EU/US):** 10 size systems (Alpha, Waist, Chest, Shoe, OneSize × EU/US regions). Turkey/Middle East mapped to the EU system.
+- **Two-Tier MOQ:**
+  - `moqPerFabric` — minimum order quantity for a single fabric/colorway
+  - `moqCombinedMultiFabric` — minimum combined total when mixing multiple fabrics/colors of the same product (schema + seed data in place; **validation not yet enforced** — multi-fabric-per-order isn't built yet, only single-fabric MOQ is currently validated)
+  - All 65 products seeded with real MOQ values from the user-provided spreadsheet
 
 ---
 
-## 3. Folder Structure (v3 + today's additions)
+## 2. Pricing Model — Fully Changed
 
-```
-satriano-atelier/
-├── app/
-│   ├── page.tsx                    # Homepage (brand intro + category showcase)
-│   ├── categories/
-│   │   ├── page.tsx                 # List of all product groups
-│   │   └── [categorySlug]/page.tsx  # Subcategories + featured pieces table
-│   ├── configure/
-│   │   └── [productId]/page.tsx     # Configurator: size/material + file upload
-│   ├── checkout/
-│   │   └── page.tsx                 # Proforma confirmation + Stripe payment
-│   ├── order-confirmation/
-│   │   └── [orderId]/page.tsx
-│   ├── portal/                                  # NEW — B2B customer portal
-│   │   └── page.tsx                             # 3 states: login / apply / submitted
-│   ├── admin/
-│   │   ├── page.tsx                             # Corporate Access Key gate (order list beyond it)
-│   │   ├── [orderId]/page.tsx
-│   │   └── product-settings/
-│   │       ├── page.tsx
-│   │       └── [productId]/page.tsx
-│   ├── legal/                                   # NEW — 6 static pages
-│   │   ├── terms/page.tsx
-│   │   ├── privacy/page.tsx
-│   │   ├── supply-terms/page.tsx
-│   │   ├── security/page.tsx
-│   │   ├── cookies/page.tsx
-│   │   └── ethics/page.tsx
-│   └── api/
-│       ├── orders/
-│       │   ├── route.ts
-│       │   └── [orderId]/route.ts
-│       ├── upload/route.ts
-│       ├── proforma/route.ts
-│       ├── categories/route.ts
-│       ├── products/
-│       │   ├── route.ts
-│       │   └── [productId]/route.ts
-│       ├── applications/                        # UNVERIFIED — may not exist yet
-│       │   └── route.ts                         # POST: submit application, GET (admin): list
-│       └── payment/
-│           ├── create-session/route.ts
-│           └── webhook/route.ts
-├── lib/
-│   ├── supabase.ts
-│   ├── pricing.ts
-│   ├── pdf-generator.ts
-│   └── email.ts
-├── components/
-│   ├── CategoryGrid.tsx
-│   ├── ProductTable.tsx
-│   ├── ConfiguratorForm.tsx
-│   ├── FileUpload.tsx
-│   ├── OrderStatusBadge.tsx
-│   └── AdminOrderTable.tsx
-└── types/
-    └── order.ts
-```
+**Old (v4):** System auto-calculates an exact price and sends the proforma immediately.
+
+**New (v5):**
+1. Customer selects a fabric → sees a **price range** (not an exact price): `Fabric.priceMinCents`–`priceMaxCents`
+2. Customer enters their own **target price** (`Order.customerTargetPriceCents`)
+3. Order is created in `PENDING_REVIEW` status — **no automatic proforma is sent**
+4. Admin reviews feasibility, sets `finalPriceCents`, and manually triggers the proforma
+5. Customer sees an "under review" state at `/proforma/[orderId]` until the final price is set
+
+`OrderStatus` enum: `DRAFT → PENDING_REVIEW → PROFORMA_SENT → APPROVED → PAID → IN_PRODUCTION → SHIPPED / CANCELLED`
 
 ---
 
-## 4. Data Model (Supabase / PostgreSQL)
+## 3. Production Infrastructure — Set Up and Verified
 
-`categories`, `products`, `orders` tables — unchanged from v3 (see original definitions; omitted here for brevity, no changes).
+- **Database:** Supabase PostgreSQL (`satriano-atelier-prod`, Frankfurt/eu-central-1), via Prisma ORM, using the pooler connection (port 6543) for runtime and the direct connection (port 5432) for migrations
+- **Vercel Environment Variables (Production):** `DATABASE_URL`, `DIRECT_URL`, `ADMIN_ACCESS_KEY`, `ADMIN_JWT_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_URL`
+- **Supabase Storage:**
+  - `logos` bucket — customer logo/vector uploads
+  - `proformas` bucket — **private**, signed-URL access. The fixed endpoint `/api/proforma/pdf/[orderId]` generates a fresh signed URL on every request and 307-redirects to it — the shared link never breaks and the bucket never needs to be public.
+- **Data API (Supabase REST):** Disabled — no table is auto-exposed over REST; all access goes through Prisma (deliberate security decision)
+- **Production smoke test:** All core routes (`/`, `/categories`, `/konfigurator/*`, `/admin`, `/portal`) return 200 with real Supabase-backed data
 
-### 4a. `b2b_applications` table — **CONFIRMED MISSING, decided to build**
-
-Confirmed (Aug 2026): the backend does not exist yet. The portal's "Application Submitted" screen is currently a UI-only state — no data is persisted, nobody on the admin side sees it. Decision: build it in full.
-
-| Column | Type | Description |
-|---|---|---|
-| `id` | uuid (PK) | Application ID |
-| `company_name` | text | Company name |
-| `contact_name` | text | Contact person |
-| `contact_email` | text | Email |
-| `status` | text | `submitted` → `under_review` → `approved` / `rejected` |
-| `submitted_data` | jsonb | Full 3-step form payload |
-| `created_at` | timestamptz | |
-| `reviewed_at` | timestamptz (nullable) | |
-| `reviewed_by` | text (nullable) | |
-
-**Implementation checklist:**
-1. Create `b2b_applications` table (schema above)
-2. `POST /api/applications` — public, called from the portal's 3-step form on final submit
-3. `GET /api/applications` — admin-only, server-side protected (see Section 9)
-4. Simple admin screen: `/admin/applications` — list + approve/reject action (updates `status`)
-5. Wire the portal's "Application Submitted" screen to actually call the `POST` endpoint — verify this is not already faked as a static success state
-6. Optional: email notification to admin on new submission (can reuse `lib/email.ts`)
+### Key lessons from this rollout:
+- When adding a connection string to Vercel, **never manually splice the password into the URL** — copy the full string directly from Supabase's "Connect → ORM → Prisma" modal. Manually combining special characters (`$`, `%`) in the password broke URL parsing.
+- Never keep real/production values in a tracked `.env` file — only `.env.local` (gitignored) should. A stray local placeholder in `.env` got bundled into a Vercel build and caused production to try connecting to `127.0.0.1`.
+- Adding a new env var in Vercel requires a manual redeploy — it does not take effect automatically.
+- A "works right after generation" test is not sufficient proof for anything involving file storage — verify with a genuine cold test (2+ minutes later) before declaring it fixed.
 
 ---
 
-## 5. Main Workflow (End to End)
+## 4. Security — Admin Auth Hardened Permanently
 
-*(core order workflow unchanged from v3 — see Section 5 of the original document)*
-
-**New workflow branch — B2B portal application (to be built, see Section 4a):**
-```
-1. Visitor on /portal → "Become a B2B Partner"
-2. 3-step form (company info → contact → review) → submit
-3. POST /api/applications → creates row in b2b_applications (status: "submitted")
-4. "Application Submitted" screen confirmed shown after a real API response, not before
-5. Admin reviews at /admin/applications → approve/reject → status updated
-```
+- Server-side JWT (via `jose`, HS256, pinned algorithm), httpOnly signed cookie
+- `middleware.ts` protects both `/admin` pages and all `/api/admin/*` routes
+- Hardcoded fallback secrets fully removed — missing env vars now throw a hard error instead of silently falling back to an insecure default
+- **Standing rule:** no destructive database command (`--force-reset`, `migrate reset`, `env rm`, etc.) is ever run without pasting the exact command and getting explicit "yes, run it" confirmation first
+- **Standing rule:** secret/credential values are never printed in chat or debug logs — only pass/fail confirmations are shared
 
 ---
 
-## 6. Stripe Integration Notes
+## 5. Admin Panel — Full Inventory (audited July 31)
 
-*(unchanged from v3)*
+### ✅ Working
+- Corporate Access Key auth, server-side, session cookie, logout
+- Order list + detail view (company, target price, fabric/size/fit/quantity)
+- Set final price + manually trigger proforma (PENDING_REVIEW → PROFORMA_SENT)
+- Full order status lifecycle including SHIPPED/CANCELLED (fixed today)
+- Logo/vector file visibility (added today)
+- Persistent proforma PDF access via private bucket + signed URL (fixed today)
+- Category → Subcategory → Product hierarchy view
+- Product active/inactive toggle, Fabric active toggle, Fit toggle, MOQ editor
+- Size system view (read-only)
 
----
+### 🟡 Partial / needs re-verification
+- Order status filter tabs — now send `?status=` to the API (fixed today, not yet re-verified)
+- Multi-line orders only display the first line item
 
-## 7. Post-MVP (Phase 2/3 — Backlog)
-
-- Second payment method (bank transfer / B2B net terms)
-- Automatic email notifications on every status change
-- Simple stock/capacity tracking
-- Advanced search/filtering
-- Cross-product comparison / outfit-suggestion enrichments
-- ~~Self-service customer portal~~ — **moved into MVP scope (Section 1)**; order-history view specifically remains Phase 3
-
----
-
-## 8. Getting Started in Antigravity — Suggested Order (v3, still valid for remaining work)
-
-1. Set up Next.js + Supabase — *done*
-2. Seed category data — *done, expanded to 21 subcategories*
-3. `/categories` pages — *done*
-4. `/configure/[productId]` + FileUpload — *done*
-5. Admin `/product-settings` — *done*
-6. Pricing function — *done*
-7. Proforma PDF + email — *done*
-8. Stripe test mode integration — *done*
-9. Admin order panel — *done, but implement Section 9's server-side checklist across all admin API routes*
-10. **PostgreSQL local connection** — *blocked; 4 integration tests failing*
-11. **Stripe live account + bank connection** — *not started*
-12. **Implement server-side admin auth** — *decided, see Section 9 checklist*
-13. **Build `b2b_applications` backend** — *decided, see Section 4a implementation checklist*
+### ❌ Missing entirely
+- Admin UI for B2B applications (API exists, no screen)
+- Category/Subcategory CRUD (no create/edit form)
+- Fabric price-range editing UI (API supports it, no form)
+- Size system CRUD
+- Admin KPI/overview dashboard
+- Multi-admin / per-user identity (single shared key)
+- Audit log
+- Order search
 
 ---
 
-## 9. Admin Access — Decision: Server-Side Validation
+## 6. Three Launch-Blocking Issues Closed Today
 
-Decided (Aug 2026): the "Corporate Access Key" gate must be server-side, not client-side. Cost difference between the two is minor (roughly 30-60 extra minutes of implementation), while the security difference is large — client-side checks expose the key in the browser bundle and can be bypassed by calling admin API routes directly.
-
-**Implementation checklist:**
-- Key checked in **middleware or an API route**, never in a client component (`if (key === "...")` in a component is readable from the bundle).
-- Key stored as a server-only env variable (not `NEXT_PUBLIC_*`), never hardcoded in the repo.
-- Session handling uses a server-validated mechanism (signed cookie / JWT) — not a client-side flag like `localStorage`.
-- **Every admin API route** is protected individually (`/api/orders`, `/api/products`, `/api/applications`, etc.) — protecting the `/admin` page alone is not enough, since API routes can be called directly, bypassing the page entirely.
+1. **Logo file wasn't visible in admin** → fixed, download link added
+2. **Proforma PDF was lost in production** (ephemeral disk) → moved to Supabase private bucket + signed URL flow, verified with a genuine cold-storage test
+3. **SHIPPED/CANCELLED status transitions were blocked** → whitelist fixed
 
 ---
 
-## 10. Product Photography Policy
+## 7. Remaining Priority Order (not yet done)
 
-Photos are AI-generated, high resolution. There is **no strict rule requiring faceless/no-model images** — both human-featured and faceless photography are acceptable. What's still open: whether a consistent approach is applied per category (e.g. formalwear with models, accessories without) or whether it's fully mixed with no pattern. This is a low-risk item (no functional or legal impact — AI generation removes the third-party copyright concern that would otherwise apply to real brand catalog photos) but worth a quick decision for visual consistency across the 21 subcategories.
+1. Codebase health audit (skill added — `codebase-health-audit`) — not yet run
+2. B2B applications admin UI
+3. Fabric price editing UI
+4. Admin KPI dashboard
+5. Category/Subcategory CRUD
+6. Multi-fabric-per-order feature (without this, `moqCombinedMultiFabric` validation has nothing to enforce)
+7. Stripe live account migration — **deliberately deferred**, will not happen until UI/UX and customer feedback have matured
+8. Local PostgreSQL dev environment — still separate, kept in sync with production Supabase manually
 
 ---
 
-## 11. Remaining Original MVP Blocked Items (still open, not superseded by new modules)
+## 8. Standing Tools Added (Skills)
 
-- PostgreSQL local connection inactive → 4 integration tests blocked
-- Stripe test-mode → live account + bank connection not yet done
+- `codebase-health-audit` — dead code / over-engineering audit
+- `feature-inventory-audit` — full inventory of a feature area (used on the admin panel today, produced high-value findings)
+
+---
+
+## 9. General Lesson (for this roadmap itself)
+
+Several times in this project, something was reported as "done" but turned out not to actually work (category count, admin key mechanism, whether the pricing model was really implemented, the "cold test" false positive pattern). Lesson: **"done" status should be periodically re-verified with `feature-inventory-audit`, especially after a major schema/architecture change** — a task's report can be accurate at the time, and still get silently broken by a later change.
