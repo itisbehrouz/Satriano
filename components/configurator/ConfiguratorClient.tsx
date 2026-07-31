@@ -18,6 +18,7 @@ interface ConfiguratorClientProps {
   subcategoryDescription?: string;
   categoryTitle?: string;
   sizeSystems?: SizeSystemDef[];
+  moqPerFabric?: number;
 }
 
 export function ConfiguratorClient({
@@ -28,6 +29,7 @@ export function ConfiguratorClient({
   subcategoryDescription,
   categoryTitle,
   sizeSystems = [],
+  moqPerFabric = 50,
 }: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
@@ -151,7 +153,7 @@ export function ConfiguratorClient({
             <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
               <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#2E5AAC]">checkroom</span>
-                2. Garment Fit (Kalıp) Selection
+                2. Garment Fit (Kalip) Selection
               </h2>
               <FitPicker
                 fits={fits}
@@ -164,7 +166,7 @@ export function ConfiguratorClient({
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">grid_on</span>
-              {fits.length > 0 ? "3" : "2"}. Regional Sizing &amp; Unit Matrix
+              {fits.length > 0 ? "3" : "2"}. Regional Sizing & Unit Matrix
             </h2>
             <SizeQtyTable
               sizeSystems={sizeSystems}
@@ -172,13 +174,14 @@ export function ConfiguratorClient({
               onRegionChange={setActiveRegion}
               quantities={sizeQuantities}
               onChange={setSizeQuantities}
+              moqPerFabric={moqPerFabric}
             />
           </section>
 
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">upload_file</span>
-              {fits.length > 0 ? "4" : "3"}. Vector Logo &amp; Placement
+              {fits.length > 0 ? "4" : "3"}. Vector Logo & Placement
             </h2>
             <LogoUploader
               file={logoFile}
@@ -191,7 +194,7 @@ export function ConfiguratorClient({
           <section className="bg-white border border-[#D1D5DB] rounded-lg p-6">
             <h2 className="text-lg font-semibold text-[#1A2233] mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#2E5AAC]">corporate_fare</span>
-              {fits.length > 0 ? "5" : "4"}. Company Information &amp; Target Budget
+              {fits.length > 0 ? "5" : "4"}. Company Information & Target Budget
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
@@ -217,7 +220,7 @@ export function ConfiguratorClient({
                   placeholder="procurement@acme.com"
                   value={companyEmail}
                   onChange={(e) => setCompanyEmail(e.target.value)}
-                  className="w-full border border-[#D1D5DB] rounded px-3 py-2 text-sm focus:border-[#2E5AAC] focus:outline-none"
+                  className="w-full sm:w-1/2 border border-[#D1D5DB] rounded px-3 py-2 text-sm focus:border-[#2E5AAC] focus:outline-none"
                 />
               </div>
             </div>
@@ -250,6 +253,8 @@ export function ConfiguratorClient({
             onSubmit={handleSubmit}
             submitting={submitting}
             errorMessage={submitError}
+            totalUnits={Object.values(sizeQuantities).reduce((sum, qty) => sum + (qty || 0), 0)}
+            moqPerFabric={moqPerFabric}
           />
         </div>
       </div>

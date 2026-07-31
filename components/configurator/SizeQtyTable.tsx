@@ -21,9 +21,17 @@ interface SizeQtyTableProps {
   onRegionChange: (region: "EU" | "US") => void;
   quantities: Record<string, number>;
   onChange: (quantities: Record<string, number>) => void;
+  moqPerFabric?: number;
 }
 
 const DEFAULT_ALPHA_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
+
+/**
+ * Stepper increment for quantity inputs.
+ * +1 per click is the most usable default — precise enough for wholesale MOQ tracking.
+ * Long-press behavior: browsers auto-repeat keydown; user gets +N naturally without extra logic.
+ */
+const STEP_INCREMENT = 1;
 
 export function SizeQtyTable({
   sizeSystems = [],
@@ -31,10 +39,27 @@ export function SizeQtyTable({
   onRegionChange,
   quantities,
   onChange,
+  moqPerFabric = 50,
 }: SizeQtyTableProps) {
   // Find system matching active region (e.g. EU or US)
   const currentSystem = sizeSystems.find((sys) => sys.region === activeRegion) || sizeSystems[0];
   const sizeOptions = currentSystem?.options.map((o) => o.label) || DEFAULT_ALPHA_SIZES;
+
+  function handleQtyChange(size: string, rawValue: string) {
+    onChange({
+      ...quantities,
+      [size]: parseQuantityInput(rawValue),
+    });
+  }
+
+  function handleStepClick(size: string, direction: "up" | "down") {
+    const current = quantities[size] ?? 0;
+    const delta = direction === "up" ? STEP_INCREMENT : -STEP_INCREMENT;
+    onChange({
+      ...quantities,
+      [size]: Math.max(0, current + delta),
+    });
+  }
 
   return (
     <div className="border border-[#D1D5DB] rounded-lg bg-white overflow-hidden shadow-sm">
@@ -53,22 +78,20 @@ export function SizeQtyTable({
             <button
               type="button"
               onClick={() => onRegionChange("EU")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${
-                activeRegion === "EU"
+              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${activeRegion === "EU"
                   ? "bg-[#2E5AAC] text-white shadow-sm"
                   : "text-[#5B6B85] hover:text-[#1A2233]"
-              }`}
+                }`}
             >
               EU Standard
             </button>
             <button
               type="button"
               onClick={() => onRegionChange("US")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${
-                activeRegion === "US"
+              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${activeRegion === "US"
                   ? "bg-[#2E5AAC] text-white shadow-sm"
                   : "text-[#5B6B85] hover:text-[#1A2233]"
-              }`}
+                }`}
             >
               US Standard
             </button>
@@ -91,19 +114,41 @@ export function SizeQtyTable({
                   {size} <span className="text-[11px] font-normal text-[#5B6B85]">({activeRegion})</span>
                 </td>
                 <td className="py-3 px-4 text-right">
+                  {/* Direct number input — still editable by typing */}
                   <input
-                    aria-label={`${size} ${activeRegion}`}
+                    aria-label={`decrease quantity for size ${size}`}
+                    aria-describedby={`${size}_qty_label`}
                     className="w-28 bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none py-1.5 px-3 rounded text-sm text-right font-medium tabular-nums"
                     min={0}
                     type="number"
                     value={quantities[size] ?? 0}
                     onChange={(event) =>
-                      onChange({
-                        ...quantities,
-                        [size]: parseQuantityInput(event.target.value),
-                      })
+                      handleQtyChange(size, event.target.value)
                     }
                   />
+                  {/* Label for accessibility */}
+                  <span id={`${size}_qty_label`} className="text-[11px] text-[#5B6B85]">
+                    increase quantity for size {size}
+                  </span>
+                  {/* +/- Stepper buttons — 44x44px touch target minimum via button-element */}
+                  <div className="inline-flex px-2 py-1" style={{ minWidth: "88px" }}>
+                    <button
+                      type="button"
+                      aria-label={`decrease quantity for size ${size}`}
+                      onClick={() => handleStepClick(size, "down")}
+                      className="px-4.5 py-4 text-xs font-mono rounded border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
+                    >
+                      −
+                    </button>
+                    <button
+                      type="button"
+                      aria-label={`increase quantity for size ${size}`}
+                      onClick={() => handleStepClick(size, "up")}
+                      className="px-4.5 py-4 text-xs font-mono rounded border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

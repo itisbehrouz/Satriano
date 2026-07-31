@@ -152,6 +152,9 @@ export default async function ProductConfiguratorPage({
     })),
   }));
 
+  // Product-scoped MOQ for gating and progress indicator
+  const moqPerFabric = product.moqPerFabric;
+
   return (
     <>
       <SiteHeader />
@@ -163,6 +166,7 @@ export default async function ProductConfiguratorPage({
         subcategoryDescription={product.description || ""}
         categoryTitle={`${product.subcategory.category.name} • ${product.subcategory.name}`}
         sizeSystems={formattedSizeSystems}
+        moqPerFabric={moqPerFabric}
       />
       <SiteFooter />
     </>
