@@ -27,7 +27,7 @@ interface Fabric {
   active: boolean;
 }
 
-interface Subcategory {
+interface Product {
   id: string;
   name: string;
   slug: string;
@@ -35,8 +35,17 @@ interface Subcategory {
   leadTimeDays?: number;
   moq?: number;
   active: boolean;
-  sizeSystems: Array<{ sizeSystem: SizeSystem }>;
   fabrics: Fabric[];
+}
+
+interface Subcategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  active: boolean;
+  sizeSystems: Array<{ sizeSystem: SizeSystem }>;
+  products: Product[];
 }
 
 interface Category {
@@ -97,14 +106,14 @@ export default function AdminProductSettingsPage() {
     }
   }
 
-  async function toggleSubcategoryActive(subId: string, currentActive: boolean) {
+  async function toggleProductActive(prodId: string, currentActive: boolean) {
     try {
       const res = await fetch("/api/admin/catalog", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          target: "subcategory",
-          id: subId,
+          target: "product",
+          id: prodId,
           data: { active: !currentActive },
         }),
       });
@@ -165,10 +174,10 @@ export default function AdminProductSettingsPage() {
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2E5AAC] mb-1">
                 <Link href="/admin" className="hover:underline">Admin Console</Link>
                 <span>/</span>
-                <span>Product Settings</span>
+                <span>3-Level Product Settings</span>
               </div>
               <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
-                Catalog &amp; Size Systems Management
+                Category → Subcategory → Product Management
               </h1>
             </div>
 
@@ -191,7 +200,7 @@ export default function AdminProductSettingsPage() {
                   : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
               }`}
             >
-              Categories &amp; Subcategories
+              Category → Subcategory → Products
             </button>
             <button
               type="button"
@@ -213,77 +222,84 @@ export default function AdminProductSettingsPage() {
                   : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
               }`}
             >
-              Subcategory Fabrics &amp; Ranges
+              Product Fabrics &amp; Ranges
             </button>
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-[#5B6B85]">Loading catalog settings…</div>
+            <div className="p-12 text-center text-[#5B6B85]">Loading 3-level catalog settings…</div>
           ) : error ? (
             <div className="p-4 bg-[#FCEBEB] text-[#A32D2D] rounded text-sm">{error}</div>
           ) : (
             <>
-              {/* TAB 1: Categories & Subcategories */}
+              {/* TAB 1: Category -> Subcategory -> Product */}
               {activeTab === "catalog" && (
                 <div className="space-y-8">
                   {categories.map((cat) => (
                     <div key={cat.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                      <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-4 mb-4">
-                        <div>
-                          <h2 className="text-xl font-bold text-[#1A2233]">{cat.name}</h2>
-                          <p className="text-xs text-[#5B6B85] mt-0.5">{cat.description}</p>
-                        </div>
-                        <span className="text-xs font-mono text-[#5B6B85]">slug: {cat.slug}</span>
+                      <div className="border-b border-[#E5E7EB] pb-3 mb-6">
+                        <h2 className="text-xl font-bold text-[#1A2233]">{cat.name}</h2>
+                        <p className="text-xs text-[#5B6B85] mt-0.5">{cat.description}</p>
                       </div>
 
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs border-collapse">
-                          <thead>
-                            <tr className="bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#5B6B85] uppercase font-semibold">
-                              <th className="p-3">Subcategory</th>
-                              <th className="p-3">Slug</th>
-                              <th className="p-3">MOQ</th>
-                              <th className="p-3">Lead Time</th>
-                              <th className="p-3">Size Systems</th>
-                              <th className="p-3 text-right">Status / Action</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-[#E5E7EB]">
-                            {cat.subcategories.map((sub) => (
-                              <tr key={sub.id} className="hover:bg-[#F5F7FA]/60">
-                                <td className="p-3 font-semibold text-[#1A2233]">{sub.name}</td>
-                                <td className="p-3 font-mono text-[#5B6B85]">{sub.slug}</td>
-                                <td className="p-3 font-medium">{sub.moq ?? 50} units</td>
-                                <td className="p-3 font-medium">{sub.leadTimeDays ?? 14} days</td>
-                                <td className="p-3">
-                                  <div className="flex flex-wrap gap-1">
-                                    {sub.sizeSystems.map((ss) => (
-                                      <span
-                                        key={ss.sizeSystem.id}
-                                        className="bg-[#E6F1FB] text-[#185FA5] px-2 py-0.5 rounded text-[10px] font-semibold"
-                                      >
-                                        {ss.sizeSystem.name} ({ss.sizeSystem.region})
-                                      </span>
-                                    ))}
-                                  </div>
-                                </td>
-                                <td className="p-3 text-right">
-                                  <button
-                                    type="button"
-                                    onClick={() => toggleSubcategoryActive(sub.id, sub.active)}
-                                    className={`px-3 py-1 rounded text-[11px] font-semibold transition-colors ${
-                                      sub.active
-                                        ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
-                                        : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
-                                    }`}
-                                  >
-                                    {sub.active ? "Active" : "Disabled"}
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                      <div className="space-y-6">
+                        {cat.subcategories.map((sub) => (
+                          <div key={sub.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]/50">
+                            <div className="flex justify-between items-center mb-3 border-b border-[#E5E7EB] pb-2">
+                              <div>
+                                <h3 className="text-base font-bold text-[#1A2233] flex items-center gap-2">
+                                  {sub.name}
+                                  <span className="text-xs font-normal text-[#5B6B85]">({sub.products.length} products)</span>
+                                </h3>
+                                <div className="flex gap-1 mt-1">
+                                  {sub.sizeSystems.map((ss) => (
+                                    <span key={ss.sizeSystem.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-2 py-0.5 rounded">
+                                      {ss.sizeSystem.name} ({ss.sizeSystem.region})
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                              <span className="text-xs font-mono text-[#5B6B85]">subcategoryId: {sub.slug}</span>
+                            </div>
+
+                            <div className="overflow-x-auto">
+                              <table className="w-full text-left text-xs border-collapse bg-white border border-[#E5E7EB] rounded">
+                                <thead>
+                                  <tr className="bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#5B6B85] uppercase font-semibold">
+                                    <th className="p-3">Product Item</th>
+                                    <th className="p-3">Slug</th>
+                                    <th className="p-3">MOQ</th>
+                                    <th className="p-3">Lead Time</th>
+                                    <th className="p-3 text-right">Status / Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="divide-y divide-[#E5E7EB]">
+                                  {sub.products.map((prod) => (
+                                    <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
+                                      <td className="p-3 font-semibold text-[#1A2233]">{prod.name}</td>
+                                      <td className="p-3 font-mono text-[#5B6B85]">{prod.slug}</td>
+                                      <td className="p-3 font-medium">{prod.moq ?? 50} units</td>
+                                      <td className="p-3 font-medium">{prod.leadTimeDays ?? 14} days</td>
+                                      <td className="p-3 text-right">
+                                        <button
+                                          type="button"
+                                          onClick={() => toggleProductActive(prod.id, prod.active)}
+                                          className={`px-3 py-1 rounded text-[11px] font-semibold transition-colors ${
+                                            prod.active
+                                              ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
+                                              : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
+                                          }`}
+                                        >
+                                          {prod.active ? "Active" : "Disabled"}
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -319,50 +335,60 @@ export default function AdminProductSettingsPage() {
                 </div>
               )}
 
-              {/* TAB 3: Fabrics & Price Ranges */}
+              {/* TAB 3: Product Fabrics & Price Ranges */}
               {activeTab === "fabrics" && (
                 <div className="space-y-6">
                   {categories.map((cat) => (
                     <div key={cat.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
                       <h3 className="text-lg font-bold text-[#1A2233] mb-4 border-b border-[#E5E7EB] pb-2">
-                        {cat.name} — Subcategory Fabric Options
+                        {cat.name} — Product-Scoped Fabric Options
                       </h3>
 
-                      <div className="space-y-4">
+                      <div className="space-y-6">
                         {cat.subcategories.map((sub) => (
-                          <div key={sub.id} className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
-                            <h4 className="text-sm font-semibold text-[#1A2233] mb-2">
-                              {sub.name} <span className="text-xs text-[#5B6B85] font-normal">({sub.fabrics.length} materials)</span>
+                          <div key={sub.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]">
+                            <h4 className="text-sm font-bold text-[#1A2233] mb-3">
+                              Subcategory: {sub.name}
                             </h4>
 
-                            {sub.fabrics.length === 0 ? (
-                              <p className="text-xs text-[#5B6B85] italic">Uses global fallback fabric options.</p>
-                            ) : (
-                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {sub.fabrics.map((fab) => (
-                                  <div key={fab.id} className="bg-white p-3 rounded border border-[#D1D5DB]">
-                                    <div className="flex justify-between items-start mb-1">
-                                      <span className="font-semibold text-xs text-[#1A2233]">{fab.name}</span>
-                                      <button
-                                        type="button"
-                                        onClick={() => toggleFabricActive(fab.id, fab.active)}
-                                        className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
-                                          fab.active ? "bg-[#E1F5EE] text-[#0F6E56]" : "bg-[#FCEBEB] text-[#A32D2D]"
-                                        }`}
-                                      >
-                                        {fab.active ? "Active" : "Off"}
-                                      </button>
+                            <div className="space-y-4">
+                              {sub.products.map((prod) => (
+                                <div key={prod.id} className="bg-white p-4 rounded border border-[#D1D5DB]">
+                                  <h5 className="text-xs font-semibold text-[#2E5AAC] mb-2 uppercase tracking-wider">
+                                    Product: {prod.name} ({prod.fabrics.length} materials)
+                                  </h5>
+
+                                  {prod.fabrics.length === 0 ? (
+                                    <p className="text-xs text-[#5B6B85] italic">Uses global fallback fabric options.</p>
+                                  ) : (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                      {prod.fabrics.map((fab) => (
+                                        <div key={fab.id} className="bg-[#F5F7FA] p-3 rounded border border-[#E5E7EB]">
+                                          <div className="flex justify-between items-start mb-1">
+                                            <span className="font-semibold text-xs text-[#1A2233]">{fab.name}</span>
+                                            <button
+                                              type="button"
+                                              onClick={() => toggleFabricActive(fab.id, fab.active)}
+                                              className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
+                                                fab.active ? "bg-[#E1F5EE] text-[#0F6E56]" : "bg-[#FCEBEB] text-[#A32D2D]"
+                                              }`}
+                                            >
+                                              {fab.active ? "Active" : "Off"}
+                                            </button>
+                                          </div>
+                                          <div className="text-xs text-[#2E5AAC] font-semibold tabular-nums mt-1">
+                                            ${(fab.priceMinCents / 100).toFixed(2)} – ${(fab.priceMaxCents / 100).toFixed(2)} / unit
+                                          </div>
+                                          <div className="text-[11px] text-[#5B6B85] tabular-nums mt-0.5">
+                                            Setup: ${(fab.setupFeeCents / 100).toFixed(2)}
+                                          </div>
+                                        </div>
+                                      ))}
                                     </div>
-                                    <div className="text-xs text-[#2E5AAC] font-semibold tabular-nums mt-1">
-                                      ${(fab.priceMinCents / 100).toFixed(2)} – ${(fab.priceMaxCents / 100).toFixed(2)} / unit
-                                    </div>
-                                    <div className="text-[11px] text-[#5B6B85] tabular-nums mt-0.5">
-                                      Setup: ${(fab.setupFeeCents / 100).toFixed(2)}
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
+                                  )}
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         ))}
                       </div>

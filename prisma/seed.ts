@@ -6,60 +6,20 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("🌱 Starting Satriano Atelier DB seeding...");
+  console.log("🌱 Starting Satriano Atelier 3-Level Catalog DB Seeding...");
 
   // 1. Seed Size Systems & Options
   const sizeSystemDefs = [
-    {
-      name: "Alpha",
-      region: "EU",
-      labels: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    },
-    {
-      name: "Alpha",
-      region: "US",
-      labels: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
-    },
-    {
-      name: "Waist",
-      region: "EU",
-      labels: ["44", "46", "48", "50", "52", "54", "56", "58", "60"],
-    },
-    {
-      name: "Waist",
-      region: "US",
-      labels: ["28", "30", "32", "34", "36", "38", "40", "42"],
-    },
-    {
-      name: "Chest",
-      region: "EU",
-      labels: ["44", "46", "48", "50", "52", "54", "56", "58", "60"],
-    },
-    {
-      name: "Chest",
-      region: "US",
-      labels: ["34", "36", "38", "40", "42", "44", "46", "48", "50"],
-    },
-    {
-      name: "Shoe",
-      region: "EU",
-      labels: ["39", "40", "41", "42", "43", "44", "45", "46"],
-    },
-    {
-      name: "Shoe",
-      region: "US",
-      labels: ["7", "8", "9", "10", "11", "12", "13"],
-    },
-    {
-      name: "OneSize",
-      region: "EU",
-      labels: ["One Size"],
-    },
-    {
-      name: "OneSize",
-      region: "US",
-      labels: ["One Size"],
-    },
+    { name: "Alpha", region: "EU", labels: ["XS", "S", "M", "L", "XL", "2XL", "3XL"] },
+    { name: "Alpha", region: "US", labels: ["XS", "S", "M", "L", "XL", "2XL", "3XL"] },
+    { name: "Waist", region: "EU", labels: ["44", "46", "48", "50", "52", "54", "56", "58", "60"] },
+    { name: "Waist", region: "US", labels: ["28", "30", "32", "34", "36", "38", "40", "42"] },
+    { name: "Chest", region: "EU", labels: ["44", "46", "48", "50", "52", "54", "56", "58", "60"] },
+    { name: "Chest", region: "US", labels: ["34", "36", "38", "40", "42", "44", "46", "48", "50"] },
+    { name: "Shoe", region: "EU", labels: ["39", "40", "41", "42", "43", "44", "45", "46"] },
+    { name: "Shoe", region: "US", labels: ["7", "8", "9", "10", "11", "12", "13"] },
+    { name: "OneSize", region: "EU", labels: ["One Size"] },
+    { name: "OneSize", region: "US", labels: ["One Size"] },
   ];
 
   const createdSystems: Record<string, string> = {};
@@ -87,77 +47,215 @@ async function main() {
     createdSystems[`${sys.name}_${sys.region}`] = sizeSys.id;
   }
 
-  // 2. Categories & Subcategories Seed Matrix
-  const categoriesData = [
+  // 2. 3-Level Catalog Structure: Category -> Subcategory -> Product
+  const catalog = [
     {
       name: "Tops",
       slug: "tops",
-      description: "Shirts, Polo Shirts, Sweaters, T-Shirts & Knitwear",
+      description: "Shirts, Polo Shirts, Sweaters, T-Shirts & Hoodies",
       sortOrder: 1,
       imageUrl: "/images/catalog/tops.png",
       subcategories: [
         {
-          name: "Dress & Casual Shirts",
+          name: "Shirts",
           slug: "shirts",
-          description: "Crisp Oxford, Fine Poplin & Breathable Linen Dress Shirts.",
+          description: "Formal Dress Shirts, Casual Shirts & Breathable Linen Shirts.",
           imageUrl: "/images/subcategories/tops-shirts.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Oxford Cotton Poplin", priceMinCents: 1800, priceMaxCents: 2300, setupFeeCents: 15000 },
-            { name: "French Linen Blend", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Dress Shirt",
+              slug: "dress-shirt",
+              description: "Crisp Oxford & Fine Poplin Tailored Formal Dress Shirt.",
+              imageUrl: "/images/subcategories/tops-shirts.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Italian Poplin Cotton (120/2)", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
+                { name: "Royal Twill Oxford", priceMinCents: 2500, priceMaxCents: 3200, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Casual Shirt",
+              slug: "casual-shirt",
+              description: "Relaxed Fit Cotton & Chambray Button-Down Casual Shirt.",
+              imageUrl: "/images/subcategories/tops-shirts.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Washed Cotton Chambray", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Linen Shirt",
+              slug: "linen-shirt",
+              description: "100% Normandy Linen Resort & Summer Shirt.",
+              imageUrl: "/images/subcategories/tops-shirts.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "French Washed Linen", priceMinCents: 2600, priceMaxCents: 3400, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
           name: "Polo Shirts",
           slug: "polos",
-          description: "Classic Pique Cotton, Mercerized Jersey & Performance Blend Polo Shirts.",
+          description: "Classic Pique Cotton & Performance Blend Polo Shirts.",
           imageUrl: "/images/subcategories/tops-polos.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
-            { name: "Organic Cotton", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
-            { name: "Performance Jersey", priceMinCents: 2200, priceMaxCents: 2700, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Classic Polo Shirt",
+              slug: "classic-polo-shirt",
+              description: "Bespoke Pique & Organic Cotton Short Sleeve Polo Shirt.",
+              imageUrl: "/images/subcategories/tops-polos.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 },
+                { name: "Organic Cotton", priceMinCents: 1900, priceMaxCents: 2400, setupFeeCents: 15000 },
+                { name: "Performance Jersey", priceMinCents: 2200, priceMaxCents: 2700, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Pique Polo Shirt",
+              slug: "pique-polo-shirt",
+              description: "Heavyweight Textured Pique Polo with Ribbed Collar.",
+              imageUrl: "/images/subcategories/tops-polos.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Heavyweight Pique Cotton", priceMinCents: 1600, priceMaxCents: 2100, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Performance Polo",
+              slug: "performance-polo-shirt",
+              description: "Moisture-Wicking & Anti-Odor Athletic Polo Shirt.",
+              imageUrl: "/images/subcategories/tops-polos.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Technical Poly-Spandex Blend", priceMinCents: 2100, priceMaxCents: 2600, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
-          name: "Knitwear & Sweaters",
-          slug: "sweaters",
-          description: "Fine Merino Wool, Cashmere Blend & Organic Cotton Crewneck Sweaters.",
+          name: "Knitwear",
+          slug: "knitwear",
+          description: "Fine Merino Wool, Cashmere & Cotton Sweaters & Cardigans.",
           imageUrl: "/images/subcategories/tops-sweaters.png",
-          leadTimeDays: 18,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Extra-Fine Merino Wool", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 20000 },
-            { name: "Cashmere Cotton Knit", priceMinCents: 4500, priceMaxCents: 5800, setupFeeCents: 20000 },
+          products: [
+            {
+              name: "Crewneck Sweater",
+              slug: "crewneck-sweater",
+              description: "Fine Gauge Merino Wool Pullover Sweater.",
+              imageUrl: "/images/subcategories/tops-sweaters.png",
+              leadTimeDays: 18,
+              moq: 50,
+              fabrics: [
+                { name: "Extra-Fine Merino Wool", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 20000 },
+              ],
+            },
+            {
+              name: "Turtleneck Sweater",
+              slug: "turtleneck-sweater",
+              description: "Cashmere Blend Roll-Neck Knitwear.",
+              imageUrl: "/images/subcategories/tops-sweaters.png",
+              leadTimeDays: 18,
+              moq: 50,
+              fabrics: [
+                { name: "Cashmere Cotton Knit", priceMinCents: 4500, priceMaxCents: 5800, setupFeeCents: 20000 },
+              ],
+            },
+            {
+              name: "Knitted Cardigan",
+              slug: "knitted-cardigan",
+              description: "Button-Front Ribbed Knit Cardigan Jacket.",
+              imageUrl: "/images/subcategories/tops-sweaters.png",
+              leadTimeDays: 18,
+              moq: 50,
+              fabrics: [
+                { name: "Heavy Lambswool Blend", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 20000 },
+              ],
+            },
           ],
         },
         {
           name: "T-Shirts",
           slug: "t-shirts",
-          description: "Heavyweight Organic Cotton & Mercerized Crewneck T-Shirts.",
+          description: "Heavyweight Crewneck, V-Neck & Pocket T-Shirts.",
           imageUrl: "/images/subcategories/tops-polos.png",
-          leadTimeDays: 12,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Heavyweight Jersey (220gsm)", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 12000 },
+          products: [
+            {
+              name: "Heavyweight Crewneck T-Shirt",
+              slug: "heavyweight-t-shirt",
+              description: "220gsm Organic Cotton Heavyweight Crewneck T-Shirt.",
+              imageUrl: "/images/subcategories/tops-polos.png",
+              leadTimeDays: 12,
+              moq: 50,
+              fabrics: [
+                { name: "220gsm Heavy Organic Jersey", priceMinCents: 1200, priceMaxCents: 1700, setupFeeCents: 12000 },
+              ],
+            },
+            {
+              name: "V-Neck T-Shirt",
+              slug: "v-neck-t-shirt",
+              description: "Tailored Slim Fit Cotton V-Neck T-Shirt.",
+              imageUrl: "/images/subcategories/tops-polos.png",
+              leadTimeDays: 12,
+              moq: 50,
+              fabrics: [
+                { name: "Mercerized Combed Cotton", priceMinCents: 1300, priceMaxCents: 1800, setupFeeCents: 12000 },
+              ],
+            },
           ],
         },
         {
           name: "Sweatshirts & Hoodies",
           slug: "hoodies",
-          description: "French Terry & Bonded Fleece Pullover Hoodies & Crewnecks.",
+          description: "French Terry Fleece Pullovers, Zip Hoodies & Sweatshirts.",
           imageUrl: "/images/catalog/loungewear.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Heavy French Terry Fleece", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Pullover Hoodie",
+              slug: "pullover-hoodie",
+              description: "Heavy French Terry Fleece Pullover Hoodie with Kangaroo Pocket.",
+              imageUrl: "/images/catalog/loungewear.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "400gsm Heavy French Terry", priceMinCents: 2600, priceMaxCents: 3500, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Zip-Up Hoodie",
+              slug: "zip-hoodie",
+              description: "Full-Zip Fleece Hoodie with YKK Hardware.",
+              imageUrl: "/images/catalog/loungewear.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Brushed Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3700, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Crewneck Sweatshirt",
+              slug: "crewneck-sweatshirt",
+              description: "Classic Athletic Raglan Crewneck Sweatshirt.",
+              imageUrl: "/images/catalog/loungewear.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Heavy Loopback Cotton Fleece", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
       ],
@@ -165,57 +263,110 @@ async function main() {
     {
       name: "Bottoms",
       slug: "bottoms",
-      description: "Trousers, Skirts, Shorts & Sweatpants",
+      description: "Trousers, Chinos, Jeans, Shorts & Sweatpants",
       sortOrder: 2,
       imageUrl: "/images/catalog/bottoms.png",
       subcategories: [
         {
-          name: "Tailored Trousers & Pants",
+          name: "Trousers & Chinos",
           slug: "trousers",
-          description: "Bespoke Pleated Dress Pants, Chinos & Flat-Front Wool Trousers.",
+          description: "Tailored Dress Pants, Chinos & Flat-Front Wool Trousers.",
           imageUrl: "/images/subcategories/bottoms-trousers.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Waist_EU", "Waist_US"],
-          fabrics: [
-            { name: "Super 110s Wool Gabardine", priceMinCents: 3500, priceMaxCents: 4500, setupFeeCents: 18000 },
-            { name: "Stretch Cotton Twill", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Dress Pants",
+              slug: "dress-pants",
+              description: "Pleated & Flat-Front Tailored Wool Dress Pants.",
+              imageUrl: "/images/subcategories/bottoms-trousers.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Super 110s Wool Gabardine", priceMinCents: 3500, priceMaxCents: 4500, setupFeeCents: 18000 },
+              ],
+            },
+            {
+              name: "Chino Pants",
+              slug: "chino-pants",
+              description: "Stretch Cotton Twill Smart Casual Chino Trousers.",
+              imageUrl: "/images/subcategories/bottoms-trousers.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Stretch Cotton Twill", priceMinCents: 2200, priceMaxCents: 2800, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
-          name: "Chino & Linen Shorts",
-          slug: "shorts",
-          description: "Custom Tailored Chino Shorts & Relaxed Linen Drawstring Shorts.",
-          imageUrl: "/images/subcategories/bottoms-shorts.png",
-          leadTimeDays: 14,
-          moq: 50,
-          systems: ["Waist_EU", "Waist_US"],
-          fabrics: [
-            { name: "Washed Linen Twill", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
-          ],
-        },
-        {
-          name: "Tailored Skirts",
-          slug: "skirts",
-          description: "Structured Wool Pencil Skirts & A-Line Linen Skirts.",
-          imageUrl: "/images/subcategories/bottoms-skirts.png",
-          leadTimeDays: 14,
-          moq: 50,
-          systems: ["Waist_EU", "Waist_US"],
-          fabrics: [
-            { name: "Crepe Wool Blend", priceMinCents: 2600, priceMaxCents: 3400, setupFeeCents: 15000 },
-          ],
-        },
-        {
-          name: "Sweatpants & Joggers",
-          slug: "sweatpants",
-          description: "Heavyweight Fleece Sweatpants & Tapered Joggers.",
+          name: "Jeans",
+          slug: "jeans",
+          description: "Selvedge & Stretch Denim Jeans.",
           imageUrl: "/images/catalog/bottoms.png",
-          leadTimeDays: 14,
-          moq: 50,
+          systems: ["Waist_EU", "Waist_US"],
+          products: [
+            {
+              name: "Slim Fit Denim Jeans",
+              slug: "slim-fit-jeans",
+              description: "Japanese Selvedge & Stretch Cotton Denim Jeans.",
+              imageUrl: "/images/catalog/bottoms.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "13.5oz Japanese Selvedge Denim", priceMinCents: 3800, priceMaxCents: 4900, setupFeeCents: 18000 },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Shorts",
+          slug: "shorts",
+          description: "Chino Shorts, Linen Shorts & Cargo Shorts.",
+          imageUrl: "/images/subcategories/bottoms-shorts.png",
+          systems: ["Waist_EU", "Waist_US"],
+          products: [
+            {
+              name: "Tailored Chino Shorts",
+              slug: "chino-shorts",
+              description: "Smart Casual Stretch Cotton Chino Shorts.",
+              imageUrl: "/images/subcategories/bottoms-shorts.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Washed Cotton Twill", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
+              ],
+            },
+            {
+              name: "Linen Shorts",
+              slug: "linen-shorts",
+              description: "Relaxed Drawstring Linen Summer Shorts.",
+              imageUrl: "/images/subcategories/bottoms-shorts.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Pure Washed Linen", priceMinCents: 2000, priceMaxCents: 2600, setupFeeCents: 15000 },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Sweatpants",
+          slug: "sweatpants",
+          description: "Jogger Pants & Heavyweight Fleece Sweatpants.",
+          imageUrl: "/images/catalog/bottoms.png",
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Brushed Back Fleece", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Tapered Jogger Pants",
+              slug: "jogger-pants",
+              description: "Slim Tapered Athletic Fleece Jogger Pants.",
+              imageUrl: "/images/catalog/bottoms.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Brushed Back Fleece", priceMinCents: 2200, priceMaxCents: 2900, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
       ],
@@ -223,57 +374,99 @@ async function main() {
     {
       name: "Outerwear",
       slug: "outerwear",
-      description: "Jackets, Trench Coats, Overcoats & Vests",
+      description: "Jackets, Trench Coats, Overcoats & Casual Blazers",
       sortOrder: 3,
       imageUrl: "/images/catalog/outerwear.png",
       subcategories: [
         {
-          name: "Casual & Leather Jackets",
+          name: "Jackets",
           slug: "jackets",
-          description: "Bespoke Softshell Zip Jackets, Grain Leather Bomber Jackets & Field Shells.",
+          description: "Softshell Zip Jackets, Leather Bombers & Field Shells.",
           imageUrl: "/images/catalog/outerwear.png",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Italian Nappa Leather", priceMinCents: 9500, priceMaxCents: 14000, setupFeeCents: 25000 },
-            { name: "Bonded Weatherproof Shell", priceMinCents: 4500, priceMaxCents: 6000, setupFeeCents: 20000 },
+          products: [
+            {
+              name: "Softshell Zip Jacket",
+              slug: "softshell-jacket",
+              description: "Weatherproof Bonded Softshell Outerwear Jacket.",
+              imageUrl: "/images/catalog/outerwear.png",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Bonded Weatherproof Shell", priceMinCents: 4500, priceMaxCents: 6000, setupFeeCents: 20000 },
+              ],
+            },
+            {
+              name: "Nappa Leather Bomber",
+              slug: "leather-bomber-jacket",
+              description: "Italian Full-Grain Nappa Leather Flight Bomber Jacket.",
+              imageUrl: "/images/catalog/outerwear.png",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Italian Nappa Leather", priceMinCents: 9500, priceMaxCents: 14000, setupFeeCents: 25000 },
+              ],
+            },
           ],
         },
         {
-          name: "Trench Coats",
+          name: "Coats",
           slug: "coats",
-          description: "Double-Breasted Wool & Weatherproof Cotton Trench Coats.",
+          description: "Double-Breasted Trench Coats & Cotton Mac Coats.",
           imageUrl: "/images/subcategories/outerwear-coats.jpg",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Gabardine Cotton Canvas", priceMinCents: 6800, priceMaxCents: 8500, setupFeeCents: 25000 },
+          products: [
+            {
+              name: "Double-Breasted Trench Coat",
+              slug: "trench-coat",
+              description: "Classic Belted Cotton Gabardine Trench Coat.",
+              imageUrl: "/images/subcategories/outerwear-coats.jpg",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Gabardine Cotton Canvas", priceMinCents: 6800, priceMaxCents: 8500, setupFeeCents: 25000 },
+              ],
+            },
           ],
         },
         {
-          name: "Heavy Overcoats",
+          name: "Overcoats",
           slug: "overcoats",
-          description: "Virgin Wool & Cashmere Overcoats engineered for winter lines.",
+          description: "Virgin Wool & Cashmere Heavy Winter Overcoats.",
           imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Melton Wool & Cashmere", priceMinCents: 8500, priceMaxCents: 12000, setupFeeCents: 25000 },
+          products: [
+            {
+              name: "Virgin Wool Overcoat",
+              slug: "wool-overcoat",
+              description: "Heavyweight Melton Virgin Wool Tailored Overcoat.",
+              imageUrl: "/images/subcategories/outerwear-overcoats.jpg",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Melton Wool & Cashmere", priceMinCents: 8500, priceMaxCents: 12000, setupFeeCents: 25000 },
+              ],
+            },
           ],
         },
         {
           name: "Casual Blazers",
           slug: "casual-blazers",
-          description: "Unstructured Linen & Cotton Hopsack Casual Blazers.",
+          description: "Unstructured Linen & Cotton Hopsack Blazers.",
           imageUrl: "/images/subcategories/formal-blazers.jpg",
-          leadTimeDays: 18,
-          moq: 50,
           systems: ["Chest_EU", "Chest_US"],
-          fabrics: [
-            { name: "Hopsack Wool Blend", priceMinCents: 4800, priceMaxCents: 6200, setupFeeCents: 20000 },
+          products: [
+            {
+              name: "Unstructured Linen Blazer",
+              slug: "casual-linen-blazer",
+              description: "Lightweight Patch-Pocket Casual Linen Blazer.",
+              imageUrl: "/images/subcategories/formal-blazers.jpg",
+              leadTimeDays: 18,
+              moq: 50,
+              fabrics: [
+                { name: "Hopsack Wool Blend", priceMinCents: 4800, priceMaxCents: 6200, setupFeeCents: 20000 },
+              ],
+            },
           ],
         },
       ],
@@ -286,39 +479,63 @@ async function main() {
       imageUrl: "/images/catalog/formal_wear.png",
       subcategories: [
         {
-          name: "Two-Piece & Three-Piece Suits",
+          name: "Suits",
           slug: "suits",
-          description: "Super 120s Virgin Wool Tailored Suit Sets.",
+          description: "Two-Piece & Three-Piece Bespoke Suit Sets.",
           imageUrl: "/images/catalog/formal_wear.png",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Chest_EU", "Chest_US"],
-          fabrics: [
-            { name: "Super 130s Italian Wool", priceMinCents: 12000, priceMaxCents: 16500, setupFeeCents: 30000 },
+          products: [
+            {
+              name: "Two-Piece Wool Suit",
+              slug: "two-piece-suit",
+              description: "Super 120s Virgin Wool Jacket & Trousers Suit Set.",
+              imageUrl: "/images/catalog/formal_wear.png",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Super 130s Italian Wool", priceMinCents: 12000, priceMaxCents: 16500, setupFeeCents: 30000 },
+              ],
+            },
           ],
         },
         {
-          name: "Eveningwear Tuxedos",
+          name: "Tuxedos",
           slug: "tuxedos",
-          description: "Black-Tie Satin Lapel Tuxedos with silk grosgrain piping.",
+          description: "Eveningwear Satin Lapel Tuxedos.",
           imageUrl: "/images/subcategories/formal-tuxedos.jpg",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Chest_EU", "Chest_US"],
-          fabrics: [
-            { name: "Barathea Wool & Silk Satin", priceMinCents: 14000, priceMaxCents: 19000, setupFeeCents: 30000 },
+          products: [
+            {
+              name: "Black-Tie Satin Tuxedo",
+              slug: "satin-tuxedo",
+              description: "Black Barathea Wool Tuxedo with Silk Grosgrain Lapels.",
+              imageUrl: "/images/subcategories/formal-tuxedos.jpg",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Barathea Wool & Silk Satin", priceMinCents: 14000, priceMaxCents: 19000, setupFeeCents: 30000 },
+              ],
+            },
           ],
         },
         {
-          name: "Standalone Blazers",
-          slug: "blazers",
-          description: "Structured Navy & Hopsack Wool Blazer Jackets.",
+          name: "Formal Blazers",
+          slug: "formal-blazers",
+          description: "Navy Hopsack & Wool Flannel Blazer Jackets.",
           imageUrl: "/images/subcategories/formal-blazers.jpg",
-          leadTimeDays: 18,
-          moq: 50,
           systems: ["Chest_EU", "Chest_US"],
-          fabrics: [
-            { name: "Refined Wool Flannel", priceMinCents: 5200, priceMaxCents: 6800, setupFeeCents: 20000 },
+          products: [
+            {
+              name: "Navy Hopsack Blazer",
+              slug: "formal-navy-blazer",
+              description: "Structured Brass-Button Navy Hopsack Formal Blazer.",
+              imageUrl: "/images/subcategories/formal-blazers.jpg",
+              leadTimeDays: 18,
+              moq: 50,
+              fabrics: [
+                { name: "Refined Wool Flannel", priceMinCents: 5200, priceMaxCents: 6800, setupFeeCents: 20000 },
+              ],
+            },
           ],
         },
       ],
@@ -331,39 +548,63 @@ async function main() {
       imageUrl: "/images/catalog/sportswear.png",
       subcategories: [
         {
-          name: "Technical Tracksuits",
+          name: "Tracksuits",
           slug: "tracksuits",
-          description: "Performance Zip Jackets & Matching Track Pants.",
+          description: "Technical Track Jackets & Matching Track Pants.",
           imageUrl: "/images/catalog/sportswear.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Bonded Technical Fleece", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Full Technical Tracksuit Set",
+              slug: "full-tracksuit-set",
+              description: "Matching Zip Track Jacket & Tapered Pants Set.",
+              imageUrl: "/images/catalog/sportswear.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Bonded Technical Fleece", priceMinCents: 3200, priceMaxCents: 4200, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
-          name: "Performance Tops & Compression",
-          slug: "performance",
-          description: "Moisture-Wicking Athletic Shirts & Seamless Compression Tops.",
+          name: "Performance Tops",
+          slug: "performance-tops",
+          description: "Moisture-Wicking Athletic Tops & Compression Shirts.",
           imageUrl: "/images/subcategories/sportswear-performance.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Recycled Elastane Knit", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Moisture-Wicking Athletic Shirt",
+              slug: "athletic-shirt",
+              description: "Lightweight Breathable Performance Running Shirt.",
+              imageUrl: "/images/subcategories/sportswear-performance.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Recycled Elastane Knit", priceMinCents: 1800, priceMaxCents: 2400, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
-          name: "Athletic Shorts & Leggings",
+          name: "Activewear",
           slug: "activewear",
-          description: "Four-way Stretch Athletic Shorts & Ergonomic Leggings.",
+          description: "Athletic Shorts & Compression Leggings.",
           imageUrl: "/images/subcategories/sportswear-activewear.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Four-Way Stretch Microfiber", priceMinCents: 1600, priceMaxCents: 2200, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Four-Way Stretch Athletic Shorts",
+              slug: "active-shorts",
+              description: "Lightweight Zip-Pocket Athletic Training Shorts.",
+              imageUrl: "/images/subcategories/sportswear-activewear.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Four-Way Stretch Microfiber", priceMinCents: 1600, priceMaxCents: 2200, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
       ],
@@ -371,56 +612,88 @@ async function main() {
     {
       name: "Underwear & Loungewear",
       slug: "lingerie-loungewear",
-      description: "Sleepwear, Underwear & Fleece Loungewear",
+      description: "Sleepwear, Underwear, Loungewear & Socks",
       sortOrder: 6,
       imageUrl: "/images/catalog/loungewear.png",
       subcategories: [
         {
-          name: "Luxury Pajamas & Robes",
+          name: "Sleepwear",
           slug: "sleepwear",
-          description: "Pure Mulberry Silk Pajama Sets & Cotton Robes.",
+          description: "Mulberry Silk Pajamas & Cotton Robes.",
           imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "19mm Mulberry Silk", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
+          products: [
+            {
+              name: "Mulberry Silk Pajama Set",
+              slug: "silk-pajamas",
+              description: "19mm Pure Mulberry Silk Piping Pajama Set.",
+              imageUrl: "/images/subcategories/loungewear-sleepwear.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "19mm Mulberry Silk", priceMinCents: 5800, priceMaxCents: 7500, setupFeeCents: 20000 },
+              ],
+            },
           ],
         },
         {
-          name: "Fine Base Layers & Underwear",
+          name: "Underwear",
           slug: "underwear",
-          description: "Seamless Organic Cotton Briefs & Trunks.",
+          description: "Organic Cotton Briefs & Seamless Trunks.",
           imageUrl: "/images/subcategories/loungewear-underwear.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Micro-Modal Cotton Blend", priceMinCents: 900, priceMaxCents: 1400, setupFeeCents: 10000 },
+          products: [
+            {
+              name: "Organic Cotton Boxer Briefs",
+              slug: "boxer-briefs",
+              description: "Micro-Modal & Organic Cotton Elastic Waistband Trunks.",
+              imageUrl: "/images/subcategories/loungewear-underwear.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Micro-Modal Cotton Blend", priceMinCents: 900, priceMaxCents: 1400, setupFeeCents: 10000 },
+              ],
+            },
           ],
         },
         {
-          name: "Fleece Sweats & Loungewear",
+          name: "Loungewear",
           slug: "loungewear",
-          description: "Heavyweight Sweatpants & Casual Hoodies.",
+          description: "Heavyweight Fleece Sweats & Lounge Pants.",
           imageUrl: "/images/catalog/loungewear.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Alpha_EU", "Alpha_US"],
-          fabrics: [
-            { name: "Organic Heavy Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Loopback Fleece Sweatshirt",
+              slug: "lounge-sweatshirt",
+              description: "Relaxed Fit Organic Loopback Fleece Lounge Shirt.",
+              imageUrl: "/images/catalog/loungewear.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Organic Heavy Loopback Fleece", priceMinCents: 2800, priceMaxCents: 3600, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
         {
-          name: "Fine Knit Socks",
+          name: "Socks",
           slug: "socks",
-          description: "Merino Wool & Mercerized Cotton Dress Socks.",
+          description: "Mercerized Cotton & Merino Wool Dress Socks.",
           imageUrl: "/images/catalog/loungewear.png",
-          leadTimeDays: 10,
-          moq: 100,
           systems: ["OneSize_EU", "OneSize_US"],
-          fabrics: [
-            { name: "Mercerized Ribbed Cotton", priceMinCents: 450, priceMaxCents: 750, setupFeeCents: 8000 },
+          products: [
+            {
+              name: "Mercerized Cotton Socks",
+              slug: "mercerized-socks",
+              description: "Ribbed Mercerized Cotton Fine Gauge Socks.",
+              imageUrl: "/images/catalog/loungewear.png",
+              leadTimeDays: 10,
+              moq: 100,
+              fabrics: [
+                { name: "Mercerized Ribbed Cotton", priceMinCents: 450, priceMaxCents: 750, setupFeeCents: 8000 },
+              ],
+            },
           ],
         },
       ],
@@ -428,63 +701,95 @@ async function main() {
     {
       name: "Accessories",
       slug: "accessories",
-      description: "Belts, Ties, Scarves, Footwear & Accessories",
+      description: "Footwear, Belts, Ties, Scarves & Leather Goods",
       sortOrder: 7,
       imageUrl: "/images/catalog/accessories.png",
       subcategories: [
         {
-          name: "Footwear & Shoes",
+          name: "Footwear",
           slug: "footwear",
-          description: "Italian Calfskin Loafers, Oxfords & Luxury Sneakers.",
+          description: "Italian Calfskin Oxfords, Loafers & Sneakers.",
           imageUrl: "/images/catalog/accessories.png",
-          leadTimeDays: 21,
-          moq: 50,
           systems: ["Shoe_EU", "Shoe_US"],
-          fabrics: [
-            { name: "Full-Grain Italian Calfskin", priceMinCents: 8500, priceMaxCents: 12500, setupFeeCents: 25000 },
+          products: [
+            {
+              name: "Leather Oxfords",
+              slug: "leather-oxfords",
+              description: "Full-Grain Italian Leather Goodyear Welted Oxfords.",
+              imageUrl: "/images/catalog/accessories.png",
+              leadTimeDays: 21,
+              moq: 50,
+              fabrics: [
+                { name: "Full-Grain Italian Calfskin", priceMinCents: 8500, priceMaxCents: 12500, setupFeeCents: 25000 },
+              ],
+            },
           ],
         },
         {
-          name: "Bespoke Leather & Suede Belts",
+          name: "Belts",
           slug: "belts",
-          description: "Full-Grain Italian Calfskin & Suede Belts.",
+          description: "Full-Grain Leather & Suede Belts.",
           imageUrl: "/images/catalog/accessories.png",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["Waist_EU", "Waist_US"],
-          fabrics: [
-            { name: "Vegetable Tanned Leather", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 12000 },
+          products: [
+            {
+              name: "Calfskin Dress Belt",
+              slug: "calfskin-belt",
+              description: "Hand-Burnished Full-Grain Leather Dress Belt.",
+              imageUrl: "/images/catalog/accessories.png",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "Vegetable Tanned Leather", priceMinCents: 2400, priceMaxCents: 3200, setupFeeCents: 12000 },
+              ],
+            },
           ],
         },
         {
-          name: "Handmade Silk & Wool Ties",
+          name: "Ties & Bowties",
           slug: "ties",
-          description: "Seven-Fold Silk Jacquard Ties & Knit Wool Ties.",
+          description: "Seven-Fold Silk Jacquard Ties & Bowties.",
           imageUrl: "/images/subcategories/accessories-ties.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["OneSize_EU", "OneSize_US"],
-          fabrics: [
-            { name: "7-Fold Woven Silk", priceMinCents: 1800, priceMaxCents: 2600, setupFeeCents: 10000 },
+          products: [
+            {
+              name: "Seven-Fold Silk Tie",
+              slug: "seven-fold-tie",
+              description: "Handmade Seven-Fold Italian Silk Jacquard Tie.",
+              imageUrl: "/images/subcategories/accessories-ties.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "7-Fold Woven Silk", priceMinCents: 1800, priceMaxCents: 2600, setupFeeCents: 10000 },
+              ],
+            },
           ],
         },
         {
-          name: "Cashmere & Silk Scarves",
+          name: "Scarves & Squares",
           slug: "scarves",
-          description: "Fine Wool-Cashmere Fringed Scarves & Silk Pocket Squares.",
+          description: "Cashmere Wool Scarves & Silk Pocket Squares.",
           imageUrl: "/images/subcategories/accessories-scarves.jpg",
-          leadTimeDays: 14,
-          moq: 50,
           systems: ["OneSize_EU", "OneSize_US"],
-          fabrics: [
-            { name: "100% Mongolian Cashmere", priceMinCents: 3500, priceMaxCents: 4800, setupFeeCents: 15000 },
+          products: [
+            {
+              name: "Cashmere Wool Scarf",
+              slug: "cashmere-scarf",
+              description: "Mongolian Cashmere Fringed Winter Scarf.",
+              imageUrl: "/images/subcategories/accessories-scarves.jpg",
+              leadTimeDays: 14,
+              moq: 50,
+              fabrics: [
+                { name: "100% Mongolian Cashmere", priceMinCents: 3500, priceMaxCents: 4800, setupFeeCents: 15000 },
+              ],
+            },
           ],
         },
       ],
     },
   ];
 
-  for (const catData of categoriesData) {
+  for (const catData of catalog) {
     let category = await prisma.category.findUnique({
       where: { slug: catData.slug },
     });
@@ -514,8 +819,6 @@ async function main() {
             slug: subDef.slug,
             description: subDef.description,
             imageUrl: subDef.imageUrl,
-            leadTimeDays: subDef.leadTimeDays,
-            moq: subDef.moq,
           },
         });
       }
@@ -540,34 +843,55 @@ async function main() {
         }
       }
 
-      // Seed fabrics
-      for (const fab of subDef.fabrics) {
-        await prisma.fabric.upsert({
-          where: {
-            name_subcategoryId: {
-              name: fab.name,
-              subcategoryId: subcategory.id,
-            },
-          },
-          create: {
-            name: fab.name,
-            subcategoryId: subcategory.id,
-            priceMinCents: fab.priceMinCents,
-            priceMaxCents: fab.priceMaxCents,
-            setupFeeCents: fab.setupFeeCents,
-            description: `${fab.name} engineered for ${subDef.name}.`,
-          },
-          update: {
-            priceMinCents: fab.priceMinCents,
-            priceMaxCents: fab.priceMaxCents,
-            setupFeeCents: fab.setupFeeCents,
-          },
+      // Products under subcategory
+      for (const prodDef of subDef.products) {
+        let product = await prisma.product.findUnique({
+          where: { slug: prodDef.slug },
         });
+
+        if (!product) {
+          product = await prisma.product.create({
+            data: {
+              subcategoryId: subcategory.id,
+              name: prodDef.name,
+              slug: prodDef.slug,
+              description: prodDef.description,
+              imageUrl: prodDef.imageUrl,
+              leadTimeDays: prodDef.leadTimeDays,
+              moq: prodDef.moq,
+            },
+          });
+        }
+
+        // Seed Product-level Fabrics
+        for (const fab of prodDef.fabrics) {
+          await prisma.fabric.upsert({
+            where: {
+              name_productId: {
+                name: fab.name,
+                productId: product.id,
+              },
+            },
+            create: {
+              name: fab.name,
+              productId: product.id,
+              priceMinCents: fab.priceMinCents,
+              priceMaxCents: fab.priceMaxCents,
+              setupFeeCents: fab.setupFeeCents,
+              description: `${fab.name} engineered for ${prodDef.name}.`,
+            },
+            update: {
+              priceMinCents: fab.priceMinCents,
+              priceMaxCents: fab.priceMaxCents,
+              setupFeeCents: fab.setupFeeCents,
+            },
+          });
+        }
       }
     }
   }
 
-  console.log("🌱 Database seeding completed successfully!");
+  console.log("🌱 3-Level Catalog DB Seeding completed successfully!");
 }
 
 main()

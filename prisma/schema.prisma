@@ -92,7 +92,25 @@ model Subcategory {
   createdAt     DateTime                @default(now())
   updatedAt     DateTime                @updatedAt
   sizeSystems   SubcategorySizeSystem[]
+  products      Product[]
+}
+
+model Product {
+  id            String      @id @default(uuid())
+  subcategoryId String
+  subcategory   Subcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  name          String
+  slug          String      @unique
+  description   String?
+  imageUrl      String?
+  leadTimeDays  Int?        @default(14)
+  moq           Int?        @default(50)
+  active        Boolean     @default(true)
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   fabrics       Fabric[]
+  orderLines    OrderLine[]
 }
 
 model SizeSystem {
@@ -123,22 +141,22 @@ model SubcategorySizeSystem {
 }
 
 model Fabric {
-  id            String       @id @default(cuid())
-  subcategoryId String?
-  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  id            String   @id @default(cuid())
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
   name          String
   description   String?
   imageUrl      String?
   colorway      String?
   priceMinCents Int
   priceMaxCents Int
-  setupFeeCents Int          @default(0)
-  active        Boolean      @default(true)
-  createdAt     DateTime     @default(now())
+  setupFeeCents Int      @default(0)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
 
   orderLines OrderLine[]
 
-  @@unique([name, subcategoryId])
+  @@unique([name, productId])
 }
 
 model Order {
@@ -163,6 +181,7 @@ model OrderLine {
   id             String      @id @default(cuid())
   orderId        String
   fabricId       String
+  productId      String?
   sizeSystemId   String?
   selectedSize   String?
   size           String
@@ -171,6 +190,7 @@ model OrderLine {
 
   order      Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
   fabric     Fabric      @relation(fields: [fabricId], references: [id])
+  product    Product?    @relation(fields: [productId], references: [id], onDelete: SetNull)
   sizeSystem SizeSystem? @relation(fields: [sizeSystemId], references: [id], onDelete: SetNull)
 }
 

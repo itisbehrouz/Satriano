@@ -24,6 +24,12 @@ export default async function CategoryDetailPage({ params }: PageProps) {
     include: {
       subcategories: {
         where: { active: true },
+        include: {
+          products: {
+            where: { active: true },
+            orderBy: { sortOrder: "asc" },
+          },
+        },
         orderBy: { sortOrder: "asc" },
       },
     },
@@ -68,17 +74,17 @@ export default async function CategoryDetailPage({ params }: PageProps) {
                   {category.name}
                 </h1>
                 <p className="text-sm md:text-base text-[#5B6B85] mt-2 max-w-2xl">
-                  {category.description}. Customized directly in our European atelier to your exact brand specifications.
+                  {category.description}. Select a specific garment product below to launch the order configurator.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4 border-t lg:border-t-0 lg:border-l border-[#E5E7EB] pt-4 lg:pt-0 lg:pl-8">
                 <div className="bg-[#F5F7FA] p-3 rounded border border-[#E5E7EB]">
                   <div className="text-[10px] text-[#5B6B85] uppercase tracking-wider font-semibold">
-                    Minimum Order
+                    Subcategories
                   </div>
                   <div className="text-lg font-bold text-[#1A2233] tabular-nums">
-                    50 Units
+                    {category.subcategories.length} Lines
                   </div>
                 </div>
                 <div className="bg-[#F5F7FA] p-3 rounded border border-[#E5E7EB]">
@@ -101,61 +107,62 @@ export default async function CategoryDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Subcategories Grid Section */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-[#1A2233]">
-              Producible Garment Subcategories
-            </h2>
-            <p className="text-sm text-[#5B6B85] mt-1">
-              Select a specific garment spec below to launch the order configurator.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {/* Subcategories & Nested Products Section */}
+          <div className="space-y-12 mb-12">
             {category.subcategories.map((sub) => (
-              <div
-                key={sub.id}
-                className="bg-white border border-[#D1D5DB] rounded-lg overflow-hidden flex flex-col hover:border-[#2E5AAC] transition-all shadow-sm"
-              >
-                {/* Fixed Image Container */}
-                <div className="h-60 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={sub.imageUrl || category.imageUrl || "/images/catalog/tops.png"}
-                    alt={sub.name}
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <span className="absolute top-3 left-3 bg-[#0B1E3D]/90 text-white text-[11px] font-semibold px-2.5 py-1 rounded">
-                    MOQ {sub.moq ?? 50} Units
-                  </span>
+              <section key={sub.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6">
+                <div className="border-b border-[#E5E7EB] pb-4 mb-6">
+                  <div className="flex items-center gap-3">
+                    <h2 className="text-2xl font-bold text-[#1A2233]">{sub.name}</h2>
+                    <span className="bg-[#E6F1FB] text-[#185FA5] text-xs font-semibold px-2.5 py-0.5 rounded">
+                      {sub.products.length} Products
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#5B6B85] mt-1">{sub.description}</p>
                 </div>
 
-                <div className="p-6 flex-grow flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#1A2233] mb-2">
-                      {sub.name}
-                    </h3>
-                    <p className="text-xs text-[#5B6B85] leading-relaxed mb-4">
-                      {sub.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 text-[11px] font-medium text-[#5B6B85] mb-4">
-                      <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                        Lead: {sub.leadTimeDays ?? 14} Days
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#E5E7EB]">
-                    <Link
-                      href={`/konfigurator/${sub.slug}`}
-                      className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
+                {/* Products Grid under Subcategory */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {sub.products.map((prod) => (
+                    <div
+                      key={prod.id}
+                      className="border border-[#D1D5DB] rounded-lg overflow-hidden flex flex-col hover:border-[#2E5AAC] transition-all bg-[#F5F7FA]/50 group"
                     >
-                      Configure Order Spec →
-                    </Link>
-                  </div>
+                      <div className="h-48 w-full relative overflow-hidden bg-white border-b border-[#E5E7EB]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={prod.imageUrl || sub.imageUrl || category.imageUrl || "/images/catalog/tops.png"}
+                          alt={prod.name}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <span className="absolute top-2.5 left-2.5 bg-[#0B1E3D]/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded">
+                          MOQ {prod.moq ?? 50} Units
+                        </span>
+                      </div>
+
+                      <div className="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-base font-semibold text-[#1A2233] mb-1 group-hover:text-[#2E5AAC] transition-colors">
+                            {prod.name}
+                          </h3>
+                          <p className="text-xs text-[#5B6B85] leading-relaxed mb-3">
+                            {prod.description}
+                          </p>
+                        </div>
+
+                        <div className="pt-3 border-t border-[#E5E7EB]">
+                          <Link
+                            href={`/konfigurator/${prod.slug}`}
+                            className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-2.5 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
+                          >
+                            Configure {prod.name} →
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              </section>
             ))}
           </div>
 

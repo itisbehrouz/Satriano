@@ -21,7 +21,12 @@ export async function GET(request: Request) {
                 },
               },
             },
-            fabrics: true,
+            products: {
+              include: {
+                fabrics: true,
+              },
+              orderBy: { sortOrder: "asc" },
+            },
           },
           orderBy: { sortOrder: "asc" },
         },
@@ -60,11 +65,21 @@ export async function PATCH(request: Request) {
         where: { id },
         data: {
           ...(typeof data.active === "boolean" ? { active: data.active } : {}),
+        },
+      });
+      return NextResponse.json({ success: true, subcategory: updated });
+    }
+
+    if (target === "product" && typeof id === "string") {
+      const updated = await prisma.product.update({
+        where: { id },
+        data: {
+          ...(typeof data.active === "boolean" ? { active: data.active } : {}),
           ...(typeof data.leadTimeDays === "number" ? { leadTimeDays: data.leadTimeDays } : {}),
           ...(typeof data.moq === "number" ? { moq: data.moq } : {}),
         },
       });
-      return NextResponse.json({ success: true, subcategory: updated });
+      return NextResponse.json({ success: true, product: updated });
     }
 
     if (target === "fabric" && typeof id === "string") {
