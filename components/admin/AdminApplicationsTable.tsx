@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 export interface B2bApplicationItem {
   id: string;
@@ -67,6 +67,16 @@ export function AdminApplicationsTable({
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
 
+  // Transient Error Banner: Auto-dismiss error message after 6 seconds
+  useEffect(() => {
+    if (actionError) {
+      const timer = setTimeout(() => {
+        setActionError(null);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [actionError]);
+
   async function handleStatusUpdate(id: string, newStatus: B2bApplicationItem["status"]) {
     setUpdatingId(id);
     setActionError(null);
@@ -100,10 +110,22 @@ export function AdminApplicationsTable({
 
   return (
     <div className="space-y-4 font-sans">
+      {/* Transient Action Error Banner with manual dismiss and 6s auto-clear */}
       {actionError && (
-        <div className="p-4 bg-[#FCEBEB] border border-[#F8B4B4] rounded text-xs text-[#A32D2D] font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-base">error</span>
-          <span>{actionError}</span>
+        <div className="p-4 bg-[#FCEBEB] border border-[#F8B4B4] rounded text-xs text-[#A32D2D] font-semibold flex items-center justify-between gap-3 shadow-sm transition-all animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-base text-[#C5221F]">error</span>
+            <span>{actionError}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setActionError(null)}
+            className="min-h-[32px] px-2 py-1 text-[#A32D2D] hover:text-[#C5221F] hover:bg-[#F8B4B4]/30 rounded text-xs font-bold inline-flex items-center gap-1"
+            title="Dismiss notification"
+          >
+            <span className="material-symbols-outlined text-base">close</span>
+            <span>Dismiss</span>
+          </button>
         </div>
       )}
 
@@ -316,13 +338,19 @@ export function AdminApplicationsTable({
                           </div>
 
                           {/* Action Row inside Drawer */}
-                          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E5E7EB]">
+                          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E5E7EB] flex-wrap">
+                            {!isEmailVerified && (
+                              <span className="text-xs text-[#854F0B] bg-[#FAEEDA] px-3 py-1.5 rounded border border-[#F5D8A0] font-medium flex items-center gap-1.5 mr-auto">
+                                <span className="material-symbols-outlined text-base">info</span>
+                                <span>Email verification required before approval or rejection</span>
+                              </span>
+                            )}
                             {app.status !== "UNDER_REVIEW" && (
                               <button
                                 type="button"
                                 disabled={isUpdating}
                                 onClick={() => handleStatusUpdate(app.id, "UNDER_REVIEW")}
-                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#185FA5] bg-white border border-[#B3D6F6] hover:bg-[#E6F1FB] rounded transition-colors inline-flex items-center gap-1.5"
+                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#185FA5] bg-white border border-[#B3D6F6] hover:bg-[#E6F1FB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
                               >
                                 <span className="material-symbols-outlined text-base">hourglass_top</span>
                                 <span>Mark Under Review</span>
@@ -333,6 +361,7 @@ export function AdminApplicationsTable({
                                 type="button"
                                 disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "APPROVED")}
+                                title={!isEmailVerified ? "Cannot approve: email not verified by applicant" : "Approve application"}
                                 className="min-h-[44px] px-4 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
                               >
                                 <span className="material-symbols-outlined text-base">check_circle</span>
@@ -344,6 +373,7 @@ export function AdminApplicationsTable({
                                 type="button"
                                 disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "REJECTED")}
+                                title={!isEmailVerified ? "Cannot reject: email not verified by applicant" : "Reject application"}
                                 className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
                               >
                                 <span className="material-symbols-outlined text-base">cancel</span>
