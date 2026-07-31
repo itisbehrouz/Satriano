@@ -106,3 +106,15 @@ Flat surfaces only, in both modes. Depth comes from the `bg-page` → `surface` 
 - **Mobile**: configurator stacks vertically; live price panel collapses into a sticky bottom bar with running total + primary CTA.
 - **Tablet**: two-column configurator (form + price panel) once viewport allows.
 - **Admin tables**: condensed column set on narrow viewports (order id, customer, status, total), rest via row expand — no horizontal scroll.
+
+## Target Audience & Accessibility Baseline
+
+Our B2B customer base spans roughly ages 30-60. Design decisions must account for this range, not just younger/digital-native users:
+
+1. **No icon-only interactive elements.** Every clickable icon (back buttons, close buttons, action icons) must be paired with a visible text label, not just an `aria-label`. `aria-label` alone only helps screen-reader users — it does nothing for a sighted user who simply doesn't recognize the icon's meaning. Example: the portal/admin "return" button should read "← Back" or "← Home", not just show an arrow glyph.
+2. **Minimum touch/click target size: 44×44px** for any interactive element (buttons, icons, form controls), per standard mobile accessibility guidance — tap precision varies more with age.
+3. **Labels, not placeholder-only inputs.** Every form field must have a persistent visible label above or beside it — never rely on placeholder text alone as the only indicator of what a field is for (placeholder text disappears on focus/input and is a known readability issue for older users).
+4. **Sufficient contrast and font size.** Body text should meet WCAG AA contrast minimums; avoid small (<14px) text for anything functionally important (labels, prices, status badges).
+
+This applies retroactively to any icon-only controls already shipped and must be checked for every new screen going forward.
+

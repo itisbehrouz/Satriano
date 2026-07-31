@@ -86,7 +86,7 @@ export default function PortalPage() {
         {/* Fixed Top-Left Return Link */}
         <Link
           href="/"
-          className="fixed top-6 left-6 flex items-center gap-2 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] px-3.5 py-2 rounded shadow-sm transition-colors z-50"
+          className="fixed top-6 left-6 inline-flex items-center gap-2 min-h-[44px] px-4 py-2.5 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] rounded shadow-sm transition-colors z-50"
         >
           <span className="material-symbols-outlined text-base">arrow_back</span>
           <span>Return to Homepage</span>
