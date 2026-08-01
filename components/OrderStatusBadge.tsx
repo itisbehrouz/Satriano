@@ -43,7 +43,7 @@ export function OrderStatusBadge({ status }: { status: OrderStatus }) {
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold uppercase tracking-wider ${config.className}`}
+      className={`inline-flex items-center px-2.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider rounded-none ${config.className}`}
     >
       {config.label}
     </span>
