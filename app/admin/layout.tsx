@@ -81,6 +81,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/admin";
   const { isAuthenticated, signOut } = useAdminAuth();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
   // Login gate / session-loading states render full-bleed, no chrome.
   if (!isAuthenticated) {
@@ -120,33 +121,55 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             </button>
           </div>
 
-          {/* Navigation Items with Sub-headings */}
+          {/* Navigation Items with Accordion Sub-headings */}
           <div className="space-y-2">
             {NAV_ITEMS.map((item) => {
               const active = item.isActive(pathname);
+              const isOpen = isExpanded && (openSections[item.href] ?? active);
+
               return (
                 <div key={item.href} className="space-y-1">
-                  <Link
-                    href={item.href}
-                    title={item.label}
-                    aria-label={item.label}
-                    aria-current={active ? "page" : undefined}
-                    className={`flex items-center gap-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                      active
-                        ? "bg-[#2E5AAC] text-white shadow-xs"
-                        : "text-[#8B93A7] hover:text-white hover:bg-white/10"
-                    } ${
-                      isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
-                    }`}
-                  >
-                    <span className="material-symbols-outlined text-xl flex-shrink-0">
-                      {item.icon}
-                    </span>
-                    {isExpanded && <span className="truncate flex-1">{item.label}</span>}
-                  </Link>
+                  <div className="flex items-center">
+                    <Link
+                      href={item.href}
+                      title={item.label}
+                      aria-label={item.label}
+                      aria-current={active ? "page" : undefined}
+                      className={`flex items-center gap-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                        active
+                          ? "bg-[#2E5AAC] text-white shadow-xs"
+                          : "text-[#8B93A7] hover:text-white hover:bg-white/10"
+                      } ${
+                        isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-xl flex-shrink-0">
+                        {item.icon}
+                      </span>
+                      {isExpanded && <span className="truncate flex-1">{item.label}</span>}
+                      {isExpanded && item.subItems.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setOpenSections((prev) => ({
+                              ...prev,
+                              [item.href]: !(prev[item.href] ?? active),
+                            }));
+                          }}
+                          className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer"
+                        >
+                          <span className="material-symbols-outlined text-base">
+                            {isOpen ? "expand_more" : "chevron_right"}
+                          </span>
+                        </button>
+                      )}
+                    </Link>
+                  </div>
 
-                  {/* Sub-headings under each icon section */}
-                  {isExpanded && (
+                  {/* Sub-headings under active/toggled section */}
+                  {isOpen && item.subItems.length > 0 && (
                     <div className="pl-7 pr-2 space-y-1 py-1">
                       {item.subItems.map((sub) => (
                         <Link
