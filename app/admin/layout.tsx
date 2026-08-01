@@ -1,39 +1,86 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminAuthProvider, useAdminAuth } from "@/components/admin/AdminAuthContext";
 
-const NAV_ITEMS = [
+interface SubItem {
+  label: string;
+  icon: string;
+  href: string;
+}
+
+interface NavItem {
+  href: string;
+  label: string;
+  icon: string;
+  subItems: SubItem[];
+  isActive: (pathname: string) => boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
   {
     href: "/admin",
     label: "Order Ledger",
-    icon: "orders",
+    icon: "receipt_long",
     isActive: (pathname: string) => pathname === "/admin",
+    subItems: [
+      { label: "All Orders", icon: "table_rows", href: "/admin?status=ALL" },
+      { label: "Pending Review", icon: "pending_actions", href: "/admin?status=PENDING_REVIEW" },
+      { label: "Proforma Sent", icon: "description", href: "/admin?status=PROFORMA_SENT" },
+      { label: "In Production", icon: "precision_manufacturing", href: "/admin?status=IN_PRODUCTION" },
+      { label: "Shipped Orders", icon: "local_shipping", href: "/admin?status=SHIPPED" },
+    ],
   },
   {
     href: "/admin/applications",
     label: "B2B Applications",
     icon: "assignment_ind",
     isActive: (pathname: string) => pathname.startsWith("/admin/applications"),
+    subItems: [
+      { label: "All Applications", icon: "assignment", href: "/admin/applications?status=ALL" },
+      { label: "Submitted (New)", icon: "mark_unread_chat_alt", href: "/admin/applications?status=SUBMITTED" },
+      { label: "Under Review", icon: "rule", href: "/admin/applications?status=UNDER_REVIEW" },
+      { label: "Approved Partners", icon: "verified", href: "/admin/applications?status=APPROVED" },
+      { label: "Rejected", icon: "cancel", href: "/admin/applications?status=REJECTED" },
+    ],
   },
   {
     href: "/admin/product-settings",
     label: "Product Settings",
     icon: "inventory_2",
     isActive: (pathname: string) => pathname.startsWith("/admin/product-settings"),
+    subItems: [
+      { label: "Garment Catalog", icon: "account_tree", href: "/admin/product-settings?tab=catalog" },
+      { label: "Garment Fits", icon: "straighten", href: "/admin/product-settings?tab=fits" },
+      { label: "Regional Sizing", icon: "aspect_ratio", href: "/admin/product-settings?tab=sizing" },
+      { label: "Fabric Pricing", icon: "texture", href: "/admin/product-settings?tab=fabrics" },
+    ],
+  },
+  {
+    href: "/admin/architecture-viz",
+    label: "3D Telemetry",
+    icon: "view_in_ar",
+    isActive: (pathname: string) => pathname.startsWith("/admin/architecture-viz"),
+    subItems: [
+      { label: "3D Zero-G Canvas", icon: "view_in_ar", href: "/admin/architecture-viz" },
+      { label: "Node Telemetry", icon: "hub", href: "/admin/architecture-viz" },
+    ],
   },
 ];
 
 function getPageName(pathname: string): string {
   if (pathname.startsWith("/admin/product-settings")) return "Product Settings";
   if (pathname.startsWith("/admin/applications")) return "B2B Applications";
+  if (pathname.startsWith("/admin/architecture-viz")) return "3D Telemetry";
   return "Order Ledger";
 }
 
 function AdminChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/admin";
   const { isAuthenticated, signOut } = useAdminAuth();
+  const [isExpanded, setIsExpanded] = useState(true);
 
   // Login gate / session-loading states render full-bleed, no chrome.
   if (!isAuthenticated) {
@@ -45,66 +92,123 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <nav
         aria-label="Admin navigation"
-        className="w-16 flex-shrink-0 bg-[#111318] flex flex-col items-center py-4 gap-2"
+        className={`flex-shrink-0 bg-[#111318] flex flex-col justify-between p-3 transition-all duration-300 select-none overflow-y-auto ${
+          isExpanded ? "w-64" : "w-16"
+        }`}
       >
-        <Link href="/" title="Return to Homepage" className="mb-4 opacity-90 hover:opacity-100">
-          <img src="/Satrinao.png" alt="Satriano Atelier" className="h-6 w-auto object-contain" />
-        </Link>
-
-        {NAV_ITEMS.map((item) => {
-          const active = item.isActive(pathname);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              title={item.label}
-              aria-label={item.label}
-              aria-current={active ? "page" : undefined}
-              className={`w-11 h-11 rounded flex items-center justify-center transition-colors ${
-                active
-                  ? "bg-[#2E5AAC] text-white"
-                  : "text-[#8B93A7] hover:text-white hover:bg-white/10"
-              }`}
-            >
-              <span className="material-symbols-outlined text-xl">{item.icon}</span>
-            </Link>
-          );
-        })}
-      </nav>
-
-      {/* Main column */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Top bar */}
-        <header className="h-14 flex-shrink-0 flex items-center justify-between px-6 border-b border-[#E4E7EC] bg-white">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#5B6B85]">
-            Admin Console
-            <span className="text-[#D1D5DB] mx-1.5">/</span>
-            <span className="text-[#1A2233]">{getPageName(pathname)}</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div
-              aria-hidden="true"
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#F7F8FA] border border-[#E4E7EC] rounded text-xs text-[#8B93A7] select-none"
-            >
-              <span className="material-symbols-outlined text-base">search</span>
-              <span>Search...</span>
-              <span className="font-mono text-[10px] border border-[#D1D5DB] rounded px-1 py-0.5">
-                &#8984;K
+        <div className="space-y-4">
+          {/* Header & Toggle Button */}
+          <div
+            className={`flex items-center min-h-[36px] px-1 ${
+              isExpanded ? "justify-between" : "justify-center"
+            }`}
+          >
+            {isExpanded && (
+              <span className="text-xs font-bold uppercase tracking-wider text-white/80">
+                Navigation Menu
               </span>
-            </div>
-
+            )}
             <button
               type="button"
-              onClick={signOut}
-              className="min-h-[36px] px-3 py-1.5 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-[#8B93A7] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
             >
-              <span className="material-symbols-outlined text-base">logout</span>
-              <span>Sign Out</span>
+              <span className="material-symbols-outlined text-lg">
+                {isExpanded ? "chevron_left" : "chevron_right"}
+              </span>
             </button>
           </div>
-        </header>
 
+          {/* Navigation Items with Sub-headings */}
+          <div className="space-y-2">
+            {NAV_ITEMS.map((item) => {
+              const active = item.isActive(pathname);
+              return (
+                <div key={item.href} className="space-y-1">
+                  <Link
+                    href={item.href}
+                    title={item.label}
+                    aria-label={item.label}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex items-center gap-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                      active
+                        ? "bg-[#2E5AAC] text-white shadow-xs"
+                        : "text-[#8B93A7] hover:text-white hover:bg-white/10"
+                    } ${
+                      isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-xl flex-shrink-0">
+                      {item.icon}
+                    </span>
+                    {isExpanded && <span className="truncate flex-1">{item.label}</span>}
+                  </Link>
+
+                  {/* Sub-headings under each icon section */}
+                  {isExpanded && (
+                    <div className="pl-7 pr-2 space-y-1 py-1">
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          className={`flex items-center gap-2 py-1.5 px-2 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                            active
+                              ? "text-[#BFDBFE] hover:text-white hover:bg-white/10"
+                              : "text-[#64748B] hover:text-[#94A3B8] hover:bg-white/5"
+                          }`}
+                        >
+                          <span className="material-symbols-outlined text-sm flex-shrink-0 text-white/40">
+                            {sub.icon}
+                          </span>
+                          <span className="truncate">{sub.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Sidebar Footer: Search & Sign Out */}
+        <div className="pt-4 border-t border-white/10 space-y-2 mt-4">
+          {/* Quick Search trigger */}
+          <div
+            className={`flex items-center gap-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-[#8B93A7] hover:bg-white/10 transition-all cursor-pointer select-none ${
+              isExpanded ? "px-3 w-full justify-between" : "justify-center px-0 w-10 h-10 mx-auto"
+            }`}
+            title="Search... (⌘K)"
+          >
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-lg text-[#8B93A7]">search</span>
+              {isExpanded && <span>Search...</span>}
+            </div>
+            {isExpanded && (
+              <kbd className="px-1.5 py-0.5 bg-white/10 border border-white/20 rounded text-[10px] font-mono text-[#8B93A7]">
+                ⌘K
+              </kbd>
+            )}
+          </div>
+
+          {/* Sign Out Button */}
+          <button
+            type="button"
+            onClick={signOut}
+            className={`flex items-center gap-2.5 py-2 rounded-lg text-xs font-semibold text-[#F87171] hover:bg-[#F87171]/15 hover:text-[#EF4444] transition-all cursor-pointer ${
+              isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
+            }`}
+            title="Sign Out"
+          >
+            <span className="material-symbols-outlined text-lg">logout</span>
+            {isExpanded && <span>Sign Out</span>}
+          </button>
+        </div>
+      </nav>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         <div className="flex-1 min-w-0">{children}</div>
       </div>
     </div>

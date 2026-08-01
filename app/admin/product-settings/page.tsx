@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
 import { ProductFitTree } from "@/components/admin/ProductFitTree";
 import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
@@ -82,8 +83,11 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-export default function AdminProductSettingsPage() {
+function ProductSettingsContent() {
   const { isAuthenticated } = useAdminAuth();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams?.get("tab") as "catalog" | "sizing" | "fits" | "fabrics" | null;
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [sizeSystems, setSizeSystems] = useState<SizeSystem[]>([]);
   const [allFits, setAllFits] = useState<FitDef[]>([]);
@@ -94,7 +98,13 @@ export default function AdminProductSettingsPage() {
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [editMoqPerFabric, setEditMoqPerFabric] = useState<number>(50);
   const [editMoqCombined, setEditMoqCombined] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
+  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">(tabParam || "catalog");
+
+  useEffect(() => {
+    if (tabParam && ["catalog", "sizing", "fits", "fabrics"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
 
   // Catalog tab accordion state (default collapsed, matches Garment Fits tree pattern)
   const [openCategoryIds, setOpenCategoryIds] = useState<Record<string, boolean>>({});
@@ -167,6 +177,7 @@ export default function AdminProductSettingsPage() {
       sub.products.flatMap((prod) =>
         prod.fabrics.map((fab) => ({
           ...fab,
+          productId: prod.id,
           productName: prod.name,
           subcategoryName: sub.name,
           categoryName: cat.name,
@@ -579,13 +590,7 @@ export default function AdminProductSettingsPage() {
 
   return (
     <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
-        <div className="w-full max-w-container-max mx-auto px-4 md:px-8 py-10">
-          {/* Header */}
-          <div className="mb-8 gap-4 border-b border-[#D1D5DB] pb-6">
-            <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
-              Category → Subcategory → Product Management
-            </h1>
-          </div>
+        <div className="w-full max-w-container-max mx-auto px-4 md:px-8 py-8 space-y-6">
 
           {/* Navigation Tabs */}
           <div className="flex border-b border-[#D1D5DB] mb-8 gap-2 flex-wrap">
@@ -1473,5 +1478,13 @@ export default function AdminProductSettingsPage() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function AdminProductSettingsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-[#5B6B85]">Loading product settings...</div>}>
+      <ProductSettingsContent />
+    </Suspense>
   );
 }

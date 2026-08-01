@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   AdminApplicationsTable,
   B2bApplicationItem,
@@ -16,12 +17,21 @@ const APPLICATION_TABS = [
   { id: "REJECTED", label: "Rejected" },
 ];
 
-export default function AdminApplicationsPage() {
+function ApplicationsContent() {
   const { isAuthenticated, setAuthenticated } = useAdminAuth();
+  const searchParams = useSearchParams();
+  const statusParam = searchParams?.get("status") || "ALL";
+
   const [applications, setApplications] = useState<B2bApplicationItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState("ALL");
+  const [activeTab, setActiveTab] = useState(statusParam);
+
+  useEffect(() => {
+    if (statusParam) {
+      setActiveTab(statusParam);
+    }
+  }, [statusParam]);
 
   async function fetchApplications() {
     setLoading(true);
@@ -80,20 +90,23 @@ export default function AdminApplicationsPage() {
   return (
     <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
         <div className="w-full max-w-container-max mx-auto space-y-6">
-          {/* Top Bar Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                  Portal Console
-                </h1>
-                <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-2.5 py-1 rounded border border-[#B3D6F6]">
-                  B2B Applications Review
-                </span>
-              </div>
-              <p className="text-xs text-[#5B6B85] mt-1">
-                Evaluate corporate manufacturing partner applications, verify company credentials &amp; assign partnership status.
-              </p>
+          {/* Status Filter Tabs & Action Control Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D1D5DB] pb-4">
+            <div className="flex flex-wrap gap-2">
+              {APPLICATION_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-medium rounded transition-all cursor-pointer ${
+                    activeTab === tab.id
+                      ? "bg-[#2E5AAC] text-white font-semibold shadow-xs"
+                      : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
 
             <button
@@ -101,28 +114,11 @@ export default function AdminApplicationsPage() {
               onClick={fetchApplications}
               aria-label="Refresh applications ledger"
               title="Refresh applications ledger"
-              className="w-10 h-10 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-[#1A2233] rounded flex items-center justify-center transition-colors shadow-xs"
+              className="min-h-[38px] px-3.5 py-1.5 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer flex-shrink-0"
             >
-              <span className="material-symbols-outlined text-lg">refresh</span>
+              <span className="material-symbols-outlined text-base">refresh</span>
+              <span>Refresh Applications</span>
             </button>
-          </div>
-
-          {/* Status Filter Tabs (44px min touch target) */}
-          <div className="flex flex-wrap gap-2 border-b border-[#D1D5DB] pb-3">
-            {APPLICATION_TABS.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`min-h-[44px] px-4 py-2 text-xs font-medium rounded transition-colors ${
-                  activeTab === tab.id
-                    ? "bg-[#2E5AAC] text-white font-semibold shadow-sm"
-                    : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
           </div>
 
           {/* Main Table Content */}
@@ -144,5 +140,13 @@ export default function AdminApplicationsPage() {
           )}
         </div>
       </main>
+  );
+}
+
+export default function AdminApplicationsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-[#5B6B85]">Loading applications...</div>}>
+      <ApplicationsContent />
+    </Suspense>
   );
 }

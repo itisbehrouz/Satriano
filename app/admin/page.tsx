@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
@@ -15,15 +16,24 @@ const TABS = [
   { id: "CANCELLED", label: "Cancelled" },
 ];
 
-export default function AdminPage() {
+function AdminOrderContent() {
   const { isAuthenticated, setAuthenticated } = useAdminAuth();
+  const searchParams = useSearchParams();
+  const statusParam = searchParams?.get("status") || "ALL";
+
   const [accessKey, setAccessKey] = useState("");
   const [authError, setAuthError] = useState<string | null>(null);
 
   const [orders, setOrders] = useState<AdminOrder[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState("ALL");
+  const [activeTab, setActiveTab] = useState(statusParam);
+
+  useEffect(() => {
+    if (statusParam) {
+      setActiveTab(statusParam);
+    }
+  }, [statusParam]);
 
   async function fetchOrders() {
     setLoading(true);
@@ -185,26 +195,29 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
         <div className="w-full max-w-container-max mx-auto space-y-6">
-          {/* Top Bar Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                  Portal Console
-                </h1>
-                <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] uppercase font-semibold px-2 py-0.5 rounded border border-[#B3D6F6]">
-                  Production Ledger
-                </span>
-              </div>
-              <p className="text-xs text-[#5B6B85] mt-1">
-                Internal order management, proforma status verification &amp; factory pipeline tracking.
-              </p>
+          {/* Filter Tabs & Action Buttons Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D1D5DB] pb-4">
+            <div className="flex flex-wrap gap-2">
+              {TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-medium rounded transition-all cursor-pointer ${
+                    activeTab === tab.id
+                      ? "bg-[#2E5AAC] text-white font-semibold shadow-xs"
+                      : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <Link
                 href="/admin/architecture-viz"
-                className="min-h-[44px] px-4 py-2 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
+                className="min-h-[38px] px-3.5 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
               >
                 <span className="material-symbols-outlined text-base">view_in_ar</span>
                 <span>3D Anti-Gravity Viz</span>
@@ -212,30 +225,12 @@ export default function AdminPage() {
               <button
                 type="button"
                 onClick={fetchOrders}
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+                className="min-h-[38px] px-3.5 py-1.5 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
               >
                 <span className="material-symbols-outlined text-base">refresh</span>
                 <span>Refresh Ledger</span>
               </button>
             </div>
-          </div>
-
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2 border-b border-[#D1D5DB] pb-3">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`min-h-[44px] px-4 py-2 text-xs font-medium rounded transition-colors ${
-                  activeTab === tab.id
-                    ? "bg-[#2E5AAC] text-white font-semibold shadow-sm"
-                    : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
           </div>
 
           {/* Main Table Content */}
@@ -259,5 +254,13 @@ export default function AdminPage() {
           )}
         </div>
       </main>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs text-[#5B6B85]">Loading order ledger...</div>}>
+      <AdminOrderContent />
+    </Suspense>
   );
 }
