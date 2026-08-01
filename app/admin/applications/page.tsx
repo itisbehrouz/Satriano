@@ -99,10 +99,11 @@ export default function AdminApplicationsPage() {
             <button
               type="button"
               onClick={fetchApplications}
-              className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              aria-label="Refresh applications ledger"
+              title="Refresh applications ledger"
+              className="w-10 h-10 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-[#1A2233] rounded flex items-center justify-center transition-colors shadow-xs"
             >
-              <span className="material-symbols-outlined text-base">refresh</span>
-              <span>Refresh</span>
+              <span className="material-symbols-outlined text-lg">refresh</span>
             </button>
           </div>
 

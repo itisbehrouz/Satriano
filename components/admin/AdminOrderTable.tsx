@@ -214,9 +214,11 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                           href={order.proforma.pdfUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#2E5AAC] border border-[#2E5AAC]/40 hover:bg-[#E6F1FB] text-xs font-semibold px-2.5 py-1.5 rounded transition-colors whitespace-nowrap"
+                          aria-label="Download Proforma Invoice PDF"
+                          title="Download Proforma Invoice PDF"
+                          className="w-8 h-8 flex items-center justify-center text-[#2E5AAC] border border-[#2E5AAC]/40 hover:bg-[#E6F1FB] rounded transition-colors shadow-xs"
                         >
-                          PDF
+                          <span className="material-symbols-outlined text-base">picture_as_pdf</span>
                         </a>
                       )}
                     </div>

@@ -133,12 +133,12 @@ export function AdminApplicationsTable({
         <table className="w-full text-left border-collapse min-w-[960px]">
           <thead>
             <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
-              <th className="p-4 w-[13%]">App Ref / Date</th>
-              <th className="p-4 w-[22%]">Company &amp; Industry</th>
-              <th className="p-4 w-[20%]">Contact Officer</th>
+              <th className="p-4 w-[14%]">App Ref / Date</th>
+              <th className="p-4 w-[28%]">Company &amp; Industry</th>
+              <th className="p-4 w-[22%]">Contact Officer</th>
               <th className="p-4 w-[12%]">Email Verification</th>
-              <th className="p-4 w-[11%]">Status</th>
-              <th className="p-4 w-[22%] text-right">Actions</th>
+              <th className="p-4 w-[10%]">Status</th>
+              <th className="p-4 w-[14%] text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
@@ -207,44 +207,45 @@ export function AdminApplicationsTable({
                     </td>
                     <td className="p-4 text-right align-top">
                       <div className="flex items-center justify-end gap-1.5 whitespace-nowrap">
-                        {/* Expand/Collapse Full Specs Button */}
+                        {/* View/Hide Specs Icon Button */}
                         <button
                           type="button"
                           onClick={() => setExpandedId(isExpanded ? null : app.id)}
-                          className="px-2.5 py-1.5 text-xs font-semibold text-[#2E5AAC] bg-white border border-[#D1D5DB] hover:bg-[#E6F1FB] hover:border-[#2E5AAC] rounded transition-colors inline-flex items-center gap-1"
+                          className="w-9 h-9 flex items-center justify-center text-[#2E5AAC] bg-white border border-[#D1D5DB] hover:bg-[#E6F1FB] hover:border-[#2E5AAC] rounded transition-colors shadow-xs"
                           aria-expanded={isExpanded}
+                          aria-label={isExpanded ? "Hide Application Specs" : "View Application Specs"}
+                          title={isExpanded ? "Hide Application Specs" : "View Application Specs"}
                         >
-                          <span className="material-symbols-outlined text-sm">
-                            {isExpanded ? "unfold_less" : "unfold_more"}
+                          <span className="material-symbols-outlined text-lg">
+                            {isExpanded ? "visibility_off" : "visibility"}
                           </span>
-                          <span>{isExpanded ? "Hide Specs" : "View Full Specs"}</span>
                         </button>
 
-                        {/* Approve Button */}
+                        {/* Approve Icon Button */}
                         {app.status !== "APPROVED" && (
                           <button
                             type="button"
                             disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "APPROVED")}
+                            aria-label="Approve application"
                             title={!isEmailVerified ? "Cannot approve: email not verified by applicant" : "Approve application"}
-                            className="px-2.5 py-1.5 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] border border-[#0F6E56] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1 shadow-xs"
+                            className="w-9 h-9 flex items-center justify-center text-white bg-[#0F6E56] hover:bg-[#0B5341] border border-[#0F6E56] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors shadow-xs"
                           >
-                            <span className="material-symbols-outlined text-sm">check_circle</span>
-                            <span>Approve</span>
+                            <span className="material-symbols-outlined text-lg">check_circle</span>
                           </button>
                         )}
 
-                        {/* Reject Button */}
+                        {/* Reject Icon Button */}
                         {app.status !== "REJECTED" && (
                           <button
                             type="button"
                             disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "REJECTED")}
+                            aria-label="Reject application"
                             title={!isEmailVerified ? "Cannot reject: email not verified by applicant" : "Reject application"}
-                            className="px-2.5 py-1.5 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1"
+                            className="w-9 h-9 flex items-center justify-center text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors shadow-xs"
                           >
-                            <span className="material-symbols-outlined text-sm">cancel</span>
-                            <span>Reject</span>
+                            <span className="material-symbols-outlined text-lg">cancel</span>
                           </button>
                         )}
                       </div>
