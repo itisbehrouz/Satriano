@@ -487,3 +487,10 @@ unconfirmed, or be wrong from the start. This project's working
 pattern going forward: every visual/UI change gets a screenshot
 checkpoint before being considered done, regardless of which agent
 (Antigravity, Claude Code, or a local model) produced it.
+
+## 12. AI Agentic Skills & Autonomous Infrastructure (Added Aug 1)
+- **Agent Skill Integration:** Deployed a comprehensive `.agents/skills` directory to automate repetitive development and auditing tasks.
+- **Database & Compute Automation:** Configured dedicated agent workflows for Prisma CLI operations, Prisma Client API generation, Postgres/MongoDB setups, and Driver Adapter implementations.
+- **UI/UX & Design System Engine:** Automated styling pipelines including Tailwind config generation, Shadcn component accessibility checks, and dynamic HTML/slide template generation.
+- **Typography & Brand Enforcement:** Integrated an extensive canvas font library (Bricolage Grotesque, Crimson Pro, IBM Plex, Jura, Outfit, Tektur, Work Sans, etc.) alongside automated scripts for logo validation, color palette extraction, and brand guideline consistency checking.
+- **Continuous Auditing:** Activated `codebase-health-audit` and `feature-inventory-audit` to maintain strict architectural hygiene as the platform scales.

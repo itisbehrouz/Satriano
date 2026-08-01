@@ -29,30 +29,30 @@ export function ApplicationStatusBadge({ status }: { status: B2bApplicationItem[
   switch (status) {
     case "APPROVED":
       return (
-        <span className="inline-flex items-center gap-1.5 bg-[#E1F5EE] text-[#0F6E56] text-xs font-semibold px-2.5 py-1 rounded border border-[#A6E5CE]">
-          <span className="material-symbols-outlined text-sm">check_circle</span>
+        <span className="inline-flex items-center gap-1.5 bg-[#E1F5EE] text-[#0F6E56] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#A6E5CE]">
+          <span className="material-symbols-outlined text-xs">check_circle</span>
           <span>APPROVED</span>
         </span>
       );
     case "REJECTED":
       return (
-        <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-xs font-semibold px-2.5 py-1 rounded border border-[#F8B4B4]">
-          <span className="material-symbols-outlined text-sm">cancel</span>
+        <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F8B4B4]">
+          <span className="material-symbols-outlined text-xs">cancel</span>
           <span>REJECTED</span>
         </span>
       );
     case "UNDER_REVIEW":
       return (
-        <span className="inline-flex items-center gap-1.5 bg-[#E6F1FB] text-[#185FA5] text-xs font-semibold px-2.5 py-1 rounded border border-[#B3D6F6]">
-          <span className="material-symbols-outlined text-sm">hourglass_top</span>
+        <span className="inline-flex items-center gap-1.5 bg-[#E6F1FB] text-[#185FA5] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#B3D6F6]">
+          <span className="material-symbols-outlined text-xs">hourglass_top</span>
           <span>UNDER REVIEW</span>
         </span>
       );
     case "SUBMITTED":
     default:
       return (
-        <span className="inline-flex items-center gap-1.5 bg-[#FAEEDA] text-[#854F0B] text-xs font-semibold px-2.5 py-1 rounded border border-[#F5D8A0]">
-          <span className="material-symbols-outlined text-sm">new_releases</span>
+        <span className="inline-flex items-center gap-1.5 bg-[#FAEEDA] text-[#854F0B] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F5D8A0]">
+          <span className="material-symbols-outlined text-xs">new_releases</span>
           <span>SUBMITTED</span>
         </span>
       );
@@ -130,15 +130,15 @@ export function AdminApplicationsTable({
       )}
 
       <div className="overflow-x-auto border border-[#D1D5DB] rounded-lg bg-white shadow-sm">
-        <table className="w-full text-left border-collapse min-w-[900px]">
+        <table className="w-full text-left border-collapse min-w-[960px]">
           <thead>
             <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
-              <th className="p-4 w-[15%]">App Ref / Date</th>
-              <th className="p-4 w-[25%]">Company &amp; Industry</th>
+              <th className="p-4 w-[13%]">App Ref / Date</th>
+              <th className="p-4 w-[22%]">Company &amp; Industry</th>
               <th className="p-4 w-[20%]">Contact Officer</th>
-              <th className="p-4 w-[15%]">Email Verification</th>
-              <th className="p-4 w-[12%]">Status</th>
-              <th className="p-4 w-[13%] text-right">Actions</th>
+              <th className="p-4 w-[12%]">Email Verification</th>
+              <th className="p-4 w-[11%]">Status</th>
+              <th className="p-4 w-[22%] text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
@@ -191,13 +191,13 @@ export function AdminApplicationsTable({
                     </td>
                     <td className="p-4 align-top">
                       {isEmailVerified ? (
-                        <span className="inline-flex items-center gap-1 bg-[#E1F5EE] text-[#0F6E56] text-xs font-semibold px-2.5 py-1 rounded border border-[#A6E5CE]">
-                          <span className="material-symbols-outlined text-sm">mark_email_read</span>
+                        <span className="inline-flex items-center gap-1.5 bg-[#E1F5EE] text-[#0F6E56] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#A6E5CE]">
+                          <span className="material-symbols-outlined text-xs">mark_email_read</span>
                           <span>Verified</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 bg-[#FAEEDA] text-[#854F0B] text-xs font-semibold px-2.5 py-1 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
-                          <span className="material-symbols-outlined text-sm">pending_actions</span>
+                        <span className="inline-flex items-center gap-1.5 bg-[#FAEEDA] text-[#854F0B] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
+                          <span className="material-symbols-outlined text-xs">pending_actions</span>
                           <span>Unverified</span>
                         </span>
                       )}
@@ -206,18 +206,18 @@ export function AdminApplicationsTable({
                       <ApplicationStatusBadge status={app.status} />
                     </td>
                     <td className="p-4 text-right align-top">
-                      <div className="flex items-center justify-end gap-2 flex-wrap">
+                      <div className="flex items-center justify-end gap-1.5 whitespace-nowrap">
                         {/* Expand/Collapse Full Specs Button */}
                         <button
                           type="button"
                           onClick={() => setExpandedId(isExpanded ? null : app.id)}
-                          className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-[#2E5AAC] bg-white border border-[#D1D5DB] hover:bg-[#E6F1FB] hover:border-[#2E5AAC] rounded transition-colors inline-flex items-center gap-1.5"
+                          className="px-2.5 py-1.5 text-xs font-semibold text-[#2E5AAC] bg-white border border-[#D1D5DB] hover:bg-[#E6F1FB] hover:border-[#2E5AAC] rounded transition-colors inline-flex items-center gap-1"
                           aria-expanded={isExpanded}
                         >
-                          <span className="material-symbols-outlined text-base">
+                          <span className="material-symbols-outlined text-sm">
                             {isExpanded ? "unfold_less" : "unfold_more"}
                           </span>
-                          <span>{isExpanded ? "Hide Details" : "View Full Specs"}</span>
+                          <span>{isExpanded ? "Hide Specs" : "View Full Specs"}</span>
                         </button>
 
                         {/* Approve Button */}
@@ -227,9 +227,9 @@ export function AdminApplicationsTable({
                             disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "APPROVED")}
                             title={!isEmailVerified ? "Cannot approve: email not verified by applicant" : "Approve application"}
-                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                            className="px-2.5 py-1.5 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] border border-[#0F6E56] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1 shadow-xs"
                           >
-                            <span className="material-symbols-outlined text-base">check_circle</span>
+                            <span className="material-symbols-outlined text-sm">check_circle</span>
                             <span>Approve</span>
                           </button>
                         )}
@@ -241,9 +241,9 @@ export function AdminApplicationsTable({
                             disabled={isUpdating || !isEmailVerified}
                             onClick={() => handleStatusUpdate(app.id, "REJECTED")}
                             title={!isEmailVerified ? "Cannot reject: email not verified by applicant" : "Reject application"}
-                            className="min-h-[44px] px-3.5 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
+                            className="px-2.5 py-1.5 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1"
                           >
-                            <span className="material-symbols-outlined text-base">cancel</span>
+                            <span className="material-symbols-outlined text-sm">cancel</span>
                             <span>Reject</span>
                           </button>
                         )}
