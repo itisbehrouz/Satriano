@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-export interface AdminSidebarProps {
+import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
+
+interface AdminSidebarProps {
   onSearchClick?: () => void;
 }
 
@@ -13,15 +15,22 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+
+  const handleOpenSearch = () => {
+    if (onSearchClick) {
+      onSearchClick();
+    } else {
+      setIsPaletteOpen(true);
+    }
+  };
 
   // Global Cmd+K / Ctrl+K keyboard shortcut handler
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        if (onSearchClick) {
-          onSearchClick();
-        }
+        handleOpenSearch();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -107,7 +116,7 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
         {!isCollapsed ? (
           <button
             type="button"
-            onClick={onSearchClick}
+            onClick={handleOpenSearch}
             className="w-full bg-[#172A4D] hover:bg-[#1E3A8A] text-[#94A3B8] hover:text-white border border-[#1E3A8A] rounded px-3 py-2 text-xs flex items-center justify-between transition-colors group cursor-pointer"
             title="Search orders, catalog or B2B partners (Cmd+K)"
           >
@@ -124,7 +133,7 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
         ) : (
           <button
             type="button"
-            onClick={onSearchClick}
+            onClick={handleOpenSearch}
             className="w-10 h-10 mx-auto bg-[#172A4D] hover:bg-[#1E3A8A] text-[#60A5FA] border border-[#1E3A8A] rounded flex items-center justify-center transition-colors cursor-pointer"
             title="Quick Search (Cmd+K)"
             aria-label="Quick Search (Cmd+K)"
@@ -208,6 +217,11 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
           </button>
         )}
       </div>
+
+      <GlobalCommandPalette
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+      />
     </aside>
   );
 }
