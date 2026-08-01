@@ -129,6 +129,8 @@ export default function AdminProductSettingsPage() {
         }
       }
     }
+  }, [categories]);
+
   // Regional Size System Slide-Over Panel Context State
   const [selectedSizeSystem, setSelectedSizeSystem] = useState<SizeSystem | null>(null);
 
