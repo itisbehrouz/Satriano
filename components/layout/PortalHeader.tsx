@@ -11,7 +11,6 @@ export function PortalHeader() {
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
-    // Authenticated session check via GET /api/portal/orders
     fetch("/api/portal/orders")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
@@ -27,7 +26,7 @@ export function PortalHeader() {
       router.push("/portal");
       router.refresh();
     } catch (err) {
-      console.error("Portal logout error:", err);
+      console.error("Logout error:", err);
     } finally {
       setLoggingOut(false);
     }
@@ -36,7 +35,7 @@ export function PortalHeader() {
   return (
     <header className="w-full bg-[#0B1E3D] text-white border-b border-[#1E3A8A] sticky top-0 z-50 select-none font-sans">
       <div className="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Brand & Portal Badge */}
+        {/* Brand Logo & Portal Badge */}
         <div className="flex items-center gap-4">
           <Link href="/portal/orders" className="flex items-center gap-2.5">
             <span className="font-bold text-sm tracking-wider uppercase text-white">Satriano</span>

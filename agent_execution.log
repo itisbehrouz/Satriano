@@ -18,3 +18,5 @@
   5. Verified 100% Vitest unit test pass rate (17/17 test files, 98/98 tests).
 
 [2026-08-02T01:12:12+03:00] - Enforced Agent Execution Logging Policy format: [Timestamp] - Summary - Changed Files - agent_execution.log
+
+[2026-08-02T01:18:50+03:00] - Created standalone PortalHeader, customer portal layout wrapper, and POST /api/portal/logout cookie invalidation endpoint. - components/layout/PortalHeader.tsx, app/portal/layout.tsx, app/api/portal/logout/route.ts, agent_execution.log
