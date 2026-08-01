@@ -27,16 +27,20 @@ export interface AdminMetrics {
   pendingActions: PendingAction[];
 }
 
-export function AdminKpiDashboard() {
+export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?: boolean }) {
   const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function fetchMetrics() {
+    if (!isAuthenticated) return;
     setLoading(true);
     setError(null);
     try {
       const res = await fetch("/api/admin/metrics");
+      if (res.status === 401) {
+        return;
+      }
       if (!res.ok) {
         throw new Error("Failed to load operational metrics.");
       }
@@ -51,8 +55,14 @@ export function AdminKpiDashboard() {
   }
 
   useEffect(() => {
-    fetchMetrics();
-  }, []);
+    if (isAuthenticated) {
+      fetchMetrics();
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   if (loading) {
     return (
