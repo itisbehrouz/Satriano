@@ -24,7 +24,7 @@ export function FitPicker({ fits, selectedFitId, onSelect }: FitPickerProps) {
           <div
             key={fit.id}
             onClick={() => onSelect(fit.id)}
-            className={`border rounded-lg p-4 cursor-pointer transition-all flex flex-col justify-between ${
+            className={`border rounded-none p-4 cursor-pointer transition-all flex flex-col justify-between ${
               isSelected
                 ? "border-[#2E5AAC] bg-[#E6F1FB]/30 ring-1 ring-[#2E5AAC]"
                 : "border-[#D1D5DB] bg-white hover:border-[#2E5AAC]/60"
@@ -35,7 +35,7 @@ export function FitPicker({ fits, selectedFitId, onSelect }: FitPickerProps) {
                 <span className="font-semibold text-sm text-[#1A2233] block">
                   {fit.name}
                 </span>
-                <span className="text-[10px] font-mono uppercase text-[#2E5AAC] font-semibold bg-[#E6F1FB] px-2 py-0.5 rounded inline-block mt-1">
+                <span className="text-[10px] font-mono uppercase text-[#2E5AAC] font-semibold bg-[#E6F1FB] px-2 py-0.5 rounded-none inline-block mt-1">
                   {fit.code}
                 </span>
               </div>

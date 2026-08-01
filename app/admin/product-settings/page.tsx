@@ -5,6 +5,8 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
+import { ProductFitTree } from "@/components/admin/ProductFitTree";
+import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
 
 interface SizeOption {
   id: string;
@@ -90,6 +92,31 @@ export default function AdminProductSettingsPage() {
   const [editMoqPerFabric, setEditMoqPerFabric] = useState<number>(50);
   const [editMoqCombined, setEditMoqCombined] = useState<string>("");
   const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
+
+  // Garment Fits Slide-Over Panel Context State
+  const [selectedFitProductContext, setSelectedFitProductContext] = useState<{
+    product: Product;
+    categoryName: string;
+    subcategoryName: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (selectedFitProductContext) {
+      for (const cat of categories) {
+        for (const sub of cat.subcategories) {
+          const found = sub.products.find((p) => p.id === selectedFitProductContext.product.id);
+          if (found) {
+            setSelectedFitProductContext({
+              product: found,
+              categoryName: cat.name,
+              subcategoryName: sub.name,
+            });
+            return;
+          }
+        }
+      }
+    }
+  }, [categories]);
 
   // Modal visibility states
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -386,6 +413,23 @@ export default function AdminProductSettingsPage() {
     }
   }
 
+  async function handleSaveProductFits(productId: string, fitIds: string[]) {
+    const res = await fetch("/api/admin/catalog", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        target: "productFits",
+        id: productId,
+        data: { fitIds },
+      }),
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.error || "Failed to update product fits");
+    }
+    await fetchCatalog();
+  }
+
   async function toggleProductFitLink(productId: string, currentFitIds: string[], targetFitId: string) {
     const isLinked = currentFitIds.includes(targetFitId);
     const newFitIds = isLinked
@@ -496,7 +540,7 @@ export default function AdminProductSettingsPage() {
                   : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
               }`}
             >
-              Garment Fits (Kalıp)
+              Garment Fits
             </button>
             <button
               type="button"
@@ -739,79 +783,31 @@ export default function AdminProductSettingsPage() {
                 </div>
               )}
 
-              {/* TAB 2: Garment Fits (Kalıp) Management */}
+              {/* TAB 2: Garment Fits Management */}
               {activeTab === "fits" && (
                 <div className="space-y-6">
-                  <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                    <h2 className="text-lg font-bold text-[#1A2233] mb-2">
-                      8 Standard Garment Fit Dimensions
-                    </h2>
-                    <p className="text-xs text-[#5B6B85] mb-6">
-                      Toggle allowed fit options per product. Products in excluded categories have 0 fits linked and omit the fit step in the configurator.
-                    </p>
+                  <ProductFitTree
+                    categories={categories}
+                    totalFitsCount={allFits.length || 8}
+                    selectedProductId={selectedFitProductContext?.product.id || null}
+                    onSelectProduct={(prod, catName, subName) => {
+                      setSelectedFitProductContext({
+                        product: prod,
+                        categoryName: catName,
+                        subcategoryName: subName,
+                      });
+                    }}
+                  />
 
-                    <div className="space-y-8">
-                      {categories.map((cat) => (
-                        <div key={cat.id} className="border-t border-[#E5E7EB] pt-6">
-                          <h3 className="text-base font-bold text-[#1A2233] mb-4">
-                            Category: {cat.name}
-                          </h3>
-
-                          <div className="space-y-4">
-                            {cat.subcategories.map((sub) => (
-                              <div key={sub.id} className="bg-[#F5F7FA] p-4 rounded border border-[#E5E7EB]">
-                                <h4 className="text-xs font-semibold uppercase text-[#5B6B85] mb-3">
-                                  Subcategory: {sub.name}
-                                </h4>
-
-                                <div className="space-y-3">
-                                  {sub.products.map((prod) => {
-                                    const linkedFitIds = prod.fits.map((pf) => pf.fit.id);
-
-                                    return (
-                                      <div key={prod.id} className="bg-white p-4 rounded border border-[#D1D5DB]">
-                                        <div className="flex justify-between items-center mb-3">
-                                          <span className="font-bold text-sm text-[#1A2233]">{prod.name}</span>
-                                          <span className="text-xs text-[#5B6B85]">
-                                            ({linkedFitIds.length} fits linked)
-                                          </span>
-                                        </div>
-
-                                        <div className="flex flex-wrap gap-3">
-                                          {allFits.map((fit) => {
-                                            const isChecked = linkedFitIds.includes(fit.id);
-
-                                            return (
-                                              <label
-                                                key={fit.id}
-                                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded border text-xs cursor-pointer select-none transition-colors ${
-                                                  isChecked
-                                                    ? "bg-[#E6F1FB] border-[#2E5AAC] text-[#185FA5] font-semibold"
-                                                    : "bg-white border-[#D1D5DB] text-[#5B6B85] hover:border-[#94A3B8]"
-                                                }`}
-                                              >
-                                                <input
-                                                  type="checkbox"
-                                                  checked={isChecked}
-                                                  onChange={() => toggleProductFitLink(prod.id, linkedFitIds, fit.id)}
-                                                  className="h-3.5 w-3.5 text-[#2E5AAC] rounded border-[#D1D5DB]"
-                                                />
-                                                {fit.name}
-                                              </label>
-                                            );
-                                          })}
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <GarmentFitsPanel
+                    isOpen={!!selectedFitProductContext}
+                    product={selectedFitProductContext?.product || null}
+                    categoryName={selectedFitProductContext?.categoryName || ""}
+                    subcategoryName={selectedFitProductContext?.subcategoryName || ""}
+                    allFits={allFits}
+                    onClose={() => setSelectedFitProductContext(null)}
+                    onSave={handleSaveProductFits}
+                  />
                 </div>
               )}
 

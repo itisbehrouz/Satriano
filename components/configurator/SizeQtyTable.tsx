@@ -62,7 +62,7 @@ export function SizeQtyTable({
   }
 
   return (
-    <div className="border border-[#D1D5DB] rounded-lg bg-white overflow-hidden shadow-sm">
+    <div className="border border-[#D1D5DB] rounded-none bg-white overflow-hidden shadow-sm">
       {sizeSystems.length > 0 && (
         <div className="bg-[#F5F7FA] border-b border-[#E5E7EB] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
@@ -74,11 +74,11 @@ export function SizeQtyTable({
             </p>
           </div>
 
-          <div className="inline-flex rounded-md border border-[#D1D5DB] bg-white p-1">
+          <div className="inline-flex rounded-none border border-[#D1D5DB] bg-white p-1">
             <button
               type="button"
               onClick={() => onRegionChange("EU")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${activeRegion === "EU"
+              className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "EU"
                   ? "bg-[#2E5AAC] text-white shadow-sm"
                   : "text-[#5B6B85] hover:text-[#1A2233]"
                 }`}
@@ -88,7 +88,7 @@ export function SizeQtyTable({
             <button
               type="button"
               onClick={() => onRegionChange("US")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded transition-colors ${activeRegion === "US"
+              className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "US"
                   ? "bg-[#2E5AAC] text-white shadow-sm"
                   : "text-[#5B6B85] hover:text-[#1A2233]"
                 }`}
@@ -117,7 +117,7 @@ export function SizeQtyTable({
                   {/* Direct number input — still editable by typing */}
                   <input
                     aria-label={`${size} ${activeRegion}`}
-                    className="w-28 bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none py-1.5 px-3 rounded text-sm text-right font-medium tabular-nums"
+                    className="w-28 bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none py-1.5 px-3 rounded-none text-sm text-right font-medium tabular-nums"
                     min={0}
                     type="number"
                     value={quantities[size] ?? 0}
@@ -131,7 +131,7 @@ export function SizeQtyTable({
                       type="button"
                       aria-label={`decrease quantity for size ${size}`}
                       onClick={() => handleStepClick(size, "down")}
-                      className="px-4.5 py-4 text-xs font-mono rounded border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
+                      className="px-4.5 py-4 text-xs font-mono rounded-none border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
                     >
                       −
                     </button>
@@ -139,7 +139,7 @@ export function SizeQtyTable({
                       type="button"
                       aria-label={`increase quantity for size ${size}`}
                       onClick={() => handleStepClick(size, "up")}
-                      className="px-4.5 py-4 text-xs font-mono rounded border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
+                      className="px-4.5 py-4 text-xs font-mono rounded-none border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
                     >
                       +
                     </button>

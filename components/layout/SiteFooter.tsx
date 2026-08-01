@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OpenCookiePreferencesButton } from "@/components/layout/CookieConsentModal";
 
 const NAVIGATION_LINKS = [
   { label: "Manufacturing Configurator", href: "/konfigurator" },
@@ -122,8 +123,9 @@ export function SiteFooter() {
           </div>
 
           <div className="flex items-center gap-6 text-[11px]">
+            <OpenCookiePreferencesButton />
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#0F6E56]" />
+              <span className="w-2 h-2 rounded-sm bg-[#0F6E56]" />
               System Status: Operational
             </span>
             <span>Locale: en-US</span>

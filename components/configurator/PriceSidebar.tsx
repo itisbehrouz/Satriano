@@ -45,12 +45,12 @@ export function PriceSidebar({
   const stickyClass = "sticky top-24";
 
   return (
-    <div className={`${stickyClass} bg-white border-2 border-[#2E5AAC]/40 rounded-lg p-6 flex flex-col h-auto shadow-sm`}>
+    <div className={`${stickyClass} bg-white border-2 border-[#2E5AAC]/40 rounded-none p-6 flex flex-col h-auto shadow-sm`}>
       <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-4 mb-4">
         <h2 className="text-base font-semibold text-[#1A2233]">
           Price Guidance & Ledger
         </h2>
-        <span className="text-[11px] font-semibold text-[#185FA5] uppercase tracking-wider bg-[#E6F1FB] px-2 py-0.5 rounded">
+        <span className="text-[11px] font-semibold text-[#185FA5] uppercase tracking-wider bg-[#E6F1FB] px-2 py-0.5 rounded-none">
           Review Required
         </span>
       </div>
@@ -76,7 +76,7 @@ export function PriceSidebar({
           </span>
         </div>
         {customerTargetPrice.trim() !== "" && (
-          <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-2 bg-[#F5F7FA] p-2 rounded">
+          <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-2 bg-[#F5F7FA] p-2 rounded-none">
             <span className="text-[#5B6B85] text-xs">Target Budget / Unit</span>
             <span className="font-bold text-[#2E5AAC] tabular-nums">
               ${customerTargetPrice} / unit
@@ -85,54 +85,44 @@ export function PriceSidebar({
         )}
       </div>
 
-      {/* Live MOQ Progress Bar */}
-      <div className="mb-4 flex flex-col gap-2">
-        <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-2">
-          <span className="text-[#5B6B85] font-semibold">Minimum Order Quantity Progress</span>
-        </div>
-        {/* Progress bar: amber/incomplete vs green/checkmark */}
-        <div className="flex items-center gap-1 mb-2">
-          {/* Bar fill */}
-          <div
-            className={`border border-[#D1D5DB] rounded px-3 py-0.5 text-xs font-mono tabular-nums ${meetsMoq
-                ? "bg-[#E8F0FB] text-[#2E5AAC]"
-                : "bg-[#FCEBEB] text-[#A32D2D]"
-              }`}
-          >
-            <span className="text-xs font-semibold">
-              {totalUnits} / {moqPerFabric} units
-            </span>
-            <span className="text-xs">
-              {" "}
-              ({progressPct}%)
-            </span>
-          </div>
-          {/* Progress bar visual */}
-          <div className="flex items-center gap-0.5 px-3 py-1 rounded border border-[#D1D5DB] bg-[#F5F7FA]">
-            {Array.from({ length: 10 }, (_, i) => (
-              <span
-                key={i}
-                className={`px-2 py-1 rounded ${i < Math.ceil(progressPct / 10)
-                    ? meetsMoq
-                      ? "bg-[#E8F0FB] text-[#2E5AAC]"
-                      : "bg-[#FCEBEB] text-[#A32D2D]"
-                    : "text-[#5B6B85]"
-                  }`}
-              >
-                {i < Math.ceil(progressPct / 10) ? (meetsMoq ? "\u2714" : "\u25CB") : "\u25CB"}
-              </span>
-            ))}
-          </div>
-        </div>
-        {/* Status message */}
-        <p className={`text-center text-xs ${meetsMoq
-            ? "bg-[#E8F0FB] p-2 rounded mt-1 text-[#2E5AAC]"
-            : "bg-[#FCEBEB] p-2 rounded mt-1 text-[#A32D2D]"
+      {/* Live MOQ Progress Section */}
+      <div className="mb-5 bg-[#F8FAFC] border border-[#E2E8F0] p-4 rounded-none space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#1E293B]">
+            MOQ Progress
+          </span>
+          <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-none ${
+            meetsMoq ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-amber-100 text-amber-900 border border-amber-300"
           }`}>
-          {meetsMoq
-            ? "\u2714 Minimum order quantity met — ready for feasibility review."
-            : `${unitsRemaining} more unit${unitsRemaining !== 1 ? "s" : ""} needed to reach minimum order (${moqPerFabric} units per fabric).`}
-        </p>
+            {totalUnits} / {moqPerFabric} units ({progressPct}%)
+          </span>
+        </div>
+
+        {/* Clean Modern Progress Bar */}
+        <div className="w-full bg-[#E2E8F0] h-2.5 rounded-none overflow-hidden">
+          <div
+            className={`h-full transition-all duration-300 ${
+              meetsMoq ? "bg-emerald-500" : "bg-amber-500"
+            }`}
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+
+        {/* Clean Status Message */}
+        <div className={`p-2.5 rounded-none text-xs flex items-center gap-2 ${
+          meetsMoq
+            ? "bg-emerald-50 border border-emerald-200 text-emerald-900"
+            : "bg-amber-50 border border-amber-200 text-amber-900"
+        }`}>
+          <span className="material-symbols-outlined text-base shrink-0">
+            {meetsMoq ? "check_circle" : "info"}
+          </span>
+          <span className="leading-tight">
+            {meetsMoq
+              ? "Minimum order quantity met — ready for feasibility review."
+              : `${unitsRemaining} more unit${unitsRemaining !== 1 ? "s" : ""} needed to reach MOQ threshold (${moqPerFabric} units per fabric).`}
+          </span>
+        </div>
       </div>
 
       <div className="mt-auto pt-4 border-t border-[#E5E7EB]">
@@ -154,22 +144,21 @@ export function PriceSidebar({
           disabled={!meetsMoq || totalUnits === 0 || submitting}
           onClick={onSubmit}
           aria-label="submit order for feasibility review"
-          className={`w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs uppercase font-semibold tracking-wider py-3.5 px-6 rounded transition-colors flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed ${!meetsMoq ? "bg-[#FCEBEB] hover:bg-[#F7D9D9]" : ""
-            }`}
+          className="w-full bg-[#0B1E3D] hover:bg-[#152744] text-white text-xs uppercase font-bold tracking-wider py-3.5 px-6 rounded-none transition-all flex items-center justify-center gap-2 disabled:bg-[#94A3B8] disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
         >
-          {submitting ? "Submitting for Review..." : "Submit Order for Feasibility Review \u2192"}
+          {submitting ? "Submitting for Review..." : "Submit Order for Feasibility Review →"}
         </button>
 
         {/* Inline gating message when below MOQ */}
         {!meetsMoq && (
-          <p className={`text-center text-xs ${"bg-[#FCEBEB] p-2 rounded mt-3 text-[#A32D2D]"
+          <p className={`text-center text-xs ${"bg-[#FCEBEB] p-2 rounded-none mt-3 text-[#A32D2D]"
             }`}>
             Submission disabled: total units ({totalUnits}) are below the minimum order quantity ({moqPerFabric} units per fabric). Please adjust your size quantities to meet the MOQ before submitting.
           </p>
         )}
 
         {errorMessage && (
-          <p className={`text-center text-xs ${"bg-[#FCEBEB] p-2 rounded mt-3 text-[#A32D2D]"
+          <p className={`text-center text-xs ${"bg-[#FCEBEB] p-2 rounded-none mt-3 text-[#A32D2D]"
             }`}>
             {errorMessage}
           </p>

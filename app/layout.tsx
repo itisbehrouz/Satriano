@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Baskervville } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { CookieConsentModal } from "@/components/layout/CookieConsentModal";
+import { B2BSupportDock } from "@/components/layout/B2BSupportDock";
+import { AIFaqAssistantModal } from "@/components/layout/AIFaqAssistantModal";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,6 +46,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <CookieConsentModal />
+        <B2BSupportDock />
+        <AIFaqAssistantModal />
         <Analytics />
       </body>
     </html>

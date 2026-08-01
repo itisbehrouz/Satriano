@@ -33,7 +33,7 @@ export function FabricPicker({ fabrics, selectedFabricId, onSelect }: FabricPick
               aria-label={fabric.name}
             />
             <label
-              className={`block cursor-pointer border rounded-lg p-4 bg-white transition-all h-full ${
+              className={`block cursor-pointer border rounded-none p-4 bg-white transition-all h-full ${
                 checked
                   ? "border-[#2E5AAC] ring-2 ring-[#2E5AAC]/20 bg-[#F5F7FA]"
                   : "border-[#D1D5DB] hover:border-[#2E5AAC]"
@@ -41,7 +41,7 @@ export function FabricPicker({ fabrics, selectedFabricId, onSelect }: FabricPick
               htmlFor={`fabric-${fabric.id}`}
             >
               <div
-                className="w-full h-32 mb-4 bg-[#F5F7FA] rounded border border-[#E5E7EB] bg-cover bg-center"
+                className="w-full h-32 mb-4 bg-[#F5F7FA] rounded-none border border-[#E5E7EB] bg-cover bg-center"
                 style={fabric.imageUrl ? { backgroundImage: `url('${fabric.imageUrl}')` } : undefined}
               />
               <h3 className="text-sm font-semibold text-[#1A2233] mb-1">

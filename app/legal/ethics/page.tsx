@@ -28,7 +28,7 @@ export default function EthicsPage() {
               Supply Chain Transparency &amp; Ethics
             </h1>
             <p className="text-xs md:text-sm text-[#5B6B85] mt-2">
-              Effective Date: July 31, 2026 | European Labor Compliance &amp; OEKO-TEX Standard 100 Sourcing
+              Effective Date: July 31, 2026 | European Labor Compliance &amp; Sustainable Sourcing
             </p>
           </div>
 
@@ -45,10 +45,10 @@ export default function EthicsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-[#1A2233] mb-3 pb-2 border-b border-[#E5E7EB]">
-                2. OEKO-TEX &amp; Sustainable Material Sourcing
+                2. Sustainable Material Sourcing
               </h2>
               <p className="text-[#5B6B85]">
-                Our raw material supply partners are audited to ensure OEKO-TEX Standard 100 certification. We prioritize organic cotton, recycled polyester blends, and traceable merino wools free from harmful AZO dyes, heavy metals, or toxic chemical finishes.
+                Our raw material supply partners are audited to ensure high quality and environmental standards. We prioritize premium cotton, durable polyester blends, and traceable wools free from harmful AZO dyes, heavy metals, or toxic chemical finishes.
               </p>
             </section>
 

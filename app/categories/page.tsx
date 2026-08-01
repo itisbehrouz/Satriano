@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { CategoriesSearchFilter } from "@/components/CategoriesSearchFilter";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -17,114 +18,78 @@ export default async function CategoriesPage() {
     orderBy: { sortOrder: "asc" },
   });
 
+  const totalSubcategories = categories.reduce((sum, c) => sum + c.subcategories.length, 0);
+
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
-        <div className="w-full px-4 md:px-8 py-10 md:py-14 max-w-container-max mx-auto">
-          {/* Header Banner */}
-          <div className="mb-12 bg-white border border-[#D1D5DB] rounded-lg p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#E6F1FB] text-[#185FA5] border border-[#B3D6F6] text-xs font-semibold uppercase tracking-wider rounded mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#185FA5]" />
-                B2B White-Label Garment Catalog
+      <main className="flex-grow bg-[#F8FAFC] text-[#020617] font-sans antialiased">
+        {/* Executive Dark Navy Hero Section */}
+        <section className="w-full bg-[#0B1E3D] text-white py-14 lg:py-20 border-b border-[#1E3A8A] relative overflow-hidden">
+          {/* Ambient Glow */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2E5AAC]/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+            {/* Breadcrumb Navigation */}
+            <nav className="flex items-center gap-2 text-xs text-[#94A3B8] mb-6">
+              <Link href="/" className="hover:text-white transition-colors">
+                Home
+              </Link>
+              <span className="text-[#64748B]">/</span>
+              <span className="font-medium text-white">Manufacturing Catalog</span>
+            </nav>
+
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div className="max-w-3xl space-y-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-none bg-[#60A5FA] animate-pulse" />
+                  B2B White-Label Portfolio
+                </div>
+
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans leading-[1.1]">
+                  Garment Manufacturing Catalog &amp; Subcategories
+                </h1>
+
+                <p className="text-base md:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
+                  Explore our complete portfolio of producible apparel lines. Filter by style or search subcategories to launch instant custom order specifications.
+                </p>
+
+                {/* Portfolio Stats Strip */}
+                <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8] pt-2">
+                  <span>
+                    <strong className="text-white font-mono text-sm">{categories.length}</strong> Main Categories
+                  </span>
+                  <span>•</span>
+                  <span>
+                    <strong className="text-white font-mono text-sm">{totalSubcategories}</strong> Subcategories
+                  </span>
+                  <span>•</span>
+                  <span>
+                    <strong className="text-[#60A5FA] font-mono text-sm">65</strong> Producible Products
+                  </span>
+                </div>
               </div>
-              <h1 className="text-2xl md:text-4xl font-semibold text-[#1A2233]">
-                Manufacturing Categories &amp; Subcategories
-              </h1>
-              <p className="text-sm text-[#5B6B85] mt-1.5 max-w-2xl leading-relaxed">
-                Explore our comprehensive garment production lines. Select any specific subcategory to configure your custom order specs.
-              </p>
+
+              {/* Action Button */}
+              <div className="shrink-0">
+                <Link
+                  href="/konfigurator"
+                  className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-lg shadow-[#2E5AAC]/30 inline-flex items-center gap-2"
+                >
+                  <span>Launch Order Configurator</span>
+                  <span>→</span>
+                </Link>
+              </div>
             </div>
-            <Link
-              href="/konfigurator"
-              className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs uppercase font-semibold tracking-wider px-6 py-3.5 rounded transition-colors whitespace-nowrap"
-            >
-              Launch Configurator →
-            </Link>
           </div>
+        </section>
 
-          {/* Grouped Category Sections */}
-          <div className="space-y-16">
-            {categories.map((cat) => (
-              <section key={cat.id} className="scroll-mt-24" id={cat.slug}>
-                {/* Category Section Title Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-[#1A2233] pb-4 mb-8 gap-4">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-2xl md:text-3xl font-semibold text-[#1A2233]">
-                        {cat.name}
-                      </h2>
-                      <span className="bg-[#E6F1FB] text-[#185FA5] text-xs font-semibold px-2.5 py-0.5 rounded">
-                        {cat.subcategories.length} Subcategories
-                      </span>
-                    </div>
-                    <p className="text-xs md:text-sm text-[#5B6B85] mt-1 font-medium">
-                      {cat.description}
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/categories/${cat.slug}`}
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-[#2E5AAC] hover:text-[#24498E] uppercase tracking-wider"
-                  >
-                    View All {cat.name} Specs →
-                  </Link>
-                </div>
-
-                {/* Subcategory Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {cat.subcategories.map((sub) => (
-                    <div
-                      key={sub.id}
-                      className="bg-white border border-[#D1D5DB] rounded-lg overflow-hidden flex flex-col hover:border-[#2E5AAC] transition-all shadow-sm group"
-                    >
-                      {/* Subcategory Photo Container */}
-                      <div className="h-60 w-full relative overflow-hidden bg-[#F5F7FA] border-b border-[#E5E7EB] shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={sub.imageUrl || cat.imageUrl || "/images/catalog/tops.png"}
-                          alt={sub.name}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <span className="absolute top-3 left-3 bg-[#0B1E3D]/90 text-white text-[11px] font-semibold px-2.5 py-1 rounded">
-                          MOQ {sub.moq ?? 50} Units
-                        </span>
-                      </div>
-
-                      {/* Subcategory Info */}
-                      <div className="p-6 flex-grow flex flex-col justify-between">
-                        <div>
-                          <h3 className="text-lg font-semibold text-[#1A2233] mb-2 group-hover:text-[#2E5AAC] transition-colors">
-                            {sub.name}
-                          </h3>
-                          <p className="text-xs text-[#5B6B85] leading-relaxed mb-4">
-                            {sub.description}
-                          </p>
-
-                          <div className="flex flex-wrap gap-2 text-[11px] font-medium text-[#5B6B85] mb-4">
-                            <span className="bg-[#F5F7FA] border border-[#E5E7EB] px-2.5 py-1 rounded">
-                              Lead: {sub.leadTimeDays ?? 14} Days
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-[#E5E7EB]">
-                          <Link
-                            href={`/konfigurator/${sub.slug}`}
-                            className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3 px-4 rounded transition-colors inline-flex items-center justify-center gap-2"
-                          >
-                            Configure Spec →
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ))}
+        {/* Search & Categories Showcase Grid Section */}
+        <section className="w-full py-12 lg:py-16 px-6 lg:px-8">
+          <div className="max-w-[1440px] mx-auto">
+            <CategoriesSearchFilter categories={categories} />
           </div>
-        </div>
+        </section>
       </main>
       <SiteFooter />
     </>

@@ -26,7 +26,7 @@ export function LogoUploader({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div
-        className="border-2 border-dashed border-[#D1D5DB] rounded-lg bg-white p-8 flex flex-col items-center justify-center text-center hover:border-[#2E5AAC] transition-colors cursor-pointer"
+        className="border-2 border-dashed border-[#D1D5DB] rounded-none bg-white p-8 flex flex-col items-center justify-center text-center hover:border-[#2E5AAC] transition-colors cursor-pointer"
         onClick={() => inputRef.current?.click()}
       >
         <span className="material-symbols-outlined text-4xl text-[#5B6B85] mb-3">
@@ -51,18 +51,18 @@ export function LogoUploader({
             event.stopPropagation();
             inputRef.current?.click();
           }}
-          className="text-xs font-semibold text-[#2E5AAC] border border-[#2E5AAC] hover:bg-[#E6F1FB] px-4 py-2 rounded transition-colors uppercase tracking-wider"
+          className="text-xs font-semibold text-[#2E5AAC] border border-[#2E5AAC] hover:bg-[#E6F1FB] px-4 py-2 rounded-none transition-colors uppercase tracking-wider"
         >
           {file ? "Change File" : "Select Vector File"}
         </button>
       </div>
 
-      <div className="border border-[#D1D5DB] bg-white rounded-lg p-5 flex flex-col">
+      <div className="border border-[#D1D5DB] bg-white rounded-none p-5 flex flex-col">
         <h3 className="text-sm font-semibold text-[#1A2233] mb-3 uppercase tracking-wider">
           Logo Placement Spec
         </h3>
         <div
-          className="flex-grow flex flex-col items-center justify-center bg-[#F5F7FA] rounded border border-[#E5E7EB] relative overflow-hidden p-6"
+          className="flex-grow flex flex-col items-center justify-center bg-[#F5F7FA] rounded-none border border-[#E5E7EB] relative overflow-hidden p-6"
           style={{ minHeight: 180 }}
         >
           <div className="flex items-center gap-2 text-[#5B6B85] mb-4">
@@ -75,7 +75,7 @@ export function LogoUploader({
             {PLACEMENT_OPTIONS.map((option) => (
               <label
                 key={option.value}
-                className="flex items-center gap-2 cursor-pointer bg-white px-3.5 py-2 border border-[#D1D5DB] rounded shadow-sm hover:border-[#2E5AAC] transition-colors"
+                className="flex items-center gap-2 cursor-pointer bg-white px-3.5 py-2 border border-[#D1D5DB] rounded-none shadow-sm hover:border-[#2E5AAC] transition-colors"
               >
                 <input
                   type="radio"

@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const MENU_ITEMS = [
   { label: "MANUFACTURING", href: "/konfigurator" },
   { label: "COLLECTIONS", href: "/categories" },
-  { label: "SOURCING", href: "#sourcing" },
-  { label: "WHOLESALE", href: "#wholesale" },
+  { label: "SOURCING", href: "/legal/supply-terms" },
+  { label: "WHOLESALE", href: "/wholesale" },
 ];
 
 export function SiteHeader() {
@@ -33,7 +33,9 @@ export function SiteHeader() {
         {/* Desktop Navigation Items */}
         <nav className="hidden md:flex gap-8 items-center text-xs font-semibold tracking-wider uppercase">
           {MENU_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href + "/"));
 
             return (
               <Link
@@ -55,7 +57,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/portal"
-            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
+            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
           >
             <span className="material-symbols-outlined text-base">account_circle</span>
             <span>Client Portal</span>
@@ -66,7 +68,7 @@ export function SiteHeader() {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="md:hidden inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded transition-colors"
+            className="md:hidden inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded-none transition-colors"
           >
             <span className="material-symbols-outlined text-lg">
               {mobileMenuOpen ? "close" : "menu"}
@@ -80,7 +82,9 @@ export function SiteHeader() {
       {mobileMenuOpen && (
         <nav className="md:hidden bg-[#081733] border-t border-[#132A52] px-4 py-3 space-y-2">
           {MENU_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href + "/"));
             return (
               <Link
                 key={item.label}
