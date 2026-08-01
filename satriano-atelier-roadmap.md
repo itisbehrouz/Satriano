@@ -524,3 +524,18 @@ checkpoint before being considered done, regardless of which agent
 - **Accordion Sub-Menu Navigation & Deep-Linking**:
   - Refactored sidebar sub-item list to an accordion pattern where sub-items expand only for the active section (or user-toggled section), keeping inactive section menus collapsed.
   - Mapped all sub-items to functional page filter query parameters (`?status=ALL`, `?status=SUBMITTED`, `?tab=fits`, etc.) with `useSearchParams` and `Suspense` synchronization across page components.
+
+---
+
+## 15. Executive Admin KPI Dashboard & Client Portal Isolation (Aug 2, 2026)
+
+- **Production-Ready Admin KPI Dashboard (`Roadmap Step 9.7`)**:
+  - Built real-time operational telemetry widget (`AdminKpiDashboard.tsx`) and API handler (`/api/admin/metrics`).
+  - Aggregated real-time metrics: Total Revenue (USD from `PAID`/`SHIPPED`/`IN_PRODUCTION`), Active Factory Orders (`IN_PRODUCTION`), Pending Proforma Quotes (`PENDING_REVIEW`), and Pending B2B Applications (`SUBMITTED`).
+  - Enforced strict Swiss Design system tokens (`#F7F8FA` background, white flat cards, 1px `#EAECF0` borders, `rounded-md` 4-6px, zero drop shadows).
+  - Applied `tabular-nums font-mono` formatting across all numeric counters and currency values.
+  - Implemented a dense, scannable summary table displaying the 5 most recent pending actions requiring executive admin review with quick-link triggers.
+- **Client Portal Header Cleanup & Layout Isolation**:
+  - Removed top `PortalHeader` component from the customer portal layout (`app/portal/layout.tsx`) for a distraction-free corporate login flow.
+- **Prisma PostgreSQL Connection Pooling Optimization**:
+  - Configured `lib/prisma.ts` with explicit `pg.Pool` initialization for `@prisma/adapter-pg` driver adapter, ensuring stable connection pooling to Supabase Transaction Mode Pooler port `:6543`.
