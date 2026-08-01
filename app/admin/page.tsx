@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable";
+import { AdminKpiDashboard } from "@/components/admin/AdminKpiDashboard";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 const TABS = [
@@ -193,8 +194,11 @@ function AdminOrderContent() {
 
   // Render Full Admin Operations Console
   return (
-    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-8 px-4 md:px-8 font-sans">
         <div className="w-full max-w-container-max mx-auto space-y-6">
+          {/* Admin KPI Overview & Analytics Widget */}
+          <AdminKpiDashboard />
+
           {/* Filter Tabs & Action Buttons Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D1D5DB] pb-4">
             <div className="flex flex-wrap gap-2">
