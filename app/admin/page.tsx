@@ -201,14 +201,23 @@ export default function AdminPage() {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={fetchOrders}
-              className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-            >
-              <span className="material-symbols-outlined text-base">refresh</span>
-              <span>Refresh Ledger</span>
-            </button>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Link
+                href="/admin/architecture-viz"
+                className="min-h-[44px] px-4 py-2 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">view_in_ar</span>
+                <span>3D Anti-Gravity Viz</span>
+              </Link>
+              <button
+                type="button"
+                onClick={fetchOrders}
+                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span className="material-symbols-outlined text-base">refresh</span>
+                <span>Refresh Ledger</span>
+              </button>
+            </div>
           </div>
 
           {/* Filter Tabs */}
