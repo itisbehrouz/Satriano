@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
 import { ProductFitTree } from "@/components/admin/ProductFitTree";
 import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
@@ -471,31 +469,25 @@ export default function AdminProductSettingsPage() {
 
   if (isAuthenticated === false) {
     return (
-      <>
-        <SiteHeader />
-        <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4">
-          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center">
-            <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
-            <p className="text-sm text-[#5B6B85] mb-6">
-              Please authenticate via the Corporate Access Gate at /admin to manage catalog settings.
-            </p>
-            <Link
-              href="/admin"
-              className="inline-block bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded"
-            >
-              Go to Admin Login →
-            </Link>
-          </div>
-        </main>
-        <SiteFooter />
-      </>
+      <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4">
+        <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center">
+          <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
+          <p className="text-sm text-[#5B6B85] mb-6">
+            Please authenticate via the Corporate Access Gate at /admin to manage catalog settings.
+          </p>
+          <Link
+            href="/admin"
+            className="inline-block bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded"
+          >
+            Go to Admin Login →
+          </Link>
+        </div>
+      </main>
     );
   }
 
   return (
-    <>
-      <SiteHeader />
-      <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
+    <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
         <div className="w-full max-w-container-max mx-auto px-4 md:px-8 py-10">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-[#D1D5DB] pb-6">
@@ -1359,8 +1351,6 @@ export default function AdminProductSettingsPage() {
           </div>
         </div>
       )}
-
-      <SiteFooter />
-    </>
+    </main>
   );
 }

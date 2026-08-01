@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import {
   AdminApplicationsTable,
   B2bApplicationItem,
@@ -91,31 +89,25 @@ export default function AdminApplicationsPage() {
 
   if (isAuthenticated === false) {
     return (
-      <>
-        <SiteHeader />
-        <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4 font-sans">
-          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center shadow-sm">
-            <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
-            <p className="text-sm text-[#5B6B85] mb-6">
-              Please authenticate via the Corporate Access Gate at /admin to manage B2B partner applications.
-            </p>
-            <Link
-              href="/admin"
-              className="inline-flex items-center justify-center min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
-            >
-              Go to Admin Login →
-            </Link>
-          </div>
-        </main>
-        <SiteFooter />
-      </>
+      <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4 font-sans">
+        <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center shadow-sm">
+          <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
+          <p className="text-sm text-[#5B6B85] mb-6">
+            Please authenticate via the Corporate Access Gate at /admin to manage B2B partner applications.
+          </p>
+          <Link
+            href="/admin"
+            className="inline-flex items-center justify-center min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+          >
+            Go to Admin Login →
+          </Link>
+        </div>
+      </main>
     );
   }
 
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
         <div className="w-full max-w-container-max mx-auto space-y-6">
           {/* Top Bar Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
@@ -227,7 +219,5 @@ export default function AdminApplicationsPage() {
           )}
         </div>
       </main>
-      <SiteFooter />
-    </>
   );
 }

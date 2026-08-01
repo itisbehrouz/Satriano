@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const CHANNELS = [
   {
@@ -58,9 +59,15 @@ const CHANNELS = [
 ];
 
 export function B2BSupportDock() {
+  const pathname = usePathname();
   // Always default to minimized tab view on every page load
   const [isMinimized, setIsMinimized] = useState(true);
   const [activeTab, setActiveTab] = useState<"none" | "channels">("none");
+
+  // Do not render support dock on admin pages
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const handleMinimize = (minimized: boolean) => {
     setIsMinimized(minimized);
