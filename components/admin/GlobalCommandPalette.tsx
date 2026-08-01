@@ -9,11 +9,29 @@ interface GlobalCommandPaletteProps {
   onClose?: () => void;
 }
 
+interface CatalogProductItem {
+  id: string;
+  name: string;
+  slug: string;
+  categoryName: string;
+  subcategoryName: string;
+}
+
+interface OrderSummaryItem {
+  id: string;
+  companyName: string;
+  status: string;
+  createdAt: string;
+}
+
 export function GlobalCommandPalette({
   isOpen: externalIsOpen,
   onClose: externalOnClose,
 }: GlobalCommandPaletteProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const [products, setProducts] = useState<CatalogProductItem[]>([]);
+  const [orders, setOrders] = useState<OrderSummaryItem[]>([]);
+  const [loadingData, setLoadingData] = useState(false);
   const router = useRouter();
 
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
@@ -35,6 +53,66 @@ export function GlobalCommandPalette({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
+  // Fetch real catalog & orders data when command palette is opened
+  useEffect(() => {
+    if (isOpen) {
+      let isMounted = true;
+      setLoadingData(true);
+
+      const fetchData = async () => {
+        try {
+          const [catalogRes, ordersRes] = await Promise.all([
+            fetch("/api/admin/catalog").catch(() => null),
+            fetch("/api/admin/orders").catch(() => null),
+          ]);
+
+          if (catalogRes && catalogRes.ok) {
+            const catData = await catalogRes.json();
+            if (catData.categories && isMounted) {
+              const items: CatalogProductItem[] = [];
+              for (const cat of catData.categories) {
+                for (const sub of cat.subcategories || []) {
+                  for (const p of sub.products || []) {
+                    items.push({
+                      id: p.id,
+                      name: p.name,
+                      slug: p.slug,
+                      categoryName: cat.name,
+                      subcategoryName: sub.name,
+                    });
+                  }
+                }
+              }
+              setProducts(items);
+            }
+          }
+
+          if (ordersRes && ordersRes.ok) {
+            const orderData = await ordersRes.json();
+            if (orderData.orders && isMounted) {
+              const items: OrderSummaryItem[] = orderData.orders.map((o: any) => ({
+                id: o.id,
+                companyName: o.company?.name || "B2B Client",
+                status: o.status,
+                createdAt: o.createdAt,
+              }));
+              setOrders(items);
+            }
+          }
+        } catch (err) {
+          console.error("Failed to load command palette search index:", err);
+        } finally {
+          if (isMounted) setLoadingData(false);
+        }
+      };
+
+      fetchData();
+      return () => {
+        isMounted = false;
+      };
+    }
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -62,9 +140,12 @@ export function GlobalCommandPalette({
             </span>
             <Command.Input
               autoFocus
-              placeholder="Search commands, order ledger, catalog, or navigation... (ESC to exit)"
+              placeholder="Search products, orders, companies, or commands... (ESC to exit)"
               className="w-full bg-transparent text-xs text-[#101828] placeholder-[#667085] focus:outline-none"
             />
+            {loadingData && (
+              <span className="w-3.5 h-3.5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mr-2 shrink-0" />
+            )}
             <kbd className="px-1.5 py-0.5 bg-[#F2F4F7] border border-[#D0D5DD] rounded text-[10px] font-mono text-[#667085] shrink-0 ml-2">
               ESC
             </kbd>
@@ -73,11 +154,67 @@ export function GlobalCommandPalette({
           {/* Results Command List */}
           <Command.List className="max-h-80 overflow-y-auto p-2 divide-y divide-[#EAECF0]">
             <Command.Empty className="p-6 text-center text-xs text-[#667085]">
-              No matching commands or navigation items found.
+              No matching products, orders, or commands found.
             </Command.Empty>
 
-            {/* Group 1: Navigation & Admin Views */}
-            <Command.Group heading="Navigation &amp; Console Views" className="py-1">
+            {/* Dynamic Group 1: Live Catalog Products */}
+            {products.length > 0 && (
+              <Command.Group heading="Catalog Products &amp; Specs" className="py-1">
+                {products.map((p) => (
+                  <Command.Item
+                    key={p.id}
+                    onSelect={() => navigateTo("/admin/product-settings")}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="material-symbols-outlined text-base text-[#667085]">
+                        checkroom
+                      </span>
+                      <div>
+                        <span className="block font-bold">{p.name}</span>
+                        <span className="text-[10px] text-[#667085] font-mono font-normal block">
+                          {p.categoryName} &rarr; {p.subcategoryName}
+                        </span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] bg-[#F2F4F7] text-[#344054] px-2 py-0.5 rounded border border-[#D0D5DD] font-mono">
+                      Edit Spec &rarr;
+                    </span>
+                  </Command.Item>
+                ))}
+              </Command.Group>
+            )}
+
+            {/* Dynamic Group 2: Production Orders & B2B Clients */}
+            {orders.length > 0 && (
+              <Command.Group heading="Production Orders &amp; B2B Clients" className="py-1">
+                {orders.map((o) => (
+                  <Command.Item
+                    key={o.id}
+                    onSelect={() => navigateTo("/admin")}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="material-symbols-outlined text-base text-[#2E5AAC]">
+                        receipt
+                      </span>
+                      <div>
+                        <span className="block font-bold">{o.companyName}</span>
+                        <span className="text-[10px] text-[#667085] font-mono font-normal block">
+                          Order ID: {o.id.slice(-8).toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] bg-[#E6F1FB] text-[#185FA5] px-2 py-0.5 rounded font-mono font-semibold">
+                      {o.status}
+                    </span>
+                  </Command.Item>
+                ))}
+              </Command.Group>
+            )}
+
+            {/* Group 3: Navigation & Admin Views */}
+            <Command.Group heading="Console Navigation" className="py-1">
               <Command.Item
                 onSelect={() => navigateTo("/admin")}
                 className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
@@ -131,8 +268,8 @@ export function GlobalCommandPalette({
               </Command.Item>
             </Command.Group>
 
-            {/* Group 2: Quick Operational Actions */}
-            <Command.Group heading="Quick Operational Shortcuts" className="py-1">
+            {/* Group 4: Quick Operational Shortcuts */}
+            <Command.Group heading="Shortcuts" className="py-1">
               <Command.Item
                 onSelect={() => navigateTo("/konfigurator")}
                 className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
