@@ -865,7 +865,6 @@ export default function AdminProductSettingsPage() {
             </>
           )}
         </div>
-      </main>
 
       {/* --- MODAL 1: ADD CATEGORY --- */}
       {showAddCategoryModal && (
