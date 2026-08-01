@@ -529,13 +529,17 @@ checkpoint before being considered done, regardless of which agent
 
 ## 15. Executive Admin KPI Dashboard & Client Portal Isolation (Aug 2, 2026)
 
-- **Production-Ready Admin KPI Dashboard (`Roadmap Step 9.7`)**:
-  - Built real-time operational telemetry widget (`AdminKpiDashboard.tsx`) and API handler (`/api/admin/metrics`).
-  - Aggregated real-time metrics: Total Revenue (USD from `PAID`/`SHIPPED`/`IN_PRODUCTION`), Active Factory Orders (`IN_PRODUCTION`), Pending Proforma Quotes (`PENDING_REVIEW`), and Pending B2B Applications (`SUBMITTED`).
-  - Enforced strict Swiss Design system tokens (`#F7F8FA` background, white flat cards, 1px `#EAECF0` borders, `rounded-md` 4-6px, zero drop shadows).
-  - Applied `tabular-nums font-mono` formatting across all numeric counters and currency values.
-  - Implemented a dense, scannable summary table displaying the 5 most recent pending actions requiring executive admin review with quick-link triggers.
+- **Production-Ready Admin KPI Dashboard & Recharts Integration (`Roadmap Step 9.7`)**:
+  - Built real-time operational telemetry widget (`DashboardMetrics.tsx` & `AdminKpiDashboard.tsx`), helper module (`lib/adminMetrics.ts`), and API handler (`/api/admin/metrics`).
+  - Concurrent Prisma metrics aggregation: 30-Day Paid Revenue sum (`PAID`/`SHIPPED` in last 30 days), Active Factory Orders (`IN_PRODUCTION`), Pending Proforma Quotes (`PENDING_REVIEW`), and Pending B2B Applications (`UNDER_REVIEW`/`SUBMITTED`).
+  - Minimalist Recharts Bar Chart widget displaying live "Orders by Status" distribution across all 8 lifecycle stages with client-side hydration safety.
+  - Enforced strict Swiss Design tokens (`#F7F8FA` background, white flat cards, 1px `#EAECF0` borders, `rounded-md` 4-6px, `#2E5AAC` accent, zero drop shadows).
+  - Enforced `tabular-nums font-mono` formatting across all numeric counters and monetary figures.
+  - Dense scannable table displaying the 5 most recent pending actions requiring executive review with direct action links.
 - **Client Portal Header Cleanup & Layout Isolation**:
-  - Removed top `PortalHeader` component from the customer portal layout (`app/portal/layout.tsx`) for a distraction-free corporate login flow.
-- **Prisma PostgreSQL Connection Pooling Optimization**:
+  - Completely removed top `PortalHeader` component from customer portal layout (`app/portal/layout.tsx`) for an isolated, distraction-free corporate login gate flow.
+- **Prisma PostgreSQL Connection Pooling & Error Propagation**:
   - Configured `lib/prisma.ts` with explicit `pg.Pool` initialization for `@prisma/adapter-pg` driver adapter, ensuring stable connection pooling to Supabase Transaction Mode Pooler port `:6543`.
+  - Propagated detailed route error messages in `/api/admin/metrics` and `/api/admin/orders`.
+- **Vitest Unit Test Suite Expansion**:
+  - Added unit test suites (`lib/adminMetrics.test.ts`, `components/admin/DashboardMetrics.test.tsx`). Verified 100% pass rate across 19 test files and 102 unit tests.
