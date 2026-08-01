@@ -46,3 +46,5 @@
 [2026-08-02T02:36:50+03:00] - Enhanced error reporting in /api/admin/metrics and /api/admin/orders route handlers to propagate exact error messages. Cleaned up lib/prisma.ts singleton with explicit DATABASE_URL assertion. Verified 17/17 Vitest test suites (98/98 tests) passing cleanly. - app/api/admin/metrics/route.ts, app/api/admin/orders/route.ts, lib/prisma.ts, agent_execution.log
 
 [2026-08-02T02:40:00+03:00] - Appended Section 15 (Executive Admin KPI Dashboard & Client Portal Isolation) to satriano-atelier-roadmap.md. - satriano-atelier-roadmap.md, agent_execution.log
+
+[2026-08-02T02:49:30+03:00] - Integrated Recharts BarChart widget into DashboardMetrics component for Orders by Status distribution. Created lib/adminMetrics.ts concurrent Prisma queries helper and added comprehensive unit tests in lib/adminMetrics.test.ts and components/admin/DashboardMetrics.test.tsx. Verified 19/19 Vitest test suites (102/102 tests) passing cleanly. - lib/adminMetrics.ts, components/admin/DashboardMetrics.tsx, lib/adminMetrics.test.ts, components/admin/DashboardMetrics.test.tsx, agent_execution.log

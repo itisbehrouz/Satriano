@@ -2,33 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
-export interface PendingAction {
-  id: string;
-  type: "ORDER" | "APPLICATION";
-  title: string;
-  client: string;
-  email: string;
-  actionNeeded: string;
-  amountCents: number | null;
-  status: string;
-  createdAt: string;
-  link: string;
-}
-
-export interface AdminMetrics {
-  totalOrders: number;
-  pendingReviewOrders: number;
-  proformaSentOrders: number;
-  inProductionOrders: number;
-  shippedOrders: number;
-  totalPaidCents: number;
-  pendingApplications: number;
-  pendingActions: PendingAction[];
-}
+import { DashboardMetrics } from "@/components/admin/DashboardMetrics";
+import type { DashboardMetricsData } from "@/lib/adminMetrics";
 
 export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?: boolean }) {
-  const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
+  const [metrics, setMetrics] = useState<DashboardMetricsData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -90,95 +68,10 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
     );
   }
 
-  const formattedRevenue = (metrics.totalPaidCents / 100).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
   return (
     <div className="space-y-6 font-sans mb-6 select-none">
-      {/* 4-Card Primary KPI Summary Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1: Total Revenue (PAID & SHIPPED Orders) */}
-        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
-              Total Revenue
-            </span>
-            <div className="w-8 h-8 rounded-md bg-[#ECFDF3] text-[#027A48] flex items-center justify-center border border-[#ABE5C6]">
-              <span className="material-symbols-outlined text-base">payments</span>
-            </div>
-          </div>
-          <div className="mt-3">
-            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
-              {formattedRevenue}
-            </div>
-            <p className="text-[11px] text-[#027A48] font-medium mt-1">
-              Paid &amp; In-Production orders
-            </p>
-          </div>
-        </div>
-
-        {/* KPI 2: Active Orders (IN_PRODUCTION) */}
-        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
-              Active Orders
-            </span>
-            <div className="w-8 h-8 rounded-md bg-[#F0F9FF] text-[#026AA2] flex items-center justify-center border border-[#B2DDFF]">
-              <span className="material-symbols-outlined text-base">factory</span>
-            </div>
-          </div>
-          <div className="mt-3">
-            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
-              {metrics.inProductionOrders}
-            </div>
-            <p className="text-[11px] text-[#026AA2] font-medium mt-1">
-              Currently in factory production
-            </p>
-          </div>
-        </div>
-
-        {/* KPI 3: Pending Proformas (PENDING_REVIEW) */}
-        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
-              Pending Proformas
-            </span>
-            <div className="w-8 h-8 rounded-md bg-[#FEF0C7] text-[#DC6803] flex items-center justify-center border border-[#FDE272]">
-              <span className="material-symbols-outlined text-base">pending_actions</span>
-            </div>
-          </div>
-          <div className="mt-3">
-            <div className="text-2xl font-bold font-mono text-[#D92D20] tabular-nums">
-              {metrics.pendingReviewOrders}
-            </div>
-            <p className="text-[11px] text-[#D92D20] font-medium mt-1">
-              Requires spec review &amp; quote
-            </p>
-          </div>
-        </div>
-
-        {/* KPI 4: Pending B2B Applications (SUBMITTED) */}
-        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
-              Pending Applications
-            </span>
-            <div className="w-8 h-8 rounded-md bg-[#E6F1FB] text-[#185FA5] flex items-center justify-center border border-[#B3D6F6]">
-              <span className="material-symbols-outlined text-base">assignment_ind</span>
-            </div>
-          </div>
-          <div className="mt-3">
-            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
-              {metrics.pendingApplications}
-            </div>
-            <p className="text-[11px] text-[#185FA5] font-medium mt-1">
-              Corporate B2B partner reviews
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Top 4-KPI Grid Cards & Recharts Bar Chart Widget */}
+      <DashboardMetrics data={metrics} onRefresh={fetchMetrics} />
 
       {/* Dense Scannable Table: 5 Most Recent Pending Actions */}
       <div className="bg-white border border-[#EAECF0] rounded-md shadow-none overflow-hidden">
@@ -282,3 +175,4 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
     </div>
   );
 }
+
