@@ -141,8 +141,11 @@ export default async function HomePage() {
                   European B2B Garment Atelier
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] font-sans">
-                  Your product. Your price. Your brand. We manufacture it.
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] font-sans">
+                  Your product.<br />
+                  Your price.<br />
+                  Your brand.<br />
+                  We manufacture it.
                 </h1>
 
                 <p className="text-base md:text-xl text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
