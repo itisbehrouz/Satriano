@@ -1,0 +1,18 @@
+[2026-08-02T01:09:25+03:00] EXECUTION LOG INITIALIZED
+- Task: Enforced Automatic Execution Logging Rule.
+- Actions Taken & Key Decisions:
+  1. Admin UI Swiss Design Overhaul: Successfully completed and committed ProductFitTree, GarmentFitsPanel, RegionalSizeTree, RegionalSizePanel, FabricPricingTree, and FabricPricingPanel.
+  2. Global Command Palette: Installed `cmdk` and built `GlobalCommandPalette.tsx` integrated into `AdminSidebar.tsx` with live database search for products, categories, subcategories, B2B companies, and orders.
+  3. Catalog Asset Uploader: Built `CatalogImageUploader.tsx` with 2MB pre-flight validation restricted to .jpg, .png, .webp, uploading to Supabase Storage bucket 'catalog-assets'.
+  4. Database Pooling Optimization: Configured `DATABASE_URL` to Supabase Transaction Mode Pooler port 6543 and cached `PrismaPg` on `globalThis` in `lib/prisma.ts`.
+  5. Architecture Confirmation: Approved custom Next.js + Supabase PostgreSQL + Prisma ORM headless architecture over third-party frameworks like MedusaJS.
+  6. Quality Verification: All 17 Vitest test suites (98/98 unit tests) passed cleanly with 100% success.
+
+[2026-08-02T01:10:30+03:00] EXECUTION LOG UPDATE
+- Task: Customer Portal Standalone Header & Layout Isolation.
+- Actions Taken:
+  1. Built `components/layout/PortalHeader.tsx`: Standalone Executive Dark Navy header displaying B2B Portal badge, navigation links (Orders, Invoices, Settings), active session customer email badge, and Sign Out action button.
+  2. Built `app/api/portal/logout/route.ts`: POST endpoint clearing `sat_customer_token` httpOnly cookie.
+  3. Built `app/portal/layout.tsx`: Layout wrapper rendering `PortalHeader` and `SiteFooter` for all customer portal pages.
+  4. Updated `app/portal/orders/page.tsx`: Stripped duplicate `SiteHeader`/`SiteFooter` components.
+  5. Verified 100% Vitest unit test pass rate (17/17 test files, 98/98 tests).

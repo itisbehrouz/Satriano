@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { OrderStatusBadge } from "@/components/OrderStatusBadge";
 
 export interface CustomerOrderLine {
@@ -72,9 +70,7 @@ export default function CustomerOrdersPage() {
   }
 
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
         <div className="w-full max-w-container-max mx-auto space-y-6">
           {/* Top Bar Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#D1D5DB]">
@@ -282,7 +278,5 @@ export default function CustomerOrdersPage() {
           )}
         </div>
       </main>
-      <SiteFooter />
-    </>
   );
 }
