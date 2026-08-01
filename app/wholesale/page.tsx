@@ -87,39 +87,38 @@ export default async function WholesalePage() {
               <span className="font-medium text-white">Wholesale Menswear Catalog</span>
             </nav>
 
-            <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
-              <div className="max-w-3xl space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none backdrop-blur-sm">
-                  <span className="w-2 h-2 rounded-none bg-[#60A5FA] animate-pulse" />
-                  B2B Apparel Sourcing &amp; Wholesale
-                </div>
+            <div className="max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-none bg-[#60A5FA] animate-pulse" />
+                B2B Apparel Sourcing &amp; Wholesale
+              </div>
 
-                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans leading-[1.1]">
-                  Wholesale Menswear &amp; Custom Apparel Catalog
-                </h1>
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans leading-[1.1]">
+                Wholesale Menswear &amp; Custom Apparel Catalog
+              </h1>
 
-                <p className="text-base md:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
-                  White-label bespoke menswear production for international corporate clients, premium retail brands, and uniform programs. Select any garment spec to configure volume proformas.
-                </p>
+              <p className="text-base md:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
+                White-label bespoke menswear production for international corporate clients, premium retail brands, and uniform programs. Select any garment spec to configure volume proformas.
+              </p>
 
-                {/* Key Metrics Bar */}
-                <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8] pt-2">
-                  <span>
-                    <strong className="text-white font-mono text-sm">{products.length}</strong> Producible Products
-                  </span>
-                  <span>•</span>
-                  <span>
-                    <strong className="text-white font-mono text-sm">{fits.length}</strong> Menswear Fits
-                  </span>
-                  <span>•</span>
-                  <span>
-                    <strong className="text-white font-mono text-sm">{categories.length}</strong> Categories
-                  </span>
-                  <span>•</span>
-                  <span>
-                    <strong className="text-[#60A5FA] font-mono text-sm">50 Pcs</strong> Minimum MOQ
-                  </span>
-                </div>
+              {/* Key Metrics Bar */}
+              <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8] pt-2">
+                <span>
+                  <strong className="text-white font-mono text-sm">{products.length}</strong> Producible Products
+                </span>
+                <span>•</span>
+                <span>
+                  <strong className="text-white font-mono text-sm">{fits.length}</strong> Menswear Fits
+                </span>
+                <span>•</span>
+                <span>
+                  <strong className="text-white font-mono text-sm">{categories.length}</strong> Categories
+                </span>
+                <span>•</span>
+                <span>
+                  <strong className="text-[#60A5FA] font-mono text-sm">50 Pcs</strong> Minimum MOQ
+                </span>
+              </div>
             </div>
           </div>
         </section>
