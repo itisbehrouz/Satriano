@@ -1,17 +1,19 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 1, 2026)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 1, 2026 — evening update)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog
 + B2B partner portal + workflow automation
 **Capacity assumption:** Solo developer, ~2 hours/day
-**Development environment:** Google Antigravity (primary), Claude
+**Development environment:** Google Antigravity (primary), Claude Code
+(approved fallback when Antigravity quota exhausted), Claude
 (architecture/planning), Vercel (hosting), Supabase (DB + Storage)
 **Cost principle:** Zero fixed cost — usage/commission-based services
 only (Vercel free tier, Supabase free tier, Stripe transaction fees
 when live)
 
-This document consolidates everything decided and built through
-August 1, 2026. It replaces all prior versioned roadmap files —
-this is the single source of truth going forward.
+This document consolidates everything decided and built through the
+evening of August 1, 2026. It replaces all prior versioned roadmap
+files — this is the single source of truth going forward. Update this
+file in place going forward; do not create new versioned files.
 
 ---
 
@@ -110,6 +112,10 @@ supported in admin, including SHIPPED/CANCELLED transitions).
 - If local dev breaks, get a narrow diagnostic (exact error + git
   status) before allowing any open-ended "fix it" self-repair — see
   Section 8.
+- **Whenever the Supabase DB password is rotated, both `.env.local`
+  AND Vercel Production env vars must be updated together, followed
+  by a redeploy** — updating only one side breaks the other silently
+  with `P1000` auth errors (happened once, see Section 8).
 
 ---
 
@@ -118,7 +124,10 @@ supported in admin, including SHIPPED/CANCELLED transitions).
 - Admin auth: server-side JWT (`jose`, HS256, pinned algorithm),
   httpOnly signed cookie (`sat_admin_token`), `middleware.ts` protects
   both `/admin` pages and all `/api/admin/*` routes. No hardcoded
-  fallback secrets — missing env vars throw a hard error.
+  fallback secrets — missing env vars throw a hard error. Kök `/admin`
+  middleware'de redirect edilmiyor; sayfa kendi içinde `useEffect` ile
+  `/api/admin/session` çağırıp login formu gösteriyor (nested route'lar
+  ise middleware'de doğrudan redirect ediliyor).
 - Customer auth: **magic-link login**, APPROVED-B2B-application-gated
   (see Section 6). Signed httpOnly cookie (`sat_customer_token`),
   separate from admin.
@@ -150,6 +159,10 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   → Product hierarchy view/CRUD (create forms for all 3 levels,
   duplicate-slug rejection, missing-fabric rejection), Fabric
   active toggle, Fit assignment matrix, MOQ editor, Size system view.
+- **Admin UI redesign (Aug 1, evening — see Section 5a for full
+  detail):** shared sidebar/top-bar chrome separated from the public
+  website; Garment Fits and Catalog & MOQs tabs redesigned to a
+  neutral, Supabase/Linear-style accordion + table pattern.
 
 ### 🟡 Partial / pending
 - Photo/image upload field for Category/Subcategory/Product "Add New"
@@ -157,6 +170,9 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   `imageUrl` can only be set via direct DB/API.
 - Fabric price-range (min/max) editing UI — API supports it, no form
   exists yet.
+- **Regional Size Systems and Product Fabrics & Ranges tabs** — still
+  on the old dense/card-grid visual pattern; not yet redesigned to
+  match Garment Fits / Catalog & MOQs (see Section 5a, next steps).
 
 ### ❌ Missing
 - Admin KPI/overview dashboard (lands directly on raw order list).
@@ -166,6 +182,111 @@ supported in admin, including SHIPPED/CANCELLED transitions).
 - Order search.
 - Multi-fabric-per-order UI (blocks `moqCombinedMultiFabric`
   enforcement).
+- Functional global search (`⌘K` bar is currently a visual placeholder
+  only in the new admin chrome — no filtering logic wired yet).
+
+---
+
+## 5a. Admin UI Redesign (Aug 1, evening session)
+
+**Motivation:** The admin panel had grown dense and visually
+inconsistent — every category/subcategory/product expanded at once,
+heavy borders, colored-fill checkboxes/chips with no visual hierarchy,
+and the public website's navy header/nav/footer bleeding into admin
+pages. Goal: a calm, operator-focused tool interface (Supabase Studio /
+Linear-inspired), fully separated from the customer-facing brand
+identity — **admin uses its own neutral design tokens, not the site's
+0px-corner navy/gold identity.**
+
+### Design tokens (admin-only, do not apply to `/`, `/configure`, `/portal`)
+| Role | Value |
+|---|---|
+| Page background | `#F7F8FA` |
+| Sidebar | `#111318` |
+| Card/surface | White, `#E4E7EC` / `#EAECF0` border |
+| Text primary | `#111318` / `#344054` |
+| Text secondary | `#6B7280` |
+| Accent (single) | `#2E5AAC` — active nav, primary buttons, focus rings only |
+| Success (status only) | `#ECFDF3` bg / `#067647` text |
+| Neutral/off status | `#F2F4F7` bg / `#475467` text |
+| Border radius | 4–6px (deliberately different from the site's 0px standard — admin is a tool, not the brand) |
+
+### Completed:
+1. **Stage 1 — Full inventory before any layout change** (via
+   `feature-inventory-audit` methodology): every `/admin/*` route, nav
+   item, button, and the auth/middleware mechanism traced from actual
+   code before touching anything, specifically to prevent silently
+   dropping functionality during the redesign.
+2. **Web-site chrome removed from all `/admin/*` routes** (done
+   independently by the user in Antigravity): navy header/nav/footer,
+   `CookieConsentModal`, and `AIFaqAssistantModal` no longer render on
+   admin pages (pathname-guarded or removed at the source).
+   `B2BSupportDock` was already admin-safe via an existing
+   `usePathname()` guard.
+3. **Stage 2 — Shared admin chrome** (`app/admin/layout.tsx`, via
+   Claude Code): dark (`#111318`) vertical icon sidebar (Order Ledger /
+   B2B Applications / Product Settings, active-route highlight) + top
+   bar (breadcrumb, visual-only search placeholder, single centralized
+   Sign Out). New `components/admin/AdminAuthContext.tsx` centralizes
+   session state (previously each of the 3 admin pages polled
+   `/api/admin/session` independently). Duplicated per-page top
+   bars/module-nav rows removed; each page's own Refresh button and
+   fetch logic were deliberately left untouched (lower-risk option),
+   only Sign Out + nav were centralized.
+4. **Garment Fits tab redesign**: replaced the old card-grid (which
+   had incorrectly mapped fit *dimensions* — chest/waist/neck
+   measurements — instead of fit *values*) with an accordion
+   Category→Subcategory→Product tree + a right slide-over panel
+   showing the correct 8 `Fit` enum values (Slim, Regular, Relaxed,
+   Tailored, Skinny, Tapered, Modern, Oversized), neutral-gray
+   checkboxes (no blue fill), and a "Linked Fits" status badge
+   (neutral/amber/red by completeness). Backend (`Fit`/`ProductFit`
+   schema, `PATCH /api/admin/catalog`) untouched — presentation-layer
+   only.
+5. **Catalog & Two-Tier MOQs tab redesign**: same accordion pattern
+   applied — Category and Subcategory rows collapsed by default
+   (`openCategoryIds`/`openSubcategoryIds` state), all 7 categories
+   now fit on one screen. Fit chips in the product table changed from
+   blue-filled to neutral gray. Active/Off status badge: Active stays
+   green (consistent with the Garment Fits success palette), Off
+   changed from red to neutral gray (inactive isn't an error state).
+   Card borders thinned to `#EAECF0`, row padding reduced. MOQ numbers
+   de-emphasized from blue to neutral dark text — blue now reserved
+   for the "Edit MOQs" link and active nav/tab state only. Add
+   Category/Subcategory/Product buttons and the inline "Edit MOQs"
+   form were functionally untouched.
+
+### Verification performed:
+- `npm test`: 98/98 passing after both tab redesigns.
+- ESLint: no new errors introduced (pre-existing warnings confirmed
+  identical on `main` via `git stash` comparison).
+- Manual browser walkthroughs (via Claude Code + `claude-in-chrome`)
+  for both redesigns: navigated all 3 admin routes, expanded/collapsed
+  categories, opened/closed Edit MOQs and Add Category, tested Sign
+  Out from the centralized button, and re-verified with the user's own
+  live session (not a copied one).
+- Auth/middleware behavior reconfirmed unchanged: unauthenticated
+  nested `/admin/*` routes still 307-redirect to `/admin`; root
+  `/admin` login gate still works via client-side session check.
+
+### Next steps (not yet done):
+- Redesign **Regional Size Systems** and **Product Fabrics & Ranges**
+  tabs to match the same neutral/accordion pattern (separate,
+  narrowly-scoped tasks — same approach as Garment Fits and Catalog &
+  MOQs, one tab at a time to keep each change independently
+  verifiable).
+- Wire the `⌘K` search bar to actual client-side filtering across
+  categories/subcategories/products (currently visual-only).
+- Decide whether to keep or remove the small SATRIANO gold wordmark
+  in the sidebar's top-left corner (currently kept — it's a static
+  logo mark, not an interactive accent, so it doesn't violate the
+  "no gold as interactive accent" rule, but it's an open aesthetic
+  call).
+- **Commit + push pending** as of this writing — changes are verified
+  locally but not yet on `main`/production. Push both the chrome
+  separation (Stage 2) and Catalog & MOQs redesign together or in two
+  clean commits, then verify `satriano.vercel.app/admin` visually
+  before considering this fully closed.
 
 ---
 
@@ -221,7 +342,9 @@ scope drift — explicitly approved):
 - **Brand mark geometry standard** — enforced 0px sharp rectangular
   geometry (`rounded-none`) across header nav, product cards,
   configurator inputs, buttons, and modals, to match the gold brand
-  mark.
+  mark. **Note:** this 0px standard applies to the public website
+  only — the admin panel deliberately uses 4–6px radius as its own
+  tool identity (see Section 5a).
 - **Certification claims audit** — removed unverified `ISO &
   OEKO-TEX Certified` / `ISO 9001` claims sitewide; replaced with
   factual terms (`European Quality Standard`, `GDPR Compliant`,
@@ -232,7 +355,8 @@ scope drift — explicitly approved):
   email) and an **`AIFaqAssistantModal.tsx`** — this is a scripted/
   rule-based FAQ assistant (MOQs, lead times, proformas, sizing,
   vector logo specs), **not** a paid AI API call — confirmed no
-  ongoing cost.
+  ongoing cost. Both this and `CookieConsentModal` were later
+  pathname-guarded out of `/admin/*` (see Section 5a).
 - **Configurator redesign** (`ConfiguratorClient.tsx` +
   `PriceSidebar.tsx`) — executive header shell with live MOQ status
   badge, 4-step progress stepper (Fabric Line → Fit & Sizing → Vector
@@ -292,22 +416,45 @@ updated in Vercel to match `.env.local`, followed by a redeploy.
 any reason (security incident, forgotten password, local recovery),
 **both** `.env.local` *and* Vercel's Production environment variables
 must be updated together, followed by a Vercel redeploy — updating
-only one side silently breaks the other environment. Consider adding
-a checklist step for this specifically after any password rotation.
+only one side silently breaks the other environment.
+
+**Aug 1, evening — Antigravity quota exhausted mid-task, handed off to
+Claude Code.** During the admin UI redesign work, Antigravity's 5-hour
++ weekly model quota (Claude/GPT group) hit 100% mid-session. Per the
+standing rule (Claude Code is the approved fallback), the in-progress
+task (admin layout Stage 1 inventory, then Stage 2 chrome build) was
+handed to Claude Code in the terminal with a full context-carryover
+prompt (standing security rules, prior task state, exact scope) so no
+re-discovery work was lost. Claude Code completed both the inventory
+and the chrome build successfully, including live browser verification
+via `claude-in-chrome`.
+
+**Lesson:** the Antigravity→Claude Code handoff works well when the
+handoff prompt explicitly restates standing rules and prior findings
+rather than assuming Claude Code will infer them — this is now the
+default pattern for future quota-exhaustion handoffs.
 
 ---
 
 ## 9. Remaining Priority Order
 
-1. Photo/image upload field for catalog Add/Edit forms.
-2. Fabric price-range editing UI.
-3. Admin KPI dashboard.
-4. Portal header logged-in state + polished order history redesign.
-5. Configurator Part D (multi-photo gallery) — scope decision pending.
-6. Multi-fabric-per-order feature (unblocks `moqCombinedMultiFabric`).
-7. Stripe live account migration — deferred.
-8. Codebase health audit — should be re-run periodically (skill
-   available, see Section 10), especially after major schema changes.
+1. **Commit + push today's admin redesign work** (chrome separation +
+   Catalog & MOQs tab) to `main`, verify on
+   `satriano.vercel.app/admin`.
+2. Redesign **Regional Size Systems** tab (same accordion/neutral
+   pattern).
+3. Redesign **Product Fabrics & Ranges** tab (same pattern).
+4. Photo/image upload field for catalog Add/Edit forms.
+5. Fabric price-range editing UI.
+6. Admin KPI dashboard.
+7. Portal header logged-in state + polished order history redesign.
+8. Wire the admin `⌘K` search bar to real filtering.
+9. Configurator Part D (multi-photo gallery) — scope decision pending.
+10. Multi-fabric-per-order feature (unblocks `moqCombinedMultiFabric`).
+11. Stripe live account migration — deferred.
+12. Codebase health audit — should be re-run periodically (skill
+    available, see Section 10), especially after major schema changes
+    or a large UI restructure like today's.
 
 ---
 
@@ -317,7 +464,8 @@ a checklist step for this specifically after any password rotation.
   after major schema/architecture changes.
 - `feature-inventory-audit` — full, code-verified inventory of a
   feature area (catches drift between "reported done" and actual
-  state).
+  state). Used today before the admin layout change specifically to
+  avoid dropping functionality during the chrome separation.
 - `ui-bug-triage-from-screenshot` — classify a screenshot bug report
   (real code bug / test data noise / browser artifact / needs more
   detail) before writing any fix prompt.
@@ -329,8 +477,13 @@ a checklist step for this specifically after any password rotation.
 Several times, something was reported as "done" but wasn't (category
 count, admin key mechanism, whether pricing was really implemented,
 the "cold test" false positive, the "29 pre-existing DB failures" that
-turned out to be a real bug). **"Done" status should be periodically
-re-verified with `feature-inventory-audit`**, especially after a major
-schema/architecture change or after any session using a less reliable
-tool (e.g. a local coding model) — a report can be accurate at the
-time and still get silently broken later, or be wrong from the start.
+turned out to be a real bug, and today: a "done" header-removal claim
+that turned out to be accurate but unverified by screenshot at the
+time it was reported). **"Done" status should be periodically
+re-verified with `feature-inventory-audit`, and any UI change claim
+should be confirmed with an actual screenshot before being marked
+closed** — a report can be accurate at the time and still be
+unconfirmed, or be wrong from the start. This project's working
+pattern going forward: every visual/UI change gets a screenshot
+checkpoint before being considered done, regardless of which agent
+(Antigravity, Claude Code, or a local model) produced it.
