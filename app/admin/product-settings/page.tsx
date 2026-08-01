@@ -92,6 +92,18 @@ export default function AdminProductSettingsPage() {
   const [editMoqCombined, setEditMoqCombined] = useState<string>("");
   const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">("catalog");
 
+  // Catalog tab accordion state (default collapsed, matches Garment Fits tree pattern)
+  const [openCategoryIds, setOpenCategoryIds] = useState<Record<string, boolean>>({});
+  const [openSubcategoryIds, setOpenSubcategoryIds] = useState<Record<string, boolean>>({});
+
+  function toggleCategoryOpen(catId: string) {
+    setOpenCategoryIds((prev) => ({ ...prev, [catId]: !prev[catId] }));
+  }
+
+  function toggleSubcategoryOpen(subId: string) {
+    setOpenSubcategoryIds((prev) => ({ ...prev, [subId]: !prev[subId] }));
+  }
+
   // Garment Fits Slide-Over Panel Context State
   const [selectedFitProductContext, setSelectedFitProductContext] = useState<{
     product: Product;
@@ -537,12 +549,12 @@ export default function AdminProductSettingsPage() {
             <>
               {/* TAB 1: Category -> Subcategory -> Product */}
               {activeTab === "catalog" && (
-                <div className="space-y-8">
-                  {/* Category Section Action Header */}
-                  <div className="bg-white border border-[#D1D5DB] rounded-lg p-5 flex items-center justify-between shadow-sm">
+                <div className="bg-white border border-[#D0D5DD] rounded-lg shadow-sm overflow-hidden font-sans">
+                  {/* Top Header Bar */}
+                  <div className="p-4 sm:p-5 border-b border-[#EAECF0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
                     <div>
-                      <h2 className="text-base font-bold text-[#1A2233]">Master Garment Hierarchy</h2>
-                      <p className="text-xs text-[#5B6B85] mt-0.5">
+                      <h2 className="text-base font-semibold text-[#101828]">Master Garment Hierarchy</h2>
+                      <p className="text-xs text-[#475467] mt-0.5">
                         Define 3-level product structure, custom fabric lines, and two-tier MOQs.
                       </p>
                     </div>
@@ -556,193 +568,254 @@ export default function AdminProductSettingsPage() {
                         setCatError(null);
                         setShowAddCategoryModal(true);
                       }}
-                      className="min-h-[44px] bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                      className="min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
                     >
                       <span className="material-symbols-outlined text-base">add_circle</span>
                       <span>+ Add Category</span>
                     </button>
                   </div>
 
-                  {categories.map((cat) => (
-                    <div key={cat.id} className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm">
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E5E7EB] pb-4 mb-6 gap-4">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h2 className="text-xl font-bold text-[#1A2233]">{cat.name}</h2>
-                            <span className="text-xs font-mono text-[#5B6B85] bg-[#F5F7FA] px-2 py-0.5 rounded border border-[#E5E7EB]">
-                              slug: {cat.slug}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#5B6B85] mt-0.5">{cat.description || "No description"}</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setSubName("");
-                            setSubSlug("");
-                            setSubDesc("");
-                            setSubSizeSystemIds([]);
-                            setSubImageUrl(null);
-                            setSubError(null);
-                            setAddSubcategoryCategory(cat);
-                          }}
-                          className="min-h-[44px] bg-white border border-[#2E5AAC] text-[#2E5AAC] hover:bg-[#E6F1FB] text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5"
-                        >
-                          <span className="material-symbols-outlined text-base">add</span>
-                          <span>+ Add Subcategory</span>
-                        </button>
-                      </div>
+                  {/* Category Accordion Tree */}
+                  <div className="divide-y divide-[#EAECF0]">
+                    {categories.map((cat) => {
+                      const isCatOpen = !!openCategoryIds[cat.id];
+                      const subSummary =
+                        cat.subcategories.length > 0
+                          ? cat.subcategories.map((s) => s.name).join(", ")
+                          : "No subcategories yet";
 
-                      <div className="space-y-6">
-                        {cat.subcategories.map((sub) => (
-                          <div key={sub.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]/50">
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 border-b border-[#E5E7EB] pb-3 gap-3">
-                              <div>
-                                <h3 className="text-base font-bold text-[#1A2233] flex items-center gap-2">
-                                  <span>{sub.name}</span>
-                                  <span className="text-xs font-normal text-[#5B6B85]">
-                                    ({sub.products.length} {sub.products.length === 1 ? "product" : "products"})
-                                  </span>
-                                </h3>
-                                <span className="text-xs font-mono text-[#5B6B85]">slug: {sub.slug}</span>
-                              </div>
-
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setProdName("");
-                                  setProdSlug("");
-                                  setProdDesc("");
-                                  setProdLeadTime(14);
-                                  setProdMoqPerFabric(50);
-                                  setProdMoqCombined("");
-                                  setProdFabricName("");
-                                  setProdPriceMinDollars("19.50");
-                                  setProdPriceMaxDollars("24.00");
-                                  setProdSetupFeeDollars("0.00");
-                                  setProdFitIds([]);
-                                  setProdImageUrl(null);
-                                  setProdError(null);
-                                  setAddProductContext({ cat, sub });
-                                }}
-                                className="min-h-[36px] bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors inline-flex items-center gap-1 shadow-sm"
+                      return (
+                        <div key={cat.id} className="bg-white">
+                          {/* Category Accordion Header */}
+                          <div className="flex items-center justify-between gap-3 px-5 py-3.5 bg-[#F9FAFB] hover:bg-[#F2F4F7] transition-colors border-b border-[#EAECF0]">
+                            <button
+                              type="button"
+                              onClick={() => toggleCategoryOpen(cat.id)}
+                              className="flex items-center gap-2.5 text-left flex-1 min-w-0"
+                            >
+                              <svg
+                                className={`w-4 h-4 flex-shrink-0 text-[#667085] transition-transform duration-200 ${
+                                  isCatOpen ? "rotate-0" : "-rotate-90"
+                                }`}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                               >
-                                <span className="material-symbols-outlined text-sm">add</span>
-                                <span>+ Add Product</span>
-                              </button>
-                            </div>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">
+                                    {cat.name}
+                                  </span>
+                                  <span className="text-[10px] font-mono text-[#667085] bg-[#EAECF0] px-1.5 py-0.5 rounded">
+                                    slug: {cat.slug}
+                                  </span>
+                                </div>
+                                <p className="text-[11px] text-[#667085] mt-0.5 truncate">{subSummary}</p>
+                              </div>
+                            </button>
 
-                            <div className="overflow-x-auto">
-                              <table className="w-full text-left text-xs border-collapse bg-white border border-[#E5E7EB] rounded">
-                                <thead>
-                                  <tr className="bg-[#F5F7FA] border-b border-[#E5E7EB] text-[#5B6B85] uppercase font-semibold">
-                                    <th className="p-3">Product Item</th>
-                                    <th className="p-3">Single-Fabric MOQ</th>
-                                    <th className="p-3">Combined Multi-Fabric MOQ</th>
-                                    <th className="p-3">Fits</th>
-                                    <th className="p-3 text-right">Status / Edit MOQs</th>
-                                  </tr>
-                                </thead>
-                                <tbody className="divide-y divide-[#E5E7EB]">
-                                  {sub.products.map((prod) => {
-                                    const isEditingThis = editingProductId === prod.id;
-
-                                    return (
-                                      <tr key={prod.id} className="hover:bg-[#F5F7FA]/60">
-                                        <td className="p-3 font-semibold text-[#1A2233]">
-                                          <div>{prod.name}</div>
-                                          <div className="text-[11px] font-mono text-[#5B6B85]">/{prod.slug}</div>
-                                        </td>
-                                        <td className="p-3 font-semibold text-[#2E5AAC]">
-                                          {prod.moqPerFabric ?? prod.moq ?? 50} pcs
-                                        </td>
-                                        <td className="p-3 font-medium text-[#1A2233]">
-                                          {prod.moqCombinedMultiFabric ? `${prod.moqCombinedMultiFabric} pcs` : "N/A"}
-                                        </td>
-                                        <td className="p-3">
-                                          {prod.fits.length === 0 ? (
-                                            <span className="text-[#5B6B85] italic text-[11px]">Excluded (0)</span>
-                                          ) : (
-                                            <div className="flex flex-wrap gap-1">
-                                              {prod.fits.map((pf) => (
-                                                <span key={pf.fit.id} className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-semibold px-1.5 py-0.5 rounded">
-                                                  {pf.fit.name}
-                                                </span>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </td>
-                                        <td className="p-3 text-right">
-                                          {isEditingThis ? (
-                                            <div className="flex items-center justify-end gap-2">
-                                              <input
-                                                type="number"
-                                                className="w-16 border rounded px-1.5 py-1 text-xs"
-                                                title="Single Fabric MOQ"
-                                                value={editMoqPerFabric}
-                                                onChange={(e) => setEditMoqPerFabric(parseInt(e.target.value, 10))}
-                                              />
-                                              <input
-                                                type="number"
-                                                className="w-16 border rounded px-1.5 py-1 text-xs"
-                                                placeholder="Combined"
-                                                title="Combined Multi-Fabric MOQ"
-                                                value={editMoqCombined}
-                                                onChange={(e) => setEditMoqCombined(e.target.value)}
-                                              />
-                                              <button
-                                                type="button"
-                                                onClick={() => saveProductMoqs(prod.id)}
-                                                className="bg-[#0F6E56] text-white px-2 py-1 rounded text-[11px] font-semibold"
-                                              >
-                                                Save
-                                              </button>
-                                              <button
-                                                type="button"
-                                                onClick={() => setEditingProductId(null)}
-                                                className="border text-[#5B6B85] px-2 py-1 rounded text-[11px]"
-                                              >
-                                                Cancel
-                                              </button>
-                                            </div>
-                                          ) : (
-                                            <div className="flex items-center justify-end gap-2">
-                                              <button
-                                                type="button"
-                                                onClick={() => {
-                                                  setEditingProductId(prod.id);
-                                                  setEditMoqPerFabric(prod.moqPerFabric ?? prod.moq ?? 50);
-                                                  setEditMoqCombined(prod.moqCombinedMultiFabric ? String(prod.moqCombinedMultiFabric) : "");
-                                                }}
-                                                className="border border-[#D1D5DB] bg-white hover:bg-[#F5F7FA] px-2 py-1 rounded text-[11px] font-semibold text-[#2E5AAC]"
-                                              >
-                                                Edit MOQs
-                                              </button>
-                                              <button
-                                                type="button"
-                                                onClick={() => toggleProductActive(prod.id, prod.active)}
-                                                className={`px-3 py-1 rounded text-[11px] font-semibold transition-colors ${
-                                                  prod.active
-                                                    ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
-                                                    : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
-                                                }`}
-                                              >
-                                                {prod.active ? "Active" : "Off"}
-                                              </button>
-                                            </div>
-                                          )}
-                                        </td>
-                                      </tr>
-                                    );
-                                  })}
-                                </tbody>
-                              </table>
-                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSubName("");
+                                setSubSlug("");
+                                setSubDesc("");
+                                setSubSizeSystemIds([]);
+                                setSubImageUrl(null);
+                                setSubError(null);
+                                setAddSubcategoryCategory(cat);
+                              }}
+                              className="min-h-[36px] flex-shrink-0 bg-white border border-[#2E5AAC] text-[#2E5AAC] hover:bg-[#E6F1FB] text-xs font-semibold px-3 py-1.5 rounded transition-colors inline-flex items-center gap-1"
+                            >
+                              <span className="material-symbols-outlined text-sm">add</span>
+                              <span>Add Subcategory</span>
+                            </button>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+
+                          {/* Subcategories */}
+                          {isCatOpen && (
+                            <div className="divide-y divide-[#EAECF0]">
+                              {cat.subcategories.map((sub) => {
+                                const isSubOpen = !!openSubcategoryIds[sub.id];
+
+                                return (
+                                  <div key={sub.id} className="bg-white">
+                                    <div className="flex items-center justify-between gap-3 pl-11 pr-5 py-3 hover:bg-[#F9FAFB] transition-colors">
+                                      <button
+                                        type="button"
+                                        onClick={() => toggleSubcategoryOpen(sub.id)}
+                                        className="flex items-center gap-2 text-left flex-1 min-w-0"
+                                      >
+                                        <svg
+                                          className={`w-3.5 h-3.5 flex-shrink-0 text-[#667085] transition-transform duration-200 ${
+                                            isSubOpen ? "rotate-0" : "-rotate-90"
+                                          }`}
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                        <span className="text-xs font-bold text-[#101828] bg-[#F2F4F7] px-2 py-0.5 rounded">
+                                          {sub.name}
+                                        </span>
+                                        <span className="text-[11px] text-[#667085]">
+                                          ({sub.products.length} {sub.products.length === 1 ? "product" : "products"})
+                                        </span>
+                                        <span className="text-[10px] font-mono text-[#98A2B3] hidden sm:inline">
+                                          slug: {sub.slug}
+                                        </span>
+                                      </button>
+
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          setProdName("");
+                                          setProdSlug("");
+                                          setProdDesc("");
+                                          setProdLeadTime(14);
+                                          setProdMoqPerFabric(50);
+                                          setProdMoqCombined("");
+                                          setProdFabricName("");
+                                          setProdPriceMinDollars("19.50");
+                                          setProdPriceMaxDollars("24.00");
+                                          setProdSetupFeeDollars("0.00");
+                                          setProdFitIds([]);
+                                          setProdImageUrl(null);
+                                          setProdError(null);
+                                          setAddProductContext({ cat, sub });
+                                        }}
+                                        className="min-h-[32px] flex-shrink-0 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] font-semibold px-2.5 py-1.5 rounded transition-colors inline-flex items-center gap-1 shadow-sm"
+                                      >
+                                        <span className="material-symbols-outlined text-sm">add</span>
+                                        <span>Add Product</span>
+                                      </button>
+                                    </div>
+
+                                    {isSubOpen && (
+                                      <div className="pl-11 pr-5 pb-4">
+                                        <div className="overflow-x-auto border border-[#EAECF0] rounded-md">
+                                          <table className="w-full text-left text-xs">
+                                            <thead className="bg-[#F9FAFB] text-[#475467] font-semibold border-b border-[#EAECF0]">
+                                              <tr>
+                                                <th className="py-2.5 px-4">Product Item</th>
+                                                <th className="py-2.5 px-4">Single-Fabric MOQ</th>
+                                                <th className="py-2.5 px-4">Combined Multi-Fabric MOQ</th>
+                                                <th className="py-2.5 px-4">Fits</th>
+                                                <th className="py-2.5 px-4 text-right">Status / Edit MOQs</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-[#EAECF0]">
+                                              {sub.products.map((prod) => {
+                                                const isEditingThis = editingProductId === prod.id;
+
+                                                return (
+                                                  <tr key={prod.id} className="hover:bg-[#F9FAFB] transition-colors">
+                                                    <td className="py-2.5 px-4 font-semibold text-[#101828]">
+                                                      <div>{prod.name}</div>
+                                                      <div className="text-[11px] font-mono text-[#667085]">/{prod.slug}</div>
+                                                    </td>
+                                                    <td className="py-2.5 px-4 font-semibold text-[#101828]">
+                                                      {prod.moqPerFabric ?? prod.moq ?? 50} pcs
+                                                    </td>
+                                                    <td className="py-2.5 px-4 font-medium text-[#344054]">
+                                                      {prod.moqCombinedMultiFabric ? `${prod.moqCombinedMultiFabric} pcs` : "N/A"}
+                                                    </td>
+                                                    <td className="py-2.5 px-4">
+                                                      {prod.fits.length === 0 ? (
+                                                        <span className="text-[#98A2B3] italic text-[11px]">Excluded (0)</span>
+                                                      ) : (
+                                                        <div className="flex flex-wrap gap-1">
+                                                          {prod.fits.map((pf) => (
+                                                            <span
+                                                              key={pf.fit.id}
+                                                              className="bg-[#F2F4F7] text-[#344054] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-[#D0D5DD]"
+                                                            >
+                                                              {pf.fit.name}
+                                                            </span>
+                                                          ))}
+                                                        </div>
+                                                      )}
+                                                    </td>
+                                                    <td className="py-2.5 px-4 text-right">
+                                                      {isEditingThis ? (
+                                                        <div className="flex items-center justify-end gap-2">
+                                                          <input
+                                                            type="number"
+                                                            className="w-16 border border-[#D0D5DD] rounded px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                                                            title="Single Fabric MOQ"
+                                                            value={editMoqPerFabric}
+                                                            onChange={(e) => setEditMoqPerFabric(parseInt(e.target.value, 10))}
+                                                          />
+                                                          <input
+                                                            type="number"
+                                                            className="w-16 border border-[#D0D5DD] rounded px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                                                            placeholder="Combined"
+                                                            title="Combined Multi-Fabric MOQ"
+                                                            value={editMoqCombined}
+                                                            onChange={(e) => setEditMoqCombined(e.target.value)}
+                                                          />
+                                                          <button
+                                                            type="button"
+                                                            onClick={() => saveProductMoqs(prod.id)}
+                                                            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white px-2 py-1 rounded text-[11px] font-semibold transition-colors"
+                                                          >
+                                                            Save
+                                                          </button>
+                                                          <button
+                                                            type="button"
+                                                            onClick={() => setEditingProductId(null)}
+                                                            className="border border-[#D0D5DD] text-[#475467] hover:bg-[#F2F4F7] px-2 py-1 rounded text-[11px] transition-colors"
+                                                          >
+                                                            Cancel
+                                                          </button>
+                                                        </div>
+                                                      ) : (
+                                                        <div className="flex items-center justify-end gap-2">
+                                                          <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                              setEditingProductId(prod.id);
+                                                              setEditMoqPerFabric(prod.moqPerFabric ?? prod.moq ?? 50);
+                                                              setEditMoqCombined(prod.moqCombinedMultiFabric ? String(prod.moqCombinedMultiFabric) : "");
+                                                            }}
+                                                            className="text-[#2E5AAC] hover:text-[#1E3F7A] hover:underline px-1 py-1 text-[11px] font-semibold transition-colors"
+                                                          >
+                                                            Edit MOQs
+                                                          </button>
+                                                          <button
+                                                            type="button"
+                                                            onClick={() => toggleProductActive(prod.id, prod.active)}
+                                                            className={`px-2.5 py-1 rounded-full border text-[11px] font-semibold transition-colors ${
+                                                              prod.active
+                                                                ? "bg-[#ECFDF3] text-[#067647] border-[#ABE5C6] hover:bg-[#D1FADF]"
+                                                                : "bg-[#F2F4F7] text-[#475467] border-[#D0D5DD] hover:bg-[#EAECF0]"
+                                                            }`}
+                                                          >
+                                                            {prod.active ? "Active" : "Off"}
+                                                          </button>
+                                                        </div>
+                                                      )}
+                                                    </td>
+                                                  </tr>
+                                                );
+                                              })}
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
 
