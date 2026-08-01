@@ -116,8 +116,7 @@ export function SizeQtyTable({
                 <td className="py-3 px-4 text-right">
                   {/* Direct number input — still editable by typing */}
                   <input
-                    aria-label={`decrease quantity for size ${size}`}
-                    aria-describedby={`${size}_qty_label`}
+                    aria-label={`${size} ${activeRegion}`}
                     className="w-28 bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none py-1.5 px-3 rounded text-sm text-right font-medium tabular-nums"
                     min={0}
                     type="number"
@@ -126,10 +125,6 @@ export function SizeQtyTable({
                       handleQtyChange(size, event.target.value)
                     }
                   />
-                  {/* Label for accessibility */}
-                  <span id={`${size}_qty_label`} className="text-[11px] text-[#5B6B85]">
-                    increase quantity for size {size}
-                  </span>
                   {/* +/- Stepper buttons — 44x44px touch target minimum via button-element */}
                   <div className="inline-flex px-2 py-1" style={{ minWidth: "88px" }}>
                     <button

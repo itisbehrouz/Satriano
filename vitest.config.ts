@@ -1,4 +1,8 @@
-import "dotenv/config";
+import { config } from "dotenv";
+// Load .env.local first (real secrets, highest priority — matches Next.js precedence),
+// then .env as fallback (placeholder defaults). dotenv never overwrites already-set vars.
+config({ path: ".env.local" });
+config({ path: ".env" });
 import { defineConfig } from "vitest/config";
 import path from "node:path";
 

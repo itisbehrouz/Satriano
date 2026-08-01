@@ -72,7 +72,8 @@ describe("PriceSidebar", () => {
       />,
     );
 
-    expect(screen.getByRole("button", { name: /submitting/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /submit order for feasibility review/i })).toBeDisabled();
+    expect(screen.getByText(/submitting for review/i)).toBeInTheDocument();
   });
 
   it("renders an error message when provided", () => {
@@ -217,7 +218,7 @@ describe("PriceSidebar", () => {
         />,
       );
 
-      expect(screen.getByText(/minimum order quantity met/)).toBeInTheDocument();
+      expect(screen.getByText(/minimum order quantity met/i)).toBeInTheDocument();
     });
 
     it("shows the gating inline message when below MOQ", () => {
