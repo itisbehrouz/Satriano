@@ -45,48 +45,22 @@ export function PortalHeader() {
           </Link>
         </div>
 
-        {/* Navigation Items */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold">
-          <Link
-            href="/portal/orders"
-            className={`transition-colors ${
-              pathname === "/portal/orders" ? "text-[#60A5FA]" : "text-[#94A3B8] hover:text-white"
-            }`}
-          >
-            Orders &amp; History
-          </Link>
-          <Link
-            href="/portal/orders#invoices"
-            className="text-[#94A3B8] hover:text-white transition-colors"
-          >
-            Invoices &amp; Proformas
-          </Link>
-          <Link
-            href="/portal/settings"
-            className={`transition-colors ${
-              pathname === "/portal/settings" ? "text-[#60A5FA]" : "text-[#94A3B8] hover:text-white"
-            }`}
-          >
-            Company Settings
-          </Link>
-        </nav>
-
-        {/* User Session & Logout Action */}
-        <div className="flex items-center gap-3">
-          {customerEmail && (
+        {/* User Session & Logout Action (Rendered only when logged in) */}
+        {customerEmail && (
+          <div className="flex items-center gap-3">
             <span className="hidden sm:inline-block text-[11px] font-mono text-[#94A3B8] bg-[#172A4D] px-2.5 py-1 rounded border border-[#1E3A8A]">
               {customerEmail}
             </span>
-          )}
-          <button
-            type="button"
-            onClick={handleLogout}
-            disabled={loggingOut}
-            className="px-3.5 py-1.5 bg-[#172A4D] hover:bg-[#A32D2D]/30 text-[#F87171] hover:text-white border border-[#1E3A8A] hover:border-[#F87171]/40 rounded text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
-          >
-            {loggingOut ? "Signing Out..." : "Sign Out"}
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={loggingOut}
+              className="px-3.5 py-1.5 bg-[#172A4D] hover:bg-[#A32D2D]/30 text-[#F87171] hover:text-white border border-[#1E3A8A] hover:border-[#F87171]/40 rounded text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {loggingOut ? "Signing Out..." : "Sign Out"}
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

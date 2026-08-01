@@ -34,3 +34,5 @@
 [2026-08-02T01:53:50+03:00] - Updated satriano-atelier-roadmap.md with Section 14 (Admin Navigation & Workspace Layout Refactoring). - satriano-atelier-roadmap.md, agent_execution.log
 
 [2026-08-02T02:18:30+03:00] - Executed Roadmap Step 9.7: Built Admin KPI Dashboard & Operational Telemetry Widget. Created /api/admin/metrics API route and AdminKpiDashboard component adhering to Swiss Design standards. Verified 17/17 Vitest test suites (98/98 tests) passing cleanly. - app/api/admin/metrics/route.ts, components/admin/AdminKpiDashboard.tsx, app/admin/page.tsx, agent_execution.log
+
+[2026-08-02T02:21:15+03:00] - Removed center navigation menu from PortalHeader component and restricted Sign Out button display to active customer sessions only. - components/layout/PortalHeader.tsx, agent_execution.log
