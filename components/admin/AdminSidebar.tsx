@@ -77,26 +77,16 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
       {/* Top Header Section */}
       <div className="space-y-4 p-3">
         {/* Brand Header & Collapse Toggle */}
-        <div className="flex items-center justify-between min-h-[40px] px-1">
+        {/* Brand Header & Collapse Toggle */}
+        <div className={`flex items-center min-h-[40px] px-1 ${isCollapsed ? "justify-center" : "justify-between"}`}>
           {!isCollapsed && (
-            <div className="flex items-center gap-2 overflow-hidden">
-              <div className="w-7 h-7 rounded bg-[#2E5AAC] text-white font-bold flex items-center justify-center text-xs tracking-wider border border-[#60A5FA]/30 shadow-xs">
-                SA
-              </div>
-              <div className="leading-tight">
-                <span className="text-xs font-bold uppercase tracking-wider block text-white">
-                  Satriano
-                </span>
-                <span className="text-[10px] text-[#93C5FD] font-mono block">
-                  M2O Portal
-                </span>
-              </div>
-            </div>
-          )}
-
-          {isCollapsed && (
-            <div className="mx-auto w-8 h-8 rounded bg-[#2E5AAC] text-white font-bold flex items-center justify-center text-xs tracking-wider border border-[#60A5FA]/30 shadow-xs">
-              SA
+            <div className="leading-tight">
+              <span className="text-xs font-bold uppercase tracking-wider block text-white">
+                Admin Console
+              </span>
+              <span className="text-[10px] text-[#93C5FD] font-mono block">
+                M2O Portal
+              </span>
             </div>
           )}
 
