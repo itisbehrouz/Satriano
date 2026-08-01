@@ -120,18 +120,6 @@ export default async function WholesalePage() {
                     <strong className="text-[#60A5FA] font-mono text-sm">50 Pcs</strong> Minimum MOQ
                   </span>
                 </div>
-              </div>
-
-              {/* Action Link */}
-              <div className="shrink-0">
-                <Link
-                  href="/konfigurator"
-                  className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-none transition-all shadow-lg shadow-[#2E5AAC]/30 inline-flex items-center gap-2"
-                >
-                  <span>Start Custom Spec</span>
-                  <span>→</span>
-                </Link>
-              </div>
             </div>
           </div>
         </section>
