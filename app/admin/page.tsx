@@ -194,70 +194,70 @@ function AdminOrderContent() {
 
   // Render Full Admin Operations Console
   return (
-    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-8 px-4 md:px-8 font-sans">
-        <div className="w-full max-w-container-max mx-auto space-y-6">
-          {/* Admin KPI Overview & Analytics Widget */}
-          <AdminKpiDashboard />
+    <main className="min-h-screen bg-[#F7F8FA] text-[#111318] py-8 px-4 md:px-8 font-sans">
+      <div className="w-full max-w-container-max mx-auto space-y-6">
+        {/* Admin KPI Overview & Analytics Widget */}
+        <AdminKpiDashboard />
 
-          {/* Filter Tabs & Action Buttons Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D1D5DB] pb-4">
-            <div className="flex flex-wrap gap-2">
-              {TABS.map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-medium rounded transition-all cursor-pointer ${
-                    activeTab === tab.id
-                      ? "bg-[#2E5AAC] text-white font-semibold shadow-xs"
-                      : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <Link
-                href="/admin/architecture-viz"
-                className="min-h-[38px] px-3.5 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-base">view_in_ar</span>
-                <span>3D Anti-Gravity Viz</span>
-              </Link>
+        {/* Filter Tabs & Action Buttons Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EAECF0] pb-4">
+          <div className="flex flex-wrap gap-1.5">
+            {TABS.map((tab) => (
               <button
+                key={tab.id}
                 type="button"
-                onClick={fetchOrders}
-                className="min-h-[38px] px-3.5 py-1.5 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                onClick={() => setActiveTab(tab.id)}
+                className={`min-h-[36px] px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer select-none ${
+                  activeTab === tab.id
+                    ? "bg-[#2E5AAC] text-white font-semibold shadow-none"
+                    : "bg-white text-[#475467] border border-[#EAECF0] hover:bg-[#F9FAFB] hover:text-[#111318]"
+                }`}
               >
-                <span className="material-symbols-outlined text-base">refresh</span>
-                <span>Refresh Ledger</span>
+                {tab.label}
               </button>
-            </div>
+            ))}
           </div>
 
-          {/* Main Table Content */}
-          {loading ? (
-            <div className="bg-white border border-[#D1D5DB] rounded-lg p-12 text-center text-sm text-[#5B6B85] shadow-sm">
-              <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
-              <p>Loading production orders ledger...</p>
-            </div>
-          ) : error ? (
-            <div className="bg-white border border-[#F8B4B4] rounded-lg p-6 text-center text-sm text-[#C5221F]">
-              <p className="font-semibold mb-1">Ledger Error</p>
-              <p className="text-xs">{error}</p>
-            </div>
-          ) : (
-            <div className="bg-white border border-[#D1D5DB] rounded-lg shadow-sm overflow-hidden">
-              <AdminOrderTable
-                orders={orders}
-                onStatusChange={fetchOrders}
-              />
-            </div>
-          )}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <Link
+              href="/admin/architecture-viz"
+              className="min-h-[36px] px-3.5 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded-md flex items-center gap-1.5 transition-all shadow-none cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">view_in_ar</span>
+              <span>3D Telemetry</span>
+            </Link>
+            <button
+              type="button"
+              onClick={fetchOrders}
+              className="min-h-[36px] px-3.5 py-1.5 bg-white border border-[#EAECF0] hover:bg-[#F9FAFB] text-xs font-semibold text-[#111318] rounded-md flex items-center gap-1.5 transition-all shadow-none cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">refresh</span>
+              <span>Refresh Ledger</span>
+            </button>
+          </div>
         </div>
-      </main>
+
+        {/* Main Table Content */}
+        {loading ? (
+          <div className="bg-white border border-[#EAECF0] rounded-md p-12 text-center text-xs text-[#475467] shadow-none">
+            <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+            <p>Loading production orders ledger...</p>
+          </div>
+        ) : error ? (
+          <div className="bg-white border border-[#FDA29B] rounded-md p-6 text-center text-xs text-[#F04438] shadow-none">
+            <p className="font-semibold mb-1">Ledger Error</p>
+            <p className="text-xs">{error}</p>
+          </div>
+        ) : (
+          <div className="bg-white border border-[#EAECF0] rounded-md shadow-none overflow-hidden">
+            <AdminOrderTable
+              orders={orders}
+              onStatusChange={fetchOrders}
+            />
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
 

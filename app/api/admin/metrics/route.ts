@@ -19,8 +19,9 @@ export async function GET(request: Request) {
       inProductionOrders,
       shippedOrders,
       paidRevenueAggregate,
-      pendingApplications,
-      recentOrders,
+      pendingApplicationsCount,
+      recentPendingOrders,
+      recentPendingApps,
     ] = await Promise.all([
       prisma.order.count(),
       prisma.order.count({ where: { status: "PENDING_REVIEW" } }),
@@ -38,10 +39,11 @@ export async function GET(request: Request) {
       }),
       prisma.b2bApplication.count({
         where: {
-          status: { in: ["SUBMITTED", "UNDER_REVIEW"] },
+          status: "SUBMITTED",
         },
       }),
       prisma.order.findMany({
+        where: { status: "PENDING_REVIEW" },
         take: 5,
         orderBy: { createdAt: "desc" },
         include: {
@@ -50,11 +52,47 @@ export async function GET(request: Request) {
           },
         },
       }),
+      prisma.b2bApplication.findMany({
+        where: { status: "SUBMITTED" },
+        take: 5,
+        orderBy: { createdAt: "desc" },
+      }),
     ]);
 
     const totalPaidCents =
       (paidRevenueAggregate._sum.totalCents || 0) +
       (paidRevenueAggregate._sum.setupFeeCents || 0);
+
+    // Format pending actions list
+    const orderActions = recentPendingOrders.map((ord) => ({
+      id: ord.id,
+      type: "ORDER",
+      title: `Order #${ord.id.slice(-6).toUpperCase()}`,
+      client: ord.company.name,
+      email: ord.company.email,
+      actionNeeded: "Review Spec & Issue Proforma",
+      amountCents: ord.totalCents + ord.setupFeeCents,
+      status: ord.status,
+      createdAt: ord.createdAt,
+      link: `/admin?status=PENDING_REVIEW`,
+    }));
+
+    const appActions = recentPendingApps.map((app) => ({
+      id: app.id,
+      type: "APPLICATION",
+      title: app.companyName,
+      client: app.fullName,
+      email: app.corpEmail,
+      actionNeeded: "Verify Corporate B2B Account",
+      amountCents: null,
+      status: app.status,
+      createdAt: app.createdAt,
+      link: `/admin/applications?status=SUBMITTED`,
+    }));
+
+    const combinedActions = [...orderActions, ...appActions]
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 5);
 
     return NextResponse.json({
       metrics: {
@@ -64,15 +102,8 @@ export async function GET(request: Request) {
         inProductionOrders,
         shippedOrders,
         totalPaidCents,
-        pendingApplications,
-        recentOrders: recentOrders.map((ord) => ({
-          id: ord.id,
-          companyName: ord.company.name,
-          corpEmail: ord.company.email,
-          status: ord.status,
-          totalCents: ord.totalCents + ord.setupFeeCents,
-          createdAt: ord.createdAt,
-        })),
+        pendingApplications: pendingApplicationsCount,
+        pendingActions: combinedActions,
       },
     });
   } catch (error) {

@@ -3,6 +3,19 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+export interface PendingAction {
+  id: string;
+  type: "ORDER" | "APPLICATION";
+  title: string;
+  client: string;
+  email: string;
+  actionNeeded: string;
+  amountCents: number | null;
+  status: string;
+  createdAt: string;
+  link: string;
+}
+
 export interface AdminMetrics {
   totalOrders: number;
   pendingReviewOrders: number;
@@ -11,14 +24,7 @@ export interface AdminMetrics {
   shippedOrders: number;
   totalPaidCents: number;
   pendingApplications: number;
-  recentOrders: Array<{
-    id: string;
-    companyName: string;
-    corpEmail: string;
-    status: string;
-    totalCents: number;
-    createdAt: string;
-  }>;
+  pendingActions: PendingAction[];
 }
 
 export function AdminKpiDashboard() {
@@ -50,10 +56,10 @@ export function AdminKpiDashboard() {
 
   if (loading) {
     return (
-      <div className="bg-white border border-[#EAECF0] rounded-lg p-6 mb-6 font-sans">
-        <div className="flex items-center gap-3 text-xs text-[#667085]">
+      <div className="bg-white border border-[#EAECF0] rounded-md p-6 mb-6 font-sans shadow-none">
+        <div className="flex items-center gap-3 text-xs text-[#475467]">
           <span className="w-4 h-4 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
-          <span>Calculating operational KPIs &amp; production telemetry...</span>
+          <span>Calculating operational telemetry and pending actions...</span>
         </div>
       </div>
     );
@@ -61,7 +67,7 @@ export function AdminKpiDashboard() {
 
   if (error || !metrics) {
     return (
-      <div className="bg-white border border-[#FDA29B] rounded-lg p-4 mb-6 font-sans flex items-center justify-between text-xs text-[#F04438]">
+      <div className="bg-white border border-[#FDA29B] rounded-md p-4 mb-6 font-sans flex items-center justify-between text-xs text-[#F04438] shadow-none">
         <span>{error || "Failed to load dashboard metrics."}</span>
         <button
           type="button"
@@ -80,99 +86,100 @@ export function AdminKpiDashboard() {
   });
 
   return (
-    <div className="space-y-6 font-sans mb-6">
-      {/* 4-Card Primary KPI Grid */}
+    <div className="space-y-6 font-sans mb-6 select-none">
+      {/* 4-Card Primary KPI Summary Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1: Total Orders */}
-        <div className="bg-white border border-[#EAECF0] rounded-lg p-5 flex flex-col justify-between select-none">
+        {/* KPI 1: Total Revenue (PAID & SHIPPED Orders) */}
+        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#667085]">
-              Total Orders
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
+              Total Revenue
             </span>
-            <div className="w-9 h-9 rounded-md bg-[#F2F4F7] text-[#344054] flex items-center justify-center border border-[#D0D5DD]">
-              <span className="material-symbols-outlined text-lg">receipt_long</span>
+            <div className="w-8 h-8 rounded-md bg-[#ECFDF3] text-[#027A48] flex items-center justify-center border border-[#ABE5C6]">
+              <span className="material-symbols-outlined text-base">payments</span>
             </div>
           </div>
-          <div className="mt-4">
-            <div className="text-2xl font-bold font-mono text-[#101828]">
-              {metrics.totalOrders}
-            </div>
-            <p className="text-[11px] text-[#475467] mt-1 flex items-center gap-1">
-              <span>All production orders in ledger</span>
-            </p>
-          </div>
-        </div>
-
-        {/* KPI 2: Pending Review (Quotes Pending) */}
-        <div className="bg-white border border-[#EAECF0] rounded-lg p-5 flex flex-col justify-between select-none">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#667085]">
-              Quotes Pending
-            </span>
-            <div className="w-9 h-9 rounded-md bg-[#FEF0C7] text-[#DC6803] flex items-center justify-center border border-[#FDE272]">
-              <span className="material-symbols-outlined text-lg">pending_actions</span>
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="text-2xl font-bold font-mono text-[#D92D20]">
-              {metrics.pendingReviewOrders}
-            </div>
-            <p className="text-[11px] text-[#D92D20] font-medium mt-1">
-              Awaiting proforma price verification
-            </p>
-          </div>
-        </div>
-
-        {/* KPI 3: Total Paid Revenue */}
-        <div className="bg-white border border-[#EAECF0] rounded-lg p-5 flex flex-col justify-between select-none">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#667085]">
-              Paid Revenue
-            </span>
-            <div className="w-9 h-9 rounded-md bg-[#ECFDF3] text-[#027A48] flex items-center justify-center border border-[#ABE5C6]">
-              <span className="material-symbols-outlined text-lg">payments</span>
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="text-2xl font-bold font-mono text-[#101828]">
+          <div className="mt-3">
+            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
               {formattedRevenue}
             </div>
             <p className="text-[11px] text-[#027A48] font-medium mt-1">
-              Confirmed B2B payment authorizations
+              Paid &amp; In-Production orders
             </p>
           </div>
         </div>
 
-        {/* KPI 4: Pending B2B Applications */}
-        <div className="bg-white border border-[#EAECF0] rounded-lg p-5 flex flex-col justify-between select-none">
+        {/* KPI 2: Active Orders (IN_PRODUCTION) */}
+        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#667085]">
-              Pending Partners
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
+              Active Orders
             </span>
-            <div className="w-9 h-9 rounded-md bg-[#E6F1FB] text-[#185FA5] flex items-center justify-center border border-[#B3D6F6]">
-              <span className="material-symbols-outlined text-lg">assignment_ind</span>
+            <div className="w-8 h-8 rounded-md bg-[#F0F9FF] text-[#026AA2] flex items-center justify-center border border-[#B2DDFF]">
+              <span className="material-symbols-outlined text-base">factory</span>
             </div>
           </div>
-          <div className="mt-4">
-            <div className="text-2xl font-bold font-mono text-[#101828]">
+          <div className="mt-3">
+            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
+              {metrics.inProductionOrders}
+            </div>
+            <p className="text-[11px] text-[#026AA2] font-medium mt-1">
+              Currently in factory production
+            </p>
+          </div>
+        </div>
+
+        {/* KPI 3: Pending Proformas (PENDING_REVIEW) */}
+        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
+              Pending Proformas
+            </span>
+            <div className="w-8 h-8 rounded-md bg-[#FEF0C7] text-[#DC6803] flex items-center justify-center border border-[#FDE272]">
+              <span className="material-symbols-outlined text-base">pending_actions</span>
+            </div>
+          </div>
+          <div className="mt-3">
+            <div className="text-2xl font-bold font-mono text-[#D92D20] tabular-nums">
+              {metrics.pendingReviewOrders}
+            </div>
+            <p className="text-[11px] text-[#D92D20] font-medium mt-1">
+              Requires spec review &amp; quote
+            </p>
+          </div>
+        </div>
+
+        {/* KPI 4: Pending B2B Applications (SUBMITTED) */}
+        <div className="bg-white border border-[#EAECF0] rounded-md p-5 flex flex-col justify-between shadow-none">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#667085]">
+              Pending Applications
+            </span>
+            <div className="w-8 h-8 rounded-md bg-[#E6F1FB] text-[#185FA5] flex items-center justify-center border border-[#B3D6F6]">
+              <span className="material-symbols-outlined text-base">assignment_ind</span>
+            </div>
+          </div>
+          <div className="mt-3">
+            <div className="text-2xl font-bold font-mono text-[#111318] tabular-nums">
               {metrics.pendingApplications}
             </div>
             <p className="text-[11px] text-[#185FA5] font-medium mt-1">
-              B2B company requests for review
+              Corporate B2B partner reviews
             </p>
           </div>
         </div>
       </div>
 
-      {/* Production Pipeline Scannable Overview Bar */}
-      <div className="bg-white border border-[#EAECF0] rounded-lg p-5">
-        <div className="flex items-center justify-between mb-4">
+      {/* Dense Scannable Table: 5 Most Recent Pending Actions */}
+      <div className="bg-white border border-[#EAECF0] rounded-md shadow-none overflow-hidden">
+        <div className="p-4 border-b border-[#EAECF0] flex items-center justify-between bg-[#F9FAFB]">
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#101828]">
-              Production Pipeline Status Breakdown
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#111318] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F04438] animate-pulse" />
+              Recent Pending Actions
             </h3>
             <p className="text-[11px] text-[#475467] mt-0.5">
-              Real-time operational distribution across active order stages.
+              5 most recent items requiring executive admin review and approval.
             </p>
           </div>
           <button
@@ -185,43 +192,82 @@ export function AdminKpiDashboard() {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="p-3 bg-[#F9FAFB] border border-[#EAECF0] rounded-md">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">
-              Quotes Pending
+        {metrics.pendingActions.length === 0 ? (
+          <div className="p-8 text-center text-xs text-[#667085]">
+            <span className="material-symbols-outlined text-2xl text-[#12B76A] mb-1 block">
+              task_alt
             </span>
-            <div className="text-lg font-bold font-mono text-[#101828] mt-1">
-              {metrics.pendingReviewOrders}
-            </div>
+            <span>No pending admin actions. All specs and applications are up to date.</span>
           </div>
-
-          <div className="p-3 bg-[#F9FAFB] border border-[#EAECF0] rounded-md">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">
-              Proformas Sent
-            </span>
-            <div className="text-lg font-bold font-mono text-[#101828] mt-1">
-              {metrics.proformaSentOrders}
-            </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-[#F8FAFC] border-b border-[#EAECF0] text-[11px] font-semibold text-[#475467] uppercase tracking-wider">
+                  <th className="py-2.5 px-4">Item &amp; Type</th>
+                  <th className="py-2.5 px-4">Corporate Client</th>
+                  <th className="py-2.5 px-4">Action Needed</th>
+                  <th className="py-2.5 px-4 text-right">Value</th>
+                  <th className="py-2.5 px-4">Submitted Date</th>
+                  <th className="py-2.5 px-4 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#EAECF0] text-[#111318]">
+                {metrics.pendingActions.map((action) => (
+                  <tr key={action.id} className="hover:bg-[#F9FAFB] transition-colors">
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded border uppercase ${
+                            action.type === "ORDER"
+                              ? "bg-[#FEF0C7] text-[#DC6803] border-[#FDE272]"
+                              : "bg-[#E6F1FB] text-[#185FA5] border-[#B3D6F6]"
+                          }`}
+                        >
+                          {action.type}
+                        </span>
+                        <span className="font-semibold text-[#111318]">{action.title}</span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4">
+                      <div>
+                        <div className="font-semibold text-[#111318]">{action.client}</div>
+                        <div className="text-[11px] text-[#667085] font-mono">{action.email}</div>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="text-[#344054] font-medium">{action.actionNeeded}</span>
+                    </td>
+                    <td className="py-3 px-4 text-right font-mono font-semibold text-[#111318] tabular-nums">
+                      {action.amountCents !== null
+                        ? (action.amountCents / 100).toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })
+                        : "—"}
+                    </td>
+                    <td className="py-3 px-4 text-[#667085] font-mono text-[11px] tabular-nums">
+                      {new Date(action.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <Link
+                        href={action.link}
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#2E5AAC] hover:text-[#1E3F7A] hover:underline"
+                      >
+                        <span>Review</span>
+                        <span>→</span>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-
-          <div className="p-3 bg-[#F9FAFB] border border-[#EAECF0] rounded-md">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">
-              In Production
-            </span>
-            <div className="text-lg font-bold font-mono text-[#101828] mt-1">
-              {metrics.inProductionOrders}
-            </div>
-          </div>
-
-          <div className="p-3 bg-[#F9FAFB] border border-[#EAECF0] rounded-md">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">
-              Shipped / Complete
-            </span>
-            <div className="text-lg font-bold font-mono text-[#101828] mt-1">
-              {metrics.shippedOrders}
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
