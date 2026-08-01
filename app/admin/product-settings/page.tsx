@@ -5,6 +5,8 @@ import Link from "next/link";
 import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
 import { ProductFitTree } from "@/components/admin/ProductFitTree";
 import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
+import { RegionalSizeTree } from "@/components/admin/RegionalSizeTree";
+import { RegionalSizePanel } from "@/components/admin/RegionalSizePanel";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 interface SizeOption {
@@ -127,7 +129,30 @@ export default function AdminProductSettingsPage() {
         }
       }
     }
-  }, [categories]);
+  // Regional Size System Slide-Over Panel Context State
+  const [selectedSizeSystem, setSelectedSizeSystem] = useState<SizeSystem | null>(null);
+
+  async function handleSaveSizeSystemSubcategories(
+    sizeSystemId: string,
+    assignedSubcategoryIds: string[]
+  ) {
+    const res = await fetch("/api/admin/catalog", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        target: "sizeSystemSubcategories",
+        id: sizeSystemId,
+        data: { subcategoryIds: assignedSubcategoryIds },
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to save size system mapping.");
+    }
+
+    await fetchCatalog();
+  }
 
   // Modal visibility states
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -849,29 +874,26 @@ export default function AdminProductSettingsPage() {
 
               {/* TAB 3: Regional Size Systems */}
               {activeTab === "sizing" && (
-                <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm space-y-6">
-                  <h2 className="text-lg font-bold text-[#1A2233]">
-                    Active CAD Sizing Standards &amp; Options
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {sizeSystems.map((sys) => (
-                      <div key={sys.id} className="border border-[#E5E7EB] rounded-lg p-4 bg-[#F5F7FA]/50">
-                        <div className="flex justify-between items-center mb-3">
-                          <h3 className="font-bold text-sm text-[#1A2233]">{sys.name}</h3>
-                          <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 bg-[#E6F1FB] text-[#185FA5] rounded">
-                            {sys.region} Region
-                          </span>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {sys.options.map((opt) => (
-                            <span key={opt.id} className="bg-white border border-[#D1D5DB] text-xs font-semibold px-2 py-1 rounded text-[#1A2233]">
-                              {opt.label}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="space-y-6">
+                  <RegionalSizeTree
+                    sizeSystems={sizeSystems}
+                    subcategories={categories.flatMap((cat) =>
+                      cat.subcategories.map((sub) => ({
+                        ...sub,
+                        categoryName: cat.name,
+                      }))
+                    )}
+                    selectedSizeSystemId={selectedSizeSystem?.id || null}
+                    onSelectSizeSystem={(sys) => setSelectedSizeSystem(sys)}
+                  />
+
+                  <RegionalSizePanel
+                    isOpen={selectedSizeSystem !== null}
+                    sizeSystem={selectedSizeSystem}
+                    categories={categories}
+                    onClose={() => setSelectedSizeSystem(null)}
+                    onSave={handleSaveSizeSystemSubcategories}
+                  />
                 </div>
               )}
 

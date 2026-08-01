@@ -335,6 +335,38 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ success: true });
     }
 
+    if (target === "subcategorySizeSystems" && typeof id === "string" && Array.isArray(data.sizeSystemIds)) {
+      await prisma.subcategorySizeSystem.deleteMany({
+        where: { subcategoryId: id },
+      });
+
+      if (data.sizeSystemIds.length > 0) {
+        await prisma.subcategorySizeSystem.createMany({
+          data: data.sizeSystemIds.map((ssId: string) => ({
+            subcategoryId: id,
+            sizeSystemId: ssId,
+          })),
+        });
+      }
+      return NextResponse.json({ success: true });
+    }
+
+    if (target === "sizeSystemSubcategories" && typeof id === "string" && Array.isArray(data.subcategoryIds)) {
+      await prisma.subcategorySizeSystem.deleteMany({
+        where: { sizeSystemId: id },
+      });
+
+      if (data.subcategoryIds.length > 0) {
+        await prisma.subcategorySizeSystem.createMany({
+          data: data.subcategoryIds.map((subId: string) => ({
+            sizeSystemId: id,
+            subcategoryId: subId,
+          })),
+        });
+      }
+      return NextResponse.json({ success: true });
+    }
+
     if (target === "fabric" && typeof id === "string") {
       const updated = await prisma.fabric.update({
         where: { id },
