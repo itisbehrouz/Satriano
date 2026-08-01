@@ -6,6 +6,7 @@ import {
   AdminApplicationsTable,
   B2bApplicationItem,
 } from "@/components/admin/AdminApplicationsTable";
+import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 const APPLICATION_TABS = [
   { id: "ALL", label: "All Applications" },
@@ -16,32 +17,11 @@ const APPLICATION_TABS = [
 ];
 
 export default function AdminApplicationsPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const { isAuthenticated, setAuthenticated } = useAdminAuth();
   const [applications, setApplications] = useState<B2bApplicationItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("ALL");
-
-  useEffect(() => {
-    async function checkSessionAndFetch() {
-      try {
-        const sessionRes = await fetch("/api/admin/session");
-        if (sessionRes.ok) {
-          const data = await sessionRes.json();
-          if (data.authenticated) {
-            setIsAuthenticated(true);
-            return;
-          }
-        }
-      } catch {
-        // Session check failed
-      }
-      setIsAuthenticated(false);
-      setLoading(false);
-    }
-
-    checkSessionAndFetch();
-  }, []);
 
   async function fetchApplications() {
     setLoading(true);
@@ -54,7 +34,7 @@ export default function AdminApplicationsPage() {
 
       const res = await fetch(url);
       if (res.status === 401) {
-        setIsAuthenticated(false);
+        setAuthenticated(false);
         return;
       }
 
@@ -77,15 +57,6 @@ export default function AdminApplicationsPage() {
       fetchApplications();
     }
   }, [isAuthenticated, activeTab]);
-
-  async function handleSignOut() {
-    try {
-      await fetch("/api/admin/logout", { method: "POST" });
-    } catch {
-      // Signout failed
-    }
-    setIsAuthenticated(false);
-  }
 
   if (isAuthenticated === false) {
     return (
@@ -125,61 +96,14 @@ export default function AdminApplicationsPage() {
               </p>
             </div>
 
-            {/* Navigation Actions (44px min touch target) */}
-            <div className="flex items-center gap-3 flex-wrap">
-              <Link
-                href="/admin"
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">receipt_long</span>
-                <span>Production Order Ledger</span>
-              </Link>
-              <Link
-                href="/admin/product-settings"
-                className="min-h-[44px] px-4 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">settings</span>
-                <span>Catalog Settings</span>
-              </Link>
-              <button
-                type="button"
-                onClick={fetchApplications}
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">refresh</span>
-                <span>Refresh</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">logout</span>
-                <span>Sign Out</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Module Navigation Tabs */}
-          <div className="flex items-center gap-2 border-b border-[#D1D5DB] pb-3 overflow-x-auto">
-            <Link
-              href="/admin"
-              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            <button
+              type="button"
+              onClick={fetchApplications}
+              className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
             >
-              <span className="material-symbols-outlined text-base">orders</span>
-              <span>Production Orders</span>
-            </Link>
-            <span className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded bg-[#0B1E3D] text-white shadow-sm flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-base">assignment_ind</span>
-              <span>B2B Applications ({applications.length})</span>
-            </span>
-            <Link
-              href="/admin/product-settings"
-              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
-            >
-              <span className="material-symbols-outlined text-base">inventory_2</span>
-              <span>Product Settings &amp; MOQs</span>
-            </Link>
+              <span className="material-symbols-outlined text-base">refresh</span>
+              <span>Refresh</span>
+            </button>
           </div>
 
           {/* Status Filter Tabs (44px min touch target) */}

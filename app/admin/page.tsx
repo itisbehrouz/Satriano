@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable";
+import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 const TABS = [
   { id: "ALL", label: "All Orders" },
@@ -15,7 +16,7 @@ const TABS = [
 ];
 
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const { isAuthenticated, setAuthenticated } = useAdminAuth();
   const [accessKey, setAccessKey] = useState("");
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -23,27 +24,6 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("ALL");
-
-  // Verify existing session cookie on mount
-  useEffect(() => {
-    async function checkSession() {
-      try {
-        const res = await fetch("/api/admin/session");
-        if (res.ok) {
-          const data = await res.json();
-          if (data.authenticated) {
-            setIsAuthenticated(true);
-            return;
-          }
-        }
-      } catch {
-        // Session check failed
-      }
-      setIsAuthenticated(false);
-    }
-
-    checkSession();
-  }, []);
 
   async function fetchOrders() {
     setLoading(true);
@@ -56,7 +36,7 @@ export default function AdminPage() {
       const res = await fetch(url);
 
       if (res.status === 401) {
-        setIsAuthenticated(false);
+        setAuthenticated(false);
         setAuthError("Session expired. Please authenticate with your Corporate Access Key.");
         return;
       }
@@ -97,20 +77,11 @@ export default function AdminPage() {
         throw new Error(data.error || "Authentication failed.");
       }
 
-      setIsAuthenticated(true);
+      setAuthenticated(true);
       setAccessKey("");
     } catch (err: any) {
       setAuthError(err.message || "Invalid Corporate Access Key.");
     }
-  }
-
-  async function handleSignOut() {
-    try {
-      await fetch("/api/admin/logout", { method: "POST" });
-    } catch {
-      // Signout fetch failed
-    }
-    setIsAuthenticated(false);
   }
 
   // Loading state while checking session
@@ -230,60 +201,14 @@ export default function AdminPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 flex-wrap">
-              <Link
-                href="/admin/applications"
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">assignment_ind</span>
-                <span>B2B Applications</span>
-              </Link>
-              <Link
-                href="/admin/product-settings"
-                className="min-h-[44px] px-4 py-2 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">settings</span>
-                <span>Catalog Settings</span>
-              </Link>
-              <button
-                type="button"
-                onClick={fetchOrders}
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">refresh</span>
-                <span>Refresh Ledger</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#FCE8E6] hover:text-[#C5221F] text-xs font-semibold text-[#5B6B85] rounded flex items-center gap-1.5 transition-colors shadow-sm"
-              >
-                <span className="material-symbols-outlined text-base">logout</span>
-                <span>Sign Out</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Module Navigation Tabs */}
-          <div className="flex items-center gap-2 border-b border-[#D1D5DB] pb-3 overflow-x-auto">
-            <span className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded bg-[#0B1E3D] text-white shadow-sm flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-base">orders</span>
-              <span>Production Orders ({orders.length})</span>
-            </span>
-            <Link
-              href="/admin/applications"
-              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
+            <button
+              type="button"
+              onClick={fetchOrders}
+              className="min-h-[44px] px-4 py-2 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded flex items-center gap-1.5 transition-colors shadow-sm"
             >
-              <span className="material-symbols-outlined text-base">assignment_ind</span>
-              <span>B2B Applications</span>
-            </Link>
-            <Link
-              href="/admin/product-settings"
-              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded transition-colors bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] flex items-center gap-1.5"
-            >
-              <span className="material-symbols-outlined text-base">inventory_2</span>
-              <span>Product Settings &amp; MOQs</span>
-            </Link>
+              <span className="material-symbols-outlined text-base">refresh</span>
+              <span>Refresh Ledger</span>
+            </button>
           </div>
 
           {/* Filter Tabs */}

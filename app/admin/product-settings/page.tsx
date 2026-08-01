@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CatalogImageUploader } from "@/components/admin/CatalogImageUploader";
 import { ProductFitTree } from "@/components/admin/ProductFitTree";
 import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
+import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 interface SizeOption {
   id: string;
@@ -78,7 +79,7 @@ function slugify(text: string): string {
 }
 
 export default function AdminProductSettingsPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const { isAuthenticated } = useAdminAuth();
   const [categories, setCategories] = useState<Category[]>([]);
   const [sizeSystems, setSizeSystems] = useState<SizeSystem[]>([]);
   const [allFits, setAllFits] = useState<FitDef[]>([]);
@@ -155,26 +156,10 @@ export default function AdminProductSettingsPage() {
   const [prodError, setProdError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function checkSessionAndFetch() {
-      try {
-        const sessionRes = await fetch("/api/admin/session");
-        if (sessionRes.ok) {
-          const data = await sessionRes.json();
-          if (data.authenticated) {
-            setIsAuthenticated(true);
-            fetchCatalog();
-            return;
-          }
-        }
-      } catch {
-        // Auth check failed
-      }
-      setIsAuthenticated(false);
-      setLoading(false);
+    if (isAuthenticated) {
+      fetchCatalog();
     }
-
-    checkSessionAndFetch();
-  }, []);
+  }, [isAuthenticated]);
 
   async function fetchCatalog() {
     setLoading(true);
@@ -490,24 +475,10 @@ export default function AdminProductSettingsPage() {
     <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
         <div className="w-full max-w-container-max mx-auto px-4 md:px-8 py-10">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 border-b border-[#D1D5DB] pb-6">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#2E5AAC] mb-1">
-                <Link href="/admin" className="hover:underline">Admin Console</Link>
-                <span>/</span>
-                <span>Product Settings &amp; Two-Tier MOQs</span>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
-                Category → Subcategory → Product Management
-              </h1>
-            </div>
-
-            <Link
-              href="/admin"
-              className="border border-[#D1D5DB] bg-white hover:bg-[#F5F7FA] text-xs font-semibold px-4 py-2.5 rounded transition-colors"
-            >
-              ← Back to Order Ledger
-            </Link>
+          <div className="mb-8 gap-4 border-b border-[#D1D5DB] pb-6">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#1A2233]">
+              Category → Subcategory → Product Management
+            </h1>
           </div>
 
           {/* Navigation Tabs */}
