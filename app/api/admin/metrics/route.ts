@@ -106,10 +106,10 @@ export async function GET(request: Request) {
         pendingActions: combinedActions,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Fetch admin metrics error:", error);
     return NextResponse.json(
-      { error: "Failed to load operational metrics." },
+      { error: error?.message || "Failed to load operational metrics." },
       { status: 500 }
     );
   }

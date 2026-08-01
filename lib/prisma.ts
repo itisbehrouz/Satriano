@@ -4,19 +4,19 @@ import { PrismaClient } from "@/app/generated/prisma/client";
 
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
-  pool?: Pool;
-  adapter?: PrismaPg;
 };
 
-if (!globalForPrisma.pool) {
+function createPrismaClient(): PrismaClient {
   const connectionString = process.env.DATABASE_URL;
-  globalForPrisma.pool = new Pool({ connectionString });
-  globalForPrisma.adapter = new PrismaPg(globalForPrisma.pool);
+  if (!connectionString) {
+    throw new Error("CRITICAL FAILURE: DATABASE_URL environment variable is not defined.");
+  }
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  return new PrismaClient({ adapter });
 }
 
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({ adapter: globalForPrisma.adapter! });
+export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
