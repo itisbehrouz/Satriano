@@ -509,3 +509,18 @@ checkpoint before being considered done, regardless of which agent
 | **Admin Layout Isolation** | 100% Healthy | `B2BSupportDock.tsx` returns `null` on `/admin/*`; consumer header/footer stripped | Maintain separate admin layout boundaries |
 | **Catalog CRUD & Image Upload** | 100% Healthy | Supabase `'catalog-assets'` bucket upload with strict 2MB validation | Fully verified & operational |
 | **Global Command Palette** | 100% Healthy | `cmdk` dialog listening to `Cmd+K`, live product & order indexing | Expand indexed entities as new models drop |
+
+---
+
+## 14. Admin Navigation & Workspace Layout Refactoring (Aug 2, 2026)
+
+- **Collapsible Executive Navigation Sidebar (`AdminChrome`)**:
+  - Implemented expandable/collapsible sidebar with toggle control (`chevron_left` / `chevron_right`) supporting compact 64px icon mode and expanded 256px drawer mode.
+  - Removed top Satriano logo from admin sidebar navigation per brand customization directive.
+- **Top Header Bar & Page Title Removal**:
+  - Removed top white header bar (`Admin Console / [Page Name]`) and top page title banners across all admin pages (`/admin`, `/admin/applications`, `/admin/product-settings`, `/admin/architecture-viz`).
+  - Relocated page action triggers (`3D Anti-Gravity Viz`, `Refresh Ledger`, `Refresh Applications`, `Back to Order Ledger`) directly into category/status filter bars.
+  - Integrated Global Search trigger (`⌘K`) and Sign Out button cleanly into the bottom sidebar footer.
+- **Accordion Sub-Menu Navigation & Deep-Linking**:
+  - Refactored sidebar sub-item list to an accordion pattern where sub-items expand only for the active section (or user-toggled section), keeping inactive section menus collapsed.
+  - Mapped all sub-items to functional page filter query parameters (`?status=ALL`, `?status=SUBMITTED`, `?tab=fits`, etc.) with `useSearchParams` and `Suspense` synchronization across page components.
