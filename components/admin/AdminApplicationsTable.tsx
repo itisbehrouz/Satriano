@@ -100,6 +100,49 @@ export function AdminApplicationsTable({
     }
   }
 
+  async function handleResendVerification(id: string, email: string) {
+    setUpdatingId(id);
+    setActionError(null);
+    try {
+      const res = await fetch(`/api/applications/${id}/resend`, {
+        method: "POST",
+      });
+      const json = await res.json();
+      if (res.ok) {
+        alert(json.message || `Verification email resent to ${email}.`);
+      } else {
+        setActionError(json.error || "Failed to resend verification email.");
+      }
+    } catch {
+      setActionError("Network error while resending verification email.");
+    } finally {
+      setUpdatingId(null);
+    }
+  }
+
+  async function handleDeleteApplication(id: string, companyName: string) {
+    if (!confirm(`Are you sure you want to permanently delete application for ${companyName}?`)) {
+      return;
+    }
+    setUpdatingId(id);
+    setActionError(null);
+    try {
+      const res = await fetch(`/api/applications/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        if (onStatusChange) onStatusChange();
+      } else {
+        const json = await res.json();
+        setActionError(json.error || "Failed to delete application record.");
+      }
+    } catch {
+      setActionError("Network error while deleting application.");
+    } finally {
+      setUpdatingId(null);
+    }
+  }
+
   if (applications.length === 0) {
     return (
       <div className="p-12 text-center border border-[#D1D5DB] bg-white rounded-lg text-[#5B6B85]">
@@ -207,6 +250,20 @@ export function AdminApplicationsTable({
                     </td>
                     <td className="p-4 text-right align-top">
                       <div className="flex items-center justify-end gap-1.5 whitespace-nowrap">
+                        {/* Resend Verification Email Icon Button */}
+                        {!isEmailVerified && (
+                          <button
+                            type="button"
+                            disabled={isUpdating}
+                            onClick={() => handleResendVerification(app.id, app.corpEmail)}
+                            aria-label={`Resend verification email to ${app.corpEmail}`}
+                            title={`Resend verification email to ${app.corpEmail}`}
+                            className="w-9 h-9 flex items-center justify-center text-[#185FA5] bg-[#E6F1FB] hover:bg-[#B3D6F6] border border-[#B3D6F6] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors shadow-xs"
+                          >
+                            <span className="material-symbols-outlined text-lg">forward_to_inbox</span>
+                          </button>
+                        )}
+
                         {/* View/Hide Specs Icon Button */}
                         <button
                           type="button"
@@ -248,6 +305,18 @@ export function AdminApplicationsTable({
                             <span className="material-symbols-outlined text-lg">cancel</span>
                           </button>
                         )}
+
+                        {/* Delete Application Record Icon Button */}
+                        <button
+                          type="button"
+                          disabled={isUpdating}
+                          onClick={() => handleDeleteApplication(app.id, app.companyName)}
+                          aria-label={`Delete application for ${app.companyName}`}
+                          title={`Delete application for ${app.companyName}`}
+                          className="w-9 h-9 flex items-center justify-center text-[#5B6B85] hover:text-[#A32D2D] bg-white hover:bg-[#FCEBEB] border border-[#D1D5DB] hover:border-[#F8B4B4] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors shadow-xs"
+                        >
+                          <span className="material-symbols-outlined text-lg">delete</span>
+                        </button>
                       </div>
                     </td>
                   </tr>

@@ -50,3 +50,42 @@ export async function PATCH(
     );
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const isAuth = await verifyAdminRequest(req);
+    if (!isAuth) {
+      return NextResponse.json(
+        { error: "Unauthorized access to Portal Console applications API." },
+        { status: 401 }
+      );
+    }
+
+    const { id } = await params;
+
+    const existingApp = await prisma.b2bApplication.findUnique({ where: { id } });
+    if (!existingApp) {
+      return NextResponse.json({ error: "Application record not found." }, { status: 404 });
+    }
+
+    // Perform cascade cleanup on verification tokens
+    await prisma.emailVerificationToken.deleteMany({
+      where: { applicationId: id },
+    });
+
+    await prisma.b2bApplication.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ success: true, message: `Application ${id} deleted successfully.` });
+  } catch (error) {
+    console.error("Error deleting B2B application record:", error);
+    return NextResponse.json(
+      { error: "Failed to delete B2B application record." },
+      { status: 500 }
+    );
+  }
+}
