@@ -7,6 +7,8 @@ import { ProductFitTree } from "@/components/admin/ProductFitTree";
 import { GarmentFitsPanel } from "@/components/admin/GarmentFitsPanel";
 import { RegionalSizeTree } from "@/components/admin/RegionalSizeTree";
 import { RegionalSizePanel } from "@/components/admin/RegionalSizePanel";
+import { FabricPricingTree, FabricItem } from "@/components/admin/FabricPricingTree";
+import { FabricPricingPanel } from "@/components/admin/FabricPricingPanel";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 interface SizeOption {
@@ -151,6 +153,71 @@ export default function AdminProductSettingsPage() {
     if (!res.ok) {
       const data = await res.json();
       throw new Error(data.error || "Failed to save size system mapping.");
+    }
+
+    await fetchCatalog();
+  }
+
+  // Fabric Pricing Slide-Over Panel Context State
+  const [selectedFabric, setSelectedFabric] = useState<FabricItem | null>(null);
+
+  // Flatten fabrics across categories -> subcategories -> products with parent context
+  const allFabricsWithContext: FabricItem[] = categories.flatMap((cat) =>
+    cat.subcategories.flatMap((sub) =>
+      sub.products.flatMap((prod) =>
+        prod.fabrics.map((fab) => ({
+          ...fab,
+          productName: prod.name,
+          subcategoryName: sub.name,
+          categoryName: cat.name,
+        }))
+      )
+    )
+  );
+
+  async function handleToggleFabricActive(fabricId: string, currentActive: boolean) {
+    const res = await fetch("/api/admin/catalog", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        target: "fabric",
+        id: fabricId,
+        data: { active: !currentActive },
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to update fabric status.");
+    }
+
+    await fetchCatalog();
+  }
+
+  async function handleSaveFabric(
+    fabricId: string,
+    updatedData: {
+      name: string;
+      colorway?: string | null;
+      priceMinCents: number;
+      priceMaxCents: number;
+      setupFeeCents: number;
+      active: boolean;
+    }
+  ) {
+    const res = await fetch("/api/admin/catalog", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        target: "fabric",
+        id: fabricId,
+        data: updatedData,
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to update fabric configuration.");
     }
 
     await fetchCatalog();
@@ -901,33 +968,20 @@ export default function AdminProductSettingsPage() {
 
               {/* TAB 4: Fabrics & Pricing */}
               {activeTab === "fabrics" && (
-                <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 shadow-sm space-y-6">
-                  <h2 className="text-lg font-bold text-[#1A2233]">
-                    Fabric Cost Tiering &amp; Setup Fee Configuration
-                  </h2>
-                  <div className="space-y-4">
-                    {categories.flatMap((c) => c.subcategories.flatMap((s) => s.products.flatMap((p) => p.fabrics))).map((fab) => (
-                      <div key={fab.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border border-[#E5E7EB] rounded bg-white gap-4">
-                        <div>
-                          <div className="font-bold text-sm text-[#1A2233]">{fab.name}</div>
-                          <div className="text-xs text-[#5B6B85]">
-                            Price Range: ${(fab.priceMinCents / 100).toFixed(2)} - ${(fab.priceMaxCents / 100).toFixed(2)} / unit | Setup Fee: ${(fab.setupFeeCents / 100).toFixed(2)}
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => toggleFabricActive(fab.id, fab.active)}
-                          className={`min-h-[36px] px-3 py-1.5 rounded text-xs font-semibold transition-colors ${
-                            fab.active
-                              ? "bg-[#E1F5EE] text-[#0F6E56] hover:bg-[#A6E5CE]"
-                              : "bg-[#FCEBEB] text-[#A32D2D] hover:bg-[#F7C5C5]"
-                          }`}
-                        >
-                          {fab.active ? "Active" : "Off"}
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                <div className="space-y-6">
+                  <FabricPricingTree
+                    fabrics={allFabricsWithContext}
+                    selectedFabricId={selectedFabric?.id || null}
+                    onSelectFabric={(fab) => setSelectedFabric(fab)}
+                    onToggleActive={handleToggleFabricActive}
+                  />
+
+                  <FabricPricingPanel
+                    isOpen={selectedFabric !== null}
+                    fabric={selectedFabric}
+                    onClose={() => setSelectedFabric(null)}
+                    onSave={handleSaveFabric}
+                  />
                 </div>
               )}
             </>
