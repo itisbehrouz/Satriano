@@ -1,0 +1,201 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import Link from "next/link";
+import { CategoryFilter, CategoryOption } from "./CategoryFilter";
+import { ProductGrid } from "./ProductGrid";
+import { ProductCard, InventoryGarmentProduct } from "./ProductCard";
+import { ProductDetailModal } from "./ProductDetailModal";
+
+export function CategoryInventoryClient() {
+  const categories: CategoryOption[] = [
+    { id: "cat-tops", name: "Tops", productCount: 45, supplierCount: 3 },
+    { id: "cat-bottoms", name: "Bottoms", productCount: 32, supplierCount: 5 },
+    { id: "cat-outerwear", name: "Outerwear", productCount: 18, supplierCount: 2 },
+    { id: "cat-formal", name: "Formal Wear", productCount: 24, supplierCount: 4 },
+  ];
+
+  const [products, setProducts] = useState<InventoryGarmentProduct[]>([
+    {
+      id: "prod-1",
+      name: "Shawl Lapel Slim Fit Prom Blazer",
+      categoryId: "cat-formal",
+      categoryName: "Formal Wear",
+      supplierId: "sup-1",
+      supplierName: "ABC Textile Co.",
+      supplierSku: "ABC-001-NAVY",
+      wholesaleCostPriceUSD: 125.0,
+      markupPercent: 20,
+      sellPriceUSD: 150.0,
+      stockLevel: 12,
+      supplierNote: "High quality wool blend, 10 days delivery schedule.",
+      sizeStockMatrix: { "36": 3, "38": 5, "40": 3, "42": 1 },
+      images: [
+        { id: "img-1", imageUrl: "/placeholder-blazer-1.jpg", imageOrder: 1 },
+        { id: "img-2", imageUrl: "/placeholder-blazer-2.jpg", imageOrder: 2 },
+        { id: "img-3", imageUrl: "/placeholder-blazer-3.jpg", imageOrder: 3 },
+        { id: "img-4", imageUrl: "/placeholder-blazer-4.jpg", imageOrder: 4 },
+      ],
+    },
+    {
+      id: "prod-2",
+      name: "Italian Poplin Cotton Dress Shirt",
+      categoryId: "cat-tops",
+      categoryName: "Tops",
+      supplierId: "sup-2",
+      supplierName: "XYZ Fabrics",
+      supplierSku: "XYZ-045-WHT",
+      wholesaleCostPriceUSD: 75.0,
+      markupPercent: 20,
+      sellPriceUSD: 90.0,
+      stockLevel: 24,
+      supplierNote: "Crisp non-iron cotton poplin. Fast dispatch.",
+      sizeStockMatrix: { "36": 6, "38": 8, "40": 6, "42": 4 },
+      images: [
+        { id: "img-5", imageUrl: "/placeholder-shirt-1.jpg", imageOrder: 1 },
+        { id: "img-6", imageUrl: "/placeholder-shirt-2.jpg", imageOrder: 2 },
+        { id: "img-7", imageUrl: "/placeholder-shirt-3.jpg", imageOrder: 3 },
+        { id: "img-8", imageUrl: "/placeholder-shirt-4.jpg", imageOrder: 4 },
+      ],
+    },
+    {
+      id: "prod-3",
+      name: "Virgin Wool Double Breasted Overcoat",
+      categoryId: "cat-outerwear",
+      categoryName: "Outerwear",
+      supplierId: "sup-3",
+      supplierName: "Premium Knit Ltd.",
+      supplierSku: "PK-089-BLK",
+      wholesaleCostPriceUSD: 95.0,
+      markupPercent: 20,
+      sellPriceUSD: 114.0,
+      stockLevel: 3,
+      supplierNote: "Heavyweight 600gsm wool blend. Low stock.",
+      sizeStockMatrix: { "36": 1, "38": 1, "40": 1, "42": 0 },
+      images: [
+        { id: "img-9", imageUrl: "/placeholder-coat-1.jpg", imageOrder: 1 },
+        { id: "img-10", imageUrl: "/placeholder-coat-2.jpg", imageOrder: 2 },
+        { id: "img-11", imageUrl: "/placeholder-coat-3.jpg", imageOrder: 3 },
+        { id: "img-12", imageUrl: "/placeholder-coat-4.jpg", imageOrder: 4 },
+      ],
+    },
+    {
+      id: "prod-4",
+      name: "Tailored Italian Wool Trousers",
+      categoryId: "cat-bottoms",
+      categoryName: "Bottoms",
+      supplierId: "sup-1",
+      supplierName: "ABC Textile Co.",
+      supplierSku: "ABC-112-GRY",
+      wholesaleCostPriceUSD: 85.0,
+      markupPercent: 20,
+      sellPriceUSD: 102.0,
+      stockLevel: 0,
+      supplierNote: "Out of stock. Restock scheduled for Aug 15.",
+      sizeStockMatrix: { "36": 0, "38": 0, "40": 0, "42": 0 },
+      images: [
+        { id: "img-13", imageUrl: "/placeholder-[#F8FAFC].jpg", imageOrder: 1 },
+        { id: "img-14", imageUrl: "/placeholder-[#F8FAFC].jpg", imageOrder: 2 },
+        { id: "img-15", imageUrl: "/placeholder-[#F8FAFC].jpg", imageOrder: 3 },
+        { id: "img-16", imageUrl: "/placeholder-[#F8FAFC].jpg", imageOrder: 4 },
+      ],
+    },
+  ]);
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("ALL");
+  const [selectedProduct, setSelectedProduct] = useState<InventoryGarmentProduct | null>(null);
+
+  // Toast State
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+
+  const showToast = (message: string, type: "success" | "error" = "success") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  const filteredProducts = useMemo(() => {
+    if (selectedCategoryId === "ALL") return products;
+    return products.filter((p) => p.categoryId === selectedCategoryId);
+  }, [products, selectedCategoryId]);
+
+  const handleUpdateProduct = (updated: InventoryGarmentProduct) => {
+    setProducts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+    setSelectedProduct(updated);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#F7F8FA] font-sans antialiased text-[#111318] p-4 md:p-6 lg:p-8 space-y-6 relative">
+      {/* Toast Alert */}
+      {toast && (
+        <div
+          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-md shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+            toast.type === "success"
+              ? "bg-[#ECFDF3] border-[#5DCAA5] text-[#067647]"
+              : "bg-[#FEE4E2] border-[#F8B4B4] text-[#C5221F]"
+          }`}
+        >
+          <span className="material-symbols-outlined text-base">
+            {toast.type === "success" ? "check_circle" : "error"}
+          </span>
+          <span>{toast.message}</span>
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EAECF0] pb-4">
+        <div>
+          <h1 className="text-2xl font-bold text-[#111318] uppercase tracking-wide">
+            INVENTORY BY CATEGORY
+          </h1>
+          <p className="text-xs text-[#6B7280] mt-1">
+            Browse ready-made product inventory aggregated across wholesale manufacturing partners by category.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/wholesale/suppliers"
+            className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-base">store</span>
+            Manage Suppliers
+          </Link>
+          <Link
+            href="/admin/wholesale"
+            className="h-10 px-4 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2"
+          >
+            Dashboard Home
+          </Link>
+        </div>
+      </div>
+
+      {/* Controls Bar: Category Filter */}
+      <div className="bg-white border border-[#EAECF0] p-4 rounded-md flex items-center justify-between">
+        <CategoryFilter
+          categories={categories}
+          selectedCategoryId={selectedCategoryId}
+          onSelectCategory={setSelectedCategoryId}
+        />
+        <div className="text-xs font-mono font-bold text-[#6B7280]">
+          Showing {filteredProducts.length} Products
+        </div>
+      </div>
+
+      {/* Product Grid */}
+      <ProductGrid
+        products={filteredProducts}
+        onView={(p) => setSelectedProduct(p)}
+        onEditMarkup={(p) => setSelectedProduct(p)}
+      />
+
+      {/* Product Detail & Photo Upload Modal (PROMPT 2 & 3) */}
+      <ProductDetailModal
+        isOpen={!!selectedProduct}
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onUpdateProduct={handleUpdateProduct}
+        showToast={showToast}
+      />
+    </div>
+  );
+}
