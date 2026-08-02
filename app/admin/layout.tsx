@@ -27,6 +27,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: "receipt_long",
     isActive: (pathname: string) => pathname === "/admin",
     subItems: [
+      { label: "Executive Dashboard", icon: "dashboard", href: "/admin" },
       { label: "All Orders", icon: "table_rows", href: "/admin?status=ALL" },
       { label: "Pending Review", icon: "pending_actions", href: "/admin?status=PENDING_REVIEW" },
       { label: "Proforma Sent", icon: "description", href: "/admin?status=PROFORMA_SENT" },

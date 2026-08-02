@@ -895,9 +895,9 @@
     "semantic_hash": "12a2129499facb7ec1b2e8fc24007abf"
   },
   "app/admin/layout.tsx": {
-    "mtime": 1785681197.0490327,
-    "ast_hash": "f176416586188454b943e14cddca3b03",
-    "semantic_hash": "f176416586188454b943e14cddca3b03"
+    "mtime": 1785683196.6989992,
+    "ast_hash": "4ac7dedc1f8f638de68c0e397a518256",
+    "semantic_hash": ""
   },
   "app/admin/page.tsx": {
     "mtime": 1785680688.951153,
@@ -1185,9 +1185,9 @@
     "semantic_hash": "198183af012398a7d745a565d0d43638"
   },
   "app/page.tsx": {
-    "mtime": 1785680331.5017679,
-    "ast_hash": "e051874fe6f41e905995cdb20dd41e7d",
-    "semantic_hash": "e051874fe6f41e905995cdb20dd41e7d"
+    "mtime": 1785683547.2835224,
+    "ast_hash": "454837e66835ecb790ea2849e53152fa",
+    "semantic_hash": ""
   },
   "app/portal/account/page.tsx": {
     "mtime": 1785679148.737708,
@@ -1250,9 +1250,9 @@
     "semantic_hash": "2223546ef9b03589c6150257455074e8"
   },
   "components/CategoriesSearchFilter.tsx": {
-    "mtime": 1785680380.6698036,
-    "ast_hash": "6a82bf7b0209de1e145ada0ebcaf5fba",
-    "semantic_hash": "6a82bf7b0209de1e145ada0ebcaf5fba"
+    "mtime": 1785683346.9671545,
+    "ast_hash": "e9cbb9ff04b4b99c7283f7f6b1352aa9",
+    "semantic_hash": ""
   },
   "components/HomeEstimatorPreview.tsx": {
     "mtime": 1785680320.3313322,
@@ -1330,8 +1330,8 @@
     "semantic_hash": "2efa72a051a09d61b31b66f7d3c5dd68"
   },
   "components/admin/GlobalCommandPalette.tsx": {
-    "mtime": 1785683028.635514,
-    "ast_hash": "300ca61a5783df509380fcfcbe405ade",
+    "mtime": 1785683189.806869,
+    "ast_hash": "600c9d99930987ec3af980189965e31e",
     "semantic_hash": ""
   },
   "components/admin/ProductFitTree.tsx": {
@@ -1590,9 +1590,9 @@
     "semantic_hash": "286e1e3948abb4bf0a608ffb4847ffba"
   },
   "components/portal/PortalHeader.tsx": {
-    "mtime": 1785682143.4162817,
-    "ast_hash": "a7001f38865611ceb914df6877c08551",
-    "semantic_hash": "a7001f38865611ceb914df6877c08551"
+    "mtime": 1785683207.186731,
+    "ast_hash": "d151b24033955deaf8dd2c9e63628b0b",
+    "semantic_hash": ""
   },
   "components/portal/account/AccountPage.test.tsx": {
     "mtime": 1785630734.8309813,

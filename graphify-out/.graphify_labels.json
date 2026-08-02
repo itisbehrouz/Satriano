@@ -625,5 +625,6 @@
   "623": "react-dom",
   "624": "@types/node",
   "625": "@types/pg",
-  "626": "vitest"
+  "626": "vitest",
+  "627": "primary-hover"
 }

@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-02)
 
 ## Corpus Check
-- 651 files · ~1,057,260 words
+- 651 files · ~1,057,163 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 8259 nodes · 9770 edges · 627 communities (517 shown, 110 thin omitted)
+- 8259 nodes · 9770 edges · 628 communities (518 shown, 110 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 93 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8be0baa3`
+- Built from commit: `5ccd6d82`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -629,6 +629,7 @@
 - @types/node
 - @types/pg
 - vitest
+- primary-hover
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 62 edges
@@ -657,7 +658,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (627 total, 110 thin omitted)
+## Communities (628 total, 110 thin omitted)
 
 ### Community 0 - "init.ts"
 Cohesion: 0.06
@@ -688,8 +689,8 @@ Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, **/*.ts (+20 more)
 
 ### Community 7 - "button"
-Cohesion: 0.15
-Nodes (15): $type, $value, bg, fg, font-size, hover-bg, bg, button (+7 more)
+Cohesion: 0.12
+Nodes (19): $type, $value, bg, fg, font-size, hover-bg, padding-y, bg (+11 more)
 
 ### Community 8 - "SiteFooter.tsx"
 Cohesion: 0.07
@@ -741,7 +742,7 @@ Nodes (37): $type, $value, background, destructive, destructive-foreground, fore
 
 ### Community 20 - "color"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
+Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
 
 ### Community 21 - "Design"
 Cohesion: 0.06
@@ -900,8 +901,8 @@ Cohesion: 0.14
 Nodes (24): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), main(), print_result(), print_summary() (+16 more)
 
 ### Community 60 - "src/ui-ux-pro-max/scripts/design_system.py"
-Cohesion: 0.10
-Nodes (25): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+17 more)
+Cohesion: 0.15
+Nodes (16): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. (+8 more)
 
 ### Community 61 - "search"
 Cohesion: 0.12
@@ -1032,8 +1033,8 @@ Cohesion: 0.05
 Nodes (53): $type, $value, $type, $value, $type, $value, $type, $value (+45 more)
 
 ### Community 93 - "radius"
-Cohesion: 0.11
-Nodes (27): $type, $value, lg, sm, $type, $value, $type, $value (+19 more)
+Cohesion: 0.13
+Nodes (22): $type, $value, lg, $type, $value, $type, $value, $type (+14 more)
 
 ### Community 94 - "Driver Adapters"
 Cohesion: 0.07
@@ -1096,16 +1097,16 @@ Cohesion: 0.15
 Nodes (21): assertInsideRepo(), assetRoot, checkAssets(), checkOnly, diffDir(), __dirname, dirsToSync, exists() (+13 more)
 
 ### Community 109 - "DesignSystemGenerator"
-Cohesion: 0.12
-Nodes (12): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Bucket a 1-10 dial value into its tier config. Returns None if value is None., Generates design system recommendations from aggregated searches. (+4 more)
+Cohesion: 0.14
+Nodes (10): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV. (+2 more)
 
 ### Community 110 - "product-settings/page.tsx"
 Cohesion: 0.16
 Nodes (14): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOption, SizeSystem, slugify() (+6 more)
 
 ### Community 111 - "fontSize"
-Cohesion: 0.11
-Nodes (20): $type, $value, $type, $value, $type, $value, $type, $value (+12 more)
+Cohesion: 0.10
+Nodes (21): $type, $value, $type, $value, $type, $value, $type, $value (+13 more)
 
 ### Community 112 - "Prisma CLI Reference"
 Cohesion: 0.10
@@ -1196,8 +1197,8 @@ Cohesion: 0.12
 Nodes (16): Architecture & Contributing, Automated Releases, Available Styles (67), 🟢 Basic Version (This Repository), 💎 Basic vs. Premium Version Comparison, Compatible Agents, Design System Command (Advanced), Features (+8 more)
 
 ### Community 134 - "DesignSystemGenerator"
-Cohesion: 0.14
-Nodes (10): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV. (+2 more)
+Cohesion: 0.12
+Nodes (12): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Bucket a 1-10 dial value into its tier config. Returns None if value is None., Generates design system recommendations from aggregated searches. (+4 more)
 
 ### Community 135 - "LegalPageShell.tsx"
 Cohesion: 0.15
@@ -1372,8 +1373,8 @@ Cohesion: 0.15
 Nodes (9): BM25, _normalize(), Apply synonym substitution before tokenizing., BM25 ranking algorithm for text search, Lowercase, normalize synonyms, split, remove punctuation, filter stopwords, Build BM25 index from documents, Score all documents against query, All indexed terms, for suggestion/typo-recovery purposes. (+1 more)
 
 ### Community 178 - ".agents/skills/ui-ux-pro-max/scripts/design_system.py"
-Cohesion: 0.15
-Nodes (16): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. (+8 more)
+Cohesion: 0.10
+Nodes (25): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+17 more)
 
 ### Community 179 - "UI/UX Pro Max - Design Intelligence"
 Cohesion: 0.12
@@ -1656,8 +1657,8 @@ Cohesion: 0.21
 Nodes (12): _domain_keywords(), _get_bm25(), _load_csv(), _load_product_keywords(), Load CSV and return list of dicts, with mtime-based caching., Fitted BM25 index for this file+columns, with mtime-based caching., Core search function using BM25. Returns (results, bm25_or_none)., Nearest known vocabulary terms for a query that returned 0 hits,     so the call (+4 more)
 
 ### Community 249 - ".claude/skills/ui-ux-pro-max/scripts/tests/test_core.py"
-Cohesion: 0.20
-Nodes (12): $type, $value, border, padding, shadow, border, card, border (+4 more)
+Cohesion: 0.12
+Nodes (22): $type, $value, radius, border, padding, radius, shadow, border (+14 more)
 
 ### Community 250 - "Banner Design - Multi-Format Creative Banner System"
 Cohesion: 0.14
@@ -1812,8 +1813,8 @@ Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
 ### Community 288 - "primitive"
-Cohesion: 0.15
-Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4 more)
+Cohesion: 0.17
+Nodes (11): $type, $value, dark, semantic, $schema, $type, $value, semantic (+3 more)
 
 ### Community 289 - "prisma migrate diff"
 Cohesion: 0.17
@@ -1848,8 +1849,8 @@ Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
 ### Community 297 - "card"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+Cohesion: 0.15
+Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
 
 ### Community 298 - ".generate_config_string"
 Cohesion: 0.20
@@ -2249,7 +2250,7 @@ Nodes (7): auth, Creating a service token, OAuth 2.0 (for user-scoped access), S
 
 ### Community 397 - "input"
 Cohesion: 0.29
-Nodes (8): padding-y, input, $type, $value, focus-ring, padding-y, $type, $value
+Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 
 ### Community 398 - "ui-ux-pro-max-cli"
 Cohesion: 0.25
@@ -2264,7 +2265,7 @@ Cohesion: 0.25
 Nodes (8): 🐛 Bug Fixes, 🔧 CLI Improvements, 📝 Documentation Improvements, 🎨 New Color Palettes, 🏭 New Industry Reasoning Rules, ✨ New UI Styles, 🌍 Translations, Ways to Contribute
 
 ### Community 401 - "detect_domain"
-Cohesion: 0.39
+Cohesion: 0.43
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection
 
 ### Community 402 - "The Stack — why each tool is here"
@@ -2360,7 +2361,7 @@ Cohesion: 0.29
 Nodes (7): Claude Marketplace 安装失败，提示 "Zip file contains a symbolic link", `npm install -g ui-ux-pro-max-cli` 失败，提示权限错误, `uipro uninstall` 提示 "No installed AI skill directories detected", `uipro: unknown command 'uninstall'` 或 `unknown command 'update'`, 故障排查, 设计系统输出被截断 / 字段不完整, 运行设计系统命令时找不到 Python
 
 ### Community 425 - "detect_domain"
-Cohesion: 0.43
+Cohesion: 0.39
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection
 
 ### Community 426 - "design-audit.mjs"
@@ -2504,12 +2505,12 @@ Cohesion: 0.33
 Nodes (5): name, prisma, seed, private, version
 
 ### Community 462 - "$type"
-Cohesion: 0.60
-Nodes (5): $type, $value, border, border, border
+Cohesion: 0.67
+Nodes (4): xl, xl, $type, $value
 
 ### Community 463 - "md"
-Cohesion: 0.15
-Nodes (17): padding-x, padding-y, radius, radius, input, $type, $value, focus-ring (+9 more)
+Cohesion: 0.67
+Nodes (4): padding-x, padding-x, $type, $value
 
 ### Community 464 - ".claude/skills/ui-ux-pro-max/scripts/validate_data.py"
 Cohesion: 0.83
@@ -2524,8 +2525,8 @@ Cohesion: 0.18
 Nodes (11): format_markdown(), format_master_md(), generate_design_system(), persist_design_system(), Format design system as markdown., Main entry point for design system generation.      Args:         query: Search, Slugify a name into a single safe path segment.      Only [a-z0-9_-] survives; e, Persist design system to design-system/<project>/ folder using Master + Override (+3 more)
 
 ### Community 467 - "xl"
-Cohesion: 0.29
-Nodes (8): xl, $type, $value, none, xl, none, $type, $value
+Cohesion: 0.67
+Nodes (4): xl, xl, $type, $value
 
 ### Community 468 - "12"
 Cohesion: 0.60
@@ -2601,7 +2602,7 @@ Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 499 - "8"
 Cohesion: 0.67
-Nodes (4): padding-x, padding-x, $type, $value
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 500 - "destructive"
 Cohesion: 0.67
@@ -2629,15 +2630,15 @@ Nodes (3): destructive, $type, $value
 
 ### Community 519 - ".test_add_components_already_installed"
 Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
+Nodes (4): $type, $value, none, none
 
 ### Community 520 - ".test_init_default_project_root"
 Cohesion: 0.67
-Nodes (3): muted, $type, $value
+Nodes (3): foreground, $type, $value
 
 ### Community 525 - ".test_add_breakpoints"
 Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
+Nodes (3): muted-foreground, $type, $value
 
 ### Community 526 - ".test_add_plugins_no_duplicates"
 Cohesion: 0.67
@@ -2645,7 +2646,7 @@ Nodes (3): ring, $type, $value
 
 ### Community 527 - ".test_recommend_plugins_nextjs"
 Cohesion: 0.67
-Nodes (3): secondary-foreground, $type, $value
+Nodes (3): primary, $type, $value
 
 ### Community 531 - ".test_init_javascript"
 Cohesion: 0.67
@@ -2675,6 +2676,10 @@ Nodes (3): primary-foreground, $type, $value
 Cohesion: 0.67
 Nodes (3): secondary-foreground, $type, $value
 
+### Community 627 - "primary-hover"
+Cohesion: 0.67
+Nodes (3): primary-hover, $type, $value
+
 ## Knowledge Gaps
 - **4186 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+4181 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -2683,9 +2688,9 @@ Nodes (3): secondary-foreground, $type, $value
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `BM25`, `src/ui-ux-pro-max/scripts/design_system.py`, `search`, `search`, `search`, `search`, `padding-y`, `.claude/skills/ui-ux-pro-max/scripts/design_system.py`, `DesignSystemGenerator`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `.agents/skills/ui-ux-pro-max/scripts/design_system.py`, `BM25`, `search`, `search`, `search`, `search`, `padding-y`, `.claude/skills/ui-ux-pro-max/scripts/design_system.py`, `DesignSystemGenerator`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **Why does `BM25` connect `BM25` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `BM25`, `src/ui-ux-pro-max/scripts/design_system.py`, `search`, `search`, `search`, `search`, `search`, `padding-y`, `DesignSystemGenerator`, `DesignSystemGenerator`?**
+- **Why does `BM25` connect `BM25` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `.agents/skills/ui-ux-pro-max/scripts/design_system.py`, `BM25`, `search`, `search`, `search`, `search`, `search`, `padding-y`, `DesignSystemGenerator`, `DesignSystemGenerator`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `TailwindConfigGenerator` connect `TailwindConfigGenerator` to `.test_init_default_typescript`, `.test_generate_javascript_config`, `.test_write_config`, `.test_init_framework`, `.test_custom_output_path`, `.generate_config_string`, `TestTailwindConfigGenerator`, `TestTailwindConfigGenerator`, `.agents/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `main`, `TestTailwindConfigGenerator`, `.claude/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `assets/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `._base_config`, `.test_generate_typescript_config`, `.test_generate_config_with_colors`, `.test_write_config_creates_content`, `.test_full_configuration_typescript`, `.test_default_content_paths_react`, `.test_add_colors`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._

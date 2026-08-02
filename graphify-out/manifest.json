@@ -895,8 +895,8 @@
     "semantic_hash": "12a2129499facb7ec1b2e8fc24007abf"
   },
   "app/admin/layout.tsx": {
-    "mtime": 1785683196.6989992,
-    "ast_hash": "4ac7dedc1f8f638de68c0e397a518256",
+    "mtime": 1785683715.34619,
+    "ast_hash": "0924a8f5996988f2ebb6a6a02c9afd64",
     "semantic_hash": ""
   },
   "app/admin/page.tsx": {
