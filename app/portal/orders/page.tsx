@@ -284,31 +284,31 @@ function CustomerOrdersContent() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B1E3D] text-[#E8ECF3] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none">
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none transition-colors">
       <div className="max-w-[1440px] mx-auto space-y-6">
         {/* 1. Page Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-4 border-b border-[#2E5AAC]">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-4 border-b border-[var(--color-border)]">
           <div>
-            <h1 className="text-2xl font-bold text-[#E8ECF3]">
+            <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
               Order History
             </h1>
-            <p className="text-sm text-[#8DA0C4] mt-1">
+            <p className="text-sm text-[var(--color-text-secondary)] mt-1">
               All manufacturing orders, proformas, and ready-made wholesale stock orders for{" "}
-              <strong className="text-[#E8ECF3]">{companyName || customerEmail || "Corporate Partner"}</strong>
+              <strong className="text-[var(--color-text-primary)]">{companyName || customerEmail || "Corporate Partner"}</strong>
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
               href="/wholesale"
-              className="h-12 bg-[#132A52] hover:bg-[#1A386D] border border-[#2E5AAC] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+              className="h-12 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
             >
               <span>Wholesale Catalog →</span>
             </Link>
 
             <Link
               href="/configure"
-              className="h-12 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+              className="h-12 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
             >
               <span>Create M2O Order →</span>
             </Link>
@@ -328,34 +328,34 @@ function CustomerOrdersContent() {
 
         {/* 3. Orders Content / Table / States */}
         {loading ? (
-          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center text-xs text-[#8DA0C4] space-y-2">
-            <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center text-xs text-[var(--color-text-secondary)] space-y-2">
+            <span className="inline-block w-6 h-6 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
             <p>Loading orders history...</p>
           </div>
         ) : error ? (
-          <div className="bg-[#3A2E14] border border-[#F0B94A] rounded-none p-6 text-center text-xs text-[#F0B94A] flex items-center justify-between">
+          <div className="bg-[var(--color-status-warning-bg)] border border-[var(--color-status-warning)] rounded-none p-6 text-center text-xs text-[var(--color-status-warning)] flex items-center justify-between">
             <span>{error}</span>
             <button
               type="button"
               onClick={fetchCustomerOrders}
-              className="underline font-semibold hover:text-white cursor-pointer"
+              className="underline font-semibold hover:text-[var(--color-text-primary)] cursor-pointer"
             >
               Retry Loading
             </button>
           </div>
         ) : displayOrders.length === 0 ? (
-          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center space-y-4">
-            <div className="text-5xl text-[#8DA0C4] mx-auto flex items-center justify-center">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center space-y-4">
+            <div className="text-5xl text-[var(--color-text-secondary)] mx-auto flex items-center justify-center">
               📦
             </div>
-            <h3 className="text-base font-bold text-[#E8ECF3]">No {orderTypeTab === "WHOLESALE" ? "Wholesale" : orderTypeTab === "M2O" ? "M2O" : ""} Orders Found</h3>
-            <p className="text-sm text-[#8DA0C4] max-w-md mx-auto">
+            <h3 className="text-base font-bold text-[var(--color-text-primary)]">No {orderTypeTab === "WHOLESALE" ? "Wholesale" : orderTypeTab === "M2O" ? "M2O" : ""} Orders Found</h3>
+            <p className="text-sm text-[var(--color-text-secondary)] max-w-md mx-auto">
               You haven&apos;t placed any orders matching your criteria yet.
             </p>
             <div>
               <Link
                 href={orderTypeTab === "WHOLESALE" ? "/wholesale" : "/configure"}
-                className="inline-flex items-center justify-center px-6 py-3 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors"
               >
                 {orderTypeTab === "WHOLESALE" ? "BROWSE WHOLESALE CATALOG" : "CREATE FIRST ORDER"}
               </Link>
@@ -398,8 +398,8 @@ export default function CustomerOrdersPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#0B1E3D] p-10 flex items-center justify-center text-xs text-[#8DA0C4]">
-          <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+        <div className="min-h-screen bg-[var(--color-bg)] p-10 flex items-center justify-center text-xs text-[var(--color-text-secondary)]">
+          <span className="inline-block w-6 h-6 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
         </div>
       }
     >

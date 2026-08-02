@@ -50,10 +50,10 @@ function AccountPageContent() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#0B1E3D] py-10 px-4 sm:px-6 lg:px-8 font-sans select-none rounded-none">
+      <main className="min-h-screen bg-[var(--color-bg)] py-10 px-4 sm:px-6 lg:px-8 font-sans select-none rounded-none transition-colors">
         <div className="max-w-[1440px] mx-auto">
-          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center text-xs text-[#8DA0C4]">
-            <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center text-xs text-[var(--color-text-secondary)]">
+            <span className="inline-block w-6 h-6 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
             <p>Loading Account Settings &amp; Preferences...</p>
           </div>
         </div>
@@ -62,16 +62,16 @@ function AccountPageContent() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0B1E3D] text-[#E8ECF3] py-6 sm:py-10 px-4 sm:px-6 lg:px-8 font-sans select-none rounded-none">
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-6 sm:py-10 px-4 sm:px-6 lg:px-8 font-sans select-none rounded-none transition-colors">
       <div className="max-w-[1440px] mx-auto space-y-6">
         {/* Title Header */}
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#85B7EB] uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-xs font-mono text-[var(--color-accent)] uppercase tracking-wider">
             <span>Client Portal</span>
             <span>•</span>
             <span>Account Management</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--color-text-primary)]">
             {session?.companyName || "Account Settings"}
           </h1>
         </div>
@@ -101,8 +101,8 @@ export default function AccountPage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-[#0B1E3D] flex items-center justify-center font-sans text-xs text-[#8DA0C4]">
-          <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+        <main className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center font-sans text-xs text-[var(--color-text-secondary)]">
+          <span className="inline-block w-5 h-5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
         </main>
       }
     >

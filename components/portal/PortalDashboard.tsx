@@ -70,10 +70,10 @@ export function PortalDashboard() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#0B1E3D] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none">
+      <main className="min-h-screen bg-[var(--color-bg)] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none transition-colors">
         <div className="max-w-[1440px] mx-auto space-y-6">
-          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center text-xs text-[#8DA0C4]">
-            <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center text-xs text-[var(--color-text-secondary)]">
+            <span className="inline-block w-6 h-6 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
             <p>Initializing B2B Client Portal Dashboard...</p>
           </div>
         </div>
@@ -83,14 +83,14 @@ export function PortalDashboard() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-[#0B1E3D] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none">
+      <main className="min-h-screen bg-[var(--color-bg)] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none transition-colors">
         <div className="max-w-[1440px] mx-auto">
-          <div className="bg-[#3A2E14] border border-[#F0B94A] rounded-none p-6 text-center text-xs text-[#F0B94A] flex items-center justify-between">
+          <div className="bg-[var(--color-status-warning-bg)] border border-[var(--color-status-warning)] rounded-none p-6 text-center text-xs text-[var(--color-status-warning)] flex items-center justify-between">
             <span>{error}</span>
             <button
               type="button"
               onClick={loadDashboardData}
-              className="underline font-semibold hover:text-white cursor-pointer"
+              className="underline font-semibold hover:text-[var(--color-text-primary)] cursor-pointer"
             >
               Retry Loading
             </button>
@@ -101,7 +101,7 @@ export function PortalDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0B1E3D] text-[#E8ECF3] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none">
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none transition-colors">
       <div className="max-w-[1440px] mx-auto">
         {/* 1. Hero Section: Company Information Card */}
         <div className="mb-6">

@@ -37,14 +37,14 @@ export function AccountDropdown({
   return (
     <div
       ref={containerRef}
-      className="absolute right-0 top-full mt-2 w-60 bg-[#132A52] border border-[#2E5AAC] rounded-none shadow-none z-50 font-sans text-[13px] text-[#E8ECF3] py-1 select-none"
+      className="absolute right-0 top-full mt-2 w-60 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none shadow-xl z-50 font-sans text-[13px] text-[var(--color-text-primary)] py-1 select-none transition-colors"
     >
       {/* Display Only Company Info Header */}
-      <div className="px-4 py-2.5 border-b border-[#1E3A8A]">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-[#8DA0C4] block">
+      <div className="px-4 py-2.5 border-b border-[var(--color-border)]">
+        <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-secondary)] block">
           Company Account
         </span>
-        <span className="font-mono font-bold text-[#E8ECF3] truncate block text-xs mt-0.5">
+        <span className="font-mono font-bold text-[var(--color-text-primary)] truncate block text-xs mt-0.5">
           {companyName}
         </span>
       </div>
@@ -54,57 +54,57 @@ export function AccountDropdown({
         <Link
           href="/portal/account?tab=company"
           onClick={onClose}
-          className="flex items-center gap-2.5 px-4 py-2 text-[#E8ECF3] hover:bg-[#2E5AAC]/20 hover:text-white transition-colors rounded-none"
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
         >
-          <span className="material-symbols-outlined text-base text-[#8DA0C4]">corporate_fare</span>
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">corporate_fare</span>
           <span>Company Info</span>
         </Link>
 
         <Link
           href="/portal/orders"
           onClick={onClose}
-          className="flex items-center gap-2.5 px-4 py-2 text-[#E8ECF3] hover:bg-[#2E5AAC]/20 hover:text-white transition-colors rounded-none"
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
         >
-          <span className="material-symbols-outlined text-base text-[#8DA0C4]">receipt_long</span>
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">receipt_long</span>
           <span>Order History</span>
         </Link>
 
         <Link
           href="/portal/account?tab=settings"
           onClick={onClose}
-          className="flex items-center gap-2.5 px-4 py-2 text-[#E8ECF3] hover:bg-[#2E5AAC]/20 hover:text-white transition-colors rounded-none"
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
         >
-          <span className="material-symbols-outlined text-base text-[#8DA0C4]">settings</span>
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">settings</span>
           <span>Settings</span>
         </Link>
 
         <Link
           href="/portal/account?tab=billing"
           onClick={onClose}
-          className="flex items-center gap-2.5 px-4 py-2 text-[#E8ECF3] hover:bg-[#2E5AAC]/20 hover:text-white transition-colors rounded-none"
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
         >
-          <span className="material-symbols-outlined text-base text-[#8DA0C4]">description</span>
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">description</span>
           <span>Billing &amp; Invoices</span>
         </Link>
       </div>
 
       {/* Separator */}
-      <div className="border-t border-[#1E3A8A] my-1" />
+      <div className="border-t border-[var(--color-border)] my-1" />
 
       {/* Support Link */}
       <div className="py-1">
         <Link
           href="/portal/support"
           onClick={onClose}
-          className="flex items-center gap-2.5 px-4 py-2 text-[#E8ECF3] hover:bg-[#2E5AAC]/20 hover:text-white transition-colors rounded-none"
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
         >
-          <span className="material-symbols-outlined text-base text-[#8DA0C4]">help</span>
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">help</span>
           <span>Support</span>
         </Link>
       </div>
 
       {/* Separator */}
-      <div className="border-t border-[#1E3A8A] my-1" />
+      <div className="border-t border-[var(--color-border)] my-1" />
 
       {/* Sign Out Warning Button */}
       <div className="py-1">
@@ -114,7 +114,7 @@ export function AccountDropdown({
             onClose();
             onLogout();
           }}
-          className="flex items-center justify-between w-full px-4 py-2 text-left text-[#F0B94A] hover:bg-[#F0B94A]/10 transition-colors rounded-none font-semibold cursor-pointer"
+          className="flex items-center justify-between w-full px-4 py-2 text-left text-[var(--color-status-warning)] hover:bg-[var(--color-status-warning-bg)] transition-colors rounded-none font-semibold cursor-pointer"
         >
           <div className="flex items-center gap-2.5">
             <span className="material-symbols-outlined text-base">logout</span>
