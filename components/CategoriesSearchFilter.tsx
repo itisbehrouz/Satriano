@@ -180,7 +180,7 @@ export function CategoriesSearchFilter({ categories }: { categories: Category[] 
                     className="bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none overflow-hidden flex flex-col justify-between transition-all group"
                   >
                     <div>
-                      {/* Image Thumbnail Box */}
+                      {/* Image Thumbnail Box (Crisp & Un-faded) */}
                       <div className="aspect-[16/10] w-full relative overflow-hidden bg-[var(--color-bg)]">
                         <Image
                           src={coverImg}
@@ -189,7 +189,6 @@ export function CategoriesSearchFilter({ categories }: { categories: Category[] 
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, 33vw"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/80 via-transparent to-transparent" />
 
                         {/* Top Badges */}
                         <div className="absolute top-3 left-3 right-3 flex justify-between items-center">

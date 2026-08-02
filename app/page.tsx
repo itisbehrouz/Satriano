@@ -289,7 +289,7 @@ export default async function HomePage() {
                     className="bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none overflow-hidden flex flex-col justify-between transition-all group"
                   >
                     <div>
-                      {/* Image Thumbnail Header */}
+                      {/* Image Thumbnail Header (Crisp & Un-faded) */}
                       <div className="aspect-[16/9] w-full relative bg-[var(--color-bg)] overflow-hidden">
                         <Image
                           src={coverImg}
@@ -298,17 +298,16 @@ export default async function HomePage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, 33vw"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
-                          <h3 className="text-xl font-bold text-white tracking-tight">{cat.name}</h3>
-                          <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-none bg-[var(--color-bg)]/80 backdrop-blur-md text-[var(--color-text-primary)] border border-[var(--color-border)]">
+                        <div className="absolute top-3 right-3">
+                          <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-none bg-[var(--color-surface)]/95 text-[var(--color-text-primary)] border border-[var(--color-border)] shadow-xs">
                             {cat.subcategories.length} Subcategories
                           </span>
                         </div>
                       </div>
 
-                      {/* Subcategory Pills */}
+                      {/* Subcategory Pills & Category Header */}
                       <div className="p-5 space-y-4">
+                        <h3 className="text-xl font-bold text-[var(--color-text-primary)] tracking-tight">{cat.name}</h3>
                         <p className="text-xs text-[var(--color-text-secondary)] line-clamp-2">{cat.description || "Bespoke B2B manufacturing product line."}</p>
                         
                         <div>
