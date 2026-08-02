@@ -690,3 +690,27 @@ checkpoint before being considered done, regardless of which agent
   - Executed `codebase-health-audit`: removed dead component `components/StatusStepper.tsx` and 3 legacy re-export shims (`components/portal/CompanyInfoCard.tsx`, `components/portal/QuickActionButtons.tsx`, `components/portal/RecentOrdersTable.tsx`).
 - **Vitest Unit Test Suite Verification**:
   - Updated test assertions in `components/portal/orders/OrdersPage.test.tsx`. Verified 100% pass rate across 27 test files and 132 unit tests.
+
+---
+
+## 20. Multi-Supplier Wholesale Marketplace & Privacy Architecture (Aug 2, 2026)
+
+- **Marketplace Model & Privacy Boundaries**:
+  - Transitioned from direct brand wholesale to a **Multi-Supplier Marketplace model** aggregating ready-made products from independent manufacturing partners.
+  - Enforced strict customer privacy boundaries: Supplier firm names, contact persons, emails, phone numbers, and notes are accessible to **Admin only** (`/admin/wholesale/suppliers`, `/admin/wholesale/inventory`, `/admin/wholesale?tab=offers`).
+  - Public catalog (`/wholesale`), checkout (`/wholesale/checkout`), and customer portal (`/portal/orders`) keep supplier identities completely anonymous to buyers.
+- **Supplier Management Dashboard (`/admin/wholesale/suppliers`)**:
+  - Built `SupplierClient.tsx`, `SuppliersTable.tsx`, `AddSupplierModal.tsx`, `EditSupplierModal.tsx`, and `SupplierDetailModal.tsx`.
+  - Full admin CRUD for supplier records with search, status filters (`ALL`, `ACTIVE`, `PENDING_VERIFICATION`), verification triggers, and deactivation toggles.
+- **Inventory by Category (`/admin/wholesale/inventory`)**:
+  - Built `CategoryInventoryClient.tsx`, `CategoryFilter.tsx`, `ProductGrid.tsx`, `ProductCard.tsx`, and `ProductDetailModal.tsx`.
+  - Aggregate product inventory organized by category showing product counts, supplier counts, wholesale cost price, calculated markup ($ and %), customer sell price, and size/stock matrices.
+- **Product Image Management (`ProductImageUploader.tsx`)**:
+  - Built 4+ photo uploader section supporting file drag & drop, order sequencing (`←`, `→`), deletion, and pre-flight client-side type/size validation (2MB–5MB, JPG/PNG/WebP).
+- **Price Offer Inbox (Multi-Supplier Bidirectional Negotiation)**:
+  - Updated `PriceOfferInboxTab.tsx` with multi-supplier negotiation statuses (`PENDING_ADMIN`, `PENDING_SUPPLIER`, `ACCEPTED`, `REJECTED`, `COUNTER_OFFERED`).
+  - Integrated Admin-only supplier contact card, internal admin notes editor, and counter-offer dialog with custom supplier messages.
+- **Executive Admin Sidebar Navigation Integration (`app/admin/layout.tsx`)**:
+  - Added direct sub-navigation entries under `Wholesale Manager`: `Supplier Management` (`/admin/wholesale/suppliers`), `Inventory by Category` (`/admin/wholesale/inventory`), `Pricing Manager`, `Inventory by Size`, `Price Offer Inbox`, and `Wholesale Orders`.
+- **Vitest Unit Test Suite Verification**:
+  - Verified 100% pass rate across 27 test files and 132 unit tests.
