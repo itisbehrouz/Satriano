@@ -36,7 +36,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     href: "/admin/wholesale",
-    label: "Wholesale Manager",
+    label: "Wholesale",
     icon: "storefront",
     isActive: (pathname: string) => pathname.startsWith("/admin/wholesale"),
     subItems: [
@@ -50,7 +50,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     href: "/admin/applications",
-    label: "B2B Applications",
+    label: "Applications",
     icon: "assignment_ind",
     isActive: (pathname: string) => pathname.startsWith("/admin/applications"),
     subItems: [
@@ -63,7 +63,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     href: "/admin/product-settings",
-    label: "Product Settings",
+    label: "Settings",
     icon: "inventory_2",
     isActive: (pathname: string) => pathname.startsWith("/admin/product-settings"),
     subItems: [
@@ -134,42 +134,36 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Login gate / session-loading states render full-bleed without menu chrome
   if (!isAuthenticated) {
     return <>{children}</>;
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
-      {/* SAP Fiori Style Top Header / Navigation Menu Bar */}
+      {/* Streamlined Modern Header Navigation */}
       <header
         ref={navRef}
         aria-label="Admin Navigation Header"
-        className="sticky top-0 z-40 w-full bg-[#0B1E3D] text-white border-b border-[#1E3A8A] shadow-md select-none transition-colors"
+        className="sticky top-0 z-40 w-full bg-[#0B1E3D] text-white border-b border-[#1E3A8A]/50 select-none transition-colors"
       >
-        <div className="max-w-container-max mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
-          {/* Brand & Portal Logo */}
+        <div className="max-w-container-max mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-6">
+          {/* Minimalist Brand Logo & Console Tag */}
           <div className="flex items-center gap-6">
             <Link
               href="/admin"
-              className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
             >
               <img
                 src="/Satrinao.png"
                 alt="Satriano Atelier"
-                className="h-8 w-auto object-contain brightness-200"
+                className="h-7 w-auto object-contain brightness-200"
               />
-              <div className="hidden sm:flex flex-col border-l border-white/20 pl-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-white leading-none">
-                  Portal Console
-                </span>
-                <span className="text-[10px] text-[#93C5FD] font-mono tracking-tight mt-0.5">
-                  SAP Enterprise ERP
-                </span>
-              </div>
+              <span className="text-[11px] font-mono tracking-wider text-[#93C5FD] uppercase opacity-75 hidden sm:inline">
+                Console
+              </span>
             </Link>
 
-            {/* Desktop Horizontal Navigation Items (SAP Style Dropdown Menu) */}
+            {/* Clean Desktop Navigation Menu */}
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main Menu">
               {NAV_ITEMS.map((item) => {
                 const isActive = item.isActive(pathname);
@@ -180,37 +174,34 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
                     <button
                       type="button"
                       onClick={() => setActiveDropdown(isOpen ? null : item.href)}
-                      className={`min-h-[40px] px-3.5 py-2 rounded-md text-xs font-semibold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer ${
+                      className={`h-14 px-3.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 border-b-2 transition-all cursor-pointer ${
                         isActive
-                          ? "bg-[#2E5AAC] text-white shadow-xs"
+                          ? "border-[#DBB671] text-white font-bold"
                           : isOpen
-                          ? "bg-white/10 text-white"
-                          : "text-[#93C5FD] hover:text-white hover:bg-white/10"
+                          ? "border-transparent text-white bg-white/5"
+                          : "border-transparent text-[#93C5FD]/80 hover:text-white hover:bg-white/5"
                       }`}
                     >
-                      <span className="material-symbols-outlined text-lg flex-shrink-0">
+                      <span className="material-symbols-outlined text-base flex-shrink-0 opacity-80">
                         {item.icon}
                       </span>
                       <span>{item.label}</span>
-                      <span className="material-symbols-outlined text-sm text-white/60">
+                      <span className="material-symbols-outlined text-xs text-white/50">
                         {isOpen ? "expand_less" : "expand_more"}
                       </span>
                     </button>
 
-                    {/* SAP Sub-Menu Dropdown Panel */}
+                    {/* Sub-Menu Dropdown Panel */}
                     {isOpen && (
-                      <div className="absolute left-0 top-full mt-1.5 w-64 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl py-2 z-50 animate-fadeIn">
-                        <div className="px-3 py-1.5 border-b border-[var(--color-border)] text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
-                          {item.label} Navigation
-                        </div>
+                      <div className="absolute left-0 top-full mt-1 w-56 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md shadow-lg py-1.5 z-50 animate-fadeIn">
                         {item.subItems.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors"
+                            className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors"
                           >
-                            <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                            <span className="material-symbols-outlined text-sm text-[var(--color-text-secondary)]">
                               {sub.icon}
                             </span>
                             <span>{sub.label}</span>
@@ -225,17 +216,17 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Right Action Utilities: Search, Theme Toggle & Sign Out */}
-          <div className="flex items-center gap-2">
-            {/* Quick Command Palette Search Button */}
+          <div className="flex items-center gap-3">
+            {/* Quick Search Button */}
             <button
               type="button"
               onClick={() => setIsPaletteOpen(true)}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-[#93C5FD] hover:text-white transition-all cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs text-[#93C5FD]/80 hover:text-white transition-all cursor-pointer"
               title="Search orders, catalog or B2B partners (⌘K)"
             >
-              <span className="material-symbols-outlined text-base">search</span>
-              <span className="hidden md:inline text-xs font-medium">Search...</span>
-              <kbd className="px-1.5 py-0.5 bg-black/20 border border-white/20 rounded text-[10px] font-mono text-white/80">
+              <span className="material-symbols-outlined text-sm">search</span>
+              <span className="hidden md:inline text-[11px]">Search</span>
+              <kbd className="px-1 py-0.2 bg-black/30 rounded text-[9px] font-mono text-white/60">
                 ⌘K
               </kbd>
             </button>
@@ -244,39 +235,34 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={toggleTheme}
-              className="w-9 h-9 rounded-md flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#DBB671] border border-white/15 transition-all cursor-pointer"
+              className="w-8 h-8 rounded flex items-center justify-center text-[#DBB671] hover:bg-white/10 transition-all cursor-pointer"
               title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
               aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <span className="material-symbols-outlined text-xl">
+              <span className="material-symbols-outlined text-lg">
                 {theme === "dark" ? "light_mode" : "dark_mode"}
               </span>
             </button>
 
-            {/* Admin User Badge & Sign Out Button */}
-            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-white/20">
-              <div className="w-8 h-8 rounded-full bg-[#2E5AAC] text-white border border-white/20 flex items-center justify-center text-xs font-bold">
-                A
-              </div>
-              <button
-                type="button"
-                onClick={signOut}
-                className="w-9 h-9 rounded-md flex items-center justify-center text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors cursor-pointer"
-                title="Sign Out of Console"
-                aria-label="Sign Out of Console"
-              >
-                <span className="material-symbols-outlined text-xl">logout</span>
-              </button>
-            </div>
+            {/* Sign Out Button */}
+            <button
+              type="button"
+              onClick={signOut}
+              className="w-8 h-8 rounded flex items-center justify-center text-red-400/90 hover:text-red-300 hover:bg-red-500/10 transition-colors cursor-pointer"
+              title="Sign Out of Console"
+              aria-label="Sign Out of Console"
+            >
+              <span className="material-symbols-outlined text-lg">logout</span>
+            </button>
 
             {/* Mobile Menu Toggle */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-9 h-9 rounded-md flex items-center justify-center bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              className="lg:hidden w-8 h-8 rounded flex items-center justify-center text-white hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
-              <span className="material-symbols-outlined text-xl">
+              <span className="material-symbols-outlined text-lg">
                 {mobileMenuOpen ? "close" : "menu"}
               </span>
             </button>
@@ -285,7 +271,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#1E3A8A] bg-[#0B1E3D] px-4 py-4 space-y-4 animate-fadeIn">
+          <div className="lg:hidden border-t border-[#1E3A8A]/50 bg-[#0B1E3D] px-4 py-3 space-y-3 animate-fadeIn">
             {/* Command Palette Trigger Mobile */}
             <button
               type="button"
@@ -293,51 +279,38 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
                 setMobileMenuOpen(false);
                 setIsPaletteOpen(true);
               }}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-md bg-white/10 text-xs text-white"
+              className="w-full flex items-center justify-between px-3 py-1.5 rounded bg-white/10 text-xs text-white"
             >
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-base">search</span>
+                <span className="material-symbols-outlined text-sm">search</span>
                 <span>Search console...</span>
               </div>
               <kbd className="px-1.5 py-0.5 bg-black/20 rounded text-[10px] font-mono">⌘K</kbd>
             </button>
 
-            {/* Mobile Menu Links */}
-            <div className="space-y-3">
+            {/* Mobile Links */}
+            <div className="space-y-2">
               {NAV_ITEMS.map((item) => (
                 <div key={item.href} className="space-y-1">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#93C5FD] flex items-center gap-2 py-1">
-                    <span className="material-symbols-outlined text-base">{item.icon}</span>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[#93C5FD] flex items-center gap-2 py-1">
+                    <span className="material-symbols-outlined text-sm">{item.icon}</span>
                     <span>{item.label}</span>
                   </div>
-                  <div className="pl-6 space-y-1">
+                  <div className="pl-5 space-y-1">
                     {item.subItems.map((sub) => (
                       <Link
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 py-1.5 px-2 rounded text-xs font-medium text-white/80 hover:text-white hover:bg-white/10"
+                        className="flex items-center gap-2 py-1 px-2 rounded text-xs text-white/80 hover:text-white hover:bg-white/10"
                       >
-                        <span className="material-symbols-outlined text-sm">{sub.icon}</span>
+                        <span className="material-symbols-outlined text-xs">{sub.icon}</span>
                         <span>{sub.label}</span>
                       </Link>
                     ))}
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Mobile Sign Out */}
-            <div className="pt-3 border-t border-white/10 flex justify-between items-center">
-              <span className="text-xs font-semibold text-white/80">Authorized Admin</span>
-              <button
-                type="button"
-                onClick={signOut}
-                className="px-3 py-1.5 bg-red-500/20 text-red-300 rounded text-xs font-semibold flex items-center gap-1.5"
-              >
-                <span className="material-symbols-outlined text-base">logout</span>
-                <span>Sign Out</span>
-              </button>
             </div>
           </div>
         )}
