@@ -4770,7 +4770,7 @@
       "label": "MENU_ITEMS",
       "file_type": "code",
       "source_file": "components/layout/SiteHeader.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "components_layout_siteheader_menu_items",
       "community": 8,
@@ -4781,7 +4781,7 @@
       "label": "SiteHeader()",
       "file_type": "code",
       "source_file": "components/layout/SiteHeader.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "components_layout_siteheader_siteheader",
       "community": 8,
@@ -19180,7 +19180,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteHeader.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_siteheader",
@@ -19191,7 +19191,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteHeader.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_siteheader",
@@ -24241,5 +24241,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ba56116528ea9ceb2155b3a5efff305f027d9e2a"
+  "built_at_commit": "5965b54007ad31c990601d3340985c8d1f2b12a0"
 }

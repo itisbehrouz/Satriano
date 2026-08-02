@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import NextImage from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -41,7 +41,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-3 hover:opacity-95 transition-opacity"
         >
-          <Image
+          <NextImage
             src="/Satrinao.png"
             alt="Satriano Atelier"
             width={180}

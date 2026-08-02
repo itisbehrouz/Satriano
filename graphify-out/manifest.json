@@ -270,9 +270,9 @@
     "semantic_hash": "b275a3fb1a354e9de12ff7bb754437da"
   },
   "app/layout.tsx": {
-    "mtime": 1785679120.160783,
-    "ast_hash": "76316d12b0c40bc99d453a8cd595297c",
-    "semantic_hash": "76316d12b0c40bc99d453a8cd595297c"
+    "mtime": 1785688524.7351685,
+    "ast_hash": "31550eeadebdaa77f293acc3873bc134",
+    "semantic_hash": ""
   },
   "app/legal/cookies/page.tsx": {
     "mtime": 1785680532.8425348,
@@ -670,13 +670,13 @@
     "semantic_hash": "7a0dbf849fb4a0ff8937ddea37b08dcd"
   },
   "components/layout/SiteFooter.tsx": {
-    "mtime": 1785688390.2541394,
-    "ast_hash": "a1e3e6b055053013717fd996c940f34d",
+    "mtime": 1785688576.258794,
+    "ast_hash": "bd211301dc15906e95654012e87ddd46",
     "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1785688480.874768,
-    "ast_hash": "eea7d0d8f7bbee74e55a082257754a67",
+    "mtime": 1785688541.5845768,
+    "ast_hash": "b3bf0ac72a6129086df49bc9836fa0d8",
     "semantic_hash": ""
   },
   "components/layout/TransactionalHeader.tsx": {

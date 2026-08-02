@@ -675,8 +675,8 @@
     "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1785688372.1508849,
-    "ast_hash": "02416ca0f7a5031d0543f6c48337eb39",
+    "mtime": 1785688480.874768,
+    "ast_hash": "eea7d0d8f7bbee74e55a082257754a67",
     "semantic_hash": ""
   },
   "components/layout/TransactionalHeader.tsx": {
