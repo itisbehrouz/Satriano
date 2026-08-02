@@ -181,6 +181,14 @@ export function OrderDetailModal({ order, isOpen, onClose }: OrderDetailModalPro
                 <span className="text-[#8DA0C4]">Garment Item:</span>
                 <span className="font-bold text-[#E8ECF3]">{productName}</span>
               </div>
+              <div className="flex justify-between">
+                <span className="text-[#8DA0C4]">Fabric:</span>
+                <span className="text-[#E8ECF3]">{fabricName}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#8DA0C4]">Fit:</span>
+                <span className="text-[#E8ECF3]">{fitName}</span>
+              </div>
 
               {/* Stock Breakdown by Size */}
               <div className="p-3 bg-[#0B1E3D] border border-[#2E5AAC]/40 rounded-none space-y-1">

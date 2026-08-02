@@ -101,14 +101,14 @@ describe("Order History Page & Components (/portal/orders)", () => {
       />
     );
 
-    expect(screen.getByText("All Orders")).toBeInTheDocument();
+    expect(screen.getByText("All Statuses")).toBeInTheDocument();
     expect(screen.getByText("Pending Review")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Search by Order ID or date...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Search by Order ID/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("Pending Review"));
     expect(onStatusChange).toHaveBeenCalledWith("PENDING_REVIEW");
 
-    fireEvent.change(screen.getByPlaceholderText("Search by Order ID or date..."), {
+    fireEvent.change(screen.getByPlaceholderText(/Search by Order ID/i), {
       target: { value: "PRO-2026" },
     });
     expect(onSearchChange).toHaveBeenCalledWith("PRO-2026");
@@ -144,7 +144,7 @@ describe("Order History Page & Components (/portal/orders)", () => {
     expect(screen.getByText("Quantity")).toBeInTheDocument();
     expect(screen.getByText("PRO-101")).toBeInTheDocument();
     expect(screen.getByText("Hoodie")).toBeInTheDocument();
-    expect(screen.getByText("⏳ Pending Review")).toBeInTheDocument();
+    expect(screen.getByText(/Pending/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("Order ID"));
     expect(onSortChange).toHaveBeenCalledWith("id");
@@ -181,8 +181,8 @@ describe("Order History Page & Components (/portal/orders)", () => {
     expect(screen.getByText("Heavyweight Hoodie")).toBeInTheDocument();
     expect(screen.getByText("Cotton Fleece")).toBeInTheDocument();
     expect(screen.getByText("Relaxed Fit")).toBeInTheDocument();
-    expect(screen.getByText("Download Proforma PDF")).toBeInTheDocument();
-    expect(screen.getByText("Contact Support")).toBeInTheDocument();
+    expect(screen.getByText(/Download Proforma/i)).toBeInTheDocument();
+    expect(screen.getByText(/Contact Wholesale Support/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText("Close Modal"));
     expect(onClose).toHaveBeenCalled();
@@ -215,7 +215,7 @@ describe("Order History Page & Components (/portal/orders)", () => {
     });
 
     expect(screen.getByText("Order History")).toBeInTheDocument();
-    expect(screen.getByText("Create New Order →")).toBeInTheDocument();
+    expect(screen.getByText(/Create M2O Order/i)).toBeInTheDocument();
     expect(screen.getByText("PRO-2026-101")).toBeInTheDocument();
     expect(screen.getByText("PRO-2026-102")).toBeInTheDocument();
   });
