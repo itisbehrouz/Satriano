@@ -39,6 +39,8 @@ const NAV_ITEMS: NavItem[] = [
     icon: "storefront",
     isActive: (pathname: string) => pathname.startsWith("/admin/wholesale"),
     subItems: [
+      { label: "Supplier Management", icon: "store", href: "/admin/wholesale/suppliers" },
+      { label: "Inventory by Category", icon: "category", href: "/admin/wholesale/inventory" },
       { label: "Pricing Manager", icon: "sell", href: "/admin/wholesale?tab=pricing" },
       { label: "Inventory by Size", icon: "grid_on", href: "/admin/wholesale?tab=inventory" },
       { label: "Price Offer Inbox", icon: "mark_email_unread", href: "/admin/wholesale?tab=offers" },
