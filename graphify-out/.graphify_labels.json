@@ -626,5 +626,18 @@
   "624": "@types/node",
   "625": "@types/pg",
   "626": "vitest",
-  "627": "primary-hover"
+  "627": "primary-hover",
+  "628": "8",
+  "629": "destructive",
+  "630": "destructive-foreground",
+  "631": "muted",
+  "632": "primary-foreground",
+  "633": "ring",
+  "634": "secondary-foreground",
+  "635": "destructive-foreground",
+  "636": "muted",
+  "637": "primary-foreground",
+  "638": "secondary-foreground",
+  "639": "0",
+  "640": "8"
 }
