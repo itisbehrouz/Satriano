@@ -850,5 +850,26 @@ Picking up from here in a new chat, in priority order (Section 9):
    follow-up).
 6. Stripe live migration — still deliberately deferred (Section 7).
 
+
 Standing rules (Section 4) and the "screenshot before done" discipline
 (Section 11) carry forward unchanged into the next session.
+
+---
+
+## 22. AddWholesaleProductModal Layout Refactoring & Compact 2-Tab Design (Aug 2, 2026)
+
+- **2-Tab Navigation Architecture**:
+  - Divided `AddWholesaleProductModal.tsx` into 2 tabs: **Basic Info** (Supplier, Category, Product Name, SKU, Description, Product Images) and **Pricing & Stock** (Wholesale Cost, Markup %, Computed Sell Price, Size/Stock Matrix, Status Toggle).
+  - Built tab navigation with Swiss Design tokens (`#2E5AAC` active underline & text, `#6B7280` text with `#F7F8FA` background).
+  - Validation auto-tab switching: Attempting submit with missing/invalid fields on an inactive tab automatically switches to that tab and highlights the error.
+- **Compact Product Image Uploader (`ProductImageUploader.tsx`)**:
+  - Replaced 4 large vertical image boxes with a single horizontal strip of 80×80px thumbnails with an 80×80px square `+ PHOTO` CTA button.
+  - Reorder (`←`/`→`) and delete (`✕`) controls converted to translucent hover overlay icons.
+  - Added `onError` fallback on `<img>` elements rendering a clean gray box with camera icon when images fail to load.
+- **Collapsible Description**:
+  - Converted description textarea to a default-collapsed field with a `+ Add Description` link.
+- **Fixed Modal Height & Sticky Footer**:
+  - Configured outer card container with max height `min(85vh, 720px)` and flex column layout.
+  - Header and tab bar fixed top (`flex-shrink-0`), tab content body scrollable (`flex-1 overflow-y-auto`), and footer fixed bottom (`flex-shrink-0 border-t`).
+- **Vitest Unit Test Suite**:
+  - Verified 100% pass rate across 28 test files and 136 unit tests.
