@@ -9,6 +9,7 @@ import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/Size
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
 import { ConfiguratorSuccess } from "@/components/configurator/ConfiguratorSuccess";
+import { GuestLoginModal } from "@/components/configure/GuestLoginModal";
 import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
 
 interface ConfiguratorClientProps {
@@ -63,7 +64,69 @@ export function ConfiguratorClient({
   const totalUnits = Object.values(sizeQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
   const meetsMoq = totalUnits >= moqPerFabric;
 
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+
+  async function handleSendMagicLink(email: string) {
+    const res = await fetch("/api/portal/magic-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.error || "Failed to send magic link email.");
+    }
+    router.push(`/configure/guest-confirmation?email=${encodeURIComponent(email)}`);
+  }
+
+  async function handleGuestOrderSubmit(email: string) {
+    setCompanyEmail(email);
+    if (!companyName) {
+      setCompanyName(email.split("@")[0].toUpperCase());
+    }
+
+    const targetPriceVal = parseFloat(customerTargetPrice);
+    const targetPriceCents =
+      !isNaN(targetPriceVal) && targetPriceVal > 0
+        ? Math.round(targetPriceVal * 100)
+        : undefined;
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fabricId: selectedFabricId,
+        productId: productId || undefined,
+        fitId: selectedFitId || undefined,
+        companyName: companyName || email.split("@")[0].toUpperCase(),
+        companyEmail: email,
+        sizeQuantities: toSizeQuantityArray(sizeQuantities),
+        customerTargetPriceCents: targetPriceCents,
+        logoPlacement: placement,
+      }),
+    });
+
+    const json = await response.json();
+    if (!response.ok) {
+      throw new Error(json.error ?? "Failed to submit guest order.");
+    }
+
+    // Trigger magic link email for guest verification
+    fetch("/api/portal/magic-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    }).catch(() => {});
+
+    router.push(`/configure/guest-confirmation?email=${encodeURIComponent(email)}`);
+  }
+
   async function handleSubmit() {
+    if (!isLoggedIn && (!companyName.trim() || !companyEmail.trim())) {
+      setIsGuestModalOpen(true);
+      return;
+    }
+
     if (!companyName.trim() || !companyEmail.trim()) {
       setSubmitError("Company name and corporate email are required to submit proforma spec.");
       return;
@@ -120,7 +183,11 @@ export function ConfiguratorClient({
         return;
       }
 
-      setSubmittedOrderId(json.orderId);
+      if (isLoggedIn) {
+        router.push(`/configure/success?orderId=${json.orderId}`);
+      } else {
+        setSubmittedOrderId(json.orderId);
+      }
     } catch {
       setSubmitError("Network connection error. Please try again.");
     } finally {
@@ -441,6 +508,14 @@ export function ConfiguratorClient({
           />
         </div>
       </div>
+
+      <GuestLoginModal
+        isOpen={isGuestModalOpen}
+        onClose={() => setIsGuestModalOpen(false)}
+        onSendMagicLink={handleSendMagicLink}
+        onSubmitGuestOrder={handleGuestOrderSubmit}
+        initialEmail={companyEmail}
+      />
     </main>
   );
 }
