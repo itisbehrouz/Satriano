@@ -887,3 +887,25 @@ Standing rules (Section 4) and the "screenshot before done" discipline
 - **Verification**:
   - `npm test`: 28 test files / 136 unit tests passed 100%.
   - `npm run build`: Production build clean with 0 errors.
+
+---
+
+## 24. Site-Wide Dark/Light Theme System (Aug 2, 2026)
+
+- **Generalize & Complete Tokens (`app/globals.css`)**:
+  - Configured project-wide light and dark theme variable scopes (`:root, [data-theme="light"]` and `[data-theme="dark"]`).
+  - Added semantic variables for background (`--color-bg`), surface (`--color-surface`), primary/secondary text (`--color-text-primary`, `--color-text-secondary`), border (`--color-border`), and status badges (`--color-status-warning`, `--color-status-info`, `--color-status-success`).
+  - Retained `--color-gold: #DBB671` theme-independent (Logo mark only).
+  - Maintained backward-compatible `--color-portal-*` alias mappings in `@theme`.
+- **Anti-Flash Theme Resolution Script (`app/layout.tsx`)**:
+  - Implemented inline execution script in `<head>` inspecting `localStorage.getItem('satriano-theme')` or system `prefers-color-scheme`.
+  - Configured admin exemption clause (`if (pathname.startsWith('/admin')) return;`) to preserve the Admin panel's separate Swiss Design token system.
+- **Toggle UI Controls**:
+  - Added sharp-corner Sun/Moon theme toggle in `SiteHeader.tsx` (Public Site).
+  - Added Theme Mode Preference card in `SettingsTab.tsx` (`/portal/account?tab=settings`).
+  - Both controls read/write to the shared `localStorage` key `'satriano-theme'` and set `data-theme` on `<html>`.
+- **Component Token Refactor (`OrdersTable.tsx`)**:
+  - Updated `OrdersTable.tsx` to reference generalized tokens (`var(--color-bg)`, `var(--color-surface)`, `var(--color-text-primary)`, `var(--color-border)`, `var(--color-status-*)`).
+- **Verification**:
+  - `npm test`: 28 test files / 136 unit tests passed 100%.
+  - `npm run build`: Production build clean with 0 errors.
