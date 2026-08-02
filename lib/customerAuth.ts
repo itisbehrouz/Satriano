@@ -1,7 +1,18 @@
 import { CompactSign, jwtVerify } from "jose";
 
 export function getCustomerJwtSecret(): Uint8Array {
-  const secret = process.env.ADMIN_JWT_SECRET || "satriano-customer-jwt-secret-key-32-chars-min!";
+  const secret = process.env.CUSTOMER_JWT_SECRET || process.env.ADMIN_JWT_SECRET;
+  if (!secret || secret.trim() === "") {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "CRITICAL SECURITY FAILURE: CUSTOMER_JWT_SECRET or ADMIN_JWT_SECRET environment variable is not configured."
+      );
+    }
+    // Safe dev default only in non-production
+    return Uint8Array.from(
+      new TextEncoder().encode("satriano-customer-dev-secret-key-32-chars-min!")
+    );
+  }
   return Uint8Array.from(new TextEncoder().encode(secret.trim()));
 }
 

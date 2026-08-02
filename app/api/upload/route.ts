@@ -3,6 +3,15 @@ import { supabase } from "@/lib/supabase";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 
+const ALLOWED_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/svg+xml",
+  "application/pdf",
+];
+const MAX_UPLOAD_SIZE = 5 * 1024 * 1024; // 5 MB
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -10,6 +19,20 @@ export async function POST(request: Request) {
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
+    }
+
+    if (file.size > MAX_UPLOAD_SIZE) {
+      return NextResponse.json(
+        { error: "File size exceeds 5MB limit." },
+        { status: 400 }
+      );
+    }
+
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: "Invalid file type. Allowed types: JPG, PNG, WebP, SVG, PDF." },
+        { status: 400 }
+      );
     }
 
     const bytes = await file.arrayBuffer();
