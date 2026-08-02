@@ -7,66 +7,74 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function WholesalePage() {
-  // Fetch all active categories
-  const categories = await prisma.category.findMany({
-    where: { active: true },
-    orderBy: { sortOrder: "asc" },
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-    },
-  });
+  let categories: any[] = [];
+  let fits: any[] = [];
+  let products: any[] = [];
 
-  // Fetch all active fits
-  const fits = await prisma.fit.findMany({
-    where: { active: true },
-    orderBy: { sortOrder: "asc" },
-    select: {
-      id: true,
-      name: true,
-      code: true,
-    },
-  });
+  try {
+    // Fetch all active categories
+    categories = await prisma.category.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+      },
+    });
 
-  // Fetch all active products with relations
-  const products = await prisma.product.findMany({
-    where: { active: true },
-    include: {
-      subcategory: {
-        include: {
-          category: {
-            select: {
-              id: true,
-              name: true,
-              slug: true,
+    // Fetch all active fits
+    fits = await prisma.fit.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    });
+
+    // Fetch all active products with relations
+    products = await prisma.product.findMany({
+      where: { active: true },
+      include: {
+        subcategory: {
+          include: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+              },
             },
           },
         },
-      },
-      fits: {
-        include: {
-          fit: {
-            select: {
-              id: true,
-              name: true,
-              code: true,
+        fits: {
+          include: {
+            fit: {
+              select: {
+                id: true,
+                name: true,
+                code: true,
+              },
             },
           },
         },
-      },
-      fabrics: {
-        where: { active: true },
-        select: {
-          id: true,
-          name: true,
-          priceMinCents: true,
-          priceMaxCents: true,
+        fabrics: {
+          where: { active: true },
+          select: {
+            id: true,
+            name: true,
+            priceMinCents: true,
+            priceMaxCents: true,
+          },
         },
       },
-    },
-    orderBy: { sortOrder: "asc" },
-  });
+      orderBy: { sortOrder: "asc" },
+    });
+  } catch (error) {
+    console.error("Prisma query error in WholesalePage, operating in offline/demo mode:", error);
+  }
 
   return (
     <>
@@ -110,4 +118,3 @@ export default async function WholesalePage() {
     </>
   );
 }
-

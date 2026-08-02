@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WholesaleProductDetailClient } from "@/components/wholesale/WholesaleProductDetailClient";
@@ -58,61 +57,67 @@ const CATEGORY_IMAGES: Record<string, string[]> = {
 export default async function WholesaleProductDetailPage({ params }: PageProps) {
   const { productId } = await params;
 
-  // Search product by ID or Slug in database
-  let dbProduct = await prisma.product.findFirst({
-    where: {
-      active: true,
-      OR: [{ id: productId }, { slug: productId }],
-    },
-    include: {
-      subcategory: {
-        include: {
-          category: true,
-          sizeSystems: {
-            include: {
-              sizeSystem: {
-                include: {
-                  options: {
-                    orderBy: { sortOrder: "asc" },
+  let dbProduct: any = null;
+
+  try {
+    // Search product by ID or Slug in database
+    dbProduct = await prisma.product.findFirst({
+      where: {
+        active: true,
+        OR: [{ id: productId }, { slug: productId }],
+      },
+      include: {
+        subcategory: {
+          include: {
+            category: true,
+            sizeSystems: {
+              include: {
+                sizeSystem: {
+                  include: {
+                    options: {
+                      orderBy: { sortOrder: "asc" },
+                    },
                   },
                 },
               },
             },
           },
         },
-      },
-      fabrics: {
-        where: { active: true },
-        orderBy: { priceMinCents: "asc" },
-      },
-    },
-  });
-
-  // Fallback: If not found by direct product slug/ID, search subcategory or match closest
-  if (!dbProduct) {
-    const subcategory = await prisma.subcategory.findFirst({
-      where: { OR: [{ id: productId }, { slug: productId }] },
-      include: {
-        category: true,
-        products: {
+        fabrics: {
           where: { active: true },
-          include: {
-            fabrics: { where: { active: true }, orderBy: { priceMinCents: "asc" } },
-          },
-          take: 1,
+          orderBy: { priceMinCents: "asc" },
         },
       },
     });
 
-    if (subcategory && subcategory.products[0]) {
-      dbProduct = {
-        ...subcategory.products[0],
-        subcategory: {
-          ...subcategory,
-          sizeSystems: [],
+    // Fallback: If not found by direct product slug/ID, search subcategory or match closest
+    if (!dbProduct) {
+      const subcategory = await prisma.subcategory.findFirst({
+        where: { OR: [{ id: productId }, { slug: productId }] },
+        include: {
+          category: true,
+          products: {
+            where: { active: true },
+            include: {
+              fabrics: { where: { active: true }, orderBy: { priceMinCents: "asc" } },
+            },
+            take: 1,
+          },
         },
-      };
+      });
+
+      if (subcategory && subcategory.products[0]) {
+        dbProduct = {
+          ...subcategory.products[0],
+          subcategory: {
+            ...subcategory,
+            sizeSystems: [],
+          },
+        };
+      }
     }
+  } catch (error) {
+    console.error("Prisma fetch failed in WholesaleProductDetailPage, falling back to mock product:", error);
   }
 
   // Ready-Made Stock Product Data Construction
@@ -135,7 +140,6 @@ export default async function WholesaleProductDetailPage({ params }: PageProps) 
     // Standard Menswear Size Stock Matrix
     const standardSizes = ["36", "38", "40", "42", "44", "46", "48", "50", "52"];
     const sizesStock = standardSizes.map((size, idx) => {
-      // Deterministic size stock mapping matching exact prompt example
       const stockMap: Record<string, number> = {
         "36": 3,
         "38": 5,
@@ -168,7 +172,7 @@ export default async function WholesaleProductDetailPage({ params }: PageProps) 
       sizesStock,
     };
   } else {
-    // If productId requested is a demo SKU like "CY-1306-11" or fallback sample:
+    // If database query failed or demo SKU requested:
     productData = {
       id: "cy-1306-11-prom-blazer",
       sku: "CY-1306-11",
