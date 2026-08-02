@@ -1185,8 +1185,8 @@
     "semantic_hash": "198183af012398a7d745a565d0d43638"
   },
   "app/page.tsx": {
-    "mtime": 1785683468.8240378,
-    "ast_hash": "38889013017698b5913ef7edf862fa0b",
+    "mtime": 1785683547.2835224,
+    "ast_hash": "454837e66835ecb790ea2849e53152fa",
     "semantic_hash": ""
   },
   "app/portal/account/page.tsx": {

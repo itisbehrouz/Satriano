@@ -110,26 +110,6 @@ export default async function HomePage() {
     <>
       <SiteHeader />
       <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans antialiased transition-colors">
-        {/* B2B Top Capacity Banner */}
-        <div className="w-full bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs py-2.5 px-4 transition-colors">
-          <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-none bg-[var(--color-status-success)] animate-pulse" />
-              <span className="text-[var(--color-text-secondary)]">
-                EU Atelier Production Capacity: <strong className="text-[var(--color-text-primary)]">Accepting Q3 B2B Specs</strong>
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px] text-[var(--color-accent)] font-medium">
-              <span>⚡ 14-Day Delivery</span>
-              <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">🔒 European Quality Standard</span>
-              <Link href="/portal" className="text-[var(--color-text-primary)] font-medium hover:underline flex items-center gap-1">
-                Partner Portal →
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {/* Hero Section */}
         <section className="w-full bg-[var(--color-bg)] text-[var(--color-text-primary)] py-14 lg:py-24 relative overflow-hidden transition-colors">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
