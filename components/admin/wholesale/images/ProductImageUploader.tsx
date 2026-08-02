@@ -72,17 +72,17 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
 
   return (
     <div className="space-y-3 font-sans select-none">
-      <div className="flex items-center justify-between border-b border-[#EAECF0] pb-2">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-2">
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-wider text-[#111318]">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
             PRODUCT IMAGES ({images.length} Photos)
           </h4>
-          <p className="text-[11px] text-[#6B7280]">
+          <p className="text-[11px] text-[var(--color-text-secondary)]">
             Upload 4+ high-quality photos (JPG, PNG, WebP • 2MB–5MB each)
           </p>
         </div>
         {images.length < 4 && (
-          <span className="text-[10px] font-mono font-bold text-[#854F0B] bg-[#FDF6E7] px-2 py-0.5 border border-[#F0B94A]/40">
+          <span className="text-[10px] font-mono font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 border border-amber-500/30">
             ⚠️ Min 4 photos recommended
           </span>
         )}
@@ -95,12 +95,12 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
           return (
             <div
               key={img.id}
-              className="relative w-[80px] h-[80px] bg-[#F8FAFC] border border-[#D0D5DD] rounded-md overflow-hidden group shrink-0 shadow-xs"
+              className="relative w-[80px] h-[80px] bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none overflow-hidden group shrink-0 shadow-xs"
             >
               {isFailed ? (
-                <div className="w-full h-full flex flex-col items-center justify-center bg-[#E2E8F0] text-[#64748B]">
+                <div className="w-full h-full flex flex-col items-center justify-center bg-[var(--color-surface)] text-[var(--color-text-secondary)]">
                   <span className="material-symbols-outlined text-xl">photo_camera</span>
-                  <span className="text-[9px] font-mono font-bold text-[#64748B] uppercase">Img {img.imageOrder}</span>
+                  <span className="text-[9px] font-mono font-bold uppercase">Img {img.imageOrder}</span>
                 </div>
               ) : (
                 <img
@@ -112,7 +112,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
               )}
 
               {/* Order Badge */}
-              <span className="absolute top-1 left-1 bg-[#111318]/80 text-white font-mono text-[9px] px-1 font-bold rounded-xs pointer-events-none">
+              <span className="absolute top-1 left-1 bg-black/80 text-white font-mono text-[9px] px-1 font-bold rounded-xs pointer-events-none">
                 {idx === 0 ? "Main" : `#${img.imageOrder}`}
               </span>
 
@@ -122,7 +122,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
                   type="button"
                   disabled={idx === 0}
                   onClick={() => handleMove(idx, "left")}
-                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded flex items-center justify-center disabled:opacity-20 cursor-pointer"
+                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded-none flex items-center justify-center disabled:opacity-20 cursor-pointer"
                   title="Move Left"
                 >
                   ←
@@ -130,7 +130,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
                 <button
                   type="button"
                   onClick={() => handleRemove(img.id)}
-                  className="w-6 h-6 bg-[#C5221F] hover:bg-red-700 text-white font-bold text-xs rounded flex items-center justify-center cursor-pointer"
+                  className="w-6 h-6 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-none flex items-center justify-center cursor-pointer"
                   title="Delete"
                 >
                   ✕
@@ -139,7 +139,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
                   type="button"
                   disabled={idx === images.length - 1}
                   onClick={() => handleMove(idx, "right")}
-                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded flex items-center justify-center disabled:opacity-20 cursor-pointer"
+                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded-none flex items-center justify-center disabled:opacity-20 cursor-pointer"
                   title="Move Right"
                 >
                   →
@@ -156,7 +156,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
             setUploadError(null);
             setIsModalOpen(true);
           }}
-          className="w-[80px] h-[80px] border-2 border-dashed border-[#CBD5E1] hover:border-[#2E5AAC] hover:bg-[#F8FAFC] text-[#2E5AAC] rounded-md flex flex-col items-center justify-center transition-colors cursor-pointer shrink-0"
+          className="w-[80px] h-[80px] border-2 border-dashed border-[var(--color-border)] hover:border-[var(--color-accent)] hover:bg-[var(--color-bg)] text-[var(--color-accent)] rounded-none flex flex-col items-center justify-center transition-colors cursor-pointer shrink-0"
           title="Add Photo"
         >
           <span className="material-symbols-outlined text-xl">add_a_photo</span>
@@ -164,37 +164,37 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
         </button>
       </div>
 
-      {/* Upload Modal (PROMPT 3) */}
+      {/* Upload Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none">
-          <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[460px] text-[#111318] shadow-2xl p-6 space-y-5">
-            <div className="flex items-center justify-between border-b border-[#EAECF0] pb-3">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[460px] text-[var(--color-text-primary)] shadow-2xl p-6 space-y-5">
+            <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 UPLOAD PRODUCT IMAGE
               </h3>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="text-[#6B7280] hover:text-[#111318] text-base font-bold cursor-pointer"
+                className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-base font-bold cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="border-2 border-dashed border-[#CBD5E1] hover:border-[#2E5AAC] rounded-md p-6 text-center space-y-3 bg-[#F8FAFC] transition-colors">
-              <span className="material-symbols-outlined text-3xl text-[#2E5AAC]">
+            <div className="border-2 border-dashed border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none p-6 text-center space-y-3 bg-[var(--color-bg)] transition-colors">
+              <span className="material-symbols-outlined text-3xl text-[var(--color-accent)]">
                 cloud_upload
               </span>
               <div className="space-y-1">
-                <p className="text-xs font-bold text-[#0F172A]">
+                <p className="text-xs font-bold text-[var(--color-text-primary)]">
                   Drag & drop image file or browse
                 </p>
-                <p className="text-[11px] text-[#64748B] font-mono">
+                <p className="text-[11px] text-[var(--color-text-secondary)] font-mono">
                   Accepted: JPG, PNG, WebP • 2MB min to 5MB max
                 </p>
               </div>
 
-              <label className="inline-block px-4 py-2 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md cursor-pointer transition-colors shadow-xs">
+              <label className="inline-block px-4 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none cursor-pointer transition-colors shadow-xs">
                 BROWSE FILES
                 <input
                   type="file"
@@ -206,16 +206,16 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
             </div>
 
             {uploadError && (
-              <div className="p-3 bg-[#FEE4E2] border border-[#F8B4B4] rounded-md text-[11px] text-[#C5221F] font-bold">
+              <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-none text-[11px] text-red-500 font-bold">
                 ⚠️ {uploadError}
               </div>
             )}
 
-            <div className="flex justify-end border-t border-[#EAECF0] pt-3">
+            <div className="flex justify-end border-t border-[var(--color-border)] pt-3">
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-white text-[#344054] border border-[#D0D5DD] rounded-md font-bold uppercase text-xs hover:bg-[#F9FAFB] cursor-pointer"
+                className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase text-xs hover:bg-[var(--color-surface)] cursor-pointer"
               >
                 CANCEL
               </button>

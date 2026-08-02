@@ -134,14 +134,14 @@ export function CategoryInventoryClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] font-sans antialiased text-[#111318] p-4 md:p-6 lg:p-8 space-y-6 relative">
+    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
       {/* Toast Alert */}
       {toast && (
         <div
-          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-md shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
             toast.type === "success"
-              ? "bg-[#ECFDF3] border-[#5DCAA5] text-[#067647]"
-              : "bg-[#FEE4E2] border-[#F8B4B4] text-[#C5221F]"
+              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-500"
+              : "bg-red-500/10 border-red-500/30 text-red-500"
           }`}
         >
           <span className="material-symbols-outlined text-base">
@@ -152,12 +152,12 @@ export function CategoryInventoryClient() {
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EAECF0] pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#111318] uppercase tracking-wide">
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
             INVENTORY BY CATEGORY
           </h1>
-          <p className="text-xs text-[#6B7280] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Browse ready-made product inventory aggregated across wholesale manufacturing partners by category.
           </p>
         </div>
@@ -166,21 +166,21 @@ export function CategoryInventoryClient() {
           <button
             type="button"
             onClick={() => setIsAddModalOpen(true)}
-            className="h-10 px-4 bg-[#067647] hover:bg-[#05603A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            className="h-10 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">add_box</span>
             + Add Wholesale Product
           </button>
           <Link
             href="/admin/wholesale/suppliers"
-            className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">store</span>
             Manage Suppliers
           </Link>
           <Link
             href="/admin/wholesale"
-            className="h-10 px-4 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2"
+            className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
           >
             Dashboard Home
           </Link>
@@ -188,13 +188,13 @@ export function CategoryInventoryClient() {
       </div>
 
       {/* Controls Bar: Category Filter */}
-      <div className="bg-white border border-[#EAECF0] p-4 rounded-md flex items-center justify-between">
+      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex items-center justify-between">
         <CategoryFilter
           categories={categories}
           selectedCategoryId={selectedCategoryId}
           onSelectCategory={setSelectedCategoryId}
         />
-        <div className="text-xs font-mono font-bold text-[#6B7280]">
+        <div className="text-xs font-mono font-bold text-[var(--color-text-secondary)]">
           Showing {filteredProducts.length} Products
         </div>
       </div>
@@ -206,7 +206,7 @@ export function CategoryInventoryClient() {
         onEditMarkup={(p) => setSelectedProduct(p)}
       />
 
-      {/* Product Detail & Photo Upload Modal (PROMPT 2 & 3) */}
+      {/* Product Detail & Photo Upload Modal */}
       <ProductDetailModal
         isOpen={!!selectedProduct}
         product={selectedProduct}

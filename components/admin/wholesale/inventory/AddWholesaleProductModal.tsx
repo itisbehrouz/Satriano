@@ -213,32 +213,32 @@ export function AddWholesaleProductModal({
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none">
       <form
         onSubmit={handleSubmit}
-        className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[720px] max-h-[min(85vh,720px)] text-[#111318] shadow-2xl flex flex-col overflow-hidden relative"
+        className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[720px] max-h-[min(85vh,720px)] text-[var(--color-text-primary)] shadow-2xl flex flex-col overflow-hidden relative"
       >
-        {/* Modal Header (Fixed Top) */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-[#EAECF0] flex-shrink-0">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-[var(--color-border)] flex-shrink-0">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
             ADD NEW WHOLESALE PRODUCT (Supplier-Linked)
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-[#6B7280] hover:text-[#111318] text-lg font-bold cursor-pointer"
+            className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-lg font-bold cursor-pointer"
             aria-label="Close"
           >
             ✕
           </button>
         </div>
 
-        {/* Tab Navigation Header (Fixed Top) */}
-        <div className="flex items-center border-b border-[#EAECF0] bg-[#F7F8FA] px-6 flex-shrink-0">
+        {/* Tab Navigation Header */}
+        <div className="flex items-center border-b border-[var(--color-border)] bg-[var(--color-bg)] px-6 flex-shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab("basic")}
             className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "basic"
-                ? "border-[#2E5AAC] text-[#2E5AAC] bg-white font-bold"
-                : "border-transparent text-[#6B7280] hover:text-[#111318]"
+                ? "border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-surface)] font-bold"
+                : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
             }`}
           >
             <span className="material-symbols-outlined text-base">info</span>
@@ -250,8 +250,8 @@ export function AddWholesaleProductModal({
             onClick={() => setActiveTab("pricing")}
             className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
               activeTab === "pricing"
-                ? "border-[#2E5AAC] text-[#2E5AAC] bg-white font-bold"
-                : "border-transparent text-[#6B7280] hover:text-[#111318]"
+                ? "border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-surface)] font-bold"
+                : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
             }`}
           >
             <span className="material-symbols-outlined text-base">payments</span>
@@ -267,14 +267,14 @@ export function AddWholesaleProductModal({
               {/* Supplier & Category */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1">
+                  <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
                     Supplier *
                   </label>
                   <select
                     required
                     value={supplierId}
                     onChange={(e) => setSupplierId(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] font-bold rounded-md focus:border-[#2E5AAC] focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-bold rounded-none focus:border-[var(--color-accent)] focus:outline-none cursor-pointer"
                   >
                     {suppliers.map((sup) => {
                       const isPending = sup.status === "PENDING_VERIFICATION";
@@ -283,7 +283,7 @@ export function AddWholesaleProductModal({
                           key={sup.id}
                           value={sup.id}
                           disabled={isPending}
-                          className={isPending ? "text-[#94A3B8]" : "text-[#111318]"}
+                          className={isPending ? "text-[var(--color-text-secondary)]" : "text-[var(--color-text-primary)]"}
                         >
                           {sup.firmName} {isPending ? "(Pending Verification 🔒)" : "✓"}
                         </option>
@@ -293,14 +293,14 @@ export function AddWholesaleProductModal({
                 </div>
 
                 <div>
-                  <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1">
+                  <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
                     Category *
                   </label>
                   <select
                     required
                     value={categoryId}
                     onChange={(e) => setCategoryId(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] font-bold rounded-md focus:border-[#2E5AAC] focus:outline-none cursor-pointer"
+                    className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-bold rounded-none focus:border-[var(--color-accent)] focus:outline-none cursor-pointer"
                   >
                     {categories.map((cat) => (
                       <option key={cat.id} value={cat.id}>
@@ -314,7 +314,7 @@ export function AddWholesaleProductModal({
               {/* Product Name & SKU */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1">
+                  <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
                     Product Name *
                   </label>
                   <input
@@ -323,12 +323,12 @@ export function AddWholesaleProductModal({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g., Shawl Lapel Slim Fit Prom Blazer"
-                    className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] rounded-md focus:border-[#2E5AAC] focus:outline-none"
+                    className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded-none focus:border-[var(--color-accent)] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1">
+                  <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
                     SKU (Supplier / Atelier Code) *
                   </label>
                   <input
@@ -337,7 +337,7 @@ export function AddWholesaleProductModal({
                     value={sku}
                     onChange={(e) => setSku(e.target.value.toUpperCase())}
                     placeholder="e.g., CY-1306-NAVY"
-                    className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] font-mono font-bold rounded-md focus:border-[#2E5AAC] focus:outline-none uppercase"
+                    className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-mono font-bold rounded-none focus:border-[var(--color-accent)] focus:outline-none uppercase"
                   />
                 </div>
               </div>
@@ -345,14 +345,14 @@ export function AddWholesaleProductModal({
               {/* Description (Optional - Collapsible) */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="font-bold uppercase tracking-wider text-[#344054]">
+                  <label className="font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                     Description (Optional)
                   </label>
                   {!isDescriptionExpanded && (
                     <button
                       type="button"
                       onClick={() => setIsDescriptionExpanded(true)}
-                      className="text-[11px] font-bold text-[#2E5AAC] hover:underline cursor-pointer"
+                      className="text-[11px] font-bold text-[var(--color-accent)] hover:underline cursor-pointer"
                     >
                       + Add Description
                     </button>
@@ -364,7 +364,7 @@ export function AddWholesaleProductModal({
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Garment details, fabric composition, features..."
-                    className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] rounded-md focus:border-[#2E5AAC] focus:outline-none resize-none"
+                    className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded-none focus:border-[var(--color-accent)] focus:outline-none resize-none"
                   />
                 )}
               </div>
@@ -378,18 +378,18 @@ export function AddWholesaleProductModal({
           {activeTab === "pricing" && (
             <div className="space-y-4">
               {/* Pricing & Margin Calculator */}
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 rounded-md space-y-4 font-mono text-xs">
-                <div className="font-bold text-[#0F172A] uppercase tracking-wider text-[11px] pb-1 border-b border-[#E2E8F0]">
+              <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none space-y-4 font-mono text-xs">
+                <div className="font-bold text-[var(--color-text-primary)] uppercase tracking-wider text-[11px] pb-1 border-b border-[var(--color-border)]">
                   PRICING & FORMULA CALCULATOR
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block font-bold text-[#344054] mb-1">
+                    <label className="block font-bold text-[var(--color-text-primary)] mb-1">
                       Wholesale Cost ($ USD) *
                     </label>
                     <div className="relative">
-                      <span className="absolute left-2.5 top-2 text-[#64748B] font-bold">$</span>
+                      <span className="absolute left-2.5 top-2 text-[var(--color-text-secondary)] font-bold">$</span>
                       <input
                         type="number"
                         step="0.01"
@@ -398,13 +398,13 @@ export function AddWholesaleProductModal({
                         value={costPriceUSD}
                         onChange={(e) => setCostPriceUSD(e.target.value)}
                         placeholder="125.00"
-                        className="w-full pl-6 pr-2 py-1.5 bg-white border border-[#D0D5DD] font-bold text-[#0F172A] rounded-md"
+                        className="w-full pl-6 pr-2 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] font-bold text-[var(--color-text-primary)] rounded-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#344054] mb-1">
+                    <label className="block font-bold text-[var(--color-text-primary)] mb-1">
                       Markup (%) *
                     </label>
                     <div className="relative">
@@ -417,15 +417,15 @@ export function AddWholesaleProductModal({
                         value={markupPercent}
                         onChange={(e) => setMarkupPercent(e.target.value)}
                         placeholder="35"
-                        className="w-full px-3 py-1.5 bg-white border border-[#D0D5DD] font-bold text-[#0F172A] rounded-md"
+                        className="w-full px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] font-bold text-[var(--color-text-primary)] rounded-none"
                       />
-                      <span className="absolute right-2.5 top-2 text-[#64748B] font-bold">%</span>
+                      <span className="absolute right-2.5 top-2 text-[var(--color-text-secondary)] font-bold">%</span>
                     </div>
                   </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="font-bold text-[#344054]">
+                      <label className="font-bold text-[var(--color-text-primary)]">
                         Computed Sell Price:
                       </label>
                       <button
@@ -436,7 +436,7 @@ export function AddWholesaleProductModal({
                             setOverrideSellPriceUSD(formulaSellPriceUSD.toFixed(2));
                           }
                         }}
-                        className="text-[10px] text-[#2E5AAC] hover:underline cursor-pointer"
+                        className="text-[10px] text-[var(--color-accent)] hover:underline cursor-pointer"
                       >
                         {isOverrideSellPrice ? "Use Formula" : "Override"}
                       </button>
@@ -444,18 +444,18 @@ export function AddWholesaleProductModal({
 
                     {isOverrideSellPrice ? (
                       <div className="relative">
-                        <span className="absolute left-2.5 top-2 text-[#64748B] font-bold">$</span>
+                        <span className="absolute left-2.5 top-2 text-[var(--color-text-secondary)] font-bold">$</span>
                         <input
                           type="number"
                           step="0.01"
                           min="0.01"
                           value={overrideSellPriceUSD}
                           onChange={(e) => setOverrideSellPriceUSD(e.target.value)}
-                          className="w-full pl-6 pr-2 py-1.5 bg-white border border-[#2E5AAC] font-bold text-[#2E5AAC] rounded-md"
+                          className="w-full pl-6 pr-2 py-1.5 bg-[var(--color-surface)] border border-[var(--color-accent)] font-bold text-[var(--color-accent)] rounded-none"
                         />
                       </div>
                     ) : (
-                      <div className="py-1.5 px-3 bg-white border border-[#E2E8F0] font-bold text-[#2E5AAC] text-sm rounded-md tabular-nums">
+                      <div className="py-1.5 px-3 bg-[var(--color-surface)] border border-[var(--color-border)] font-bold text-[var(--color-accent)] text-sm rounded-none tabular-nums">
                         ${formulaSellPriceUSD.toFixed(2)}
                       </div>
                     )}
@@ -463,7 +463,7 @@ export function AddWholesaleProductModal({
                 </div>
 
                 {isNegativeMargin && (
-                  <div className="p-3 bg-[#FEE4E2] border border-[#F8B4B4] rounded-md text-[11px] text-[#C5221F] font-bold flex items-center gap-2">
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-none text-[11px] text-red-500 font-bold flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">warning</span>
                     <span>⚠️ Negative Margin Warning: Sell price (${finalSellPriceUSD.toFixed(2)}) is lower than wholesale cost (${parsedCostUSD.toFixed(2)}).</span>
                   </div>
@@ -471,8 +471,8 @@ export function AddWholesaleProductModal({
               </div>
 
               {/* Size / Stock Matrix */}
-              <div className="border border-[#EAECF0] p-4 rounded-md space-y-3 font-sans">
-                <div className="font-bold text-[#111318] uppercase tracking-wider text-xs pb-1 border-b border-[#EAECF0]">
+              <div className="border border-[var(--color-border)] p-4 rounded-none space-y-3 font-sans">
+                <div className="font-bold text-[var(--color-text-primary)] uppercase tracking-wider text-xs pb-1 border-b border-[var(--color-border)]">
                   INITIAL SIZE & STOCK MATRIX
                 </div>
 
@@ -480,13 +480,13 @@ export function AddWholesaleProductModal({
                   {Object.entries(stockMatrix).map(([sz, data]) => (
                     <div
                       key={sz}
-                      className="p-2.5 border border-[#E2E8F0] rounded-md bg-[#F8FAFC] flex flex-col justify-between gap-2"
+                      className="p-2.5 border border-[var(--color-border)] rounded-none bg-[var(--color-bg)] flex flex-col justify-between gap-2"
                     >
                       <div className="flex justify-between items-center font-mono">
-                        <span className="font-bold text-xs uppercase text-[#0F172A]">SIZE {sz}</span>
+                        <span className="font-bold text-xs uppercase text-[var(--color-text-primary)]">SIZE {sz}</span>
                         <span
                           className={`text-[10px] font-bold uppercase ${
-                            data.quantity > 0 ? "text-[#067647]" : "text-[#94A3B8]"
+                            data.quantity > 0 ? "text-emerald-500" : "text-[var(--color-text-secondary)]"
                           }`}
                         >
                           {data.quantity > 0 ? `${data.quantity} in st` : "0"}
@@ -497,7 +497,7 @@ export function AddWholesaleProductModal({
                         <button
                           type="button"
                           onClick={() => handleStockQtyChange(sz, -1)}
-                          className="w-6 h-6 bg-white border border-[#CBD5E1] hover:bg-[#E2E8F0] text-xs font-bold rounded flex items-center justify-center cursor-pointer min-h-[26px]"
+                          className="w-6 h-6 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs font-bold rounded-none flex items-center justify-center cursor-pointer min-h-[26px]"
                         >
                           -
                         </button>
@@ -506,12 +506,12 @@ export function AddWholesaleProductModal({
                           min={0}
                           value={data.quantity}
                           onChange={(e) => handleStockQtyInput(sz, e.target.value)}
-                          className="w-12 h-6 bg-white border border-[#2E5AAC] font-mono text-center text-xs font-bold text-[#0F172A] rounded"
+                          className="w-12 h-6 bg-[var(--color-surface)] border border-[var(--color-accent)] font-mono text-center text-xs font-bold text-[var(--color-text-primary)] rounded-none"
                         />
                         <button
                           type="button"
                           onClick={() => handleStockQtyChange(sz, 1)}
-                          className="w-6 h-6 bg-white border border-[#CBD5E1] hover:bg-[#E2E8F0] text-xs font-bold rounded flex items-center justify-center cursor-pointer min-h-[26px]"
+                          className="w-6 h-6 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs font-bold rounded-none flex items-center justify-center cursor-pointer min-h-[26px]"
                         >
                           +
                         </button>
@@ -522,10 +522,10 @@ export function AddWholesaleProductModal({
               </div>
 
               {/* Status Toggle */}
-              <div className="flex items-center justify-between bg-[#F8FAFC] border border-[#E2E8F0] p-4 rounded-md font-mono text-xs">
+              <div className="flex items-center justify-between bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none font-mono text-xs">
                 <div>
-                  <span className="font-bold uppercase text-[#111318]">GARMENT STATUS:</span>
-                  <span className="text-[#64748B] text-[11px] block">
+                  <span className="font-bold uppercase text-[var(--color-text-primary)]">GARMENT STATUS:</span>
+                  <span className="text-[var(--color-text-secondary)] text-[11px] block">
                     {status === "ACTIVE"
                       ? "Active (Visible on public /wholesale catalog)"
                       : "Inactive (Saved but hidden from public catalog)"}
@@ -538,12 +538,12 @@ export function AddWholesaleProductModal({
                       key={st}
                       type="button"
                       onClick={() => setStatus(st)}
-                      className={`px-3 py-1.5 font-bold uppercase rounded-md text-xs transition-colors cursor-pointer border ${
+                      className={`px-3 py-1.5 font-bold uppercase rounded-none text-xs transition-colors cursor-pointer border ${
                         status === st
                           ? st === "ACTIVE"
-                            ? "bg-[#067647] text-white border-[#067647]"
-                            : "bg-[#C5221F] text-white border-[#C5221F]"
-                          : "bg-white text-[#64748B] border-[#D0D5DD]"
+                            ? "bg-emerald-600 text-white border-emerald-600"
+                            : "bg-red-600 text-white border-red-600"
+                          : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border-[var(--color-border)]"
                       }`}
                     >
                       {st}
@@ -554,22 +554,22 @@ export function AddWholesaleProductModal({
             </div>
           )}
 
-          {error && <p className="text-[#C5221F] font-bold text-xs">{error}</p>}
+          {error && <p className="text-red-500 font-bold text-xs">{error}</p>}
         </div>
 
-        {/* Modal Footer (Fixed Bottom) */}
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-[#EAECF0] bg-[#F7F8FA] flex-shrink-0">
+        {/* Modal Footer */}
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-[var(--color-border)] bg-[var(--color-bg)] flex-shrink-0">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-white text-[#344054] border border-[#D0D5DD] rounded-md font-bold uppercase tracking-wider text-xs hover:bg-[#F9FAFB] cursor-pointer"
+            className="px-4 py-2 bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-bg)] cursor-pointer"
           >
             CANCEL
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="px-5 py-2 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white rounded-md font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+            className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer disabled:opacity-50"
           >
             {submitting ? "CREATING..." : "CREATE PRODUCT"}
           </button>

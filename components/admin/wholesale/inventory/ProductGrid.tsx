@@ -11,7 +11,7 @@ export interface ProductGridProps {
 export function ProductGrid({ products, onView, onEditMarkup }: ProductGridProps) {
   if (products.length === 0) {
     return (
-      <div className="p-12 text-center text-xs text-[#6B7280] bg-white rounded-md border border-[#EAECF0]">
+      <div className="p-12 text-center text-xs text-[var(--color-text-secondary)] bg-[var(--color-surface)] rounded-none border border-[var(--color-border)]">
         No ready-made products found for the selected category filter.
       </div>
     );

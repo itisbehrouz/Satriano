@@ -34,83 +34,83 @@ export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps)
   const markupUSD = product.sellPriceUSD - product.wholesaleCostPriceUSD;
 
   return (
-    <div className="bg-white border border-[#D0D5DD] hover:border-[#2E5AAC] rounded-md p-4 space-y-3 font-sans select-none transition-all shadow-xs flex flex-col justify-between">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none p-4 space-y-3 font-sans select-none transition-all shadow-xs flex flex-col justify-between">
       <div className="space-y-3">
         {/* Image & Photo Count */}
-        <div className="relative aspect-3/4 bg-[#F8FAFC] rounded-xs border border-[#E2E8F0] overflow-hidden">
+        <div className="relative aspect-3/4 bg-[var(--color-bg)] rounded-none border border-[var(--color-border)] overflow-hidden">
           <img
             src={mainImage}
             alt={product.name}
             className="w-full h-full object-cover"
           />
-          <span className="absolute top-2 right-2 bg-[#111318]/80 text-white font-mono text-[10px] px-1.5 py-0.5 font-bold">
+          <span className="absolute top-2 right-2 bg-black/80 text-white font-mono text-[10px] px-1.5 py-0.5 font-bold">
             📷 {product.images.length} Photos
           </span>
-          <span className="absolute bottom-2 left-2 bg-[#2E5AAC] text-white font-mono text-[10px] px-1.5 py-0.5 font-bold uppercase">
+          <span className="absolute bottom-2 left-2 bg-[var(--color-accent)] text-white font-mono text-[10px] px-1.5 py-0.5 font-bold uppercase">
             SKU: {product.supplierSku}
           </span>
         </div>
 
         {/* Product Info & Supplier */}
         <div>
-          <h3 className="text-sm font-bold text-[#111318] line-clamp-1">
+          <h3 className="text-sm font-bold text-[var(--color-text-primary)] line-clamp-1">
             {product.name}
           </h3>
-          <div className="text-xs font-semibold text-[#2E5AAC]">
+          <div className="text-xs font-semibold text-[var(--color-accent)]">
             by {product.supplierName}
           </div>
         </div>
 
         {/* Pricing Block */}
-        <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-2.5 rounded-md space-y-1 text-xs font-mono">
-          <div className="flex justify-between text-[#64748B]">
+        <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-2.5 rounded-none space-y-1 text-xs font-mono">
+          <div className="flex justify-between text-[var(--color-text-secondary)]">
             <span>Wholesale Cost:</span>
             <span>${product.wholesaleCostPriceUSD.toFixed(2)}</span>
           </div>
-          <div className="flex justify-between text-[#067647] font-bold text-[11px]">
+          <div className="flex justify-between text-emerald-500 font-bold text-[11px]">
             <span>Your Markup:</span>
             <span>+${markupUSD.toFixed(2)} ({product.markupPercent}%)</span>
           </div>
-          <div className="flex justify-between font-bold text-[#0F172A] pt-1 border-t border-[#E2E8F0]">
+          <div className="flex justify-between font-bold text-[var(--color-text-primary)] pt-1 border-t border-[var(--color-border)]">
             <span>Sell Price:</span>
-            <span className="text-[#2E5AAC]">${product.sellPriceUSD.toFixed(2)}</span>
+            <span className="text-[var(--color-accent)]">${product.sellPriceUSD.toFixed(2)}</span>
           </div>
         </div>
 
         {/* Inventory Summary */}
         <div className="space-y-1">
           <div className="flex justify-between items-center text-xs font-mono font-bold">
-            <span className="text-[#6B7280]">Total Stock:</span>
+            <span className="text-[var(--color-text-secondary)]">Total Stock:</span>
             {isGoodStock && (
-              <span className="text-[#067647]">{product.stockLevel} units ✓</span>
+              <span className="text-emerald-500">{product.stockLevel} units ✓</span>
             )}
             {isLowStock && (
-              <span className="text-[#854F0B]">{product.stockLevel} units ⚠</span>
+              <span className="text-amber-500">{product.stockLevel} units ⚠</span>
             )}
             {isOutOfStock && (
-              <span className="text-[#C5221F]">0 units ✗</span>
+              <span className="text-red-500">0 units ✗</span>
             )}
           </div>
 
-          <div className="text-[11px] text-[#64748B] line-clamp-1 italic">
+          <div className="text-[11px] text-[var(--color-text-secondary)] line-clamp-1 italic">
             &quot;{product.supplierNote}&quot;
           </div>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center gap-2 pt-3 border-t border-[#EAECF0]">
+      <div className="flex items-center gap-2 pt-3 border-t border-[var(--color-border)]">
         <button
           type="button"
           onClick={() => onView(product)}
-          className="flex-1 py-1.5 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase rounded-md transition-colors cursor-pointer text-center"
+          className="flex-1 py-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer text-center"
         >
           VIEW
         </button>
         <button
           type="button"
           onClick={() => onEditMarkup(product)}
-          className="flex-1 py-1.5 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase rounded-md transition-colors cursor-pointer text-center"
+          className="flex-1 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase rounded-none transition-colors cursor-pointer text-center"
         >
           EDIT
         </button>

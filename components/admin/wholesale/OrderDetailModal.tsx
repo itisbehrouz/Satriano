@@ -68,16 +68,16 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none overflow-y-auto">
-      <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[620px] text-[#111318] shadow-2xl relative p-6 space-y-6 my-8">
+      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[620px] text-[var(--color-text-primary)] shadow-2xl relative p-6 space-y-6 my-8">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#EAECF0] pb-4">
-          <h2 className="text-base font-bold font-mono text-[#111318]">
+        <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
+          <h2 className="text-base font-bold font-mono text-[var(--color-text-primary)]">
             ORDER {order.orderId}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-[#6B7280] hover:text-[#111318] text-lg font-bold cursor-pointer"
+            className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-lg font-bold cursor-pointer"
             aria-label="Close Modal"
           >
             ✕
@@ -87,33 +87,33 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
         <div className="space-y-6 text-xs max-h-[70vh] overflow-y-auto pr-1">
           {/* Section 1: Order Summary */}
           <div>
-            <h3 className="font-mono font-bold text-[#6B7280] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[#EAECF0] mb-3">
+            <h3 className="font-mono font-bold text-[var(--color-text-secondary)] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[var(--color-border)] mb-3">
               ORDER SUMMARY
             </h3>
             <div className="space-y-1.5 font-mono">
               <div className="flex justify-between">
-                <span className="text-[#6B7280]">Order ID:</span>
-                <span className="font-bold text-[#111318]">{order.orderId}</span>
+                <span className="text-[var(--color-text-secondary)]">Order ID:</span>
+                <span className="font-bold text-[var(--color-text-primary)]">{order.orderId}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#6B7280]">Customer:</span>
-                <span className="font-bold text-[#111318]">{order.customerName}</span>
+                <span className="text-[var(--color-text-secondary)]">Customer:</span>
+                <span className="font-bold text-[var(--color-text-primary)]">{order.customerName}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#6B7280]">Date Submitted:</span>
-                <span className="text-[#111318]">{order.dateSubmitted}</span>
+                <span className="text-[var(--color-text-secondary)]">Date Submitted:</span>
+                <span className="text-[var(--color-text-primary)]">{order.dateSubmitted}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#6B7280]">Status:</span>
-                <span className="font-bold text-[#2E5AAC]">{statusLabel}</span>
+                <span className="text-[var(--color-text-secondary)]">Status:</span>
+                <span className="font-bold text-[var(--color-accent)]">{statusLabel}</span>
               </div>
-              <div className="flex justify-between pt-1 border-t border-[#EAECF0]">
-                <span className="text-[#6B7280]">Total Units:</span>
-                <span className="font-bold text-[#111318]">{order.totalUnits}</span>
+              <div className="flex justify-between pt-1 border-t border-[var(--color-border)]">
+                <span className="text-[var(--color-text-secondary)]">Total Units:</span>
+                <span className="font-bold text-[var(--color-text-primary)]">{order.totalUnits}</span>
               </div>
-              <div className="flex justify-between font-bold text-sm text-[#111318] pt-1">
+              <div className="flex justify-between font-bold text-sm text-[var(--color-text-primary)] pt-1">
                 <span>Total Price:</span>
-                <span className="tabular-nums text-[#2E5AAC]">
+                <span className="tabular-nums text-[var(--color-accent)]">
                   ${order.totalPriceUSD.toLocaleString("en-US", { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -122,31 +122,31 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
 
           {/* Section 2: Items Breakdown */}
           <div>
-            <h3 className="font-mono font-bold text-[#6B7280] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[#EAECF0] mb-3">
+            <h3 className="font-mono font-bold text-[var(--color-text-secondary)] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[var(--color-border)] mb-3">
               ITEMS BREAKDOWN
             </h3>
             <div className="space-y-3">
               {order.items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] border border-[#E2E8F0] p-3.5 rounded-md space-y-2"
+                  className="bg-[var(--color-bg)] border border-[var(--color-border)] p-3.5 rounded-none space-y-2"
                 >
-                  <div className="font-bold text-[#0F172A]">
-                    {item.productName} — <span className="text-[#2E5AAC]">{item.colorVariant}</span>
+                  <div className="font-bold text-[var(--color-text-primary)]">
+                    {item.productName} — <span className="text-[var(--color-accent)]">{item.colorVariant}</span>
                   </div>
-                  <div className="space-y-1 font-mono text-[11px] text-[#475569] pl-2 border-l-2 border-[#CBD5E1]">
+                  <div className="space-y-1 font-mono text-[11px] text-[var(--color-text-secondary)] pl-2 border-l-2 border-[var(--color-border)]">
                     {Object.entries(item.sizeBreakdown).map(([sz, qty]) => (
                       <div key={sz} className="flex justify-between">
                         <span>
                           Size {sz}: {qty} units @ ${item.unitPriceUSD.toFixed(2)}
                         </span>
-                        <span className="font-bold text-[#0F172A]">
+                        <span className="font-bold text-[var(--color-text-primary)]">
                           ${(qty * item.unitPriceUSD).toFixed(2)}
                         </span>
                       </div>
                     ))}
                   </div>
-                  <div className="flex justify-between font-mono font-bold text-xs text-[#0F172A] pt-1 border-t border-[#E2E8F0]">
+                  <div className="flex justify-between font-mono font-bold text-xs text-[var(--color-text-primary)] pt-1 border-t border-[var(--color-border)]">
                     <span>Item Total:</span>
                     <span>${item.lineTotalUSD.toFixed(2)}</span>
                   </div>
@@ -158,10 +158,10 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
           {/* Section 3: Customer Price Offer */}
           {order.suggestedUnitPriceUSD && (
             <div>
-              <h3 className="font-mono font-bold text-[#6B7280] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[#EAECF0] mb-3">
+              <h3 className="font-mono font-bold text-[var(--color-text-secondary)] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[var(--color-border)] mb-3">
                 CUSTOMER PRICE OFFER
               </h3>
-              <div className="bg-[#ECFDF3] border border-[#5DCAA5]/40 p-3.5 rounded-md space-y-1.5 font-mono text-xs text-[#067647]">
+              <div className="bg-emerald-500/10 border border-emerald-500/30 p-3.5 rounded-none space-y-1.5 font-mono text-xs text-emerald-500">
                 <div className="flex justify-between">
                   <span>Suggested Price:</span>
                   <span className="font-bold">
@@ -182,7 +182,7 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
 
           {/* Section 4: Fulfillment Timeline */}
           <div>
-            <h3 className="font-mono font-bold text-[#6B7280] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[#EAECF0] mb-3">
+            <h3 className="font-mono font-bold text-[var(--color-text-secondary)] uppercase tracking-wider text-[11px] pb-1.5 border-b border-[var(--color-border)] mb-3">
               FULFILLMENT TIMELINE
             </h3>
             <div className="space-y-3 pl-2">
@@ -190,7 +190,7 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
                 <div key={stg.key} className="flex items-start gap-3">
                   <span
                     className={`font-mono text-xs font-bold ${
-                      stg.completed ? "text-[#067647]" : "text-[#6B7280]"
+                      stg.completed ? "text-emerald-500" : "text-[var(--color-text-secondary)]"
                     }`}
                   >
                     {stg.completed ? "✓" : "→"}
@@ -198,12 +198,12 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
                   <div>
                     <span
                       className={`text-xs font-semibold ${
-                        stg.completed ? "text-[#111318]" : "text-[#6B7280]"
+                        stg.completed ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"
                       }`}
                     >
                       {stg.label}
                     </span>
-                    <span className="text-[11px] text-[#6B7280] block font-mono">
+                    <span className="text-[11px] text-[var(--color-text-secondary)] block font-mono">
                       {stg.date}
                     </span>
                   </div>
@@ -214,11 +214,11 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end pt-4 border-t border-[#EAECF0]">
+        <div className="flex justify-end pt-4 border-t border-[var(--color-border)]">
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] rounded-md font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
+            className="px-5 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
           >
             CLOSE
           </button>

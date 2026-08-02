@@ -131,14 +131,14 @@ export function SupplierClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] font-sans antialiased text-[#111318] p-4 md:p-6 lg:p-8 space-y-6 relative">
+    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
       {/* Toast Alert */}
       {toast && (
         <div
-          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-md shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
             toast.type === "success"
-              ? "bg-[#ECFDF3] border-[#5DCAA5] text-[#067647]"
-              : "bg-[#FEE4E2] border-[#F8B4B4] text-[#C5221F]"
+              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-500"
+              : "bg-red-500/10 border-red-500/30 text-red-500"
           }`}
         >
           <span className="material-symbols-outlined text-base">
@@ -149,12 +149,12 @@ export function SupplierClient() {
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EAECF0] pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#111318] uppercase tracking-wide">
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
             SUPPLIER MANAGEMENT
           </h1>
-          <p className="text-xs text-[#6B7280] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Manage wholesale manufacturing partners, review applications, and verify new suppliers.
           </p>
         </div>
@@ -163,14 +163,14 @@ export function SupplierClient() {
           <button
             type="button"
             onClick={() => setIsAddModalOpen(true)}
-            className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">add</span>
             + ADD NEW SUPPLIER
           </button>
           <Link
             href="/admin/wholesale"
-            className="h-10 px-4 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2"
+            className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
           >
             Back to Wholesale Dashboard
           </Link>
@@ -178,10 +178,10 @@ export function SupplierClient() {
       </div>
 
       {/* Controls Bar: Search & Filter Tabs */}
-      <div className="bg-white border border-[#EAECF0] p-4 rounded-md flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
+      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
         {/* Search Bar */}
         <div className="relative flex-1 max-w-md">
-          <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#64748B] text-lg">
+          <span className="material-symbols-outlined absolute left-3 top-2.5 text-[var(--color-text-secondary)] text-lg">
             search
           </span>
           <input
@@ -189,13 +189,13 @@ export function SupplierClient() {
             placeholder="Search suppliers by name, contact, email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#F8FAFC] border border-[#D0D5DD] rounded-md text-xs text-[#111318] focus:border-[#2E5AAC] focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
           />
         </div>
 
         {/* Status Filters */}
         <div className="flex items-center gap-2 font-mono text-xs">
-          <span className="text-[#6B7280] font-bold uppercase mr-1">Filter:</span>
+          <span className="text-[var(--color-text-secondary)] font-bold uppercase mr-1">Filter:</span>
           {(["ALL", "ACTIVE", "PENDING"] as const).map((st) => (
             <button
               key={st}
@@ -203,8 +203,8 @@ export function SupplierClient() {
               onClick={() => setStatusFilter(st)}
               className={`px-3 py-1.5 rounded-none font-bold uppercase transition-colors cursor-pointer border ${
                 statusFilter === st
-                  ? "bg-[#2E5AAC] text-white border-[#2E5AAC]"
-                  : "bg-white text-[#344054] border-[#D0D5DD] hover:bg-[#F9FAFB]"
+                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                  : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border-[var(--color-border)] hover:bg-[var(--color-bg)]"
               }`}
             >
               {st}
@@ -214,7 +214,7 @@ export function SupplierClient() {
       </div>
 
       {/* Main Table Card */}
-      <div className="bg-white border border-[#EAECF0] rounded-md p-6">
+      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6">
         <SuppliersTable
           suppliers={filteredSuppliers}
           onEdit={(sup) => setEditingSupplier(sup)}

@@ -89,20 +89,20 @@ export function InventoryTab({
   };
 
   return (
-    <section className="bg-white border border-[#EAECF0] rounded-md p-6 space-y-6 select-none font-sans">
+    <section className="bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 space-y-6 select-none font-sans transition-colors">
       {/* Top Product Selector */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EAECF0] pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
             INVENTORY BY SIZE/COLOR
           </h2>
-          <p className="text-xs text-[#6B7280] mt-0.5">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
             Manage granular ready-made stock levels per garment color variant
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold uppercase text-[#6B7280]">Select Product:</label>
+          <label className="text-xs font-bold uppercase text-[var(--color-text-secondary)]">Select Product:</label>
           <select
             value={selectedProductId}
             onChange={(e) => {
@@ -112,7 +112,7 @@ export function InventoryTab({
                 setSelectedVariantId(p.colorVariants[0].id);
               }
             }}
-            className="bg-[#F7F8FA] border border-[#D0D5DD] rounded-md px-3 py-1.5 text-xs text-[#111318] font-bold focus:outline-none focus:border-[#2E5AAC] cursor-pointer"
+            className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none px-3 py-1.5 text-xs text-[var(--color-text-primary)] font-bold focus:outline-none focus:border-[var(--color-accent)] cursor-pointer"
           >
             {products.map((p) => (
               <option key={p.id} value={p.id}>
@@ -124,15 +124,15 @@ export function InventoryTab({
       </div>
 
       {currentProduct && currentVariant ? (
-        <div className="space-y-6 bg-[#F9FAFB] border border-[#EAECF0] p-6 rounded-md">
+        <div className="space-y-6 bg-[var(--color-bg)] border border-[var(--color-border)] p-6 rounded-none">
           {/* Main Header & Color Dropdown */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#EAECF0] pb-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[var(--color-border)] pb-4">
             <div>
-              <h3 className="text-base font-bold text-[#111318]">
+              <h3 className="text-base font-bold text-[var(--color-text-primary)]">
                 PRODUCT: {currentProduct.name}
               </h3>
               <div className="flex items-center gap-3 mt-1">
-                <span className="text-xs font-semibold text-[#2E5AAC]">
+                <span className="text-xs font-semibold text-[var(--color-accent)]">
                   Color Variant: {currentVariant.colorName}
                 </span>
 
@@ -140,7 +140,7 @@ export function InventoryTab({
                 <select
                   value={currentVariant.id}
                   onChange={(e) => setSelectedVariantId(e.target.value)}
-                  className="bg-white border border-[#CBD5E1] text-[#0F172A] text-xs font-bold px-3 py-1 rounded-md cursor-pointer focus:outline-none focus:border-[#2E5AAC]"
+                  className="bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-xs font-bold px-3 py-1 rounded-none cursor-pointer focus:outline-none focus:border-[var(--color-accent)]"
                 >
                   {currentProduct.colorVariants.map((v) => {
                     const isCurrent = v.id === currentVariant.id;
@@ -156,10 +156,10 @@ export function InventoryTab({
             </div>
 
             <div className="text-right space-y-1">
-              <div className="font-mono font-bold text-sm text-[#111318]">
-                Total Stock: <span className="text-[#2E5AAC]">{totalStock} units</span>
+              <div className="font-mono font-bold text-sm text-[var(--color-text-primary)]">
+                Total Stock: <span className="text-[var(--color-accent)]">{totalStock} units</span>
               </div>
-              <div className="text-[11px] text-[#6B7280] font-mono">
+              <div className="text-[11px] text-[var(--color-text-secondary)] font-mono">
                 Last Restocked: {currentVariant.lastRestocked}
               </div>
             </div>
@@ -172,10 +172,10 @@ export function InventoryTab({
               return (
                 <div
                   key={sz}
-                  className={`p-3.5 border rounded-md text-xs space-y-1.5 transition-all ${
+                  className={`p-3.5 border rounded-none text-xs space-y-1.5 transition-all ${
                     inStock
-                      ? "bg-white border-[#D0D5DD] text-[#111318]"
-                      : "bg-[#FEE4E2]/50 border-[#F8B4B4] text-[#C5221F]"
+                      ? "bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text-primary)]"
+                      : "bg-red-500/10 border-red-500/30 text-red-500"
                   }`}
                 >
                   <div className="font-bold uppercase tracking-wide font-mono text-[11px]">
@@ -185,7 +185,7 @@ export function InventoryTab({
                   <div className="pt-1">
                     <span
                       className={`inline-block px-2 py-0.5 text-[10px] font-bold uppercase rounded-none ${
-                        inStock ? "bg-[#ECFDF3] text-[#067647]" : "bg-[#FEE4E2] text-[#C5221F]"
+                        inStock ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30" : "bg-red-500/10 text-red-500 border border-red-500/30"
                       }`}
                     >
                       {inStock ? "✓ In Stock" : "✗ Out of Stock"}
@@ -197,12 +197,12 @@ export function InventoryTab({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#EAECF0]">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[var(--color-border)]">
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => setIsEditOpen(true)}
-                className="px-5 py-2.5 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shadow-xs"
+                className="px-5 py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
               >
                 EDIT STOCK LEVELS
               </button>
@@ -210,7 +210,7 @@ export function InventoryTab({
               <button
                 type="button"
                 onClick={() => setIsAddColorOpen(true)}
-                className="px-4 py-2.5 bg-white border border-[#D0D5DD] text-[#111318] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
+                className="px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
               >
                 ADD NEW COLOR VARIANT
               </button>
@@ -219,14 +219,14 @@ export function InventoryTab({
             <button
               type="button"
               onClick={() => setIsArchiveConfirmOpen(true)}
-              className="px-4 py-2.5 bg-white border border-[#D0D5DD] text-[#C5221F] hover:bg-[#FEE4E2] text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer"
+              className="px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-red-500 hover:bg-red-500/10 text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
             >
               ARCHIVE COLOR
             </button>
           </div>
         </div>
       ) : (
-        <div className="p-8 text-center text-xs text-[#6B7280] bg-[#F9FAFB] rounded-md border border-[#EAECF0]">
+        <div className="p-8 text-center text-xs text-[var(--color-text-secondary)] bg-[var(--color-bg)] rounded-none border border-[var(--color-border)]">
           No color variants available for this product. Click &quot;Add New Color Variant&quot; to begin.
         </div>
       )}
@@ -256,30 +256,30 @@ export function InventoryTab({
       {/* Archive Color Confirm Modal */}
       {isArchiveConfirmOpen && currentVariant && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none">
-          <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[460px] text-[#111318] shadow-2xl p-6 space-y-5">
-            <div className="flex items-center gap-3 text-[#C5221F]">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[460px] text-[var(--color-text-primary)] shadow-2xl p-6 space-y-5">
+            <div className="flex items-center gap-3 text-red-500">
               <span className="material-symbols-outlined text-2xl">archive</span>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 Archive Color Variant
               </h3>
             </div>
 
-            <p className="text-xs text-[#6B7280] leading-relaxed">
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
               Archive <strong>{currentVariant.colorName}</strong> color variant? You won&apos;t be able to order this variant, but historical data is preserved.
             </p>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#EAECF0]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-[var(--color-border)]">
               <button
                 type="button"
                 onClick={() => setIsArchiveConfirmOpen(false)}
-                className="px-4 py-2 bg-white text-[#344054] border border-[#D0D5DD] rounded-md font-bold uppercase tracking-wider text-xs hover:bg-[#F9FAFB] cursor-pointer"
+                className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
               >
                 KEEP
               </button>
               <button
                 type="button"
                 onClick={handleArchiveColor}
-                className="px-4 py-2 bg-[#C5221F] hover:bg-red-800 text-white rounded-md font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
               >
                 ARCHIVE
               </button>

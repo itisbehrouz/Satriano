@@ -33,13 +33,13 @@ export function OrderStatusTab({
   };
 
   return (
-    <section className="bg-white border border-[#EAECF0] rounded-md p-6 space-y-6 select-none font-sans">
-      <div className="flex items-center justify-between border-b border-[#EAECF0] pb-4">
+    <section className="bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 space-y-6 select-none font-sans transition-colors">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
             WHOLESALE ORDER STATUS
           </h2>
-          <p className="text-xs text-[#6B7280] mt-0.5">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
             Track ready-made stock orders and update fulfillment stages
           </p>
         </div>
@@ -48,7 +48,7 @@ export function OrderStatusTab({
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-[#F7F8FA] border-b border-[#EAECF0] text-[#111318] font-bold uppercase tracking-wider h-11">
+            <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[var(--color-text-primary)] font-bold uppercase tracking-wider h-11">
               <th className="py-3 px-4">Order</th>
               <th className="py-3 px-4">Customer</th>
               <th className="py-3 px-4 text-center">Units</th>
@@ -57,67 +57,63 @@ export function OrderStatusTab({
               <th className="py-3 px-4 text-right">Fulfillment</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#EAECF0]">
-            {orders.map((order, idx) => {
-              const isEven = idx % 2 === 0;
-
+          <tbody className="divide-y divide-[var(--color-border)]">
+            {orders.map((order) => {
               return (
                 <tr
                   key={order.id}
-                  className={`h-14 transition-colors ${
-                    isEven ? "bg-white" : "bg-[#F9FAFB]"
-                  } hover:bg-[#F2F4F7]`}
+                  className="h-14 transition-colors bg-[var(--color-surface)] hover:bg-[var(--color-bg)]/50"
                 >
                   {/* Order ID Link */}
                   <td className="py-3 px-4 font-mono font-bold">
                     <button
                       type="button"
                       onClick={() => setSelectedOrder(order)}
-                      className="text-[#2E5AAC] hover:underline cursor-pointer text-left"
+                      className="text-[var(--color-accent)] hover:underline cursor-pointer text-left"
                     >
                       {order.orderId}
                     </button>
                   </td>
 
                   {/* Customer */}
-                  <td className="py-3 px-4 font-bold text-[#111318]">
+                  <td className="py-3 px-4 font-bold text-[var(--color-text-primary)]">
                     {order.customerName}
                   </td>
 
                   {/* Total Units */}
-                  <td className="py-3 px-4 text-center font-mono font-bold text-[#111318]">
+                  <td className="py-3 px-4 text-center font-mono font-bold text-[var(--color-text-primary)]">
                     {order.totalUnits}
                   </td>
 
                   {/* Total $ */}
-                  <td className="py-3 px-4 text-right font-mono font-bold text-[#111318] tabular-nums">
+                  <td className="py-3 px-4 text-right font-mono font-bold text-[var(--color-text-primary)] tabular-nums">
                     ${order.totalPriceUSD.toLocaleString("en-US", { minimumFractionDigits: 2 })}
                   </td>
 
                   {/* Status Badge */}
                   <td className="py-3 px-4 font-bold text-xs uppercase font-mono">
                     {order.status === "PENDING_REVIEW" && (
-                      <span className="bg-[#FDF6E7] text-[#854F0B] px-2.5 py-1 rounded-none border border-[#F0B94A]/40 inline-flex items-center gap-1">
+                      <span className="bg-amber-500/10 text-amber-500 px-2.5 py-1 rounded-none border border-amber-500/30 inline-flex items-center gap-1">
                         ⏳ PENDING REVIEW
                       </span>
                     )}
                     {order.status === "APPROVED" && (
-                      <span className="bg-[#E6F1FB] text-[#185FA5] px-2.5 py-1 rounded-none border border-[#2E5AAC]/40 inline-flex items-center gap-1">
+                      <span className="bg-sky-500/10 text-sky-500 px-2.5 py-1 rounded-none border border-sky-500/30 inline-flex items-center gap-1">
                         ✓ APPROVED
                       </span>
                     )}
                     {order.status === "IN_FULFILLMENT" && (
-                      <span className="bg-[#E6F1FB] text-[#185FA5] px-2.5 py-1 rounded-none border border-[#2E5AAC]/40 inline-flex items-center gap-1">
+                      <span className="bg-sky-500/10 text-sky-500 px-2.5 py-1 rounded-none border border-sky-500/30 inline-flex items-center gap-1">
                         📦 IN FULFILLMENT
                       </span>
                     )}
                     {order.status === "SHIPPED" && (
-                      <span className="bg-[#ECFDF3] text-[#067647] px-2.5 py-1 rounded-none border border-[#5DCAA5]/40 inline-flex items-center gap-1">
+                      <span className="bg-emerald-500/10 text-emerald-500 px-2.5 py-1 rounded-none border border-emerald-500/30 inline-flex items-center gap-1">
                         ✅ SHIPPED
                       </span>
                     )}
                     {order.status === "ON_HOLD" && (
-                      <span className="bg-[#FDF6E7] text-[#854F0B] px-2.5 py-1 rounded-none border border-[#F0B94A]/40 inline-flex items-center gap-1">
+                      <span className="bg-amber-500/10 text-amber-500 px-2.5 py-1 rounded-none border border-amber-500/30 inline-flex items-center gap-1">
                         ⚠️ ON HOLD
                       </span>
                     )}
@@ -130,7 +126,7 @@ export function OrderStatusTab({
                       onChange={(e) =>
                         handleStatusSelect(order.id, e.target.value as WholesaleOrderFull["status"])
                       }
-                      className="bg-white border border-[#D0D5DD] rounded-md px-3 py-1.5 text-xs text-[#111318] font-semibold focus:outline-none focus:border-[#2E5AAC] cursor-pointer"
+                      className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none px-3 py-1.5 text-xs text-[var(--color-text-primary)] font-semibold focus:outline-none focus:border-[var(--color-accent)] cursor-pointer"
                     >
                       <option value="PENDING_REVIEW">Pending Review</option>
                       <option value="APPROVED">Approved</option>

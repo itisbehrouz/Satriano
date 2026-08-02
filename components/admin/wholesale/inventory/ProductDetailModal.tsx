@@ -52,20 +52,20 @@ export function ProductDetailModal({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none overflow-y-auto">
-      <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[700px] text-[#111318] shadow-2xl relative p-6 space-y-6 my-8">
-        <div className="flex items-center justify-between border-b border-[#EAECF0] pb-4">
+      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[700px] text-[var(--color-text-primary)] shadow-2xl relative p-6 space-y-6 my-8">
+        <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <div>
-            <h2 className="text-base font-bold text-[#111318] uppercase tracking-wide">
+            <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
               {product.name}
             </h2>
-            <div className="text-xs text-[#2E5AAC] font-mono font-bold mt-0.5">
+            <div className="text-xs text-[var(--color-accent)] font-mono font-bold mt-0.5">
               Supplier: {product.supplierName} • SKU: {product.supplierSku}
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-[#6B7280] hover:text-[#111318] text-lg font-bold cursor-pointer"
+            className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-lg font-bold cursor-pointer"
             aria-label="Close"
           >
             ✕
@@ -73,7 +73,7 @@ export function ProductDetailModal({
         </div>
 
         <div className="space-y-6 max-h-[70vh] overflow-y-auto pr-1">
-          {/* Photo Management Section (PROMPT 3) */}
+          {/* Photo Management Section */}
           <ProductImageUploader
             images={product.images}
             onChangeImages={(newImages) => {
@@ -82,29 +82,29 @@ export function ProductDetailModal({
           />
 
           {/* Pricing Block */}
-          <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 rounded-md space-y-3 font-mono text-xs">
-            <div className="font-bold text-[#0F172A] uppercase tracking-wider text-[11px] pb-1 border-b border-[#E2E8F0]">
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none space-y-3 font-mono text-xs">
+            <div className="font-bold text-[var(--color-text-primary)] uppercase tracking-wider text-[11px] pb-1 border-b border-[var(--color-border)]">
               PRICING & MARGIN ANALYSIS
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <span className="text-[#64748B] block">Wholesale Cost:</span>
-                <span className="font-bold text-[#0F172A] text-sm">
+                <span className="text-[var(--color-text-secondary)] block">Wholesale Cost:</span>
+                <span className="font-bold text-[var(--color-text-primary)] text-sm">
                   ${product.wholesaleCostPriceUSD.toFixed(2)}
                 </span>
               </div>
 
               <div>
-                <span className="text-[#64748B] block">Your Markup:</span>
-                <span className="font-bold text-[#067647] text-sm">
+                <span className="text-[var(--color-text-secondary)] block">Your Markup:</span>
+                <span className="font-bold text-emerald-500 text-sm">
                   +${currentMarkupUSD.toFixed(2)} ({product.markupPercent}%)
                 </span>
               </div>
 
               <div>
-                <span className="text-[#64748B] block">Customer Retail Price:</span>
-                <span className="font-bold text-[#2E5AAC] text-sm">
+                <span className="text-[var(--color-text-secondary)] block">Customer Retail Price:</span>
+                <span className="font-bold text-[var(--color-accent)] text-sm">
                   ${product.sellPriceUSD.toFixed(2)}
                 </span>
               </div>
@@ -112,8 +112,8 @@ export function ProductDetailModal({
 
             {/* Edit Markup Form Inline */}
             {isEditingMarkup ? (
-              <form onSubmit={handleSaveMarkup} className="pt-2 border-t border-[#E2E8F0] space-y-2">
-                <label className="block text-[11px] font-bold text-[#344054]">
+              <form onSubmit={handleSaveMarkup} className="pt-2 border-t border-[var(--color-border)] space-y-2">
+                <label className="block text-[11px] font-bold text-[var(--color-text-primary)]">
                   Edit Markup Percentage (%):
                 </label>
                 <div className="flex items-center gap-2">
@@ -125,32 +125,32 @@ export function ProductDetailModal({
                     value={markupPercentInput}
                     onChange={(e) => setMarkupPercentInput(e.target.value)}
                     placeholder="20"
-                    className="w-28 px-3 py-1.5 bg-white border border-[#2E5AAC] text-xs font-bold rounded-md"
+                    className="w-28 px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-accent)] text-xs font-bold text-[var(--color-text-primary)] rounded-none"
                   />
                   <button
                     type="submit"
-                    className="px-3 py-1.5 bg-[#2E5AAC] text-white text-xs font-bold uppercase rounded-md cursor-pointer"
+                    className="px-3 py-1.5 bg-[var(--color-accent)] text-white text-xs font-bold uppercase rounded-none cursor-pointer"
                   >
                     SAVE
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsEditingMarkup(false)}
-                    className="px-3 py-1.5 bg-white border border-[#D0D5DD] text-xs font-bold uppercase rounded-md cursor-pointer"
+                    className="px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-bold text-[var(--color-text-primary)] uppercase rounded-none cursor-pointer"
                   >
                     CANCEL
                   </button>
                 </div>
               </form>
             ) : (
-              <div className="pt-2 border-t border-[#E2E8F0]">
+              <div className="pt-2 border-t border-[var(--color-border)]">
                 <button
                   type="button"
                   onClick={() => {
                     setMarkupPercentInput(product.markupPercent.toString());
                     setIsEditingMarkup(true);
                   }}
-                  className="text-xs font-bold text-[#2E5AAC] hover:underline cursor-pointer"
+                  className="text-xs font-bold text-[var(--color-accent)] hover:underline cursor-pointer"
                 >
                   ✏️ Edit Markup Percentage
                 </button>
@@ -159,8 +159,8 @@ export function ProductDetailModal({
           </div>
 
           {/* Size / Stock Matrix */}
-          <div className="border border-[#EAECF0] p-4 rounded-md space-y-3 font-sans">
-            <div className="font-bold text-[#111318] uppercase tracking-wider text-xs pb-1 border-b border-[#EAECF0]">
+          <div className="border border-[var(--color-border)] p-4 rounded-none space-y-3 font-sans">
+            <div className="font-bold text-[var(--color-text-primary)] uppercase tracking-wider text-xs pb-1 border-b border-[var(--color-border)]">
               INVENTORY MATRIX (Size & Stock)
             </div>
 
@@ -170,13 +170,13 @@ export function ProductDetailModal({
                 return (
                   <div
                     key={sz}
-                    className={`p-2.5 border rounded-md font-mono text-xs ${
-                      inStock ? "bg-white border-[#D0D5DD]" : "bg-[#FEE4E2]/50 border-[#F8B4B4]"
+                    className={`p-2.5 border rounded-none font-mono text-xs ${
+                      inStock ? "bg-[var(--color-surface)] border-[var(--color-border)]" : "bg-red-500/10 border-red-500/30"
                     }`}
                   >
-                    <div className="font-bold text-[#111318]">SIZE {sz}</div>
-                    <div className="text-[#64748B]">{qty} units</div>
-                    <div className={`text-[10px] font-bold ${inStock ? "text-[#067647]" : "text-[#C5221F]"}`}>
+                    <div className="font-bold text-[var(--color-text-primary)]">SIZE {sz}</div>
+                    <div className="text-[var(--color-text-secondary)]">{qty} units</div>
+                    <div className={`text-[10px] font-bold ${inStock ? "text-emerald-500" : "text-red-500"}`}>
                       {inStock ? "✓ In Stock" : "✗ Out of Stock"}
                     </div>
                   </div>
@@ -186,18 +186,18 @@ export function ProductDetailModal({
           </div>
 
           {/* Supplier Note */}
-          <div className="bg-[#FDF6E7] border border-[#F0B94A]/40 p-3.5 rounded-md text-xs font-mono">
-            <span className="font-bold text-[#854F0B] uppercase block mb-1">Supplier Note:</span>
-            <p className="text-[#3A2E14] italic">&quot;{product.supplierNote}&quot;</p>
+          <div className="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-none text-xs font-mono">
+            <span className="font-bold text-amber-500 uppercase block mb-1">Supplier Note:</span>
+            <p className="text-[var(--color-text-primary)] italic">&quot;{product.supplierNote}&quot;</p>
           </div>
         </div>
 
         {/* Footer Actions */}
-        <div className="flex flex-wrap justify-between items-center gap-3 pt-4 border-t border-[#EAECF0]">
+        <div className="flex flex-wrap justify-between items-center gap-3 pt-4 border-t border-[var(--color-border)]">
           <button
             type="button"
             onClick={handleSyncInventory}
-            className="px-4 py-2 bg-white border border-[#D0D5DD] text-[#111318] hover:bg-[#F9FAFB] text-xs font-bold uppercase rounded-md cursor-pointer inline-flex items-center gap-1.5"
+            className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase rounded-none cursor-pointer inline-flex items-center gap-1.5"
           >
             <span className="material-symbols-outlined text-base">sync</span>
             SYNC INVENTORY
@@ -206,7 +206,7 @@ export function ProductDetailModal({
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] rounded-md font-bold uppercase tracking-wider text-xs cursor-pointer"
+            className="px-5 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer"
           >
             CLOSE
           </button>

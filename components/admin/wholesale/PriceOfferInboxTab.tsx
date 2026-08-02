@@ -76,13 +76,13 @@ export function PriceOfferInboxTab({
   };
 
   return (
-    <section className="bg-white border border-[#EAECF0] rounded-md p-6 space-y-6 select-none font-sans">
-      <div className="flex items-center justify-between border-b border-[#EAECF0] pb-4">
+    <section className="bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 space-y-6 select-none font-sans transition-colors">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
             PRICE OFFER INBOX (Multi-Supplier Negotiation)
           </h2>
-          <p className="text-xs text-[#6B7280] mt-0.5">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
             Admin multi-supplier price offer desk. Supplier details & notes are visible to Admin only.
           </p>
         </div>
@@ -96,43 +96,24 @@ export function PriceOfferInboxTab({
           const isRejected = offer.status === "REJECTED";
           const isCountered = offer.status === "COUNTER_OFFERED";
 
-          let borderClass = "border-[#EAECF0]";
-          let bgClass = "bg-white";
-          if (isPendingAdmin) {
-            borderClass = "border-[#F0B94A]";
-            bgClass = "bg-[#FDF6E7]/40";
-          }
-          if (isPendingSupplier) {
-            borderClass = "border-[#85B7EB]";
-            bgClass = "bg-[#E6F1FB]/40";
-          }
-          if (isAccepted) {
-            borderClass = "border-[#5DCAA5]";
-            bgClass = "bg-[#ECFDF3]/40";
-          }
-          if (isRejected) {
-            borderClass = "border-[#F8B4B4]";
-            bgClass = "bg-[#FEE4E2]/40";
-          }
-
           return (
             <div
               key={offer.id}
-              className={`border ${borderClass} ${bgClass} rounded-md p-5 space-y-4 transition-all shadow-xs`}
+              className="border border-[var(--color-border)] bg-[var(--color-bg)] rounded-none p-5 space-y-4 transition-all"
             >
               {/* Header Row */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#EAECF0] pb-3">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono font-bold text-sm text-[#2E5AAC]">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[var(--color-border)] pb-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="font-mono font-bold text-sm text-[var(--color-accent)]">
                     {offer.orderId}
                   </span>
-                  <span className="font-bold text-[#111318] text-sm">
+                  <span className="font-bold text-[var(--color-text-primary)] text-sm">
                     {offer.productName} ({offer.quantity} units)
                   </span>
-                  <span className="font-mono text-xs font-bold text-[#067647]">
+                  <span className="font-mono text-xs font-bold text-emerald-500">
                     ${offer.offeredPriceUSD.toFixed(0)}/unit
                   </span>
-                  <span className="text-[11px] text-[#6B7280] font-mono">
+                  <span className="text-[11px] text-[var(--color-text-secondary)] font-mono">
                     (vs ${offer.listPriceUSD.toFixed(0)} list)
                   </span>
                 </div>
@@ -140,27 +121,27 @@ export function PriceOfferInboxTab({
                 {/* Status Badge */}
                 <div className="font-mono text-xs font-bold uppercase">
                   {isPendingAdmin && (
-                    <span className="bg-[#FDF6E7] text-[#854F0B] px-2.5 py-1 rounded-none border border-[#F0B94A]/40 inline-flex items-center gap-1">
+                    <span className="bg-amber-500/10 text-amber-500 px-2.5 py-1 rounded-none border border-amber-500/30 inline-flex items-center gap-1">
                       ⏳ PENDING ADMIN REVIEW
                     </span>
                   )}
                   {isPendingSupplier && (
-                    <span className="bg-[#E6F1FB] text-[#185FA5] px-2.5 py-1 rounded-none border border-[#2E5AAC]/40 inline-flex items-center gap-1">
+                    <span className="bg-sky-500/10 text-sky-500 px-2.5 py-1 rounded-none border border-sky-500/30 inline-flex items-center gap-1">
                       ⏳ PENDING SUPPLIER RESPONSE
                     </span>
                   )}
                   {isAccepted && (
-                    <span className="bg-[#ECFDF3] text-[#067647] px-2.5 py-1 rounded-none border border-[#5DCAA5]/40 inline-flex items-center gap-1">
+                    <span className="bg-emerald-500/10 text-emerald-500 px-2.5 py-1 rounded-none border border-emerald-500/30 inline-flex items-center gap-1">
                       ✓ ACCEPTED (${offer.acceptedPriceUSD || offer.offeredPriceUSD}/unit)
                     </span>
                   )}
                   {isRejected && (
-                    <span className="bg-[#FEE4E2] text-[#C5221F] px-2.5 py-1 rounded-none border border-[#F8B4B4] inline-flex items-center gap-1">
+                    <span className="bg-red-500/10 text-red-500 px-2.5 py-1 rounded-none border border-red-500/30 inline-flex items-center gap-1">
                       ✗ REJECTED
                     </span>
                   )}
                   {isCountered && (
-                    <span className="bg-[#E6F1FB] text-[#185FA5] px-2.5 py-1 rounded-none border border-[#2E5AAC]/40 inline-flex items-center gap-1">
+                    <span className="bg-sky-500/10 text-sky-500 px-2.5 py-1 rounded-none border border-sky-500/30 inline-flex items-center gap-1">
                       ⏳ COUNTER OFFERED (${offer.counterPriceUSD}/unit)
                     </span>
                   )}
@@ -169,23 +150,23 @@ export function PriceOfferInboxTab({
 
               {/* ADMIN ONLY Supplier Info Box */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-                <div className="bg-white border border-[#E2E8F0] p-3 rounded-md space-y-1">
-                  <div className="font-bold text-[#854F0B] uppercase text-[10px] tracking-wider flex items-center gap-1">
+                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-none space-y-1">
+                  <div className="font-bold text-amber-500 uppercase text-[10px] tracking-wider flex items-center gap-1">
                     <span className="material-symbols-outlined text-xs">lock</span>
                     SUPPLIER INFO (ADMIN ONLY — Hidden from customer)
                   </div>
-                  <div className="font-bold text-[#0F172A]">{offer.supplierName}</div>
-                  <div className="text-[#475569]">
+                  <div className="font-bold text-[var(--color-text-primary)]">{offer.supplierName}</div>
+                  <div className="text-[var(--color-text-secondary)]">
                     Contact: {offer.supplierContact} • {offer.supplierEmail}
                   </div>
-                  <div className="text-[#475569]">Phone: {offer.supplierPhone}</div>
+                  <div className="text-[var(--color-text-secondary)]">Phone: {offer.supplierPhone}</div>
                 </div>
 
-                <div className="bg-white border border-[#E2E8F0] p-3 rounded-md space-y-1">
-                  <div className="font-bold text-[#64748B] uppercase text-[10px] tracking-wider">
+                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-none space-y-1">
+                  <div className="font-bold text-[var(--color-text-secondary)] uppercase text-[10px] tracking-wider">
                     SUPPLIER&apos;S NOTE
                   </div>
-                  <p className="text-[#334155] italic">
+                  <p className="text-[var(--color-text-primary)] italic">
                     &quot;{offer.supplierNote || "No note provided."}&quot;
                   </p>
                 </div>
@@ -194,7 +175,7 @@ export function PriceOfferInboxTab({
               {/* Admin Internal Notes Section */}
               <div className="text-xs space-y-1">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-[#344054] uppercase tracking-wider text-[11px]">
+                  <span className="font-bold text-[var(--color-text-primary)] uppercase tracking-wider text-[11px]">
                     Internal Admin Notes:
                   </span>
                   {editingAdminNoteId !== offer.id && (
@@ -204,7 +185,7 @@ export function PriceOfferInboxTab({
                         setEditingAdminNoteId(offer.id);
                         setTempAdminNote(offer.adminNote || "");
                       }}
-                      className="text-[11px] font-bold text-[#2E5AAC] hover:underline cursor-pointer"
+                      className="text-[11px] font-bold text-[var(--color-accent)] hover:underline cursor-pointer"
                     >
                       Edit Note
                     </button>
@@ -218,7 +199,7 @@ export function PriceOfferInboxTab({
                       value={tempAdminNote}
                       onChange={(e) => setTempAdminNote(e.target.value)}
                       placeholder="Add internal note..."
-                      className="flex-1 px-3 py-1.5 bg-white border border-[#2E5AAC] rounded-md text-xs"
+                      className="flex-1 px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-accent)] rounded-none text-xs text-[var(--color-text-primary)]"
                     />
                     <button
                       type="button"
@@ -227,33 +208,33 @@ export function PriceOfferInboxTab({
                         setEditingAdminNoteId(null);
                         showToast("Saved internal admin note", "success");
                       }}
-                      className="px-3 py-1.5 bg-[#2E5AAC] text-white text-xs font-bold uppercase rounded-md"
+                      className="px-3 py-1.5 bg-[var(--color-accent)] text-white text-xs font-bold uppercase rounded-none cursor-pointer"
                     >
                       Save
                     </button>
                   </div>
                 ) : (
-                  <p className="text-[#64748B] font-mono text-xs italic bg-[#F8FAFC] p-2 border border-[#E2E8F0] rounded-md">
+                  <p className="text-[var(--color-text-secondary)] font-mono text-xs italic bg-[var(--color-surface)] p-2 border border-[var(--color-border)] rounded-none">
                     {offer.adminNote || "No internal admin note."}
                   </p>
                 )}
               </div>
 
               {/* Action Buttons */}
-              <div className="flex justify-end gap-2 pt-2 border-t border-[#EAECF0]">
+              <div className="flex justify-end gap-2 pt-2 border-t border-[var(--color-border)]">
                 {isPendingAdmin || isPendingSupplier ? (
                   <>
                     <button
                       type="button"
                       onClick={() => handleAccept(offer)}
-                      className="px-4 py-2 bg-[#067647] hover:bg-emerald-800 text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shadow-xs"
+                      className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
                       ACCEPT
                     </button>
                     <button
                       type="button"
                       onClick={() => setRejectingOffer(offer)}
-                      className="px-4 py-2 bg-[#C5221F] hover:bg-red-800 text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shadow-xs"
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
                       REJECT
                     </button>
@@ -264,13 +245,13 @@ export function PriceOfferInboxTab({
                         setCounterPriceInput(offer.offeredPriceUSD.toString());
                         setCounterMessageInput("");
                       }}
-                      className="px-4 py-2 bg-[#854F0B] hover:bg-amber-800 text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shadow-xs"
+                      className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
                       COUNTER OFFER
                     </button>
                   </>
                 ) : (
-                  <span className="text-xs text-[#6B7280] font-mono italic">
+                  <span className="text-xs text-[var(--color-text-secondary)] font-mono italic">
                     Action completed ({offer.status})
                   </span>
                 )}
@@ -280,43 +261,43 @@ export function PriceOfferInboxTab({
         })}
       </div>
 
-      {/* Counter Modal (PROMPT 4) */}
+      {/* Counter Modal */}
       {counteringOffer && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none">
-          <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[480px] text-[#111318] shadow-2xl p-6 space-y-5">
-            <div className="flex items-center justify-between border-b border-[#EAECF0] pb-3">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[480px] text-[var(--color-text-primary)] shadow-2xl p-6 space-y-5">
+            <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 COUNTER OFFER TO SUPPLIER: {counteringOffer.supplierName}
               </h3>
               <button
                 type="button"
                 onClick={() => setCounteringOffer(null)}
-                className="text-[#6B7280] hover:text-[#111318] text-base font-bold cursor-pointer"
+                className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-base font-bold cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleSendCounterSubmit} className="space-y-4 text-xs">
-              <div className="bg-[#F8FAFC] p-3 rounded-md border border-[#E2E8F0] space-y-1 font-mono">
+              <div className="bg-[var(--color-bg)] p-3 rounded-none border border-[var(--color-border)] space-y-1 font-mono">
                 <div className="flex justify-between">
-                  <span className="text-[#64748B]">Buyer Offer:</span>
-                  <span className="font-bold text-[#067647]">
+                  <span className="text-[var(--color-text-secondary)]">Buyer Offer:</span>
+                  <span className="font-bold text-emerald-500">
                     ${counteringOffer.offeredPriceUSD}/unit ({counteringOffer.quantity} units)
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#64748B]">Supplier List Price:</span>
-                  <span className="font-bold text-[#0F172A]">${counteringOffer.listPriceUSD}/unit</span>
+                  <span className="text-[var(--color-text-secondary)]">Supplier List Price:</span>
+                  <span className="font-bold text-[var(--color-text-primary)]">${counteringOffer.listPriceUSD}/unit</span>
                 </div>
               </div>
 
               <div>
-                <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1.5">
+                <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1.5">
                   Your Counter Price (USD, per unit) *
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-[#64748B] font-mono font-bold">$</span>
+                  <span className="absolute left-3 top-2.5 text-[var(--color-text-secondary)] font-mono font-bold">$</span>
                   <input
                     type="number"
                     step="1"
@@ -326,13 +307,13 @@ export function PriceOfferInboxTab({
                     value={counterPriceInput}
                     onChange={(e) => setCounterPriceInput(e.target.value)}
                     placeholder="110"
-                    className="w-full pl-8 pr-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] font-mono font-bold rounded-md focus:border-[#2E5AAC] focus:outline-none"
+                    className="w-full pl-8 pr-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-mono font-bold rounded-none focus:border-[var(--color-accent)] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-bold uppercase tracking-wider text-[#344054] mb-1.5">
+                <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1.5">
                   Message to Supplier (Optional)
                 </label>
                 <textarea
@@ -340,21 +321,21 @@ export function PriceOfferInboxTab({
                   value={counterMessageInput}
                   onChange={(e) => setCounterMessageInput(e.target.value)}
                   placeholder="e.g. We can commit to 50 units if you accept $110/unit..."
-                  className="w-full px-3 py-2 bg-white border border-[#D0D5DD] text-[#111318] rounded-md focus:border-[#2E5AAC] focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded-none focus:border-[var(--color-accent)] focus:outline-none resize-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-[#EAECF0]">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[var(--color-border)]">
                 <button
                   type="button"
                   onClick={() => setCounteringOffer(null)}
-                  className="px-4 py-2 bg-white text-[#344054] border border-[#D0D5DD] rounded-md font-bold uppercase text-xs hover:bg-[#F9FAFB] cursor-pointer"
+                  className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase text-xs hover:bg-[var(--color-surface)] cursor-pointer"
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#854F0B] hover:bg-amber-800 text-white rounded-md font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer shadow-xs"
+                  className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
                 >
                   SEND COUNTER
                 </button>
@@ -367,31 +348,31 @@ export function PriceOfferInboxTab({
       {/* Reject Modal */}
       {rejectingOffer && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans select-none">
-          <div className="bg-white border border-[#EAECF0] rounded-md w-full max-w-[440px] text-[#111318] shadow-2xl p-6 space-y-5">
-            <div className="flex items-center gap-3 text-[#C5221F]">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[440px] text-[var(--color-text-primary)] shadow-2xl p-6 space-y-5">
+            <div className="flex items-center gap-3 text-red-500">
               <span className="material-symbols-outlined text-2xl">error</span>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#111318]">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 Reject Price Offer
               </h3>
             </div>
 
-            <p className="text-xs text-[#6B7280] leading-relaxed">
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
               Reject price offer of <strong>${rejectingOffer.offeredPriceUSD}/unit</strong> for{" "}
               <strong>{rejectingOffer.quantity} {rejectingOffer.productName}s</strong> ({rejectingOffer.orderId})?
             </p>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-[#EAECF0]">
+            <div className="flex justify-end gap-3 pt-3 border-t border-[var(--color-border)]">
               <button
                 type="button"
                 onClick={() => setRejectingOffer(null)}
-                className="px-4 py-2 bg-white text-[#344054] border border-[#D0D5DD] rounded-md font-bold uppercase tracking-wider text-xs hover:bg-[#F9FAFB] cursor-pointer"
+                className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
               >
                 CANCEL
               </button>
               <button
                 type="button"
                 onClick={handleConfirmReject}
-                className="px-4 py-2 bg-[#C5221F] hover:bg-red-800 text-white rounded-md font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
               >
                 REJECT
               </button>
