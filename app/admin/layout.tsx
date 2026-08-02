@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminAuthProvider, useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
 
 interface SubItem {
   label: string;
@@ -84,171 +85,274 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-function getPageName(pathname: string): string {
-  if (pathname.startsWith("/admin/wholesale")) return "Wholesale Manager";
-  if (pathname.startsWith("/admin/product-settings")) return "Product Settings";
-  if (pathname.startsWith("/admin/applications")) return "B2B Applications";
-  if (pathname.startsWith("/admin/architecture-viz")) return "3D Telemetry";
-  return "Order Ledger";
-}
-
 function AdminChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/admin";
   const { isAuthenticated, signOut } = useAdminAuth();
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const navRef = useRef<HTMLDivElement>(null);
 
-  // Login gate / session-loading states render full-bleed, no chrome.
+  // Initialize theme from DOM / LocalStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentTheme =
+        (document.documentElement.getAttribute("data-theme") as "light" | "dark") ||
+        (localStorage.getItem("satriano-theme") as "light" | "dark") ||
+        "light";
+      setTheme(currentTheme);
+      document.documentElement.setAttribute("data-theme", currentTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    try {
+      localStorage.setItem("satriano-theme", nextTheme);
+    } catch (e) {
+      console.error("Theme storage error:", e);
+    }
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close dropdown on route change
+  useEffect(() => {
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Login gate / session-loading states render full-bleed without menu chrome
   if (!isAuthenticated) {
     return <>{children}</>;
   }
 
   return (
-    <div className="min-h-screen flex bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
-      {/* Sidebar */}
-      <nav
-        aria-label="Admin navigation"
-        className={`flex-shrink-0 bg-[#111318] flex flex-col justify-between p-3 transition-all duration-300 select-none overflow-y-auto ${
-          isExpanded ? "w-64" : "w-16"
-        }`}
+    <div className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
+      {/* SAP Fiori Style Top Header / Navigation Menu Bar */}
+      <header
+        ref={navRef}
+        aria-label="Admin Navigation Header"
+        className="sticky top-0 z-40 w-full bg-[#0B1E3D] text-white border-b border-[#1E3A8A] shadow-md select-none transition-colors"
       >
-        <div className="space-y-4">
-          {/* Header & Toggle Button */}
-          <div
-            className={`flex items-center min-h-[36px] px-1 ${
-              isExpanded ? "justify-between" : "justify-center"
-            }`}
-          >
-            {isExpanded && (
-              <span className="text-xs font-bold uppercase tracking-wider text-white/80">
-                Navigation Menu
-              </span>
-            )}
+        <div className="max-w-container-max mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
+          {/* Brand & Portal Logo */}
+          <div className="flex items-center gap-6">
+            <Link
+              href="/admin"
+              className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+            >
+              <img
+                src="/Satrinao.png"
+                alt="Satriano Atelier"
+                className="h-8 w-auto object-contain brightness-200"
+              />
+              <div className="hidden sm:flex flex-col border-l border-white/20 pl-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-white leading-none">
+                  Portal Console
+                </span>
+                <span className="text-[10px] text-[#93C5FD] font-mono tracking-tight mt-0.5">
+                  SAP Enterprise ERP
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop Horizontal Navigation Items (SAP Style Dropdown Menu) */}
+            <nav className="hidden lg:flex items-center gap-1" aria-label="Main Menu">
+              {NAV_ITEMS.map((item) => {
+                const isActive = item.isActive(pathname);
+                const isOpen = activeDropdown === item.href;
+
+                return (
+                  <div key={item.href} className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setActiveDropdown(isOpen ? null : item.href)}
+                      className={`min-h-[40px] px-3.5 py-2 rounded-md text-xs font-semibold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer ${
+                        isActive
+                          ? "bg-[#2E5AAC] text-white shadow-xs"
+                          : isOpen
+                          ? "bg-white/10 text-white"
+                          : "text-[#93C5FD] hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-lg flex-shrink-0">
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                      <span className="material-symbols-outlined text-sm text-white/60">
+                        {isOpen ? "expand_less" : "expand_more"}
+                      </span>
+                    </button>
+
+                    {/* SAP Sub-Menu Dropdown Panel */}
+                    {isOpen && (
+                      <div className="absolute left-0 top-full mt-1.5 w-64 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl py-2 z-50 animate-fadeIn">
+                        <div className="px-3 py-1.5 border-b border-[var(--color-border)] text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
+                          {item.label} Navigation
+                        </div>
+                        {item.subItems.map((sub) => (
+                          <Link
+                            key={sub.label}
+                            href={sub.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors"
+                          >
+                            <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                              {sub.icon}
+                            </span>
+                            <span>{sub.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Right Action Utilities: Search, Theme Toggle & Sign Out */}
+          <div className="flex items-center gap-2">
+            {/* Quick Command Palette Search Button */}
             <button
               type="button"
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-[#8B93A7] hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-              title={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
+              onClick={() => setIsPaletteOpen(true)}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-[#93C5FD] hover:text-white transition-all cursor-pointer"
+              title="Search orders, catalog or B2B partners (⌘K)"
             >
-              <span className="material-symbols-outlined text-lg">
-                {isExpanded ? "chevron_left" : "chevron_right"}
+              <span className="material-symbols-outlined text-base">search</span>
+              <span className="hidden md:inline text-xs font-medium">Search...</span>
+              <kbd className="px-1.5 py-0.5 bg-black/20 border border-white/20 rounded text-[10px] font-mono text-white/80">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Dark / Light Mode Toggle Button */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-md flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#DBB671] border border-white/15 transition-all cursor-pointer"
+              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              <span className="material-symbols-outlined text-xl">
+                {theme === "dark" ? "light_mode" : "dark_mode"}
+              </span>
+            </button>
+
+            {/* Admin User Badge & Sign Out Button */}
+            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-white/20">
+              <div className="w-8 h-8 rounded-full bg-[#2E5AAC] text-white border border-white/20 flex items-center justify-center text-xs font-bold">
+                A
+              </div>
+              <button
+                type="button"
+                onClick={signOut}
+                className="w-9 h-9 rounded-md flex items-center justify-center text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors cursor-pointer"
+                title="Sign Out of Console"
+                aria-label="Sign Out of Console"
+              >
+                <span className="material-symbols-outlined text-xl">logout</span>
+              </button>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden w-9 h-9 rounded-md flex items-center justify-center bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
+            >
+              <span className="material-symbols-outlined text-xl">
+                {mobileMenuOpen ? "close" : "menu"}
               </span>
             </button>
           </div>
+        </div>
 
-          {/* Navigation Items with Accordion Sub-headings */}
-          <div className="space-y-2">
-            {NAV_ITEMS.map((item) => {
-              const active = item.isActive(pathname);
-              const isOpen = isExpanded && (openSections[item.href] ?? active);
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-[#1E3A8A] bg-[#0B1E3D] px-4 py-4 space-y-4 animate-fadeIn">
+            {/* Command Palette Trigger Mobile */}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setIsPaletteOpen(true);
+              }}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-md bg-white/10 text-xs text-white"
+            >
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base">search</span>
+                <span>Search console...</span>
+              </div>
+              <kbd className="px-1.5 py-0.5 bg-black/20 rounded text-[10px] font-mono">⌘K</kbd>
+            </button>
 
-              return (
+            {/* Mobile Menu Links */}
+            <div className="space-y-3">
+              {NAV_ITEMS.map((item) => (
                 <div key={item.href} className="space-y-1">
-                  <div className="flex items-center">
-                    <Link
-                      href={item.href}
-                      title={item.label}
-                      aria-label={item.label}
-                      aria-current={active ? "page" : undefined}
-                      className={`flex items-center gap-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                        active
-                          ? "bg-[#2E5AAC] text-white shadow-xs"
-                          : "text-[#8B93A7] hover:text-white hover:bg-white/10"
-                      } ${
-                        isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
-                      }`}
-                    >
-                      <span className="material-symbols-outlined text-xl flex-shrink-0">
-                        {item.icon}
-                      </span>
-                      {isExpanded && <span className="truncate flex-1">{item.label}</span>}
-                      {isExpanded && item.subItems.length > 0 && (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setOpenSections((prev) => ({
-                              ...prev,
-                              [item.href]: !(prev[item.href] ?? active),
-                            }));
-                          }}
-                          className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white transition-colors cursor-pointer"
-                        >
-                          <span className="material-symbols-outlined text-base">
-                            {isOpen ? "expand_more" : "chevron_right"}
-                          </span>
-                        </button>
-                      )}
-                    </Link>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#93C5FD] flex items-center gap-2 py-1">
+                    <span className="material-symbols-outlined text-base">{item.icon}</span>
+                    <span>{item.label}</span>
                   </div>
-
-                  {/* Sub-headings under active/toggled section */}
-                  {isOpen && item.subItems.length > 0 && (
-                    <div className="pl-7 pr-2 space-y-1 py-1">
-                      {item.subItems.map((sub) => (
-                        <Link
-                          key={sub.label}
-                          href={sub.href}
-                          className={`flex items-center gap-2 py-1.5 px-2 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
-                            active
-                              ? "text-[#BFDBFE] hover:text-white hover:bg-white/10"
-                              : "text-[#64748B] hover:text-[#94A3B8] hover:bg-white/5"
-                          }`}
-                        >
-                          <span className="material-symbols-outlined text-sm flex-shrink-0 text-white/40">
-                            {sub.icon}
-                          </span>
-                          <span className="truncate">{sub.label}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  <div className="pl-6 space-y-1">
+                    {item.subItems.map((sub) => (
+                      <Link
+                        key={sub.label}
+                        href={sub.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-2 py-1.5 px-2 rounded text-xs font-medium text-white/80 hover:text-white hover:bg-white/10"
+                      >
+                        <span className="material-symbols-outlined text-sm">{sub.icon}</span>
+                        <span>{sub.label}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Sidebar Footer: Search & Sign Out */}
-        <div className="pt-4 border-t border-white/10 space-y-2 mt-4">
-          {/* Quick Search trigger */}
-          <div
-            className={`flex items-center gap-2.5 py-2 rounded-lg bg-white/5 border border-white/10 text-xs text-[#8B93A7] hover:bg-white/10 transition-all cursor-pointer select-none ${
-              isExpanded ? "px-3 w-full justify-between" : "justify-center px-0 w-10 h-10 mx-auto"
-            }`}
-            title="Search... (⌘K)"
-          >
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-lg text-[#8B93A7]">search</span>
-              {isExpanded && <span>Search...</span>}
+              ))}
             </div>
-            {isExpanded && (
-              <kbd className="px-1.5 py-0.5 bg-white/10 border border-white/20 rounded text-[10px] font-mono text-[#8B93A7]">
-                ⌘K
-              </kbd>
-            )}
-          </div>
 
-          {/* Sign Out Button */}
-          <button
-            type="button"
-            onClick={signOut}
-            className={`flex items-center gap-2.5 py-2 rounded-lg text-xs font-semibold text-[#F87171] hover:bg-[#F87171]/15 hover:text-[#EF4444] transition-all cursor-pointer ${
-              isExpanded ? "px-3 w-full" : "justify-center px-0 w-10 h-10 mx-auto"
-            }`}
-            title="Sign Out"
-          >
-            <span className="material-symbols-outlined text-lg">logout</span>
-            {isExpanded && <span>Sign Out</span>}
-          </button>
-        </div>
-      </nav>
+            {/* Mobile Sign Out */}
+            <div className="pt-3 border-t border-white/10 flex justify-between items-center">
+              <span className="text-xs font-semibold text-white/80">Authorized Admin</span>
+              <button
+                type="button"
+                onClick={signOut}
+                className="px-3 py-1.5 bg-red-500/20 text-red-300 rounded text-xs font-semibold flex items-center gap-1.5"
+              >
+                <span className="material-symbols-outlined text-base">logout</span>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </header>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         <div className="flex-1 min-w-0">{children}</div>
       </div>
+
+      {/* Command Palette Modal */}
+      <GlobalCommandPalette
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+      />
     </div>
   );
 }
