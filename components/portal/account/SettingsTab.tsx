@@ -8,6 +8,25 @@ export function SettingsTab() {
   const [currency, setCurrency] = useState("USD");
   const [language, setLanguage] = useState("en-US");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const current = (document.documentElement.getAttribute("data-theme") as "light" | "dark") || "light";
+      setThemeMode(current);
+    }
+  }, []);
+
+  const handleToggleTheme = () => {
+    const next = themeMode === "dark" ? "light" : "dark";
+    setThemeMode(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("satriano-theme", next);
+    } catch (e) {}
+    setStatusMessage(`Interface theme updated to ${next.toUpperCase()} mode.`);
+    setTimeout(() => setStatusMessage(null), 3000);
+  };
 
   function handleSaveSettings() {
     setStatusMessage("Account preferences updated.");
@@ -38,6 +57,30 @@ export function SettingsTab() {
       <div className="space-y-6">
         {/* Section 1: Toggles */}
         <div className="space-y-4 font-mono text-xs">
+          {/* Theme Mode Toggle */}
+          <div className="flex items-center justify-between p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
+            <div>
+              <span className="font-bold text-white block">Theme Mode ({themeMode === "dark" ? "Dark Theme 🌙" : "Light Theme ☀️"})</span>
+              <span className="text-[#8DA0C4] text-[11px] block mt-0.5 font-sans">
+                Interface color palette preference for Public site &amp; B2B Customer Portal.
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={handleToggleTheme}
+              className={`px-3 py-1.5 border border-[#2E5AAC] font-mono text-xs font-bold uppercase tracking-wider rounded-none cursor-pointer transition-colors flex items-center gap-1.5 ${
+                themeMode === "dark"
+                  ? "bg-[#2E5AAC] text-white"
+                  : "bg-white text-[#1A2233]"
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">
+                {themeMode === "dark" ? "light_mode" : "dark_mode"}
+              </span>
+              <span>{themeMode === "dark" ? "Dark Mode" : "Light Mode"}</span>
+            </button>
+          </div>
+
           <div className="flex items-center justify-between p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
             <div>
               <span className="font-bold text-white block">Email Notifications</span>

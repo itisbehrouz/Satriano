@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,6 +14,23 @@ const MENU_ITEMS = [
 export function SiteHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const current = (document.documentElement.getAttribute("data-theme") as "light" | "dark") || "light";
+      setTheme(current);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("satriano-theme", next);
+    } catch (e) {}
+  };
 
   return (
     <header className="bg-[#0B1E3D] text-[#E8ECF3] border-b border-[#132A52] sticky top-0 z-50 w-full shadow-sm">
@@ -55,6 +72,19 @@ export function SiteHeader() {
 
         {/* Primary Action & Mobile Menu Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Site-Wide Dark/Light Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            title={theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded-none transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-lg">
+              {theme === "dark" ? "light_mode" : "dark_mode"}
+            </span>
+          </button>
+
           <Link
             href="/portal"
             className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
@@ -63,7 +93,7 @@ export function SiteHeader() {
             <span>Client Portal</span>
           </Link>
 
-          {/* Accessible Mobile Nav Toggle with Visible Text Label & 44px Touch Target */}
+          {/* Accessible Mobile Nav Toggle */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

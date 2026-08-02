@@ -5,58 +5,102 @@
 /* Source of truth: /DESIGN.md (project root), OFFICIAL 2026-07-30        */
 /* ---------------------------------------------------------------------- */
 
-@theme {
-  /* Canvas & Surface Colors */
+:root,
+[data-theme="light"] {
+  --color-bg: #F5F7FA;
   --color-bg-page: #F5F7FA;
-  --color-background: #F5F7FA;
   --color-surface: #FFFFFF;
   --color-surface-dim: #0B1E3D;
+  --color-text-primary: #1A2233;
+  --color-text-secondary: #5B6B85;
+  --color-border: #E4E7EC;
+  --color-outline: #D1D5DB;
 
-  /* Header & Footer Brand Block */
   --color-header: #0B1E3D;
   --color-text-on-header: #E8ECF3;
 
-  /* Interactive Accent (Everyday Action Blue) */
+  --color-status-warning: #854F0B;
+  --color-status-warning-bg: #FEF3C7;
+  --color-status-info: #1E40AF;
+  --color-status-info-bg: #DBEAFE;
+  --color-status-success: #0F6E56;
+  --color-status-success-bg: #D1FAE5;
+  --color-status-error: #A32D2D;
+  --color-status-error-bg: #FCEBEB;
+
   --color-accent: #2E5AAC;
   --color-accent-hover: #24498E;
+  --color-brand-mark: #DBB671;
+  --color-gold: #DBB671;
+}
 
-  /* Brand Mark (Logo Gold ONLY — max 1 small signature accent per view) */
+[data-theme="dark"] {
+  --color-bg: #0B1E3D;
+  --color-bg-page: #0B1E3D;
+  --color-surface: #132A52;
+  --color-surface-dim: #071325;
+  --color-text-primary: #E8ECF3;
+  --color-text-secondary: #8DA0C4;
+  --color-border: #1E3A8A;
+  --color-outline: #1E3A8A;
+
+  --color-header: #0B1E3D;
+  --color-text-on-header: #E8ECF3;
+
+  --color-status-warning: #F0B94A;
+  --color-status-warning-bg: #3A2E14;
+  --color-status-info: #85B7EB;
+  --color-status-info-bg: #132A52;
+  --color-status-success: #5DCAA5;
+  --color-status-success-bg: #14301F;
+  --color-status-error: #F8B4B4;
+  --color-status-error-bg: #3A1414;
+
+  --color-accent: #2E5AAC;
+  --color-accent-hover: #24498E;
+  --color-brand-mark: #DBB671;
+  --color-gold: #DBB671;
+}
+
+@theme {
+  /* Site-Wide Theme Variables */
+  --color-bg: var(--color-bg);
+  --color-bg-page: var(--color-bg-page);
+  --color-surface: var(--color-surface);
+  --color-surface-dim: var(--color-surface-dim);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-border: var(--color-border);
+  --color-outline: var(--color-outline);
+
+  --color-header: var(--color-header);
+  --color-text-on-header: var(--color-text-on-header);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
   --color-brand-mark: #DBB671;
   --color-gold: #DBB671;
 
-  /* Text Roles */
-  --color-text-primary: #1A2233;
-  --color-on-surface: #1A2233;
-  --color-text-secondary: #5B6B85;
-  --color-on-surface-variant: #5B6B85;
+  --color-status-warning: var(--color-status-warning);
+  --color-status-warning-bg: var(--color-status-warning-bg);
+  --color-status-info: var(--color-status-info);
+  --color-status-info-bg: var(--color-status-info-bg);
+  --color-status-success: var(--color-status-success);
+  --color-status-success-bg: var(--color-status-success-bg);
+  --color-status-error: var(--color-status-error);
+  --color-status-error-bg: var(--color-status-error-bg);
 
-  /* Borders & Outlines */
-  --color-outline: #D1D5DB;
-  --color-outline-variant: #E5E7EB;
-
-  /* Status Colors (Public Light Theme) */
-  --color-status-success-text: #0F6E56;
-  --color-status-success-bg: #E1F5EE;
-  --color-status-warning-text: #854F0B;
-  --color-status-warning-bg: #FAEEDA;
-  --color-status-info-text: #185FA5;
-  --color-status-info-bg: #E6F1FB;
-  --color-status-error-text: #A32D2D;
-  --color-status-error-bg: #FCEBEB;
-
-  /* Portal Dark Theme (B2B Customer Portal) */
-  --color-portal-bg: #0B1E3D;
-  --color-portal-surface: #132A52;
-  --color-portal-text-secondary: #8DA0C4;
-  --color-portal-border: #1E3A8A;
-
-  /* Portal Status Badges (Section 16–17) */
-  --color-portal-warning: #F0B94A;
-  --color-portal-warning-bg: #3A2E14;
-  --color-portal-info: #85B7EB;
-  --color-portal-info-bg: #132A52;
-  --color-portal-success: #5DCAA5;
-  --color-portal-success-bg: #14301F;
+  /* Backward-Compatible Portal Tokens Alias */
+  --color-portal-bg: var(--color-bg);
+  --color-portal-surface: var(--color-surface);
+  --color-portal-text-secondary: var(--color-text-secondary);
+  --color-portal-border: var(--color-border);
+  --color-portal-warning: var(--color-status-warning);
+  --color-portal-warning-bg: var(--color-status-warning-bg);
+  --color-portal-info: var(--color-status-info);
+  --color-portal-info-bg: var(--color-status-info-bg);
+  --color-portal-success: var(--color-status-success);
+  --color-portal-success-bg: var(--color-status-success-bg);
 
   /* Typography Font Families */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -85,7 +129,8 @@
 }
 
 body {
-  background-color: #F5F7FA;
-  color: #1A2233;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }

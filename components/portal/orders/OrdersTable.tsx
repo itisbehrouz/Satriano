@@ -21,7 +21,7 @@ export function OrdersTable({
   onSelectOrder,
 }: OrdersTableProps) {
   const getSortIcon = (column: string) => {
-    if (sortColumn !== column) return <span className="text-[var(--color-portal-text-secondary)] ml-1">↑↓</span>;
+    if (sortColumn !== column) return <span className="text-[var(--color-text-secondary)] ml-1">↑↓</span>;
     return sortOrder === "asc" ? (
       <span className="text-[var(--color-accent)] font-bold ml-1">↑</span>
     ) : (
@@ -30,10 +30,10 @@ export function OrdersTable({
   };
 
   return (
-    <div className="border border-[var(--color-portal-border)] rounded-none overflow-x-auto font-sans select-none bg-[var(--color-portal-bg)]">
+    <div className="border border-[var(--color-border)] rounded-none overflow-x-auto font-sans select-none bg-[var(--color-bg)]">
       <table className="w-full text-left text-xs border-collapse">
         <thead>
-          <tr className="bg-[var(--color-portal-surface)] border-b border-[var(--color-portal-border)] text-[var(--color-text-on-header)] font-bold text-xs uppercase tracking-wider h-14">
+          <tr className="bg-[var(--color-surface)] border-b border-[var(--color-border)] text-[var(--color-text-primary)] font-bold text-xs uppercase tracking-wider h-14">
             <th
               className="py-3 px-4 cursor-pointer hover:text-[var(--color-accent)]"
               onClick={() => onSortChange("id")}
@@ -103,7 +103,7 @@ export function OrdersTable({
             <th className="py-3 px-4 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[var(--color-portal-border)]">
+        <tbody className="divide-y divide-[var(--color-border)]">
           {orders.map((order) => {
             const dateStr = new Date(order.createdAt).toLocaleDateString("en-US", {
               month: "short",
@@ -126,30 +126,30 @@ export function OrdersTable({
             const isShipped = order.status === "SHIPPED" || order.status === "Shipped";
             const isCancelled = order.status === "CANCELLED" || order.status === "Cancelled";
 
-            // Status Badge Styling based on Phase 1 tokens
-            let badgeBg = "bg-[var(--color-portal-info-bg)]";
-            let badgeTextColor = "text-[var(--color-portal-info)]";
+            // Status Badge Styling based on generalized theme tokens
+            let badgeBg = "bg-[var(--color-status-info-bg)]";
+            let badgeTextColor = "text-[var(--color-status-info)]";
             let badgeLabel: string = String(order.status);
 
             if (isPending) {
-              badgeBg = "bg-[var(--color-portal-warning-bg)]";
-              badgeTextColor = "text-[var(--color-portal-warning)]";
+              badgeBg = "bg-[var(--color-status-warning-bg)]";
+              badgeTextColor = "text-[var(--color-status-warning)]";
               badgeLabel = "⏳ Pending";
             } else if (isApproved) {
-              badgeBg = "bg-[var(--color-portal-info-bg)]";
-              badgeTextColor = "text-[var(--color-portal-info)]";
+              badgeBg = "bg-[var(--color-status-info-bg)]";
+              badgeTextColor = "text-[var(--color-status-info)]";
               badgeLabel = "✓ Approved";
             } else if (isPaid) {
-              badgeBg = "bg-[var(--color-portal-info-bg)]";
-              badgeTextColor = "text-[var(--color-portal-info)]";
+              badgeBg = "bg-[var(--color-status-info-bg)]";
+              badgeTextColor = "text-[var(--color-status-info)]";
               badgeLabel = "✓ Paid";
             } else if (isShipped) {
-              badgeBg = "bg-[var(--color-portal-success-bg)]";
-              badgeTextColor = "text-[var(--color-portal-success)]";
+              badgeBg = "bg-[var(--color-status-success-bg)]";
+              badgeTextColor = "text-[var(--color-status-success)]";
               badgeLabel = "📦 Shipped";
             } else if (isCancelled) {
-              badgeBg = "bg-[var(--color-portal-surface)]";
-              badgeTextColor = "text-[var(--color-portal-text-secondary)]";
+              badgeBg = "bg-[var(--color-surface)]";
+              badgeTextColor = "text-[var(--color-text-secondary)]";
               badgeLabel = "✗ Cancelled";
             }
 
@@ -166,7 +166,7 @@ export function OrdersTable({
             return (
               <tr
                 key={order.id}
-                className="h-14 bg-[var(--color-portal-bg)] hover:bg-[var(--color-portal-surface)]/60 transition-colors text-[var(--color-text-on-header)]"
+                className="h-14 bg-[var(--color-bg)] hover:bg-[var(--color-surface)]/60 transition-colors text-[var(--color-text-primary)]"
               >
                 <td className="py-3 px-4 font-mono font-bold">
                   <button
@@ -177,27 +177,27 @@ export function OrdersTable({
                     {refNo}
                   </button>
                 </td>
-                <td className="py-3 px-4 font-mono text-[var(--color-portal-text-secondary)] text-xs tabular-nums">
+                <td className="py-3 px-4 font-mono text-[var(--color-text-secondary)] text-xs tabular-nums">
                   {dateStr}
                 </td>
 
                 {isWholesaleView ? (
-                  <td className="py-3 px-4 text-center font-mono font-bold text-[var(--color-text-on-header)] tabular-nums">
+                  <td className="py-3 px-4 text-center font-mono font-bold text-[var(--color-text-primary)] tabular-nums">
                     {totalUnits}
                   </td>
                 ) : (
-                  <td className="py-3 px-4 font-medium text-[var(--color-text-on-header)]">
+                  <td className="py-3 px-4 font-medium text-[var(--color-text-primary)]">
                     {productDisplay}
                   </td>
                 )}
 
                 {!isWholesaleView && (
-                  <td className="py-3 px-4 text-right font-mono text-[var(--color-text-on-header)] tabular-nums font-semibold">
+                  <td className="py-3 px-4 text-right font-mono text-[var(--color-text-primary)] tabular-nums font-semibold">
                     {totalUnits}
                   </td>
                 )}
 
-                <td className="py-3 px-4 text-right font-mono font-bold text-[var(--color-text-on-header)] tabular-nums">
+                <td className="py-3 px-4 text-right font-mono font-bold text-[var(--color-text-primary)] tabular-nums">
                   {totalFormatted}
                 </td>
 

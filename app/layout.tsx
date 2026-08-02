@@ -36,13 +36,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var p=window.location.pathname;if(p.startsWith('/admin'))return;var t=localStorage.getItem('satriano-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
       </head>
       <body
-        className="min-h-screen flex flex-col antialiased bg-[#F5F7FA] text-[#1A2233] font-sans"
+        className="min-h-screen flex flex-col antialiased bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans"
         suppressHydrationWarning
       >
         {children}
