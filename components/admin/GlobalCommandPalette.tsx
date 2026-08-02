@@ -63,10 +63,16 @@ export function GlobalCommandPalette({
 
       const fetchData = async () => {
         try {
-          const [catalogRes, ordersRes] = await Promise.all([
+          // Fetch catalog and admin orders
+          let [catalogRes, ordersRes] = await Promise.all([
             fetch("/api/admin/catalog").catch(() => null),
             fetch("/api/admin/orders").catch(() => null),
           ]);
+
+          // Fallback for customer portal session if admin endpoint is unauthorized
+          if (!ordersRes || !ordersRes.ok) {
+            ordersRes = await fetch("/api/portal/orders").catch(() => null);
+          }
 
           if (catalogRes && catalogRes.ok) {
             const catData = await catalogRes.json();
@@ -94,9 +100,9 @@ export function GlobalCommandPalette({
             if (orderData.orders && isMounted) {
               const items: OrderSummaryItem[] = orderData.orders.map((o: any) => ({
                 id: o.id,
-                companyName: o.company?.name || "B2B Client",
+                companyName: o.company?.name || o.customerName || "B2B Order",
                 status: o.status,
-                createdAt: o.createdAt,
+                createdAt: o.createdAt || o.dateSubmitted,
               }));
               setOrders(items);
             }
@@ -126,59 +132,59 @@ export function GlobalCommandPalette({
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 font-sans">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[#0B1E3D]/60 backdrop-blur-xs transition-opacity animate-fadeIn"
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-fadeIn"
         onClick={() => setIsOpen(false)}
       />
 
       {/* Command Palette Dialog Window */}
-      <div className="relative w-full max-w-xl bg-white border border-[#D0D5DD] rounded-xl shadow-2xl overflow-hidden z-50 animate-scaleUp">
-        <Command label="Global Admin Command Palette" className="w-full">
+      <div className="relative w-full max-w-xl bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl shadow-2xl overflow-hidden z-50 animate-scaleUp text-[var(--color-text-primary)]">
+        <Command label="Global Command Palette" className="w-full">
           {/* Input Header */}
-          <div className="flex items-center px-4 py-3 border-b border-[#EAECF0] bg-white">
-            <span className="material-symbols-outlined text-[#667085] text-lg mr-2.5">
+          <div className="flex items-center px-4 py-3 border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+            <span className="material-symbols-outlined text-[var(--color-text-secondary)] text-lg mr-2.5">
               search
             </span>
             <Command.Input
               autoFocus
               placeholder="Search products, orders, companies, or commands... (ESC to exit)"
-              className="w-full bg-transparent text-xs text-[#101828] placeholder-[#667085] focus:outline-none"
+              className="w-full bg-transparent text-xs text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none"
             />
             {loadingData && (
-              <span className="w-3.5 h-3.5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mr-2 shrink-0" />
+              <span className="w-3.5 h-3.5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mr-2 shrink-0" />
             )}
-            <kbd className="px-1.5 py-0.5 bg-[#F2F4F7] border border-[#D0D5DD] rounded text-[10px] font-mono text-[#667085] shrink-0 ml-2">
+            <kbd className="px-1.5 py-0.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded text-[10px] font-mono text-[var(--color-text-secondary)] shrink-0 ml-2">
               ESC
             </kbd>
           </div>
 
           {/* Results Command List */}
-          <Command.List className="max-h-80 overflow-y-auto p-2 divide-y divide-[#EAECF0]">
-            <Command.Empty className="p-6 text-center text-xs text-[#667085]">
+          <Command.List className="max-h-80 overflow-y-auto p-2 divide-y divide-[var(--color-border)]">
+            <Command.Empty className="p-6 text-center text-xs text-[var(--color-text-secondary)]">
               No matching products, orders, or commands found.
             </Command.Empty>
 
             {/* Dynamic Group 1: Live Catalog Products */}
             {products.length > 0 && (
-              <Command.Group heading="Catalog Products &amp; Specs" className="py-1">
+              <Command.Group heading="Catalog Products & Specs" className="py-1">
                 {products.map((p) => (
                   <Command.Item
                     key={p.id}
-                    onSelect={() => navigateTo("/admin/product-settings")}
-                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                    onSelect={() => navigateTo("/konfigurator")}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="material-symbols-outlined text-base text-[#667085]">
+                      <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">
                         checkroom
                       </span>
                       <div>
                         <span className="block font-bold">{p.name}</span>
-                        <span className="text-[10px] text-[#667085] font-mono font-normal block">
+                        <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal block">
                           {p.categoryName} &rarr; {p.subcategoryName}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[10px] bg-[#F2F4F7] text-[#344054] px-2 py-0.5 rounded border border-[#D0D5DD] font-mono">
-                      Edit Spec &rarr;
+                    <span className="text-[10px] bg-[var(--color-bg)] text-[var(--color-text-secondary)] px-2 py-0.5 rounded border border-[var(--color-border)] font-mono">
+                      View Spec &rarr;
                     </span>
                   </Command.Item>
                 ))}
@@ -187,25 +193,25 @@ export function GlobalCommandPalette({
 
             {/* Dynamic Group 2: Production Orders & B2B Clients */}
             {orders.length > 0 && (
-              <Command.Group heading="Production Orders &amp; B2B Clients" className="py-1">
+              <Command.Group heading="Production Orders & B2B Clients" className="py-1">
                 {orders.map((o) => (
                   <Command.Item
                     key={o.id}
-                    onSelect={() => navigateTo("/admin")}
-                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                    onSelect={() => navigateTo(o.id.startsWith("PRO-") ? "/portal/orders" : "/admin")}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="material-symbols-outlined text-base text-[#2E5AAC]">
+                      <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
                         receipt
                       </span>
                       <div>
                         <span className="block font-bold">{o.companyName}</span>
-                        <span className="text-[10px] text-[#667085] font-mono font-normal block">
-                          Order ID: {o.id.slice(-8).toUpperCase()}
+                        <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal block">
+                          Order ID: {o.id.length > 12 ? o.id.slice(-8).toUpperCase() : o.id}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[10px] bg-[#E6F1FB] text-[#185FA5] px-2 py-0.5 rounded font-mono font-semibold">
+                    <span className="text-[10px] bg-[var(--color-accent)]/10 text-[var(--color-accent)] px-2 py-0.5 rounded font-mono font-semibold">
                       {o.status}
                     </span>
                   </Command.Item>
@@ -213,102 +219,86 @@ export function GlobalCommandPalette({
               </Command.Group>
             )}
 
-            {/* Group 3: Navigation & Admin Views */}
-            <Command.Group heading="Console Navigation" className="py-1">
-              <Command.Item
-                onSelect={() => navigateTo("/admin")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
-                    receipt_long
-                  </span>
-                  <span>Order Production Ledger</span>
-                </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/admin</span>
-              </Command.Item>
-
-              <Command.Item
-                onSelect={() => navigateTo("/admin/applications")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
-                    assignment_ind
-                  </span>
-                  <span>B2B Partner Applications</span>
-                </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/admin/applications</span>
-              </Command.Item>
-
-              <Command.Item
-                onSelect={() => navigateTo("/admin/product-settings")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
-                    inventory_2
-                  </span>
-                  <span>Catalog, Fits &amp; Fabric Ranges</span>
-                </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/admin/product-settings</span>
-              </Command.Item>
-
-              <Command.Item
-                onSelect={() => navigateTo("/admin/architecture-viz")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
-                    view_in_ar
-                  </span>
-                  <span>3D Anti-Gravity Telemetry</span>
-                </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/admin/architecture-viz</span>
-              </Command.Item>
-            </Command.Group>
-
-            {/* Group 4: Quick Operational Shortcuts */}
-            <Command.Group heading="Shortcuts" className="py-1">
+            {/* Group 3: Portal Navigation & Shortcuts */}
+            <Command.Group heading="Client Portal Navigation" className="py-1">
               <Command.Item
                 onSelect={() => navigateTo("/konfigurator")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
-                    add_circle
+                  <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                    checkroom
                   </span>
-                  <span>Create Custom Production Spec</span>
+                  <span>Garment Customization Catalog</span>
                 </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/konfigurator</span>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/konfigurator</span>
+              </Command.Item>
+
+              <Command.Item
+                onSelect={() => navigateTo("/portal/orders")}
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                    receipt_long
+                  </span>
+                  <span>Orders &amp; Production History</span>
+                </div>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/portal/orders</span>
+              </Command.Item>
+
+              <Command.Item
+                onSelect={() => navigateTo("/portal/account?tab=company")}
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                    manage_accounts
+                  </span>
+                  <span>Company Account &amp; Settings</span>
+                </div>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/portal/account</span>
+              </Command.Item>
+
+              <Command.Item
+                onSelect={() => navigateTo("/portal/account?tab=support")}
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
+                    help_center
+                  </span>
+                  <span>Support &amp; Technical Assistance</span>
+                </div>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/portal/support</span>
               </Command.Item>
 
               <Command.Item
                 onSelect={() => navigateTo("/wholesale")}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[#101828] hover:bg-[#F0F5FF] hover:text-[#2E5AAC] cursor-pointer transition-colors"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-base text-[#2E5AAC]">
+                  <span className="material-symbols-outlined text-base text-[var(--color-accent)]">
                     storefront
                   </span>
-                  <span>Public Wholesale Menswear Catalog</span>
+                  <span>Wholesale Menswear Collection</span>
                 </div>
-                <span className="text-[10px] text-[#667085] font-mono font-normal">/wholesale</span>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/wholesale</span>
               </Command.Item>
             </Command.Group>
           </Command.List>
 
           {/* Footer Bar */}
-          <div className="p-3 bg-[#F9FAFB] border-t border-[#EAECF0] flex items-center justify-between text-[11px] text-[#667085]">
+          <div className="p-3 bg-[var(--color-bg)] border-t border-[var(--color-border)] flex items-center justify-between text-[11px] text-[var(--color-text-secondary)]">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white border border-[#D0D5DD] rounded font-mono text-[10px]">↑↓</kbd> Navigate
+                <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded font-mono text-[10px]">↑↓</kbd> Navigate
               </span>
               <span className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white border border-[#D0D5DD] rounded font-mono text-[10px]">↵</kbd> Select
+                <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded font-mono text-[10px]">↵</kbd> Select
               </span>
             </div>
-            <span className="font-mono text-[10px]">Satriano Admin Portal</span>
+            <span className="font-mono text-[10px]">Satriano Atelier</span>
           </div>
         </Command>
       </div>

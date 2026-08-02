@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
+import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
 
 export interface PortalHeaderProps {
   initialCompanyName?: string | null;
@@ -15,6 +16,7 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
 
   const [companyName, setCompanyName] = useState<string | null>(initialCompanyName);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState<boolean>(false);
   const [loadingSession, setLoadingSession] = useState<boolean>(true);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
@@ -131,8 +133,23 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           )}
         </div>
 
-        {/* Right: Theme Toggle, Account Dropdown & Sign Out Action Button */}
+        {/* Right: Search ⌘K Button, Theme Toggle, Account Dropdown & Sign Out Action Button */}
         <div className="flex items-center gap-3">
+          {/* Quick Search Button (⌘K) */}
+          <button
+            type="button"
+            onClick={() => setIsPaletteOpen(true)}
+            className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs transition-all cursor-pointer min-h-[32px]"
+            title="Search catalog, orders, or portal pages (⌘K)"
+            aria-label="Search catalog, orders, or portal pages"
+          >
+            <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">search</span>
+            <span className="hidden md:inline text-[11px] font-medium text-[var(--color-text-secondary)]">Search</span>
+            <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[9px] font-mono text-[var(--color-text-secondary)]">
+              ⌘K
+            </kbd>
+          </button>
+
           {/* Site-Wide Dark/Light Theme Toggle */}
           <button
             type="button"
@@ -185,6 +202,12 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           ) : null}
         </div>
       </div>
+
+      {/* Command Palette Search Overlay */}
+      <GlobalCommandPalette
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+      />
     </header>
   );
 }
