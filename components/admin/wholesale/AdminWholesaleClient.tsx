@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { WholesalePricingTab, PricingProduct } from "./WholesalePricingTab";
 import { InventoryTab, InventoryProduct } from "./InventoryTab";
-import { PriceOfferInboxTab, PriceOffer } from "./PriceOfferInboxTab";
+import { PriceOfferInboxTab, PriceOfferV2 } from "./PriceOfferInboxTab";
 import { OrderStatusTab } from "./OrderStatusTab";
 import { WholesaleOrderFull } from "./OrderDetailModal";
 
@@ -183,34 +183,56 @@ export function AdminWholesaleClient() {
   };
 
   // =========================================================================
-  // TAB 3: MOCK STATE — Price Offer Inbox
+  // TAB 3: MOCK STATE — Price Offer Inbox (Multi-Supplier)
   // =========================================================================
-  const [priceOffers, setPriceOffers] = useState<PriceOffer[]>([
+  const [priceOffers, setPriceOffers] = useState<PriceOfferV2[]>([
     {
       id: "po-1",
       orderId: "#WH001",
-      productName: "Blazer",
+      productName: "Shawl Lapel Prom Blazer",
       quantity: 50,
       offeredPriceUSD: 100,
       listPriceUSD: 125,
-      status: "PENDING",
+      supplierId: "sup-1",
+      supplierName: "ABC Textile Co.",
+      supplierContact: "John Doe",
+      supplierEmail: "john@abctextile.com",
+      supplierPhone: "+90 212 555 1234",
+      supplierNote: "Good stock available, can ship within 10 days.",
+      adminNote: "Verifying bulk fabric availability with supplier.",
+      status: "PENDING_ADMIN",
     },
     {
       id: "po-2",
       orderId: "#WH002",
-      productName: "Shirts (bulk)",
+      productName: "Italian Poplin Shirts",
       quantity: 100,
       offeredPriceUSD: 60,
       listPriceUSD: 75,
+      supplierId: "sup-2",
+      supplierName: "XYZ Fabrics",
+      supplierContact: "Maria Garcia",
+      supplierEmail: "maria@xyzfabrics.com",
+      supplierPhone: "+90 212 444 9876",
+      supplierNote: "Approved 20% volume discount for 100 units.",
+      adminNote: "Confirmed supplier discount terms.",
       status: "ACCEPTED",
+      acceptedPriceUSD: 60,
     },
     {
       id: "po-3",
       orderId: "#WH003",
-      productName: "Suit",
+      productName: "Double Breasted Wool Coat",
       quantity: 20,
-      offeredPriceUSD: 320,
-      listPriceUSD: 350,
+      offeredPriceUSD: 180,
+      listPriceUSD: 220,
+      supplierId: "sup-3",
+      supplierName: "Premium Knit Ltd.",
+      supplierContact: "Ahmed Hassan",
+      supplierEmail: "ahmed@premiumknit.com",
+      supplierPhone: "+90 224 333 5544",
+      supplierNote: "Raw virgin wool cost is high, cannot go below $200.",
+      adminNote: "Offer below supplier margin limit.",
       status: "REJECTED",
     },
   ]);
@@ -227,13 +249,24 @@ export function AdminWholesaleClient() {
     );
   };
 
-  const handleCounterOffer = (id: string, counterPriceUSD: number) => {
+  const handleCounterOffer = (id: string, counterPriceUSD: number, adminMessage: string) => {
     setPriceOffers((prev) =>
       prev.map((o) =>
         o.id === id
-          ? { ...o, status: "COUNTER_PENDING", counterPriceUSD }
+          ? {
+              ...o,
+              status: "COUNTER_OFFERED",
+              counterPriceUSD,
+              adminNote: adminMessage ? `Counter sent: "${adminMessage}"` : o.adminNote,
+            }
           : o
       )
+    );
+  };
+
+  const handleSaveAdminNote = (id: string, adminNote: string) => {
+    setPriceOffers((prev) =>
+      prev.map((o) => (o.id === id ? { ...o, adminNote } : o))
     );
   };
 
@@ -344,14 +377,23 @@ export function AdminWholesaleClient() {
           </p>
         </div>
 
-        <Link
-          href="/wholesale"
-          target="_blank"
-          className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-base">open_in_new</span>
-          View Live Wholesale Catalog
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/wholesale/suppliers"
+            className="h-10 px-4 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-base">store</span>
+            Manage Suppliers
+          </Link>
+          <Link
+            href="/wholesale"
+            target="_blank"
+            className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-base">open_in_new</span>
+            View Live Wholesale Catalog
+          </Link>
+        </div>
       </div>
 
       {/* Navigation Tabs Header */}
@@ -408,6 +450,7 @@ export function AdminWholesaleClient() {
             onAcceptOffer={handleAcceptOffer}
             onRejectOffer={handleRejectOffer}
             onCounterOffer={handleCounterOffer}
+            onSaveAdminNote={handleSaveAdminNote}
             showToast={showToast}
           />
         )}

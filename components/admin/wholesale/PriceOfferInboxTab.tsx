@@ -26,7 +26,7 @@ export interface PriceOfferInboxTabProps {
   onAcceptOffer: (id: string) => void;
   onRejectOffer: (id: string) => void;
   onCounterOffer: (id: string, counterPriceUSD: number, adminMessage: string) => void;
-  onSaveAdminNote: (id: string, note: string) => void;
+  onSaveAdminNote?: (id: string, note: string) => void;
   showToast: (msg: string, type?: "success" | "error") => void;
 }
 
@@ -223,7 +223,7 @@ export function PriceOfferInboxTab({
                     <button
                       type="button"
                       onClick={() => {
-                        onSaveAdminNote(offer.id, tempAdminNote);
+                        onSaveAdminNote?.(offer.id, tempAdminNote);
                         setEditingAdminNoteId(null);
                         showToast("Saved internal admin note", "success");
                       }}
