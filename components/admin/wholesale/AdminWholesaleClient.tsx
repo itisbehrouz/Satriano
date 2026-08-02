@@ -349,120 +349,122 @@ export function AdminWholesaleClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
-      {/* Floating Success/Error Toast */}
-      {toast && (
-        <div
-          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
-            toast.type === "success"
-              ? "bg-[var(--color-status-success-bg)] border-[var(--color-status-success)]/30 text-[var(--color-status-success)]"
-              : "bg-red-500/10 border-red-500/30 text-red-500"
-          }`}
-        >
-          <span className="material-symbols-outlined text-base">
-            {toast.type === "success" ? "check_circle" : "error"}
-          </span>
-          <span>{toast.message}</span>
-        </div>
-      )}
-
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
-        <div>
-          <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
-            WHOLESALE MANAGEMENT DASHBOARD
-          </h1>
-          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-            Full admin wholesale control panel: pricing tiers, granular size inventory, buyer price offers, and order fulfillment.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="/admin/wholesale/suppliers"
-            className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-8 px-4 md:px-8 font-sans transition-colors">
+      <div className="w-full max-w-container-max mx-auto space-y-6 relative">
+        {/* Floating Success/Error Toast */}
+        {toast && (
+          <div
+            className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+              toast.type === "success"
+                ? "bg-[var(--color-status-success-bg)] border-[var(--color-status-success)]/30 text-[var(--color-status-success)]"
+                : "bg-red-500/10 border-red-500/30 text-red-500"
+            }`}
           >
-            <span className="material-symbols-outlined text-base">store</span>
-            Manage Suppliers
-          </Link>
-          <Link
-            href="/wholesale"
-            target="_blank"
-            className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-base">open_in_new</span>
-            View Live Wholesale Catalog
-          </Link>
-        </div>
-      </div>
+            <span className="material-symbols-outlined text-base">
+              {toast.type === "success" ? "check_circle" : "error"}
+            </span>
+            <span>{toast.message}</span>
+          </div>
+        )}
 
-      {/* Navigation Tabs Header */}
-      <div className="flex items-center gap-2 border-b border-[var(--color-border)] overflow-x-auto pb-1">
-        {[
-          { id: "pricing", label: "Wholesale Pricing Manager", icon: "sell" },
-          { id: "inventory", label: "Inventory by Size/Color", icon: "grid_on" },
-          { id: "offers", label: "Price Offer Inbox", icon: "mark_email_unread" },
-          { id: "orders", label: "Wholesale Order Status", icon: "local_shipping" },
-        ].map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => handleTabChange(tab.id as any)}
-              className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-none border-b-2 transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
-                isActive
-                  ? "border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-surface)] font-bold"
-                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-              }`}
+        {/* Top Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
+              WHOLESALE MANAGEMENT DASHBOARD
+            </h1>
+            <p className="text-xs text-[var(--color-text-secondary)] mt-1">
+              Full admin wholesale control panel: pricing tiers, granular size inventory, buyer price offers, and order fulfillment.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/wholesale/suppliers"
+              className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
             >
-              <span className="material-symbols-outlined text-base">{tab.icon}</span>
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
+              <span className="material-symbols-outlined text-base">store</span>
+              Manage Suppliers
+            </Link>
+            <Link
+              href="/wholesale"
+              target="_blank"
+              className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">open_in_new</span>
+              View Live Wholesale Catalog
+            </Link>
+          </div>
+        </div>
+
+        {/* Navigation Tabs Header */}
+        <div className="flex items-center gap-2 border-b border-[var(--color-border)] overflow-x-auto pb-1">
+          {[
+            { id: "pricing", label: "Wholesale Pricing Manager", icon: "sell" },
+            { id: "inventory", label: "Inventory by Size/Color", icon: "grid_on" },
+            { id: "offers", label: "Price Offer Inbox", icon: "mark_email_unread" },
+            { id: "orders", label: "Wholesale Order Status", icon: "local_shipping" },
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => handleTabChange(tab.id as any)}
+                className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-none border-b-2 transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
+                  isActive
+                    ? "border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-surface)] font-bold"
+                    : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                }`}
+              >
+                <span className="material-symbols-outlined text-base">{tab.icon}</span>
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Tab View Rendering */}
+        <div>
+          {activeTab === "pricing" && (
+            <WholesalePricingTab
+              products={pricingProducts}
+              onUpdatePrice={handleUpdatePrice}
+              onDeleteProduct={handleDeletePricingProduct}
+              showToast={showToast}
+            />
+          )}
+
+          {activeTab === "inventory" && (
+            <InventoryTab
+              products={inventoryProducts}
+              onUpdateInventory={handleUpdateInventory}
+              onAddColorVariant={handleAddColorVariant}
+              onArchiveColorVariant={handleArchiveColorVariant}
+              showToast={showToast}
+            />
+          )}
+
+          {activeTab === "offers" && (
+            <PriceOfferInboxTab
+              offers={priceOffers}
+              onAcceptOffer={handleAcceptOffer}
+              onRejectOffer={handleRejectOffer}
+              onCounterOffer={handleCounterOffer}
+              onSaveAdminNote={handleSaveAdminNote}
+              showToast={showToast}
+            />
+          )}
+
+          {activeTab === "orders" && (
+            <OrderStatusTab
+              orders={wholesaleOrders}
+              onUpdateStatus={handleUpdateOrderStatus}
+              showToast={showToast}
+            />
+          )}
+        </div>
       </div>
-
-      {/* Active Tab View Rendering */}
-      <div>
-        {activeTab === "pricing" && (
-          <WholesalePricingTab
-            products={pricingProducts}
-            onUpdatePrice={handleUpdatePrice}
-            onDeleteProduct={handleDeletePricingProduct}
-            showToast={showToast}
-          />
-        )}
-
-        {activeTab === "inventory" && (
-          <InventoryTab
-            products={inventoryProducts}
-            onUpdateInventory={handleUpdateInventory}
-            onAddColorVariant={handleAddColorVariant}
-            onArchiveColorVariant={handleArchiveColorVariant}
-            showToast={showToast}
-          />
-        )}
-
-        {activeTab === "offers" && (
-          <PriceOfferInboxTab
-            offers={priceOffers}
-            onAcceptOffer={handleAcceptOffer}
-            onRejectOffer={handleRejectOffer}
-            onCounterOffer={handleCounterOffer}
-            onSaveAdminNote={handleSaveAdminNote}
-            showToast={showToast}
-          />
-        )}
-
-        {activeTab === "orders" && (
-          <OrderStatusTab
-            orders={wholesaleOrders}
-            onUpdateStatus={handleUpdateOrderStatus}
-            showToast={showToast}
-          />
-        )}
-      </div>
-    </div>
+    </main>
   );
 }

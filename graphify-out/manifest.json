@@ -1355,9 +1355,9 @@
     "semantic_hash": "3f80235cd495bc5b34bca840eaf9ac0e"
   },
   "components/admin/wholesale/AdminWholesaleClient.tsx": {
-    "mtime": 1785680758.4487174,
-    "ast_hash": "365265c7bf075e6cd17a7c26a6908abf",
-    "semantic_hash": "365265c7bf075e6cd17a7c26a6908abf"
+    "mtime": 1785684434.1377232,
+    "ast_hash": "115d4bb061e48a115f490ca96cc31f5d",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/InventoryEditModal.tsx": {
     "mtime": 1785681860.9332895,
@@ -1410,9 +1410,9 @@
     "semantic_hash": "96d7a045f773098fde60ef11724432b9"
   },
   "components/admin/wholesale/inventory/CategoryInventoryClient.tsx": {
-    "mtime": 1785681781.5835316,
-    "ast_hash": "8bde1418ec261e7002582e97b0909d76",
-    "semantic_hash": "8bde1418ec261e7002582e97b0909d76"
+    "mtime": 1785684481.6284404,
+    "ast_hash": "9654fcb4017af5f78193981a91c10f98",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/inventory/ProductCard.tsx": {
     "mtime": 1785681795.001668,
@@ -1440,9 +1440,9 @@
     "semantic_hash": "20edc15132aa94752a36d05f03117b2a"
   },
   "components/admin/wholesale/suppliers/SupplierClient.tsx": {
-    "mtime": 1785681809.2089574,
-    "ast_hash": "592db2c9b925fe313a1d8d72e4272c41",
-    "semantic_hash": "592db2c9b925fe313a1d8d72e4272c41"
+    "mtime": 1785684565.9565253,
+    "ast_hash": "31d699da817c46ee6fb735878c6b3cb8",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/suppliers/SupplierDetailModal.tsx": {
     "mtime": 1785681972.5547137,

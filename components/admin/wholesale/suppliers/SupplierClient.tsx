@@ -131,142 +131,144 @@ export function SupplierClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
-      {/* Toast Alert */}
-      {toast && (
-        <div
-          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
-            toast.type === "success"
-              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-500"
-              : "bg-red-500/10 border-red-500/30 text-red-500"
-          }`}
-        >
-          <span className="material-symbols-outlined text-base">
-            {toast.type === "success" ? "check_circle" : "error"}
-          </span>
-          <span>{toast.message}</span>
-        </div>
-      )}
-
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
-        <div>
-          <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
-            SUPPLIER MANAGEMENT
-          </h1>
-          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-            Manage wholesale manufacturing partners, review applications, and verify new suppliers.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setIsAddModalOpen(true)}
-            className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-8 px-4 md:px-8 font-sans transition-colors">
+      <div className="w-full max-w-container-max mx-auto space-y-6 relative">
+        {/* Toast Alert */}
+        {toast && (
+          <div
+            className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+              toast.type === "success"
+                ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-500"
+                : "bg-red-500/10 border-red-500/30 text-red-500"
+            }`}
           >
-            <span className="material-symbols-outlined text-base">add</span>
-            + ADD NEW SUPPLIER
-          </button>
-          <Link
-            href="/admin/wholesale"
-            className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
-          >
-            Back to Wholesale Dashboard
-          </Link>
-        </div>
-      </div>
+            <span className="material-symbols-outlined text-base">
+              {toast.type === "success" ? "check_circle" : "error"}
+            </span>
+            <span>{toast.message}</span>
+          </div>
+        )}
 
-      {/* Controls Bar: Search & Filter Tabs */}
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
-        {/* Search Bar */}
-        <div className="relative flex-1 max-w-md">
-          <span className="material-symbols-outlined absolute left-3 top-2.5 text-[var(--color-text-secondary)] text-lg">
-            search
-          </span>
-          <input
-            type="text"
-            placeholder="Search suppliers by name, contact, email..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
+              SUPPLIER MANAGEMENT
+            </h1>
+            <p className="text-xs text-[var(--color-text-secondary)] mt-1">
+              Manage wholesale manufacturing partners, review applications, and verify new suppliers.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsAddModalOpen(true)}
+              className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">add</span>
+              + ADD NEW SUPPLIER
+            </button>
+            <Link
+              href="/admin/wholesale"
+              className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
+            >
+              Back to Wholesale Dashboard
+            </Link>
+          </div>
+        </div>
+
+        {/* Controls Bar: Search & Filter Tabs */}
+        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
+          {/* Search Bar */}
+          <div className="relative flex-1 max-w-md">
+            <span className="material-symbols-outlined absolute left-3 top-2.5 text-[var(--color-text-secondary)] text-lg">
+              search
+            </span>
+            <input
+              type="text"
+              placeholder="Search suppliers by name, contact, email..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
+            />
+          </div>
+
+          {/* Status Filters */}
+          <div className="flex items-center gap-2 font-mono text-xs">
+            <span className="text-[var(--color-text-secondary)] font-bold uppercase mr-1">Filter:</span>
+            {(["ALL", "ACTIVE", "PENDING"] as const).map((st) => (
+              <button
+                key={st}
+                type="button"
+                onClick={() => setStatusFilter(st)}
+                className={`px-3 py-1.5 rounded-none font-bold uppercase transition-colors cursor-pointer border ${
+                  statusFilter === st
+                    ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                    : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border-[var(--color-border)] hover:bg-[var(--color-bg)]"
+                }`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Table Card */}
+        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6">
+          <SuppliersTable
+            suppliers={filteredSuppliers}
+            onEdit={(sup) => setEditingSupplier(sup)}
+            onView={(sup) => setViewingSupplier(sup)}
+            onVerify={handleVerifySupplier}
+            onToggleStatus={handleToggleStatus}
           />
         </div>
 
-        {/* Status Filters */}
-        <div className="flex items-center gap-2 font-mono text-xs">
-          <span className="text-[var(--color-text-secondary)] font-bold uppercase mr-1">Filter:</span>
-          {(["ALL", "ACTIVE", "PENDING"] as const).map((st) => (
-            <button
-              key={st}
-              type="button"
-              onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1.5 rounded-none font-bold uppercase transition-colors cursor-pointer border ${
-                statusFilter === st
-                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
-                  : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-              }`}
-            >
-              {st}
-            </button>
-          ))}
-        </div>
-      </div>
+        {/* Add Supplier Modal */}
+        <AddSupplierModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          onCreate={handleCreateSupplier}
+        />
 
-      {/* Main Table Card */}
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6">
-        <SuppliersTable
-          suppliers={filteredSuppliers}
-          onEdit={(sup) => setEditingSupplier(sup)}
-          onView={(sup) => setViewingSupplier(sup)}
-          onVerify={handleVerifySupplier}
+        {/* Edit Supplier Modal */}
+        <EditSupplierModal
+          isOpen={!!editingSupplier}
+          supplier={editingSupplier}
+          onClose={() => setEditingSupplier(null)}
+          onSave={handleSaveSupplier}
+        />
+
+        {/* Supplier Detail Modal */}
+        <SupplierDetailModal
+          isOpen={!!viewingSupplier}
+          supplier={viewingSupplier}
+          onClose={() => setViewingSupplier(null)}
+          onEdit={(sup) => {
+            setViewingSupplier(null);
+            setEditingSupplier(sup);
+          }}
           onToggleStatus={handleToggleStatus}
+          onAddProduct={(supId) => {
+            setViewingSupplier(null);
+            setAddProductSupplierId(supId);
+          }}
+        />
+
+        {/* Add Wholesale Product Modal (prefilled supplierId) */}
+        <AddWholesaleProductModal
+          isOpen={!!addProductSupplierId}
+          prefilledSupplierId={addProductSupplierId || undefined}
+          suppliers={suppliers.map((s) => ({ id: s.id, firmName: s.firmName, status: s.status }))}
+          categories={categoriesOptions}
+          onClose={() => setAddProductSupplierId(null)}
+          onSuccess={(newProd) => {
+            showToast(`Created wholesale product ${newProd.name || newProd.sku}`, "success");
+          }}
+          showToast={showToast}
         />
       </div>
-
-      {/* Add Supplier Modal */}
-      <AddSupplierModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onCreate={handleCreateSupplier}
-      />
-
-      {/* Edit Supplier Modal */}
-      <EditSupplierModal
-        isOpen={!!editingSupplier}
-        supplier={editingSupplier}
-        onClose={() => setEditingSupplier(null)}
-        onSave={handleSaveSupplier}
-      />
-
-      {/* Supplier Detail Modal */}
-      <SupplierDetailModal
-        isOpen={!!viewingSupplier}
-        supplier={viewingSupplier}
-        onClose={() => setViewingSupplier(null)}
-        onEdit={(sup) => {
-          setViewingSupplier(null);
-          setEditingSupplier(sup);
-        }}
-        onToggleStatus={handleToggleStatus}
-        onAddProduct={(supId) => {
-          setViewingSupplier(null);
-          setAddProductSupplierId(supId);
-        }}
-      />
-
-      {/* Add Wholesale Product Modal (prefilled supplierId) */}
-      <AddWholesaleProductModal
-        isOpen={!!addProductSupplierId}
-        prefilledSupplierId={addProductSupplierId || undefined}
-        suppliers={suppliers.map((s) => ({ id: s.id, firmName: s.firmName, status: s.status }))}
-        categories={categoriesOptions}
-        onClose={() => setAddProductSupplierId(null)}
-        onSuccess={(newProd) => {
-          showToast(`Created wholesale product ${newProd.name || newProd.sku}`, "success");
-        }}
-        showToast={showToast}
-      />
-    </div>
+    </main>
   );
 }

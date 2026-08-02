@@ -134,8 +134,9 @@ export function CategoryInventoryClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
-      {/* Toast Alert */}
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-8 px-4 md:px-8 font-sans transition-colors">
+      <div className="w-full max-w-container-max mx-auto space-y-6 relative">
+        {/* Toast Alert */}
       {toast && (
         <div
           className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
@@ -247,6 +248,7 @@ export function CategoryInventoryClient() {
         }}
         showToast={showToast}
       />
-    </div>
+      </div>
+    </main>
   );
 }
