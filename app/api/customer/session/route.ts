@@ -11,7 +11,7 @@ export async function GET(req: Request) {
 
     const company = await prisma.company.findFirst({
       where: { email: session.email },
-      select: { name: true, email: true },
+      select: { name: true, email: true, createdAt: true },
     });
 
     const companyName = company?.name || session.email.split("@")[0].toUpperCase();
@@ -20,6 +20,8 @@ export async function GET(req: Request) {
       authenticated: true,
       email: session.email,
       companyName,
+      createdAt: company?.createdAt ? company.createdAt.toISOString() : undefined,
+      accountStatus: "APPROVED",
     });
   } catch (error) {
     console.error("Error fetching customer session:", error);

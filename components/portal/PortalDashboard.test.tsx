@@ -29,7 +29,7 @@ describe("PortalDashboard Component", () => {
               }),
           });
         }
-        if (url.includes("/api/portal/orders")) {
+        if (url.includes("/api/customer/orders") || url.includes("/api/portal/orders")) {
           return Promise.resolve({
             ok: true,
             status: 200,
@@ -76,10 +76,10 @@ describe("PortalDashboard Component", () => {
       render(<PortalDashboard />);
     });
 
-    expect(screen.getByText("Create New Order")).toBeInTheDocument();
-    expect(screen.getByText("View All Orders")).toBeInTheDocument();
-    expect(screen.getByText("Account Settings")).toBeInTheDocument();
-    expect(screen.getByText("Contact Support")).toBeInTheDocument();
+    expect(screen.getByText("CREATE NEW ORDER")).toBeInTheDocument();
+    expect(screen.getByText("VIEW ALL ORDERS")).toBeInTheDocument();
+    expect(screen.getByText("ACCOUNT SETTINGS")).toBeInTheDocument();
+    expect(screen.getByText("CONTACT SUPPORT")).toBeInTheDocument();
   });
 
   it("renders recent orders table with order items", async () => {
