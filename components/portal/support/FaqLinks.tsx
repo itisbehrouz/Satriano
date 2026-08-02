@@ -13,13 +13,13 @@ export function FaqLinks() {
   ];
 
   return (
-    <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-6 md:p-8 text-[#E8ECF3] shadow-none space-y-6">
-      <div className="border-b border-[#2E5AAC]/40 pb-4">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 md:p-8 text-[var(--color-text-primary)] shadow-none space-y-6 transition-colors">
+      <div className="border-b border-[var(--color-border)] pb-4">
         <h2 className="text-base font-bold uppercase tracking-wider font-mono flex items-center gap-2">
-          <span className="w-2.5 h-2.5 bg-[#2E5AAC] rounded-none" />
+          <span className="w-2.5 h-2.5 bg-[var(--color-accent)] rounded-none" />
           FAQ Quick Links &amp; Knowledge Base
         </h2>
-        <p className="text-xs text-[#8DA0C4] mt-1">
+        <p className="text-xs text-[var(--color-text-secondary)] mt-1">
           Frequently Asked Questions &amp; Manufacturing Guidelines
         </p>
       </div>
@@ -29,15 +29,15 @@ export function FaqLinks() {
           <Link
             key={idx}
             href={link.href}
-            className="p-4 bg-[#0B1E3D] border border-[#1E3A8A] hover:border-[#2E5AAC] text-[#85B7EB] hover:text-white transition-colors rounded-none flex items-center justify-between group"
+            className="p-4 bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-accent)] text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors rounded-none flex items-center justify-between group"
           >
             <div className="flex items-center gap-2.5">
-              <span className="material-symbols-outlined text-base text-[#8DA0C4] group-hover:text-[#85B7EB]">
+              <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)]">
                 {link.icon}
               </span>
               <span>{link.label}</span>
             </div>
-            <span className="text-[#8DA0C4] group-hover:text-white">→</span>
+            <span className="text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]">→</span>
           </Link>
         ))}
       </div>

@@ -17,7 +17,7 @@ export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   ];
 
   return (
-    <div className="border-b border-[#2E5AAC]/30 bg-[#132A52] px-4 sm:px-6 rounded-none select-none">
+    <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 sm:px-6 rounded-none select-none transition-colors">
       <nav className="-mb-px flex space-x-6 sm:space-x-8 text-xs font-semibold uppercase tracking-wider overflow-x-auto">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -28,8 +28,8 @@ export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
               onClick={() => onTabChange(tab.id)}
               className={`py-4 inline-flex items-center gap-2 border-b-2 font-mono transition-colors cursor-pointer rounded-none whitespace-nowrap ${
                 isActive
-                  ? "border-[#2E5AAC] text-[#E8ECF3] font-bold"
-                  : "border-transparent text-[#8DA0C4] hover:text-[#E8ECF3] hover:border-[#8DA0C4]/40"
+                  ? "border-[var(--color-accent)] text-[var(--color-text-primary)] font-bold"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               <span className="material-symbols-outlined text-base">

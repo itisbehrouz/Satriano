@@ -44,9 +44,9 @@ export function FilterBar({
   ];
 
   return (
-    <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-4 font-sans select-none space-y-4">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-4 font-sans select-none space-y-4 transition-colors">
       {/* 1. Primary Order Type Toggle Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#2E5AAC]/50 pb-3">
+      <div className="flex items-center gap-2 border-b border-[var(--color-border)] pb-3">
         {typeTabs.map((typeTab) => {
           const isActive = selectedOrderType === typeTab.id;
           return (
@@ -56,8 +56,8 @@ export function FilterBar({
               onClick={() => onOrderTypeChange && onOrderTypeChange(typeTab.id)}
               className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-none transition-colors border cursor-pointer ${
                 isActive
-                  ? "bg-[#2E5AAC] text-white border-[#2E5AAC]"
-                  : "bg-[#0B1E3D] text-[#8DA0C4] border-[#2E5AAC]/40 hover:text-white hover:border-[#2E5AAC]"
+                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                  : "bg-[var(--color-bg)] text-[var(--color-text-secondary)] border-[var(--color-border)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               {typeTab.label}
@@ -79,8 +79,8 @@ export function FilterBar({
                 onClick={() => onStatusChange(tab.id)}
                 className={`px-3 py-2 text-xs font-semibold whitespace-nowrap rounded-none transition-colors border-b-2 cursor-pointer flex items-center gap-1.5 ${
                   isActive
-                    ? "text-[#2E5AAC] border-[#2E5AAC] font-bold bg-[#0B1E3D]/50"
-                    : "text-[#8DA0C4] border-transparent hover:text-[#E8ECF3]"
+                    ? "text-[var(--color-accent)] border-[var(--color-accent)] font-bold bg-[var(--color-bg)]"
+                    : "text-[var(--color-text-secondary)] border-transparent hover:text-[var(--color-text-primary)]"
                 }`}
               >
                 <span>{tab.label}</span>
@@ -88,8 +88,8 @@ export function FilterBar({
                   <span
                     className={`text-[10px] px-1.5 py-0.2 font-mono rounded-none ${
                       isActive
-                        ? "bg-[#2E5AAC] text-white"
-                        : "bg-[#0B1E3D] text-[#8DA0C4] border border-[#2E5AAC]/40"
+                        ? "bg-[var(--color-accent)] text-white"
+                        : "bg-[var(--color-bg)] text-[var(--color-text-secondary)] border border-[var(--color-border)]"
                     }`}
                   >
                     {tab.count}
@@ -102,7 +102,7 @@ export function FilterBar({
 
         {/* Search Input (Right side) */}
         <div className="relative min-w-[280px] w-full md:w-auto">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-base text-[#8DA0C4]">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-base text-[var(--color-text-secondary)]">
             search
           </span>
           <input
@@ -110,13 +110,13 @@ export function FilterBar({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by Order ID, date, or SKU..."
-            className="w-full bg-[#132A52] border border-[#8DA0C4] focus:border-2 focus:border-[#2E5AAC] text-[#E8ECF3] placeholder-[#8DA0C4] pl-9 pr-8 py-2 text-xs rounded-none outline-none font-sans"
+            className="w-full bg-[var(--color-bg)] border border-[var(--color-border)] focus:border-2 focus:border-[var(--color-accent)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] pl-9 pr-8 py-2 text-xs rounded-none outline-none font-sans"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => onSearchChange("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8DA0C4] hover:text-[#E8ECF3] text-xs cursor-pointer"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-xs cursor-pointer"
               aria-label="Clear search"
             >
               ✕

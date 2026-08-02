@@ -29,55 +29,55 @@ export function CompanyInfoTab({
   }
 
   return (
-    <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-6 md:p-8 text-[#E8ECF3] shadow-none space-y-6">
-      <div className="flex items-center justify-between border-b border-[#2E5AAC]/40 pb-4">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 md:p-8 text-[var(--color-text-primary)] shadow-none space-y-6 transition-colors">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
           <h2 className="text-base font-bold uppercase tracking-wider font-mono flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-[#2E5AAC] rounded-none" />
+            <span className="w-2.5 h-2.5 bg-[var(--color-accent)] rounded-none" />
             Company Information
           </h2>
-          <p className="text-xs text-[#8DA0C4] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Verified B2B Corporate Entity Details
           </p>
         </div>
-        <span className="bg-[#14301F] text-[#5DCAA5] border border-[#5DCAA5]/40 text-xs font-mono font-bold px-3 py-1 uppercase tracking-wider rounded-none inline-flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-none bg-[#5DCAA5] animate-pulse" />
+        <span className="bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border border-[var(--color-status-success)]/40 text-xs font-mono font-bold px-3 py-1 uppercase tracking-wider rounded-none inline-flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-none bg-[var(--color-status-success)] animate-pulse" />
           <span>✓ {status} B2B PARTNER</span>
         </span>
       </div>
 
       {savedMessage && (
-        <div className="p-3 bg-[#14301F] border border-[#5DCAA5] text-xs text-[#5DCAA5] font-semibold">
+        <div className="p-3 bg-[var(--color-status-success-bg)] border border-[var(--color-status-success)] text-xs text-[var(--color-status-success)] font-semibold">
           {savedMessage}
         </div>
       )}
 
       {!isEditing ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
-          <div className="space-y-1 p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
-            <span className="text-[#8DA0C4] uppercase block text-[10px]">Company Legal Name</span>
-            <span className="font-bold text-white text-sm block">{name}</span>
+          <div className="space-y-1 p-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none">
+            <span className="text-[var(--color-text-secondary)] uppercase block text-[10px]">Company Legal Name</span>
+            <span className="font-bold text-[var(--color-text-primary)] text-sm block">{name}</span>
           </div>
 
-          <div className="space-y-1 p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
-            <span className="text-[#8DA0C4] uppercase block text-[10px]">Corporate Account Email</span>
-            <span className="font-bold text-white text-sm block">{email}</span>
+          <div className="space-y-1 p-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none">
+            <span className="text-[var(--color-text-secondary)] uppercase block text-[10px]">Corporate Account Email</span>
+            <span className="font-bold text-[var(--color-text-primary)] text-sm block">{email}</span>
           </div>
 
-          <div className="space-y-1 p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
-            <span className="text-[#8DA0C4] uppercase block text-[10px]">Partner Account ID</span>
-            <span className="font-bold text-[#85B7EB] text-sm block">{accountId}</span>
+          <div className="space-y-1 p-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none">
+            <span className="text-[var(--color-text-secondary)] uppercase block text-[10px]">Partner Account ID</span>
+            <span className="font-bold text-[var(--color-accent)] text-sm block">{accountId}</span>
           </div>
 
-          <div className="space-y-1 p-4 bg-[#0B1E3D] border border-[#1E3A8A] rounded-none">
-            <span className="text-[#8DA0C4] uppercase block text-[10px]">Account Activation Date</span>
-            <span className="font-bold text-white text-sm block">{createdAt}</span>
+          <div className="space-y-1 p-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none">
+            <span className="text-[var(--color-text-secondary)] uppercase block text-[10px]">Account Activation Date</span>
+            <span className="font-bold text-[var(--color-text-primary)] text-sm block">{createdAt}</span>
           </div>
         </div>
       ) : (
         <form onSubmit={handleSave} className="space-y-4 text-xs font-sans">
           <div>
-            <label className="block text-xs font-semibold text-[#8DA0C4] uppercase mb-1">
+            <label className="block text-xs font-semibold text-[var(--color-text-secondary)] uppercase mb-1">
               Company Legal Name
             </label>
             <input
@@ -85,7 +85,7 @@ export function CompanyInfoTab({
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-[#0B1E3D] border border-[#2E5AAC] p-3 text-sm text-[#E8ECF3] focus:outline-none rounded-none"
+              className="w-full bg-[var(--color-bg)] border border-[var(--color-border)] p-3 text-sm text-[var(--color-text-primary)] focus:outline-none rounded-none"
             />
           </div>
 
@@ -93,13 +93,13 @@ export function CompanyInfoTab({
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="px-4 py-2 bg-[#0B1E3D] border border-[#8DA0C4] text-[#8DA0C4] hover:text-white text-xs font-bold uppercase rounded-none transition-colors"
+              className="px-4 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-xs font-bold uppercase rounded-none transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-bold uppercase rounded-none transition-colors"
+              className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[#1E3F7A] text-white text-xs font-bold uppercase rounded-none transition-colors"
             >
               Save Changes
             </button>
@@ -108,11 +108,11 @@ export function CompanyInfoTab({
       )}
 
       {!isEditing && (
-        <div className="pt-2 border-t border-[#2E5AAC]/30 flex justify-end">
+        <div className="pt-2 border-t border-[var(--color-border)] flex justify-end">
           <button
             type="button"
             onClick={() => setIsEditing(true)}
-            className="h-10 px-5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 rounded-none transition-colors cursor-pointer"
+            className="h-10 px-5 bg-[var(--color-accent)] hover:bg-[#1E3F7A] text-white text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 rounded-none transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">edit</span>
             <span>Edit Company Info</span>

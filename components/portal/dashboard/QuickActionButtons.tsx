@@ -9,7 +9,7 @@ export function QuickActionButtons() {
       {/* 1. Primary Button: CREATE NEW ORDER */}
       <Link
         href="/configure"
-        className="h-12 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+        className="h-12 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
       >
         <span className="text-xl">➕</span>
         <span>CREATE NEW ORDER</span>
@@ -18,7 +18,7 @@ export function QuickActionButtons() {
       {/* 2. Secondary Outline: VIEW ALL ORDERS */}
       <Link
         href="/portal/orders"
-        className="h-12 bg-transparent hover:bg-[#1A3A5C] text-[#2E5AAC] border-2 border-[#2E5AAC] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+        className="h-12 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-accent)] border-2 border-[var(--color-accent)] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
       >
         <span className="text-xl">📋</span>
         <span>VIEW ALL ORDERS</span>
@@ -27,7 +27,7 @@ export function QuickActionButtons() {
       {/* 3. Secondary Outline: ACCOUNT SETTINGS */}
       <Link
         href="/portal/account"
-        className="h-12 bg-transparent hover:bg-[#1A3A5C] text-[#2E5AAC] border-2 border-[#2E5AAC] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+        className="h-12 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-accent)] border-2 border-[var(--color-accent)] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
       >
         <span className="text-xl">⚙️</span>
         <span>ACCOUNT SETTINGS</span>
@@ -36,7 +36,7 @@ export function QuickActionButtons() {
       {/* 4. Secondary Outline: CONTACT SUPPORT */}
       <Link
         href="/portal/support"
-        className="h-12 bg-transparent hover:bg-[#1A3A5C] text-[#2E5AAC] border-2 border-[#2E5AAC] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+        className="h-12 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-accent)] border-2 border-[var(--color-accent)] text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
       >
         <span className="text-xl">📞</span>
         <span>CONTACT SUPPORT</span>

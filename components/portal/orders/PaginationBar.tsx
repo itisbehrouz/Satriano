@@ -29,11 +29,11 @@ export function PaginationBar({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2 font-sans select-none text-[13px] text-[#8DA0C4]">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2 font-sans select-none text-[13px] text-[var(--color-text-secondary)]">
       {/* Info text */}
       <div>
-        Showing <span className="font-mono font-bold text-[#E8ECF3]">{startItem}–{endItem}</span> of{" "}
-        <span className="font-mono font-bold text-[#E8ECF3]">{totalOrders}</span> orders
+        Showing <span className="font-mono font-bold text-[var(--color-text-primary)]">{startItem}–{endItem}</span> of{" "}
+        <span className="font-mono font-bold text-[var(--color-text-primary)]">{totalOrders}</span> orders
       </div>
 
       {/* Page Controls */}
@@ -45,8 +45,8 @@ export function PaginationBar({
           onClick={() => onPageChange(currentPage - 1)}
           className={`px-3 py-1.5 border rounded-none cursor-pointer transition-colors ${
             currentPage <= 1
-              ? "border-[#1E3A8A] text-[#8DA0C4]/40 cursor-not-allowed"
-              : "border-[#2E5AAC] text-[#8DA0C4] hover:text-[#E8ECF3] hover:bg-[#1A3A5C]"
+              ? "border-[var(--color-border)] text-[var(--color-text-secondary)]/40 cursor-not-allowed"
+              : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
           }`}
           aria-label="Previous Page"
         >
@@ -63,8 +63,8 @@ export function PaginationBar({
               onClick={() => onPageChange(p)}
               className={`px-3 py-1.5 font-bold border rounded-none cursor-pointer transition-colors ${
                 isActive
-                  ? "bg-[#2E5AAC] text-white border-[#2E5AAC]"
-                  : "bg-[#132A52] border-[#1E3A8A] text-[#8DA0C4] hover:text-[#E8ECF3] hover:border-[#2E5AAC]"
+                  ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                  : "bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               {p}
@@ -79,8 +79,8 @@ export function PaginationBar({
           onClick={() => onPageChange(currentPage + 1)}
           className={`px-3 py-1.5 border rounded-none cursor-pointer transition-colors ${
             currentPage >= totalPages
-              ? "border-[#1E3A8A] text-[#8DA0C4]/40 cursor-not-allowed"
-              : "border-[#2E5AAC] text-[#8DA0C4] hover:text-[#E8ECF3] hover:bg-[#1A3A5C]"
+              ? "border-[var(--color-border)] text-[var(--color-text-secondary)]/40 cursor-not-allowed"
+              : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
           }`}
           aria-label="Next Page"
         >

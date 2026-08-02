@@ -145,9 +145,9 @@ function PortalPageContent() {
   // 2. LOADING STATE
   if (isAuthenticated === null) {
     return (
-      <main className="min-h-screen bg-[#0B1E3D] flex items-center justify-center font-sans text-xs text-[#8DA0C4]">
+      <main className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center font-sans text-xs text-[var(--color-text-secondary)] transition-colors">
         <div className="text-center space-y-2">
-          <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
+          <span className="inline-block w-6 h-6 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin" />
           <p>Verifying client session...</p>
         </div>
       </main>
@@ -545,8 +545,8 @@ export default function PortalPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#0B1E3D] flex items-center justify-center font-sans text-xs text-[#8DA0C4]">
-          <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+        <div className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center font-sans text-xs text-[var(--color-text-secondary)] transition-colors">
+          <span className="inline-block w-5 h-5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
         </div>
       }
     >
