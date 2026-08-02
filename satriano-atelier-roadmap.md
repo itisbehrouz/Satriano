@@ -560,3 +560,22 @@ checkpoint before being considered done, regardless of which agent
   - Built `Helpful Resources` quick links section for MOQs, lead times, payment methods, and support.
 - **Vitest Unit Test Expansion**:
   - Created unit test suites (`components/portal/PortalHeader.test.tsx`, `components/portal/PortalDashboard.test.tsx`). Verified 100% pass rate across 21 test files and 108 unit tests.
+
+---
+
+## 17. B2B Customer Portal Account Settings & Support Hub (Aug 2, 2026)
+
+- **Account Settings Hub (`/portal/account`)**:
+  - Created `TabNavigation` component with URL query parameter sync (`?tab=company|settings|billing`).
+  - Created `CompanyInfoTab` displaying corporate account details, account ID, activation date, and green approval badge (`✓ APPROVED B2B PARTNER`).
+  - Created `SettingsTab` with interactive toggles (Email Notifications, Proforma Auto-Download), dropdowns (Currency, Language), password change button, and account deletion warning.
+  - Created `BillingTab` with corporate billing address editor and recent invoices table with PDF download links.
+- **Customer Support Hub (`/portal/support`)**:
+  - Created `ContactChannels` component with direct links for WhatsApp (`https://wa.me/...`), Telegram (`https://t.me/SatrianoAtelier`), Email with 1-click clipboard copy (`support@satriano.com`), and Signal Private Desk.
+  - Created `SupportForm` component submitting tickets to `POST /api/customer/support-ticket` with subject, message, and file upload fields.
+  - Created `FaqLinks` component with quick links to MOQs, configurator guidelines, payment terms, and delivery SLAs.
+- **Header & Dropdown Navigation Alignment**:
+  - Verified `AccountDropdown` menu routes (`/portal/account?tab=company`, `/portal/orders`, `/portal/account?tab=settings`, `/portal/account?tab=billing`, `/portal/support`).
+  - Removed duplicate standalone Sign Out button from `PortalHeader`.
+- **Vitest Unit Test Expansion**:
+  - Added unit test suites (`components/portal/account/AccountPage.test.tsx`, `components/portal/support/SupportPage.test.tsx`). Verified 100% pass rate across 24 test files and 117 unit tests.
