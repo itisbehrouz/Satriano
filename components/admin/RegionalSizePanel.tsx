@@ -111,24 +111,24 @@ export function RegionalSizePanel({
     <>
       {/* Dark Overlay Backdrop */}
       <div
-        className="fixed inset-0 bg-[#101828]/50 backdrop-blur-xs z-50 transition-opacity"
+        className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 transition-opacity"
         onClick={handleAttemptClose}
       />
 
       {/* Slide-Over Side Drawer */}
-      <div className="fixed inset-y-0 right-0 w-full max-w-lg bg-white shadow-2xl z-50 flex flex-col font-sans border-l border-[#D0D5DD] animate-slideInRight">
+      <div className="fixed inset-y-0 right-0 w-full max-w-lg bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-2xl z-50 flex flex-col font-sans border-l border-[var(--color-border)] animate-slideInRight">
         {/* Panel Header */}
-        <div className="p-5 border-b border-[#EAECF0] bg-[#F9FAFB] flex items-center justify-between">
+        <div className="p-5 border-b border-[var(--color-border)] bg-[var(--color-bg)] flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-[#101828]">
+              <h3 className="text-base font-bold text-[var(--color-text-primary)]">
                 {sizeSystem.name} Sizing Standard
               </h3>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[#E6F1FB] text-[#185FA5] rounded border border-[#B3D6F6]">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-none border border-[var(--color-accent)]/20">
                 {sizeSystem.region} Region
               </span>
             </div>
-            <p className="text-xs text-[#475467]">
+            <p className="text-xs text-[var(--color-text-secondary)]">
               Select subcategories that support this CAD sizing standard.
             </p>
           </div>
@@ -136,22 +136,22 @@ export function RegionalSizePanel({
           <button
             type="button"
             onClick={handleAttemptClose}
-            className="w-8 h-8 rounded-md bg-white border border-[#D0D5DD] text-[#667085] hover:text-[#101828] hover:bg-[#F2F4F7] flex items-center justify-center text-xs font-bold transition-colors"
+            className="w-8 h-8 rounded-none bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] flex items-center justify-center text-xs font-bold transition-colors cursor-pointer"
           >
             ✕
           </button>
         </div>
 
         {/* Size Matrix Badge Bar */}
-        <div className="px-5 py-3 bg-white border-b border-[#EAECF0] flex items-center gap-2 overflow-x-auto">
-          <span className="text-xs font-semibold text-[#475467] shrink-0">
+        <div className="px-5 py-3 bg-[var(--color-surface)] border-b border-[var(--color-border)] flex items-center gap-2 overflow-x-auto">
+          <span className="text-xs font-semibold text-[var(--color-text-secondary)] shrink-0">
             Size Matrix:
           </span>
           <div className="flex flex-wrap gap-1">
             {sizeSystem.options.map((opt) => (
               <span
                 key={opt.id}
-                className="bg-[#F9FAFB] border border-[#D0D5DD] text-[#344054] text-[11px] font-semibold px-2 py-0.5 rounded font-mono"
+                className="bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-[11px] font-semibold px-2 py-0.5 rounded-none font-mono"
               >
                 {opt.label}
               </span>
@@ -161,28 +161,28 @@ export function RegionalSizePanel({
 
         {/* Error Banner */}
         {error && (
-          <div className="p-4 bg-[#FEF3F2] border-b border-[#FECDCA] text-[#B42318] text-xs font-semibold flex items-center justify-between">
+          <div className="p-4 bg-red-500/10 border-b border-red-500/30 text-red-500 text-xs font-semibold flex items-center justify-between">
             <span>{error}</span>
-            <button onClick={() => setError(null)} className="text-[#B42318] font-bold">
+            <button onClick={() => setError(null)} className="text-red-500 font-bold cursor-pointer">
               ✕
             </button>
           </div>
         )}
 
         {/* Subcategories Selection List */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-white">
+        <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-[var(--color-surface)]">
           {categories.map((cat) => (
             <div key={cat.id} className="space-y-3">
               {/* Category Header */}
-              <div className="text-xs font-bold uppercase tracking-wider text-[#344054] border-b border-[#EAECF0] pb-1.5 flex items-center justify-between">
+              <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-1.5 flex items-center justify-between">
                 <span>Category: {cat.name}</span>
-                <span className="text-[10px] text-[#667085] font-mono">
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono">
                   {cat.subcategories.filter((s) => selectedSubcatIds.includes(s.id)).length}/
                   {cat.subcategories.length} selected
                 </span>
               </div>
 
-              {/* Neutral-Gray Checkbox Items */}
+              {/* Checkbox Items */}
               <div className="space-y-2">
                 {cat.subcategories.map((sub) => {
                   const isChecked = selectedSubcatIds.includes(sub.id);
@@ -190,18 +190,18 @@ export function RegionalSizePanel({
                     <label
                       key={sub.id}
                       onClick={() => handleToggleSubcategory(sub.id)}
-                      className={`flex items-center justify-between p-3 rounded-md border cursor-pointer transition-colors ${
+                      className={`flex items-center justify-between p-3 rounded-none border cursor-pointer transition-colors ${
                         isChecked
-                          ? "bg-[#F0F5FF] border-[#2E5AAC]"
-                          : "bg-[#F9FAFB] border-[#D0D5DD] hover:border-[#2E5AAC]"
+                          ? "bg-[var(--color-accent)]/10 border-[var(--color-accent)] text-[var(--color-text-primary)]"
+                          : "bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]"
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div
-                          className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
+                          className={`w-4 h-4 rounded-none border flex items-center justify-center transition-colors ${
                             isChecked
-                              ? "bg-[#2E5AAC] border-[#2E5AAC] text-white"
-                              : "bg-white border-[#D0D5DD]"
+                              ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white"
+                              : "bg-[var(--color-surface)] border-[var(--color-border)]"
                           }`}
                         >
                           {isChecked && (
@@ -211,10 +211,10 @@ export function RegionalSizePanel({
                           )}
                         </div>
                         <div>
-                          <span className="text-xs font-semibold text-[#101828]">
+                          <span className="text-xs font-semibold text-[var(--color-text-primary)]">
                             {sub.name}
                           </span>
-                          <span className="text-[10px] text-[#667085] block font-mono">
+                          <span className="text-[10px] text-[var(--color-text-secondary)] block font-mono">
                             {sub.slug}
                           </span>
                         </div>
@@ -228,11 +228,11 @@ export function RegionalSizePanel({
         </div>
 
         {/* Footer Actions Bar */}
-        <div className="p-5 border-t border-[#EAECF0] bg-[#F9FAFB] flex items-center justify-between">
+        <div className="p-5 border-t border-[var(--color-border)] bg-[var(--color-bg)] flex items-center justify-between">
           <button
             type="button"
             onClick={handleAttemptClose}
-            className="px-4 py-2 bg-white border border-[#D0D5DD] hover:bg-[#F2F4F7] text-xs font-semibold text-[#344054] rounded-md transition-colors cursor-pointer"
+            className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-none transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -241,7 +241,7 @@ export function RegionalSizePanel({
             type="button"
             disabled={saving || !hasUnsavedChanges}
             onClick={handleSaveClick}
-            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold px-5 py-2 rounded-md transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-5 py-2 rounded-none transition-colors cursor-pointer disabled:opacity-50"
           >
             {saving ? "Saving Changes…" : "Save Changes"}
           </button>
@@ -250,13 +250,13 @@ export function RegionalSizePanel({
 
       {/* Unsaved Changes Confirmation Modal */}
       {showConfirmClose && (
-        <div className="fixed inset-0 bg-[#101828]/60 backdrop-blur-xs flex items-center justify-center p-4 z-60 animate-fadeIn">
-          <div className="bg-white border border-[#D0D5DD] rounded-lg p-5 max-w-sm w-full shadow-xl space-y-4 font-sans">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-60 animate-fadeIn">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 max-w-sm w-full shadow-xl space-y-4 font-sans text-[var(--color-text-primary)]">
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-[#101828]">
+              <h4 className="text-sm font-bold text-[var(--color-text-primary)]">
                 Discard Unsaved Changes?
               </h4>
-              <p className="text-xs text-[#475467]">
+              <p className="text-xs text-[var(--color-text-secondary)]">
                 You have modified subcategory assignments for {sizeSystem.name}. Discarding will revert all pending changes.
               </p>
             </div>
@@ -265,14 +265,14 @@ export function RegionalSizePanel({
               <button
                 type="button"
                 onClick={() => setShowConfirmClose(false)}
-                className="px-3 py-1.5 bg-white border border-[#D0D5DD] text-xs font-semibold text-[#344054] rounded-md hover:bg-[#F2F4F7]"
+                className="px-3 py-1.5 bg-[var(--color-bg)] border border-[var(--color-border)] text-xs font-semibold text-[var(--color-text-primary)] rounded-none hover:bg-[var(--color-surface)] cursor-pointer"
               >
                 Keep Editing
               </button>
               <button
                 type="button"
                 onClick={handleConfirmDiscard}
-                className="px-3 py-1.5 bg-[#B42318] text-white text-xs font-semibold rounded-md hover:bg-[#912015]"
+                className="px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-none hover:bg-red-700 cursor-pointer"
               >
                 Discard Changes
               </button>

@@ -905,8 +905,8 @@
     "semantic_hash": ""
   },
   "app/admin/product-settings/page.tsx": {
-    "mtime": 1785680743.9622507,
-    "ast_hash": "5c7ac28e5a96d23b5f90b5dbdebfba53",
+    "mtime": 1785681371.217979,
+    "ast_hash": "c76293951f35f279e490b772c008dbca",
     "semantic_hash": ""
   },
   "app/admin/wholesale/inventory/page.tsx": {
@@ -1315,19 +1315,19 @@
     "semantic_hash": ""
   },
   "components/admin/FabricPricingPanel.tsx": {
-    "mtime": 1785620972.8016045,
-    "ast_hash": "348fb340d1a3ac38baa80ba9f5c15ecb",
-    "semantic_hash": "348fb340d1a3ac38baa80ba9f5c15ecb"
+    "mtime": 1785681461.0943782,
+    "ast_hash": "86135db27130a79b4274a8033766bd39",
+    "semantic_hash": ""
   },
   "components/admin/FabricPricingTree.tsx": {
-    "mtime": 1785623551.5181818,
-    "ast_hash": "482506c316857c4706fe805ce33cd05e",
-    "semantic_hash": "482506c316857c4706fe805ce33cd05e"
+    "mtime": 1785681422.9773676,
+    "ast_hash": "ee4d71426d0fb5464edebf41e85441ce",
+    "semantic_hash": ""
   },
   "components/admin/GarmentFitsPanel.tsx": {
-    "mtime": 1785601110.145305,
-    "ast_hash": "de7162bbc676a96364cdc888a49206ea",
-    "semantic_hash": "de7162bbc676a96364cdc888a49206ea"
+    "mtime": 1785681433.633281,
+    "ast_hash": "2efa72a051a09d61b31b66f7d3c5dd68",
+    "semantic_hash": ""
   },
   "components/admin/GlobalCommandPalette.tsx": {
     "mtime": 1785621783.5592277,
@@ -1335,19 +1335,19 @@
     "semantic_hash": "7d29966534353431c5657a6303573b66"
   },
   "components/admin/ProductFitTree.tsx": {
-    "mtime": 1785623551.5187578,
-    "ast_hash": "a2ac34d7fba15fc0a01e1eea4d586ad3",
-    "semantic_hash": "a2ac34d7fba15fc0a01e1eea4d586ad3"
+    "mtime": 1785681391.5371568,
+    "ast_hash": "92f72f75598d85757a543ec598e70404",
+    "semantic_hash": ""
   },
   "components/admin/RegionalSizePanel.tsx": {
-    "mtime": 1785620535.6293175,
-    "ast_hash": "84ebae03ccfdef54fc4f20cb62343380",
-    "semantic_hash": "84ebae03ccfdef54fc4f20cb62343380"
+    "mtime": 1785681446.6289787,
+    "ast_hash": "1c5ce1084bc1fd0c517ec4c1b4246a21",
+    "semantic_hash": ""
   },
   "components/admin/RegionalSizeTree.tsx": {
-    "mtime": 1785623551.519186,
-    "ast_hash": "ff3335279fdc8f4fb98ff222d0a5ed3a",
-    "semantic_hash": "ff3335279fdc8f4fb98ff222d0a5ed3a"
+    "mtime": 1785681404.1831524,
+    "ast_hash": "5030db2ec572b085e7873d04601c20dd",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/AddColorVariantModal.tsx": {
     "mtime": 1785662534.75084,
@@ -1390,9 +1390,9 @@
     "semantic_hash": "a564f6d60d0eda595acdb72a03a72c4d"
   },
   "components/admin/wholesale/WholesalePricingTab.tsx": {
-    "mtime": 1785662521.1932187,
-    "ast_hash": "5f642afa1927fe2646236f42d0ad4aa6",
-    "semantic_hash": "5f642afa1927fe2646236f42d0ad4aa6"
+    "mtime": 1785681489.8172877,
+    "ast_hash": "8b667b95590199693eb031b2cbb812b1",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/images/ProductImageUploader.tsx": {
     "mtime": 1785676638.5066612,

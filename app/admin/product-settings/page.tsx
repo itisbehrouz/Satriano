@@ -675,7 +675,7 @@ function ProductSettingsContent() {
                   </div>
 
                   {/* Category Accordion Tree */}
-                  <div className="divide-y divide-[#EAECF0]">
+                  <div className="divide-y divide-[var(--color-border)]">
                     {categories.map((cat) => {
                       const isCatOpen = !!openCategoryIds[cat.id];
                       const subSummary =
@@ -684,16 +684,16 @@ function ProductSettingsContent() {
                           : "No subcategories yet";
 
                       return (
-                        <div key={cat.id} className="bg-white">
+                        <div key={cat.id} className="bg-[var(--color-surface)]">
                           {/* Category Accordion Header */}
-                          <div className="flex items-center justify-between gap-3 px-5 py-3.5 bg-[#F9FAFB] hover:bg-[#F2F4F7] transition-colors border-b border-[#EAECF0]">
+                          <div className="flex items-center justify-between gap-3 px-5 py-3.5 bg-[var(--color-bg)] hover:bg-[var(--color-surface)] transition-colors border-b border-[var(--color-border)]">
                             <button
                               type="button"
                               onClick={() => toggleCategoryOpen(cat.id)}
-                              className="flex items-center gap-2.5 text-left flex-1 min-w-0"
+                              className="flex items-center gap-2.5 text-left flex-1 min-w-0 cursor-pointer"
                             >
                               <svg
-                                className={`w-4 h-4 flex-shrink-0 text-[#667085] transition-transform duration-200 ${
+                                className={`w-4 h-4 flex-shrink-0 text-[var(--color-text-secondary)] transition-transform duration-200 ${
                                   isCatOpen ? "rotate-0" : "-rotate-90"
                                 }`}
                                 fill="none"
@@ -704,14 +704,14 @@ function ProductSettingsContent() {
                               </svg>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">
+                                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                                     {cat.name}
                                   </span>
-                                  <span className="text-[10px] font-mono text-[#667085] bg-[#EAECF0] px-1.5 py-0.5 rounded">
+                                  <span className="text-[10px] font-mono text-[var(--color-text-secondary)] bg-[var(--color-surface)] border border-[var(--color-border)] px-1.5 py-0.5 rounded-none">
                                     slug: {cat.slug}
                                   </span>
                                 </div>
-                                <p className="text-[11px] text-[#667085] mt-0.5 truncate">{subSummary}</p>
+                                <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5 truncate">{subSummary}</p>
                               </div>
                             </button>
 
@@ -726,7 +726,7 @@ function ProductSettingsContent() {
                                 setSubError(null);
                                 setAddSubcategoryCategory(cat);
                               }}
-                              className="min-h-[36px] flex-shrink-0 bg-white border border-[#2E5AAC] text-[#2E5AAC] hover:bg-[#E6F1FB] text-xs font-semibold px-3 py-1.5 rounded transition-colors inline-flex items-center gap-1"
+                              className="min-h-[36px] flex-shrink-0 bg-[var(--color-surface)] border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 text-xs font-semibold px-3 py-1.5 rounded-none transition-colors inline-flex items-center gap-1 cursor-pointer"
                             >
                               <span className="material-symbols-outlined text-sm">add</span>
                               <span>Add Subcategory</span>
@@ -735,20 +735,20 @@ function ProductSettingsContent() {
 
                           {/* Subcategories */}
                           {isCatOpen && (
-                            <div className="divide-y divide-[#EAECF0]">
+                            <div className="divide-y divide-[var(--color-border)]">
                               {cat.subcategories.map((sub) => {
                                 const isSubOpen = !!openSubcategoryIds[sub.id];
 
                                 return (
-                                  <div key={sub.id} className="bg-white">
-                                    <div className="flex items-center justify-between gap-3 pl-11 pr-5 py-3 hover:bg-[#F9FAFB] transition-colors">
+                                  <div key={sub.id} className="bg-[var(--color-surface)]">
+                                    <div className="flex items-center justify-between gap-3 pl-11 pr-5 py-3 hover:bg-[var(--color-bg)]/60 transition-colors">
                                       <button
                                         type="button"
                                         onClick={() => toggleSubcategoryOpen(sub.id)}
-                                        className="flex items-center gap-2 text-left flex-1 min-w-0"
+                                        className="flex items-center gap-2 text-left flex-1 min-w-0 cursor-pointer"
                                       >
                                         <svg
-                                          className={`w-3.5 h-3.5 flex-shrink-0 text-[#667085] transition-transform duration-200 ${
+                                          className={`w-3.5 h-3.5 flex-shrink-0 text-[var(--color-text-secondary)] transition-transform duration-200 ${
                                             isSubOpen ? "rotate-0" : "-rotate-90"
                                           }`}
                                           fill="none"
@@ -757,13 +757,13 @@ function ProductSettingsContent() {
                                         >
                                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                         </svg>
-                                        <span className="text-xs font-bold text-[#101828] bg-[#F2F4F7] px-2 py-0.5 rounded">
+                                        <span className="text-xs font-bold text-[var(--color-text-primary)] bg-[var(--color-bg)] px-2 py-0.5 rounded-none border border-[var(--color-border)]">
                                           {sub.name}
                                         </span>
-                                        <span className="text-[11px] text-[#667085]">
+                                        <span className="text-[11px] text-[var(--color-text-secondary)]">
                                           ({sub.products.length} {sub.products.length === 1 ? "product" : "products"})
                                         </span>
-                                        <span className="text-[10px] font-mono text-[#98A2B3] hidden sm:inline">
+                                        <span className="text-[10px] font-mono text-[var(--color-text-secondary)] hidden sm:inline">
                                           slug: {sub.slug}
                                         </span>
                                       </button>
@@ -786,7 +786,7 @@ function ProductSettingsContent() {
                                           setProdError(null);
                                           setAddProductContext({ cat, sub });
                                         }}
-                                        className="min-h-[32px] flex-shrink-0 bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] font-semibold px-2.5 py-1.5 rounded transition-colors inline-flex items-center gap-1 shadow-sm"
+                                        className="min-h-[32px] flex-shrink-0 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-none transition-colors inline-flex items-center gap-1 cursor-pointer"
                                       >
                                         <span className="material-symbols-outlined text-sm">add</span>
                                         <span>Add Product</span>
@@ -795,9 +795,9 @@ function ProductSettingsContent() {
 
                                     {isSubOpen && (
                                       <div className="pl-11 pr-5 pb-4">
-                                        <div className="overflow-x-auto border border-[#EAECF0] rounded-md">
+                                        <div className="overflow-x-auto border border-[var(--color-border)] rounded-none">
                                           <table className="w-full text-left text-xs">
-                                            <thead className="bg-[#F9FAFB] text-[#475467] font-semibold border-b border-[#EAECF0]">
+                                            <thead className="bg-[var(--color-bg)] text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)] uppercase text-[11px]">
                                               <tr>
                                                 <th className="py-2.5 px-4">Product Item</th>
                                                 <th className="py-2.5 px-4">Single-Fabric MOQ</th>
@@ -806,31 +806,31 @@ function ProductSettingsContent() {
                                                 <th className="py-2.5 px-4 text-right">Status / Edit MOQs</th>
                                               </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-[#EAECF0]">
+                                            <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-primary)]">
                                               {sub.products.map((prod) => {
                                                 const isEditingThis = editingProductId === prod.id;
 
                                                 return (
-                                                  <tr key={prod.id} className="hover:bg-[#F9FAFB] transition-colors">
-                                                    <td className="py-2.5 px-4 font-semibold text-[#101828]">
+                                                  <tr key={prod.id} className="hover:bg-[var(--color-bg)]/50 transition-colors">
+                                                    <td className="py-2.5 px-4 font-semibold text-[var(--color-text-primary)]">
                                                       <div>{prod.name}</div>
-                                                      <div className="text-[11px] font-mono text-[#667085]">/{prod.slug}</div>
+                                                      <div className="text-[11px] font-mono text-[var(--color-text-secondary)]">/{prod.slug}</div>
                                                     </td>
-                                                    <td className="py-2.5 px-4 font-semibold text-[#101828]">
+                                                    <td className="py-2.5 px-4 font-semibold text-[var(--color-text-primary)]">
                                                       {prod.moqPerFabric ?? prod.moq ?? 50} pcs
                                                     </td>
-                                                    <td className="py-2.5 px-4 font-medium text-[#344054]">
+                                                    <td className="py-2.5 px-4 font-medium text-[var(--color-text-secondary)]">
                                                       {prod.moqCombinedMultiFabric ? `${prod.moqCombinedMultiFabric} pcs` : "N/A"}
                                                     </td>
                                                     <td className="py-2.5 px-4">
                                                       {prod.fits.length === 0 ? (
-                                                        <span className="text-[#98A2B3] italic text-[11px]">Excluded (0)</span>
+                                                        <span className="text-[var(--color-text-secondary)] italic text-[11px]">Excluded (0)</span>
                                                       ) : (
                                                         <div className="flex flex-wrap gap-1">
                                                           {prod.fits.map((pf) => (
                                                             <span
                                                               key={pf.fit.id}
-                                                              className="bg-[#F2F4F7] text-[#344054] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-[#D0D5DD]"
+                                                              className="bg-[var(--color-bg)] text-[var(--color-text-primary)] text-[10px] font-semibold px-1.5 py-0.5 rounded-none border border-[var(--color-border)]"
                                                             >
                                                               {pf.fit.name}
                                                             </span>
@@ -843,14 +843,14 @@ function ProductSettingsContent() {
                                                         <div className="flex items-center justify-end gap-2">
                                                           <input
                                                             type="number"
-                                                            className="w-16 border border-[#D0D5DD] rounded px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                                                            className="w-16 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded-none px-1.5 py-1 text-xs focus:outline-none focus:border-[var(--color-accent)]"
                                                             title="Single Fabric MOQ"
                                                             value={editMoqPerFabric}
                                                             onChange={(e) => setEditMoqPerFabric(parseInt(e.target.value, 10))}
                                                           />
                                                           <input
                                                             type="number"
-                                                            className="w-16 border border-[#D0D5DD] rounded px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                                                            className="w-16 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] rounded-none px-1.5 py-1 text-xs focus:outline-none focus:border-[var(--color-accent)]"
                                                             placeholder="Combined"
                                                             title="Combined Multi-Fabric MOQ"
                                                             value={editMoqCombined}
@@ -859,14 +859,14 @@ function ProductSettingsContent() {
                                                           <button
                                                             type="button"
                                                             onClick={() => saveProductMoqs(prod.id)}
-                                                            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white px-2 py-1 rounded text-[11px] font-semibold transition-colors"
+                                                            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white px-2 py-1 rounded-none text-[11px] font-semibold transition-colors cursor-pointer"
                                                           >
                                                             Save
                                                           </button>
                                                           <button
                                                             type="button"
                                                             onClick={() => setEditingProductId(null)}
-                                                            className="border border-[#D0D5DD] text-[#475467] hover:bg-[#F2F4F7] px-2 py-1 rounded text-[11px] transition-colors"
+                                                            className="border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg)] px-2 py-1 rounded-none text-[11px] transition-colors cursor-pointer"
                                                           >
                                                             Cancel
                                                           </button>

@@ -76,21 +76,21 @@ export function RegionalSizeTree({
   });
 
   return (
-    <div className="bg-white border border-[#D0D5DD] rounded-lg shadow-sm overflow-hidden font-sans">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none overflow-hidden font-sans transition-colors">
       {/* Top Header / Bar */}
-      <div className="p-4 sm:p-5 border-b border-[#EAECF0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
+      <div className="p-4 sm:p-5 border-b border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--color-bg)]">
         <div>
-          <h2 className="text-base font-semibold text-[#101828]">
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
             Regional CAD Size Systems &amp; Standards
           </h2>
-          <p className="text-xs text-[#475467] mt-0.5">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
             Manage regional CAD size matrices (Alpha, Waist, Chest) and assign them to product subcategories.
           </p>
         </div>
 
         {/* Active Search Bar Input (⌘K Enabled) */}
         <div className="relative w-full sm:w-80">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#667085]">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[var(--color-text-secondary)]">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
@@ -106,20 +106,20 @@ export function RegionalSizeTree({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search size standards, regions, options... ⌘K"
-            className="w-full pl-9 pr-14 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] placeholder-[#667085] focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC] transition-colors"
+            className="w-full pl-9 pr-14 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
           />
           <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1">
             {searchQuery ? (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="text-[#667085] hover:text-[#101828] text-xs px-1 font-bold cursor-pointer"
+                className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-xs px-1 font-bold cursor-pointer"
                 title="Clear search filter"
               >
                 ✕
               </button>
             ) : (
-              <kbd className="px-1.5 py-0.5 bg-[#F2F4F7] border border-[#D0D5DD] rounded text-[10px] font-mono text-[#667085] pointer-events-none">
+              <kbd className="px-1.5 py-0.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-[10px] font-mono text-[var(--color-text-secondary)] pointer-events-none">
                 ⌘K
               </kbd>
             )}
@@ -130,20 +130,20 @@ export function RegionalSizeTree({
       {/* Size Systems Table View */}
       <div className="overflow-x-auto">
         {filteredSizeSystems.length === 0 ? (
-          <div className="p-12 text-center text-xs text-[#667085] space-y-2">
-            <p className="font-semibold text-[#101828]">No sizing standards match &quot;{searchQuery}&quot;</p>
-            <p className="text-[#667085]">Try searching by region (EU, US), size name (Alpha, Waist), or size tag (M, 40R).</p>
+          <div className="p-12 text-center text-xs text-[var(--color-text-secondary)] space-y-2">
+            <p className="font-semibold text-[var(--color-text-primary)]">No sizing standards match &quot;{searchQuery}&quot;</p>
+            <p className="text-[var(--color-text-secondary)]">Try searching by region (EU, US), size name (Alpha, Waist), or size tag (M, 40R).</p>
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="mt-2 inline-flex items-center px-3 py-1.5 bg-[#F2F4F7] hover:bg-[#EAECF0] text-[#344054] text-xs font-semibold rounded border border-[#D0D5DD] transition-colors cursor-pointer"
+              className="mt-2 inline-flex items-center px-3 py-1.5 bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs font-semibold rounded-none border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors cursor-pointer"
             >
               Clear Search Query
             </button>
           </div>
         ) : (
           <table className="w-full text-left text-xs border-collapse">
-            <thead className="bg-[#F9FAFB] text-[#475467] font-semibold border-b border-[#EAECF0]">
+            <thead className="bg-[var(--color-bg)] text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)] uppercase text-[11px]">
               <tr>
                 <th className="py-3 px-5">Standard Name &amp; Region</th>
                 <th className="py-3 px-5">Size Options Matrix</th>
@@ -151,7 +151,7 @@ export function RegionalSizeTree({
                 <th className="py-3 px-5 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EAECF0]">
+            <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-primary)]">
               {filteredSizeSystems.map((sys) => {
                 const isSelected = sys.id === selectedSizeSystemId;
                 const mappedSubcats = subcategories.filter((sub) =>
@@ -164,16 +164,16 @@ export function RegionalSizeTree({
                     onClick={() => onSelectSizeSystem(sys)}
                     className={`cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-[#F0F5FF] border-l-4 border-l-[#2E5AAC]"
-                        : "bg-white hover:bg-[#F9FAFB]"
+                        ? "bg-[var(--color-accent)]/10 border-l-4 border-l-[var(--color-accent)]"
+                        : "hover:bg-[var(--color-bg)]/50"
                     }`}
                   >
                     {/* Standard Name & Region */}
                     <td className="py-4 px-5 align-top">
                       <div className="flex items-center gap-2">
-                        {isSelected && <span className="w-2 h-2 rounded-full bg-[#2E5AAC]" />}
-                        <span className="font-bold text-[#101828] text-sm">{sys.name}</span>
-                        <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[#E6F1FB] text-[#185FA5] rounded border border-[#B3D6F6]">
+                        {isSelected && <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />}
+                        <span className="font-bold text-[var(--color-text-primary)] text-sm">{sys.name}</span>
+                        <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-none border border-[var(--color-accent)]/20">
                           {sys.region} Region
                         </span>
                       </div>
@@ -185,7 +185,7 @@ export function RegionalSizeTree({
                         {sys.options.map((opt) => (
                           <span
                             key={opt.id}
-                            className="bg-[#F9FAFB] border border-[#D0D5DD] text-[#344054] text-[11px] font-semibold px-2 py-0.5 rounded font-mono shadow-2xs"
+                            className="bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-[11px] font-semibold px-2 py-0.5 rounded-none font-mono"
                           >
                             {opt.label}
                           </span>
@@ -200,14 +200,14 @@ export function RegionalSizeTree({
                           {mappedSubcats.map((sub) => (
                             <span
                               key={sub.id}
-                              className="bg-[#F2F4F7] text-[#344054] border border-[#D0D5DD] text-[11px] font-medium px-2 py-0.5 rounded"
+                              className="bg-[var(--color-bg)] text-[var(--color-text-secondary)] border border-[var(--color-border)] text-[11px] font-medium px-2 py-0.5 rounded-none"
                             >
                               {sub.categoryName} &rarr; {sub.name}
                             </span>
                           ))}
                         </div>
                       ) : (
-                        <span className="text-xs text-[#98A2B3] italic">
+                        <span className="text-xs text-[var(--color-text-secondary)] italic">
                           No subcategories assigned
                         </span>
                       )}
@@ -217,7 +217,7 @@ export function RegionalSizeTree({
                     <td className="py-4 px-5 text-right align-top">
                       <span
                         className={`text-xs font-semibold ${
-                          isSelected ? "text-[#2E5AAC]" : "text-[#667085] hover:text-[#101828]"
+                          isSelected ? "text-[var(--color-accent)]" : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                         }`}
                       >
                         {isSelected ? "Editing Mapping →" : "Edit Subcategories"}

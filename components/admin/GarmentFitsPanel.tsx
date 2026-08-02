@@ -82,24 +82,24 @@ export function GarmentFitsPanel({
       {/* Backdrop */}
       <div
         onClick={handleCloseRequest}
-        className="fixed inset-0 bg-black/40 z-40 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-black/50 z-40 backdrop-blur-xs transition-opacity"
       />
 
       {/* Slide-Over Side Drawer */}
-      <aside className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col border-l border-[#EAECF0] animate-in slide-in-from-right duration-200">
+      <aside className="fixed inset-y-0 right-0 w-full max-w-md bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-2xl z-50 flex flex-col border-l border-[var(--color-border)] animate-in slide-in-from-right duration-200">
         {/* Header */}
-        <div className="p-6 border-b border-[#EAECF0] flex justify-between items-start bg-white">
+        <div className="p-6 border-b border-[var(--color-border)] flex justify-between items-start bg-[var(--color-surface)]">
           <div>
-            <div className="text-[11px] font-bold tracking-widest text-[#667085] uppercase mb-1">
+            <div className="text-[11px] font-bold tracking-widest text-[var(--color-text-secondary)] uppercase mb-1">
               {categoryName} / {subcategoryName}
             </div>
-            <h2 className="text-xl font-bold text-[#101828]">{product.name}</h2>
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{product.name}</h2>
           </div>
 
           <button
             type="button"
             onClick={handleCloseRequest}
-            className="p-1.5 text-[#667085] hover:text-[#101828] rounded-md hover:bg-[#F2F4F7] transition-colors"
+            className="p-1.5 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-none hover:bg-[var(--color-bg)] transition-colors cursor-pointer"
             aria-label="Close panel"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -111,20 +111,20 @@ export function GarmentFitsPanel({
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           <div>
-            <h3 className="text-sm font-bold text-[#101828] mb-1">Allowed Fits</h3>
-            <p className="text-xs text-[#475467] leading-relaxed">
+            <h3 className="text-sm font-bold text-[var(--color-text-primary)] mb-1">Allowed Fits</h3>
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
               Select which fit options are available for this product in the configurator.
             </p>
           </div>
 
           {errorMsg && (
-            <div className="p-3 bg-[#FEF3F2] border border-[#FECDCA] text-[#B42318] text-xs rounded-md">
+            <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-500 text-xs rounded-none">
               {errorMsg}
             </div>
           )}
 
           {saveSuccess && (
-            <div className="p-3 bg-[#ECFDF3] border border-[#ABE5C6] text-[#067647] text-xs rounded-md flex items-center gap-2">
+            <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs rounded-none flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -132,7 +132,7 @@ export function GarmentFitsPanel({
             </div>
           )}
 
-          {/* 8 Custom Styled Checkboxes */}
+          {/* Custom Styled Checkboxes */}
           <div className="space-y-2.5">
             {allFits.map((fit) => {
               const isChecked = selectedFitIds.includes(fit.id);
@@ -141,24 +141,23 @@ export function GarmentFitsPanel({
                 <label
                   key={fit.id}
                   onClick={() => handleToggleFit(fit.id)}
-                  className={`flex items-center justify-between p-3.5 rounded-lg border text-xs cursor-pointer select-none transition-all ${
+                  className={`flex items-center justify-between p-3.5 rounded-none border text-xs cursor-pointer select-none transition-all ${
                     isChecked
-                      ? "bg-[#F2F4F7] border-[#D0D5DD] text-[#101828] font-semibold"
-                      : "bg-white border-[#D0D5DD] text-[#475467] hover:border-[#2E5AAC]"
+                      ? "bg-[var(--color-accent)]/10 border-[var(--color-accent)] text-[var(--color-text-primary)] font-semibold"
+                      : "bg-[var(--color-bg)] border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)]"
                   }`}
                 >
                   <span className="text-sm">{fit.name}</span>
 
-                  {/* Custom Checkbox (Neutral Gray when checked, NO BLUE FILL) */}
                   <div
-                    className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                    className={`w-5 h-5 rounded-none border flex items-center justify-center transition-colors ${
                       isChecked
-                        ? "bg-[#F2F4F7] border-[#D0D5DD]"
-                        : "bg-white border-[#D0D5DD]"
+                        ? "bg-[var(--color-accent)] border-[var(--color-accent)] text-white"
+                        : "bg-[var(--color-surface)] border-[var(--color-border)]"
                     }`}
                   >
                     {isChecked && (
-                      <svg className="w-3.5 h-3.5 text-[#111318]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     )}
@@ -170,15 +169,15 @@ export function GarmentFitsPanel({
         </div>
 
         {/* Fixed Footer */}
-        <div className="p-4 border-t border-[#EAECF0] bg-white space-y-2">
+        <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-surface)] space-y-2">
           <button
             type="button"
             onClick={handleSave}
             disabled={isSubmitting || !isDirty}
-            className={`w-full py-2.5 px-4 rounded-md text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors ${
+            className={`w-full py-2.5 px-4 text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors ${
               isDirty && !isSubmitting
-                ? "bg-[#2E5AAC] hover:bg-[#24498E] text-white shadow-xs cursor-pointer"
-                : "bg-[#EAECF0] text-[#98A2B3] cursor-not-allowed"
+                ? "bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white cursor-pointer"
+                : "bg-[var(--color-bg)] text-[var(--color-text-secondary)] border border-[var(--color-border)] cursor-not-allowed"
             }`}
           >
             {isSubmitting ? (

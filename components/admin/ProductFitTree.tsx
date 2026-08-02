@@ -90,11 +90,11 @@ export function ProductFitTree({
 
   const getBadgeStyle = (linkedCount: number, total: number) => {
     if (linkedCount === total && total > 0) {
-      return "bg-[#F2F4F7] text-[#344054] border-[#D0D5DD]";
+      return "bg-[var(--color-bg)] text-[var(--color-text-primary)] border-[var(--color-border)]";
     } else if (linkedCount > 0) {
-      return "bg-[#FEF0C7] text-[#DC6803] border-[#FDE272]";
+      return "bg-amber-500/10 text-amber-500 border-amber-500/30";
     } else {
-      return "bg-[#FEE4E2] text-[#D92D20] border-[#FECDCA]";
+      return "bg-red-500/10 text-red-500 border-red-500/30";
     }
   };
 
@@ -137,21 +137,21 @@ export function ProductFitTree({
     .filter((cat) => cat.subcategories.length > 0);
 
   return (
-    <div className="bg-white border border-[#D0D5DD] rounded-lg shadow-sm overflow-hidden font-sans">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none overflow-hidden font-sans transition-colors">
       {/* Top Header / Bar */}
-      <div className="p-4 sm:p-5 border-b border-[#EAECF0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
+      <div className="p-4 sm:p-5 border-b border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--color-bg)]">
         <div>
-          <h2 className="text-base font-semibold text-[#101828]">
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
             Garment Fits Catalog &amp; Product Mapping
           </h2>
-          <p className="text-xs text-[#475467] mt-0.5">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
             Manage fit availability per product. Click any product to edit allowed fit options.
           </p>
         </div>
 
         {/* Active Search Bar Input (⌘K Enabled) */}
         <div className="relative w-full sm:w-80">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#667085]">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[var(--color-text-secondary)]">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
@@ -167,20 +167,20 @@ export function ProductFitTree({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search categories, subcategories, products... ⌘K"
-            className="w-full pl-9 pr-14 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] placeholder-[#667085] focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC] transition-colors"
+            className="w-full pl-9 pr-14 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
           />
           <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1">
             {searchQuery ? (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="text-[#667085] hover:text-[#101828] text-xs px-1 font-bold cursor-pointer"
+                className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] text-xs px-1 font-bold cursor-pointer"
                 title="Clear search filter"
               >
                 ✕
               </button>
             ) : (
-              <kbd className="px-1.5 py-0.5 bg-[#F2F4F7] border border-[#D0D5DD] rounded text-[10px] font-mono text-[#667085] pointer-events-none">
+              <kbd className="px-1.5 py-0.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-[10px] font-mono text-[var(--color-text-secondary)] pointer-events-none">
                 ⌘K
               </kbd>
             )}
@@ -189,15 +189,15 @@ export function ProductFitTree({
       </div>
 
       {/* Accordion Tree List */}
-      <div className="divide-y divide-[#EAECF0]">
+      <div className="divide-y divide-[var(--color-border)]">
         {filteredCategories.length === 0 ? (
-          <div className="p-12 text-center text-xs text-[#667085] space-y-2">
-            <p className="font-semibold text-[#101828]">No catalog items match &quot;{searchQuery}&quot;</p>
-            <p className="text-[#667085]">Try searching by category name (e.g. Shirts), subcategory, or product title.</p>
+          <div className="p-12 text-center text-xs text-[var(--color-text-secondary)] space-y-2">
+            <p className="font-semibold text-[var(--color-text-primary)]">No catalog items match &quot;{searchQuery}&quot;</p>
+            <p className="text-[var(--color-text-secondary)]">Try searching by category name (e.g. Shirts), subcategory, or product title.</p>
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="mt-2 inline-flex items-center px-3 py-1.5 bg-[#F2F4F7] hover:bg-[#EAECF0] text-[#344054] text-xs font-semibold rounded border border-[#D0D5DD] transition-colors cursor-pointer"
+              className="mt-2 inline-flex items-center px-3 py-1.5 bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs font-semibold rounded-none border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors cursor-pointer"
             >
               Clear Search Query
             </button>
@@ -207,16 +207,16 @@ export function ProductFitTree({
             const isCollapsed = collapsedCategories[cat.id] && !normalizedQuery;
 
             return (
-              <div key={cat.id} className="bg-white">
+              <div key={cat.id} className="bg-[var(--color-surface)]">
                 {/* Category Accordion Header */}
                 <button
                   type="button"
                   onClick={() => toggleCategory(cat.id)}
-                  className="w-full flex items-center justify-between px-5 py-3.5 bg-[#F9FAFB] hover:bg-[#F2F4F7] transition-colors text-left border-b border-[#EAECF0]"
+                  className="w-full flex items-center justify-between px-5 py-3.5 bg-[var(--color-bg)] hover:bg-[var(--color-surface)] transition-colors text-left border-b border-[var(--color-border)] cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5">
                     <svg
-                      className={`w-4 h-4 text-[#667085] transition-transform duration-200 ${
+                      className={`w-4 h-4 text-[var(--color-text-secondary)] transition-transform duration-200 ${
                         isCollapsed ? "-rotate-90" : "rotate-0"
                       }`}
                       fill="none"
@@ -225,10 +225,10 @@ export function ProductFitTree({
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                       Category: {cat.name}
                     </span>
-                    <span className="text-[11px] font-medium text-[#667085] bg-[#EAECF0] px-2 py-0.5 rounded-full">
+                    <span className="text-[11px] font-medium text-[var(--color-text-secondary)] bg-[var(--color-surface)] border border-[var(--color-border)] px-2 py-0.5 rounded-none">
                       {cat.subcategories.length} subcategories
                     </span>
                   </div>
@@ -236,22 +236,22 @@ export function ProductFitTree({
 
                 {/* Subcategories & Products */}
                 {!isCollapsed && (
-                  <div className="divide-y divide-[#EAECF0]">
+                  <div className="divide-y divide-[var(--color-border)]">
                     {cat.subcategories.map((sub) => (
-                      <div key={sub.id} className="p-4 sm:p-5 bg-white space-y-3">
+                      <div key={sub.id} className="p-4 sm:p-5 bg-[var(--color-surface)] space-y-3">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold uppercase tracking-wider text-[#475467]">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
                             Subcategory:
                           </span>
-                          <span className="text-xs font-bold text-[#101828] bg-[#F2F4F7] px-2 py-0.5 rounded">
+                          <span className="text-xs font-bold text-[var(--color-text-primary)] bg-[var(--color-bg)] border border-[var(--color-border)] px-2 py-0.5 rounded-none">
                             {sub.name}
                           </span>
                         </div>
 
                         {/* Products Table */}
-                        <div className="overflow-x-auto border border-[#EAECF0] rounded-md">
-                          <table className="w-full text-left text-xs">
-                            <thead className="bg-[#F9FAFB] text-[#475467] font-semibold border-b border-[#EAECF0]">
+                        <div className="overflow-x-auto border border-[var(--color-border)] rounded-none">
+                          <table className="w-full text-left text-xs border-collapse">
+                            <thead className="bg-[var(--color-bg)] text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)] uppercase text-[11px]">
                               <tr>
                                 <th className="py-2.5 px-4">Product Name</th>
                                 <th className="py-2.5 px-4">Category</th>
@@ -260,7 +260,7 @@ export function ProductFitTree({
                                 <th className="py-2.5 px-4 text-right">Action</th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-[#EAECF0]">
+                            <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-primary)]">
                               {sub.products.map((prod) => {
                                 const isSelected = prod.id === selectedProductId;
                                 const linkedFitCount = prod.fits.length;
@@ -271,23 +271,23 @@ export function ProductFitTree({
                                     onClick={() => onSelectProduct(prod, cat.name, sub.name)}
                                     className={`cursor-pointer transition-colors ${
                                       isSelected
-                                        ? "bg-[#F0F5FF] border-l-4 border-l-[#2E5AAC]"
-                                        : "bg-white hover:bg-[#F9FAFB]"
+                                        ? "bg-[var(--color-accent)]/10 border-l-4 border-l-[var(--color-accent)]"
+                                        : "hover:bg-[var(--color-bg)]/50"
                                     }`}
                                   >
-                                    <td className="py-3 px-4 font-semibold text-[#101828]">
+                                    <td className="py-3 px-4 font-semibold text-[var(--color-text-primary)]">
                                       <div className="flex items-center gap-2">
                                         {isSelected && (
-                                          <span className="w-1.5 h-1.5 rounded-full bg-[#2E5AAC]" />
+                                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
                                         )}
                                         {prod.name}
                                       </div>
                                     </td>
-                                    <td className="py-3 px-4 text-[#475467]">{cat.name}</td>
-                                    <td className="py-3 px-4 text-[#475467]">{sub.name}</td>
+                                    <td className="py-3 px-4 text-[var(--color-text-secondary)]">{cat.name}</td>
+                                    <td className="py-3 px-4 text-[var(--color-text-secondary)]">{sub.name}</td>
                                     <td className="py-3 px-4 text-center">
                                       <span
-                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${getBadgeStyle(
+                                        className={`inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-semibold border ${getBadgeStyle(
                                           linkedFitCount,
                                           totalFitsCount
                                         )}`}
@@ -298,7 +298,7 @@ export function ProductFitTree({
                                     <td className="py-3 px-4 text-right">
                                       <span
                                         className={`text-xs font-semibold ${
-                                          isSelected ? "text-[#2E5AAC]" : "text-[#667085] hover:text-[#101828]"
+                                          isSelected ? "text-[var(--color-accent)]" : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                                         }`}
                                       >
                                         {isSelected ? "Editing →" : "Edit Fits"}

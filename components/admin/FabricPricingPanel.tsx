@@ -158,24 +158,24 @@ export function FabricPricingPanel({
     <>
       {/* Dark Overlay Backdrop */}
       <div
-        className="fixed inset-0 bg-[#101828]/50 backdrop-blur-xs z-50 transition-opacity"
+        className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 transition-opacity"
         onClick={handleAttemptClose}
       />
 
       {/* Slide-Over Side Drawer */}
-      <div className="fixed inset-y-0 right-0 w-full max-w-lg bg-white shadow-2xl z-50 flex flex-col font-sans border-l border-[#D0D5DD] animate-slideInRight">
+      <div className="fixed inset-y-0 right-0 w-full max-w-lg bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-2xl z-50 flex flex-col font-sans border-l border-[var(--color-border)] animate-slideInRight">
         {/* Panel Header */}
-        <div className="p-5 border-b border-[#EAECF0] bg-[#F9FAFB] flex items-center justify-between">
+        <div className="p-5 border-b border-[var(--color-border)] bg-[var(--color-bg)] flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-bold text-[#101828]">
+              <h3 className="text-base font-bold text-[var(--color-text-primary)]">
                 Configure Fabric Line
               </h3>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[#F2F4F7] text-[#344054] rounded border border-[#D0D5DD]">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-none border border-[var(--color-accent)]/20">
                 {fabric.name}
               </span>
             </div>
-            <p className="text-xs text-[#475467]">
+            <p className="text-xs text-[var(--color-text-secondary)]">
               Update volume price ranges, setup fee, and active status.
             </p>
           </div>
@@ -183,19 +183,19 @@ export function FabricPricingPanel({
           <button
             type="button"
             onClick={handleAttemptClose}
-            className="w-8 h-8 rounded-md bg-white border border-[#D0D5DD] text-[#667085] hover:text-[#101828] hover:bg-[#F2F4F7] flex items-center justify-center text-xs font-bold transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-none bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] flex items-center justify-center text-xs font-bold transition-colors cursor-pointer"
           >
             ✕
           </button>
         </div>
 
         {/* Associated Context Bar */}
-        <div className="px-5 py-3 bg-[#F0F5FF] border-b border-[#D0D5DD] flex items-center justify-between text-xs">
-          <span className="text-[#344054]">
+        <div className="px-5 py-3 bg-[var(--color-accent)]/10 border-b border-[var(--color-border)] flex items-center justify-between text-xs">
+          <span className="text-[var(--color-text-primary)]">
             <strong>Product Spec:</strong> {fabric.productName || "Global Fabric Line"}
           </span>
           {fabric.subcategoryName && (
-            <span className="text-[#2E5AAC] font-mono text-[11px] font-semibold">
+            <span className="text-[var(--color-accent)] font-mono text-[11px] font-semibold">
               {fabric.categoryName} &rarr; {fabric.subcategoryName}
             </span>
           )}
@@ -203,19 +203,19 @@ export function FabricPricingPanel({
 
         {/* Error Banner */}
         {error && (
-          <div className="p-4 bg-[#FEF3F2] border-b border-[#FECDCA] text-[#B42318] text-xs font-semibold flex items-center justify-between">
+          <div className="p-4 bg-red-500/10 border-b border-red-500/30 text-red-500 text-xs font-semibold flex items-center justify-between">
             <span>{error}</span>
-            <button onClick={() => setError(null)} className="text-[#B42318] font-bold">
+            <button onClick={() => setError(null)} className="text-red-500 font-bold cursor-pointer">
               ✕
             </button>
           </div>
         )}
 
         {/* Form Body */}
-        <form id="fabric-form" onSubmit={handleSaveClick} className="flex-1 overflow-y-auto p-5 space-y-5 bg-white">
+        <form id="fabric-form" onSubmit={handleSaveClick} className="flex-1 overflow-y-auto p-5 space-y-5 bg-[var(--color-surface)]">
           {/* Fabric Name */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-[#344054]">
+            <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
               Fabric Name Line
             </label>
             <input
@@ -223,13 +223,13 @@ export function FabricPricingPanel({
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-3 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+              className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)]"
             />
           </div>
 
           {/* Colorway / Variant Tag */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-[#344054]">
+            <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
               Colorway / Variant Tag (Optional)
             </label>
             <input
@@ -237,18 +237,18 @@ export function FabricPricingPanel({
               value={colorway}
               onChange={(e) => setColorway(e.target.value)}
               placeholder="e.g. Navy Super 130s Wool"
-              className="w-full px-3 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+              className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus:border-[var(--color-accent)]"
             />
           </div>
 
           {/* Unit Price Tiering (Min & Max Dollars) */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#344054]">
+              <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
                 Min Unit Price ($)
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[#667085]">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[var(--color-text-secondary)]">
                   $
                 </span>
                 <input
@@ -258,17 +258,17 @@ export function FabricPricingPanel({
                   value={minPriceDollars}
                   onChange={(e) => setMinPriceDollars(e.target.value)}
                   required
-                  className="w-full pl-7 pr-3 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] font-mono focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                  className="w-full pl-7 pr-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] font-mono focus:outline-none focus:border-[var(--color-accent)]"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-[#344054]">
+              <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
                 Max Unit Price ($)
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[#667085]">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[var(--color-text-secondary)]">
                   $
                 </span>
                 <input
@@ -278,7 +278,7 @@ export function FabricPricingPanel({
                   value={maxPriceDollars}
                   onChange={(e) => setMaxPriceDollars(e.target.value)}
                   required
-                  className="w-full pl-7 pr-3 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] font-mono focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                  className="w-full pl-7 pr-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] font-mono focus:outline-none focus:border-[var(--color-accent)]"
                 />
               </div>
             </div>
@@ -286,11 +286,11 @@ export function FabricPricingPanel({
 
           {/* Setup Fee ($) */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-[#344054]">
+            <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
               Fabric Setup / Milling Fee ($)
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[#667085]">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[var(--color-text-secondary)]">
                 $
               </span>
               <input
@@ -300,22 +300,22 @@ export function FabricPricingPanel({
                 value={setupFeeDollars}
                 onChange={(e) => setSetupFeeDollars(e.target.value)}
                 required
-                className="w-full pl-7 pr-3 py-2 bg-white border border-[#D0D5DD] rounded-md text-xs text-[#101828] font-mono focus:outline-none focus:ring-1 focus:ring-[#2E5AAC] focus:border-[#2E5AAC]"
+                className="w-full pl-7 pr-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] font-mono focus:outline-none focus:border-[var(--color-accent)]"
               />
             </div>
-            <p className="text-[11px] text-[#667085]">
+            <p className="text-[11px] text-[var(--color-text-secondary)]">
               One-off setup fee applied per production run when using this fabric tier.
             </p>
           </div>
 
           {/* Active Status Toggle */}
-          <div className="pt-2 border-t border-[#EAECF0]">
-            <label className="flex items-center justify-between p-3 rounded-md border border-[#D0D5DD] bg-[#F9FAFB] cursor-pointer">
+          <div className="pt-2 border-t border-[var(--color-border)]">
+            <label className="flex items-center justify-between p-3 rounded-none border border-[var(--color-border)] bg-[var(--color-bg)] cursor-pointer">
               <div>
-                <span className="text-xs font-semibold text-[#101828] block">
+                <span className="text-xs font-semibold text-[var(--color-text-primary)] block">
                   Active Status
                 </span>
-                <span className="text-[11px] text-[#667085] block">
+                <span className="text-[11px] text-[var(--color-text-secondary)] block">
                   Enable or disable this fabric option across the B2B configurator.
                 </span>
               </div>
@@ -323,18 +323,18 @@ export function FabricPricingPanel({
                 type="checkbox"
                 checked={active}
                 onChange={(e) => setActive(e.target.checked)}
-                className="h-4 w-4 text-[#2E5AAC] rounded border-[#D0D5DD] focus:ring-[#2E5AAC]"
+                className="h-4 w-4 text-[var(--color-accent)] rounded-none border-[var(--color-border)] focus:ring-[var(--color-accent)] cursor-pointer"
               />
             </label>
           </div>
         </form>
 
         {/* Footer Actions Bar */}
-        <div className="p-5 border-t border-[#EAECF0] bg-[#F9FAFB] flex items-center justify-between">
+        <div className="p-5 border-t border-[var(--color-border)] bg-[var(--color-bg)] flex items-center justify-between">
           <button
             type="button"
             onClick={handleAttemptClose}
-            className="px-4 py-2 bg-white border border-[#D0D5DD] hover:bg-[#F2F4F7] text-xs font-semibold text-[#344054] rounded-md transition-colors cursor-pointer"
+            className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-none transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -343,7 +343,7 @@ export function FabricPricingPanel({
             type="submit"
             form="fabric-form"
             disabled={saving || !hasUnsavedChanges}
-            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold px-5 py-2 rounded-md transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-5 py-2 rounded-none transition-colors shadow-xs cursor-pointer disabled:opacity-50"
           >
             {saving ? "Saving Changes…" : "Save Tiering & Fees"}
           </button>
@@ -352,13 +352,13 @@ export function FabricPricingPanel({
 
       {/* Unsaved Changes Confirmation Modal */}
       {showConfirmClose && (
-        <div className="fixed inset-0 bg-[#101828]/60 backdrop-blur-xs flex items-center justify-center p-4 z-60 animate-fadeIn">
-          <div className="bg-white border border-[#D0D5DD] rounded-lg p-5 max-w-sm w-full shadow-xl space-y-4 font-sans">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-60 animate-fadeIn">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 max-w-sm w-full shadow-xl space-y-4 font-sans text-[var(--color-text-primary)]">
             <div className="space-y-1">
-              <h4 className="text-sm font-bold text-[#101828]">
+              <h4 className="text-sm font-bold text-[var(--color-text-primary)]">
                 Discard Unsaved Changes?
               </h4>
-              <p className="text-xs text-[#475467]">
+              <p className="text-xs text-[var(--color-text-secondary)]">
                 You have modified price tiering or setup fees for {fabric.name}. Discarding will revert all pending edits.
               </p>
             </div>
@@ -367,14 +367,14 @@ export function FabricPricingPanel({
               <button
                 type="button"
                 onClick={() => setShowConfirmClose(false)}
-                className="px-3 py-1.5 bg-white border border-[#D0D5DD] text-xs font-semibold text-[#344054] rounded-md hover:bg-[#F2F4F7]"
+                className="px-3 py-1.5 bg-[var(--color-bg)] border border-[var(--color-border)] text-xs font-semibold text-[var(--color-text-primary)] rounded-none hover:bg-[var(--color-surface)] cursor-pointer"
               >
                 Keep Editing
               </button>
               <button
                 type="button"
                 onClick={handleConfirmDiscard}
-                className="px-3 py-1.5 bg-[#B42318] text-white text-xs font-semibold rounded-md hover:bg-[#912015]"
+                className="px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-none hover:bg-red-700 cursor-pointer"
               >
                 Discard Changes
               </button>
