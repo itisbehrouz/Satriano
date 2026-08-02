@@ -16,6 +16,7 @@ export interface ProductImageUploaderProps {
 export function ProductImageUploader({ images, onChangeImages }: ProductImageUploaderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [failedImageIds, setFailedImageIds] = useState<Record<string, boolean>>({});
 
   const handleRemove = (imageId: string) => {
     const updated = images
@@ -24,9 +25,9 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
     onChangeImages(updated);
   };
 
-  const handleMove = (index: number, direction: "up" | "down") => {
+  const handleMove = (index: number, direction: "left" | "right") => {
     const newImages = [...images];
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    const targetIndex = direction === "left" ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= newImages.length) return;
 
     const temp = newImages[index];
@@ -70,7 +71,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
   };
 
   return (
-    <div className="space-y-4 font-sans select-none">
+    <div className="space-y-3 font-sans select-none">
       <div className="flex items-center justify-between border-b border-[#EAECF0] pb-2">
         <div>
           <h4 className="text-xs font-bold uppercase tracking-wider text-[#111318]">
@@ -82,74 +83,84 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
         </div>
         {images.length < 4 && (
           <span className="text-[10px] font-mono font-bold text-[#854F0B] bg-[#FDF6E7] px-2 py-0.5 border border-[#F0B94A]/40">
-            ⚠️ Minimum 4 images recommended ({4 - images.length} remaining)
+            ⚠️ Min 4 photos recommended
           </span>
         )}
       </div>
 
-      {/* Photo Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {images.map((img, idx) => (
-          <div
-            key={img.id}
-            className="relative border border-[#D0D5DD] bg-white rounded-md p-2 space-y-2 group shadow-xs"
-          >
-            <div className="relative aspect-3/4 bg-[#F8FAFC] overflow-hidden rounded-xs border border-[#E2E8F0]">
-              <img
-                src={img.imageUrl}
-                alt={`Photo ${img.imageOrder}`}
-                className="w-full h-full object-cover"
-              />
-              <span className="absolute top-1.5 left-1.5 bg-[#111318]/80 text-white font-mono text-[10px] px-1.5 py-0.5 font-bold">
-                {idx === 0 ? "Main Image" : `Photo ${img.imageOrder}`}
-              </span>
-            </div>
+      {/* Horizontal Strip (80x80px thumbnails + hover controls + error fallback) */}
+      <div className="flex flex-wrap items-center gap-2 pt-1">
+        {images.map((img, idx) => {
+          const isFailed = failedImageIds[img.id];
+          return (
+            <div
+              key={img.id}
+              className="relative w-[80px] h-[80px] bg-[#F8FAFC] border border-[#D0D5DD] rounded-md overflow-hidden group shrink-0 shadow-xs"
+            >
+              {isFailed ? (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-[#E2E8F0] text-[#64748B]">
+                  <span className="material-symbols-outlined text-xl">photo_camera</span>
+                  <span className="text-[9px] font-mono font-bold text-[#64748B] uppercase">Img {img.imageOrder}</span>
+                </div>
+              ) : (
+                <img
+                  src={img.imageUrl}
+                  alt={`Photo ${img.imageOrder}`}
+                  onError={() => setFailedImageIds((prev) => ({ ...prev, [img.id]: true }))}
+                  className="w-full h-full object-cover object-center"
+                />
+              )}
 
-            <div className="flex items-center justify-between pt-1">
-              <div className="flex items-center gap-1">
+              {/* Order Badge */}
+              <span className="absolute top-1 left-1 bg-[#111318]/80 text-white font-mono text-[9px] px-1 font-bold rounded-xs pointer-events-none">
+                {idx === 0 ? "Main" : `#${img.imageOrder}`}
+              </span>
+
+              {/* Hover Overlay Controls (Reorder & Delete) */}
+              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1 p-1">
                 <button
                   type="button"
                   disabled={idx === 0}
-                  onClick={() => handleMove(idx, "up")}
-                  className="w-6 h-6 bg-[#F8FAFC] border border-[#CBD5E1] hover:bg-[#E2E8F0] text-xs font-bold rounded cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+                  onClick={() => handleMove(idx, "left")}
+                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded flex items-center justify-center disabled:opacity-20 cursor-pointer"
                   title="Move Left"
                 >
                   ←
                 </button>
                 <button
                   type="button"
+                  onClick={() => handleRemove(img.id)}
+                  className="w-6 h-6 bg-[#C5221F] hover:bg-red-700 text-white font-bold text-xs rounded flex items-center justify-center cursor-pointer"
+                  title="Delete"
+                >
+                  ✕
+                </button>
+                <button
+                  type="button"
                   disabled={idx === images.length - 1}
-                  onClick={() => handleMove(idx, "down")}
-                  className="w-6 h-6 bg-[#F8FAFC] border border-[#CBD5E1] hover:bg-[#E2E8F0] text-xs font-bold rounded cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+                  onClick={() => handleMove(idx, "right")}
+                  className="w-6 h-6 bg-white/20 hover:bg-white/40 text-white font-bold text-xs rounded flex items-center justify-center disabled:opacity-20 cursor-pointer"
                   title="Move Right"
                 >
                   →
                 </button>
               </div>
-
-              <button
-                type="button"
-                onClick={() => handleRemove(img.id)}
-                className="px-2 py-0.5 bg-white border border-[#F8B4B4] text-[#C5221F] hover:bg-[#FEE4E2] text-[10px] font-bold uppercase rounded cursor-pointer"
-              >
-                Delete
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          );
+        })}
 
-      <div className="flex items-center gap-3 pt-2">
+        {/* 80x80px Square "+ Add Photo" CTA Button */}
         <button
           type="button"
           onClick={() => {
             setUploadError(null);
             setIsModalOpen(true);
           }}
-          className="px-4 py-2 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors cursor-pointer shadow-xs inline-flex items-center gap-1.5"
+          className="w-[80px] h-[80px] border-2 border-dashed border-[#CBD5E1] hover:border-[#2E5AAC] hover:bg-[#F8FAFC] text-[#2E5AAC] rounded-md flex flex-col items-center justify-center transition-colors cursor-pointer shrink-0"
+          title="Add Photo"
         >
-          <span className="material-symbols-outlined text-base">add_a_photo</span>
-          + ADD PHOTO
+          <span className="material-symbols-outlined text-xl">add_a_photo</span>
+          <span className="text-[10px] font-bold uppercase mt-0.5">+ PHOTO</span>
         </button>
       </div>
 

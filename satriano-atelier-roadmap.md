@@ -1,4 +1,4 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 2, 2026 — evening update)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 2, 2026 — evening update, Add Wholesale Product + E2E verification added)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog
 + B2B partner portal + workflow automation
@@ -11,9 +11,10 @@ only (Vercel free tier, Supabase free tier, Stripe transaction fees
 when live)
 
 This document consolidates everything decided and built through the
-evening of August 1, 2026. It replaces all prior versioned roadmap
-files — this is the single source of truth going forward. Update this
-file in place going forward; do not create new versioned files.
+evening of August 2, 2026 (adds Section 21). It replaces all prior
+versioned roadmap files — this is the single source of truth going
+forward. Update this file in place going forward; do not create new
+versioned files.
 
 ---
 
@@ -120,6 +121,11 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   AND Vercel Production env vars must be updated together, followed
   by a redeploy** — updating only one side breaks the other silently
   with `P1000` auth errors (happened once, see Section 8).
+- **Schema changes for new features can be synced non-destructively
+  via `prisma db push`** when a full migration isn't warranted yet
+  (used for the Section 21 wholesale-product models) — confirm this is
+  acceptable per-case; prefer `prisma migrate dev` once the shape is
+  stable.
 
 ---
 
@@ -145,6 +151,14 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   3. Never scrape credentials from IDE session transcript logs as a
      "recovery" method — always get fresh values from the actual
      source (Supabase/Vercel dashboards).
+- **Supplier/customer privacy boundary (added Section 20, re-verified
+  Section 21):** supplier identity fields (firm name, contact person,
+  email, phone, notes, cost price) must never appear in any
+  customer-facing or public API response (`/wholesale`,
+  `/wholesale/[productId]`, `/wholesale/checkout`, `/portal/orders`).
+  Enforced via explicit Prisma `select` (never rely on frontend
+  omission) and now covered by an automated privacy-assertion test
+  (Section 21) in addition to manual E2E verification.
 
 ---
 
@@ -167,6 +181,9 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   detail):** shared sidebar/top-bar chrome separated from the public
   website; Garment Fits and Catalog & MOQs tabs redesigned to a
   neutral, Supabase/Linear-style accordion + table pattern.
+- **Add Wholesale Product flow (Aug 2, evening — see Section 21):**
+  supplier-linked wholesale product creation, fully E2E-verified in
+  production with zero test residue.
 
 ### 🟡 Partial / pending
 - Fabric price-range (min/max) editing UI — API supports it, no form
@@ -185,6 +202,9 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   enforcement).
 - Functional global search (`⌘K` bar is currently a visual placeholder
   only in the new admin chrome — no filtering logic wired yet).
+- Wholesale product edit/delete UI (create flow shipped in Section 21;
+  edit/delete explicitly deferred as a follow-up task).
+- Wholesale product bulk CSV import.
 
 ---
 
@@ -381,6 +401,9 @@ UI text/comments/docs.
 - **Discount tiers / stock-count display** (from a competitor
   reference): rejected — doesn't fit the Made-to-Order + price-range
   model; not applicable.
+- **Wholesale product edit/delete UI, bulk CSV import:** deferred as
+  explicit follow-ups to the Section 21 create flow — not scope drift,
+  just sequenced after.
 
 ---
 
@@ -453,12 +476,14 @@ Completed a comprehensive redesign of the entire admin console using Swiss Desig
 4. **[COMPLETED] Photo/image upload field for catalog Add/Edit forms** (`CatalogImageUploader.tsx`).
 5. **[COMPLETED] Fabric price-range & setup fee editing UI** (`FabricPricingPanel.tsx`).
 6. **[COMPLETED] Wire the admin `⌘K` search bar to real filtering** (`GlobalCommandPalette.tsx` with live database indexing).
-7. Admin KPI dashboard & analytics widget.
-8. Customer Portal header logged-in state + polished order history redesign.
-9. Configurator Part D (multi-photo gallery) — scope decision pending.
-10. Multi-fabric-per-order feature (unblocks `moqCombinedMultiFabric`).
-11. Stripe live account migration — deferred.
-12. Codebase health audit — re-run periodically after major feature drops.
+7. **[COMPLETED] Add Wholesale Product flow** (supplier-linked create, API, E2E-verified — Section 21).
+8. Admin KPI dashboard & analytics widget — deeper drill-downs beyond the current top-level metrics.
+9. Customer Portal header logged-in state + polished order history redesign.
+10. Configurator Part D (multi-photo gallery) — scope decision pending.
+11. Multi-fabric-per-order feature (unblocks `moqCombinedMultiFabric`).
+12. Wholesale product edit/delete UI + bulk CSV import.
+13. Stripe live account migration — deferred.
+14. Codebase health audit — re-run periodically after major feature drops.
 
 ---
 
@@ -490,7 +515,10 @@ closed** — a report can be accurate at the time and still be
 unconfirmed, or be wrong from the start. This project's working
 pattern going forward: every visual/UI change gets a screenshot
 checkpoint before being considered done, regardless of which agent
-(Antigravity, Claude Code, or a local model) produced it.
+(Antigravity, Claude Code, or a local model) produced it. The Section
+21 wholesale-product work followed this discipline end to end: unit
+tests, a full 9-assertion production E2E pass, and an explicit
+zero-residue cleanup check, not just a "looks done" claim.
 
 ## 12. AI Agentic Skills & Autonomous Infrastructure (Added Aug 1)
 - **Agent Skill Integration:** Deployed a comprehensive `.agents/skills` directory to automate repetitive development and auditing tasks.
@@ -505,11 +533,12 @@ checkpoint before being considered done, regardless of which agent
 
 | Area / Component | Status | Empirical Evidence / Verification | Recommendation |
 |---|---|---|---|
-| **Vitest Test Suite** | 100% Healthy | 17/17 test files, 98/98 unit tests passing cleanly in 4.69s | Keep test coverage high for new endpoints |
+| **Vitest Test Suite** | 100% Healthy | 28/28 test files, 136/136 unit tests passing cleanly | Keep test coverage high for new endpoints |
 | **Prisma Connection Pooling** | 100% Healthy | Port `:6543` Transaction Pooler + cached `PrismaPg` on `globalThis` | Prevent pool exhaustion in serverless |
 | **Admin Layout Isolation** | 100% Healthy | `B2BSupportDock.tsx` returns `null` on `/admin/*`; consumer header/footer stripped | Maintain separate admin layout boundaries |
 | **Catalog CRUD & Image Upload** | 100% Healthy | Supabase `'catalog-assets'` bucket upload with strict 2MB validation | Fully verified & operational |
 | **Global Command Palette** | 100% Healthy | `cmdk` dialog listening to `Cmd+K`, live product & order indexing | Expand indexed entities as new models drop |
+| **Wholesale Product Privacy Boundary** | 100% Healthy | Automated test + live E2E assertion confirm zero supplier fields in public payloads (Section 21) | Re-check this specific assertion after any future wholesale schema change |
 
 ---
 
@@ -717,22 +746,109 @@ checkpoint before being considered done, regardless of which agent
 
 ---
 
-## 21. Supplier-Linked "Add Wholesale Product" Flow (Aug 2, 2026)
+## 21. Add Wholesale Product Flow — Build & Production E2E Verification (Aug 2, 2026, evening)
 
-- **Prisma Data Model Extension (`prisma/schema.prisma`)**:
-  - Added `WholesaleProduct`, `WholesaleProductImage`, `WholesaleStock`, `Supplier`, `SupplierStatus`, and `WholesaleProductStatus` models & enums.
-  - Enforced strict privacy selection rules (public endpoints select product fields excluding `supplier` / `supplierId`).
-- **Admin UI `AddWholesaleProductModal.tsx`**:
-  - Built modal mounted from both `/admin/wholesale/inventory` (`+ Add Wholesale Product` button) and `/admin/wholesale/suppliers` -> `SupplierDetailModal` (`+ ADD PRODUCT` button pre-filling `supplierId`).
-  - Fields: Supplier dropdown (only `ACTIVE` selectable, `PENDING_VERIFICATION` greyed out), Category dropdown, Product Name, SKU, Description, `ProductImageUploader.tsx` (drag & drop, reorder, 2MB-5MB validation), Cost Price ($) + Markup % -> live computed Sell Price with override toggle and negative margin warning, initial Size/Stock matrix steppers (`36` to `50`), and `ACTIVE`/`INACTIVE` status toggle.
-- **Admin API Endpoints (`/api/admin/wholesale/products`)**:
-  - Implemented `POST /api/admin/wholesale/products` (creates product, nested images, and size stock in single Prisma transaction).
-  - Implemented `GET /api/admin/wholesale/products` (supports `supplierId`, `categoryId`, `status` filters).
-  - Implemented `GET /api/admin/wholesale/products/[id]` & `PATCH /api/admin/wholesale/products/[id]`.
-  - Implemented `POST /api/admin/wholesale/products/[id]/images` & `DELETE /api/admin/wholesale/products/[id]/images/[imageId]`.
-- **Vitest Test Suite & Privacy Verification**:
-  - Created `app/api/admin/wholesale/products/products.test.ts`.
-  - Verified 100% pass rate across 28 test files and 136 unit tests.
-- **Production E2E Verification (Aug 2, 2026)**:
-  - All 9 production E2E assertions passed cleanly on live Supabase DB and endpoints (Happy path create, Duplicate SKU 409 rejection, Empty stock 400 rejection, Inactive supplier 400 rejection, Negative margin warning trigger, Admin inventory listing, Public catalog privacy boundary assertion [0 supplier keys exposed], Inactive status public hiding, Image add/remove sort order consistency).
-  - Mandatory zero-residue cleanup executed (`productResidueCount: 0`, `supplierResidueCount: 0`).
+**Gap closed:** Section 20 shipped Supplier Management CRUD and
+read-side Inventory by Category, but there was no flow for admin to
+actually *create* a new ready-made wholesale product and attach it to
+a supplier. This section closes that gap, built and verified in one
+session (commits `782f0e9`, `f1d980c`, pushed to `main`).
+
+### Data model
+- Added `WholesaleProduct`, `WholesaleProductImage`, `WholesaleStock`,
+  `Supplier` (with `SupplierStatus`), and `WholesaleProductStatus`
+  (`ACTIVE`/`INACTIVE`) models/enums to `prisma/schema.prisma`.
+- Synced to Supabase PostgreSQL via `prisma db push` (non-destructive;
+  a full `prisma migrate dev` is a follow-up once the shape is
+  considered stable).
+- **Privacy rule enforced at the query layer**: public customer
+  queries (`/wholesale`, `/wholesale/[productId]`, `/wholesale/checkout`,
+  `/portal/orders`) use explicit Prisma `select` statements that
+  strictly omit `supplier`/`supplierId`. Only `/admin/wholesale/*`
+  routes `include` supplier detail.
+
+### Admin UI — `AddWholesaleProductModal.tsx`
+- Mounted at two entry points: `/admin/wholesale/inventory` (`+ Add
+  Wholesale Product` header CTA) and `/admin/wholesale/suppliers` →
+  `SupplierDetailModal.tsx` (`+ ADD PRODUCT`, pre-fills `supplierId`).
+- Supplier dropdown restricted to `ACTIVE` suppliers
+  (`PENDING_VERIFICATION` greyed out). Category dropdown wired to the
+  existing category hierarchy. SKU duplicate-rejected server-side
+  (`409`). Images via the existing `ProductImageUploader.tsx`
+  (drag & drop, reorder, 2–5MB JPG/PNG/WebP validation, unchanged).
+  Cost price + markup % → live-computed sell price with an override
+  toggle and a hard second-confirmation step if the override goes
+  negative-margin. Size/stock matrix (steppers, sizes 36–50, default
+  `lowStockThreshold = 3`). Active/Inactive status toggle. Swiss Design
+  tokens matched (`#F7F8FA` bg, white card, `1px #EAECF0` border,
+  `rounded-md`, `#2E5AAC` accent, `tabular-nums font-mono`).
+
+### API — `/api/admin/wholesale/products` (admin-JWT protected)
+- `POST` — create product + nested images + stock rows in one
+  `prisma.$transaction`.
+- `GET` (list, filters: `supplierId`, `categoryId`, `status`) and `GET
+  /[id]` (full detail incl. supplier, admin only).
+- `PATCH /[id]` — field/status updates.
+- `POST /[id]/images` and `DELETE /[id]/images/[imageId]`.
+
+### Unit tests
+- `products.test.ts` covers create validation, duplicate SKU, negative
+  margin warning, empty-stock rejection, and an explicit privacy
+  assertion (`expect(publicDTO).not.toHaveProperty("supplier")`).
+- Full suite: **28 test files, 136/136 unit tests passing.**
+
+### Production E2E verification (9/9 assertions passed, zero residue)
+Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker
+prefix used throughout for traceability and cleanup:
+
+1. Happy-path create — `201`, minimal response shape (no supplier
+   contact fields even for the admin caller).
+2. Duplicate SKU — `409` (Prisma `P2002`).
+3. Empty stock array — `400`.
+4. `PENDING_VERIFICATION` supplier attach attempt — `400`.
+5. Negative-margin override — UI blocks submit until an explicit
+   second confirmation click.
+6. Created product visible via `GET
+   /api/admin/wholesale/products?status=ACTIVE` and in
+   `/admin/wholesale/inventory` (full supplier detail, as expected for
+   admin).
+7. **Public catalog privacy boundary — explicitly confirmed**: the
+   public payload for the same product contains zero `supplier`,
+   `supplierId`, `firmName`, `contactPerson`, or `costPriceCents` keys.
+   Treated as the single most important assertion in this set.
+8. Setting `status: "INACTIVE"` removes the product from public
+   `/wholesale` while it stays fully visible in admin inventory.
+9. Image add/remove — `sortOrder` stays gap-free after deletion
+   (verified `[1, 2]` sequencing).
+
+**Cleanup:** all test records deleted in FK-safe order
+(`WholesaleStock` → `WholesaleProductImage` → `WholesaleProduct` →
+test `Supplier`/`Category`). Re-search for the `E2E-WHOLESALE-` marker
+across all four tables confirmed **zero residue**
+(`productResidueCount: 0`, `supplierResidueCount: 0`).
+
+### Status
+**Shipped and E2E-verified in production.** Follow-ups (not yet
+built, tracked in Section 5/7/9): wholesale product edit/delete UI,
+bulk CSV import.
+
+---
+
+## 22. Next Session — Handoff Notes
+
+Picking up from here in a new chat, in priority order (Section 9):
+1. Admin KPI dashboard deeper drill-downs (item 8).
+2. Customer Portal header logged-in state + order history redesign
+   polish (item 9) — a build prompt was reportedly prepared earlier
+   but not yet executed (Section 6); confirm whether it still applies
+   before re-drafting.
+3. Configurator Part D multi-photo gallery — still a scope decision,
+   not a build task, until the asset-generation question is resolved.
+4. Multi-fabric-per-order (unblocks `moqCombinedMultiFabric`
+   enforcement, Section 1).
+5. Wholesale product edit/delete UI + bulk CSV import (Section 21
+   follow-up).
+6. Stripe live migration — still deliberately deferred (Section 7).
+
+Standing rules (Section 4) and the "screenshot before done" discipline
+(Section 11) carry forward unchanged into the next session.
