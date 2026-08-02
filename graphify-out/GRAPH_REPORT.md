@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-02)
 
 ## Corpus Check
-- 651 files · ~1,057,192 words
+- 651 files · ~1,057,165 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 8259 nodes · 9768 edges · 644 communities (534 shown, 110 thin omitted)
+- 8259 nodes · 9768 edges · 648 communities (538 shown, 110 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 93 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `02e524b8`
+- Built from commit: `d004a47f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -646,6 +646,10 @@
 - 3. Production Infrastructure
 - 1. Catalog Architecture
 - 3. Production Infrastructure
+- 4
+- destructive
+- 12
+- 4
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 62 edges
@@ -674,7 +678,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (644 total, 110 thin omitted)
+## Communities (648 total, 110 thin omitted)
 
 ### Community 0 - "init.ts"
 Cohesion: 0.06
@@ -781,8 +785,8 @@ Cohesion: 0.07
 Nodes (15): Test adding colors multiple times., Test adding full color palette., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test that adding same plugin twice doesn't duplicate., Test plugin recommendations for Next.js., Test generating config with plugins., Test validating valid configuration. (+7 more)
 
 ### Community 26 - "radius"
-Cohesion: 0.12
-Nodes (23): $type, $value, lg, $type, $value, $type, $value, $type (+15 more)
+Cohesion: 0.19
+Nodes (14): $type, $value, sm, $type, $value, shadow, default, md (+6 more)
 
 ### Community 27 - "BM25"
 Cohesion: 0.12
@@ -837,8 +841,8 @@ Cohesion: 0.15
 Nodes (19): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+11 more)
 
 ### Community 40 - "fontSize"
-Cohesion: 0.11
-Nodes (20): $type, $value, $type, $value, $type, $value, $type, $value (+12 more)
+Cohesion: 0.12
+Nodes (16): $type, $value, $type, $value, $type, $value, $type, $value (+8 more)
 
 ### Community 41 - "assets/skills/design-system/scripts/generate-slide.py"
 Cohesion: 0.15
@@ -858,11 +862,11 @@ Nodes (3): POST(), createdCompanyIds, POST()
 
 ### Community 45 - "color"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, destructive, foreground, muted-foreground, primary-hover, secondary (+11 more)
+Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
 
 ### Community 46 - "gray"
-Cohesion: 0.09
-Nodes (23): $type, $value, $type, $value, $type, $value, $type, $value (+15 more)
+Cohesion: 0.11
+Nodes (19): $type, $value, $type, $value, $type, $value, $type, $value (+11 more)
 
 ### Community 47 - "color"
 Cohesion: 0.11
@@ -870,7 +874,7 @@ Nodes (19): $type, $value, background, foreground, muted-foreground, primary, pr
 
 ### Community 48 - "color"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
+Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
 
 ### Community 49 - ".agents/skills/design-system/scripts/fetch-background.py"
 Cohesion: 0.17
@@ -1109,8 +1113,8 @@ Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
 ### Community 108 - "card"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+Cohesion: 0.15
+Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
 
 ### Community 109 - ".generate_config_string"
 Cohesion: 0.20
@@ -1133,8 +1137,8 @@ Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
 ### Community 114 - "card"
-Cohesion: 0.15
-Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
+Cohesion: 0.20
+Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
 
 ### Community 115 - ".generate_config_string"
 Cohesion: 0.20
@@ -1177,8 +1181,8 @@ Cohesion: 0.18
 Nodes (8): args, fs, minimal, MINIMAL_TOKENS, path, projectRoot, tokensPath, wrapStyle
 
 ### Community 125 - "duration"
-Cohesion: 0.20
-Nodes (10): fast, normal, slow, $type, $value, $type, $value, duration (+2 more)
+Cohesion: 0.18
+Nodes (11): fast, normal, slow, $type, $value, $type, $value, primitive (+3 more)
 
 ### Community 126 - "patch"
 Cohesion: 0.18
@@ -1334,7 +1338,7 @@ Nodes (8): Category, CATEGORY_IMAGES, Fabric, Fit, ProductWithRelations, ReadySt
 
 ### Community 164 - "input"
 Cohesion: 0.29
-Nodes (8): padding-y, input, $type, $value, focus-ring, padding-y, $type, $value
+Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 
 ### Community 165 - "input"
 Cohesion: 0.29
@@ -1345,8 +1349,8 @@ Cohesion: 0.43
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection
 
 ### Community 167 - "input"
-Cohesion: 0.20
-Nodes (12): padding-x, padding-y, input, $type, $value, focus-ring, padding-x, padding-y (+4 more)
+Cohesion: 0.29
+Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 
 ### Community 168 - "GlobalCommandPalette.tsx"
 Cohesion: 0.29
@@ -1446,11 +1450,11 @@ Nodes (4): xl, xl, $type, $value
 
 ### Community 192 - "none"
 Cohesion: 0.67
-Nodes (4): $type, $value, none, none
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 193 - "padding-y"
-Cohesion: 0.67
-Nodes (4): padding-y, padding-y, $type, $value
+Cohesion: 0.19
+Nodes (13): lg, xl, $type, $value, $type, $value, radius, full (+5 more)
 
 ### Community 194 - ".claude/skills/ui-ux-pro-max/scripts/validate_data.py"
 Cohesion: 0.83
@@ -1494,7 +1498,7 @@ Nodes (3): checkAdminAuth(), GET(), POST()
 
 ### Community 207 - "16"
 Cohesion: 0.67
-Nodes (3): $type, $value, 16
+Nodes (4): $type, $value, default, default
 
 ### Community 208 - "Design"
 Cohesion: 0.06
@@ -1514,15 +1518,15 @@ Nodes (7): POST(), POST(), POST(), sendMagicLinkEmail(), SendMagicLinkEmailParam
 
 ### Community 212 - "destructive-foreground"
 Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
+Nodes (4): $type, $value, 800, 800
 
 ### Community 213 - "muted"
 Cohesion: 0.67
-Nodes (3): muted, $type, $value
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 214 - "primary-foreground"
 Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
+Nodes (4): $type, $value, md, md
 
 ### Community 215 - "ring"
 Cohesion: 0.67
@@ -1530,11 +1534,11 @@ Nodes (3): ring, $type, $value
 
 ### Community 216 - "secondary-foreground"
 Cohesion: 0.67
-Nodes (3): secondary-foreground, $type, $value
+Nodes (3): $type, $value, 2
 
 ### Community 222 - "destructive"
 Cohesion: 0.67
-Nodes (3): destructive, $type, $value
+Nodes (4): $type, $value, 50, 50
 
 ### Community 223 - "destructive-foreground"
 Cohesion: 0.67
@@ -1901,8 +1905,8 @@ Cohesion: 0.11
 Nodes (18): 1. Wordmark (Logotype), 2. Lettermark (Monogram), 3. Pictorial Mark (Brand Mark), 4. Abstract Mark, 5. Mascot, 6. Emblem, 7. Combination Mark, Aesthetic Styles (+10 more)
 
 ### Community 395 - "gray"
-Cohesion: 0.28
-Nodes (9): $type, $value, $type, $value, 50, 700, 50, 700 (+1 more)
+Cohesion: 0.60
+Nodes (5): $type, $value, 700, 700, 700
 
 ### Community 396 - "Brand Consistency Checklist"
 Cohesion: 0.11
@@ -2637,12 +2641,12 @@ Cohesion: 0.40
 Nodes (4): Brand Guidelines Template, Document Structure, Extractable Fields, Usage
 
 ### Community 580 - "lg"
-Cohesion: 0.60
-Nodes (5): sm, sm, sm, $type, $value
+Cohesion: 0.67
+Nodes (3): destructive, $type, $value
 
 ### Community 581 - "sm"
 Cohesion: 0.67
-Nodes (4): padding-x, padding-x, $type, $value
+Nodes (3): foreground, $type, $value
 
 ### Community 582 - "Brand Guidelines Template"
 Cohesion: 0.40
@@ -2686,11 +2690,11 @@ Nodes (4): xl, xl, $type, $value
 
 ### Community 592 - "50"
 Cohesion: 0.67
-Nodes (4): $type, $value, none, none
+Nodes (3): muted-foreground, $type, $value
 
 ### Community 593 - "800"
 Cohesion: 0.67
-Nodes (3): $type, $value, 1
+Nodes (3): primary-hover, $type, $value
 
 ### Community 594 - "PULL_REQUEST_TEMPLATE.md"
 Cohesion: 0.50
@@ -2730,19 +2734,19 @@ Nodes (4): 5a. Admin UI Redesign (Aug 1, evening session), Completed:, Design to
 
 ### Community 604 - "12"
 Cohesion: 0.67
-Nodes (3): $type, $value, 3
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 605 - "4"
 Cohesion: 0.67
-Nodes (3): $type, $value, 6
+Nodes (4): $type, $value, none, none
 
 ### Community 606 - "0"
 Cohesion: 0.67
-Nodes (3): $type, $value, 16
+Nodes (3): $type, $value, 12
 
 ### Community 607 - "12"
 Cohesion: 0.67
-Nodes (3): foreground, $type, $value
+Nodes (3): destructive-foreground, $type, $value
 
 ### Community 608 - "6"
 Cohesion: 0.67
@@ -2750,15 +2754,31 @@ Nodes (3): $type, $value, 8
 
 ### Community 609 - "8"
 Cohesion: 0.67
-Nodes (3): muted-foreground, $type, $value
+Nodes (3): muted, $type, $value
 
 ### Community 610 - "foreground"
 Cohesion: 0.67
-Nodes (3): primary, $type, $value
+Nodes (3): primary-foreground, $type, $value
 
 ### Community 611 - "muted-foreground"
 Cohesion: 0.67
-Nodes (3): primary-hover, $type, $value
+Nodes (3): secondary-foreground, $type, $value
+
+### Community 644 - "4"
+Cohesion: 0.67
+Nodes (3): $type, $value, 4
+
+### Community 645 - "destructive"
+Cohesion: 0.67
+Nodes (3): destructive, $type, $value
+
+### Community 646 - "12"
+Cohesion: 0.67
+Nodes (3): $type, $value, 12
+
+### Community 647 - "4"
+Cohesion: 0.67
+Nodes (3): $type, $value, 4
 
 ## Knowledge Gaps
 - **4186 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+4181 more)

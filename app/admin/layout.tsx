@@ -140,93 +140,76 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
-      {/* Streamlined Modern Header Navigation */}
+      {/* Streamlined Dynamic Light/Dark Mode Header Navigation */}
       <header
         ref={navRef}
         aria-label="Admin Navigation Header"
-        className="sticky top-0 z-40 w-full bg-[#0B1E3D] text-white border-b border-[#1E3A8A]/50 select-none transition-colors"
+        className="sticky top-0 z-40 w-full bg-[var(--color-surface)] text-[var(--color-text-primary)] border-b border-[var(--color-border)] select-none transition-colors shadow-xs"
       >
         <div className="max-w-container-max mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-6">
-          {/* Minimalist Brand Logo & Console Tag */}
-          <div className="flex items-center gap-6">
-            <Link
-              href="/admin"
-              className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
-            >
-              <img
-                src="/Satrinao.png"
-                alt="Satriano Atelier"
-                className="h-7 w-auto object-contain brightness-200"
-              />
-              <span className="text-[11px] font-mono tracking-wider text-[#93C5FD] uppercase opacity-75 hidden sm:inline">
-                Console
-              </span>
-            </Link>
+          {/* Desktop Navigation Menu */}
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main Menu">
+            {NAV_ITEMS.map((item) => {
+              const isActive = item.isActive(pathname);
+              const isOpen = activeDropdown === item.href;
 
-            {/* Clean Desktop Navigation Menu */}
-            <nav className="hidden lg:flex items-center gap-1" aria-label="Main Menu">
-              {NAV_ITEMS.map((item) => {
-                const isActive = item.isActive(pathname);
-                const isOpen = activeDropdown === item.href;
+              return (
+                <div key={item.href} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setActiveDropdown(isOpen ? null : item.href)}
+                    className={`h-14 px-3.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 border-b-2 transition-all cursor-pointer ${
+                      isActive
+                        ? "border-[var(--color-accent)] text-[var(--color-accent)] font-bold"
+                        : isOpen
+                        ? "border-transparent text-[var(--color-text-primary)] bg-[var(--color-bg)]"
+                        : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg)]/60"
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-base flex-shrink-0 opacity-80">
+                      {item.icon}
+                    </span>
+                    <span>{item.label}</span>
+                    <span className="material-symbols-outlined text-xs text-[var(--color-text-secondary)]">
+                      {isOpen ? "expand_less" : "expand_more"}
+                    </span>
+                  </button>
 
-                return (
-                  <div key={item.href} className="relative">
-                    <button
-                      type="button"
-                      onClick={() => setActiveDropdown(isOpen ? null : item.href)}
-                      className={`h-14 px-3.5 text-xs font-semibold tracking-wide flex items-center gap-1.5 border-b-2 transition-all cursor-pointer ${
-                        isActive
-                          ? "border-[#DBB671] text-white font-bold"
-                          : isOpen
-                          ? "border-transparent text-white bg-white/5"
-                          : "border-transparent text-[#93C5FD]/80 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      <span className="material-symbols-outlined text-base flex-shrink-0 opacity-80">
-                        {item.icon}
-                      </span>
-                      <span>{item.label}</span>
-                      <span className="material-symbols-outlined text-xs text-white/50">
-                        {isOpen ? "expand_less" : "expand_more"}
-                      </span>
-                    </button>
-
-                    {/* Sub-Menu Dropdown Panel */}
-                    {isOpen && (
-                      <div className="absolute left-0 top-full mt-1 w-56 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md shadow-lg py-1.5 z-50 animate-fadeIn">
-                        {item.subItems.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors"
-                          >
-                            <span className="material-symbols-outlined text-sm text-[var(--color-text-secondary)]">
-                              {sub.icon}
-                            </span>
-                            <span>{sub.label}</span>
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </nav>
-          </div>
+                  {/* Sub-Menu Dropdown Panel */}
+                  {isOpen && (
+                    <div className="absolute left-0 top-full mt-1 w-56 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md shadow-lg py-1.5 z-50 animate-fadeIn">
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] transition-colors"
+                        >
+                          <span className="material-symbols-outlined text-sm text-[var(--color-text-secondary)]">
+                            {sub.icon}
+                          </span>
+                          <span>{sub.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
 
           {/* Right Action Utilities: Search, Theme Toggle & Sign Out */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {/* Quick Search Button */}
             <button
               type="button"
               onClick={() => setIsPaletteOpen(true)}
-              className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs text-[#93C5FD]/80 hover:text-white transition-all cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs transition-all cursor-pointer"
               title="Search orders, catalog or B2B partners (⌘K)"
             >
               <span className="material-symbols-outlined text-sm">search</span>
               <span className="hidden md:inline text-[11px]">Search</span>
-              <kbd className="px-1 py-0.2 bg-black/30 rounded text-[9px] font-mono text-white/60">
+              <kbd className="px-1 py-0.2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[9px] font-mono text-[var(--color-text-secondary)]">
                 ⌘K
               </kbd>
             </button>
@@ -235,7 +218,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={toggleTheme}
-              className="w-8 h-8 rounded flex items-center justify-center text-[#DBB671] hover:bg-white/10 transition-all cursor-pointer"
+              className="w-8 h-8 rounded flex items-center justify-center text-[var(--color-brand-mark)] hover:bg-[var(--color-bg)] border border-[var(--color-border)] transition-all cursor-pointer"
               title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
               aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
@@ -248,7 +231,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={signOut}
-              className="w-8 h-8 rounded flex items-center justify-center text-red-400/90 hover:text-red-300 hover:bg-red-500/10 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded flex items-center justify-center text-red-500 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-colors cursor-pointer"
               title="Sign Out of Console"
               aria-label="Sign Out of Console"
             >
@@ -259,7 +242,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-8 h-8 rounded flex items-center justify-center text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="lg:hidden w-8 h-8 rounded flex items-center justify-center text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               <span className="material-symbols-outlined text-lg">
@@ -271,7 +254,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#1E3A8A]/50 bg-[#0B1E3D] px-4 py-3 space-y-3 animate-fadeIn">
+          <div className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 space-y-3 animate-fadeIn">
             {/* Command Palette Trigger Mobile */}
             <button
               type="button"
@@ -279,20 +262,20 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
                 setMobileMenuOpen(false);
                 setIsPaletteOpen(true);
               }}
-              className="w-full flex items-center justify-between px-3 py-1.5 rounded bg-white/10 text-xs text-white"
+              className="w-full flex items-center justify-between px-3 py-1.5 rounded bg-[var(--color-bg)] border border-[var(--color-border)] text-xs text-[var(--color-text-primary)]"
             >
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-sm">search</span>
+                <span className="material-symbols-outlined text-sm text-[var(--color-text-secondary)]">search</span>
                 <span>Search console...</span>
               </div>
-              <kbd className="px-1.5 py-0.5 bg-black/20 rounded text-[10px] font-mono">⌘K</kbd>
+              <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[10px] font-mono text-[var(--color-text-secondary)]">⌘K</kbd>
             </button>
 
             {/* Mobile Links */}
             <div className="space-y-2">
               {NAV_ITEMS.map((item) => (
                 <div key={item.href} className="space-y-1">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-[#93C5FD] flex items-center gap-2 py-1">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)] flex items-center gap-2 py-1">
                     <span className="material-symbols-outlined text-sm">{item.icon}</span>
                     <span>{item.label}</span>
                   </div>
@@ -302,7 +285,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 py-1 px-2 rounded text-xs text-white/80 hover:text-white hover:bg-white/10"
+                        className="flex items-center gap-2 py-1 px-2 rounded text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg)]"
                       >
                         <span className="material-symbols-outlined text-xs">{sub.icon}</span>
                         <span>{sub.label}</span>
