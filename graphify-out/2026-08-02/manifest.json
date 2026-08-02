@@ -400,9 +400,9 @@
     "semantic_hash": "5ec1c007ad4b927f580776c286d858d1"
   },
   "components/admin/AdminKpiDashboard.tsx": {
-    "mtime": 1785680705.9575577,
-    "ast_hash": "c84deebdc55a9842d4903cd65e2a8380",
-    "semantic_hash": "c84deebdc55a9842d4903cd65e2a8380"
+    "mtime": 1785688345.9506261,
+    "ast_hash": "8d1d4bc7524121b29d1e7c195cf59d5b",
+    "semantic_hash": ""
   },
   "components/admin/AdminOrderTable.tsx": {
     "mtime": 1785680697.5806463,
@@ -670,14 +670,14 @@
     "semantic_hash": "7a0dbf849fb4a0ff8937ddea37b08dcd"
   },
   "components/layout/SiteFooter.tsx": {
-    "mtime": 1785680314.1253355,
-    "ast_hash": "bcd3fe8b5ae172098f694c106c90685c",
-    "semantic_hash": "bcd3fe8b5ae172098f694c106c90685c"
+    "mtime": 1785688390.2541394,
+    "ast_hash": "a1e3e6b055053013717fd996c940f34d",
+    "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1785680307.5626752,
-    "ast_hash": "03ed614ffe5b0e2df01f153220ee441c",
-    "semantic_hash": "03ed614ffe5b0e2df01f153220ee441c"
+    "mtime": 1785688372.1508849,
+    "ast_hash": "02416ca0f7a5031d0543f6c48337eb39",
+    "semantic_hash": ""
   },
   "components/layout/TransactionalHeader.tsx": {
     "mtime": 1785448801.654339,

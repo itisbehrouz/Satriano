@@ -1,24 +1,33 @@
 # Graph Report - Satriano Atelier  (2026-08-02)
 
 ## Corpus Check
-- 207 files · ~569,169 words
+- 207 files · ~569,204 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 859 nodes · 1283 edges · 59 communities (45 shown, 14 thin omitted)
+- 860 nodes · 1282 edges · 68 communities (55 shown, 13 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `94615fe2`
+- Built from commit: `ba561165`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - init.ts
+- WholesaleCatalogClient.tsx
+- admin/layout.tsx
+- useAdminAuth
+- applications/page.tsx
 - SupplierClient.tsx
 - compilerOptions
+- portal/PortalHeader.tsx
 - SiteFooter.tsx
+- wholesale/[productId]/page.tsx
+- GlobalCommandPalette.tsx
+- categories/page.tsx
+- app/page.tsx
 - verifyAdminRequest
 - AdminWholesaleClient.tsx
 - dependencies
@@ -80,10 +89,10 @@
 10. `verifyCustomerRequest()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ApplicationsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
-  app/admin/applications/page.tsx → components/admin/AdminAuthContext.tsx
 - `AdminChrome()` --calls--> `useAdminAuth()`  [EXTRACTED]
   app/admin/layout.tsx → components/admin/AdminAuthContext.tsx
+- `ApplicationsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/applications/page.tsx → components/admin/AdminAuthContext.tsx
 - `AdminOrdersContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
   app/admin/orders/page.tsx → components/admin/AdminAuthContext.tsx
 - `AdminDashboardContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
@@ -94,7 +103,27 @@
 ## Import Cycles
 - None detected.
 
-## Communities (59 total, 14 thin omitted)
+## Communities (68 total, 13 thin omitted)
+
+### Community 0 - "init.ts"
+Cohesion: 0.24
+Nodes (7): TABS, AdminOrder, AdminOrderTable(), AdminOrderTableProps, ALL_STATUSES, OrderStatusBadge(), STATUS_CONFIG
+
+### Community 1 - "WholesaleCatalogClient.tsx"
+Cohesion: 0.20
+Nodes (8): Category, CATEGORY_IMAGES, Fabric, Fit, ProductWithRelations, ReadyStockProduct, Subcategory, WholesaleCatalogClient()
+
+### Community 2 - "admin/layout.tsx"
+Cohesion: 0.22
+Nodes (7): AdminChrome(), NAV_ITEMS, NavItem, SubItem, AdminAuthContext, AdminAuthContextValue, AdminAuthProvider()
+
+### Community 3 - "useAdminAuth"
+Cohesion: 0.28
+Nodes (6): ApplicationsContent(), AdminOrdersContent(), AdminDashboardContent(), useAdminAuth(), AdminKpiDashboard(), DashboardMetrics
+
+### Community 4 - "applications/page.tsx"
+Cohesion: 0.32
+Nodes (4): APPLICATION_TABS, AdminApplicationsTable(), AdminApplicationsTableProps, B2bApplicationItem
 
 ### Community 5 - "SupplierClient.tsx"
 Cohesion: 0.08
@@ -104,13 +133,33 @@ Nodes (31): metadata, metadata, ProductImageItem, ProductImageUploader(), Produc
 Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
+### Community 7 - "portal/PortalHeader.tsx"
+Cohesion: 0.36
+Nodes (4): AccountDropdown(), AccountDropdownProps, PortalHeader(), PortalHeaderProps
+
 ### Community 8 - "SiteFooter.tsx"
-Cohesion: 0.05
-Nodes (36): CATEGORY_IMAGES, PageProps, ProductConfiguratorPageProps, CAPABILITIES, CATEGORY_IMAGES, FAQS, OPERATIONAL_STEPS, PortalView (+28 more)
+Cohesion: 0.14
+Nodes (11): CATEGORY_IMAGES, PageProps, ProductConfiguratorPageProps, PortalView, ConfiguratorClient(), LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS, QUALITY_OPERATIONS_LINKS (+3 more)
+
+### Community 9 - "wholesale/[productId]/page.tsx"
+Cohesion: 0.29
+Nodes (5): CATEGORY_IMAGES, PageProps, SizeStockItem, WholesaleProductDetailClient(), WholesaleProductDetailData
+
+### Community 10 - "GlobalCommandPalette.tsx"
+Cohesion: 0.29
+Nodes (5): AdminSidebarProps, CatalogProductItem, GlobalCommandPalette(), GlobalCommandPaletteProps, OrderSummaryItem
+
+### Community 11 - "categories/page.tsx"
+Cohesion: 0.33
+Nodes (4): CategoriesSearchFilter(), Category, CATEGORY_IMAGES, Subcategory
+
+### Community 12 - "app/page.tsx"
+Cohesion: 0.33
+Nodes (4): CAPABILITIES, CATEGORY_IMAGES, FAQS, OPERATIONAL_STEPS
 
 ### Community 15 - "verifyAdminRequest"
-Cohesion: 0.10
-Nodes (29): DELETE(), GET(), PATCH(), POST(), ALLOWED_TYPES, POST(), POST(), PATCH() (+21 more)
+Cohesion: 0.09
+Nodes (31): DELETE(), GET(), PATCH(), POST(), ALLOWED_TYPES, POST(), POST(), PATCH() (+23 more)
 
 ### Community 27 - "AdminWholesaleClient.tsx"
 Cohesion: 0.08
@@ -173,8 +222,8 @@ Cohesion: 0.50
 Nodes (7): WholesaleCheckoutClient(), addToWholesaleCart(), clearWholesaleCart(), getSampleDefaultCart(), getWholesaleCart(), saveWholesaleCart(), WholesaleCartItem
 
 ### Community 369 - "admin/layout.tsx"
-Cohesion: 0.05
-Nodes (36): APPLICATION_TABS, ApplicationsContent(), AdminChrome(), NAV_ITEMS, NavItem, SubItem, AdminOrdersContent(), TABS (+28 more)
+Cohesion: 0.26
+Nodes (8): GET(), DashboardMetrics(), DashboardMetricsProps, mockMetricsData, ALL_STATUSES, DashboardMetricsData, getAdminDashboardMetrics(), StatusDistributionItem
 
 ### Community 392 - "support/page.tsx"
 Cohesion: 0.33
@@ -245,9 +294,9 @@ Cohesion: 0.50
 Nodes (4): 5a. Admin UI Redesign (Aug 1, evening session), Completed:, Design tokens (admin-only, do not apply to `/`, `/configure`, `/portal`), Verification performed:
 
 ## Knowledge Gaps
-- **346 isolated node(s):** `APPLICATION_TABS`, `SubItem`, `NavItem`, `NAV_ITEMS`, `TABS` (+341 more)
+- **347 isolated node(s):** `APPLICATION_TABS`, `SubItem`, `NavItem`, `NAV_ITEMS`, `TABS` (+342 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -257,12 +306,12 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `react` connect `account/page.tsx` to `dependencies`?**
   _High betweenness centrality (0.108) - this node is a cross-community bridge._
 - **What connects `APPLICATION_TABS`, `SubItem`, `NavItem` to the rest of the system?**
-  _346 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _347 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `SupplierClient.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.0786308973172988 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
 - **Should `SiteFooter.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.05081585081585081 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14153846153846153 - nodes in this community are weakly interconnected._
 - **Should `verifyAdminRequest` be split into smaller, more focused modules?**
-  _Cohesion score 0.1036077705827937 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09254901960784313 - nodes in this community are weakly interconnected._
