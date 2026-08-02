@@ -662,3 +662,31 @@ checkpoint before being considered done, regardless of which agent
 - Production deployment via `npx vercel --prod`: build succeeded
   (33 pages, all routes listed including `/api/admin/catalog/upload`).
 - Live E2E catalog test: all 8 assertions passed.
+
+---
+
+## 19. Ready-Made Stock Wholesale Catalog, Customer Portal & Admin Dashboard (Aug 2, 2026)
+
+- **Ready-Made Stock Wholesale Catalog (`/wholesale`)**:
+  - Built `WholesaleCatalogClient.tsx`: Sticky left filter drawer (Category, Fabric Line, Price Range $10–$500 slider, In Stock Only toggle), responsive 4-column desktop product grid (`280px × 380px`, white background, `1px solid #E0E0E0`, `0px` radius, `$125.00` price font-mono tabular-nums, `✓ In Stock` / `⚠ Low Stock` / `Out of Stock` badges, 40px `"VIEW & ORDER"` button), and responsive pagination.
+- **Wholesale Product Detail (`/wholesale/[productId]`)**:
+  - 2-column layout (Main image + 4-thumbnail grid, SKU `CY-1306-11`, Name `Shawl Lapel Slim Fit Blazer Men Prom Blazer - Wessi`, Fixed price `$125.00`, `✓ IN STOCK` status).
+  - 9-size stock matrix (`36`-`52`) with `+`/`-` steppers, `Qty: N`, `N in st` indicators. Open Pack & Pre-Pack bundle options (1 Pack 5 units, 2 Packs 10 units, All Available).
+  - Price Negotiation offer input for bulk orders ($\ge 10$ units). `[ADD TO CART]` button saving breakdown to `localStorage` wholesale cart.
+- **Wholesale Cart Checkout (`/wholesale/checkout`)**:
+  - Review table with size breakdown formatting (`36(3) 38(5) 40(1) 44(3)`), subtotal, negotiated offer discount line (`✓ $100/unit -$300.00`), total. Terms & Invoice checkboxes, B2B payment methods (Credit Card, Bank Transfer SWIFT, B2B Net-30 Terms), `[PROCEED TO PAYMENT]` submission and order persistence in localStorage / customer portal history.
+- **Customer Portal Wholesale Orders (`/portal/orders`)**:
+  - Order type filter tabs: `[ALL ORDERS]`, `[M2O ORDERS]`, `[WHOLESALE ORDERS]`.
+  - Wholesale table view with `Order ID` (`#WH001`), `Date`, `Units`, `Total`, `Status`.
+  - **Wholesale Order Detail Modal**: Displays stock breakdown by size (`36(3) 38(5) 40(1) 44(3)`), unit price (offered `$100.00/unit` vs list `$125.00/unit`), bulk discount percentage (`20% Bulk Discount Applied (-$300.00)`), and delivery estimate (`Immediate Dispatch (3–5 Business Days)`).
+- **Admin Wholesale Management Dashboard (`/admin/wholesale`)**:
+  - Executive sidebar layout integration with sub-items (Pricing Manager, Inventory by Size, Price Offer Inbox, Wholesale Orders).
+  - **Pricing Manager**: `PRODUCT PRICING TIER` table with M2O price ranges, wholesale fixed prices, stock counts, inline price input, and real-time save.
+  - **Inventory by Size/Color**: Product variant selector, granular size stock matrix (`Size 36` to `48`), and `[Edit Stock Levels]` inline editor.
+  - **Price Offer Inbox**: `PENDING PRICE OFFERS` table displaying bulk buyer offers with `[Accept]`, `[Reject]`, and `[Counter Offer: $X/unit]` actions.
+  - **Wholesale Order Status**: `RECENT WHOLESALE ORDERS` table with status dropdown selector (`Pending Review`, `Approved`, `In Fulfillment`, `Shipped`, `Cancelled`).
+- **Offline Database Fault Tolerance & Codebase Health Audit**:
+  - Wrapped server components (`app/wholesale/page.tsx`, `app/admin/wholesale/page.tsx`, `app/wholesale/[productId]/page.tsx`) in `try / catch` blocks to handle database connectivity/pooler offline states gracefully without crashing server pages.
+  - Executed `codebase-health-audit`: removed dead component `components/StatusStepper.tsx` and 3 legacy re-export shims (`components/portal/CompanyInfoCard.tsx`, `components/portal/QuickActionButtons.tsx`, `components/portal/RecentOrdersTable.tsx`).
+- **Vitest Unit Test Suite Verification**:
+  - Updated test assertions in `components/portal/orders/OrdersPage.test.tsx`. Verified 100% pass rate across 27 test files and 132 unit tests.
