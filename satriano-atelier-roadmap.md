@@ -909,3 +909,21 @@ Standing rules (Section 4) and the "screenshot before done" discipline
 - **Verification**:
   - `npm test`: 28 test files / 136 unit tests passed 100%.
   - `npm run build`: Production build clean with 0 errors.
+
+---
+
+## 25. Theme System Remediation & Portal Dark Default (Aug 2, 2026)
+
+- **Fix 1 — Portal Header Toggle (`PortalHeader.tsx`)**:
+  - Added Sun/Moon icon theme toggle button in `PortalHeader.tsx` adjacent to `AccountDropdown`.
+  - Reused exact `document.documentElement.setAttribute('data-theme', ...)` and `localStorage.setItem('satriano-theme', ...)` logic.
+- **Fix 2 — Complete Component Token Coverage**:
+  - Converted hardcoded hex values to CSS custom property tokens across 8 portal components/pages: `app/portal/orders/page.tsx`, `components/portal/PortalHeader.tsx`, `app/portal/account/page.tsx`, `components/portal/PortalDashboard.tsx`, `components/portal/account/BillingTab.tsx`, `components/portal/account/SettingsTab.tsx`, `components/portal/orders/OrderDetailModal.tsx`, and `components/portal/AccountDropdown.tsx`.
+  - Eliminated dark/light contrast mismatches between page wrappers and nested components.
+- **Fix 3 — Portal Dark Default (`app/layout.tsx`)**:
+  - Updated inline resolution script in `<head>`: when `pathname.startsWith('/portal')` and no `satriano-theme` localStorage key exists, `data-theme` defaults to `"dark"` directly regardless of OS system preference.
+  - Public marketing routes retain system-preference fallback (`prefers-color-scheme`).
+  - Executive Admin panel (`/admin/*`) remains 100% exempt on its isolated Swiss Design token system.
+- **Verification**:
+  - `npm test`: 28 test files / 136 unit tests passed 100%.
+  - `npm run build`: Production build clean with 0 errors.
