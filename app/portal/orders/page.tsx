@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
-import { OrderStatusBadge } from "@/components/OrderStatusBadge";
-import { StatusStepper } from "@/components/StatusStepper";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FilterBar } from "@/components/portal/orders/FilterBar";
+import { OrdersTable } from "@/components/portal/orders/OrdersTable";
+import { OrderDetailModal } from "@/components/portal/orders/OrderDetailModal";
+import { PaginationBar } from "@/components/portal/orders/PaginationBar";
 import type { OrderStatus } from "@/app/generated/prisma/enums";
 
 export interface CustomerOrderLine {
@@ -28,31 +31,79 @@ export interface CustomerOrder {
   proforma?: { refNo: string; pdfUrl?: string | null } | null;
 }
 
-export default function CustomerOrdersPage() {
-  const [loading, setLoading] = useState(true);
+function CustomerOrdersContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // State initialized from URL query params
+  const initialStatus = searchParams.get("status") || "ALL";
+  const initialSearch = searchParams.get("search") || "";
+  const initialSort = searchParams.get("sort") || "createdAt";
+  const initialOrder = (searchParams.get("order") as "asc" | "desc") || "desc";
+  const initialPage = parseInt(searchParams.get("page") || "1", 10);
+
+  const [statusFilter, setStatusFilter] = useState<string>(initialStatus);
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
+  const [sortColumn, setSortColumn] = useState<string>(initialSort);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">(initialOrder);
+  const [currentPage, setCurrentPage] = useState<number>(initialPage);
+
   const [orders, setOrders] = useState<CustomerOrder[]>([]);
   const [customerEmail, setCustomerEmail] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>("ALL");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Modal State
+  const [selectedOrder, setSelectedOrder] = useState<CustomerOrder | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Sync state to URL query params
+  const updateUrlParams = (newParams: Record<string, string | number>) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(newParams).forEach(([k, v]) => {
+      if (v === "" || v === "ALL" || (k === "page" && v === 1)) {
+        params.delete(k);
+      } else {
+        params.set(k, String(v));
+      }
+    });
+    router.replace(`/portal/orders?${params.toString()}`);
+  };
 
   async function fetchCustomerOrders() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/portal/orders");
+      const queryUrl = `/api/customer/orders?status=${statusFilter}&search=${encodeURIComponent(
+        searchQuery
+      )}&sort=${sortColumn}&order=${sortOrder}&page=${currentPage}&limit=10`;
+
+      const res = await fetch(queryUrl);
+
       if (res.status === 401) {
         window.location.href = "/portal?error=session_expired";
         return;
       }
 
       if (!res.ok) {
-        throw new Error("Failed to load portal order history.");
+        // Fallback to legacy endpoint if needed
+        const fallbackRes = await fetch("/api/portal/orders");
+        if (!fallbackRes.ok) {
+          throw new Error("Failed to load order history.");
+        }
+        const fallbackData = await fallbackRes.json();
+        setOrders(fallbackData.orders || []);
+        setCustomerEmail(fallbackData.email || null);
+        return;
       }
 
       const data = await res.json();
       setOrders(data.orders || []);
       setCustomerEmail(data.email || null);
+      if (data.orders && data.orders[0]?.company?.name) {
+        setCompanyName(data.orders[0].company.name);
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to load order history.";
       setError(msg);
@@ -63,265 +114,163 @@ export default function CustomerOrdersPage() {
 
   useEffect(() => {
     fetchCustomerOrders();
-  }, []);
+  }, [statusFilter, searchQuery, sortColumn, sortOrder, currentPage]);
 
-  const filteredOrders = useMemo(() => {
-    return orders.filter((order) => {
-      const matchesStatus =
-        selectedStatusFilter === "ALL" || order.status === selectedStatusFilter;
-      const refNo = order.proforma?.refNo || order.id;
-      const matchesQuery =
-        !searchQuery.trim() ||
-        refNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.company.name.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesStatus && matchesQuery;
+  // Client-side counts for tabs
+  const statusCounts = useMemo(() => {
+    const counts: Record<string, number> = { ALL: orders.length };
+    orders.forEach((o) => {
+      counts[o.status] = (counts[o.status] || 0) + 1;
     });
-  }, [orders, selectedStatusFilter, searchQuery]);
+    return counts;
+  }, [orders]);
+
+  const handleStatusChange = (newStatus: string) => {
+    setStatusFilter(newStatus);
+    setCurrentPage(1);
+    updateUrlParams({ status: newStatus, page: 1 });
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+    updateUrlParams({ search: query, page: 1 });
+  };
+
+  const handleSortChange = (column: string) => {
+    let nextOrder: "asc" | "desc" = "asc";
+    if (sortColumn === column) {
+      nextOrder = sortOrder === "asc" ? "desc" : "asc";
+    }
+    setSortColumn(column);
+    setSortOrder(nextOrder);
+    updateUrlParams({ sort: column, order: nextOrder });
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    updateUrlParams({ page });
+  };
+
+  const handleOpenModal = (order: CustomerOrder) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
+  };
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] text-[#101828] py-6 sm:py-10 px-4 sm:px-6 lg:px-8 font-sans select-none rounded-none">
-      <div className="max-w-[1440px] mx-auto space-y-6 rounded-none">
-        {/* Top Header & Operational Actions */}
-        <div className="bg-white border border-[#EAECF0] rounded-none p-5 sm:p-6 shadow-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <main className="min-h-screen bg-[#0B1E3D] text-[#E8ECF3] p-4 md:p-6 lg:p-10 font-sans select-none rounded-none">
+      <div className="max-w-[1440px] mx-auto space-y-6">
+        {/* 1. Page Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-4 border-b border-[#2E5AAC]">
           <div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-bold text-[#111318]">
-                B2B Production Orders &amp; Proformas
-              </h1>
-              <span className="bg-[#E6F1FB] text-[#185FA5] text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-0.5 border border-[#B3D6F6] rounded-none">
-                PARTNERSHIP LEDGER
-              </span>
-            </div>
-            <p className="text-xs text-[#475467] mt-1">
-              Active manufacturing orders and proforma invoices for corporate account{" "}
-              <strong className="text-[#111318] font-mono">{customerEmail || "..."}</strong>.
+            <h1 className="text-2xl font-bold text-[#E8ECF3]">
+              Order History
+            </h1>
+            <p className="text-sm text-[#8DA0C4] mt-1">
+              All manufacturing orders and proformas for{" "}
+              <strong className="text-[#E8ECF3]">{companyName || customerEmail || "Corporate Partner"}</strong>
             </p>
           </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
-            <Link
-              href="/konfigurator"
-              className="bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 inline-flex items-center gap-1.5 transition-colors rounded-none shadow-none"
-            >
-              <span className="material-symbols-outlined text-base">add_circle</span>
-              <span>Configure New Spec</span>
-            </Link>
+          <Link
+            href="/configure"
+            className="h-12 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+          >
+            <span>Create New Order →</span>
+          </Link>
+        </div>
 
+        {/* 2. Filter & Search Bar */}
+        <FilterBar
+          selectedStatus={statusFilter}
+          onStatusChange={handleStatusChange}
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
+          statusCounts={statusCounts}
+        />
+
+        {/* 3. Orders Content / Table / States */}
+        {loading ? (
+          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center text-xs text-[#8DA0C4] space-y-2">
+            <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+            <p>Loading manufacturing orders...</p>
+          </div>
+        ) : error ? (
+          <div className="bg-[#3A2E14] border border-[#F0B94A] rounded-none p-6 text-center text-xs text-[#F0B94A] flex items-center justify-between">
+            <span>{error}</span>
             <button
               type="button"
               onClick={fetchCustomerOrders}
-              className="bg-white hover:bg-[#F8FAFC] text-[#344054] border border-[#EAECF0] text-xs font-semibold px-3.5 py-2 inline-flex items-center gap-1.5 transition-colors cursor-pointer rounded-none shadow-none"
+              className="underline font-semibold hover:text-white cursor-pointer"
             >
-              <span className="material-symbols-outlined text-base">refresh</span>
-              <span>Refresh</span>
+              Retry Loading
             </button>
           </div>
-        </div>
-
-        {/* Filter & Search Bar */}
-        <div className="bg-white border border-[#EAECF0] rounded-none p-4 shadow-none flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-          {/* Status Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-            {[
-              { id: "ALL", label: "All Orders" },
-              { id: "PENDING_REVIEW", label: "Pending Review" },
-              { id: "PROFORMA_SENT", label: "Proforma Sent" },
-              { id: "PAID", label: "Paid" },
-              { id: "IN_PRODUCTION", label: "In Production" },
-              { id: "SHIPPED", label: "Shipped" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setSelectedStatusFilter(tab.id)}
-                className={`px-3 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap rounded-none cursor-pointer border ${
-                  selectedStatusFilter === tab.id
-                    ? "bg-[#2E5AAC] text-white border-[#2E5AAC]"
-                    : "bg-[#F8FAFC] text-[#475467] border-[#EAECF0] hover:bg-[#F2F4F7]"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Input */}
-          <div className="relative min-w-[240px]">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-base text-[#667085]">
-              search
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by Order ID or Company..."
-              className="w-full bg-[#F8FAFC] border border-[#EAECF0] pl-9 pr-3 py-1.5 text-xs text-[#111318] placeholder-[#667085] focus:outline-none focus:border-[#2E5AAC] rounded-none"
-            />
-          </div>
-        </div>
-
-        {/* Orders State Content */}
-        {loading ? (
-          <div className="bg-white border border-[#EAECF0] rounded-none p-12 text-center text-xs text-[#475467] shadow-none space-y-2">
-            <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
-            <p>Loading client portal manufacturing orders...</p>
-          </div>
-        ) : error ? (
-          <div className="bg-[#FEF3F2] border border-[#FECDCA] rounded-none p-6 text-center text-xs text-[#B42318] space-y-1">
-            <p className="font-bold">Failed to load order history</p>
-            <p>{error}</p>
-          </div>
-        ) : filteredOrders.length === 0 ? (
-          <div className="bg-white border border-[#EAECF0] rounded-none p-12 text-center space-y-4 shadow-none">
-            <div className="w-12 h-12 bg-[#F9FAFB] text-[#667085] rounded-none flex items-center justify-center mx-auto border border-[#EAECF0]">
-              <span className="material-symbols-outlined text-2xl">receipt_long</span>
+        ) : orders.length === 0 ? (
+          <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center space-y-4">
+            <div className="text-5xl text-[#8DA0C4] mx-auto flex items-center justify-center">
+              📦
             </div>
-            <h3 className="text-base font-bold text-[#111318]">No Orders Match Filter Criteria</h3>
-            <p className="text-xs text-[#475467] max-w-md mx-auto leading-relaxed">
-              No manufacturing orders found for account <strong>{customerEmail}</strong> matching your selected filter.
+            <h3 className="text-base font-bold text-[#E8ECF3]">No Orders Found</h3>
+            <p className="text-sm text-[#8DA0C4] max-w-md mx-auto">
+              You haven&apos;t placed any manufacturing orders matching your criteria yet. Start by configuring your first order.
             </p>
-            <Link
-              href="/konfigurator"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded-none shadow-none transition-colors"
-            >
-              <span className="material-symbols-outlined text-base">tune</span>
-              <span>Configure First Order</span>
-            </Link>
+            <div>
+              <Link
+                href="/configure"
+                className="inline-flex items-center justify-center px-6 py-3 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors"
+              >
+                CREATE FIRST ORDER
+              </Link>
+            </div>
           </div>
         ) : (
-          <div className="space-y-6 rounded-none">
-            {filteredOrders.map((order) => {
-              const dateStr = new Date(order.createdAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              });
+          <div className="space-y-4">
+            <OrdersTable
+              orders={orders}
+              sortColumn={sortColumn}
+              sortOrder={sortOrder}
+              onSortChange={handleSortChange}
+              onSelectOrder={handleOpenModal}
+            />
 
-              const refNo = order.proforma?.refNo || `ORD-${order.id.slice(-8).toUpperCase()}`;
-              const totalUnits = order.lines.reduce((acc, line) => acc + line.quantity, 0);
-
-              return (
-                <div
-                  key={order.id}
-                  className="bg-white border border-[#EAECF0] rounded-none p-5 sm:p-6 space-y-6 shadow-none"
-                >
-                  {/* Card Header & Primary PDF Download Action */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EAECF0] pb-4">
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-base font-bold text-[#111318] tabular-nums">
-                          #{refNo}
-                        </span>
-                        <OrderStatusBadge status={order.status} />
-                      </div>
-                      <p className="text-xs text-[#475467] mt-1 font-mono tabular-nums">
-                        Submitted on {dateStr} • Corporate Client:{" "}
-                        <strong className="text-[#111318] font-sans">{order.company.name}</strong>
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <a
-                        href={`/api/proforma/pdf/${order.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider inline-flex items-center gap-1.5 rounded-none transition-colors shadow-none"
-                      >
-                        <span className="material-symbols-outlined text-base">picture_as_pdf</span>
-                        <span>Download Proforma PDF</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* 6-Stage Lifecycle Stepper */}
-                  <div className="p-4 bg-[#F9FAFB] border border-[#EAECF0] rounded-none">
-                    <StatusStepper status={order.status} />
-                  </div>
-
-                  {/* Engineering Feasibility Notice Banner */}
-                  {order.status === "PENDING_REVIEW" && (
-                    <div className="p-4 bg-[#FEF0C7] border border-[#FDE272] rounded-none text-xs text-[#DC6803] flex items-start gap-3">
-                      <span className="material-symbols-outlined text-lg mt-0.5 text-[#DC6803]">
-                        engineering
-                      </span>
-                      <div>
-                        <strong className="block font-bold mb-0.5 uppercase tracking-wide text-[11px]">
-                          Engineering Feasibility Review In Progress
-                        </strong>
-                        <span>
-                          Our factory production engineers are verifying pattern grading, fabric rolls, and loom allocations. Official unit pricing and proforma invoice will be finalized shortly.
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* High-Density Details Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs">
-                    {/* Configured Line Items Breakdown */}
-                    <div className="space-y-2 lg:col-span-2">
-                      <h4 className="font-bold text-[#344054] uppercase tracking-wider text-[11px] border-b border-[#EAECF0] pb-1.5">
-                        Configured Line Items ({totalUnits} Total Units)
-                      </h4>
-                      <div className="space-y-2 mt-2">
-                        {order.lines.map((line) => (
-                          <div
-                            key={line.id}
-                            className="p-3.5 bg-[#F9FAFB] border border-[#EAECF0] rounded-none flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                          >
-                            <div>
-                              <span className="font-bold text-[#111318] text-sm block">
-                                {line.product?.name || "Garment Spec Line"}
-                              </span>
-                              <span className="text-xs text-[#475467]">
-                                Fabric: <strong className="text-[#111318]">{line.fabric?.name || "Standard"}</strong> • Fit:{" "}
-                                <strong className="text-[#111318]">{line.selectedFit || "Regular"}</strong>
-                              </span>
-                            </div>
-                            <div className="font-mono font-semibold text-[#111318] text-xs bg-white px-3 py-1 border border-[#EAECF0] self-start sm:self-auto rounded-none tabular-nums">
-                              {line.quantity} units ({line.size})
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Financial Specification Summary Box */}
-                    <div className="space-y-3 bg-[#F9FAFB] p-4.5 border border-[#EAECF0] h-fit rounded-none">
-                      <h4 className="font-bold text-[#344054] uppercase tracking-wider text-[11px] border-b border-[#EAECF0] pb-1.5">
-                        Financial Specification
-                      </h4>
-                      <div>
-                        <span className="text-[#667085] block text-[11px]">Target Unit Budget:</span>
-                        <span className="font-semibold text-[#111318] font-mono tabular-nums">
-                          {order.customerTargetPriceCents
-                            ? `$${(order.customerTargetPriceCents / 100).toFixed(2)} / unit`
-                            : "Not specified"}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-[#667085] block text-[11px]">Confirmed Final Unit Price:</span>
-                        <span className="font-bold text-[#2E5AAC] font-mono text-sm block tabular-nums">
-                          {order.finalPriceCents
-                            ? `$${(order.finalPriceCents / 100).toFixed(2)} / unit`
-                            : "Pending Feasibility Review"}
-                        </span>
-                      </div>
-                      {order.totalCents > 0 && (
-                        <div className="pt-2 border-t border-[#EAECF0] mt-2">
-                          <span className="text-[#667085] block text-[11px]">Grand Total (Inc. Setup Fee):</span>
-                          <span className="font-mono text-base font-bold text-[#111318] tabular-nums">
-                            ${(order.totalCents / 100).toLocaleString("en-US", { minimumFractionDigits: 2 })}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {/* 4. Pagination Bar */}
+            <PaginationBar
+              currentPage={currentPage}
+              totalPages={Math.ceil(orders.length / 10) || 1}
+              totalOrders={orders.length}
+              limit={10}
+              onPageChange={handlePageChange}
+            />
           </div>
         )}
       </div>
+
+      {/* 5. Order Detail Modal */}
+      <OrderDetailModal
+        order={selectedOrder}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </main>
+  );
+}
+
+export default function CustomerOrdersPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#0B1E3D] p-10 flex items-center justify-center text-xs text-[#8DA0C4]">
+          <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+        </div>
+      }
+    >
+      <CustomerOrdersContent />
+    </Suspense>
   );
 }
