@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PortalHeader } from "@/components/portal/PortalHeader";
 import { ConfiguratorClient } from "@/components/configurator/ConfiguratorClient";
 import { prisma } from "@/lib/prisma";
+import { verifyCustomerToken } from "@/lib/customerAuth";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +17,22 @@ export default async function ProductConfiguratorPage({
   params,
 }: ProductConfiguratorPageProps) {
   const { productId } = await params;
+
+  // Check customer authentication state
+  const cookieStore = await cookies();
+  const token = cookieStore.get("sat_customer_token")?.value;
+  const customerSession = token ? await verifyCustomerToken(token) : null;
+
+  let initialCompanyName = "";
+  let initialCompanyEmail = "";
+  if (customerSession?.email) {
+    initialCompanyEmail = customerSession.email;
+    const company = await prisma.company.findFirst({
+      where: { email: customerSession.email },
+      select: { name: true },
+    });
+    initialCompanyName = company?.name || customerSession.email.split("@")[0].toUpperCase();
+  }
 
   // Search product by ID or Slug
   let product = await prisma.product.findFirst({
@@ -157,7 +176,11 @@ export default async function ProductConfiguratorPage({
 
   return (
     <>
-      <SiteHeader />
+      {customerSession ? (
+        <PortalHeader initialCompanyName={initialCompanyName} />
+      ) : (
+        <SiteHeader />
+      )}
       <ConfiguratorClient
         productId={product.id}
         fabrics={fabrics}
@@ -167,6 +190,9 @@ export default async function ProductConfiguratorPage({
         categoryTitle={`${product.subcategory.category.name} • ${product.subcategory.name}`}
         sizeSystems={formattedSizeSystems}
         moqPerFabric={moqPerFabric}
+        isLoggedIn={!!customerSession}
+        initialCompanyEmail={initialCompanyEmail}
+        initialCompanyName={initialCompanyName}
       />
       <SiteFooter />
     </>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { LogoPlacement } from "@/app/generated/prisma/enums";
 import { FabricPicker, type FabricOption } from "@/components/configurator/FabricPicker";
@@ -8,8 +8,8 @@ import { FitPicker, type FitOption } from "@/components/configurator/FitPicker";
 import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/SizeQtyTable";
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
+import { ConfiguratorSuccess } from "@/components/configurator/ConfiguratorSuccess";
 import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
-import { formatCents } from "@/lib/formatCurrency";
 
 interface ConfiguratorClientProps {
   productId?: string;
@@ -20,6 +20,9 @@ interface ConfiguratorClientProps {
   categoryTitle?: string;
   sizeSystems?: SizeSystemDef[];
   moqPerFabric?: number;
+  isLoggedIn?: boolean;
+  initialCompanyEmail?: string;
+  initialCompanyName?: string;
 }
 
 export function ConfiguratorClient({
@@ -31,6 +34,9 @@ export function ConfiguratorClient({
   categoryTitle,
   sizeSystems = [],
   moqPerFabric = 50,
+  isLoggedIn = false,
+  initialCompanyEmail = "",
+  initialCompanyName = "",
 }: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
@@ -40,10 +46,16 @@ export function ConfiguratorClient({
   const [customerTargetPrice, setCustomerTargetPrice] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [placement, setPlacement] = useState<LogoPlacement>("LEFT_CHEST");
-  const [companyName, setCompanyName] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
+  const [companyName, setCompanyName] = useState(initialCompanyName);
+  const [companyEmail, setCompanyEmail] = useState(initialCompanyEmail);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submittedOrderId, setSubmittedOrderId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialCompanyEmail) setCompanyEmail(initialCompanyEmail);
+    if (initialCompanyName) setCompanyName(initialCompanyName);
+  }, [initialCompanyEmail, initialCompanyName]);
 
   const selectedFabric = fabrics.find((fabric) => fabric.id === selectedFabricId) ?? fabrics[0];
   const selectedFit = fits.find((fit) => fit.id === selectedFitId) ?? fits[0];
@@ -53,7 +65,7 @@ export function ConfiguratorClient({
 
   async function handleSubmit() {
     if (!companyName.trim() || !companyEmail.trim()) {
-      setSubmitError("Company name and corporate email are required.");
+      setSubmitError("Company name and corporate email are required to submit proforma spec.");
       return;
     }
 
@@ -72,6 +84,7 @@ export function ConfiguratorClient({
 
         if (!uploadRes.ok) {
           setSubmitError("Failed to upload vector logo file. Please try again.");
+          setSubmitting(false);
           return;
         }
 
@@ -100,17 +113,36 @@ export function ConfiguratorClient({
           logoPlacement: placement,
         }),
       });
+
       const json = await response.json();
       if (!response.ok) {
         setSubmitError(json.error ?? "Something went wrong during proforma generation. Please try again.");
         return;
       }
-      router.push(`/proforma/${json.orderId}`);
+
+      setSubmittedOrderId(json.orderId);
     } catch {
       setSubmitError("Network connection error. Please try again.");
     } finally {
       setSubmitting(false);
     }
+  }
+
+  // Render Success Screen if order submitted
+  if (submittedOrderId) {
+    return (
+      <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-10 bg-[#F5F7FA] text-[#1A2233] font-sans">
+        <ConfiguratorSuccess
+          orderId={submittedOrderId}
+          isLoggedIn={isLoggedIn}
+          companyEmail={companyEmail}
+          onReset={() => {
+            setSubmittedOrderId(null);
+            setSizeQuantities(DEFAULT_SIZE_QUANTITIES);
+          }}
+        />
+      </main>
+    );
   }
 
   const titleText = subcategoryTitle ? subcategoryTitle : "Classic Polo Shirt";
@@ -193,7 +225,7 @@ export function ConfiguratorClient({
                 <span className="w-6 h-6 bg-[#0B1E3D] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
                   1
                 </span>
-                Luxury Material &amp; Fabric Selection
+                Material &amp; Fabric Selection
               </h2>
               <span className="text-xs font-mono text-[#2E5AAC] font-semibold bg-[#E6F1FB] px-2.5 py-1 rounded-none">
                 {fabrics.length} Fabrics Available
@@ -279,19 +311,37 @@ export function ConfiguratorClient({
             />
           </section>
 
-          {/* Step 5: Company Info & Budget Target */}
+          {/* Step 5: Corporate Info & Proforma Submission */}
           <section className="bg-white border border-[#D1D5DB] rounded-none p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-6">
               <h2 className="text-base font-bold text-[#1A2233] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[#0B1E3D] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
                   {fits.length > 0 ? "5" : "4"}
                 </span>
-                Corporate Info &amp; Target Unit Budget
+                Corporate Info &amp; Proforma Submission
               </h2>
-              <span className="text-xs font-mono text-emerald-700 font-semibold">
-                Official Proforma Document
-              </span>
+              {isLoggedIn && (
+                <span className="text-xs font-mono text-emerald-700 font-semibold bg-emerald-50 px-2.5 py-1 border border-emerald-200">
+                  ✓ Logged In as Partner
+                </span>
+              )}
             </div>
+
+            {!isLoggedIn && (
+              <div className="mb-6 p-4 bg-[#E6F1FB] border border-[#B3D6F6] rounded-none flex items-center justify-between gap-4">
+                <div className="text-xs text-[#185FA5]">
+                  <strong className="block font-bold">Have an existing B2B partner account?</strong>
+                  <span>Log in to automatically attach this order spec to your client portal.</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => router.push("/portal")}
+                  className="bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-none transition-colors shrink-0"
+                >
+                  Login &amp; Submit
+                </button>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
