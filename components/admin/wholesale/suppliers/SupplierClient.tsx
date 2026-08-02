@@ -6,6 +6,7 @@ import { SuppliersTable } from "./SuppliersTable";
 import { AddSupplierModal, SupplierData } from "./AddSupplierModal";
 import { EditSupplierModal, SupplierRecord } from "./EditSupplierModal";
 import { SupplierDetailModal } from "./SupplierDetailModal";
+import { AddWholesaleProductModal, SupplierOption, CategoryOption } from "../inventory/AddWholesaleProductModal";
 
 export function SupplierClient() {
   const [suppliers, setSuppliers] = useState<SupplierRecord[]>([
@@ -56,6 +57,13 @@ export function SupplierClient() {
     },
   ]);
 
+  const categoriesOptions: CategoryOption[] = [
+    { id: "cat-tops", name: "Tops" },
+    { id: "cat-bottoms", name: "Bottoms" },
+    { id: "cat-outerwear", name: "Outerwear" },
+    { id: "cat-formal", name: "Formal Wear" },
+  ];
+
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"ALL" | "ACTIVE" | "PENDING">("ALL");
 
@@ -63,6 +71,7 @@ export function SupplierClient() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingSupplier, setEditingSupplier] = useState<SupplierRecord | null>(null);
   const [viewingSupplier, setViewingSupplier] = useState<SupplierRecord | null>(null);
+  const [addProductSupplierId, setAddProductSupplierId] = useState<string | null>(null);
 
   // Toast State
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -240,6 +249,23 @@ export function SupplierClient() {
           setEditingSupplier(sup);
         }}
         onToggleStatus={handleToggleStatus}
+        onAddProduct={(supId) => {
+          setViewingSupplier(null);
+          setAddProductSupplierId(supId);
+        }}
+      />
+
+      {/* Add Wholesale Product Modal (prefilled supplierId) */}
+      <AddWholesaleProductModal
+        isOpen={!!addProductSupplierId}
+        prefilledSupplierId={addProductSupplierId || undefined}
+        suppliers={suppliers.map((s) => ({ id: s.id, firmName: s.firmName, status: s.status }))}
+        categories={categoriesOptions}
+        onClose={() => setAddProductSupplierId(null)}
+        onSuccess={(newProd) => {
+          showToast(`Created wholesale product ${newProd.name || newProd.sku}`, "success");
+        }}
+        showToast={showToast}
       />
     </div>
   );

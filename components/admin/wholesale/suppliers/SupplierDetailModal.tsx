@@ -8,6 +8,7 @@ export interface SupplierDetailModalProps {
   onClose: () => void;
   onEdit: (supplier: SupplierRecord) => void;
   onToggleStatus: (supplierId: string, newStatus: SupplierRecord["status"]) => void;
+  onAddProduct?: (supplierId: string) => void;
 }
 
 export function SupplierDetailModal({
@@ -16,6 +17,7 @@ export function SupplierDetailModal({
   onClose,
   onEdit,
   onToggleStatus,
+  onAddProduct,
 }: SupplierDetailModalProps) {
   if (!isOpen || !supplier) return null;
 
@@ -110,6 +112,18 @@ export function SupplierDetailModal({
         </div>
 
         <div className="flex justify-end gap-3 pt-4 border-t border-[#EAECF0]">
+          {onAddProduct && supplier.status === "ACTIVE" && (
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                onAddProduct(supplier.id);
+              }}
+              className="px-4 py-2 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase rounded-md cursor-pointer flex items-center gap-1"
+            >
+              + ADD PRODUCT
+            </button>
+          )}
           <button
             type="button"
             onClick={() => onEdit(supplier)}

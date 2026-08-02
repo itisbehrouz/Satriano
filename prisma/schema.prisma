@@ -64,6 +64,7 @@ model Category {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   subcategories Subcategory[]
+  wholesaleProducts WholesaleProduct[]
 }
 
 model Subcategory {
@@ -282,3 +283,70 @@ model MagicLinkToken {
   usedAt    DateTime?
   createdAt DateTime  @default(now())
 }
+
+enum SupplierStatus {
+  ACTIVE
+  INACTIVE
+  PENDING_VERIFICATION
+}
+
+enum WholesaleProductStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Supplier {
+  id            String         @id @default(cuid())
+  firmName      String
+  contactPerson String?
+  email         String?
+  phone         String?
+  address       String?
+  website       String?
+  notes         String?
+  status        SupplierStatus @default(PENDING_VERIFICATION)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  wholesaleProducts WholesaleProduct[]
+}
+
+model WholesaleProduct {
+  id             String                 @id @default(cuid())
+  supplierId     String
+  supplier       Supplier               @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  categoryId     String
+  category       Category               @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name           String
+  sku            String                 @unique
+  description    String?
+  costPriceCents Int
+  markupPercent  Float                  @default(35.0)
+  sellPriceCents Int
+  status         WholesaleProductStatus @default(ACTIVE)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+
+  images WholesaleProductImage[]
+  stock  WholesaleStock[]
+}
+
+model WholesaleProductImage {
+  id                 String           @id @default(cuid())
+  wholesaleProductId String
+  wholesaleProduct   WholesaleProduct @relation(fields: [wholesaleProductId], references: [id], onDelete: Cascade)
+  url                String
+  sortOrder          Int              @default(0)
+}
+
+model WholesaleStock {
+  id                 String           @id @default(cuid())
+  wholesaleProductId String
+  wholesaleProduct   WholesaleProduct @relation(fields: [wholesaleProductId], references: [id], onDelete: Cascade)
+  size               String
+  quantity           Int              @default(0)
+  lowStockThreshold  Int              @default(3)
+
+  @@unique([wholesaleProductId, size])
+}
+

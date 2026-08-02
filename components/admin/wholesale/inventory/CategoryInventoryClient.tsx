@@ -6,6 +6,7 @@ import { CategoryFilter, CategoryOption } from "./CategoryFilter";
 import { ProductGrid } from "./ProductGrid";
 import { ProductCard, InventoryGarmentProduct } from "./ProductCard";
 import { ProductDetailModal } from "./ProductDetailModal";
+import { AddWholesaleProductModal, SupplierOption } from "./AddWholesaleProductModal";
 
 export function CategoryInventoryClient() {
   const categories: CategoryOption[] = [
@@ -14,6 +15,15 @@ export function CategoryInventoryClient() {
     { id: "cat-outerwear", name: "Outerwear", productCount: 18, supplierCount: 2 },
     { id: "cat-formal", name: "Formal Wear", productCount: 24, supplierCount: 4 },
   ];
+
+  const suppliers: SupplierOption[] = [
+    { id: "sup-1", firmName: "ABC Textile Co.", status: "ACTIVE" },
+    { id: "sup-2", firmName: "XYZ Fabrics", status: "ACTIVE" },
+    { id: "sup-3", firmName: "Premium Knit Ltd.", status: "ACTIVE" },
+    { id: "sup-4", firmName: "Anadolu Garments A.Ş.", status: "PENDING_VERIFICATION" },
+  ];
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
 
   const [products, setProducts] = useState<InventoryGarmentProduct[]>([
     {
@@ -153,6 +163,14 @@ export function CategoryInventoryClient() {
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setIsAddModalOpen(true)}
+            className="h-10 px-4 bg-[#067647] hover:bg-[#05603A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-base">add_box</span>
+            + Add Wholesale Product
+          </button>
           <Link
             href="/admin/wholesale/suppliers"
             className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
@@ -194,6 +212,39 @@ export function CategoryInventoryClient() {
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
         onUpdateProduct={handleUpdateProduct}
+        showToast={showToast}
+      />
+
+      {/* Add Wholesale Product Modal */}
+      <AddWholesaleProductModal
+        isOpen={isAddModalOpen}
+        suppliers={suppliers}
+        categories={categories}
+        onClose={() => setIsAddModalOpen(false)}
+        onSuccess={(newProduct) => {
+          showToast(`Added product ${newProduct.name || newProduct.sku}`, "success");
+          // Map to local presentation format
+          const formatted: InventoryGarmentProduct = {
+            id: newProduct.id,
+            name: newProduct.name || "New Garment Product",
+            categoryId: newProduct.categoryId || "cat-formal",
+            categoryName: categories.find((c) => c.id === newProduct.categoryId)?.name || "Formal Wear",
+            supplierId: newProduct.supplierId || "sup-1",
+            supplierName: suppliers.find((s) => s.id === newProduct.supplierId)?.firmName || "Supplier",
+            supplierSku: newProduct.sku,
+            wholesaleCostPriceUSD: (newProduct.costPriceCents || 12500) / 100,
+            markupPercent: newProduct.markupPercent || 35,
+            sellPriceUSD: (newProduct.sellPriceCents || 16875) / 100,
+            stockLevel: 10,
+            supplierNote: "Direct factory inventory",
+            sizeStockMatrix: { "36": 2, "38": 3, "40": 3, "42": 2 },
+            images: newProduct.images || [
+              { id: "img-1", imageUrl: "/placeholder-blazer-1.jpg", imageOrder: 1 },
+              { id: "img-2", imageUrl: "/placeholder-blazer-2.jpg", imageOrder: 2 },
+            ],
+          };
+          setProducts((prev) => [formatted, ...prev]);
+        }}
         showToast={showToast}
       />
     </div>
