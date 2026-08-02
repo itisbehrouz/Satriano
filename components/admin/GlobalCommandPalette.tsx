@@ -42,17 +42,27 @@ export function GlobalCommandPalette({
     setInternalIsOpen(val);
   };
 
-  // Listen for global Cmd+K / Ctrl+K keyboard shortcut
+  // Listen for global Cmd+K / Ctrl+K / Alt+K and Escape keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      // Toggle palette on Cmd+K, Ctrl+K, or Alt+K (Option+K)
+      if ((e.metaKey || e.ctrlKey || e.altKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
+        e.stopPropagation();
         setIsOpen(!isOpen);
+        return;
+      }
+
+      // Close palette on Escape key when open
+      if (e.key === "Escape" && isOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, true);
+    return () => window.removeEventListener("keydown", handleKeyDown, true);
   }, [isOpen]);
 
   // Fetch real catalog & orders data when command palette is opened
@@ -152,9 +162,14 @@ export function GlobalCommandPalette({
             {loadingData && (
               <span className="w-3.5 h-3.5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mr-2 shrink-0" />
             )}
-            <kbd className="px-1.5 py-0.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded text-[10px] font-mono text-[var(--color-text-secondary)] shrink-0 ml-2">
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="px-1.5 py-0.5 bg-[var(--color-bg)] hover:bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[10px] font-mono text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] shrink-0 ml-2 cursor-pointer transition-colors"
+              title="Close search (ESC)"
+            >
               ESC
-            </kbd>
+            </button>
           </div>
 
           {/* Results Command List */}
