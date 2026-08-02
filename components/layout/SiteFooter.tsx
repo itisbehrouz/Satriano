@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { OpenCookiePreferencesButton } from "@/components/layout/CookieConsentModal";
 
@@ -36,9 +37,11 @@ export function SiteFooter() {
               href="/"
               className="inline-block hover:opacity-95 transition-opacity self-start"
             >
-              <img
+              <Image
                 src="/Satrinao.png"
                 alt="Satriano Atelier"
+                width={180}
+                height={50}
                 className="h-[45px] md:h-[48px] w-auto object-contain"
               />
             </Link>

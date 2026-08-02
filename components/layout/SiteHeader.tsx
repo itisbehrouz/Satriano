@@ -40,9 +40,12 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-3 hover:opacity-95 transition-opacity"
         >
-          <img
+          <Image
             src="/Satrinao.png"
             alt="Satriano Atelier"
+            width={180}
+            height={50}
+            priority
             className="h-9 md:h-[50px] w-auto object-contain"
           />
         </Link>

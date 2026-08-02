@@ -2,8 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { DashboardMetrics } from "@/components/admin/DashboardMetrics";
+import dynamic from "next/dynamic";
 import type { DashboardMetricsData } from "@/lib/adminMetrics";
+
+const DashboardMetrics = dynamic(
+  () => import("@/components/admin/DashboardMetrics").then((mod) => mod.DashboardMetrics),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full animate-pulse bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none" />
+    ),
+  }
+);
 
 export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?: boolean }) {
   const [metrics, setMetrics] = useState<DashboardMetricsData | null>(null);
