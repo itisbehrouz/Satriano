@@ -34,7 +34,7 @@
   --color-outline: #D1D5DB;
   --color-outline-variant: #E5E7EB;
 
-  /* Status Colors */
+  /* Status Colors (Public Light Theme) */
   --color-status-success-text: #0F6E56;
   --color-status-success-bg: #E1F5EE;
   --color-status-warning-text: #854F0B;
@@ -43,6 +43,20 @@
   --color-status-info-bg: #E6F1FB;
   --color-status-error-text: #A32D2D;
   --color-status-error-bg: #FCEBEB;
+
+  /* Portal Dark Theme (B2B Customer Portal) */
+  --color-portal-bg: #0B1E3D;
+  --color-portal-surface: #132A52;
+  --color-portal-text-secondary: #8DA0C4;
+  --color-portal-border: #1E3A8A;
+
+  /* Portal Status Badges (Section 16–17) */
+  --color-portal-warning: #F0B94A;
+  --color-portal-warning-bg: #3A2E14;
+  --color-portal-info: #85B7EB;
+  --color-portal-info-bg: #132A52;
+  --color-portal-success: #5DCAA5;
+  --color-portal-success-bg: #14301F;
 
   /* Typography Font Families */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
