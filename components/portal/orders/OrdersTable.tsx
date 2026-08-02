@@ -21,21 +21,21 @@ export function OrdersTable({
   onSelectOrder,
 }: OrdersTableProps) {
   const getSortIcon = (column: string) => {
-    if (sortColumn !== column) return <span className="text-[#8DA0C4] ml-1">↑↓</span>;
+    if (sortColumn !== column) return <span className="text-[var(--color-portal-text-secondary)] ml-1">↑↓</span>;
     return sortOrder === "asc" ? (
-      <span className="text-[#2E5AAC] font-bold ml-1">↑</span>
+      <span className="text-[var(--color-accent)] font-bold ml-1">↑</span>
     ) : (
-      <span className="text-[#2E5AAC] font-bold ml-1">↓</span>
+      <span className="text-[var(--color-accent)] font-bold ml-1">↓</span>
     );
   };
 
   return (
-    <div className="border border-[#2E5AAC] rounded-none overflow-x-auto font-sans select-none">
+    <div className="border border-[var(--color-portal-border)] rounded-none overflow-x-auto font-sans select-none bg-[var(--color-portal-bg)]">
       <table className="w-full text-left text-xs border-collapse">
         <thead>
-          <tr className="bg-[#132A52] border-b border-[#2E5AAC] text-[#E8ECF3] font-bold text-xs uppercase tracking-wider h-14">
+          <tr className="bg-[var(--color-portal-surface)] border-b border-[var(--color-portal-border)] text-[var(--color-text-on-header)] font-bold text-xs uppercase tracking-wider h-14">
             <th
-              className="py-3 px-4 cursor-pointer hover:text-[#2E5AAC]"
+              className="py-3 px-4 cursor-pointer hover:text-[var(--color-accent)]"
               onClick={() => onSortChange("id")}
             >
               <div className="flex items-center">
@@ -44,7 +44,7 @@ export function OrdersTable({
               </div>
             </th>
             <th
-              className="py-3 px-4 cursor-pointer hover:text-[#2E5AAC]"
+              className="py-3 px-4 cursor-pointer hover:text-[var(--color-accent)]"
               onClick={() => onSortChange("createdAt")}
             >
               <div className="flex items-center">
@@ -56,7 +56,7 @@ export function OrdersTable({
             {/* If Wholesale View: Show Units column */}
             {isWholesaleView ? (
               <th
-                className="py-3 px-4 text-center cursor-pointer hover:text-[#2E5AAC]"
+                className="py-3 px-4 text-center cursor-pointer hover:text-[var(--color-accent)]"
                 onClick={() => onSortChange("quantity")}
               >
                 <div className="flex items-center justify-center">
@@ -70,7 +70,7 @@ export function OrdersTable({
 
             {!isWholesaleView && (
               <th
-                className="py-3 px-4 text-right cursor-pointer hover:text-[#2E5AAC]"
+                className="py-3 px-4 text-right cursor-pointer hover:text-[var(--color-accent)]"
                 onClick={() => onSortChange("quantity")}
               >
                 <div className="flex items-center justify-end">
@@ -81,7 +81,7 @@ export function OrdersTable({
             )}
 
             <th
-              className="py-3 px-4 text-right cursor-pointer hover:text-[#2E5AAC]"
+              className="py-3 px-4 text-right cursor-pointer hover:text-[var(--color-accent)]"
               onClick={() => onSortChange("totalCents")}
             >
               <div className="flex items-center justify-end">
@@ -91,7 +91,7 @@ export function OrdersTable({
             </th>
 
             <th
-              className="py-3 px-4 cursor-pointer hover:text-[#2E5AAC]"
+              className="py-3 px-4 cursor-pointer hover:text-[var(--color-accent)]"
               onClick={() => onSortChange("status")}
             >
               <div className="flex items-center">
@@ -103,8 +103,8 @@ export function OrdersTable({
             <th className="py-3 px-4 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#2E5AAC]">
-          {orders.map((order, idx) => {
+        <tbody className="divide-y divide-[var(--color-portal-border)]">
+          {orders.map((order) => {
             const dateStr = new Date(order.createdAt).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
@@ -126,30 +126,30 @@ export function OrdersTable({
             const isShipped = order.status === "SHIPPED" || order.status === "Shipped";
             const isCancelled = order.status === "CANCELLED" || order.status === "Cancelled";
 
-            // Status Badge Styling based on prompt specifications
-            let badgeBg = "bg-[#132A52]";
-            let badgeTextColor = "text-[#85B7EB]";
+            // Status Badge Styling based on Phase 1 tokens
+            let badgeBg = "bg-[var(--color-portal-info-bg)]";
+            let badgeTextColor = "text-[var(--color-portal-info)]";
             let badgeLabel: string = String(order.status);
 
             if (isPending) {
-              badgeBg = "bg-[#3A2E14]";
-              badgeTextColor = "text-[#F0B94A]";
+              badgeBg = "bg-[var(--color-portal-warning-bg)]";
+              badgeTextColor = "text-[var(--color-portal-warning)]";
               badgeLabel = "⏳ Pending";
             } else if (isApproved) {
-              badgeBg = "bg-[#132A52]";
-              badgeTextColor = "text-[#85B7EB]";
+              badgeBg = "bg-[var(--color-portal-info-bg)]";
+              badgeTextColor = "text-[var(--color-portal-info)]";
               badgeLabel = "✓ Approved";
             } else if (isPaid) {
-              badgeBg = "bg-[#132A52]";
-              badgeTextColor = "text-[#85B7EB]";
+              badgeBg = "bg-[var(--color-portal-info-bg)]";
+              badgeTextColor = "text-[var(--color-portal-info)]";
               badgeLabel = "✓ Paid";
             } else if (isShipped) {
-              badgeBg = "bg-[#14301F]";
-              badgeTextColor = "text-[#5DCAA5]";
+              badgeBg = "bg-[var(--color-portal-success-bg)]";
+              badgeTextColor = "text-[var(--color-portal-success)]";
               badgeLabel = "📦 Shipped";
             } else if (isCancelled) {
-              badgeBg = "bg-[#1A2332]";
-              badgeTextColor = "text-[#8DA0C4]";
+              badgeBg = "bg-[var(--color-portal-surface)]";
+              badgeTextColor = "text-[var(--color-portal-text-secondary)]";
               badgeLabel = "✗ Cancelled";
             }
 
@@ -166,40 +166,38 @@ export function OrdersTable({
             return (
               <tr
                 key={order.id}
-                className={`h-14 ${
-                  idx % 2 === 0 ? "bg-[#0B1E3D]" : "bg-[#1A3A5C]"
-                } hover:bg-[#2A4A6C] transition-colors text-[#E8ECF3]`}
+                className="h-14 bg-[var(--color-portal-bg)] hover:bg-[var(--color-portal-surface)]/60 transition-colors text-[var(--color-text-on-header)]"
               >
                 <td className="py-3 px-4 font-mono font-bold">
                   <button
                     type="button"
                     onClick={() => onSelectOrder(order)}
-                    className="text-[#2E5AAC] hover:underline cursor-pointer font-bold text-left"
+                    className="text-[var(--color-accent)] hover:underline cursor-pointer font-bold text-left"
                   >
                     {refNo}
                   </button>
                 </td>
-                <td className="py-3 px-4 font-mono text-[#8DA0C4] text-xs tabular-nums">
+                <td className="py-3 px-4 font-mono text-[var(--color-portal-text-secondary)] text-xs tabular-nums">
                   {dateStr}
                 </td>
 
                 {isWholesaleView ? (
-                  <td className="py-3 px-4 text-center font-mono font-bold text-[#E8ECF3] tabular-nums">
+                  <td className="py-3 px-4 text-center font-mono font-bold text-[var(--color-text-on-header)] tabular-nums">
                     {totalUnits}
                   </td>
                 ) : (
-                  <td className="py-3 px-4 font-medium text-[#E8ECF3]">
+                  <td className="py-3 px-4 font-medium text-[var(--color-text-on-header)]">
                     {productDisplay}
                   </td>
                 )}
 
                 {!isWholesaleView && (
-                  <td className="py-3 px-4 text-right font-mono text-[#E8ECF3] tabular-nums font-semibold">
+                  <td className="py-3 px-4 text-right font-mono text-[var(--color-text-on-header)] tabular-nums font-semibold">
                     {totalUnits}
                   </td>
                 )}
 
-                <td className="py-3 px-4 text-right font-mono font-bold text-[#E8ECF3] tabular-nums">
+                <td className="py-3 px-4 text-right font-mono font-bold text-[var(--color-text-on-header)] tabular-nums">
                   {totalFormatted}
                 </td>
 
@@ -215,7 +213,7 @@ export function OrdersTable({
                   <button
                     type="button"
                     onClick={() => onSelectOrder(order)}
-                    className="text-[#2E5AAC] hover:underline font-bold cursor-pointer"
+                    className="text-[var(--color-accent)] hover:underline font-bold cursor-pointer"
                   >
                     View Details →
                   </button>
