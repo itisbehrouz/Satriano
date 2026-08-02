@@ -873,3 +873,17 @@ Standing rules (Section 4) and the "screenshot before done" discipline
   - Header and tab bar fixed top (`flex-shrink-0`), tab content body scrollable (`flex-1 overflow-y-auto`), and footer fixed bottom (`flex-shrink-0 border-t`).
 - **Vitest Unit Test Suite**:
   - Verified 100% pass rate across 28 test files and 136 unit tests.
+
+---
+
+## 23. Color Token Centralization Phase 1 & Phase 2 Pilot (Aug 2, 2026)
+
+- **Phase 1 Infrastructure (`app/globals.css`)**:
+  - Added B2B Portal dark-theme surface tokens (`--color-portal-bg: #0B1E3D`, `--color-portal-surface: #132A52`, `--color-portal-text-secondary: #8DA0C4`, `--color-portal-border: #1E3A8A`).
+  - Added Section 16–17 portal status badge tokens (`--color-portal-warning: #F0B94A`, `--color-portal-warning-bg: #3A2E14`, `--color-portal-info: #85B7EB`, `--color-portal-info-bg: #132A52`, `--color-portal-success: #5DCAA5`, `--color-portal-success-bg: #14301F`).
+- **Phase 2 Pilot Refactoring (`components/portal/orders/OrdersTable.tsx`)**:
+  - Replaced hardcoded hex colors with CSS custom property tokens (`var(--color-portal-bg)`, `var(--color-portal-surface)`, `var(--color-portal-warning)`, `var(--color-portal-info)`, `var(--color-portal-success)`, `var(--color-accent)`).
+  - Applied flat single-color surface design decision: removed alternating two-tone row backgrounds (`#0B1E3D`/`#1A3A5C`) in favor of unified `var(--color-portal-bg)` with 1px `var(--color-portal-border)` row dividers.
+- **Verification**:
+  - `npm test`: 28 test files / 136 unit tests passed 100%.
+  - `npm run build`: Production build clean with 0 errors.
