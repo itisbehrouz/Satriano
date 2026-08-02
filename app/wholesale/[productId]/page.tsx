@@ -201,7 +201,7 @@ export default async function WholesaleProductDetailPage({ params }: PageProps) 
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F5F5F5] min-h-screen py-8 lg:py-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] min-h-screen py-8 lg:py-12 px-4 sm:px-6 lg:px-8 transition-colors">
         <div className="max-w-[1440px] mx-auto">
           <WholesaleProductDetailClient product={productData} />
         </div>

@@ -33,7 +33,7 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="bg-[#0B1E3D] text-[#E8ECF3] border-b border-[#132A52] sticky top-0 z-50 w-full shadow-sm">
+    <header className="bg-[var(--color-bg)] text-[var(--color-text-primary)] sticky top-0 z-50 w-full transition-colors">
       <div className="flex justify-between items-center w-full px-3 md:px-8 py-3 max-w-container-max mx-auto">
         {/* Official Brand Logo Image */}
         <Link
@@ -60,8 +60,8 @@ export function SiteHeader() {
                 href={item.href}
                 className={`relative py-1 transition-colors ${
                   isActive
-                    ? "text-[#E8ECF3] border-b-2 border-[#DBB671]"
-                    : "text-[#8DA0C4] hover:text-[#E8ECF3]"
+                    ? "text-[var(--color-text-primary)] border-b-2 border-[var(--color-gold)]"
+                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                 }`}
               >
                 {item.label}
@@ -78,7 +78,7 @@ export function SiteHeader() {
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
             title={theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"}
-            className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded-none transition-colors cursor-pointer"
+            className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:opacity-80 border border-[var(--color-border)] rounded-none transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-lg">
               {theme === "dark" ? "light_mode" : "dark_mode"}
@@ -87,7 +87,7 @@ export function SiteHeader() {
 
           <Link
             href="/portal"
-            className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
+            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-[11px] sm:text-xs uppercase font-semibold tracking-wider px-3 sm:px-5 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5 min-h-[44px]"
           >
             <span className="material-symbols-outlined text-base">account_circle</span>
             <span>Client Portal</span>
@@ -98,7 +98,7 @@ export function SiteHeader() {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="md:hidden inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#E8ECF3] bg-[#132A52] hover:bg-[#1A386D] border border-[#1F3A6B] rounded-none transition-colors"
+            className="md:hidden inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none transition-colors"
           >
             <span className="material-symbols-outlined text-lg">
               {mobileMenuOpen ? "close" : "menu"}
@@ -110,7 +110,7 @@ export function SiteHeader() {
 
       {/* Collapsible Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-[#081733] border-t border-[#132A52] px-4 py-3 space-y-2">
+        <nav className="md:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)] px-4 py-3 space-y-2">
           {MENU_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -122,8 +122,8 @@ export function SiteHeader() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block text-xs font-semibold tracking-wider uppercase py-2.5 px-3 rounded transition-colors ${
                   isActive
-                    ? "bg-[#132A52] text-[#DBB671]"
-                    : "text-[#8DA0C4] hover:text-[#E8ECF3] hover:bg-[#132A52]/50"
+                    ? "bg-[var(--color-bg)] text-[var(--color-gold)]"
+                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg)]/50"
                 }`}
               >
                 {item.label}

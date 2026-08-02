@@ -18,26 +18,26 @@ export function HomeEstimatorPreview() {
   const totalMaxCents = selectedGrade.maxPriceCents * quantity + selectedGrade.setupFeeCents;
 
   return (
-    <div className="w-full bg-[#0B1E3D] text-white rounded-none border border-white/15 p-6 md:p-8 shadow-2xl relative overflow-hidden">
+    <div className="w-full bg-[var(--color-surface)] text-[var(--color-text-primary)] rounded-none border border-[var(--color-border)] p-6 md:p-8 shadow-sm relative overflow-hidden transition-colors">
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Controls Column */}
         <div className="lg:col-span-7 space-y-6">
           <div>
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] bg-[#2E5AAC]/30 px-3 py-1 rounded-none border border-[#2E5AAC]/50 mb-3">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-3 py-1 rounded-none border border-[var(--color-accent)]/30 mb-3">
               <span className="material-symbols-outlined text-sm">calculate</span>
               Live Price Ledger Estimator
             </span>
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+            <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-text-primary)]">
               Transparent Production Cost Matrix
             </h3>
-            <p className="text-sm text-[#94A3B8] mt-2">
+            <p className="text-sm text-[var(--color-text-secondary)] mt-2">
               Select fabric tier and order quantity to preview instant unit ranges and itemized setup costs.
             </p>
           </div>
 
           {/* Fabric Grade Select */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#CBD5E1] mb-2">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)] mb-2">
               1. Fabric Grade & Composition
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -47,12 +47,12 @@ export function HomeEstimatorPreview() {
                   onClick={() => setSelectedGrade(grade)}
                   className={`p-3 rounded-none border text-left text-xs transition-all ${
                     selectedGrade.id === grade.id
-                      ? "border-[#60A5FA] bg-[#2E5AAC]/40 text-white font-semibold shadow-md shadow-[#2E5AAC]/20"
-                      : "border-white/10 bg-white/5 text-[#94A3B8] hover:border-white/30 hover:text-white"
+                      ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-text-primary)] font-semibold"
+                      : "border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-primary)]"
                   }`}
                 >
-                  <p className="font-medium text-white">{grade.name}</p>
-                  <p className="text-[11px] text-[#93C5FD] mt-1 font-mono">
+                  <p className="font-medium text-[var(--color-text-primary)]">{grade.name}</p>
+                  <p className="text-[11px] text-[var(--color-accent)] mt-1 font-mono">
                     {formatCents(grade.minPriceCents)} – {formatCents(grade.maxPriceCents)} / unit
                   </p>
                 </button>
@@ -63,10 +63,10 @@ export function HomeEstimatorPreview() {
           {/* Quantity Range Slider */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-[#CBD5E1]">
+              <label className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
                 2. Order Volume (Units)
               </label>
-              <span className="text-sm font-mono font-bold text-[#60A5FA] bg-[#2E5AAC]/30 px-3 py-0.5 rounded-none border border-[#2E5AAC]/50">
+              <span className="text-sm font-mono font-bold text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-3 py-0.5 rounded-none border border-[var(--color-accent)]/30">
                 {quantity} Units
               </span>
             </div>
@@ -77,9 +77,9 @@ export function HomeEstimatorPreview() {
               step={50}
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className="w-full h-2 bg-white/10 rounded-none appearance-none cursor-pointer accent-[#60A5FA]"
+              className="w-full h-2 bg-[var(--color-border)] rounded-none appearance-none cursor-pointer accent-[var(--color-accent)]"
             />
-            <div className="flex justify-between text-[11px] text-[#64748B] mt-1 font-mono">
+            <div className="flex justify-between text-[11px] text-[var(--color-text-secondary)] mt-1 font-mono">
               <span>50 MOQ</span>
               <span>250</span>
               <span>500</span>
@@ -90,44 +90,44 @@ export function HomeEstimatorPreview() {
 
         {/* Ledger Output Box Column */}
         <div className="lg:col-span-5">
-          <div className="bg-[#152744]/90 border border-white/20 rounded-none p-6 shadow-xl backdrop-blur-md space-y-4">
-            <div className="border-b border-white/10 pb-3 flex justify-between items-center">
-              <span className="text-xs uppercase font-semibold text-[#94A3B8]">Est. Unit Price</span>
-              <span className="text-base font-bold text-[#60A5FA] font-mono">
+          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none p-6 space-y-4">
+            <div className="border-b border-[var(--color-border)] pb-3 flex justify-between items-center">
+              <span className="text-xs uppercase font-semibold text-[var(--color-text-secondary)]">Est. Unit Price</span>
+              <span className="text-base font-bold text-[var(--color-accent)] font-mono">
                 {formatCents(selectedGrade.minPriceCents)} – {formatCents(selectedGrade.maxPriceCents)}
               </span>
             </div>
 
-            <div className="space-y-2 text-xs text-[#CBD5E1]">
+            <div className="space-y-2 text-xs text-[var(--color-text-secondary)]">
               <div className="flex justify-between">
                 <span>Subtotal ({quantity} units)</span>
-                <span className="font-mono text-white">
+                <span className="font-mono text-[var(--color-text-primary)]">
                   {formatCents(selectedGrade.minPriceCents * quantity)} – {formatCents(selectedGrade.maxPriceCents * quantity)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Vector Digitization Setup</span>
-                <span className="font-mono text-white">{formatCents(selectedGrade.setupFeeCents)}</span>
+                <span className="font-mono text-[var(--color-text-primary)]">{formatCents(selectedGrade.setupFeeCents)}</span>
               </div>
               <div className="flex justify-between">
                 <span>QC & Proforma Issuance</span>
-                <span className="font-mono text-emerald-400">Included ($0.00)</span>
+                <span className="font-mono text-[var(--color-status-success)]">Included ($0.00)</span>
               </div>
             </div>
 
-            <div className="border-t border-white/15 pt-4">
+            <div className="border-t border-[var(--color-border)] pt-4">
               <div className="flex justify-between items-baseline mb-4">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#93C5FD]">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
                   Estimated Order Total Range
                 </span>
-                <span className="text-xl font-bold text-white font-mono">
+                <span className="text-xl font-bold text-[var(--color-text-primary)] font-mono">
                   {formatCents(totalMinCents)} – {formatCents(totalMaxCents)}
                 </span>
               </div>
 
               <Link
                 href="/konfigurator"
-                className="w-full bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-4 rounded-none transition-colors inline-flex items-center justify-center gap-2 shadow-lg shadow-[#2E5AAC]/30 text-center"
+                className="w-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-4 rounded-none transition-colors inline-flex items-center justify-center gap-2 text-center"
               >
                 Configure Full Product Spec →
               </Link>

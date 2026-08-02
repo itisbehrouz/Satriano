@@ -23,49 +23,46 @@ export default async function CategoriesPage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F8FAFC] text-[#020617] font-sans antialiased">
-        {/* Executive Dark Navy Hero Section */}
-        <section className="w-full bg-[#0B1E3D] text-white py-14 lg:py-20 border-b border-[#1E3A8A] relative overflow-hidden">
-          {/* Ambient Glow */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2E5AAC]/15 rounded-full blur-3xl pointer-events-none" />
-
+      <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans antialiased transition-colors">
+        {/* Executive Hero Section */}
+        <section className="w-full bg-[var(--color-bg)] text-[var(--color-text-primary)] py-14 lg:py-20 relative overflow-hidden transition-colors">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 text-xs text-[#94A3B8] mb-6">
-              <Link href="/" className="hover:text-white transition-colors">
+            <nav className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)] mb-6">
+              <Link href="/" className="hover:text-[var(--color-text-primary)] transition-colors">
                 Home
               </Link>
-              <span className="text-[#64748B]">/</span>
-              <span className="font-medium text-white">Manufacturing Catalog</span>
+              <span className="text-[var(--color-text-secondary)]">/</span>
+              <span className="font-medium text-[var(--color-text-primary)]">Manufacturing Catalog</span>
             </nav>
 
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
               <div className="max-w-3xl space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none backdrop-blur-sm">
-                  <span className="w-2 h-2 rounded-none bg-[#60A5FA] animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] rounded-none">
+                  <span className="w-2 h-2 rounded-none bg-[var(--color-accent)] animate-pulse" />
                   B2B White-Label Portfolio
                 </div>
 
-                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans leading-[1.1]">
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] font-sans leading-[1.1]">
                   Garment Manufacturing Catalog &amp; Subcategories
                 </h1>
 
-                <p className="text-base md:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
+                <p className="text-base md:text-lg text-[var(--color-text-secondary)] font-normal leading-relaxed max-w-2xl">
                   Explore our complete portfolio of producible apparel lines. Filter by style or search subcategories to launch instant custom order specifications.
                 </p>
 
                 {/* Portfolio Stats Strip */}
-                <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8] pt-2">
+                <div className="flex flex-wrap items-center gap-6 text-xs text-[var(--color-text-secondary)] pt-2">
                   <span>
-                    <strong className="text-white font-mono text-sm">{categories.length}</strong> Main Categories
+                    <strong className="text-[var(--color-text-primary)] font-mono text-sm">{categories.length}</strong> Main Categories
                   </span>
                   <span>•</span>
                   <span>
-                    <strong className="text-white font-mono text-sm">{totalSubcategories}</strong> Subcategories
+                    <strong className="text-[var(--color-text-primary)] font-mono text-sm">{totalSubcategories}</strong> Subcategories
                   </span>
                   <span>•</span>
                   <span>
-                    <strong className="text-[#60A5FA] font-mono text-sm">65</strong> Producible Products
+                    <strong className="text-[var(--color-accent)] font-mono text-sm">65</strong> Producible Products
                   </span>
                 </div>
               </div>
@@ -74,7 +71,7 @@ export default async function CategoriesPage() {
               <div className="shrink-0">
                 <Link
                   href="/konfigurator"
-                  className="bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-xl transition-all shadow-lg shadow-[#2E5AAC]/30 inline-flex items-center gap-2"
+                  className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-none transition-all inline-flex items-center gap-2"
                 >
                   <span>Launch Order Configurator</span>
                   <span>→</span>
@@ -85,7 +82,7 @@ export default async function CategoriesPage() {
         </section>
 
         {/* Search & Categories Showcase Grid Section */}
-        <section className="w-full py-12 lg:py-16 px-6 lg:px-8">
+        <section className="w-full py-12 lg:py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
           <div className="max-w-[1440px] mx-auto">
             <CategoriesSearchFilter categories={categories} />
           </div>

@@ -34,44 +34,44 @@ export function LegalPageShell({
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F8FAFC] text-[#020617] font-sans antialiased">
-        {/* Executive Dark Navy Hero Header */}
-        <section className="w-full bg-[#0B1E3D] text-white py-12 lg:py-16 border-b border-[#1E3A8A] relative overflow-hidden">
+      <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans antialiased transition-colors">
+        {/* Executive Hero Header */}
+        <section className="w-full bg-[var(--color-bg)] text-[var(--color-text-primary)] py-12 lg:py-16 relative overflow-hidden transition-colors">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 text-xs text-[#94A3B8] mb-6">
-              <Link href="/" className="hover:text-white transition-colors">
+            <nav className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)] mb-6">
+              <Link href="/" className="hover:text-[var(--color-text-primary)] transition-colors">
                 Home
               </Link>
-              <span className="text-[#64748B]">/</span>
-              <span className="text-[#94A3B8]">Legal &amp; Compliance</span>
-              <span className="text-[#64748B]">/</span>
-              <span className="font-medium text-white">{title}</span>
+              <span className="text-[var(--color-text-secondary)]">/</span>
+              <span className="text-[var(--color-text-secondary)]">Legal &amp; Compliance</span>
+              <span className="text-[var(--color-text-secondary)]">/</span>
+              <span className="font-medium text-[var(--color-text-primary)]">{title}</span>
             </nav>
 
             <div className="max-w-3xl space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-[11px] font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none">
-                <span className="w-1.5 h-1.5 rounded-none bg-[#60A5FA]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-[11px] font-semibold uppercase tracking-widest text-[var(--color-accent)] rounded-none">
+                <span className="w-1.5 h-1.5 rounded-none bg-[var(--color-accent)]" />
                 {categoryBadge}
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] font-sans">
                 {title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs text-[#94A3B8] pt-1">
-                <span>Effective Date: <strong className="text-white font-medium">{effectiveDate}</strong></span>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-text-secondary)] pt-1">
+                <span>Effective Date: <strong className="text-[var(--color-text-primary)] font-medium">{effectiveDate}</strong></span>
                 <span>•</span>
-                <span>Jurisdiction: <strong className="text-white font-medium">International B2B Commercial Law</strong></span>
+                <span>Jurisdiction: <strong className="text-[var(--color-text-primary)] font-medium">International B2B Commercial Law</strong></span>
                 <span>•</span>
-                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-none font-mono">
+                <span className="px-2 py-0.5 bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border border-[var(--color-status-success)]/30 rounded-none font-mono">
                   GDPR Compliant
                 </span>
               </div>
             </div>
 
             {/* Document Navigation Tabs */}
-            <div className="mt-10 pt-6 border-t border-white/10 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div className="mt-10 pt-6 border-t border-[var(--color-border)] flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
               {LEGAL_DOCUMENTS.map((doc) => {
                 const isActive = doc.slug === activeSlug;
                 return (
@@ -80,8 +80,8 @@ export function LegalPageShell({
                     href={doc.href}
                     className={`whitespace-nowrap px-4 py-2 rounded-none text-xs font-semibold uppercase tracking-wider transition-all ${
                       isActive
-                        ? "bg-[#2E5AAC] text-white shadow-md shadow-[#2E5AAC]/30 border border-[#60A5FA]/40"
-                        : "bg-white/5 text-[#94A3B8] hover:bg-white/10 hover:text-white border border-white/10"
+                        ? "bg-[var(--color-accent)] text-white border border-[var(--color-accent)]"
+                        : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)]"
                     }`}
                   >
                     {doc.label}
@@ -93,14 +93,14 @@ export function LegalPageShell({
         </section>
 
         {/* Content Section with Sticky Sidebar */}
-        <section className="w-full py-12 lg:py-16 px-6 lg:px-8">
+        <section className="w-full py-12 lg:py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
           <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left Column: Sticky Table of Contents & Contact Card */}
             <aside className="lg:col-span-4 space-y-6">
               <div className="sticky top-8 space-y-6">
                 {/* Table of Contents Card */}
-                <div className="bg-white border border-[#E2E8F0] rounded-none p-6 shadow-sm">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[#0369A1] mb-4 flex items-center gap-2">
+                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 shadow-sm">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-4 flex items-center gap-2">
                     <span className="material-symbols-outlined text-sm">toc</span>
                     Document Index
                   </h3>
@@ -109,9 +109,9 @@ export function LegalPageShell({
                       <a
                         key={sec.id}
                         href={`#${sec.id}`}
-                        className="block text-xs text-[#475569] hover:text-[#0369A1] hover:bg-[#F0F9FF] px-3 py-2 rounded-none transition-colors font-medium border-l-2 border-transparent hover:border-[#0369A1]"
+                        className="block text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:bg-[var(--color-bg)] px-3 py-2 rounded-none transition-colors font-medium border-l-2 border-transparent hover:border-[var(--color-accent)]"
                       >
-                        <span className="text-[#94A3B8] font-mono mr-2">{idx + 1}.</span>
+                        <span className="text-[var(--color-text-secondary)] font-mono mr-2">{idx + 1}.</span>
                         {sec.title}
                       </a>
                     ))}
@@ -119,15 +119,15 @@ export function LegalPageShell({
                 </div>
 
                 {/* Compliance Officer Contact Card */}
-                <div className="bg-[#0B1E3D] text-white border border-white/10 rounded-none p-6 space-y-3">
-                  <span className="material-symbols-outlined text-emerald-400 text-2xl">verified_user</span>
-                  <h4 className="text-sm font-bold text-white">Legal &amp; Compliance Office</h4>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
+                <div className="bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 space-y-3">
+                  <span className="material-symbols-outlined text-[var(--color-status-success)] text-2xl">verified_user</span>
+                  <h4 className="text-sm font-bold text-[var(--color-text-primary)]">Legal &amp; Compliance Office</h4>
+                  <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
                     Have questions regarding custom B2B manufacturing terms, GDPR data rights, or proforma validity?
                   </p>
                   <a
                     href="mailto:compliance@satrianoatelier.com"
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-[#60A5FA] hover:text-white transition-colors pt-1"
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--color-accent)] hover:underline transition-colors pt-1"
                   >
                     <span>compliance@satrianoatelier.com</span>
                     <span>→</span>
@@ -142,17 +142,17 @@ export function LegalPageShell({
                 <article
                   key={sec.id}
                   id={sec.id}
-                  className="bg-white border border-[#E2E8F0] rounded-none p-8 lg:p-10 shadow-sm scroll-mt-8 space-y-4"
+                  className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-8 lg:p-10 shadow-sm scroll-mt-8 space-y-4"
                 >
-                  <div className="flex items-center gap-3 border-b border-[#E2E8F0] pb-4">
-                    <span className="w-8 h-8 rounded-none bg-[#E0F2FE] text-[#0369A1] font-mono font-bold text-xs flex items-center justify-center">
+                  <div className="flex items-center gap-3 border-b border-[var(--color-border)] pb-4">
+                    <span className="w-8 h-8 rounded-none bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-mono font-bold text-xs flex items-center justify-center border border-[var(--color-accent)]/20">
                       #
                     </span>
-                    <h2 className="text-xl font-bold tracking-tight text-[#0F172A]">
+                    <h2 className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">
                       {sec.title}
                     </h2>
                   </div>
-                  <div className="text-sm text-[#334155] leading-relaxed space-y-4">
+                  <div className="text-sm text-[var(--color-text-secondary)] leading-relaxed space-y-4">
                     {sec.content}
                   </div>
                 </article>

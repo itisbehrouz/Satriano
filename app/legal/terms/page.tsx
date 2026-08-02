@@ -23,9 +23,9 @@ const SECTIONS: LegalSection[] = [
         <p>
           Satriano Atelier operates exclusively as a commercial B2B manufacturer. All producible garments are subject to a minimum order quantity (MOQ) of 50 units per style/colorway unless otherwise stipulated in a signed master supply agreement.
         </p>
-        <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 rounded-xl space-y-2 text-xs">
-          <p className="font-semibold text-[#0F172A]">MOQ Enforcement Standards:</p>
-          <ul className="list-disc pl-5 space-y-1 text-[#475569]">
+        <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none space-y-2 text-xs">
+          <p className="font-semibold text-[var(--color-text-primary)]">MOQ Enforcement Standards:</p>
+          <ul className="list-disc pl-5 space-y-1 text-[var(--color-text-secondary)]">
             <li>Single Fabric Line: 50 units minimum per style/color.</li>
             <li>Combined Multi-Fabric Orders: 100 units combined total across multi-fabric batches.</li>
             <li>Sample Development: Orders below MOQ incur sample digitization surcharges.</li>

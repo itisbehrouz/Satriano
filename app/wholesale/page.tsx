@@ -79,24 +79,24 @@ export default async function WholesalePage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F5F5F5] text-[#1A2233] font-sans antialiased min-h-screen">
+      <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans antialiased min-h-screen transition-colors">
         {/* Page Header Section */}
-        <header className="w-full bg-[#0B1E3D] text-white py-10 lg:py-14 border-b border-[#132A52] relative overflow-hidden">
+        <header className="w-full bg-[var(--color-bg)] text-[var(--color-text-primary)] py-10 lg:py-14 relative overflow-hidden transition-colors">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs text-[#8DA0C4] mb-4">
-              <Link href="/" className="hover:text-white transition-colors">
+            <nav className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)] mb-4">
+              <Link href="/" className="hover:text-[var(--color-text-primary)] transition-colors">
                 Home
               </Link>
-              <span className="text-[#5B6B85]">/</span>
-              <span className="font-medium text-white">Wholesale Catalog</span>
+              <span className="text-[var(--color-text-secondary)]">/</span>
+              <span className="font-medium text-[var(--color-text-primary)]">Wholesale Catalog</span>
             </nav>
 
             <div className="space-y-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white font-sans uppercase">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--color-text-primary)] font-sans uppercase">
                 WHOLESALE CATALOG
               </h1>
-              <p className="text-sm sm:text-base text-[#8DA0C4] font-normal leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-[var(--color-text-secondary)] font-normal leading-relaxed max-w-3xl">
                 Ready-made menswear with fixed pricing and immediate availability
               </p>
             </div>
@@ -104,7 +104,7 @@ export default async function WholesalePage() {
         </header>
 
         {/* Interactive Wholesale Catalog Content Section */}
-        <section className="w-full py-8 lg:py-12 px-4 sm:px-6 lg:px-8">
+        <section className="w-full py-8 lg:py-12 px-4 sm:px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
           <div className="max-w-[1440px] mx-auto">
             <WholesaleCatalogClient
               products={products as any}

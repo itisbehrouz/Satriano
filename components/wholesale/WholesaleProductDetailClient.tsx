@@ -160,19 +160,19 @@ export function WholesaleProductDetailClient({
   const currentMainImage = product.images[activeImageIndex] || product.images[0] || "/images/catalog/formal_wear.png";
 
   return (
-    <div className="w-full font-sans antialiased text-[#1A2233]">
+    <div className="w-full font-sans antialiased text-[var(--color-text-primary)]">
       
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-xs text-[#5B6B85] mb-6">
-        <Link href="/" className="hover:text-[#2E5AAC] transition-colors">
+      <nav className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)] mb-6">
+        <Link href="/" className="hover:text-[var(--color-accent)] transition-colors">
           Home
         </Link>
         <span>/</span>
-        <Link href="/wholesale" className="hover:text-[#2E5AAC] transition-colors">
+        <Link href="/wholesale" className="hover:text-[var(--color-accent)] transition-colors">
           Wholesale Catalog
         </Link>
         <span>/</span>
-        <span className="font-semibold text-[#1A2233] truncate max-w-md">
+        <span className="font-semibold text-[var(--color-text-primary)] truncate max-w-md">
           {product.name}
         </span>
       </nav>
@@ -180,13 +180,11 @@ export function WholesaleProductDetailClient({
       {/* Main 2-Column Product Detail Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* ================================================================= */}
-        {/* LEFT — PRODUCT IMAGES                                             */}
-        {/* ================================================================= */}
+        {/* LEFT — PRODUCT IMAGES */}
         <div className="lg:col-span-6 space-y-4">
           
           {/* Large Image Display */}
-          <div className="w-full aspect-[4/5] relative bg-white border border-[#E0E0E0] rounded-none overflow-hidden shadow-none">
+          <div className="w-full aspect-[4/5] relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none overflow-hidden">
             <Image
               src={currentMainImage}
               alt={product.name}
@@ -206,10 +204,10 @@ export function WholesaleProductDetailClient({
                   key={`${imgUrl}-${idx}`}
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`w-full aspect-square relative bg-white border rounded-none overflow-hidden transition-all min-h-[44px] ${
+                  className={`w-full aspect-square relative bg-[var(--color-surface)] border rounded-none overflow-hidden transition-all min-h-[44px] ${
                     isActive
-                      ? "border-2 border-[#2E5AAC] ring-1 ring-[#2E5AAC]"
-                      : "border-[#E0E0E0] hover:border-[#5B6B85]"
+                      ? "border-2 border-[var(--color-accent)]"
+                      : "border-[var(--color-border)] hover:border-[var(--color-text-secondary)]"
                   }`}
                 >
                   <Image
@@ -225,31 +223,29 @@ export function WholesaleProductDetailClient({
           </div>
         </div>
 
-        {/* ================================================================= */}
-        {/* RIGHT — PRODUCT DETAILS & ORDERING MATRIX                          */}
-        {/* ================================================================= */}
-        <div className="lg:col-span-6 space-y-6 bg-white border border-[#E0E0E0] p-6 lg:p-8 rounded-none">
+        {/* RIGHT — PRODUCT DETAILS & ORDERING MATRIX */}
+        <div className="lg:col-span-6 space-y-6 bg-[var(--color-surface)] border border-[var(--color-border)] p-6 lg:p-8 rounded-none transition-colors">
           
           {/* Header Info: SKU, Name, Price, Stock Badge */}
-          <div className="space-y-3 border-b border-[#E0E0E0] pb-5">
+          <div className="space-y-3 border-b border-[var(--color-border)] pb-5">
             {/* SKU */}
-            <div className="text-xs font-mono font-semibold text-[#5B6B85]">
+            <div className="text-xs font-mono font-semibold text-[var(--color-text-secondary)]">
               SKU: {product.sku}
             </div>
 
             {/* Name */}
-            <h1 className="text-xl sm:text-2xl font-bold text-[#1A2233] leading-tight">
+            <h1 className="text-xl sm:text-2xl font-bold text-[var(--color-text-primary)] leading-tight">
               {product.name}
             </h1>
 
             {/* Price & Stock Badge */}
             <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-              {/* Fixed Price: #2E5AAC, tabular-nums font */}
+              {/* Fixed Price */}
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold font-mono text-[#2E5AAC] tabular-nums">
+                <span className="text-2xl font-bold font-mono text-[var(--color-accent)] tabular-nums">
                   ${product.priceUSD.toFixed(2)}
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#5B6B85]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
                   (FIXED)
                 </span>
               </div>
@@ -264,23 +260,23 @@ export function WholesaleProductDetailClient({
           </div>
 
           {/* Description Section */}
-          <div className="space-y-2 border-b border-[#E0E0E0] pb-5">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+          <div className="space-y-2 border-b border-[var(--color-border)] pb-5">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
               DESCRIPTION
             </h2>
-            <p className="text-xs text-[#5B6B85] leading-relaxed">
+            <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
               &quot;{product.description}&quot;
             </p>
           </div>
 
           {/* OPEN PACK ORDER Section */}
-          <div className="space-y-4 border-b border-[#E0E0E0] pb-6">
+          <div className="space-y-4 border-b border-[var(--color-border)] pb-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 OPEN PACK ORDER
               </h2>
               {orderMode === "open-pack" && openPackTotalUnits > 0 && (
-                <span className="text-xs font-mono font-bold text-[#2E5AAC]">
+                <span className="text-xs font-mono font-bold text-[var(--color-accent)]">
                   Selected: {openPackTotalUnits} units (${(openPackTotalUnits * product.priceUSD).toFixed(2)})
                 </span>
               )}
@@ -297,14 +293,14 @@ export function WholesaleProductDetailClient({
                     key={item.size}
                     className={`border p-2.5 rounded-none flex flex-col justify-between items-center space-y-2 transition-colors ${
                       qty > 0
-                        ? "border-[#2E5AAC] bg-[#2E5AAC]/5"
+                        ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10"
                         : isOutOfStock
-                        ? "border-[#E0E0E0] bg-[#F5F5F5] opacity-60"
-                        : "border-[#E0E0E0] bg-white hover:border-[#5B6B85]"
+                        ? "border-[var(--color-border)] bg-[var(--color-bg)] opacity-60"
+                        : "border-[var(--color-border)] bg-[var(--color-bg)] hover:border-[var(--color-accent)]"
                     }`}
                   >
                     {/* Header: Size label */}
-                    <div className="text-xs font-bold text-[#1A2233]">
+                    <div className="text-xs font-bold text-[var(--color-text-primary)]">
                       Size {item.size}
                     </div>
 
@@ -315,7 +311,7 @@ export function WholesaleProductDetailClient({
                         type="button"
                         onClick={() => updateSizeQty(item.size, -1, item.inStock)}
                         disabled={qty <= 0 || isOutOfStock}
-                        className="w-8 h-8 flex items-center justify-center bg-[#F5F5F5] hover:bg-[#E0E0E0] text-[#1A2233] font-bold text-sm border border-[#E0E0E0] rounded-none disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[32px]"
+                        className="w-8 h-8 flex items-center justify-center bg-[var(--color-surface)] hover:bg-[var(--color-border)] text-[var(--color-text-primary)] font-bold text-sm border border-[var(--color-border)] rounded-none disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[32px]"
                       >
                         -
                       </button>
@@ -329,7 +325,7 @@ export function WholesaleProductDetailClient({
                           setSizeQtyDirect(item.size, val, item.inStock);
                         }}
                         disabled={isOutOfStock}
-                        className="w-16 h-8 text-center text-xs font-mono font-bold text-[#1A2233] bg-white border border-[#E0E0E0] rounded-none focus:outline-none focus:border-[#2E5AAC]"
+                        className="w-16 h-8 text-center text-xs font-mono font-bold text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none focus:outline-none focus:border-[var(--color-accent)]"
                       />
 
                       {/* Increment Button */}
@@ -337,15 +333,15 @@ export function WholesaleProductDetailClient({
                         type="button"
                         onClick={() => updateSizeQty(item.size, 1, item.inStock)}
                         disabled={qty >= item.inStock || isOutOfStock}
-                        className="w-8 h-8 flex items-center justify-center bg-[#F5F5F5] hover:bg-[#E0E0E0] text-[#1A2233] font-bold text-sm border border-[#E0E0E0] rounded-none disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[32px]"
+                        className="w-8 h-8 flex items-center justify-center bg-[var(--color-surface)] hover:bg-[var(--color-border)] text-[var(--color-text-primary)] font-bold text-sm border border-[var(--color-border)] rounded-none disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[32px]"
                       >
                         +
                       </button>
                     </div>
 
                     {/* In-Stock Count */}
-                    <div className="text-[11px] font-mono text-[#5B6B85]">
-                      {item.inStock} in st
+                    <div className="text-[11px] font-mono text-[var(--color-text-secondary)]">
+                      {item.inStock} in stock
                     </div>
                   </div>
                 );
@@ -354,8 +350,8 @@ export function WholesaleProductDetailClient({
           </div>
 
           {/* PRE-PACK ORDER Section */}
-          <div className="space-y-3 border-b border-[#E0E0E0] pb-6">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+          <div className="space-y-3 border-b border-[var(--color-border)] pb-6">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
               PRE-PACK ORDER
             </h2>
 
@@ -364,8 +360,8 @@ export function WholesaleProductDetailClient({
               <label
                 className={`flex items-center justify-between p-3 border rounded-none cursor-pointer transition-colors min-h-[44px] ${
                   orderMode === "pre-pack" && prePackOption === "1-pack"
-                    ? "border-[#2E5AAC] bg-[#2E5AAC]/5 font-semibold"
-                    : "border-[#E0E0E0] bg-white hover:bg-[#F5F5F5]"
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 font-semibold"
+                    : "border-[var(--color-border)] bg-[var(--color-bg)]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -377,11 +373,11 @@ export function WholesaleProductDetailClient({
                       setOrderMode("pre-pack");
                       setPrePackOption("1-pack");
                     }}
-                    className="w-4 h-4 accent-[#2E5AAC] cursor-pointer"
+                    className="w-4 h-4 accent-[var(--color-accent)] cursor-pointer"
                   />
                   <span>Add 1 Pack (5 units mixed sizes)</span>
                 </div>
-                <span className="font-mono font-bold text-[#2E5AAC] text-xs">
+                <span className="font-mono font-bold text-[var(--color-accent)] text-xs">
                   ${(Math.min(5, totalAvailableStock) * product.priceUSD).toFixed(2)}
                 </span>
               </label>
@@ -390,8 +386,8 @@ export function WholesaleProductDetailClient({
               <label
                 className={`flex items-center justify-between p-3 border rounded-none cursor-pointer transition-colors min-h-[44px] ${
                   orderMode === "pre-pack" && prePackOption === "2-packs"
-                    ? "border-[#2E5AAC] bg-[#2E5AAC]/5 font-semibold"
-                    : "border-[#E0E0E0] bg-white hover:bg-[#F5F5F5]"
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 font-semibold"
+                    : "border-[var(--color-border)] bg-[var(--color-bg)]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -403,11 +399,11 @@ export function WholesaleProductDetailClient({
                       setOrderMode("pre-pack");
                       setPrePackOption("2-packs");
                     }}
-                    className="w-4 h-4 accent-[#2E5AAC] cursor-pointer"
+                    className="w-4 h-4 accent-[var(--color-accent)] cursor-pointer"
                   />
                   <span>Add 2 Packs (10 units)</span>
                 </div>
-                <span className="font-mono font-bold text-[#2E5AAC] text-xs">
+                <span className="font-mono font-bold text-[var(--color-accent)] text-xs">
                   ${(Math.min(10, totalAvailableStock) * product.priceUSD).toFixed(2)}
                 </span>
               </label>
@@ -416,8 +412,8 @@ export function WholesaleProductDetailClient({
               <label
                 className={`flex items-center justify-between p-3 border rounded-none cursor-pointer transition-colors min-h-[44px] ${
                   orderMode === "pre-pack" && prePackOption === "all"
-                    ? "border-[#2E5AAC] bg-[#2E5AAC]/5 font-semibold"
-                    : "border-[#E0E0E0] bg-white hover:bg-[#F5F5F5]"
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 font-semibold"
+                    : "border-[var(--color-border)] bg-[var(--color-bg)]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -429,11 +425,11 @@ export function WholesaleProductDetailClient({
                       setOrderMode("pre-pack");
                       setPrePackOption("all");
                     }}
-                    className="w-4 h-4 accent-[#2E5AAC] cursor-pointer"
+                    className="w-4 h-4 accent-[var(--color-accent)] cursor-pointer"
                   />
                   <span>Add All Available ({totalAvailableStock} units)</span>
                 </div>
-                <span className="font-mono font-bold text-[#2E5AAC] text-xs">
+                <span className="font-mono font-bold text-[var(--color-accent)] text-xs">
                   ${(totalAvailableStock * product.priceUSD).toFixed(2)}
                 </span>
               </label>
@@ -442,12 +438,12 @@ export function WholesaleProductDetailClient({
 
           {/* PRICE OFFER (Optional) Section */}
           {(activeTotalUnits >= 10 || suggestedPrice.length > 0) && (
-            <div className="space-y-2 border-b border-[#E0E0E0] pb-6">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+            <div className="space-y-2 border-b border-[var(--color-border)] pb-6">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
                 PRICE OFFER (Optional)
               </h2>
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-[#5B6B85]">
+                <label className="block text-xs font-semibold text-[var(--color-text-secondary)]">
                   Suggest a price:
                 </label>
                 <input
@@ -455,9 +451,9 @@ export function WholesaleProductDetailClient({
                   value={suggestedPrice}
                   onChange={(e) => setSuggestedPrice(e.target.value)}
                   placeholder="Enter your offer (e.g., $110 per unit)"
-                  className="w-full px-3 py-2.5 bg-white border border-[#E0E0E0] text-xs text-[#1A2233] rounded-none focus:outline-none focus:border-[#2E5AAC] placeholder-[#94A3B8]"
+                  className="w-full px-3 py-2.5 bg-[var(--color-bg)] border border-[var(--color-border)] text-xs text-[var(--color-text-primary)] rounded-none focus:outline-none focus:border-[var(--color-accent)] placeholder-[var(--color-text-secondary)]"
                 />
-                <p className="text-[11px] text-[#5B6B85] italic">
+                <p className="text-[11px] text-[var(--color-text-secondary)] italic">
                   Help us negotiate better pricing for bulk orders — submit your offer for admin review
                 </p>
               </div>
@@ -468,15 +464,15 @@ export function WholesaleProductDetailClient({
           <div className="space-y-4 pt-2">
             
             {/* Total Units & Price Summary Bar */}
-            <div className="flex items-center justify-between p-3.5 bg-[#F5F5F5] border border-[#E0E0E0] rounded-none">
-              <div className="text-xs text-[#5B6B85]">
+            <div className="flex items-center justify-between p-3.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none">
+              <div className="text-xs text-[var(--color-text-secondary)]">
                 Order Summary ({orderMode === "open-pack" ? "Open Pack" : "Pre-Pack"})
               </div>
               <div className="text-right">
-                <div className="text-sm font-bold text-[#1A2233] font-mono">
+                <div className="text-sm font-bold text-[var(--color-text-primary)] font-mono">
                   {activeTotalUnits} Units Total
                 </div>
-                <div className="text-base font-bold text-[#2E5AAC] font-mono tabular-nums">
+                <div className="text-base font-bold text-[var(--color-accent)] font-mono tabular-nums">
                   ${activeTotalPriceUSD.toFixed(2)}
                 </div>
               </div>
@@ -484,9 +480,9 @@ export function WholesaleProductDetailClient({
 
             {/* Cart Success Alert */}
             {addedToCartSuccess && (
-              <div className="p-3 bg-[#5DCAA5]/15 border border-[#5DCAA5] text-[#0F6E56] text-xs font-semibold rounded-none flex items-center justify-between">
+              <div className="p-3 bg-[var(--color-status-success-bg)] border border-[var(--color-status-success)] text-[var(--color-status-success)] text-xs font-semibold rounded-none flex items-center justify-between">
                 <span>✓ Added {activeTotalUnits} units to your wholesale cart!</span>
-                <Link href="/wholesale/checkout" className="underline font-bold text-[#2E5AAC]">
+                <Link href="/wholesale/checkout" className="underline font-bold text-[var(--color-accent)]">
                   Proceed to Checkout →
                 </Link>
               </div>
@@ -498,7 +494,7 @@ export function WholesaleProductDetailClient({
                 type="button"
                 onClick={handleAddToCart}
                 disabled={activeTotalUnits <= 0}
-                className="w-full min-h-[44px] h-[48px] bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full min-h-[44px] h-[48px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-lg">shopping_bag</span>
                 ADD TO CART
@@ -506,7 +502,7 @@ export function WholesaleProductDetailClient({
 
               <Link
                 href="/wholesale"
-                className="w-full min-h-[44px] h-[48px] bg-white hover:bg-[#F5F5F5] text-[#1A2233] border border-[#E0E0E0] text-xs font-bold uppercase tracking-wider rounded-none transition-colors flex items-center justify-center gap-2"
+                className="w-full min-h-[44px] h-[48px] bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-lg">arrow_back</span>
                 CONTINUE SHOPPING

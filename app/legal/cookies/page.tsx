@@ -17,29 +17,29 @@ const SECTIONS: LegalSection[] = [
     title: "2. Categories of Cookies Utilized",
     content: (
       <div className="space-y-4">
-        <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
-          <div className="font-bold text-[#0F172A] text-sm">
+        <div className="bg-[var(--color-bg)] p-4 rounded-none border border-[var(--color-border)]">
+          <div className="font-bold text-[var(--color-text-primary)] text-sm">
             A. Essential Technical Cookies (Strictly Necessary)
           </div>
-          <p className="text-xs text-[#475569] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Required for portal navigation, CSRF token validation, and maintaining selected fabric &amp; sizing quantities while building custom proforma invoices.
           </p>
         </div>
 
-        <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
-          <div className="font-bold text-[#0F172A] text-sm">
+        <div className="bg-[var(--color-bg)] p-4 rounded-none border border-[var(--color-border)]">
+          <div className="font-bold text-[var(--color-text-primary)] text-sm">
             B. Session &amp; Security Tokens
           </div>
-          <p className="text-xs text-[#475569] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Used to authenticate corporate portal logins and protect internal Portal Console administrative state without storing sensitive credentials in cookies.
           </p>
         </div>
 
-        <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
-          <div className="font-bold text-[#0F172A] text-sm">
+        <div className="bg-[var(--color-bg)] p-4 rounded-none border border-[var(--color-border)]">
+          <div className="font-bold text-[var(--color-text-primary)] text-sm">
             C. Performance &amp; Operational Analytics
           </div>
-          <p className="text-xs text-[#475569] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Anonymous aggregated performance indicators to optimize page load speeds, PDF proforma rendering times, and server response times.
           </p>
         </div>
