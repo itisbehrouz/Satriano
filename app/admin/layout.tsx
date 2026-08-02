@@ -104,7 +104,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#F7F8FA] font-sans">
+    <div className="min-h-screen flex bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
       {/* Sidebar */}
       <nav
         aria-label="Admin navigation"

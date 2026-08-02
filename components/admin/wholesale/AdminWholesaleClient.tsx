@@ -349,14 +349,14 @@ export function AdminWholesaleClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] font-sans antialiased text-[#111318] p-4 md:p-6 lg:p-8 space-y-6 relative">
+    <div className="min-h-screen bg-[var(--color-bg)] font-sans antialiased text-[var(--color-text-primary)] p-4 md:p-6 lg:p-8 space-y-6 relative transition-colors">
       {/* Floating Success/Error Toast */}
       {toast && (
         <div
-          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-md shadow-xl font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
+          className={`fixed top-6 right-6 z-50 px-4 py-3 rounded-none font-bold text-xs flex items-center gap-2 border transition-all animate-bounce ${
             toast.type === "success"
-              ? "bg-[#ECFDF3] border-[#5DCAA5] text-[#067647]"
-              : "bg-[#FEE4E2] border-[#F8B4B4] text-[#C5221F]"
+              ? "bg-[var(--color-status-success-bg)] border-[var(--color-status-success)]/30 text-[var(--color-status-success)]"
+              : "bg-red-500/10 border-red-500/30 text-red-500"
           }`}
         >
           <span className="material-symbols-outlined text-base">
@@ -367,12 +367,12 @@ export function AdminWholesaleClient() {
       )}
 
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#EAECF0] pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#111318] uppercase tracking-wide">
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
             WHOLESALE MANAGEMENT DASHBOARD
           </h1>
-          <p className="text-xs text-[#6B7280] mt-1">
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">
             Full admin wholesale control panel: pricing tiers, granular size inventory, buyer price offers, and order fulfillment.
           </p>
         </div>
@@ -380,7 +380,7 @@ export function AdminWholesaleClient() {
         <div className="flex items-center gap-3">
           <Link
             href="/admin/wholesale/suppliers"
-            className="h-10 px-4 bg-white border border-[#D0D5DD] text-[#344054] hover:bg-[#F9FAFB] text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2"
+            className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
           >
             <span className="material-symbols-outlined text-base">store</span>
             Manage Suppliers
@@ -388,7 +388,7 @@ export function AdminWholesaleClient() {
           <Link
             href="/wholesale"
             target="_blank"
-            className="h-10 px-4 bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+            className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">open_in_new</span>
             View Live Wholesale Catalog
@@ -397,7 +397,7 @@ export function AdminWholesaleClient() {
       </div>
 
       {/* Navigation Tabs Header */}
-      <div className="flex items-center gap-2 border-b border-[#EAECF0] overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 border-b border-[var(--color-border)] overflow-x-auto pb-1">
         {[
           { id: "pricing", label: "Wholesale Pricing Manager", icon: "sell" },
           { id: "inventory", label: "Inventory by Size/Color", icon: "grid_on" },
@@ -412,8 +412,8 @@ export function AdminWholesaleClient() {
               onClick={() => handleTabChange(tab.id as any)}
               className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-none border-b-2 transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 isActive
-                  ? "border-[#2E5AAC] text-[#2E5AAC] bg-white font-bold"
-                  : "border-transparent text-[#6B7280] hover:text-[#111318]"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)] bg-[var(--color-surface)] font-bold"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               <span className="material-symbols-outlined text-base">{tab.icon}</span>

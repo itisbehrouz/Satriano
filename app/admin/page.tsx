@@ -98,23 +98,23 @@ function AdminOrderContent() {
   // Loading state while checking session
   if (isAuthenticated === null) {
     return (
-      <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center font-sans">
-        <div className="text-center text-xs text-[#5B6B85]">
-          <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+      <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] flex items-center justify-center font-sans transition-colors">
+        <div className="text-center text-xs text-[var(--color-text-secondary)]">
+          <span className="inline-block w-5 h-5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
           <p>Verifying Portal Console session...</p>
         </div>
       </div>
     );
   }
 
-  // Render Minimal Focused Login Gate if unauthenticated (No SiteHeader/SiteFooter, Fixed Return Icon, Centered Logo)
+  // Render Minimal Focused Login Gate if unauthenticated
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
+      <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative transition-colors">
         {/* Fixed Top-Left Return Link */}
         <Link
           href="/"
-          className="fixed top-6 left-6 inline-flex items-center gap-2 min-h-[44px] px-4 py-2.5 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] rounded shadow-sm transition-colors z-50"
+          className="fixed top-6 left-6 inline-flex items-center gap-2 min-h-[44px] px-4 py-2.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none shadow-sm transition-colors z-50"
         >
           <span className="material-symbols-outlined text-base">arrow_back</span>
           <span>Return to Homepage</span>
@@ -132,15 +132,15 @@ function AdminOrderContent() {
             </Link>
           </div>
 
-          <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-8 shadow-sm transition-colors">
             <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-[#0B1E3D] text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <div className="w-12 h-12 bg-[var(--color-accent)] text-white rounded-none flex items-center justify-center mx-auto mb-3 shadow-sm">
                 <span className="material-symbols-outlined text-xl">admin_panel_settings</span>
               </div>
-              <h1 className="text-xl font-semibold text-[#1A2233]">
+              <h1 className="text-xl font-semibold text-[var(--color-text-primary)]">
                 Portal Console Access
               </h1>
-              <p className="text-xs text-[#5B6B85] mt-1 leading-relaxed">
+              <p className="text-xs text-[var(--color-text-secondary)] mt-1 leading-relaxed">
                 Authorized personnel access to order management &amp; factory status ledgers.
               </p>
             </div>
@@ -149,12 +149,12 @@ function AdminOrderContent() {
               <div>
                 <label
                   htmlFor="accessKey"
-                  className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1.5"
+                  className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)] mb-1.5"
                 >
                   Corporate Access Key *
                 </label>
                 <div className="relative">
-                  <span className="material-symbols-outlined absolute left-3 top-2.5 text-[#5B6B85] text-lg">
+                  <span className="material-symbols-outlined absolute left-3 top-2.5 text-[var(--color-text-secondary)] text-lg">
                     key
                   </span>
                   <input
@@ -164,26 +164,26 @@ function AdminOrderContent() {
                     value={accessKey}
                     onChange={(e) => setAccessKey(e.target.value)}
                     placeholder="Enter security key..."
-                    className="w-full pl-10 pr-3 py-2.5 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                    className="w-full pl-10 pr-3 py-2.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
                   />
                 </div>
               </div>
 
               {authError && (
-                <div className="p-3 bg-[#FCE8E6] border border-[#F8B4B4] rounded text-xs text-[#C5221F]">
+                <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-none text-xs text-red-500">
                   {authError}
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-[#2E5AAC] hover:bg-[#1E3F7A] text-white text-xs font-semibold uppercase tracking-wider rounded transition-colors shadow-sm"
+                className="w-full py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider rounded-none transition-colors shadow-sm"
               >
                 Authenticate &amp; Unlock Console
               </button>
             </form>
 
-            <div className="mt-6 pt-4 border-t border-[#E5E7EB] text-center text-[11px] text-[#5B6B85]">
+            <div className="mt-6 pt-4 border-t border-[var(--color-border)] text-center text-[11px] text-[var(--color-text-secondary)]">
               Internal security audit logged. Unauthorized access attempts are monitored.
             </div>
           </div>
@@ -194,23 +194,23 @@ function AdminOrderContent() {
 
   // Render Full Admin Operations Console
   return (
-    <main className="min-h-screen bg-[#F7F8FA] text-[#111318] py-8 px-4 md:px-8 font-sans">
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-8 px-4 md:px-8 font-sans transition-colors">
       <div className="w-full max-w-container-max mx-auto space-y-6">
         {/* Admin KPI Overview & Analytics Widget */}
         <AdminKpiDashboard isAuthenticated={isAuthenticated} />
 
         {/* Filter Tabs & Action Buttons Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EAECF0] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div className="flex flex-wrap gap-1.5">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`min-h-[36px] px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer select-none ${
+                className={`min-h-[36px] px-3 py-1.5 text-xs font-medium rounded-none transition-all cursor-pointer select-none ${
                   activeTab === tab.id
-                    ? "bg-[#2E5AAC] text-white font-semibold shadow-none"
-                    : "bg-white text-[#475467] border border-[#EAECF0] hover:bg-[#F9FAFB] hover:text-[#111318]"
+                    ? "bg-[var(--color-accent)] text-white font-semibold"
+                    : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:text-[var(--color-text-primary)]"
                 }`}
               >
                 {tab.label}
@@ -221,7 +221,7 @@ function AdminOrderContent() {
           <div className="flex items-center gap-2 flex-shrink-0">
             <Link
               href="/admin/architecture-viz"
-              className="min-h-[36px] px-3.5 py-1.5 bg-[#0F172A] hover:bg-[#1E293B] text-[#00F0FF] border border-[#00F0FF]/30 text-xs font-semibold rounded-md flex items-center gap-1.5 transition-all shadow-none cursor-pointer"
+              className="min-h-[36px] px-3.5 py-1.5 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-accent)] border border-[var(--color-border)] text-xs font-semibold rounded-none flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">view_in_ar</span>
               <span>3D Telemetry</span>
@@ -229,7 +229,7 @@ function AdminOrderContent() {
             <button
               type="button"
               onClick={fetchOrders}
-              className="min-h-[36px] px-3.5 py-1.5 bg-white border border-[#EAECF0] hover:bg-[#F9FAFB] text-xs font-semibold text-[#111318] rounded-md flex items-center gap-1.5 transition-all shadow-none cursor-pointer"
+              className="min-h-[36px] px-3.5 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-primary)] rounded-none flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">refresh</span>
               <span>Refresh Ledger</span>
@@ -239,17 +239,17 @@ function AdminOrderContent() {
 
         {/* Main Table Content */}
         {loading ? (
-          <div className="bg-white border border-[#EAECF0] rounded-md p-12 text-center text-xs text-[#475467] shadow-none">
-            <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center text-xs text-[var(--color-text-secondary)]">
+            <span className="inline-block w-5 h-5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
             <p>Loading production orders ledger...</p>
           </div>
         ) : error ? (
-          <div className="bg-white border border-[#FDA29B] rounded-md p-6 text-center text-xs text-[#F04438] shadow-none">
+          <div className="bg-[var(--color-surface)] border border-red-500/30 rounded-none p-6 text-center text-xs text-red-500">
             <p className="font-semibold mb-1">Ledger Error</p>
             <p className="text-xs">{error}</p>
           </div>
         ) : (
-          <div className="bg-white border border-[#EAECF0] rounded-md shadow-none overflow-hidden">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none overflow-hidden transition-colors">
             <AdminOrderTable
               orders={orders}
               onStatusChange={fetchOrders}
@@ -263,7 +263,7 @@ function AdminOrderContent() {
 
 export default function AdminPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-xs text-[#5B6B85]">Loading order ledger...</div>}>
+    <Suspense fallback={<div className="p-8 text-xs text-[var(--color-text-secondary)]">Loading order ledger...</div>}>
       <AdminOrderContent />
     </Suspense>
   );

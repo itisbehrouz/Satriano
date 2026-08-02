@@ -571,15 +571,15 @@ function ProductSettingsContent() {
 
   if (isAuthenticated === false) {
     return (
-      <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4">
-        <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center">
-          <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
-          <p className="text-sm text-[#5B6B85] mb-6">
+      <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] flex items-center justify-center p-4 transition-colors">
+        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-8 max-w-md w-full text-center shadow-sm">
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)] mb-2">Admin Access Required</h1>
+          <p className="text-sm text-[var(--color-text-secondary)] mb-6">
             Please authenticate via the Corporate Access Gate at /admin to manage catalog settings.
           </p>
           <Link
             href="/admin"
-            className="inline-block bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded"
+            className="inline-block bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-none transition-colors"
           >
             Go to Admin Login →
           </Link>
@@ -589,18 +589,18 @@ function ProductSettingsContent() {
   }
 
   return (
-    <main className="flex-grow bg-[#F5F7FA] text-[#1A2233] font-sans">
+    <main className="flex-grow bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
         <div className="w-full max-w-container-max mx-auto px-4 md:px-8 py-8 space-y-6">
 
           {/* Navigation Tabs */}
-          <div className="flex border-b border-[#D1D5DB] mb-8 gap-2 flex-wrap">
+          <div className="flex border-b border-[var(--color-border)] mb-8 gap-2 flex-wrap">
             <button
               type="button"
               onClick={() => setActiveTab("catalog")}
               className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
                 activeTab === "catalog"
-                  ? "border-[#2E5AAC] text-[#2E5AAC]"
-                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               Catalog &amp; Two-Tier MOQs
@@ -610,8 +610,8 @@ function ProductSettingsContent() {
               onClick={() => setActiveTab("fits")}
               className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
                 activeTab === "fits"
-                  ? "border-[#2E5AAC] text-[#2E5AAC]"
-                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               Garment Fits
@@ -621,8 +621,8 @@ function ProductSettingsContent() {
               onClick={() => setActiveTab("sizing")}
               className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
                 activeTab === "sizing"
-                  ? "border-[#2E5AAC] text-[#2E5AAC]"
-                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               Regional Size Systems
@@ -632,8 +632,8 @@ function ProductSettingsContent() {
               onClick={() => setActiveTab("fabrics")}
               className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
                 activeTab === "fabrics"
-                  ? "border-[#2E5AAC] text-[#2E5AAC]"
-                  : "border-transparent text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
               Product Fabrics &amp; Ranges
@@ -641,19 +641,19 @@ function ProductSettingsContent() {
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-[#5B6B85]">Loading catalog settings…</div>
+            <div className="p-12 text-center text-[var(--color-text-secondary)]">Loading catalog settings…</div>
           ) : error ? (
-            <div className="p-4 bg-[#FCEBEB] text-[#A32D2D] rounded text-sm">{error}</div>
+            <div className="p-4 bg-red-500/10 text-red-500 rounded-none border border-red-500/20 text-sm">{error}</div>
           ) : (
             <>
               {/* TAB 1: Category -> Subcategory -> Product */}
               {activeTab === "catalog" && (
-                <div className="bg-white border border-[#D0D5DD] rounded-lg shadow-sm overflow-hidden font-sans">
+                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none overflow-hidden font-sans transition-colors">
                   {/* Top Header Bar */}
-                  <div className="p-4 sm:p-5 border-b border-[#EAECF0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
+                  <div className="p-4 sm:p-5 border-b border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--color-bg)]">
                     <div>
-                      <h2 className="text-base font-semibold text-[#101828]">Master Garment Hierarchy</h2>
-                      <p className="text-xs text-[#475467] mt-0.5">
+                      <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Master Garment Hierarchy</h2>
+                      <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
                         Define 3-level product structure, custom fabric lines, and two-tier MOQs.
                       </p>
                     </div>
@@ -667,7 +667,7 @@ function ProductSettingsContent() {
                         setCatError(null);
                         setShowAddCategoryModal(true);
                       }}
-                      className="min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold px-4 py-2.5 rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                      className="min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-4 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5"
                     >
                       <span className="material-symbols-outlined text-base">add_circle</span>
                       <span>+ Add Category</span>

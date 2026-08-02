@@ -145,7 +145,7 @@ export function AdminApplicationsTable({
 
   if (applications.length === 0) {
     return (
-      <div className="p-12 text-center border border-[#D1D5DB] bg-white rounded-lg text-[#5B6B85]">
+      <div className="p-12 text-center border border-[var(--color-border)] bg-[var(--color-surface)] rounded-none text-[var(--color-text-secondary)]">
         No B2B partner applications found for the selected criteria.
       </div>
     );
@@ -153,17 +153,17 @@ export function AdminApplicationsTable({
 
   return (
     <div className="space-y-4 font-sans">
-      {/* Transient Action Error Banner with manual dismiss and 6s auto-clear */}
+      {/* Transient Action Error Banner */}
       {actionError && (
-        <div className="p-4 bg-[#FCEBEB] border border-[#F8B4B4] rounded text-xs text-[#A32D2D] font-semibold flex items-center justify-between gap-3 shadow-sm transition-all animate-fadeIn">
+        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-none text-xs text-red-500 font-semibold flex items-center justify-between gap-3 transition-all animate-fadeIn">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-base text-[#C5221F]">error</span>
+            <span className="material-symbols-outlined text-base text-red-500">error</span>
             <span>{actionError}</span>
           </div>
           <button
             type="button"
             onClick={() => setActionError(null)}
-            className="min-h-[32px] px-2 py-1 text-[#A32D2D] hover:text-[#C5221F] hover:bg-[#F8B4B4]/30 rounded text-xs font-bold inline-flex items-center gap-1"
+            className="min-h-[32px] px-2 py-1 text-red-500 hover:bg-red-500/20 rounded-none text-xs font-bold inline-flex items-center gap-1"
             title="Dismiss notification"
           >
             <span className="material-symbols-outlined text-base">close</span>
@@ -172,10 +172,10 @@ export function AdminApplicationsTable({
         </div>
       )}
 
-      <div className="overflow-x-auto border border-[#D1D5DB] rounded-lg bg-white shadow-sm">
+      <div className="overflow-x-auto border border-[var(--color-border)] rounded-none bg-[var(--color-surface)] transition-colors">
         <table className="w-full text-left border-collapse min-w-[960px]">
           <thead>
-            <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
+            <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg)] text-xs uppercase font-semibold text-[var(--color-text-primary)]">
               <th className="p-4 w-[14%]">App Ref / Date</th>
               <th className="p-4 w-[28%]">Company &amp; Industry</th>
               <th className="p-4 w-[22%]">Contact Officer</th>
@@ -184,7 +184,7 @@ export function AdminApplicationsTable({
               <th className="p-4 w-[14%] text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
+          <tbody className="divide-y divide-[var(--color-border)] text-sm text-[var(--color-text-primary)]">
             {applications.map((app) => {
               const isExpanded = expandedId === app.id;
               const isUpdating = updatingId === app.id;
@@ -197,7 +197,7 @@ export function AdminApplicationsTable({
 
               return (
                 <Fragment key={app.id}>
-                  <tr className="hover:bg-[#F5F7FA]/60 transition-colors">
+                  <tr className="hover:bg-[var(--color-bg)]/50 transition-colors">
                     <td className="p-4 font-mono text-xs align-top">
                       <div className="font-bold text-[#1A2233]">
                         #{app.id.slice(-8).toUpperCase()}

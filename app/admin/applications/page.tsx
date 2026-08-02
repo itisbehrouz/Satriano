@@ -70,15 +70,15 @@ function ApplicationsContent() {
 
   if (isAuthenticated === false) {
     return (
-      <main className="min-h-screen bg-[#F5F7FA] flex items-center justify-center p-4 font-sans">
-        <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 max-w-md w-full text-center shadow-sm">
-          <h1 className="text-xl font-bold text-[#1A2233] mb-2">Admin Access Required</h1>
-          <p className="text-sm text-[#5B6B85] mb-6">
+      <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] flex items-center justify-center p-4 font-sans transition-colors">
+        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-8 max-w-md w-full text-center shadow-sm">
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)] mb-2">Admin Access Required</h1>
+          <p className="text-sm text-[var(--color-text-secondary)] mb-6">
             Please authenticate via the Corporate Access Gate at /admin to manage B2B partner applications.
           </p>
           <Link
             href="/admin"
-            className="inline-flex items-center justify-center min-h-[44px] bg-[#2E5AAC] hover:bg-[#24498E] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
+            className="inline-flex items-center justify-center min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-none transition-colors"
           >
             Go to Admin Login →
           </Link>
@@ -88,20 +88,20 @@ function ApplicationsContent() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-10 px-4 md:px-8 font-sans">
+    <main className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text-primary)] py-10 px-4 md:px-8 font-sans transition-colors">
         <div className="w-full max-w-container-max mx-auto space-y-6">
           {/* Status Filter Tabs & Action Control Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D1D5DB] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
             <div className="flex flex-wrap gap-2">
               {APPLICATION_TABS.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-medium rounded transition-all cursor-pointer ${
+                  className={`min-h-[38px] px-3.5 py-1.5 text-xs font-medium rounded-none transition-all cursor-pointer ${
                     activeTab === tab.id
-                      ? "bg-[#2E5AAC] text-white font-semibold shadow-xs"
-                      : "bg-white text-[#5B6B85] border border-[#D1D5DB] hover:bg-[#F5F7FA] hover:text-[#1A2233]"
+                      ? "bg-[var(--color-accent)] text-white font-semibold"
+                      : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:text-[var(--color-text-primary)]"
                   }`}
                 >
                   {tab.label}
@@ -114,7 +114,7 @@ function ApplicationsContent() {
               onClick={fetchApplications}
               aria-label="Refresh applications ledger"
               title="Refresh applications ledger"
-              className="min-h-[38px] px-3.5 py-1.5 bg-white border border-[#D1D5DB] hover:bg-[#F5F7FA] text-xs font-semibold text-[#1A2233] rounded-lg flex items-center gap-1.5 transition-all shadow-xs cursor-pointer flex-shrink-0"
+              className="min-h-[38px] px-3.5 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-primary)] rounded-none flex items-center gap-1.5 transition-all cursor-pointer flex-shrink-0"
             >
               <span className="material-symbols-outlined text-base">refresh</span>
               <span>Refresh Applications</span>
@@ -123,12 +123,12 @@ function ApplicationsContent() {
 
           {/* Main Table Content */}
           {loading ? (
-            <div className="bg-white border border-[#D1D5DB] rounded-lg p-12 text-center text-sm text-[#5B6B85] shadow-sm">
-              <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
+            <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-12 text-center text-sm text-[var(--color-text-secondary)] shadow-sm">
+              <span className="inline-block w-5 h-5 border-2 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mb-2" />
               <p>Loading B2B partner applications...</p>
             </div>
           ) : error ? (
-            <div className="bg-white border border-[#F8B4B4] rounded-lg p-6 text-center text-sm text-[#C5221F]">
+            <div className="bg-[var(--color-surface)] border border-red-500/30 rounded-none p-6 text-center text-sm text-red-500">
               <p className="font-semibold mb-1">Applications Error</p>
               <p className="text-xs">{error}</p>
             </div>
@@ -145,7 +145,7 @@ function ApplicationsContent() {
 
 export default function AdminApplicationsPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-xs text-[#5B6B85]">Loading applications...</div>}>
+    <Suspense fallback={<div className="p-8 text-xs text-[var(--color-text-secondary)]">Loading applications...</div>}>
       <ApplicationsContent />
     </Suspense>
   );
