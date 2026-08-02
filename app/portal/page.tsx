@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PortalDashboard } from "@/components/portal/PortalDashboard";
 
 type PortalView = "LOGIN" | "REGISTER" | "SUBMITTED";
 
 function PortalPageContent() {
   const searchParams = useSearchParams();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [view, setView] = useState<PortalView>("LOGIN");
 
   // Magic link login state
@@ -35,6 +37,26 @@ function PortalPageContent() {
   });
 
   const [regError, setRegError] = useState<string | null>(null);
+
+  // Check customer session on mount
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch("/api/customer/session");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.authenticated) {
+            setIsAuthenticated(true);
+            return;
+          }
+        }
+      } catch {
+        // Unauthenticated
+      }
+      setIsAuthenticated(false);
+    }
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const errorParam = searchParams.get("error");
@@ -115,7 +137,24 @@ function PortalPageContent() {
     }
   }
 
-  // 1. MINIMAL FOCUSED LOGIN / REGISTER SCREENS
+  // 1. AUTHENTICATED CUSTOMER DASHBOARD
+  if (isAuthenticated === true) {
+    return <PortalDashboard />;
+  }
+
+  // 2. LOADING STATE
+  if (isAuthenticated === null) {
+    return (
+      <main className="min-h-screen bg-[#0B1E3D] flex items-center justify-center font-sans text-xs text-[#8DA0C4]">
+        <div className="text-center space-y-2">
+          <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin" />
+          <p>Verifying client session...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // 3. MINIMAL FOCUSED LOGIN / REGISTER SCREENS (UNAUTHENTICATED)
   if (view === "LOGIN" || view === "REGISTER") {
     return (
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
@@ -456,7 +495,7 @@ function PortalPageContent() {
     );
   }
 
-  // 2. SUBMITTED CONFIRMATION VIEW (Requires email verification before admin review)
+  // 4. SUBMITTED CONFIRMATION VIEW
   return (
     <>
       <SiteHeader />
@@ -506,7 +545,7 @@ export default function PortalPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center font-sans text-xs text-[#5B6B85]">
+        <div className="min-h-screen bg-[#0B1E3D] flex items-center justify-center font-sans text-xs text-[#8DA0C4]">
           <span className="inline-block w-5 h-5 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
         </div>
       }
@@ -515,4 +554,3 @@ export default function PortalPage() {
     </Suspense>
   );
 }
-

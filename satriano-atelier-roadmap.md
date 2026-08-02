@@ -543,3 +543,20 @@ checkpoint before being considered done, regardless of which agent
   - Propagated detailed route error messages in `/api/admin/metrics` and `/api/admin/orders`.
 - **Vitest Unit Test Suite Expansion**:
   - Added unit test suites (`lib/adminMetrics.test.ts`, `components/admin/DashboardMetrics.test.tsx`). Verified 100% pass rate across 19 test files and 102 unit tests.
+
+---
+
+## 16. B2B Customer Portal UI & Executive Dashboard Redesign (Aug 2, 2026)
+
+- **Stitch Brief B2B Customer Header (`PortalHeader.tsx` & `AccountDropdown.tsx`)**:
+  - Built 64px sticky top header (`#0B1E3D` dark navy) with gold logo mark ("S") and brand title.
+  - Active route navigation links (`Catalog`, `Orders`, `Account`) with 2px `#2E5AAC` underline highlights.
+  - AccountDropdown menu (`#132A52` surface, 0px geometry, displaying Company Info, Order History, Settings, Billing & Invoices, Support, and `#F0B94A` warning text Sign Out button).
+  - Dedicated outline Sign Out button and `/api/customer/session` endpoint.
+- **Customer Portal Executive Dashboard (`PortalDashboard.tsx`)**:
+  - Built `CompanyInfoCard`: 4px blue left border (`#2E5AAC`), `#132A52` surface, green approved badge (`#5DCAA5`/`#14301F`), display of company name, email, partner status, and creation timestamp.
+  - Built `QuickActionButtons`: 2x2 grid panel with primary CTA (`Create New Order` → `/konfigurator`) and 3 outline secondary CTAs (`View All Orders`, `Account Settings`, `Contact Support`).
+  - Built `RecentOrdersTable`: Displays 5 most recent orders with alternating `#0B1E3D` / `#132A52` rows, 1px `#2E5AAC` borders, color-coded badges (`#F0B94A` Warning, `#85B7EB` Info, `#5DCAA5` Success), `tabular-nums` formatting, and direct `Review →` / `Download →` proforma PDF links.
+  - Built `Helpful Resources` quick links section for MOQs, lead times, payment methods, and support.
+- **Vitest Unit Test Expansion**:
+  - Created unit test suites (`components/portal/PortalHeader.test.tsx`, `components/portal/PortalDashboard.test.tsx`). Verified 100% pass rate across 21 test files and 108 unit tests.
