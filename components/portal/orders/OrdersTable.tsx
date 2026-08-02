@@ -5,6 +5,7 @@ import type { CustomerOrder } from "@/app/portal/orders/page";
 
 export interface OrdersTableProps {
   orders: CustomerOrder[];
+  isWholesaleView?: boolean;
   sortColumn: string;
   sortOrder: "asc" | "desc";
   onSortChange: (column: string) => void;
@@ -13,6 +14,7 @@ export interface OrdersTableProps {
 
 export function OrdersTable({
   orders,
+  isWholesaleView = false,
   sortColumn,
   sortOrder,
   onSortChange,
@@ -50,16 +52,34 @@ export function OrdersTable({
                 {getSortIcon("createdAt")}
               </div>
             </th>
-            <th className="py-3 px-4">Product</th>
-            <th
-              className="py-3 px-4 text-right cursor-pointer hover:text-[#2E5AAC]"
-              onClick={() => onSortChange("quantity")}
-            >
-              <div className="flex items-center justify-end">
-                <span>Quantity</span>
-                {getSortIcon("quantity")}
-              </div>
-            </th>
+            
+            {/* If Wholesale View: Show Units column */}
+            {isWholesaleView ? (
+              <th
+                className="py-3 px-4 text-center cursor-pointer hover:text-[#2E5AAC]"
+                onClick={() => onSortChange("quantity")}
+              >
+                <div className="flex items-center justify-center">
+                  <span>Units</span>
+                  {getSortIcon("quantity")}
+                </div>
+              </th>
+            ) : (
+              <th className="py-3 px-4">Product</th>
+            )}
+
+            {!isWholesaleView && (
+              <th
+                className="py-3 px-4 text-right cursor-pointer hover:text-[#2E5AAC]"
+                onClick={() => onSortChange("quantity")}
+              >
+                <div className="flex items-center justify-end">
+                  <span>Quantity</span>
+                  {getSortIcon("quantity")}
+                </div>
+              </th>
+            )}
+
             <th
               className="py-3 px-4 text-right cursor-pointer hover:text-[#2E5AAC]"
               onClick={() => onSortChange("totalCents")}
@@ -69,6 +89,7 @@ export function OrdersTable({
                 {getSortIcon("totalCents")}
               </div>
             </th>
+
             <th
               className="py-3 px-4 cursor-pointer hover:text-[#2E5AAC]"
               onClick={() => onSortChange("status")}
@@ -78,6 +99,7 @@ export function OrdersTable({
                 {getSortIcon("status")}
               </div>
             </th>
+
             <th className="py-3 px-4 text-right">Actions</th>
           </tr>
         </thead>
@@ -86,10 +108,9 @@ export function OrdersTable({
             const dateStr = new Date(order.createdAt).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
-              year: "numeric",
             });
 
-            const refNo = order.proforma?.refNo || `#${order.id.slice(-6).toUpperCase()}`;
+            const refNo = order.proforma?.refNo || (order.id.startsWith("#") ? order.id : `#${order.id.slice(-6).toUpperCase()}`);
 
             const firstLine = order.lines[0];
             const extraCount = order.lines.length - 1;
@@ -97,29 +118,23 @@ export function OrdersTable({
             const productDisplay =
               extraCount > 0 ? `${productName} (+${extraCount})` : productName;
 
-            const totalUnits = order.lines.reduce((acc, line) => acc + line.quantity, 0);
+            const totalUnits = order.totalUnits || order.lines.reduce((acc, line) => acc + line.quantity, 0);
 
-            const isPending = order.status === "PENDING_REVIEW";
-            const isProformaSent = order.status === "PROFORMA_SENT";
-            const isApproved = order.status === "APPROVED";
-            const isPaid = order.status === "PAID";
-            const isInProd = order.status === "IN_PRODUCTION";
-            const isShipped = order.status === "SHIPPED";
-            const isCancelled = order.status === "CANCELLED";
+            const isPending = order.status === "PENDING_REVIEW" || order.status === "Pending";
+            const isApproved = order.status === "APPROVED" || order.status === "Approved";
+            const isPaid = order.status === "PAID" || order.status === "Paid";
+            const isShipped = order.status === "SHIPPED" || order.status === "Shipped";
+            const isCancelled = order.status === "CANCELLED" || order.status === "Cancelled";
 
             // Status Badge Styling based on prompt specifications
             let badgeBg = "bg-[#132A52]";
             let badgeTextColor = "text-[#85B7EB]";
-            let badgeLabel: string = order.status;
+            let badgeLabel: string = String(order.status);
 
             if (isPending) {
               badgeBg = "bg-[#3A2E14]";
               badgeTextColor = "text-[#F0B94A]";
-              badgeLabel = "⏳ Pending Review";
-            } else if (isProformaSent) {
-              badgeBg = "bg-[#132A52]";
-              badgeTextColor = "text-[#85B7EB]";
-              badgeLabel = "📄 Proforma Sent";
+              badgeLabel = "⏳ Pending";
             } else if (isApproved) {
               badgeBg = "bg-[#132A52]";
               badgeTextColor = "text-[#85B7EB]";
@@ -128,10 +143,6 @@ export function OrdersTable({
               badgeBg = "bg-[#132A52]";
               badgeTextColor = "text-[#85B7EB]";
               badgeLabel = "✓ Paid";
-            } else if (isInProd) {
-              badgeBg = "bg-[#132A52]";
-              badgeTextColor = "text-[#85B7EB]";
-              badgeLabel = "⚙️ In Production";
             } else if (isShipped) {
               badgeBg = "bg-[#14301F]";
               badgeTextColor = "text-[#5DCAA5]";
@@ -145,11 +156,11 @@ export function OrdersTable({
             const totalFormatted =
               order.totalCents > 0
                 ? `$${(order.totalCents / 100).toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
+                    minimumFractionDigits: 0,
                     maximumFractionDigits: 2,
                   })}`
                 : order.customerTargetPriceCents
-                ? `$${(order.customerTargetPriceCents / 100).toFixed(2)}`
+                ? `$${(order.customerTargetPriceCents / 100).toFixed(0)}`
                 : "$0.00";
 
             return (
@@ -171,15 +182,27 @@ export function OrdersTable({
                 <td className="py-3 px-4 font-mono text-[#8DA0C4] text-xs tabular-nums">
                   {dateStr}
                 </td>
-                <td className="py-3 px-4 font-medium text-[#E8ECF3]">
-                  {productDisplay}
-                </td>
-                <td className="py-3 px-4 text-right font-mono text-[#E8ECF3] tabular-nums font-semibold">
-                  {totalUnits}
-                </td>
+
+                {isWholesaleView ? (
+                  <td className="py-3 px-4 text-center font-mono font-bold text-[#E8ECF3] tabular-nums">
+                    {totalUnits}
+                  </td>
+                ) : (
+                  <td className="py-3 px-4 font-medium text-[#E8ECF3]">
+                    {productDisplay}
+                  </td>
+                )}
+
+                {!isWholesaleView && (
+                  <td className="py-3 px-4 text-right font-mono text-[#E8ECF3] tabular-nums font-semibold">
+                    {totalUnits}
+                  </td>
+                )}
+
                 <td className="py-3 px-4 text-right font-mono font-bold text-[#E8ECF3] tabular-nums">
                   {totalFormatted}
                 </td>
+
                 <td className="py-3 px-4">
                   <span
                     className={`inline-block px-3 py-1.5 text-xs font-bold uppercase rounded-none ${badgeBg} ${badgeTextColor}`}
@@ -187,29 +210,12 @@ export function OrdersTable({
                     {badgeLabel}
                   </span>
                 </td>
+                
                 <td className="py-3 px-4 text-right font-mono text-xs space-x-2">
-                  {isPending || isProformaSent ? (
-                    <button
-                      type="button"
-                      onClick={() => onSelectOrder(order)}
-                      className="text-[#2E5AAC] hover:underline font-bold cursor-pointer"
-                    >
-                      Review →
-                    </button>
-                  ) : (
-                    <a
-                      href={`/api/proforma/pdf/${order.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#2E5AAC] hover:underline font-bold"
-                    >
-                      Download ↓
-                    </a>
-                  )}
                   <button
                     type="button"
                     onClick={() => onSelectOrder(order)}
-                    className="text-[#8DA0C4] hover:text-[#E8ECF3] hover:underline cursor-pointer ml-2"
+                    className="text-[#2E5AAC] hover:underline font-bold cursor-pointer"
                   >
                     View Details →
                   </button>

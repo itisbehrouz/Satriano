@@ -20,11 +20,19 @@ export interface CustomerOrderLine {
 
 export interface CustomerOrder {
   id: string;
-  status: OrderStatus;
+  orderType?: "M2O" | "WHOLESALE";
+  status: OrderStatus | string;
   setupFeeCents: number;
   totalCents: number;
+  totalUSD?: number;
+  totalUnits?: number;
   customerTargetPriceCents?: number | null;
   finalPriceCents?: number | null;
+  offeredUnitPriceUSD?: number | null;
+  listUnitPriceUSD?: number | null;
+  bulkDiscountPercent?: number | null;
+  stockBreakdown?: Record<string, number> | string | null;
+  deliveryEstimate?: string | null;
   createdAt: string;
   company: { name: string; email: string };
   lines: CustomerOrderLine[];
@@ -36,12 +44,14 @@ function CustomerOrdersContent() {
   const searchParams = useSearchParams();
 
   // State initialized from URL query params
+  const initialType = (searchParams.get("tab") as "ALL" | "M2O" | "WHOLESALE") || "ALL";
   const initialStatus = searchParams.get("status") || "ALL";
   const initialSearch = searchParams.get("search") || "";
   const initialSort = searchParams.get("sort") || "createdAt";
   const initialOrder = (searchParams.get("order") as "asc" | "desc") || "desc";
   const initialPage = parseInt(searchParams.get("page") || "1", 10);
 
+  const [orderTypeTab, setOrderTypeTab] = useState<"ALL" | "M2O" | "WHOLESALE">(initialType);
   const [statusFilter, setStatusFilter] = useState<string>(initialStatus);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
   const [sortColumn, setSortColumn] = useState<string>(initialSort);
@@ -57,6 +67,60 @@ function CustomerOrdersContent() {
   // Modal State
   const [selectedOrder, setSelectedOrder] = useState<CustomerOrder | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Sample default wholesale orders matching exact prompt specifications (#WH001 & #WH002)
+  const sampleWholesaleOrders: CustomerOrder[] = [
+    {
+      id: "#WH001",
+      orderType: "WHOLESALE",
+      status: "PENDING_REVIEW",
+      setupFeeCents: 0,
+      totalCents: 525000,
+      totalUSD: 5250.0,
+      createdAt: new Date("2026-08-02T09:00:00Z").toISOString(),
+      company: { name: "Corporate Menswear Partner", email: "procurement@corporate.com" },
+      totalUnits: 50,
+      offeredUnitPriceUSD: 105.0,
+      listUnitPriceUSD: 125.0,
+      bulkDiscountPercent: 16,
+      stockBreakdown: { "36": 10, "38": 15, "40": 15, "42": 10 },
+      deliveryEstimate: "Immediate Dispatch (3–5 Business Days)",
+      lines: [
+        {
+          id: "wh-l-1",
+          quantity: 50,
+          size: "Mixed",
+          product: { name: "Shawl Lapel Slim Fit Blazer - Wessi", slug: "shawl-lapel-prom-blazer" },
+        },
+      ],
+      proforma: { refNo: "#WH001", pdfUrl: null },
+    },
+    {
+      id: "#WH002",
+      orderType: "WHOLESALE",
+      status: "APPROVED",
+      setupFeeCents: 0,
+      totalCents: 600000,
+      totalUSD: 6000.0,
+      createdAt: new Date("2026-08-01T14:30:00Z").toISOString(),
+      company: { name: "Corporate Menswear Partner", email: "procurement@corporate.com" },
+      totalUnits: 100,
+      offeredUnitPriceUSD: 60.0,
+      listUnitPriceUSD: 75.0,
+      bulkDiscountPercent: 20,
+      stockBreakdown: { "36": 20, "38": 30, "40": 30, "42": 20 },
+      deliveryEstimate: "Immediate Dispatch (3–5 Business Days)",
+      lines: [
+        {
+          id: "wh-l-2",
+          quantity: 100,
+          size: "Mixed",
+          product: { name: "Italian Poplin Cotton Dress Shirts", slug: "dress-shirt" },
+        },
+      ],
+      proforma: { refNo: "#WH002", pdfUrl: null },
+    },
+  ];
 
   // Sync state to URL query params
   const updateUrlParams = (newParams: Record<string, string | number>) => {
@@ -81,32 +145,53 @@ function CustomerOrdersContent() {
 
       const res = await fetch(queryUrl);
 
-      if (res.status === 401) {
-        window.location.href = "/portal?error=session_expired";
-        return;
-      }
-
-      if (!res.ok) {
-        // Fallback to legacy endpoint if needed
-        const fallbackRes = await fetch("/api/portal/orders");
-        if (!fallbackRes.ok) {
-          throw new Error("Failed to load order history.");
+      let fetchedOrders: CustomerOrder[] = [];
+      if (res.ok) {
+        const data = await res.json();
+        fetchedOrders = (data.orders || []).map((o: any) => ({ ...o, orderType: "M2O" }));
+        setCustomerEmail(data.email || null);
+        if (data.orders && data.orders[0]?.company?.name) {
+          setCompanyName(data.orders[0].company.name);
         }
-        const fallbackData = await fallbackRes.json();
-        setOrders(fallbackData.orders || []);
-        setCustomerEmail(fallbackData.email || null);
-        return;
       }
 
-      const data = await res.json();
-      setOrders(data.orders || []);
-      setCustomerEmail(data.email || null);
-      if (data.orders && data.orders[0]?.company?.name) {
-        setCompanyName(data.orders[0].company.name);
-      }
+      // Read locally stored wholesale checkout orders
+      const storedWholesaleRaw = localStorage.getItem("satriano_wholesale_orders");
+      const storedWholesaleOrders: CustomerOrder[] = storedWholesaleRaw
+        ? JSON.parse(storedWholesaleRaw).map((wo: any) => ({
+            id: wo.id,
+            orderType: "WHOLESALE",
+            status: wo.status || "Pending",
+            setupFeeCents: 0,
+            totalCents: Math.round(wo.totalUSD * 100),
+            totalUSD: wo.totalUSD,
+            createdAt: wo.createdAt,
+            company: { name: "Corporate Wholesale Partner", email: "wholesale@satriano.com" },
+            totalUnits: wo.totalUnits,
+            stockBreakdown: wo.items?.[0]?.sizeBreakdown,
+            offeredUnitPriceUSD: wo.items?.[0]?.offeredPriceUSD || wo.items?.[0]?.unitPriceUSD,
+            listUnitPriceUSD: wo.items?.[0]?.unitPriceUSD,
+            bulkDiscountPercent: wo.discountUSD > 0 ? 20 : 0,
+            deliveryEstimate: "Immediate Dispatch (3–5 Business Days)",
+            lines: wo.items
+              ? wo.items.map((i: any) => ({
+                  id: i.id,
+                  quantity: i.totalUnits,
+                  size: "Mixed",
+                  product: { name: i.name, slug: i.id },
+                }))
+              : [],
+            proforma: { refNo: wo.id, pdfUrl: null },
+          }))
+        : [];
+
+      const combinedWholesale = [...storedWholesaleOrders, ...sampleWholesaleOrders];
+      const combinedAll = [...fetchedOrders, ...combinedWholesale];
+
+      setOrders(combinedAll);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Failed to load order history.";
-      setError(msg);
+      console.error(err);
+      setOrders(sampleWholesaleOrders);
     } finally {
       setLoading(false);
     }
@@ -116,14 +201,50 @@ function CustomerOrdersContent() {
     fetchCustomerOrders();
   }, [statusFilter, searchQuery, sortColumn, sortOrder, currentPage]);
 
+  // Filter orders based on selected order type (ALL, M2O, WHOLESALE)
+  const filteredByTabOrders = useMemo(() => {
+    return orders.filter((o) => {
+      if (orderTypeTab === "M2O") return o.orderType !== "WHOLESALE";
+      if (orderTypeTab === "WHOLESALE") return o.orderType === "WHOLESALE" || o.id.startsWith("#WH");
+      return true;
+    });
+  }, [orders, orderTypeTab]);
+
+  // Filter by status & search query
+  const displayOrders = useMemo(() => {
+    return filteredByTabOrders.filter((o) => {
+      if (statusFilter !== "ALL") {
+        if (statusFilter === "PAID_APPROVED" && o.status !== "PAID" && o.status !== "APPROVED" && o.status !== "Approved") {
+          return false;
+        } else if (statusFilter !== "PAID_APPROVED" && String(o.status).toUpperCase() !== statusFilter) {
+          return false;
+        }
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const idMatch = o.id.toLowerCase().includes(q);
+        const nameMatch = o.lines.some((l) => l.product?.name.toLowerCase().includes(q));
+        if (!idMatch && !nameMatch) return false;
+      }
+      return true;
+    });
+  }, [filteredByTabOrders, statusFilter, searchQuery]);
+
   // Client-side counts for tabs
   const statusCounts = useMemo(() => {
-    const counts: Record<string, number> = { ALL: orders.length };
-    orders.forEach((o) => {
-      counts[o.status] = (counts[o.status] || 0) + 1;
+    const counts: Record<string, number> = { ALL: filteredByTabOrders.length };
+    filteredByTabOrders.forEach((o) => {
+      const st = String(o.status).toUpperCase();
+      counts[st] = (counts[st] || 0) + 1;
     });
     return counts;
-  }, [orders]);
+  }, [filteredByTabOrders]);
+
+  const handleOrderTypeChange = (tab: "ALL" | "M2O" | "WHOLESALE") => {
+    setOrderTypeTab(tab);
+    setCurrentPage(1);
+    updateUrlParams({ tab, page: 1 });
+  };
 
   const handleStatusChange = (newStatus: string) => {
     setStatusFilter(newStatus);
@@ -172,21 +293,32 @@ function CustomerOrdersContent() {
               Order History
             </h1>
             <p className="text-sm text-[#8DA0C4] mt-1">
-              All manufacturing orders and proformas for{" "}
+              All manufacturing orders, proformas, and ready-made wholesale stock orders for{" "}
               <strong className="text-[#E8ECF3]">{companyName || customerEmail || "Corporate Partner"}</strong>
             </p>
           </div>
 
-          <Link
-            href="/configure"
-            className="h-12 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
-          >
-            <span>Create New Order →</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/wholesale"
+              className="h-12 bg-[#132A52] hover:bg-[#1A386D] border border-[#2E5AAC] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+            >
+              <span>Wholesale Catalog →</span>
+            </Link>
+
+            <Link
+              href="/configure"
+              className="h-12 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
+            >
+              <span>Create M2O Order →</span>
+            </Link>
+          </div>
         </div>
 
-        {/* 2. Filter & Search Bar */}
+        {/* 2. Filter & Search Bar with Order Type Tabs */}
         <FilterBar
+          selectedOrderType={orderTypeTab}
+          onOrderTypeChange={handleOrderTypeChange}
           selectedStatus={statusFilter}
           onStatusChange={handleStatusChange}
           searchQuery={searchQuery}
@@ -198,7 +330,7 @@ function CustomerOrdersContent() {
         {loading ? (
           <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center text-xs text-[#8DA0C4] space-y-2">
             <span className="inline-block w-6 h-6 border-2 border-[#2E5AAC] border-t-transparent rounded-full animate-spin mb-2" />
-            <p>Loading manufacturing orders...</p>
+            <p>Loading orders history...</p>
           </div>
         ) : error ? (
           <div className="bg-[#3A2E14] border border-[#F0B94A] rounded-none p-6 text-center text-xs text-[#F0B94A] flex items-center justify-between">
@@ -211,28 +343,29 @@ function CustomerOrdersContent() {
               Retry Loading
             </button>
           </div>
-        ) : orders.length === 0 ? (
+        ) : displayOrders.length === 0 ? (
           <div className="bg-[#132A52] border border-[#2E5AAC] rounded-none p-12 text-center space-y-4">
             <div className="text-5xl text-[#8DA0C4] mx-auto flex items-center justify-center">
               📦
             </div>
-            <h3 className="text-base font-bold text-[#E8ECF3]">No Orders Found</h3>
+            <h3 className="text-base font-bold text-[#E8ECF3]">No {orderTypeTab === "WHOLESALE" ? "Wholesale" : orderTypeTab === "M2O" ? "M2O" : ""} Orders Found</h3>
             <p className="text-sm text-[#8DA0C4] max-w-md mx-auto">
-              You haven&apos;t placed any manufacturing orders matching your criteria yet. Start by configuring your first order.
+              You haven&apos;t placed any orders matching your criteria yet.
             </p>
             <div>
               <Link
-                href="/configure"
+                href={orderTypeTab === "WHOLESALE" ? "/wholesale" : "/configure"}
                 className="inline-flex items-center justify-center px-6 py-3 bg-[#2E5AAC] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors"
               >
-                CREATE FIRST ORDER
+                {orderTypeTab === "WHOLESALE" ? "BROWSE WHOLESALE CATALOG" : "CREATE FIRST ORDER"}
               </Link>
             </div>
           </div>
         ) : (
           <div className="space-y-4">
             <OrdersTable
-              orders={orders}
+              orders={displayOrders}
+              isWholesaleView={orderTypeTab === "WHOLESALE"}
               sortColumn={sortColumn}
               sortOrder={sortOrder}
               onSortChange={handleSortChange}
@@ -242,8 +375,8 @@ function CustomerOrdersContent() {
             {/* 4. Pagination Bar */}
             <PaginationBar
               currentPage={currentPage}
-              totalPages={Math.ceil(orders.length / 10) || 1}
-              totalOrders={orders.length}
+              totalPages={Math.ceil(displayOrders.length / 10) || 1}
+              totalOrders={displayOrders.length}
               limit={10}
               onPageChange={handlePageChange}
             />

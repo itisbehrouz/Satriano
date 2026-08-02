@@ -34,6 +34,18 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
+    href: "/admin/wholesale",
+    label: "Wholesale Manager",
+    icon: "storefront",
+    isActive: (pathname: string) => pathname.startsWith("/admin/wholesale"),
+    subItems: [
+      { label: "Pricing Manager", icon: "sell", href: "/admin/wholesale?tab=pricing" },
+      { label: "Inventory by Size", icon: "grid_on", href: "/admin/wholesale?tab=inventory" },
+      { label: "Price Offer Inbox", icon: "mark_email_unread", href: "/admin/wholesale?tab=offers" },
+      { label: "Wholesale Orders", icon: "local_shipping", href: "/admin/wholesale?tab=orders" },
+    ],
+  },
+  {
     href: "/admin/applications",
     label: "B2B Applications",
     icon: "assignment_ind",
@@ -71,6 +83,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 function getPageName(pathname: string): string {
+  if (pathname.startsWith("/admin/wholesale")) return "Wholesale Manager";
   if (pathname.startsWith("/admin/product-settings")) return "Product Settings";
   if (pathname.startsWith("/admin/applications")) return "B2B Applications";
   if (pathname.startsWith("/admin/architecture-viz")) return "3D Telemetry";

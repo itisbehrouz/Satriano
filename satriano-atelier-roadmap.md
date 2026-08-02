@@ -1,4 +1,4 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 1, 2026 — evening update)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 2, 2026 — evening update)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog
 + B2B partner portal + workflow automation
@@ -82,9 +82,13 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   `DATABASE_URL`, `DIRECT_URL`, `ADMIN_ACCESS_KEY`, `ADMIN_JWT_SECRET`,
   `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_URL`,
   `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_SECURE`,
-  `EMAIL_FROM` (Resend, test mode — see Section 7).
+  `EMAIL_FROM`, `RESEND_API_KEY`.
 - **Supabase Storage buckets:**
   - `logos` — public, customer logo/vector uploads.
+  - `catalog-images` — **public**, admin-uploaded category/subcategory/
+    product photos used on customer-facing `/categories` pages.
+    Dedicated bucket separate from logos (different purpose). Accepts
+    JPG/PNG/WebP, 5 MB max.
   - `proformas` — **private**, signed-URL access via the fixed
     endpoint `/api/proforma/pdf/[orderId]`, which generates a fresh
     signed URL on every request and 307-redirects. The link never
@@ -165,9 +169,6 @@ supported in admin, including SHIPPED/CANCELLED transitions).
   neutral, Supabase/Linear-style accordion + table pattern.
 
 ### 🟡 Partial / pending
-- Photo/image upload field for Category/Subcategory/Product "Add New"
-  and Edit forms — prompt prepared, not yet executed. Currently
-  `imageUrl` can only be set via direct DB/API.
 - Fabric price-range (min/max) editing UI — API supports it, no form
   exists yet.
 - **Regional Size Systems and Product Fabrics & Ranges tabs** — still
@@ -579,3 +580,85 @@ checkpoint before being considered done, regardless of which agent
   - Removed duplicate standalone Sign Out button from `PortalHeader`.
 - **Vitest Unit Test Expansion**:
   - Added unit test suites (`components/portal/account/AccountPage.test.tsx`, `components/portal/support/SupportPage.test.tsx`). Verified 100% pass rate across 24 test files and 117 unit tests.
+
+---
+
+## 18. Catalog Image Upload, Email Infrastructure & Production Hardening (Jul 31 – Aug 2, 2026)
+
+### Catalog Image Upload Feature
+- **New upload API endpoint** (`/api/admin/catalog/upload`): admin-
+  authenticated, dedicated to catalog images. Validates file type
+  (JPG/PNG/WebP only) and size (5 MB max). Uploads to the new
+  `catalog-images` Supabase Storage bucket (public). Returns the
+  public URL for storage in the record's `imageUrl` field.
+- **Reusable `CatalogImageUploader` component**
+  (`components/admin/CatalogImageUploader.tsx`): click-to-upload with
+  instant local preview, replace/clear controls, client-side
+  type+size validation, uploading progress state, and error display.
+  Matches the admin panel's neutral design tokens.
+- **Image upload integrated into all three "Add New" modals**
+  (Category, Subcategory, Product) in `/admin/product-settings` —
+  image URL is included in the POST body on creation.
+- **Image URL support added to PATCH handlers** — categories,
+  subcategories, and products can all have their `imageUrl` updated
+  via the existing PATCH endpoint. Categories also gained PATCH
+  support for `name` and `description` (previously only subcategory
+  and product had full PATCH support).
+- **Customer-facing rendering confirmed**: both `/categories` and
+  `/categories/[categoryId]` already render `imageUrl` via `<img>`
+  tags with fallback to default placeholder images.
+
+### Email Infrastructure (Resend Integration)
+- **Diagnosed email delivery failure**: confirmed that `SMTP_HOST`,
+  `SMTP_USER`, `SMTP_PASS` were missing from Vercel Production
+  environment — the app was falling back to console-mock logging,
+  meaning no real emails had ever been sent from production.
+- **Added all email environment variables to Vercel Production**:
+  `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_SECURE`,
+  `EMAIL_FROM`, and `RESEND_API_KEY`.
+- **Resend configured in test mode** — can send to the registered
+  account email only. Domain verification required before sending to
+  arbitrary customer emails.
+
+### Production Data Cleanup
+- **Comprehensive test-data audit**: searched production database for
+  any records where company name or email contains "E2E", "Test",
+  "test-", "e2e-", "prod-e2e-", "fullchain-e2e-", "order-render-",
+  "cold storage test", "render proof", "acme" (case-insensitive)
+  across Order, Company, B2bApplication, MagicLinkToken,
+  EmailVerificationToken, and Proforma tables.
+- **Deleted all leftover test records** in correct foreign-key order
+  (OrderLine → LogoAsset → Order → Proforma → MagicLinkToken →
+  EmailVerificationToken → B2bApplication → Company).
+- **Re-ran search to confirm zero matches** remain.
+
+### B2B Application UI Fixes
+- **Approve/Reject buttons disabled for unverified emails**: in the
+  expanded application detail drawer, "Approve Application" and
+  "Reject Application" buttons are now disabled (grayed out, with
+  tooltip explaining why) when `emailVerifiedAt` is null — matching
+  the compact row's already-disabled Approve button.
+- **Transient error banner**: the red error banner ("Cannot approve
+  or reject an application before the applicant's email address has
+  been verified.") is now transient and contextual — tied to a
+  specific failed action attempt, auto-clears after 5 seconds or on
+  next interaction. No longer a permanent page-level fixture.
+
+### Application Confirmation Page Copy
+- Updated `/portal` post-submission confirmation screen to accurately
+  reflect the email verification step: badge now reads "APPLICATION
+  RECEIVED • VERIFY YOUR EMAIL" instead of implying review has
+  started; body copy explains the verification email was sent and
+  clicking the link is required before the application enters review.
+
+### Catalog CRUD Live E2E Testing
+- **Full production E2E test** (8 assertions): admin auth + cookie,
+  create Category/Subcategory/Product, duplicate slug rejection (×3),
+  missing fabric rejection, verify rendering on `/categories`, full
+  cleanup. All 8 tests passed cleanly with zero test residue.
+
+### Verification
+- `tsc --noEmit`: clean, zero errors.
+- Production deployment via `npx vercel --prod`: build succeeded
+  (33 pages, all routes listed including `/api/admin/catalog/upload`).
+- Live E2E catalog test: all 8 assertions passed.

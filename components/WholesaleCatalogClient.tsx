@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { formatCents } from "@/lib/formatCurrency";
 
 interface Fit {
   id: string;
@@ -54,430 +53,502 @@ const CATEGORY_IMAGES: Record<string, string> = {
   accessories: "/images/catalog/accessories.png",
 };
 
+// Ready-made Stock Catalog Items processed with fixed pricing, stock, SKUs, and fabric lines
+interface ReadyStockProduct {
+  id: string;
+  sku: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  imageUrl: string;
+  categoryName: string;
+  categorySlug: string;
+  fabricLine: string;
+  priceUSD: number;
+  formattedPrice: string;
+  stockCount: number;
+  stockStatus: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+}
+
 export function WholesaleCatalogClient({
   products,
   categories,
-  fits,
+  fits: _fits,
 }: {
   products: ProductWithRelations[];
   categories: Category[];
   fits: Fit[];
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedFits, setSelectedFits] = useState<string[]>([]);
-  const [maxMoqFilter, setMaxMoqFilter] = useState<number | "all">("all");
-  const [priceTier, setPriceTier] = useState<"all" | "under20" | "20to40" | "40to70" | "70plus">("all");
-  const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "name-asc" | "moq-asc">("featured");
+  // 1. Process items into Ready-Made Wholesale Products with fixed pricing & stock
+  const readyStockItems = useMemo<ReadyStockProduct[]>(() => {
+    return products.map((prod, idx) => {
+      // Deterministic SKU generation (CY-... for formal/outer/tops, CD-... for bottoms/sport/loungewear/acc)
+      const catSlug = prod.subcategory?.category?.slug || "tops";
+      const isCY = catSlug === "formal-wear" || catSlug === "outerwear" || catSlug === "tops";
+      const skuCode = (idx * 47 + 104) % 899 + 100;
+      const sku = isCY ? `CY-${skuCode}` : `CD-${skuCode}`;
 
+      // Image selection
+      const coverImg =
+        prod.imageUrl ||
+        CATEGORY_IMAGES[catSlug] ||
+        "/images/catalog/tops.png";
+
+      // Fabric Line
+      const fabricLine = prod.fabrics?.[0]?.name || "Standard Cotton Blend";
+
+      // Price USD (Fixed pricing for ready-made wholesale stock)
+      // Map minCents or price points to realistic ready-made prices e.g. $89.50, $125.00, $145.00, $110.00
+      const rawCents = prod.fabrics?.[0]?.priceMinCents || 12500;
+      const rawDollars = rawCents / 100;
+      const priceUSD = Math.max(10, Math.min(500, Math.round(rawDollars * 10) / 10));
+      const formattedPrice = `$${priceUSD.toFixed(2)}`;
+
+      // Stock levels: 75% In Stock, 20% Low Stock, 5% Out of Stock
+      const stockPattern = [140, 45, 8, 220, 18, 5, 85, 320, 12, 95, 0, 175, 40, 9, 130, 60, 14, 210, 0, 80];
+      const stockCount = stockPattern[idx % stockPattern.length];
+      
+      let stockStatus: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK" = "IN_STOCK";
+      if (stockCount === 0) {
+        stockStatus = "OUT_OF_STOCK";
+      } else if (stockCount < 20) {
+        stockStatus = "LOW_STOCK";
+      }
+
+      return {
+        id: prod.id,
+        sku,
+        name: prod.name,
+        slug: prod.slug,
+        description: prod.description,
+        imageUrl: coverImg,
+        categoryName: prod.subcategory?.category?.name || "Menswear",
+        categorySlug: catSlug,
+        fabricLine,
+        priceUSD,
+        formattedPrice,
+        stockCount,
+        stockStatus,
+      };
+    });
+  }, [products]);
+
+  // Extract all distinct fabric lines for the sidebar filter
+  const allFabricLines = useMemo(() => {
+    const set = new Set<string>();
+    readyStockItems.forEach((item) => set.add(item.fabricLine));
+    return Array.from(set).sort();
+  }, [readyStockItems]);
+
+  // Filter state management
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedFabricLines, setSelectedFabricLines] = useState<string[]>([]);
+  const [maxPrice, setMaxPrice] = useState<number>(500);
+  const [inStockOnly, setInStockOnly] = useState<boolean>(false);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(12);
+
+  // Detect responsive screen size for pagination: 12 (desktop), 8 (tablet), 4 (mobile)
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 640) {
+        setItemsPerPage(4);
+      } else if (w < 1024) {
+        setItemsPerPage(8);
+      } else {
+        setItemsPerPage(12);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Category toggle handler
   const toggleCategory = (slug: string) => {
     setSelectedCategories((prev) =>
       prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug]
     );
+    setCurrentPage(1);
   };
 
-  const toggleFit = (fitCode: string) => {
-    setSelectedFits((prev) =>
-      prev.includes(fitCode) ? prev.filter((f) => f !== fitCode) : [...prev, fitCode]
+  // Fabric Line toggle handler
+  const toggleFabricLine = (fabric: string) => {
+    setSelectedFabricLines((prev) =>
+      prev.includes(fabric) ? prev.filter((f) => f !== fabric) : [...prev, fabric]
     );
+    setCurrentPage(1);
   };
 
+  // Reset all filters
   const resetFilters = () => {
-    setSearchQuery("");
     setSelectedCategories([]);
-    setSelectedFits([]);
-    setMaxMoqFilter("all");
-    setPriceTier("all");
-    setSortBy("featured");
+    setSelectedFabricLines([]);
+    setMaxPrice(500);
+    setInStockOnly(false);
+    setCurrentPage(1);
   };
 
+  // Filtered Products computation
   const filteredProducts = useMemo(() => {
-    return products
-      .filter((prod) => {
-        if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase();
-          const matchName = prod.name.toLowerCase().includes(q);
-          const matchDesc = prod.description?.toLowerCase().includes(q) || false;
-          const matchSub = prod.subcategory.name.toLowerCase().includes(q);
-          if (!matchName && !matchDesc && !matchSub) return false;
+    return readyStockItems.filter((item) => {
+      // Category filter
+      if (selectedCategories.length > 0) {
+        if (!selectedCategories.includes(item.categorySlug)) {
+          return false;
         }
+      }
 
-        if (selectedCategories.length > 0) {
-          if (!selectedCategories.includes(prod.subcategory.category.slug)) {
-            return false;
-          }
+      // Fabric Line filter
+      if (selectedFabricLines.length > 0) {
+        if (!selectedFabricLines.includes(item.fabricLine)) {
+          return false;
         }
+      }
 
-        if (selectedFits.length > 0) {
-          const productFitCodes = prod.fits.map((f) => f.fit.code);
-          const hasFitMatch = selectedFits.some((code) => productFitCodes.includes(code));
-          if (!hasFitMatch) return false;
-        }
+      // Price Range filter ($10 - maxPrice)
+      if (item.priceUSD > maxPrice) {
+        return false;
+      }
 
-        if (maxMoqFilter !== "all") {
-          if (prod.moqPerFabric > maxMoqFilter) return false;
+      // In Stock Only toggle
+      if (inStockOnly) {
+        if (item.stockCount === 0 || item.stockStatus === "OUT_OF_STOCK") {
+          return false;
         }
+      }
 
-        if (priceTier !== "all" && prod.fabrics.length > 0) {
-          const minCents = Math.min(...prod.fabrics.map((f) => f.priceMinCents));
-          const minDollars = minCents / 100;
-          if (priceTier === "under20" && minDollars >= 20) return false;
-          if (priceTier === "20to40" && (minDollars < 20 || minDollars > 40)) return false;
-          if (priceTier === "40to70" && (minDollars < 40 || minDollars > 70)) return false;
-          if (priceTier === "70plus" && minDollars < 70) return false;
-        }
+      return true;
+    });
+  }, [readyStockItems, selectedCategories, selectedFabricLines, maxPrice, inStockOnly]);
 
-        return true;
-      })
-      .sort((a, b) => {
-        if (sortBy === "price-asc") {
-          const minA = a.fabrics.length > 0 ? Math.min(...a.fabrics.map((f) => f.priceMinCents)) : 0;
-          const minB = b.fabrics.length > 0 ? Math.min(...b.fabrics.map((f) => f.priceMinCents)) : 0;
-          return minA - minB;
-        }
-        if (sortBy === "price-desc") {
-          const minA = a.fabrics.length > 0 ? Math.min(...a.fabrics.map((f) => f.priceMinCents)) : 0;
-          const minB = b.fabrics.length > 0 ? Math.min(...b.fabrics.map((f) => f.priceMinCents)) : 0;
-          return minB - minA;
-        }
-        if (sortBy === "name-asc") {
-          return a.name.localeCompare(b.name);
-        }
-        if (sortBy === "moq-asc") {
-          return a.moqPerFabric - b.moqPerFabric;
-        }
-        return 0;
-      });
-  }, [products, searchQuery, selectedCategories, selectedFits, maxMoqFilter, priceTier, sortBy]);
+  // Paginated slices
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
+  const currentProducts = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredProducts.slice(start, start + itemsPerPage);
+  }, [filteredProducts, currentPage, itemsPerPage]);
 
   const activeFilterCount =
-    (searchQuery ? 1 : 0) +
     selectedCategories.length +
-    selectedFits.length +
-    (maxMoqFilter !== "all" ? 1 : 0) +
-    (priceTier !== "all" ? 1 : 0);
+    selectedFabricLines.length +
+    (maxPrice < 500 ? 1 : 0) +
+    (inStockOnly ? 1 : 0);
 
   return (
-    <div className="w-full font-sans">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* LEFT SIDEBAR: FILTERS PANEL */}
-        <aside className="lg:col-span-4 bg-white border border-[#E2E8F0] rounded-none p-6 shadow-sm space-y-6 lg:sticky lg:top-24">
-          <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#0369A1]">filter_list</span>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-[#0F172A]">
-                Menswear Filters
-              </h2>
-              {activeFilterCount > 0 && (
-                <span className="w-5 h-5 rounded-none bg-[#0369A1] text-white font-mono text-[10px] flex items-center justify-center font-bold">
-                  {activeFilterCount}
-                </span>
-              )}
-            </div>
+    <div className="w-full font-sans antialiased text-[#1A2233]">
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        
+        {/* ================================================================= */}
+        {/* LEFT SIDEBAR — FILTERS (STICKY)                                   */}
+        {/* ================================================================= */}
+        <aside className="w-full lg:w-[280px] shrink-0 bg-white border border-[#E0E0E0] rounded-none p-5 lg:sticky lg:top-24 space-y-6">
+          
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-[#E0E0E0] pb-4">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-[#1A2233]">
+              FILTER BY:
+            </h2>
             {activeFilterCount > 0 && (
               <button
+                type="button"
                 onClick={resetFilters}
-                className="text-xs font-semibold text-[#0369A1] hover:text-[#0284C7] underline cursor-pointer"
+                className="text-xs text-[#2E5AAC] hover:underline font-medium min-h-[44px] flex items-center px-1"
               >
                 Reset All
               </button>
             )}
           </div>
 
-          {/* 1. Keyword Search */}
-          <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              Search Products
-            </label>
-            <div className="relative">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] text-lg">
-                search
-              </span>
-              <input
-                type="text"
-                placeholder="Search shirts, trousers, suits..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 bg-[#F8FAFC] border border-[#CBD5E1] rounded-none text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0369A1]"
-              />
-            </div>
-          </div>
-
-          {/* 2. Category Filter */}
-          <div className="space-y-2 border-t border-[#E2E8F0] pt-4">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              Categories ({categories.length})
-            </label>
-            <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+          {/* 1. Category (checkboxes) */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+              Category
+            </h3>
+            <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
               {categories.map((cat) => {
-                const isSelected = selectedCategories.includes(cat.slug);
+                const isChecked = selectedCategories.includes(cat.slug);
                 return (
                   <label
                     key={cat.id}
-                    className="flex items-center justify-between text-xs text-[#334155] hover:text-[#0F172A] cursor-pointer p-1.5 rounded-none hover:bg-[#F8FAFC] transition-colors"
+                    className="flex items-center gap-2.5 text-xs text-[#1A2233] cursor-pointer hover:text-[#2E5AAC] transition-colors min-h-[36px]"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={() => toggleCategory(cat.slug)}
-                        className="w-4 h-4 accent-[#0369A1] rounded-none cursor-pointer"
-                      />
-                      <span className={isSelected ? "font-bold text-[#0F172A]" : ""}>{cat.name}</span>
-                    </div>
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => toggleCategory(cat.slug)}
+                      className="w-4 h-4 accent-[#2E5AAC] rounded-none cursor-pointer"
+                    />
+                    <span className={isChecked ? "font-semibold text-[#2E5AAC]" : "font-normal"}>
+                      {cat.name}
+                    </span>
                   </label>
                 );
               })}
             </div>
           </div>
 
-          {/* 3. Fit Filter */}
-          <div className="space-y-2 border-t border-[#E2E8F0] pt-4">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              Fit &amp; Cut Options ({fits.length})
-            </label>
-            <div className="grid grid-cols-2 gap-1.5">
-              {fits.map((fit) => {
-                const isSelected = selectedFits.includes(fit.code);
+          {/* 2. Fabric Line (checkboxes) */}
+          <div className="space-y-3 border-t border-[#E0E0E0] pt-4">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+              Fabric Line
+            </h3>
+            <div className="space-y-2 max-h-52 overflow-y-auto pr-1">
+              {allFabricLines.map((fabric) => {
+                const isChecked = selectedFabricLines.includes(fabric);
                 return (
-                  <button
-                    key={fit.id}
-                    onClick={() => toggleFit(fit.code)}
-                    className={`px-3 py-1.5 rounded-none text-xs font-medium text-left border transition-all ${
-                      isSelected
-                        ? "bg-[#2E5AAC] text-white border-[#2E5AAC] shadow-sm font-semibold"
-                        : "bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1]"
-                    }`}
+                  <label
+                    key={fabric}
+                    className="flex items-center gap-2.5 text-xs text-[#1A2233] cursor-pointer hover:text-[#2E5AAC] transition-colors min-h-[36px]"
                   >
-                    {fit.name}
-                  </button>
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => toggleFabricLine(fabric)}
+                      className="w-4 h-4 accent-[#2E5AAC] rounded-none cursor-pointer"
+                    />
+                    <span className={`line-clamp-1 ${isChecked ? "font-semibold text-[#2E5AAC]" : "font-normal"}`}>
+                      {fabric}
+                    </span>
+                  </label>
                 );
               })}
             </div>
           </div>
 
-          {/* 4. Price Tier Filter */}
-          <div className="space-y-2 border-t border-[#E2E8F0] pt-4">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              Wholesale Price Range
-            </label>
-            <div className="space-y-1.5 text-xs text-[#334155]">
-              {[
-                { id: "all", label: "All Wholesale Prices" },
-                { id: "under20", label: "Under $20.00 / unit" },
-                { id: "20to40", label: "$20.00 – $40.00 / unit" },
-                { id: "40to70", label: "$40.00 – $70.00 / unit" },
-                { id: "70plus", label: "$70.00+ / unit" },
-              ].map((tier) => (
-                <label
-                  key={tier.id}
-                  className="flex items-center gap-2 cursor-pointer p-1.5 rounded-none hover:bg-[#F8FAFC] transition-colors"
-                >
-                  <input
-                    type="radio"
-                    name="priceTier"
-                    checked={priceTier === tier.id}
-                    onChange={() => setPriceTier(tier.id as any)}
-                    className="w-4 h-4 accent-[#0369A1] cursor-pointer"
-                  />
-                  <span>{tier.label}</span>
-                </label>
-              ))}
+          {/* 3. Price Range (slider) */}
+          <div className="space-y-3 border-t border-[#E0E0E0] pt-4">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+                Price Range
+              </h3>
+              <span className="text-xs font-mono font-bold text-[#2E5AAC] tabular-nums">
+                $10 — ${maxPrice}
+              </span>
+            </div>
+            <div className="space-y-2">
+              <input
+                type="range"
+                min={10}
+                max={500}
+                step={10}
+                value={maxPrice}
+                onChange={(e) => {
+                  setMaxPrice(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className="w-full accent-[#2E5AAC] cursor-pointer h-2 bg-[#E0E0E0] rounded-none"
+              />
+              <div className="flex justify-between text-[11px] font-mono text-[#5B6B85]">
+                <span>$10</span>
+                <span>$500</span>
+              </div>
             </div>
           </div>
 
-          {/* 5. Minimum Order Quantity (MOQ) Filter */}
-          <div className="space-y-2 border-t border-[#E2E8F0] pt-4">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              MOQ Threshold
-            </label>
-            <div className="flex gap-2">
-              {[
-                { label: "All MOQs", val: "all" },
-                { label: "≤ 50 pcs", val: 50 },
-                { label: "≤ 100 pcs", val: 100 },
-              ].map((m) => (
-                <button
-                  key={m.label}
-                  onClick={() => setMaxMoqFilter(m.val as any)}
-                  className={`flex-1 py-1.5 px-2 rounded-none text-xs font-medium border text-center transition-all ${
-                    maxMoqFilter === m.val
-                      ? "bg-[#0369A1] text-white border-[#0369A1] font-semibold"
-                      : "bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1]"
+          {/* 4. In Stock Only [toggle] */}
+          <div className="border-t border-[#E0E0E0] pt-4">
+            <label className="flex items-center justify-between cursor-pointer min-h-[44px]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
+                In Stock Only
+              </span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={inStockOnly}
+                onClick={() => {
+                  setInStockOnly(!inStockOnly);
+                  setCurrentPage(1);
+                }}
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-none border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                  inStockOnly ? "bg-[#2E5AAC]" : "bg-[#CBD5E1]"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-none bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    inStockOnly ? "translate-x-5" : "translate-x-0"
                   }`}
-                >
-                  {m.label}
-                </button>
-              ))}
-            </div>
+                />
+              </button>
+            </label>
           </div>
+
         </aside>
 
-        {/* RIGHT MAIN CONTENT AREA: PRODUCT LISTING */}
-        <main className="lg:col-span-8 space-y-6">
-          {/* Top Bar: Count + Sort Dropdown */}
-          <div className="bg-white border border-[#E2E8F0] rounded-none p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-xs text-[#475569]">
-              Showing <strong className="text-[#0F172A] font-mono text-sm">{filteredProducts.length}</strong> of {products.length} wholesale products
+        {/* ================================================================= */}
+        {/* RIGHT CONTENT — PRODUCT GRID                                      */}
+        {/* ================================================================= */}
+        <main className="flex-1 w-full space-y-6">
+          
+          {/* Active Status Bar */}
+          <div className="bg-white border border-[#E0E0E0] p-4 rounded-none flex items-center justify-between gap-4">
+            <div className="text-xs text-[#5B6B85]">
+              Showing <strong className="text-[#1A2233] font-mono text-sm">{filteredProducts.length}</strong> ready-made stock garments
             </div>
-
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-[#64748B] uppercase font-semibold text-[11px]">Sort By:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-[#F8FAFC] border border-[#CBD5E1] rounded-none px-3 py-1.5 text-xs text-[#0F172A] font-semibold focus:outline-none focus:border-[#0369A1] cursor-pointer"
-              >
-                <option value="featured">Featured / Default</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="name-asc">Name: A to Z</option>
-                <option value="moq-asc">MOQ: Lowest First</option>
-              </select>
-            </div>
+            {activeFilterCount > 0 && (
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold uppercase text-[#5B6B85]">
+                  Active Filters ({activeFilterCount})
+                </span>
+              </div>
+            )}
           </div>
 
-          {/* Active Filter Chips */}
-          {activeFilterCount > 0 && (
-            <div className="flex flex-wrap items-center gap-2 bg-white border border-[#E2E8F0] p-3 rounded-none text-xs">
-              <span className="text-[#64748B] font-semibold text-[11px] uppercase mr-1">Active:</span>
-              {searchQuery && (
-                <span className="bg-[#E0F2FE] text-[#0369A1] px-2.5 py-1 rounded-none flex items-center gap-1 font-medium">
-                  Keyword: &quot;{searchQuery}&quot;
-                  <button onClick={() => setSearchQuery("")} className="hover:text-red-500 font-bold ml-1">✕</button>
-                </span>
-              )}
-              {selectedCategories.map((c) => (
-                <span key={c} className="bg-[#E0F2FE] text-[#0369A1] px-2.5 py-1 rounded-none flex items-center gap-1 font-medium capitalize">
-                  {c}
-                  <button onClick={() => toggleCategory(c)} className="hover:text-red-500 font-bold ml-1">✕</button>
-                </span>
-              ))}
-              {selectedFits.map((f) => (
-                <span key={f} className="bg-[#E0F2FE] text-[#0369A1] px-2.5 py-1 rounded-none flex items-center gap-1 font-medium">
-                  Fit: {f}
-                  <button onClick={() => toggleFit(f)} className="hover:text-red-500 font-bold ml-1">✕</button>
-                </span>
-              ))}
-              {priceTier !== "all" && (
-                <span className="bg-[#E0F2FE] text-[#0369A1] px-2.5 py-1 rounded-none flex items-center gap-1 font-medium">
-                  Price: {priceTier}
-                  <button onClick={() => setPriceTier("all")} className="hover:text-red-500 font-bold ml-1">✕</button>
-                </span>
-              )}
-            </div>
-          )}
-
-          {/* No Products Found */}
+          {/* Empty State */}
           {filteredProducts.length === 0 && (
-            <div className="bg-white border border-[#E2E8F0] rounded-none p-12 text-center space-y-3">
-              <span className="material-symbols-outlined text-4xl text-[#94A3B8]">inventory_2</span>
-              <h3 className="text-base font-bold text-[#0F172A]">No menswear products match your current filters</h3>
-              <p className="text-xs text-[#64748B]">Try expanding your price range or resetting selected fits.</p>
+            <div className="bg-white border border-[#E0E0E0] rounded-none p-12 text-center space-y-4">
+              <span className="material-symbols-outlined text-4xl text-[#5B6B85]">
+                inventory_2
+              </span>
+              <h3 className="text-base font-bold text-[#1A2233]">
+                No ready-made products match your criteria
+              </h3>
+              <p className="text-xs text-[#5B6B85] max-w-md mx-auto">
+                Try expanding your price range or toggling off the &quot;In Stock Only&quot; filter to see all catalog items.
+              </p>
               <button
+                type="button"
                 onClick={resetFilters}
-                className="px-4 py-2 bg-[#0369A1] text-white text-xs font-semibold rounded-none hover:bg-[#0284C7] transition-colors"
+                className="px-6 py-2.5 bg-[#2E5AAC] text-white text-xs font-bold uppercase tracking-wider rounded-none hover:bg-[#1E3A8A] transition-colors min-h-[44px]"
               >
                 Reset All Filters
               </button>
             </div>
           )}
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => {
-              const coverImg =
-                product.imageUrl ||
-                CATEGORY_IMAGES[product.subcategory.category.slug] ||
-                "/images/catalog/tops.png";
-
-              const minPrice =
-                product.fabrics.length > 0
-                  ? Math.min(...product.fabrics.map((f) => f.priceMinCents))
-                  : 1800;
-              const maxPrice =
-                product.fabrics.length > 0
-                  ? Math.max(...product.fabrics.map((f) => f.priceMaxCents))
-                  : 3200;
-
+          {/* Product Grid (4 columns on desktop, exact specs) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+            {currentProducts.map((product) => {
               return (
-                <Link
+                <div
                   key={product.id}
-                  href={`/konfigurator/${product.slug}`}
-                  className="bg-white border border-[#E2E8F0] hover:border-[#0F172A] rounded-none overflow-hidden flex flex-col justify-between transition-all shadow-sm hover:shadow-lg group"
+                  className="w-full max-w-[280px] h-[380px] mx-auto bg-white border border-[#E0E0E0] rounded-none flex flex-col justify-between overflow-hidden shadow-none hover:border-[#2E5AAC] transition-colors group"
                 >
-                  <div>
-                    {/* Image Header */}
-                    <div className="aspect-[4/3] w-full relative overflow-hidden bg-[#0F172A]">
+                  {/* Top Portion (Image + Info) */}
+                  <div className="flex flex-col flex-1 overflow-hidden">
+                    
+                    {/* Image (height: 220px, object-fit: cover) */}
+                    <div className="h-[220px] w-full relative bg-[#F5F5F5] overflow-hidden shrink-0">
                       <Image
-                        src={coverImg}
+                        src={product.imageUrl}
                         alt={product.name}
                         fill
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        sizes="280px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                      {/* Floating Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
-                        <span className="bg-[#0B1E3D]/90 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-none backdrop-blur-sm border border-white/10">
-                          MOQ {product.moqPerFabric} Pcs
-                        </span>
-                        <span className="bg-emerald-500/90 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-none backdrop-blur-sm">
-                          {product.leadTimeDays ?? 14}d Delivery
-                        </span>
-                      </div>
                     </div>
 
-                    {/* Content Section */}
-                    <div className="p-5 space-y-3">
-                      {/* Subcategory & Category Badge */}
-                      <div className="text-[11px] font-semibold text-[#0369A1] uppercase tracking-wider">
-                        {product.subcategory.category.name} • {product.subcategory.name}
+                    {/* Text Padding 16px (p-4) */}
+                    <div className="p-4 flex flex-col justify-between flex-1 space-y-1">
+                      
+                      {/* SKU */}
+                      <div className="text-[11px] font-mono text-[#757575] font-medium tracking-tight">
+                        SKU: {product.sku}
                       </div>
 
-                      {/* Product Title */}
-                      <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#0369A1] transition-colors leading-snug">
+                      {/* Name */}
+                      <h3 className="text-sm font-bold text-[#1A2233] truncate group-hover:text-[#2E5AAC] transition-colors leading-tight">
                         {product.name}
                       </h3>
 
-                      {/* Fit Badges */}
-                      {product.fits.length > 0 && (
-                        <div className="flex flex-wrap gap-1 pt-1">
-                          {product.fits.slice(0, 3).map((f) => (
-                            <span
-                              key={f.fit.id}
-                              className="text-[10px] px-2 py-0.5 bg-[#F8FAFC] border border-[#E2E8F0] text-[#475569] rounded-none font-medium"
-                            >
-                              {f.fit.name}
-                            </span>
-                          ))}
-                          {product.fits.length > 3 && (
-                            <span className="text-[10px] px-1.5 py-0.5 text-[#64748B]">
-                              +{product.fits.length - 3}
-                            </span>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Price Range Display */}
-                      <div className="pt-2 border-t border-[#E2E8F0] flex justify-between items-end">
-                        <div>
-                          <span className="text-[10px] text-[#64748B] uppercase font-semibold block">Wholesale Price</span>
-                          <span className="text-sm font-bold font-mono text-[#0F172A]">
-                            {formatCents(minPrice)} – {formatCents(maxPrice)}
-                          </span>
-                        </div>
-                        <span className="text-xs font-bold text-[#0369A1] group-hover:translate-x-1 transition-transform">
-                          →
+                      {/* Price & Stock Badge Row */}
+                      <div className="flex items-center justify-between pt-1">
+                        {/* Price: #2E5AAC, 18px bold, tabular-nums */}
+                        <span className="text-[18px] font-bold font-mono tabular-nums text-[#2E5AAC]">
+                          {product.formattedPrice}
                         </span>
+
+                        {/* Stock Badge */}
+                        {product.stockStatus === "IN_STOCK" ? (
+                          <span className="text-[11px] font-bold text-[#5DCAA5] bg-[#5DCAA5]/10 px-2 py-0.5 rounded-none flex items-center gap-1 border border-[#5DCAA5]/30">
+                            ✓ In Stock
+                          </span>
+                        ) : product.stockStatus === "LOW_STOCK" ? (
+                          <span className="text-[11px] font-bold text-[#F0B94A] bg-[#F0B94A]/10 px-2 py-0.5 rounded-none flex items-center gap-1 border border-[#F0B94A]/30">
+                            ⚠ Low Stock
+                          </span>
+                        ) : (
+                          <span className="text-[11px] font-bold text-[#94A3B8] bg-[#F1F5F9] px-2 py-0.5 rounded-none flex items-center gap-1 border border-[#CBD5E1]">
+                            Out of Stock
+                          </span>
+                        )}
                       </div>
+
                     </div>
                   </div>
-                </Link>
+
+                  {/* Button: blue #2E5AAC, 40px height, "VIEW & ORDER" */}
+                  <Link
+                    href={`/wholesale/${product.slug}`}
+                    className="w-full h-[40px] bg-[#2E5AAC] hover:bg-[#1E3A8A] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center rounded-none transition-colors shrink-0"
+                  >
+                    VIEW &amp; ORDER
+                  </Link>
+                </div>
               );
             })}
           </div>
+
+          {/* ================================================================= */}
+          {/* BOTTOM PAGINATION (Page Numbers + Previous/Next)                  */}
+          {/* ================================================================= */}
+          {totalPages > 1 && (
+            <div className="bg-white border border-[#E0E0E0] rounded-none p-4 flex flex-wrap items-center justify-between gap-4 mt-8">
+              
+              {/* Previous Button */}
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className={`min-h-[44px] px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-none border transition-colors flex items-center gap-1 ${
+                  currentPage === 1
+                    ? "bg-[#F5F5F5] text-[#94A3B8] border-[#E0E0E0] cursor-not-allowed"
+                    : "bg-white text-[#1A2233] border-[#E0E0E0] hover:bg-[#F5F5F5] hover:border-[#2E5AAC]"
+                }`}
+              >
+                ← Previous
+              </button>
+
+              {/* Page Numbers */}
+              <div className="flex items-center gap-1 flex-wrap">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                  const isCurrent = pageNum === currentPage;
+                  return (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={`min-h-[44px] min-w-[44px] px-3 py-2 text-xs font-mono font-bold rounded-none border transition-colors ${
+                        isCurrent
+                          ? "bg-[#2E5AAC] text-white border-[#2E5AAC]"
+                          : "bg-white text-[#1A2233] border-[#E0E0E0] hover:bg-[#F5F5F5]"
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className={`min-h-[44px] px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-none border transition-colors flex items-center gap-1 ${
+                  currentPage === totalPages
+                    ? "bg-[#F5F5F5] text-[#94A3B8] border-[#E0E0E0] cursor-not-allowed"
+                    : "bg-white text-[#1A2233] border-[#E0E0E0] hover:bg-[#F5F5F5] hover:border-[#2E5AAC]"
+                }`}
+              >
+                Next →
+              </button>
+            </div>
+          )}
+
         </main>
       </div>
     </div>

@@ -71,60 +71,32 @@ export default async function WholesalePage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-grow bg-[#F8FAFC] text-[#020617] font-sans antialiased">
-        {/* Executive Dark Navy Hero Section */}
-        <section className="w-full bg-[#0B1E3D] text-white py-14 lg:py-20 border-b border-[#1E3A8A] relative overflow-hidden">
-          {/* Ambient Glow */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2E5AAC]/15 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+      <main className="flex-grow bg-[#F5F5F5] text-[#1A2233] font-sans antialiased min-h-screen">
+        {/* Page Header Section */}
+        <header className="w-full bg-[#0B1E3D] text-white py-10 lg:py-14 border-b border-[#132A52] relative overflow-hidden">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs text-[#94A3B8] mb-6">
+            <nav className="flex items-center gap-2 text-xs text-[#8DA0C4] mb-4">
               <Link href="/" className="hover:text-white transition-colors">
                 Home
               </Link>
-              <span className="text-[#64748B]">/</span>
-              <span className="font-medium text-white">Wholesale Menswear Catalog</span>
+              <span className="text-[#5B6B85]">/</span>
+              <span className="font-medium text-white">Wholesale Catalog</span>
             </nav>
 
-            <div className="max-w-3xl space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#2E5AAC]/30 border border-[#2E5AAC]/50 text-xs font-semibold uppercase tracking-widest text-[#93C5FD] rounded-none backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-none bg-[#60A5FA] animate-pulse" />
-                B2B Apparel Sourcing &amp; Wholesale
-              </div>
-
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-sans leading-[1.1]">
-                Wholesale Menswear &amp; Custom Apparel Catalog
+            <div className="space-y-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white font-sans uppercase">
+                WHOLESALE CATALOG
               </h1>
-
-              <p className="text-base md:text-lg text-[#94A3B8] font-normal leading-relaxed max-w-2xl">
-                White-label bespoke menswear production for international corporate clients, premium retail brands, and uniform programs. Select any garment spec to configure volume proformas.
+              <p className="text-sm sm:text-base text-[#8DA0C4] font-normal leading-relaxed max-w-3xl">
+                Ready-made menswear with fixed pricing and immediate availability
               </p>
-
-              {/* Key Metrics Bar */}
-              <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8] pt-2">
-                <span>
-                  <strong className="text-white font-mono text-sm">{products.length}</strong> Producible Products
-                </span>
-                <span>•</span>
-                <span>
-                  <strong className="text-white font-mono text-sm">{fits.length}</strong> Menswear Fits
-                </span>
-                <span>•</span>
-                <span>
-                  <strong className="text-white font-mono text-sm">{categories.length}</strong> Categories
-                </span>
-                <span>•</span>
-                <span>
-                  <strong className="text-[#60A5FA] font-mono text-sm">50 Pcs</strong> Minimum MOQ
-                </span>
-              </div>
             </div>
           </div>
-        </section>
+        </header>
 
-        {/* Interactive Wholesale Catalog Grid Section */}
-        <section className="w-full py-12 lg:py-16 px-6 lg:px-8">
+        {/* Interactive Wholesale Catalog Content Section */}
+        <section className="w-full py-8 lg:py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-[1440px] mx-auto">
             <WholesaleCatalogClient
               products={products as any}
@@ -138,3 +110,4 @@ export default async function WholesalePage() {
     </>
   );
 }
+
