@@ -1330,9 +1330,9 @@
     "semantic_hash": "2efa72a051a09d61b31b66f7d3c5dd68"
   },
   "components/admin/GlobalCommandPalette.tsx": {
-    "mtime": 1785682157.544503,
-    "ast_hash": "d679a92eb76bf705f269cbb222cedec8",
-    "semantic_hash": "d679a92eb76bf705f269cbb222cedec8"
+    "mtime": 1785683028.635514,
+    "ast_hash": "300ca61a5783df509380fcfcbe405ade",
+    "semantic_hash": ""
   },
   "components/admin/ProductFitTree.tsx": {
     "mtime": 1785681391.5371568,

@@ -1,10 +1,11 @@
-# Graph Report - .  (2026-08-02)
+# Graph Report - Satriano Atelier  (2026-08-02)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 651 files · ~1,057,205 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 8187 nodes · 9750 edges · 604 communities (503 shown, 101 thin omitted)
+- 8259 nodes · 9770 edges · 627 communities (517 shown, 110 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 93 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
@@ -511,6 +512,7 @@
 - main
 - 2
 - 4
+- padding-y
 - 8
 - destructive
 - destructive-foreground
@@ -605,6 +607,28 @@
 - 3. Production Infrastructure
 - 1. Catalog Architecture
 - 3. Production Infrastructure
+- foreground
+- muted-foreground
+- primary
+- primary-hover
+- .test_add_all_components_dry_run
+- .test_list_installed_with_components
+- .test_init_custom_project_root
+- .test_get_installed_components_no_config
+- .test_generate_typescript_config
+- .test_generate_config_with_colors
+- .test_write_config_creates_content
+- .test_full_configuration_typescript
+- .test_default_content_paths_react
+- .test_add_colors
+- eslint
+- next
+- pdf-lib
+- prisma
+- react-dom
+- @types/node
+- @types/pg
+- vitest
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 62 edges
@@ -619,29 +643,29 @@
 10. `ShadcnInstaller` - 33 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `ApplicationsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/applications/page.tsx → components/admin/AdminAuthContext.tsx
 - `POST()` --calls--> `sendVerificationEmail()`  [EXTRACTED]
   app/api/portal/resend-verification/route.ts → lib/email.ts
-- `PATCH()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
-  app/api/admin/catalog/route.ts → lib/adminAuth.ts
-- `POST()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
-  app/api/admin/catalog/upload/route.ts → lib/adminAuth.ts
-- `GET()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
-  app/api/admin/metrics/route.ts → lib/adminAuth.ts
-- `GET()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
-  app/api/admin/session/route.ts → lib/adminAuth.ts
+- `AdminChrome()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/layout.tsx → components/admin/AdminAuthContext.tsx
+- `AdminOrderContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/page.tsx → components/admin/AdminAuthContext.tsx
+- `ProductSettingsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/product-settings/page.tsx → components/admin/AdminAuthContext.tsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (604 total, 101 thin omitted)
+## Communities (627 total, 110 thin omitted)
 
 ### Community 0 - "init.ts"
 Cohesion: 0.06
 Nodes (67): ASSETS_CANDIDATES, __dirname, initCommand(), InitOptions, templateInstall(), tryGitHubInstall(), removeSkillDir(), uninstallCommand() (+59 more)
 
 ### Community 1 - "gray"
-Cohesion: 0.05
-Nodes (53): $type, $value, $type, $value, $type, $value, $type, $value (+45 more)
+Cohesion: 0.09
+Nodes (23): $type, $value, $type, $value, $type, $value, $type, $value (+15 more)
 
 ### Community 2 - "gray"
 Cohesion: 0.05
@@ -660,15 +684,15 @@ Cohesion: 0.08
 Nodes (31): metadata, metadata, ProductImageItem, ProductImageUploader(), ProductImageUploaderProps, AddWholesaleProductModal(), AddWholesaleProductModalProps, CategoryOption (+23 more)
 
 ### Community 6 - "compilerOptions"
-Cohesion: 0.04
-Nodes (44): compilerOptions, allowSyntheticDefaultImports, declaration, esModuleInterop, module, moduleResolution, outDir, resolveJsonModule (+36 more)
+Cohesion: 0.07
+Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, **/*.ts (+20 more)
 
 ### Community 7 - "button"
-Cohesion: 0.06
-Nodes (45): $type, $value, $type, $value, bg, fg, font-size, hover-bg (+37 more)
+Cohesion: 0.09
+Nodes (27): $type, $value, bg, fg, font-size, hover-bg, padding-x, padding-y (+19 more)
 
 ### Community 8 - "SiteFooter.tsx"
-Cohesion: 0.08
+Cohesion: 0.07
 Nodes (23): CATEGORY_IMAGES, PageProps, ProductConfiguratorPageProps, CAPABILITIES, CATEGORY_IMAGES, FAQS, OPERATIONAL_STEPS, PortalView (+15 more)
 
 ### Community 9 - "Tailwind CSS Utility Reference"
@@ -716,8 +740,8 @@ Cohesion: 0.05
 Nodes (37): $type, $value, background, destructive, destructive-foreground, foreground, muted, muted-foreground (+29 more)
 
 ### Community 20 - "color"
-Cohesion: 0.05
-Nodes (37): $type, $value, background, destructive, destructive-foreground, foreground, muted, muted-foreground (+29 more)
+Cohesion: 0.11
+Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
 
 ### Community 21 - "Design"
 Cohesion: 0.06
@@ -748,8 +772,8 @@ Cohesion: 0.08
 Nodes (24): metadata, AddColorVariantModal(), AddColorVariantModalProps, AdminWholesaleClient(), InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct (+16 more)
 
 ### Community 28 - "dependencies"
-Cohesion: 0.06
-Nodes (35): cmdk, jose, next, nodemailer, dependencies, cmdk, jose, next (+27 more)
+Cohesion: 0.07
+Nodes (27): cmdk, jose, nodemailer, dependencies, cmdk, jose, nodemailer, pg (+19 more)
 
 ### Community 29 - "spacing"
 Cohesion: 0.06
@@ -808,20 +832,20 @@ Cohesion: 0.06
 Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common Font Pairings, Contrast Requirements, CSS Implementation, Editorial (+22 more)
 
 ### Community 43 - "devDependencies"
-Cohesion: 0.06
-Nodes (31): dotenv, eslint, eslint-config-next, jsdom, devDependencies, dotenv, eslint, eslint-config-next (+23 more)
+Cohesion: 0.07
+Nodes (27): dotenv, eslint-config-next, jsdom, devDependencies, dotenv, eslint-config-next, jsdom, tailwindcss (+19 more)
 
 ### Community 44 - "Prisma 7 Driver Adapter Implementation Guide"
 Cohesion: 0.07
 Nodes (29): Architecture Overview, Argument Mapping (input), Checklist, Column Type Inference, ColumnTypeEnum values, Conversion Helpers, Database-Specific Notes, E2E Tests (with PrismaClient) (+21 more)
 
 ### Community 45 - "Prerequisites"
-Cohesion: 0.08
-Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+21 more)
+Cohesion: 0.06
+Nodes (33): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+25 more)
 
 ### Community 46 - "Prerequisites"
-Cohesion: 0.08
-Nodes (29): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+21 more)
+Cohesion: 0.06
+Nodes (33): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+25 more)
 
 ### Community 47 - "Logo Usage Rules"
 Cohesion: 0.07
@@ -856,8 +880,8 @@ Cohesion: 0.07
 Nodes (15): Test adding colors multiple times., Test adding full color palette., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test that adding same plugin twice doesn't duplicate., Test plugin recommendations for Next.js., Test generating config with plugins., Test validating valid configuration. (+7 more)
 
 ### Community 55 - "prisma.ts"
-Cohesion: 0.14
-Nodes (17): GET(), GET(), POST(), POST(), GET(), GET(), ConfigureDefaultPage(), ProductConfiguratorPage() (+9 more)
+Cohesion: 0.15
+Nodes (16): GET(), GET(), POST(), GET(), GET(), ConfigureDefaultPage(), ProductConfiguratorPage(), PortalLayout() (+8 more)
 
 ### Community 56 - ".agents/skills/design-system/scripts/html-token-validator.py"
 Cohesion: 0.14
@@ -876,16 +900,16 @@ Cohesion: 0.14
 Nodes (24): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), main(), print_result(), print_summary() (+16 more)
 
 ### Community 60 - "src/ui-ux-pro-max/scripts/design_system.py"
-Cohesion: 0.15
-Nodes (16): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. (+8 more)
+Cohesion: 0.10
+Nodes (25): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+17 more)
 
 ### Community 61 - "search"
 Cohesion: 0.12
 Nodes (24): detect_domain(), get_cip_brief(), _load_csv(), Load CSV and return list of dicts, Core search function using BM25, Auto-detect the most relevant domain from query, Main search function with auto-domain detection, Search across all domains and combine results (+16 more)
 
 ### Community 62 - "TestTailwindConfigGenerator"
-Cohesion: 0.08
-Nodes (13): Test adding colors multiple times., Test adding full color palette., Test TailwindConfigGenerator class., Test generating TypeScript configuration., Test generating config with custom colors., Test validating valid configuration., Test validating config with empty theme extensions., Test that written config contains expected content. (+5 more)
+Cohesion: 0.07
+Nodes (15): Test adding colors multiple times., Test adding full color palette., Test adding custom breakpoints., Test TailwindConfigGenerator class., Test that adding same plugin twice doesn't duplicate., Test plugin recommendations for Next.js., Test generating config with plugins., Test validating valid configuration. (+7 more)
 
 ### Community 63 - "Asset Approval Checklist"
 Cohesion: 0.08
@@ -1004,20 +1028,20 @@ Cohesion: 0.09
 Nodes (22): Best Practices, Chart.js Integration, Command, Component Spec Pattern, Contextual Decision Flow, Decision System CSVs, Design System, Integration (+14 more)
 
 ### Community 92 - "gray"
-Cohesion: 0.08
-Nodes (27): $type, $value, $type, $value, $type, $value, $type, $value (+19 more)
+Cohesion: 0.05
+Nodes (53): $type, $value, $type, $value, $type, $value, $type, $value (+45 more)
 
 ### Community 93 - "radius"
 Cohesion: 0.11
 Nodes (27): $type, $value, lg, sm, $type, $value, $type, $value (+19 more)
 
 ### Community 94 - "Driver Adapters"
-Cohesion: 0.11
-Nodes (22): Accept self-signed certificates, After (v7), Available Adapters, Before (v6), Configuration, Connection Pool Configuration, Driver Adapters, Installation (+14 more)
+Cohesion: 0.07
+Nodes (27): Accept self-signed certificates, After (v7), Available Adapters, Before (v6), Configuration, Connection Pool Configuration, Driver Adapters, Installation (+19 more)
 
 ### Community 95 - "Removed Features"
-Cohesion: 0.09
-Nodes (22): Alternatives, Auto-generate after migrate, Auto-seed after migrate, Automatic Behaviors Removed, CLI Flags Removed, Client Middleware, Common Middleware Patterns, Custom counter with extensions (+14 more)
+Cohesion: 0.08
+Nodes (23): Alternatives, Auto-generate after migrate, Auto-seed after migrate, Automatic Behaviors Removed, CLI Flags Removed, Client Middleware, Common Middleware Patterns, Custom counter with extensions (+15 more)
 
 ### Community 96 - "Tailwind CSS Customization"
 Cohesion: 0.09
@@ -1040,8 +1064,8 @@ Cohesion: 0.09
 Nodes (22): @apply Directive, Best Practices, Color Customization, Complete Tailwind Config, Configuration Examples, Content Configuration, Custom Color Palette, Custom Font Sizes (+14 more)
 
 ### Community 101 - "email.ts"
-Cohesion: 0.13
-Nodes (13): POST(), POST(), POST(), createdCompanyIds, postProforma(), POST(), sendMagicLinkEmail(), SendMagicLinkEmailParams (+5 more)
+Cohesion: 0.22
+Nodes (7): POST(), createdCompanyIds, postProforma(), POST(), sendProformaEmail(), generateProformaPdf(), ProformaPdfData
 
 ### Community 102 - "pricing.ts"
 Cohesion: 0.15
@@ -1056,8 +1080,8 @@ Cohesion: 0.09
 Nodes (21): BigInt handling, Database-Specific Features, Date handling, Delete example, Dynamic table/column names, $executeRaw, Handling Results, Insert example (+13 more)
 
 ### Community 105 - "radius"
-Cohesion: 0.11
-Nodes (27): $type, $value, lg, sm, $type, $value, $type, $value (+19 more)
+Cohesion: 0.12
+Nodes (23): $type, $value, sm, $type, $value, $type, $value, $type (+15 more)
 
 ### Community 106 - "DesignSystemGenerator"
 Cohesion: 0.13
@@ -1072,12 +1096,12 @@ Cohesion: 0.15
 Nodes (21): assertInsideRepo(), assetRoot, checkAssets(), checkOnly, diffDir(), __dirname, dirsToSync, exists() (+13 more)
 
 ### Community 109 - "DesignSystemGenerator"
-Cohesion: 0.14
-Nodes (10): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Generates design system recommendations from aggregated searches., Load reasoning rules from CSV. (+2 more)
+Cohesion: 0.12
+Nodes (12): DesignSystemGenerator, Find matching reasoning rule for a category., Apply reasoning rules to search results., Select best matching result based on priority keywords., Extract results list from search result dict., Generate complete design system recommendation.          variance/motion/density, Bucket a 1-10 dial value into its tier config. Returns None if value is None., Generates design system recommendations from aggregated searches. (+4 more)
 
 ### Community 110 - "product-settings/page.tsx"
-Cohesion: 0.13
-Nodes (17): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOption, SizeSystem, slugify() (+9 more)
+Cohesion: 0.16
+Nodes (14): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOption, SizeSystem, slugify() (+6 more)
 
 ### Community 111 - "fontSize"
 Cohesion: 0.11
@@ -1121,7 +1145,7 @@ Nodes (19): Command, Common Workflow, Custom port, Don't open browser, Edit Reco
 
 ### Community 121 - "Query Options"
 Cohesion: 0.10
-Nodes (19): cursor, distinct, Filtered include, include, Include relation count, Multiple distinct fields, Negative take (reverse), Nested include (+11 more)
+Nodes (20): cursor, distinct, Filtered include, include, Include relation count, Multiple distinct fields, Negative take (reverse), Nested include (+12 more)
 
 ### Community 122 - "Prisma Client API Reference"
 Cohesion: 0.10
@@ -1168,8 +1192,8 @@ Cohesion: 0.10
 Nodes (19): Base Color Presets, Best Practices, Color Customization, Color Format, Component Customization, CSS Variable System, Customize Styles, Customize Variants (+11 more)
 
 ### Community 133 - "[UI UX Pro Max](https://uupm.cc)"
-Cohesion: 0.10
-Nodes (20): 161 Industry-Specific Reasoning Rules, Architecture & Contributing, Automated Releases, Available Styles (67), 🟢 Basic Version (This Repository), 💎 Basic vs. Premium Version Comparison, Compatible Agents, Design System Command (Advanced) (+12 more)
+Cohesion: 0.12
+Nodes (16): Architecture & Contributing, Automated Releases, Available Styles (67), 🟢 Basic Version (This Repository), 💎 Basic vs. Premium Version Comparison, Compatible Agents, Design System Command (Advanced), Features (+8 more)
 
 ### Community 134 - "DesignSystemGenerator"
 Cohesion: 0.14
@@ -1192,8 +1216,8 @@ Cohesion: 0.11
 Nodes (18): 1. Wordmark (Logotype), 2. Lettermark (Monogram), 3. Pictorial Mark (Brand Mark), 4. Abstract Mark, 5. Mascot, 6. Emblem, 7. Combination Mark, Aesthetic Styles (+10 more)
 
 ### Community 139 - "prisma generate"
-Cohesion: 0.11
-Nodes (18): After schema changes, Basic generation, Bun Runtime, CI/CD pipeline, Command, Common Patterns, Compiler Build Tuning, Current Generator Behavior (+10 more)
+Cohesion: 0.10
+Nodes (19): After schema changes, Basic generation, Bun Runtime, CI/CD pipeline, Command, Common Patterns, Compiler Build Tuning, Current Generator Behavior (+11 more)
 
 ### Community 140 - "prisma migrate dev"
 Cohesion: 0.11
@@ -1225,7 +1249,7 @@ Nodes (18): 1. Wordmark (Logotype), 2. Lettermark (Monogram), 3. Pictorial Mark 
 
 ### Community 147 - "color"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
+Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
 
 ### Community 148 - "Brand Consistency Checklist"
 Cohesion: 0.11
@@ -1253,7 +1277,7 @@ Nodes (17): 1. Install dotenv, 2. Import in prisma.config.ts, Application Code, 
 
 ### Community 154 - "TailwindConfigGenerator"
 Cohesion: 0.11
-Nodes (10): Generate Tailwind CSS configuration files., Add full color palette (50-950 shades) for a base color.          Args:, TailwindConfigGenerator, Test adding custom fonts., Test adding custom spacing., Test plugin recommendations., Test generating config with plugins., Test validating config with no content paths. (+2 more)
+Nodes (10): Generate Tailwind CSS configuration files., Add full color palette (50-950 shades) for a base color.          Args:, TailwindConfigGenerator, Test adding custom fonts., Test adding custom spacing., Test plugin recommendations., Test initialization for JavaScript config., Test writing config to invalid path. (+2 more)
 
 ### Community 155 - "Brand Consistency Checklist"
 Cohesion: 0.11
@@ -1332,8 +1356,8 @@ Cohesion: 0.12
 Nodes (16): Browser-Safe Types, Bun, "Cannot use import statement outside a module", CommonJS Projects, "ERR_REQUIRE_ESM", ESM and CommonJS Support, ESM Projects, File Extensions (+8 more)
 
 ### Community 174 - "button"
-Cohesion: 0.09
-Nodes (27): $type, $value, bg, fg, font-size, hover-bg, padding-x, padding-y (+19 more)
+Cohesion: 0.20
+Nodes (10): fg, font-size, hover-bg, button, $type, $value, $type, $value (+2 more)
 
 ### Community 175 - "BM25"
 Cohesion: 0.15
@@ -1360,8 +1384,8 @@ Cohesion: 0.15
 Nodes (9): BM25, _normalize(), Apply synonym substitution before tokenizing., BM25 ranking algorithm for text search, Lowercase, normalize synonyms, split, remove punctuation, filter stopwords, Build BM25 index from documents, Score all documents against query, All indexed terms, for suggestion/typo-recovery purposes. (+1 more)
 
 ### Community 181 - "configuratorLogic.ts"
-Cohesion: 0.18
-Nodes (12): DEFAULT_ALPHA_SIZES, SizeOptionDef, SizeQtyTable(), SizeQtyTableProps, SizeSystemDef, DEFAULT_SIZE_QUANTITIES, parseQuantityInput(), SIZE_CODES (+4 more)
+Cohesion: 0.19
+Nodes (11): DEFAULT_ALPHA_SIZES, SizeOptionDef, SizeQtyTable(), SizeQtyTableProps, DEFAULT_SIZE_QUANTITIES, parseQuantityInput(), SIZE_CODES, SizeCode (+3 more)
 
 ### Community 182 - "Design Principles"
 Cohesion: 0.12
@@ -1376,8 +1400,8 @@ Cohesion: 0.20
 Nodes (15): apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch(), generate_icon(), generate_sizes(), load_env(), main() (+7 more)
 
 ### Community 185 - "Component Specifications"
-Cohesion: 0.23
-Nodes (15): Alert, Anatomy, Badge, Button, Card, Cell Alignment, Component Specifications, Dialog (+7 more)
+Cohesion: 0.07
+Nodes (28): Alert, Anatomy, Anatomy, Anatomy, Anatomy, Anatomy, Badge, Button (+20 more)
 
 ### Community 186 - "Constructor Options"
 Cohesion: 0.12
@@ -1408,8 +1432,8 @@ Cohesion: 0.20
 Nodes (15): apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch(), generate_icon(), generate_sizes(), load_env(), main() (+7 more)
 
 ### Community 193 - "Component Specifications"
-Cohesion: 0.23
-Nodes (15): Alert, Anatomy, Badge, Button, Card, Cell Alignment, Component Specifications, Dialog (+7 more)
+Cohesion: 0.07
+Nodes (28): Alert, Anatomy, Anatomy, Anatomy, Anatomy, Anatomy, Badge, Button (+20 more)
 
 ### Community 194 - "ShadcnInstaller"
 Cohesion: 0.23
@@ -1436,8 +1460,8 @@ Cohesion: 0.20
 Nodes (15): apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch(), generate_icon(), generate_sizes(), load_env(), main() (+7 more)
 
 ### Community 200 - "Component Specifications"
-Cohesion: 0.23
-Nodes (15): Alert, Anatomy, Badge, Button, Card, Cell Alignment, Component Specifications, Dialog (+7 more)
+Cohesion: 0.07
+Nodes (28): Alert, Anatomy, Anatomy, Anatomy, Anatomy, Anatomy, Badge, Button (+20 more)
 
 ### Community 201 - "fontSize"
 Cohesion: 0.12
@@ -1456,8 +1480,8 @@ Cohesion: 0.12
 Nodes (9): Test adding components that are already installed., Test adding components in dry run mode., Test ShadcnInstaller class., Test adding all components without config., Test listing installed components without config., Test listing installed components when none exist., Test initialization with default project root., Test getting installed components when files exist. (+1 more)
 
 ### Community 205 - "[UI UX Pro Max](https://uupm.cc)"
-Cohesion: 0.12
-Nodes (16): Star 历史, [UI UX Pro Max](https://uupm.cc), 兼容的智能体, 前置要求, 功能特性, 可用风格 (67), 🟢 基础版（本仓库）, 💎 基础版与高级版对比 (+8 more)
+Cohesion: 0.10
+Nodes (20): 161 条行业特定推理规则, Star 历史, [UI UX Pro Max](https://uupm.cc), v2.0 新特性, 兼容的智能体, 前置要求, 功能特性, 可用风格 (67) (+12 more)
 
 ### Community 206 - "stack/package.json"
 Cohesion: 0.12
@@ -1468,8 +1492,8 @@ Cohesion: 0.17
 Nodes (10): AccountPage(), mockPush, CompanyInfoTab(), CompanyInfoTabProps, SettingsTab(), AccountTab, TabNavigation(), TabNavigationProps (+2 more)
 
 ### Community 208 - "ConfiguratorClient.tsx"
-Cohesion: 0.18
-Nodes (10): ConfiguratorClientProps, ConfiguratorSuccess(), ConfiguratorSuccessProps, FitOption, FitPicker(), FitPickerProps, sampleFits, LogoUploader() (+2 more)
+Cohesion: 0.14
+Nodes (15): ConfiguratorClientProps, ConfiguratorSuccess(), ConfiguratorSuccessProps, FabricOption, FabricPicker(), FabricPickerProps, fabrics, FitOption (+7 more)
 
 ### Community 209 - "CIP Design Reference"
 Cohesion: 0.13
@@ -1496,8 +1520,8 @@ Cohesion: 0.13
 Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contrast Patterns, Copywriting Formulas, Core Formulas, Cost of Inaction, FAB (Features-Advantages-Benefits), Formula-to-Slide Mapping (+6 more)
 
 ### Community 215 - "TestShadcnInstaller"
-Cohesion: 0.16
-Nodes (7): Test adding components in dry run mode., Test ShadcnInstaller class., Test adding all components without config., Test listing installed components when none exist., Test initialization with custom project root., Test getting installed components without config., TestShadcnInstaller
+Cohesion: 0.12
+Nodes (9): Test adding components that are already installed., Test adding components in dry run mode., Test ShadcnInstaller class., Test adding all components without config., Test listing installed components without config., Test listing installed components when none exist., Test initialization with default project root., Test getting installed components when files exist. (+1 more)
 
 ### Community 216 - "CIP Design Reference"
 Cohesion: 0.13
@@ -1512,16 +1536,16 @@ Cohesion: 0.13
 Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contrast Patterns, Copywriting Formulas, Core Formulas, Cost of Inaction, FAB (Features-Advantages-Benefits), Formula-to-Slide Mapping (+6 more)
 
 ### Community 219 - "src/ui-ux-pro-max/scripts/tests/test_core.py"
-Cohesion: 0.18
-Nodes (11): format_markdown(), format_master_md(), generate_design_system(), persist_design_system(), Format design system as markdown., Main entry point for design system generation.      Args:         query: Search, Slugify a name into a single safe path segment.      Only [a-z0-9_-] survives; e, Persist design system to design-system/<project>/ folder using Master + Override (+3 more)
+Cohesion: 0.11
+Nodes (17): compilerOptions, allowSyntheticDefaultImports, declaration, esModuleInterop, module, moduleResolution, outDir, resolveJsonModule (+9 more)
 
 ### Community 220 - "Copywriting Formulas"
 Cohesion: 0.13
 Nodes (14): AIDA (Attention-Interest-Desire-Action), Before-After-Bridge, Contrast Patterns, Copywriting Formulas, Core Formulas, Cost of Inaction, FAB (Features-Advantages-Benefits), Formula-to-Slide Mapping (+6 more)
 
 ### Community 221 - ".claude/skills/ui-ux-pro-max/scripts/design_system.py"
-Cohesion: 0.18
-Nodes (14): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_page_override_md(), _generate_intelligent_overrides(), hex_to_ansi(), Format a page-specific override file with intelligent AI-generated content., Generate intelligent overrides based on page type using layered search. (+6 more)
+Cohesion: 0.12
+Nodes (24): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+16 more)
 
 ### Community 222 - "CIP Design Reference"
 Cohesion: 0.13
@@ -1544,8 +1568,8 @@ Cohesion: 0.13
 Nodes (15): keywords, ai, claude, codex, copilot, cursor, design, kiro (+7 more)
 
 ### Community 227 - "formatCents"
-Cohesion: 0.21
-Nodes (9): FabricOption, FabricPicker(), FabricPickerProps, fabrics, FABRIC_GRADES, HomeEstimatorPreview(), BillingTab(), formatCents() (+1 more)
+Cohesion: 0.23
+Nodes (8): ProformaPage(), ProformaPageProps, FABRIC_GRADES, HomeEstimatorPreview(), TransactionalHeader(), BillingTab(), formatCents(), usdFormatter
 
 ### Community 228 - "Banner Design - Multi-Format Creative Banner System"
 Cohesion: 0.14
@@ -1632,8 +1656,8 @@ Cohesion: 0.21
 Nodes (12): _domain_keywords(), _get_bm25(), _load_csv(), _load_product_keywords(), Load CSV and return list of dicts, with mtime-based caching., Fitted BM25 index for this file+columns, with mtime-based caching., Core search function using BM25. Returns (results, bm25_or_none)., Nearest known vocabulary terms for a query that returned 0 hits,     so the call (+4 more)
 
 ### Community 249 - ".claude/skills/ui-ux-pro-max/scripts/tests/test_core.py"
-Cohesion: 0.18
-Nodes (11): format_markdown(), format_master_md(), generate_design_system(), persist_design_system(), Format design system as markdown., Main entry point for design system generation.      Args:         query: Search, Slugify a name into a single safe path segment.      Only [a-z0-9_-] survives; e, Persist design system to design-system/<project>/ folder using Master + Override (+3 more)
+Cohesion: 0.20
+Nodes (12): radius, padding, radius, shadow, card, radius, $type, $value (+4 more)
 
 ### Community 250 - "Banner Design - Multi-Format Creative Banner System"
 Cohesion: 0.14
@@ -1684,12 +1708,12 @@ Cohesion: 0.21
 Nodes (12): _domain_keywords(), _get_bm25(), _load_csv(), _load_product_keywords(), Load CSV and return list of dicts, with mtime-based caching., Fitted BM25 index for this file+columns, with mtime-based caching., Core search function using BM25. Returns (results, bm25_or_none)., Nearest known vocabulary terms for a query that returned 0 hits,     so the call (+4 more)
 
 ### Community 262 - "adminMetrics.ts"
-Cohesion: 0.25
+Cohesion: 0.26
 Nodes (8): GET(), DashboardMetrics(), DashboardMetricsProps, mockMetricsData, ALL_STATUSES, DashboardMetricsData, getAdminDashboardMetrics(), StatusDistributionItem
 
 ### Community 263 - "scripts"
-Cohesion: 0.14
-Nodes (13): name, prisma, seed, private, scripts, build, dev, lint (+5 more)
+Cohesion: 0.25
+Nodes (8): scripts, build, dev, lint, postinstall, start, test, test:watch
 
 ### Community 264 - ".agents/skills/brand/references/update.md"
 Cohesion: 0.15
@@ -1760,8 +1784,8 @@ Cohesion: 0.15
 Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4 more)
 
 ### Community 281 - "devDependencies"
-Cohesion: 0.15
-Nodes (13): devDependencies, @playwright/test, @types/bun, @types/node, @types/prompts, typescript, @types/node, typescript (+5 more)
+Cohesion: 0.18
+Nodes (11): devDependencies, @playwright/test, @types/bun, @types/node, @types/prompts, typescript, @types/node, typescript (+3 more)
 
 ### Community 282 - "Pre-Delivery Checklist (canonical — the only one)"
 Cohesion: 0.15
@@ -1772,7 +1796,7 @@ Cohesion: 0.15
 Nodes (12): 10. Charts & Data (LOW), 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Style Selection (HIGH), 5. Layout & Responsive (HIGH), 6. Typography & Color (MEDIUM), 7. Animation (MEDIUM) (+4 more)
 
 ### Community 284 - "admin/page.tsx"
-Cohesion: 0.19
+Cohesion: 0.21
 Nodes (8): TABS, AdminKpiDashboard(), AdminOrder, AdminOrderTable(), AdminOrderTableProps, ALL_STATUSES, OrderStatusBadge(), STATUS_CONFIG
 
 ### Community 285 - "Satriano Atelier Design System"
@@ -1789,7 +1813,7 @@ Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), pat
 
 ### Community 288 - "primitive"
 Cohesion: 0.15
-Nodes (12): $type, $value, dark, semantic, primitive, $schema, $type, $value (+4 more)
+Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4 more)
 
 ### Community 289 - "prisma migrate diff"
 Cohesion: 0.17
@@ -1825,7 +1849,7 @@ Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), pat
 
 ### Community 297 - "card"
 Cohesion: 0.20
-Nodes (12): radius, padding, radius, shadow, card, radius, $type, $value (+4 more)
+Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
 
 ### Community 298 - ".generate_config_string"
 Cohesion: 0.20
@@ -1840,8 +1864,8 @@ Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
 ### Community 301 - "card"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+Cohesion: 0.15
+Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
 
 ### Community 302 - ".generate_config_string"
 Cohesion: 0.20
@@ -1912,8 +1936,8 @@ Cohesion: 0.18
 Nodes (8): args, fs, minimal, MINIMAL_TOKENS, path, projectRoot, tokensPath, wrapStyle
 
 ### Community 319 - "primitive"
-Cohesion: 0.18
-Nodes (11): fast, normal, slow, $type, $value, $type, $value, primitive (+3 more)
+Cohesion: 0.20
+Nodes (10): fast, normal, slow, $type, $value, $type, $value, duration (+2 more)
 
 ### Community 320 - "patch"
 Cohesion: 0.18
@@ -1968,11 +1992,11 @@ Cohesion: 0.22
 Nodes (4): ConfiguratorSuccessPage(), mockPush, GuestLoginModal(), GuestLoginModalProps
 
 ### Community 333 - "checkout/page.tsx"
-Cohesion: 0.33
+Cohesion: 0.50
 Nodes (7): WholesaleCheckoutClient(), addToWholesaleCart(), clearWholesaleCart(), getSampleDefaultCart(), getWholesaleCart(), saveWholesaleCart(), WholesaleCartItem
 
 ### Community 334 - "WholesaleCatalogClient.tsx"
-Cohesion: 0.20
+Cohesion: 0.22
 Nodes (8): Category, CATEGORY_IMAGES, Fabric, Fit, ProductWithRelations, ReadyStockProduct, Subcategory, WholesaleCatalogClient()
 
 ### Community 335 - "ProductFitTree.tsx"
@@ -2000,8 +2024,8 @@ Cohesion: 0.36
 Nodes (9): flattenTokens(), fs, generateCSS(), generateTailwind(), main(), parseArgs(), path, resolveReference() (+1 more)
 
 ### Community 341 - "duration"
-Cohesion: 0.20
-Nodes (10): fast, normal, slow, $type, $value, $type, $value, duration (+2 more)
+Cohesion: 0.18
+Nodes (11): fast, normal, slow, $type, $value, $type, $value, primitive (+3 more)
 
 ### Community 342 - "prisma format"
 Cohesion: 0.20
@@ -2036,7 +2060,7 @@ Cohesion: 0.22
 Nodes (6): Any, Path, Initialize generator.          Args:             typescript: If True, generate ., Determine default output path., Create base configuration structure., Get default content paths for framework.
 
 ### Community 350 - "ui-ux-pro-max/CLAUDE.md"
-Cohesion: 0.20
+Cohesion: 0.18
 Nodes (6): Architecture, Git Workflow, Prerequisites, Project Overview, Search Command, Sync Rules
 
 ### Community 351 - "Brand"
@@ -2108,16 +2132,16 @@ Cohesion: 0.20
 Nodes (10): scripts, build, check:assets, dev, prepublishOnly, smoke:domains, smoke:stacks, sync:assets (+2 more)
 
 ### Community 368 - "applications/page.tsx"
-Cohesion: 0.24
-Nodes (5): APPLICATION_TABS, AdminApplicationsTable(), AdminApplicationsTableProps, B2bApplicationItem, useAdminAuth()
+Cohesion: 0.28
+Nodes (5): APPLICATION_TABS, ApplicationsContent(), AdminApplicationsTable(), AdminApplicationsTableProps, B2bApplicationItem
 
 ### Community 369 - "admin/layout.tsx"
-Cohesion: 0.22
-Nodes (6): NAV_ITEMS, NavItem, SubItem, AdminAuthContext, AdminAuthContextValue, AdminAuthProvider()
+Cohesion: 0.21
+Nodes (9): AdminChrome(), NAV_ITEMS, NavItem, SubItem, AdminOrderContent(), AdminAuthContext, AdminAuthContextValue, AdminAuthProvider() (+1 more)
 
 ### Community 370 - "Core Visual Elements"
-Cohesion: 0.28
-Nodes (8): Color Palette, Colors, Core Visual Elements, Logo, Quick Checks, Typography, Visual Guidelines Template, Visual Identity Basics
+Cohesion: 0.18
+Nodes (10): Color Palette, Colors, Core Visual Elements, Logo, Logo, Quick Checks, Typography, Typography (+2 more)
 
 ### Community 371 - ".agents/skills/brand/scripts/sync-brand-to-tokens.cjs"
 Cohesion: 0.33
@@ -2172,8 +2196,8 @@ Cohesion: 0.22
 Nodes (8): Create connection, Create project (with database), Delete database, Delete project, endpoints, Get database, List projects, List regions
 
 ### Community 384 - "Core Visual Elements"
-Cohesion: 0.28
-Nodes (8): Color Palette, Colors, Core Visual Elements, Logo, Quick Checks, Typography, Visual Guidelines Template, Visual Identity Basics
+Cohesion: 0.18
+Nodes (10): Color Palette, Colors, Core Visual Elements, Logo, Logo, Quick Checks, Typography, Typography (+2 more)
 
 ### Community 385 - ".claude/skills/brand/scripts/sync-brand-to-tokens.cjs"
 Cohesion: 0.33
@@ -2184,8 +2208,8 @@ Cohesion: 0.28
 Nodes (8): CompletedProcess, Path, Regression tests for validate-tokens.cjs.  The validator used to skip any line c, A hardcoded hex on the same line as a var() token is still a violation., A line that references only tokens produces no false positives., _run(), test_flags_hardcoded_hex_sharing_line_with_token(), test_token_only_line_reports_no_violation()
 
 ### Community 387 - "Core Visual Elements"
-Cohesion: 0.28
-Nodes (8): Color Palette, Colors, Core Visual Elements, Logo, Quick Checks, Typography, Visual Guidelines Template, Visual Identity Basics
+Cohesion: 0.18
+Nodes (10): Color Palette, Colors, Core Visual Elements, Logo, Logo, Quick Checks, Typography, Typography (+2 more)
 
 ### Community 388 - "assets/skills/brand/scripts/sync-brand-to-tokens.cjs"
 Cohesion: 0.33
@@ -2240,7 +2264,7 @@ Cohesion: 0.25
 Nodes (8): 🐛 Bug Fixes, 🔧 CLI Improvements, 📝 Documentation Improvements, 🎨 New Color Palettes, 🏭 New Industry Reasoning Rules, ✨ New UI Styles, 🌍 Translations, Ways to Contribute
 
 ### Community 401 - "detect_domain"
-Cohesion: 0.43
+Cohesion: 0.39
 Nodes (3): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection
 
 ### Community 402 - "The Stack — why each tool is here"
@@ -2308,8 +2332,8 @@ Cohesion: 0.29
 Nodes (6): Animation Classes, Background Images, Base Structure, Chart.js Integration, CSS Variables Reference, HTML Slide Template
 
 ### Community 418 - "detect_domain"
-Cohesion: 0.43
-Nodes (3): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection
+Cohesion: 0.25
+Nodes (4): detect_domain(), Auto-detect the most relevant domain from query.      Matches are weighted by ke, TestDomainDetection, TestPersistence
 
 ### Community 419 - "detect_domain"
 Cohesion: 0.43
@@ -2436,8 +2460,8 @@ Cohesion: 0.40
 Nodes (4): Brand Guidelines Template, Document Structure, Extractable Fields, Usage
 
 ### Community 451 - "$type"
-Cohesion: 0.60
-Nodes (5): $type, $value, border, border, border
+Cohesion: 0.25
+Nodes (7): POST(), POST(), POST(), sendMagicLinkEmail(), SendMagicLinkEmailParams, SendProformaEmailParams, SendVerificationEmailParams
 
 ### Community 452 - "radius"
 Cohesion: 0.60
@@ -2471,17 +2495,21 @@ Nodes (4): Reporting a Vulnerability, Scope, Security Policy, Supported Versions
 Cohesion: 0.40
 Nodes (4): How to report, Inputs you need, Operating principle: assess the live experience first, The 7-phase review
 
+### Community 460 - "[orderId]/page.tsx"
+Cohesion: 0.29
+Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
+
 ### Community 461 - "$type"
-Cohesion: 0.60
-Nodes (5): $type, $value, 700, 700, 700
+Cohesion: 0.33
+Nodes (5): name, prisma, seed, private, version
 
 ### Community 462 - "$type"
 Cohesion: 0.60
 Nodes (5): $type, $value, border, border, border
 
 ### Community 463 - "md"
-Cohesion: 0.67
-Nodes (4): $type, $value, md, md
+Cohesion: 0.60
+Nodes (5): $type, $value, border, border, border
 
 ### Community 464 - ".claude/skills/ui-ux-pro-max/scripts/validate_data.py"
 Cohesion: 0.83
@@ -2500,20 +2528,20 @@ Cohesion: 0.67
 Nodes (4): xl, xl, $type, $value
 
 ### Community 468 - "12"
-Cohesion: 0.67
-Nodes (3): $type, $value, 12
+Cohesion: 0.60
+Nodes (5): $type, $value, 700, 700, 700
 
 ### Community 469 - "三个 data-scripts-templates 的区别.md"
-Cohesion: 0.50
-Nodes (3): 三处分别是什么, 可以只保留一个吗？, 推荐工作流
+Cohesion: 0.40
+Nodes (4): 三处 data / scripts / templates 的区别, 三处分别是什么, 可以只保留一个吗？, 推荐工作流
 
 ### Community 470 - "PULL_REQUEST_TEMPLATE.md"
 Cohesion: 0.50
 Nodes (3): Checklist, What does this PR change?, Why?
 
 ### Community 471 - "v2.0 新特性"
-Cohesion: 0.50
-Nodes (4): 161 条行业特定推理规则, v2.0 新特性, 智能设计系统生成, 设计系统生成的工作原理
+Cohesion: 0.60
+Nodes (5): radius, radius, radius, $type, $value
 
 ### Community 472 - "validate_file"
 Cohesion: 0.67
@@ -2560,12 +2588,16 @@ Cohesion: 0.50
 Nodes (4): 5a. Admin UI Redesign (Aug 1, evening session), Completed:, Design tokens (admin-only, do not apply to `/`, `/configure`, `/portal`), Verification performed:
 
 ### Community 496 - "2"
-Cohesion: 0.67
-Nodes (3): $type, $value, 2
+Cohesion: 0.60
+Nodes (5): lg, $type, $value, lg, lg
 
 ### Community 497 - "4"
 Cohesion: 0.67
-Nodes (3): $type, $value, 4
+Nodes (4): $type, $value, 50, 50
+
+### Community 498 - "padding-y"
+Cohesion: 0.67
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 499 - "8"
 Cohesion: 0.67
@@ -2577,15 +2609,15 @@ Nodes (3): destructive, $type, $value
 
 ### Community 501 - "destructive-foreground"
 Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
+Nodes (4): $type, $value, none, none
 
 ### Community 502 - "muted"
-Cohesion: 0.67
-Nodes (3): muted, $type, $value
+Cohesion: 0.50
+Nodes (4): 161 Industry-Specific Reasoning Rules, How Design System Generation Works, Intelligent Design System Generation, What's New in v2.0
 
 ### Community 503 - "primary-foreground"
-Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
+Cohesion: 0.50
+Nodes (3): ALLOWED_TYPES, CatalogImageUploader(), CatalogImageUploaderProps
 
 ### Community 504 - "ring"
 Cohesion: 0.67
@@ -2593,27 +2625,75 @@ Nodes (3): ring, $type, $value
 
 ### Community 505 - "secondary-foreground"
 Cohesion: 0.67
+Nodes (3): destructive, $type, $value
+
+### Community 519 - ".test_add_components_already_installed"
+Cohesion: 0.67
+Nodes (3): destructive-foreground, $type, $value
+
+### Community 520 - ".test_init_default_project_root"
+Cohesion: 0.67
+Nodes (3): muted, $type, $value
+
+### Community 525 - ".test_add_breakpoints"
+Cohesion: 0.67
+Nodes (3): primary-foreground, $type, $value
+
+### Community 526 - ".test_add_plugins_no_duplicates"
+Cohesion: 0.67
+Nodes (3): ring, $type, $value
+
+### Community 527 - ".test_recommend_plugins_nextjs"
+Cohesion: 0.67
 Nodes (3): secondary-foreground, $type, $value
 
+### Community 531 - ".test_init_javascript"
+Cohesion: 0.67
+Nodes (3): $type, $value, 16
+
+### Community 532 - ".test_write_config_invalid_path"
+Cohesion: 0.67
+Nodes (3): $type, $value, 1
+
+### Community 535 - ".test_base_config_structure"
+Cohesion: 0.67
+Nodes (3): $type, $value, 3
+
+### Community 605 - "foreground"
+Cohesion: 0.67
+Nodes (3): foreground, $type, $value
+
+### Community 606 - "muted-foreground"
+Cohesion: 0.67
+Nodes (3): muted-foreground, $type, $value
+
+### Community 607 - "primary"
+Cohesion: 0.67
+Nodes (3): primary, $type, $value
+
+### Community 608 - "primary-hover"
+Cohesion: 0.67
+Nodes (3): primary-hover, $type, $value
+
 ## Knowledge Gaps
-- **4088 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+4083 more)
+- **4186 isolated node(s):** `fs`, `path`, `fs`, `path`, `fs` (+4181 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **101 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **110 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `TailwindConfigGenerator` connect `TailwindConfigGenerator` to `.test_add_breakpoints`, `.test_add_plugins_no_duplicates`, `.test_recommend_plugins_nextjs`, `.test_init_default_typescript`, `.test_generate_javascript_config`, `.test_write_config`, `.test_init_javascript`, `.test_write_config_invalid_path`, `.test_init_framework`, `.test_custom_output_path`, `.test_base_config_structure`, `.generate_config_string`, `TestTailwindConfigGenerator`, `TestTailwindConfigGenerator`, `.agents/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `main`, `TestTailwindConfigGenerator`, `.claude/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `assets/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `._base_config`?**
+- **Why does `DesignSystemGenerator` connect `DesignSystemGenerator` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `BM25`, `src/ui-ux-pro-max/scripts/design_system.py`, `search`, `search`, `search`, `search`, `.claude/skills/ui-ux-pro-max/scripts/design_system.py`, `DesignSystemGenerator`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **Why does `BM25` connect `BM25` to `DesignSystemGenerator`, `.agents/skills/ui-ux-pro-max/scripts/tests/test_core.py`, `DesignSystemGenerator`, `detect_domain`, `detect_domain`, `detect_domain`, `BM25`, `assets/scripts/design_system.py`, `detect_domain`, `BM25`, `BM25`, `BM25`, `src/ui-ux-pro-max/scripts/design_system.py`, `search`, `search`, `search`, `search`, `search`, `DesignSystemGenerator`, `DesignSystemGenerator`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `dependencies` to `account/page.tsx`, `scripts`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `TailwindConfigGenerator` connect `TailwindConfigGenerator` to `.test_init_default_typescript`, `.test_generate_javascript_config`, `.test_write_config`, `.test_init_framework`, `.test_custom_output_path`, `.generate_config_string`, `TestTailwindConfigGenerator`, `TestTailwindConfigGenerator`, `.agents/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `main`, `TestTailwindConfigGenerator`, `.claude/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `assets/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py`, `._base_config`, `.test_generate_typescript_config`, `.test_generate_config_with_colors`, `.test_write_config_creates_content`, `.test_full_configuration_typescript`, `.test_default_content_paths_react`, `.test_add_colors`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `TailwindConfigGenerator` (e.g. with `TestGeneratedConfigIsValidJs` and `TestTailwindConfigGenerator`) actually correct?**
   _`TailwindConfigGenerator` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `ShadcnInstaller` (e.g. with `TestShadcnInstaller` and `TestShadcnInstaller`) actually correct?**
   _`ShadcnInstaller` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `fs`, `path`, `fs` to the rest of the system?**
-  _4088 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _4186 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `init.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.06111111111111111 - nodes in this community are weakly interconnected._
-- **Should `gray` be split into smaller, more focused modules?**
-  _Cohesion score 0.05370101596516691 - nodes in this community are weakly interconnected._

@@ -308,6 +308,8 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
       <GlobalCommandPalette
         isOpen={isPaletteOpen}
         onClose={() => setIsPaletteOpen(false)}
+        onOpen={() => setIsPaletteOpen(true)}
+        onOpenChange={setIsPaletteOpen}
       />
     </div>
   );

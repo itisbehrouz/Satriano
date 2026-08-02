@@ -207,6 +207,8 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
       <GlobalCommandPalette
         isOpen={isPaletteOpen}
         onClose={() => setIsPaletteOpen(false)}
+        onOpen={() => setIsPaletteOpen(true)}
+        onOpenChange={setIsPaletteOpen}
       />
     </header>
   );

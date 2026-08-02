@@ -7,6 +7,8 @@ import { Command } from "cmdk";
 interface GlobalCommandPaletteProps {
   isOpen?: boolean;
   onClose?: () => void;
+  onOpen?: () => void;
+  onOpenChange?: (open: boolean) => void;
 }
 
 interface CatalogProductItem {
@@ -27,6 +29,8 @@ interface OrderSummaryItem {
 export function GlobalCommandPalette({
   isOpen: externalIsOpen,
   onClose: externalOnClose,
+  onOpen: externalOnOpen,
+  onOpenChange: externalOnOpenChange,
 }: GlobalCommandPaletteProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [products, setProducts] = useState<CatalogProductItem[]>([]);
@@ -36,7 +40,12 @@ export function GlobalCommandPalette({
 
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
   const setIsOpen = (val: boolean) => {
-    if (externalOnClose && !val) {
+    if (externalOnOpenChange) {
+      externalOnOpenChange(val);
+    }
+    if (val && externalOnOpen) {
+      externalOnOpen();
+    } else if (!val && externalOnClose) {
       externalOnClose();
     }
     setInternalIsOpen(val);
@@ -45,8 +54,11 @@ export function GlobalCommandPalette({
   // Listen for global Cmd+K / Ctrl+K / Alt+K and Escape keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Toggle palette on Cmd+K, Ctrl+K, or Alt+K (Option+K)
-      if ((e.metaKey || e.ctrlKey || e.altKey) && e.key.toLowerCase() === "k") {
+      const isK = e.code === "KeyK" || e.key.toLowerCase() === "k";
+      const isModifierPressed = e.metaKey || e.ctrlKey || e.altKey;
+
+      // Toggle palette on Cmd+K, Ctrl+K, or Alt+K (Option+K on Mac)
+      if (isModifierPressed && isK) {
         e.preventDefault();
         e.stopPropagation();
         setIsOpen(!isOpen);
@@ -54,7 +66,7 @@ export function GlobalCommandPalette({
       }
 
       // Close palette on Escape key when open
-      if (e.key === "Escape" && isOpen) {
+      if ((e.code === "Escape" || e.key === "Escape") && isOpen) {
         e.preventDefault();
         e.stopPropagation();
         setIsOpen(false);
@@ -63,7 +75,7 @@ export function GlobalCommandPalette({
 
     window.addEventListener("keydown", handleKeyDown, true);
     return () => window.removeEventListener("keydown", handleKeyDown, true);
-  }, [isOpen]);
+  }, [isOpen, externalOnOpen, externalOnClose, externalOnOpenChange]);
 
   // Fetch real catalog & orders data when command palette is opened
   useEffect(() => {
