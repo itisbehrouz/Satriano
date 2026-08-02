@@ -144,16 +144,6 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
                   onLogout={handleSignOut}
                 />
               </div>
-
-              {/* Dedicated Sign Out Button */}
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="border border-[#8DA0C4] hover:border-[#F0B94A] text-[#E8ECF3] hover:text-[#F0B94A] text-xs font-semibold px-3 py-1.5 transition-colors cursor-pointer rounded-none shadow-none hidden sm:inline-flex items-center gap-1.5"
-              >
-                <span className="material-symbols-outlined text-sm">logout</span>
-                <span>Sign Out</span>
-              </button>
             </>
           ) : !loadingSession ? (
             <Link
