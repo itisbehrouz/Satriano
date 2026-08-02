@@ -714,3 +714,22 @@ checkpoint before being considered done, regardless of which agent
   - Added direct sub-navigation entries under `Wholesale Manager`: `Supplier Management` (`/admin/wholesale/suppliers`), `Inventory by Category` (`/admin/wholesale/inventory`), `Pricing Manager`, `Inventory by Size`, `Price Offer Inbox`, and `Wholesale Orders`.
 - **Vitest Unit Test Suite Verification**:
   - Verified 100% pass rate across 27 test files and 132 unit tests.
+
+---
+
+## 21. Supplier-Linked "Add Wholesale Product" Flow (Aug 2, 2026)
+
+- **Prisma Data Model Extension (`prisma/schema.prisma`)**:
+  - Added `WholesaleProduct`, `WholesaleProductImage`, `WholesaleStock`, `Supplier`, `SupplierStatus`, and `WholesaleProductStatus` models & enums.
+  - Enforced strict privacy selection rules (public endpoints select product fields excluding `supplier` / `supplierId`).
+- **Admin UI `AddWholesaleProductModal.tsx`**:
+  - Built modal mounted from both `/admin/wholesale/inventory` (`+ Add Wholesale Product` button) and `/admin/wholesale/suppliers` -> `SupplierDetailModal` (`+ ADD PRODUCT` button pre-filling `supplierId`).
+  - Fields: Supplier dropdown (only `ACTIVE` selectable, `PENDING_VERIFICATION` greyed out), Category dropdown, Product Name, SKU, Description, `ProductImageUploader.tsx` (drag & drop, reorder, 2MB-5MB validation), Cost Price ($) + Markup % -> live computed Sell Price with override toggle and negative margin warning, initial Size/Stock matrix steppers (`36` to `50`), and `ACTIVE`/`INACTIVE` status toggle.
+- **Admin API Endpoints (`/api/admin/wholesale/products`)**:
+  - Implemented `POST /api/admin/wholesale/products` (creates product, nested images, and size stock in single Prisma transaction).
+  - Implemented `GET /api/admin/wholesale/products` (supports `supplierId`, `categoryId`, `status` filters).
+  - Implemented `GET /api/admin/wholesale/products/[id]` & `PATCH /api/admin/wholesale/products/[id]`.
+  - Implemented `POST /api/admin/wholesale/products/[id]/images` & `DELETE /api/admin/wholesale/products/[id]/images/[imageId]`.
+- **Vitest Test Suite & Privacy Verification**:
+  - Created `app/api/admin/wholesale/products/products.test.ts`.
+  - Verified 100% pass rate across 28 test files and 136 unit tests.
