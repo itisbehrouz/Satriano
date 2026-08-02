@@ -193,7 +193,7 @@ export default async function HomePage() {
               {/* Right Column: Hero Visual Card */}
               <div className="lg:col-span-5 relative">
                 <div className="relative rounded-none overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md group">
-                  <div className="aspect-[4/3] w-full relative">
+                  <div className="aspect-[4/3] w-full relative bg-[var(--color-bg)] overflow-hidden">
                     <Image
                       src="/hero-atelier.png"
                       alt="Satriano Atelier European B2B Garment Manufacturing"
@@ -202,11 +202,10 @@ export default async function HomePage() {
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 1024px) 100vw, 45vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent opacity-80" />
                   </div>
 
-                  {/* Overlay Spec Badge */}
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-none bg-[var(--color-bg)]/90 backdrop-blur-md border border-[var(--color-border)] flex items-center justify-between">
+                  {/* Hero Spec Badge Footer */}
+                  <div className="p-4 bg-[var(--color-surface)] border-t border-[var(--color-border)] flex items-center justify-between">
                     <div>
                       <p className="text-[11px] uppercase tracking-widest text-[var(--color-accent)] font-semibold">Craftsmanship & CAD Precision</p>
                       <p className="text-sm font-bold text-[var(--color-text-primary)] mt-0.5">Bespoke Apparel & Corporate Uniforms</p>
