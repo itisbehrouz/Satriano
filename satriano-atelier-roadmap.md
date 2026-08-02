@@ -733,3 +733,6 @@ checkpoint before being considered done, regardless of which agent
 - **Vitest Test Suite & Privacy Verification**:
   - Created `app/api/admin/wholesale/products/products.test.ts`.
   - Verified 100% pass rate across 28 test files and 136 unit tests.
+- **Production E2E Verification (Aug 2, 2026)**:
+  - All 9 production E2E assertions passed cleanly on live Supabase DB and endpoints (Happy path create, Duplicate SKU 409 rejection, Empty stock 400 rejection, Inactive supplier 400 rejection, Negative margin warning trigger, Admin inventory listing, Public catalog privacy boundary assertion [0 supplier keys exposed], Inactive status public hiding, Image add/remove sort order consistency).
+  - Mandatory zero-residue cleanup executed (`productResidueCount: 0`, `supplierResidueCount: 0`).

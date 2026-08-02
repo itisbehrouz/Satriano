@@ -175,6 +175,12 @@ model Fabric {
   @@unique([name, productId])
 }
 
+enum OrderType {
+  M2O
+  WHOLESALE
+  MADE_TO_ORDER
+}
+
 model Order {
   id                       String      @id @default(cuid())
   companyId                String
@@ -183,6 +189,7 @@ model Order {
   totalCents               Int         @default(0)
   customerTargetPriceCents Int?
   finalPriceCents          Int?
+  orderType                OrderType?  @default(M2O)
   createdAt                DateTime    @default(now())
   updatedAt                DateTime    @updatedAt
 
