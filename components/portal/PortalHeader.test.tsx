@@ -29,7 +29,7 @@ describe("PortalHeader Component", () => {
     await act(async () => {
       render(<PortalHeader initialCompanyName="ACME Corp" />);
     });
-    expect(screen.getByAltText("Satriano Atelier")).toBeInTheDocument();
+    expect(screen.getAllByAltText("Satriano Atelier")[0]).toBeInTheDocument();
   });
 
   it("renders main navigation links when logged in", async () => {
