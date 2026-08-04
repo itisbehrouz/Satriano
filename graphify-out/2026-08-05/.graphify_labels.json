@@ -83,6 +83,9 @@
   "81": "sw.js",
   "82": "payment.test.ts",
   "83": "products/[id]/route.ts",
+  "84": "products/route.ts",
   "85": "api/upload/route.ts",
-  "86": "ConfiguratorSuccess.tsx"
+  "86": "ConfiguratorSuccess.tsx",
+  "87": "[imageId]/route.ts",
+  "88": "images/route.ts"
 }

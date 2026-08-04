@@ -710,9 +710,9 @@
     "semantic_hash": "8ce8c3b90e65ea870c94f21413f799fa"
   },
   "components/portal/account/BillingTab.tsx": {
-    "mtime": 1785880330.0172281,
-    "ast_hash": "2a017993325977fb6f4c21b0b3834e50",
-    "semantic_hash": ""
+    "mtime": 1785679164.042276,
+    "ast_hash": "59974032c08ab856486ffa5d709a6062",
+    "semantic_hash": "59974032c08ab856486ffa5d709a6062"
   },
   "components/portal/account/CompanyInfoTab.tsx": {
     "mtime": 1785679838.2263012,
@@ -1397,11 +1397,6 @@
   "public/images/slider/tops.webp": {
     "mtime": 1785875539.2079403,
     "ast_hash": "d03cced81a62fa866891e1e4ad02dffe",
-    "semantic_hash": ""
-  },
-  "components/portal/account/InvoicePreviewModal.tsx": {
-    "mtime": 1785880323.9428368,
-    "ast_hash": "a05007749b38187d7d4a9a759d55ab1b",
     "semantic_hash": ""
   }
 }

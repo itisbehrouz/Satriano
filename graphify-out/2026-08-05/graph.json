@@ -681,8 +681,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 87,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "[imageid]/route.ts"
     },
     {
@@ -692,8 +692,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 87,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -703,8 +703,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 87,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "delete()"
     },
     {
@@ -714,8 +714,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 88,
+      "community_name": "images/route.ts",
       "norm_label": "images/route.ts"
     },
     {
@@ -725,8 +725,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 88,
+      "community_name": "images/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -736,8 +736,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 88,
+      "community_name": "images/route.ts",
       "norm_label": "post()"
     },
     {
@@ -747,8 +747,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "products/[id]/route.ts"
     },
     {
@@ -758,8 +758,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -769,8 +769,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_get",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "get()"
     },
     {
@@ -780,8 +780,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_patch",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "patch()"
     },
     {
@@ -802,8 +802,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 84,
+      "community_name": "products/route.ts",
       "norm_label": "products/route.ts"
     },
     {
@@ -813,8 +813,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 84,
+      "community_name": "products/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -824,8 +824,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_get",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 84,
+      "community_name": "products/route.ts",
       "norm_label": "get()"
     },
     {
@@ -835,8 +835,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 84,
+      "community_name": "products/route.ts",
       "norm_label": "post()"
     },
     {
@@ -967,8 +967,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_resend_magic_link_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "resend-magic-link/route.ts"
     },
     {
@@ -978,8 +978,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_customer_resend_magic_link_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "post()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1022,8 +1022,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "post()"
     },
     {
@@ -1088,8 +1088,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "create-session/route.ts"
     },
     {
@@ -1099,8 +1099,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "post()"
     },
     {
@@ -1110,8 +1110,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_payment_test",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "payment.test.ts"
     },
     {
@@ -1121,8 +1121,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_payment_test_createdcompanyids",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1132,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "webhook/route.ts"
     },
     {
@@ -1143,8 +1143,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "post()"
     },
     {
@@ -1176,8 +1176,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_portal_magic_link_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "magic-link/route.ts"
     },
     {
@@ -1187,8 +1187,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_portal_magic_link_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "post()"
     },
     {
@@ -1253,7 +1253,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1264,7 +1264,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1495,8 +1495,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guest-confirmation/page.tsx"
     },
     {
@@ -1506,8 +1506,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationcontent",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestconfirmationcontent()"
     },
     {
@@ -1517,8 +1517,8 @@
       "source_location": "L104",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationpage",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestconfirmationpage()"
     },
     {
@@ -1528,8 +1528,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_page",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "configure/page.tsx"
     },
     {
@@ -1539,8 +1539,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -1550,8 +1550,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_success_page",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "success/page.tsx"
     },
     {
@@ -1561,8 +1561,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesscontent",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorsuccesscontent()"
     },
     {
@@ -1572,8 +1572,8 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesspage",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorsuccesspage()"
     },
     {
@@ -1583,8 +1583,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "konfigurator/[productid]/page.tsx"
     },
     {
@@ -1594,8 +1594,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpageprops",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "productconfiguratorpageprops"
     },
     {
@@ -1605,8 +1605,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2001,8 +2001,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "portal/layout.tsx"
     },
     {
@@ -2012,8 +2012,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "portallayout()"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_proforma_orderid_page",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "[orderid]/page.tsx"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_proforma_orderid_page_proformapageprops",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "proformapageprops"
     },
     {
@@ -2210,8 +2210,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_proforma_orderid_page_proformapage",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "proformapage()"
     },
     {
@@ -2287,8 +2287,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2298,8 +2298,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "wholesalepage()"
     },
     {
@@ -4124,8 +4124,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "configuratorclient()"
     },
     {
@@ -4135,8 +4135,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorportal.test.tsx"
     },
     {
@@ -4146,8 +4146,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test_mockpush",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "mockpush"
     },
     {
@@ -4509,8 +4509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodal.tsx"
     },
     {
@@ -4520,8 +4520,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodalprops",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodalprops"
     },
     {
@@ -4531,8 +4531,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodal",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodal()"
     },
     {
@@ -4707,8 +4707,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 17,
+      "community_name": "App Layout Baskervville",
       "norm_label": "cookieconsentmodal.tsx"
     },
     {
@@ -4718,8 +4718,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_tabtype",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 17,
+      "community_name": "App Layout Baskervville",
       "norm_label": "tabtype"
     },
     {
@@ -4729,8 +4729,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_cookiecategorystate",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 17,
+      "community_name": "App Layout Baskervville",
       "norm_label": "cookiecategorystate"
     },
     {
@@ -4751,8 +4751,8 @@
       "source_location": "L274",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_opencookiepreferencesbutton",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 17,
+      "community_name": "App Layout Baskervville",
       "norm_label": "opencookiepreferencesbutton()"
     },
     {
@@ -4762,8 +4762,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_legalpageshell",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legalpageshell.tsx"
     },
     {
@@ -4784,8 +4784,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_layout_legalpageshell_legalpageshellprops",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legalpageshellprops"
     },
     {
@@ -4795,8 +4795,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_layout_legalpageshell_legal_documents",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legal_documents"
     },
     {
@@ -4872,8 +4872,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_sitefooter",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter.tsx"
     },
     {
@@ -4883,8 +4883,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_layout_sitefooter_navigation_links",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "navigation_links"
     },
     {
@@ -4894,8 +4894,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_layout_sitefooter_legal_compliance_links",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legal_compliance_links"
     },
     {
@@ -4905,8 +4905,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "components_layout_sitefooter_quality_operations_links",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "quality_operations_links"
     },
     {
@@ -4916,8 +4916,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter()"
     },
     {
@@ -4971,8 +4971,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_transactionalheader",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "transactionalheader.tsx"
     },
     {
@@ -4982,8 +4982,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_layout_transactionalheader_transactionalheader",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "transactionalheader()"
     },
     {
@@ -5158,19 +5158,19 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_account_billingtab",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "billingtab.tsx"
     },
     {
       "label": "BillingTab()",
       "file_type": "code",
       "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L7",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_account_billingtab_billingtab",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "billingtab()"
     },
     {
@@ -5205,50 +5205,6 @@
       "community": 10,
       "community_name": "Page React Account",
       "norm_label": "companyinfotab()"
-    },
-    {
-      "label": "InvoicePreviewModal.tsx",
-      "file_type": "code",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "components_portal_account_invoicepreviewmodal",
-      "community": 10,
-      "community_name": "Page React Account",
-      "norm_label": "invoicepreviewmodal.tsx"
-    },
-    {
-      "label": "InvoiceItem",
-      "file_type": "code",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "components_portal_account_invoicepreviewmodal_invoiceitem",
-      "community": 10,
-      "community_name": "Page React Account",
-      "norm_label": "invoiceitem"
-    },
-    {
-      "label": "InvoicePreviewModalProps",
-      "file_type": "code",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "components_portal_account_invoicepreviewmodal_invoicepreviewmodalprops",
-      "community": 10,
-      "community_name": "Page React Account",
-      "norm_label": "invoicepreviewmodalprops"
-    },
-    {
-      "label": "InvoicePreviewModal()",
-      "file_type": "code",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "components_portal_account_invoicepreviewmodal_invoicepreviewmodal",
-      "community": 10,
-      "community_name": "Page React Account",
-      "norm_label": "invoicepreviewmodal()"
     },
     {
       "label": "SettingsTab.tsx",
@@ -5774,8 +5730,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -5785,8 +5741,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "customersession"
     },
     {
@@ -5796,8 +5752,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "usecustomersession()"
     },
     {
@@ -5950,8 +5906,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customer-session.ts"
     },
     {
@@ -5961,8 +5917,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customersession"
     },
     {
@@ -5972,8 +5928,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "getcustomersession()"
     },
     {
@@ -6115,8 +6071,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -6137,8 +6093,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_email",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "email.ts"
     },
     {
@@ -6148,8 +6104,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_email_sendproformaemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "sendproformaemailparams"
     },
     {
@@ -6170,8 +6126,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "sendmagiclinkemailparams"
     },
     {
@@ -6181,8 +6137,8 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemail",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "sendmagiclinkemail()"
     },
     {
@@ -6192,8 +6148,8 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "lib_email_sendverificationemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "sendverificationemailparams"
     },
     {
@@ -6214,8 +6170,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_formatcurrency_test",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "formatcurrency.test.ts"
     },
     {
@@ -6225,8 +6181,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_formatcurrency",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "formatcurrency.ts"
     },
     {
@@ -6236,8 +6192,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_formatcurrency_usdformatter",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "usdformatter"
     },
     {
@@ -6247,8 +6203,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_formatcurrency_formatcents",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 12,
+      "community_name": "Orders Api Route",
       "norm_label": "formatcents()"
     },
     {
@@ -6577,8 +6533,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_stripe",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "stripe.ts"
     },
     {
@@ -19615,47 +19571,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L7",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_portal_account_billingtab",
       "target": "components_portal_account_billingtab_billingtab",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_billingtab",
-      "target": "components_portal_account_invoicepreviewmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_billingtab",
-      "target": "components_portal_account_invoicepreviewmodal_invoiceitem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_billingtab",
-      "target": "components_portal_account_invoicepreviewmodal_invoicepreviewmodal",
       "confidence_score": 1.0
     },
     {
@@ -19688,7 +19608,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/portal/account/BillingTab.tsx",
-      "source_location": "L160",
+      "source_location": "L148",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_portal_account_billingtab_billingtab",
@@ -19715,75 +19635,6 @@
       "source": "components_portal_account_companyinfotab",
       "target": "components_portal_account_companyinfotab_companyinfotabprops",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal",
-      "target": "components_portal_account_invoicepreviewmodal_invoiceitem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal",
-      "target": "components_portal_account_invoicepreviewmodal_invoicepreviewmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal",
-      "target": "components_portal_account_invoicepreviewmodal_invoicepreviewmodalprops",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal",
-      "target": "lib_formatcurrency",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal",
-      "target": "lib_formatcurrency_formatcents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/portal/account/InvoicePreviewModal.tsx",
-      "source_location": "L121",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_portal_account_invoicepreviewmodal_invoicepreviewmodal",
-      "target": "lib_formatcurrency_formatcents"
     },
     {
       "relation": "contains",
@@ -23478,5 +23329,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d7c33cd165cbcccab4b9dd52de3bc9873f7c615e"
+  "built_at_commit": "70516587715f86e5c77c466e3c51df914e6a272b"
 }
