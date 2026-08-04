@@ -163,16 +163,35 @@ model Fabric {
   name          String
   description   String?
   imageUrl      String?
+  /// @deprecated Legacy single colourway field. Maintained for production row compatibility. Use FabricColor relation instead.
   colorway      String?
   priceMinCents Int
   priceMaxCents Int
+  /// @deprecated Setup fee removed from business model. Maintained for legacy row compatibility only.
   setupFeeCents Int      @default(0)
+  moqPerColor   Int      @default(20)
   active        Boolean  @default(true)
   createdAt     DateTime @default(now())
 
+  colors     FabricColor[]
   orderLines OrderLine[]
 
   @@unique([name, productId])
+}
+
+model FabricColor {
+  id        String   @id @default(cuid())
+  fabricId  String
+  fabric    Fabric   @relation(fields: [fabricId], references: [id], onDelete: Cascade)
+  name      String
+  hex       String?
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  orderLines OrderLine[]
+
+  @@unique([fabricId, name])
 }
 
 enum OrderType {
@@ -185,6 +204,7 @@ model Order {
   id                       String      @id @default(cuid())
   companyId                String
   status                   OrderStatus @default(PENDING_REVIEW)
+  /// @deprecated Setup fee removed from business model. Maintained for legacy row compatibility only.
   setupFeeCents            Int         @default(0)
   totalCents               Int         @default(0)
   customerTargetPriceCents Int?
@@ -201,9 +221,11 @@ model Order {
 }
 
 model OrderLine {
-  id             String      @id @default(cuid())
+  id             String       @id @default(cuid())
   orderId        String
   fabricId       String
+  colorId        String?
+  selectedColor  String?
   productId      String?
   fitId          String?
   selectedFit    String?
@@ -213,11 +235,12 @@ model OrderLine {
   quantity       Int
   unitPriceCents Int
 
-  order      Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  fabric     Fabric      @relation(fields: [fabricId], references: [id])
-  product    Product?    @relation(fields: [productId], references: [id], onDelete: SetNull)
-  fit        Fit?        @relation(fields: [fitId], references: [id], onDelete: SetNull)
-  sizeSystem SizeSystem? @relation(fields: [sizeSystemId], references: [id], onDelete: SetNull)
+  order      Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fabric     Fabric       @relation(fields: [fabricId], references: [id])
+  color      FabricColor? @relation(fields: [colorId], references: [id], onDelete: SetNull)
+  product    Product?     @relation(fields: [productId], references: [id], onDelete: SetNull)
+  fit        Fit?         @relation(fields: [fitId], references: [id], onDelete: SetNull)
+  sizeSystem SizeSystem?  @relation(fields: [sizeSystemId], references: [id], onDelete: SetNull)
 }
 
 model LogoAsset {
