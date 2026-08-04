@@ -26,30 +26,43 @@ export function FitPicker({ fits, selectedFitId, onSelect }: FitPickerProps) {
             onClick={() => onSelect(fit.id)}
             className={`border rounded-none p-4 cursor-pointer transition-all flex flex-col justify-between ${
               isSelected
-                ? "border-[#2E5AAC] bg-[#E6F1FB]/30 ring-1 ring-[#2E5AAC]"
-                : "border-[#D1D5DB] bg-white hover:border-[#2E5AAC]/60"
+                ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 ring-1 ring-[var(--color-accent)] text-[var(--color-text-primary)]"
+                : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] hover:border-[var(--color-accent)]/50"
             }`}
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <span className="font-semibold text-sm text-[#1A2233] block">
+                <span className="font-bold text-sm text-[var(--color-text-primary)] block">
                   {fit.name}
                 </span>
-                <span className="text-[10px] font-mono uppercase text-[#2E5AAC] font-semibold bg-[#E6F1FB] px-2 py-0.5 rounded-none inline-block mt-1">
+                <span className="text-[10px] font-mono uppercase text-[var(--color-accent)] font-semibold bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 px-2 py-0.5 rounded-none inline-block mt-1">
                   {fit.code}
                 </span>
               </div>
-              <input
-                type="radio"
-                name="garment-fit"
-                checked={isSelected}
-                onChange={() => onSelect(fit.id)}
-                className="mt-1 h-4 w-4 text-[#2E5AAC] focus:ring-[#2E5AAC]"
-                aria-label={fit.name}
-              />
+              <div className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="garment-fit"
+                  checked={isSelected}
+                  onChange={() => onSelect(fit.id)}
+                  className="sr-only"
+                  aria-label={fit.name}
+                />
+                <div className={`w-5 h-5 rounded-none border flex items-center justify-center transition-colors ${
+                  isSelected
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-white"
+                    : "border-[var(--color-border)] bg-[var(--color-bg)]"
+                }`}>
+                  {isSelected && (
+                    <span className="material-symbols-outlined text-xs font-bold">
+                      check
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
             {fit.description && (
-              <p className="text-xs text-[#5B6B85] mt-2 leading-relaxed">
+              <p className="text-xs text-[var(--color-text-secondary)] mt-3 leading-relaxed">
                 {fit.description}
               </p>
             )}

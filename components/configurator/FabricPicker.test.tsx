@@ -11,7 +11,6 @@ const fabrics: FabricOption[] = [
     imageUrl: null,
     priceMinCents: 1500,
     priceMaxCents: 2000,
-    setupFeeCents: 15000,
   },
   {
     id: "fabric-organic",
@@ -20,7 +19,6 @@ const fabrics: FabricOption[] = [
     imageUrl: null,
     priceMinCents: 1900,
     priceMaxCents: 2400,
-    setupFeeCents: 15000,
   },
 ];
 
