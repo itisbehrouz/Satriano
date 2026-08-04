@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { formatCents } from "@/lib/formatCurrency";
+import { InvoicePreviewModal, type InvoiceItem } from "./InvoicePreviewModal";
 
 export function BillingTab() {
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -9,6 +10,7 @@ export function BillingTab() {
     "Satriano Garment Trading LLC\nTax Registration (TRN): 100485930200003\nBuilding 4, Design District (d3)\nDubai, United Arab Emirates"
   );
   const [tempAddress, setTempAddress] = useState(address);
+  const [previewInvoice, setPreviewInvoice] = useState<InvoiceItem | null>(null);
 
   // Mock invoice entries
   const invoices = [
@@ -142,7 +144,17 @@ export function BillingTab() {
             <tbody className="divide-y divide-[var(--color-border)]">
               {invoices.map((inv) => (
                 <tr key={inv.id} className="hover:bg-[var(--color-surface)]/60 transition-colors">
-                  <td className="p-3 font-bold text-[var(--color-text-primary)]">{inv.invoiceNo}</td>
+                  <td className="p-3 font-bold">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewInvoice(inv)}
+                      className="text-[var(--color-accent)] hover:underline font-bold text-left cursor-pointer inline-flex items-center gap-1"
+                      title="Click to preview invoice"
+                    >
+                      <span className="material-symbols-outlined text-xs">visibility</span>
+                      <span>{inv.invoiceNo}</span>
+                    </button>
+                  </td>
                   <td className="p-3 text-[var(--color-text-secondary)]">{inv.date}</td>
                   <td className="p-3 text-right text-[var(--color-text-primary)] font-bold tabular-nums">
                     {formatCents(inv.amountCents)}
@@ -175,6 +187,13 @@ export function BillingTab() {
           </table>
         </div>
       </div>
+
+      <InvoicePreviewModal
+        invoice={previewInvoice}
+        billingAddress={address}
+        isOpen={Boolean(previewInvoice)}
+        onClose={() => setPreviewInvoice(null)}
+      />
     </div>
   );
 }
