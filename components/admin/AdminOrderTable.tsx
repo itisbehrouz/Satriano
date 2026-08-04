@@ -8,7 +8,7 @@ export interface AdminOrder {
   id: string;
   status: OrderStatus;
   totalCents: number;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   customerTargetPriceCents?: number | null;
   finalPriceCents?: number | null;
   createdAt: string;

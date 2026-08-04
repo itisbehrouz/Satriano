@@ -11,7 +11,7 @@ export interface FabricItem {
   colorway?: string | null;
   priceMinCents: number;
   priceMaxCents: number;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   active: boolean;
   productName?: string;
   categoryName?: string;
@@ -157,7 +157,6 @@ export function FabricPricingTree({
                 <th className="py-3 px-5">Fabric Line &amp; Variant</th>
                 <th className="py-3 px-5">Associated Product Spec</th>
                 <th className="py-3 px-5">Unit Price Tiering</th>
-                <th className="py-3 px-5">Setup Fee</th>
                 <th className="py-3 px-5 text-center">Status</th>
                 <th className="py-3 px-5 text-right">Action</th>
               </tr>
@@ -214,13 +213,6 @@ export function FabricPricingTree({
                         ${(fab.priceMinCents / 100).toFixed(2)} - ${(fab.priceMaxCents / 100).toFixed(2)}
                       </span>
                       <span className="text-[11px] text-[var(--color-text-secondary)] block font-sans">per unit</span>
-                    </td>
-
-                    {/* Setup Fee */}
-                    <td className="py-4 px-5 align-top font-mono">
-                      <span className="font-semibold text-[var(--color-text-primary)]">
-                        ${(fab.setupFeeCents / 100).toFixed(2)}
-                      </span>
                     </td>
 
                     {/* Status Badge & Toggle */}

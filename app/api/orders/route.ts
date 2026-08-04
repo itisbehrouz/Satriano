@@ -99,7 +99,7 @@ export async function POST(request: Request) {
     data: {
       companyId: company.id,
       status: "PENDING_REVIEW",
-      setupFeeCents: totalOrderSetupFeeCents,
+      setupFeeCents: 0,
       totalCents: 0, // Set to 0 until admin feasibility review sets finalPriceCents
       customerTargetPriceCents: customerTargetPriceCents || null,
       lines: {

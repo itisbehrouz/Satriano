@@ -41,7 +41,7 @@ describe("Order History Page & Components (/portal/orders)", () => {
                   {
                     id: "ord-101",
                     status: "PENDING_REVIEW",
-                    setupFeeCents: 5000,
+                    setupFeeCents: 0,
                     totalCents: 15000,
                     customerTargetPriceCents: 15000,
                     createdAt: "2026-08-01T10:00:00.000Z",

@@ -30,8 +30,8 @@ describe("Payment API Routes", () => {
       data: {
         companyId: company.id,
         status: "PROFORMA_SENT",
-        setupFeeCents: 15000,
-        totalCents: 570000,
+        setupFeeCents: 0,
+        totalCents: 555000,
         lines: {
           create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1850 }],
         },
@@ -70,8 +70,8 @@ describe("Payment API Routes", () => {
       data: {
         companyId: company.id,
         status: "PROFORMA_SENT",
-        setupFeeCents: 15000,
-        totalCents: 570000,
+        setupFeeCents: 0,
+        totalCents: 555000,
         lines: {
           create: [{ fabricId: fabric.id, size: "M", quantity: 300, unitPriceCents: 1850 }],
         },

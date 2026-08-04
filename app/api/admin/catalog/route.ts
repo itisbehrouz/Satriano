@@ -236,7 +236,7 @@ export async function POST(request: Request) {
               colorway: initialFabric.colorway?.trim() || null,
               priceMinCents: initialFabric.priceMinCents,
               priceMaxCents: initialFabric.priceMaxCents,
-              setupFeeCents: typeof initialFabric.setupFeeCents === "number" ? initialFabric.setupFeeCents : 0,
+              setupFeeCents: 0,
             },
           },
           ...(Array.isArray(fitIds) && fitIds.length > 0
@@ -374,7 +374,6 @@ export async function PATCH(request: Request) {
           ...(typeof data.active === "boolean" ? { active: data.active } : {}),
           ...(typeof data.priceMinCents === "number" ? { priceMinCents: data.priceMinCents } : {}),
           ...(typeof data.priceMaxCents === "number" ? { priceMaxCents: data.priceMaxCents } : {}),
-          ...(typeof data.setupFeeCents === "number" ? { setupFeeCents: data.setupFeeCents } : {}),
         },
       });
       return NextResponse.json({ success: true, fabric: updated });

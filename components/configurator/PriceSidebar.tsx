@@ -6,7 +6,7 @@ interface PriceSidebarProps {
     name: string;
     priceMinCents: number;
     priceMaxCents: number;
-    setupFeeCents: number;
+    setupFeeCents?: number;
   };
   sizeQuantities: SizeQuantity[];
   customerTargetPrice?: string;
@@ -63,12 +63,6 @@ export function PriceSidebar({
           <span className="text-[var(--color-text-secondary)]">Fabric Range ({fabric.name})</span>
           <span className="font-semibold text-[var(--color-text-primary)] tabular-nums text-xs">
             {formatCents(fabric.priceMinCents)} – {formatCents(fabric.priceMaxCents)} / unit
-          </span>
-        </div>
-        <div className="flex justify-between items-center border-b border-[var(--color-border)] pb-2">
-          <span className="text-[var(--color-text-secondary)]">Setup & Branding Fee</span>
-          <span className="font-semibold text-[var(--color-text-primary)] tabular-nums">
-            {formatCents(result.setupFeeCents)}
           </span>
         </div>
         <div className="flex justify-between items-center border-b border-[var(--color-border)] pb-2">

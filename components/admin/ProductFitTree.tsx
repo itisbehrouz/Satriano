@@ -14,7 +14,7 @@ export interface Fabric {
   name: string;
   priceMinCents: number;
   priceMaxCents: number;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   active: boolean;
 }
 

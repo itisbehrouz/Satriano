@@ -7,7 +7,7 @@ export interface PricingInput {
   fabric: {
     priceMinCents: number;
     priceMaxCents: number;
-    setupFeeCents: number;
+    setupFeeCents?: number;
   };
   sizeQuantities: SizeQuantity[];
 }
@@ -50,7 +50,7 @@ export function computeOrderPricing({ fabric, sizeQuantities }: PricingInput): P
   const totalUnits = lineItems.reduce((sum, line) => sum + line.quantity, 0);
   const estimatedSubtotalMinCents = totalUnits * fabric.priceMinCents;
   const estimatedSubtotalMaxCents = totalUnits * fabric.priceMaxCents;
-  const setupFeeCents = totalUnits > 0 ? fabric.setupFeeCents : 0;
+  const setupFeeCents = 0;
 
   return {
     lineItems,
@@ -59,8 +59,8 @@ export function computeOrderPricing({ fabric, sizeQuantities }: PricingInput): P
     priceMaxCents: fabric.priceMaxCents,
     estimatedSubtotalMinCents,
     estimatedSubtotalMaxCents,
-    setupFeeCents,
-    estimatedTotalMinCents: estimatedSubtotalMinCents + setupFeeCents,
-    estimatedTotalMaxCents: estimatedSubtotalMaxCents + setupFeeCents,
+    setupFeeCents: 0,
+    estimatedTotalMinCents: estimatedSubtotalMinCents,
+    estimatedTotalMaxCents: estimatedSubtotalMaxCents,
   };
 }

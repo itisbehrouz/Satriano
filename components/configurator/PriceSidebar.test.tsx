@@ -7,22 +7,21 @@ describe("PriceSidebar", () => {
   it("renders estimated price range and totals: Pique Cotton ($15-$20), 300 units", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000, setupFeeCents: 15000 }}
+        fabric={{ name: "Pique Cotton", priceMinCents: 1500, priceMaxCents: 2000 }}
         sizeQuantities={[{ size: "M", quantity: 300 }]}
       />,
     );
 
     expect(screen.getByText(/fabric range \(pique cotton\)/i)).toBeInTheDocument();
     expect(screen.getByText("$15.00 – $20.00 / unit")).toBeInTheDocument();
-    expect(screen.getByText("$150.00")).toBeInTheDocument();
     expect(screen.getByText("300")).toBeInTheDocument();
-    expect(screen.getByText("$4,650.00 – $6,150.00")).toBeInTheDocument();
+    expect(screen.getByText("$4,500.00 – $6,000.00")).toBeInTheDocument();
   });
 
   it("renders estimated total range from a multi-size order", () => {
     render(
       <PriceSidebar
-        fabric={{ name: "Custom", priceMinCents: 4000, priceMaxCents: 5000, setupFeeCents: 25000 }}
+        fabric={{ name: "Custom", priceMinCents: 4000, priceMaxCents: 5000 }}
         sizeQuantities={[
           { size: "S", quantity: 150 },
           { size: "M", quantity: 300 },
@@ -33,7 +32,7 @@ describe("PriceSidebar", () => {
     );
 
     expect(screen.getByText("800")).toBeInTheDocument();
-    expect(screen.getByText("$32,250.00 – $40,250.00")).toBeInTheDocument();
+    expect(screen.getByText("$32,000.00 – $40,000.00")).toBeInTheDocument();
   });
 
   it("disables the submit button when total units is 0", () => {

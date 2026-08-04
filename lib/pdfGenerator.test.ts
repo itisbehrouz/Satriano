@@ -13,8 +13,8 @@ describe("lib/pdfGenerator", () => {
       lines: [
         { fabricName: "Pique Cotton", size: "M", quantity: 100, unitPriceCents: 1850 },
       ],
-      setupFeeCents: 15000,
-      totalCents: 200000,
+      setupFeeCents: 0,
+      totalCents: 185000,
     });
 
     expect(pdfBytes).toBeInstanceOf(Uint8Array);

@@ -22,7 +22,7 @@ export interface CustomerOrder {
   id: string;
   orderType?: "M2O" | "WHOLESALE";
   status: OrderStatus | string;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   totalCents: number;
   totalUSD?: number;
   totalUnits?: number;

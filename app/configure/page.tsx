@@ -66,7 +66,7 @@ export default async function ConfigureDefaultPage() {
     imageUrl: f.imageUrl,
     priceMinCents: f.priceMinCents,
     priceMaxCents: f.priceMaxCents,
-    setupFeeCents: f.setupFeeCents,
+    setupFeeCents: 0,
   }));
 
   if (fabrics.length === 0) {
@@ -80,10 +80,12 @@ export default async function ConfigureDefaultPage() {
         imageUrl: true,
         priceMinCents: true,
         priceMaxCents: true,
-        setupFeeCents: true,
       },
     });
-    fabrics = globalFabrics;
+    fabrics = globalFabrics.map((gf) => ({
+      ...gf,
+      setupFeeCents: 0,
+    }));
   }
 
   const fits = product.fits.map((pf) => ({

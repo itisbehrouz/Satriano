@@ -37,7 +37,7 @@ interface Fabric {
   name: string;
   priceMinCents: number;
   priceMaxCents: number;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   active: boolean;
 }
 
@@ -445,7 +445,7 @@ function ProductSettingsContent() {
               name: prodFabricName,
               priceMinCents,
               priceMaxCents,
-              setupFeeCents,
+              setupFeeCents: 0,
             },
           },
         }),

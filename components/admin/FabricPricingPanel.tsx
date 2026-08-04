@@ -52,7 +52,7 @@ export function FabricPricingPanel({
     if (fabric) {
       const minStr = (fabric.priceMinCents / 100).toFixed(2);
       const maxStr = (fabric.priceMaxCents / 100).toFixed(2);
-      const setupStr = (fabric.setupFeeCents / 100).toFixed(2);
+      const setupStr = ((fabric.setupFeeCents ?? 0) / 100).toFixed(2);
       const fabName = fabric.name;
       const fabColorway = fabric.colorway || "";
       const fabActive = fabric.active;
@@ -282,30 +282,6 @@ export function FabricPricingPanel({
                 />
               </div>
             </div>
-          </div>
-
-          {/* Setup Fee ($) */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-[var(--color-text-primary)]">
-              Fabric Setup / Milling Fee ($)
-            </label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-mono text-[var(--color-text-secondary)]">
-                $
-              </span>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                value={setupFeeDollars}
-                onChange={(e) => setSetupFeeDollars(e.target.value)}
-                required
-                className="w-full pl-7 pr-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] font-mono focus:outline-none focus:border-[var(--color-accent)]"
-              />
-            </div>
-            <p className="text-[11px] text-[var(--color-text-secondary)]">
-              One-off setup fee applied per production run when using this fabric tier.
-            </p>
           </div>
 
           {/* Active Status Toggle */}

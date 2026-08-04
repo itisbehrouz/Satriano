@@ -91,10 +91,9 @@ export async function getAdminDashboardMetrics(): Promise<DashboardMetricsData> 
     }),
   ]);
 
-  // Calculate 30-day sum: prefer finalPriceCents, fallback to totalCents + setupFeeCents
+  // Calculate 30-day sum: prefer finalPriceCents, fallback to totalCents
   const thirtyDaysRevenueCents =
-    revenueAggregate._sum.finalPriceCents ??
-    ((revenueAggregate._sum.totalCents || 0) + (revenueAggregate._sum.setupFeeCents || 0));
+    revenueAggregate._sum.finalPriceCents ?? (revenueAggregate._sum.totalCents || 0);
 
   // Map status counts to complete distribution array
   const countMap = new Map<string, number>();
@@ -116,7 +115,7 @@ export async function getAdminDashboardMetrics(): Promise<DashboardMetricsData> 
     client: ord.company.name,
     email: ord.company.email,
     actionNeeded: "Review Spec & Issue Proforma",
-    amountCents: ord.finalPriceCents ?? (ord.totalCents + ord.setupFeeCents),
+    amountCents: ord.finalPriceCents ?? ord.totalCents,
     status: ord.status,
     createdAt: ord.createdAt.toISOString(),
     link: `/admin?status=PENDING_REVIEW`,

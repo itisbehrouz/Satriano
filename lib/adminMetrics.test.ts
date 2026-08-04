@@ -22,7 +22,7 @@ describe("getAdminDashboardMetrics", () => {
         companyId: company.id,
         status: "PENDING_REVIEW",
         totalCents: 15000,
-        setupFeeCents: 5000,
+        setupFeeCents: 0,
         finalPriceCents: 20000,
       },
     });

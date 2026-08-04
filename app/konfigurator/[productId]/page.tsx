@@ -132,7 +132,7 @@ export default async function ProductConfiguratorPage({
     imageUrl: f.imageUrl,
     priceMinCents: f.priceMinCents,
     priceMaxCents: f.priceMaxCents,
-    setupFeeCents: f.setupFeeCents,
+    setupFeeCents: 0,
   }));
 
   if (fabrics.length === 0) {
@@ -146,10 +146,12 @@ export default async function ProductConfiguratorPage({
         imageUrl: true,
         priceMinCents: true,
         priceMaxCents: true,
-        setupFeeCents: true,
       },
     });
-    fabrics = globalFabrics;
+    fabrics = globalFabrics.map((gf) => ({
+      ...gf,
+      setupFeeCents: 0,
+    }));
   }
 
   // Exact linked product fits (empty array if excluded category)

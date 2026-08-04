@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
     const totalUnits = order.lines.reduce((sum, line) => sum + line.quantity, 0);
     const subtotalCents = totalUnits * finalPriceCents;
-    const totalCents = subtotalCents + order.setupFeeCents;
+    const totalCents = subtotalCents;
 
     const refNo =
       order.proforma?.refNo ||

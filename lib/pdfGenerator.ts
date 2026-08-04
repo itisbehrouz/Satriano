@@ -13,7 +13,7 @@ export interface ProformaPdfData {
     quantity: number;
     unitPriceCents: number;
   }>;
-  setupFeeCents: number;
+  setupFeeCents?: number;
   totalCents: number;
 }
 
@@ -99,16 +99,7 @@ export async function generateProformaPdf(data: ProformaPdfData): Promise<Uint8A
     y -= 18;
   }
 
-  // Setup Fee
-  if (data.setupFeeCents > 0) {
-    const setupFee = data.setupFeeCents / 100;
-    page.drawText("Production Setup Fee", { x: 50, y, size: 9, font });
-    page.drawText("-", { x: 280, y, size: 9, font });
-    page.drawText("1", { x: 340, y, size: 9, font });
-    page.drawText(`$${setupFee.toFixed(2)}`, { x: 400, y, size: 9, font });
-    page.drawText(`$${setupFee.toFixed(2)}`, { x: 480, y, size: 9, font });
-    y -= 18;
-  }
+
 
   y -= 10;
   page.drawLine({

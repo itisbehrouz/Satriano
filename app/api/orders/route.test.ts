@@ -47,7 +47,7 @@ describe("POST /api/orders", () => {
     createdCompanyIds.push(order.companyId);
 
     expect(order.status).toBe("PENDING_REVIEW");
-    expect(order.setupFeeCents).toBe(15000);
+    expect(order.setupFeeCents).toBe(0);
     expect(order.totalCents).toBe(0);
     expect(order.customerTargetPriceCents).toBe(1850);
     expect(order.lines).toHaveLength(1);

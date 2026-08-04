@@ -226,14 +226,7 @@ export default async function ProformaPage({ params }: ProformaPageProps) {
                     {totalUnits}
                   </span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-[var(--color-border)] text-xs text-[var(--color-text-secondary)]">
-                  <span>
-                    Setup &amp; Digitization
-                  </span>
-                  <span className="font-bold text-[var(--color-text-primary)] font-mono">
-                    {formatCents(order.setupFeeCents)}
-                  </span>
-                </div>
+
                 <div className="flex justify-between py-4 mt-2 text-sm text-[var(--color-text-primary)]">
                   <span className="font-bold uppercase">
                     Final Total

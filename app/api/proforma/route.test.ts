@@ -49,7 +49,7 @@ describe("POST /api/proforma", () => {
       data: {
         companyId: company.id,
         status: "PENDING_REVIEW",
-        setupFeeCents: 15000,
+        setupFeeCents: 0,
         totalCents: 0,
         customerTargetPriceCents: 1800,
         lines: {
@@ -65,7 +65,7 @@ describe("POST /api/proforma", () => {
     expect(json.success).toBe(true);
     expect(json.status).toBe("PROFORMA_SENT");
     expect(json.finalPriceCents).toBe(1850);
-    expect(json.totalCents).toBe(570000);
+    expect(json.totalCents).toBe(555000);
     expect(json.pdfUrl).toBeDefined();
 
     const updatedOrder = await prisma.order.findUniqueOrThrow({
@@ -75,7 +75,7 @@ describe("POST /api/proforma", () => {
 
     expect(updatedOrder.status).toBe("PROFORMA_SENT");
     expect(updatedOrder.finalPriceCents).toBe(1850);
-    expect(updatedOrder.totalCents).toBe(570000);
+    expect(updatedOrder.totalCents).toBe(555000);
     expect(updatedOrder.proforma).not.toBeNull();
     expect(updatedOrder.proforma?.pdfUrl).toBeDefined();
     expect(typeof updatedOrder.proforma?.pdfUrl).toBe("string");

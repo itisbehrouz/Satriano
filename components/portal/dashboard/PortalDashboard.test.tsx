@@ -45,7 +45,7 @@ describe("PortalDashboard Component & Dashboard Subcomponents", () => {
                   {
                     id: "ord-101",
                     status: "PENDING_REVIEW",
-                    setupFeeCents: 5000,
+                    setupFeeCents: 0,
                     totalCents: 15000,
                     customerTargetPriceCents: 15000,
                     createdAt: new Date().toISOString(),

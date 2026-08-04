@@ -28,7 +28,7 @@ const SECTIONS: LegalSection[] = [
           <ul className="list-disc pl-5 space-y-1 text-[var(--color-text-secondary)]">
             <li>Single Fabric Line: 50 units minimum per style/color.</li>
             <li>Combined Multi-Fabric Orders: 100 units combined total across multi-fabric batches.</li>
-            <li>Sample Development: Orders below MOQ incur sample digitization surcharges.</li>
+            <li>Sample Development: Custom sampling is subject to manual feasibility review.</li>
           </ul>
         </div>
       </>

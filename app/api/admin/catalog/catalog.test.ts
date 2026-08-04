@@ -170,7 +170,6 @@ describe("Admin Catalog Management API (Category, Subcategory, Product Creation 
             name: "Waterproof Wool Blend (320 GSM)",
             priceMinCents: 4500,
             priceMaxCents: 5800,
-            setupFeeCents: 1000,
           },
         },
       }),
