@@ -131,23 +131,6 @@ export function SiteHeader() {
 
         {/* Primary Action & Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Quick Search Bar Placeholder (⌘K) - Visible when authenticated */}
-          {isAuthenticated && (
-            <div
-              className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] text-xs min-h-[44px] cursor-default opacity-80"
-              title="Catalog search coming soon"
-            >
-              <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">
-                search
-              </span>
-              <span className="hidden md:inline text-[11px] font-medium text-[var(--color-text-secondary)]">
-                Search
-              </span>
-              <kbd className="px-1.5 py-0.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded text-[9px] font-mono text-[var(--color-text-secondary)]">
-                ⌘K
-              </kbd>
-            </div>
-          )}
 
           {/* Site-Wide Dark/Light Theme Toggle Button */}
           <button
