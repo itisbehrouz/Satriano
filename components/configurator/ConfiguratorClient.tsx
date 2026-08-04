@@ -48,11 +48,36 @@ export function ConfiguratorClient({
   const [addingToCart, setAddingToCart] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 120);
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const selectedFabric = fabrics.find((fabric) => fabric.id === selectedFabricId) ?? fabrics[0];
   const selectedFit = fits.find((fit) => fit.id === selectedFitId) ?? fits[0];
 
   const totalUnits = Object.values(sizeQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
   const meetsMoq = totalUnits >= moqPerFabric;
+
+  const steps = [
+    { id: "step-fabric", label: "Fabric Line", num: 1, isComplete: !!selectedFabricId },
+    ...(fits.length > 0 ? [{ id: "step-fit", label: "Garment Fit", num: 2, isComplete: !!selectedFitId }] : []),
+    { id: "step-sizing", label: "Sizing & Quantities", num: fits.length > 0 ? 3 : 2, isComplete: meetsMoq },
+    { id: "step-branding", label: "Vector Logo", num: fits.length > 0 ? 4 : 3, isComplete: logoFile !== null },
+  ];
+
+  function scrollToSection(id: string) {
+    const el = document.getElementById(id);
+    if (el) {
+      const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
+    }
+  }
 
   async function handleAddToCart() {
     setSubmitError(null);
@@ -108,7 +133,56 @@ export function ConfiguratorClient({
     "Custom luxury B2B apparel production. Select fabric line, garment fit, regional size quantities, and vector branding.";
 
   return (
-    <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-10 bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
+    <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-6 bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
+      {/* Sticky Progress Stepper Header Bar */}
+      <div className={`sticky top-0 z-30 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] -mx-4 md:-mx-8 px-4 md:px-8 transition-all duration-200 motion-reduce:transition-none mb-6 ${
+        isScrolled ? "py-2.5 shadow-md" : "py-4"
+      }`}>
+        <div className="max-w-container-max mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 md:gap-6 overflow-x-auto scrollbar-none py-1">
+            {steps.map((step) => (
+              <button
+                key={step.id}
+                type="button"
+                onClick={() => scrollToSection(step.id)}
+                className="flex items-center gap-2 group cursor-pointer shrink-0 text-left focus:outline-none"
+              >
+                <span className={`w-5 h-5 rounded-none font-mono font-bold flex items-center justify-center text-[10px] transition-colors ${
+                  step.isComplete
+                    ? "bg-[var(--color-status-success)] text-white"
+                    : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] group-hover:border-[var(--color-accent)]"
+                }`}>
+                  {step.isComplete ? (
+                    <span className="material-symbols-outlined text-xs font-bold">check</span>
+                  ) : (
+                    step.num
+                  )}
+                </span>
+                <span className={`font-mono uppercase tracking-wider transition-colors ${
+                  isScrolled ? "text-[10px]" : "text-xs"
+                } ${
+                  step.isComplete
+                    ? "font-semibold text-[var(--color-text-primary)]"
+                    : "font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]"
+                }`}>
+                  {step.label}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden sm:flex items-center gap-3 shrink-0">
+            <span className={`font-mono text-xs px-2.5 py-1 rounded-none border transition-colors ${
+              meetsMoq
+                ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border-[var(--color-status-success)]/30"
+                : "bg-amber-500/10 text-amber-500 border-amber-500/30"
+            }`}>
+              {totalUnits} / {moqPerFabric} pcs
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Executive Product Header Shell */}
       <div className="mb-8 bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 md:p-8 transition-colors">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -142,35 +216,13 @@ export function ConfiguratorClient({
             </div>
           </div>
         </div>
-
-        {/* Visual Spec Stepper Bar */}
-        <div className="mt-8 pt-6 border-t border-[var(--color-border)] grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-mono">
-          <div className="flex items-center gap-2 text-[var(--color-gold)]">
-            <span className="w-5 h-5 bg-[var(--color-gold)] text-[var(--color-bg)] font-bold flex items-center justify-center rounded-none text-[10px]">
-              1
-            </span>
-            <span className="font-bold uppercase tracking-wider">Fabric Line</span>
-          </div>
-          <div className="flex items-center gap-2 text-[var(--color-text-secondary)]">
-            <span className="w-5 h-5 bg-[var(--color-border)] text-[var(--color-text-primary)] font-bold flex items-center justify-center rounded-none text-[10px]">
-              2
-            </span>
-            <span className="font-semibold uppercase tracking-wider">Fit &amp; Sizing</span>
-          </div>
-          <div className="flex items-center gap-2 text-[var(--color-text-secondary)]">
-            <span className="w-5 h-5 bg-[var(--color-border)] text-[var(--color-text-primary)] font-bold flex items-center justify-center rounded-none text-[10px]">
-              3
-            </span>
-            <span className="font-semibold uppercase tracking-wider">Vector Logo</span>
-          </div>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Main Configurator Form Column */}
         <div className="lg:col-span-8 flex flex-col gap-8">
           {/* Step 1: Material Selection */}
-          <section className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          <section id="step-fabric" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
@@ -194,7 +246,7 @@ export function ConfiguratorClient({
 
           {/* Step 2: Garment Fit Selection */}
           {fits.length > 0 && (
-            <section className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+            <section id="step-fit" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
               <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
                 <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                   <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
@@ -217,7 +269,7 @@ export function ConfiguratorClient({
           )}
 
           {/* Step 3: Regional Sizing & Unit Matrix */}
-          <section className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          <section id="step-sizing" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
@@ -242,7 +294,7 @@ export function ConfiguratorClient({
           </section>
 
           {/* Step 4: Vector Logo & Custom Placement */}
-          <section className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          <section id="step-branding" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
