@@ -86,7 +86,7 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           {companyName && (
             <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
               <Link
-                href="/konfigurator"
+                href="/categories"
                 className={`transition-colors pb-1 rounded-none ${
                   isCatalogActive
                     ? "border-b-2 border-[var(--color-accent)] text-[var(--color-text-primary)]"

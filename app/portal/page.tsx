@@ -516,7 +516,7 @@ function PortalPageContent() {
                 Back to Homepage
               </Link>
               <Link
-                href="/konfigurator"
+                href="/categories"
                 className="min-h-[44px] inline-flex items-center justify-center bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
               >
                 Launch Order Configurator

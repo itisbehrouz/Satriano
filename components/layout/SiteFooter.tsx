@@ -7,7 +7,7 @@ import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { OpenCookiePreferencesButton } from "@/components/layout/CookieConsentModal";
 
 const NAVIGATION_LINKS = [
-  { label: "Manufacturing Configurator", href: "/konfigurator" },
+  { label: "Manufacturing Configurator", href: "/categories" },
   { label: "Garment Categories", href: "/categories" },
   { label: "Client Portal Access", href: "/portal" },
   { label: "Wholesale & Custom Lines", href: "/portal" },
