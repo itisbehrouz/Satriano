@@ -1858,8 +1858,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_page",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "app/page.tsx"
     },
     {
@@ -1869,8 +1869,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_page_operational_steps",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "operational_steps"
     },
     {
@@ -1880,8 +1880,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "app_page_capabilities",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "capabilities"
     },
     {
@@ -1891,8 +1891,8 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "app_page_faqs",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "faqs"
     },
     {
@@ -1902,8 +1902,8 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "app_page_category_images",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "category_images"
     },
     {
@@ -1913,8 +1913,8 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "app_page_homepage",
-      "community": 30,
-      "community_name": "app/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "homepage()"
     },
     {
@@ -2086,7 +2086,7 @@
       "label": "PortalPage()",
       "file_type": "code",
       "source_file": "app/portal/page.tsx",
-      "source_location": "L533",
+      "source_location": "L534",
       "_origin": "ast",
       "id": "app_portal_page_portalpage",
       "community": 9,
@@ -4806,52 +4806,52 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_sitefooter",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter.tsx"
     },
     {
       "label": "NAVIGATION_LINKS",
       "file_type": "code",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L9",
+      "source_location": "L5",
       "_origin": "ast",
       "id": "components_layout_sitefooter_navigation_links",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "navigation_links"
     },
     {
       "label": "LEGAL_COMPLIANCE_LINKS",
       "file_type": "code",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L16",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_sitefooter_legal_compliance_links",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legal_compliance_links"
     },
     {
       "label": "QUALITY_OPERATIONS_LINKS",
       "file_type": "code",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L25",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "components_layout_sitefooter_quality_operations_links",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "quality_operations_links"
     },
     {
       "label": "SiteFooter()",
       "file_type": "code",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L32",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter()"
     },
     {
@@ -4861,8 +4861,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_siteheader",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "siteheader.tsx"
     },
     {
@@ -4872,8 +4872,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_layout_siteheader_anonymous_nav_items",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "anonymous_nav_items"
     },
     {
@@ -4883,8 +4883,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_layout_siteheader_authenticated_nav_items",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "authenticated_nav_items"
     },
     {
@@ -4894,8 +4894,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "components_layout_siteheader_siteheader",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "siteheader()"
     },
     {
@@ -4960,8 +4960,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -4971,8 +4971,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -4982,8 +4982,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdown()"
     },
     {
@@ -5664,8 +5664,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -5675,8 +5675,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customersession"
     },
     {
@@ -14288,7 +14288,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/portal/page.tsx",
-      "source_location": "L533",
+      "source_location": "L534",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_portal_page",
@@ -18544,7 +18544,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L7",
+      "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
@@ -18556,7 +18556,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L7",
+      "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
@@ -18692,7 +18692,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L16",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
@@ -18703,7 +18703,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L9",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
@@ -18714,7 +18714,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L25",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
@@ -18725,48 +18725,12 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L32",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_layout_sitefooter",
       "target": "components_layout_sitefooter_sitefooter",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_layout_sitefooter",
-      "target": "hooks_usecustomersession",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_layout_sitefooter",
-      "target": "hooks_usecustomersession_usecustomersession",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/layout/SiteFooter.tsx",
-      "source_location": "L34",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_layout_sitefooter_sitefooter",
-      "target": "hooks_usecustomersession_usecustomersession"
     },
     {
       "relation": "contains",

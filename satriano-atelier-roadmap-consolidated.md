@@ -1,11 +1,11 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 2, 2026 — Theme System & Full Roadmap Consolidation)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 4, 2026 — Portal Login Gate Cleanup, ⌘K Security Scoping & PWA)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog + B2B partner portal + workflow automation
 **Capacity assumption:** Solo developer, ~2 hours/day
 **Development environment:** Google Antigravity (primary), Claude Code (approved fallback when Antigravity quota exhausted), Claude (architecture/planning), Vercel (hosting), Supabase (DB + Storage)
 **Cost principle:** Zero fixed cost — usage/commission-based services only (Vercel free tier, Supabase free tier, Stripe transaction fees when live)
 
-This document consolidates everything decided and built through August 2, 2026 (adds Section 26). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
+This document consolidates everything decided and built through August 4, 2026 (adds Sections 27–28). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
 
 ---
 
@@ -264,7 +264,7 @@ Several times, something was reported as "done" but wasn't (category count, admi
   - Removed top Satriano logo from admin sidebar navigation per brand customization directive.
 - **Top Header Bar & Page Title Removal**:
   - Removed top white header bar (`Admin Console / [Page Name]`) and top page title banners across all admin pages (`/admin`, `/admin/applications`, `/admin/product-settings`, `/admin/architecture-viz`).
-  - Relocated page action triggers (`3D Anti-Gravity Viz`, `Refresh Ledger`, `Refresh Applications`, `Back to Order Ledger`) directly into category/status filter bars.
+  - Relocated page action triggers (`3D Anti-Gravity Viz` — **renamed to `3D Telemetry`, Aug 4, 2026**, `Refresh Ledger`, `Refresh Applications`, `Back to Order Ledger`) directly into category/status filter bars.
   - Integrated Global Search trigger (`⌘K`) and Sign Out button cleanly into the bottom sidebar footer.
 - **Accordion Sub-Menu Navigation & Deep-Linking**:
   - Refactored sidebar sub-item list to an accordion pattern where sub-items expand only for the active section (or user-toggled section), keeping inactive section menus collapsed.
@@ -523,6 +523,7 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
   - Updated inline resolution script in `<head>`: when `pathname.startsWith('/portal')` and no `satriano-theme` localStorage key exists, `data-theme` defaults to `"dark"` directly regardless of OS system preference.
   - Public marketing routes retain system-preference fallback (`prefers-color-scheme`).
   - Executive Admin panel (`/admin/*`) remains 100% exempt on its isolated Swiss Design token system.
+  - **⚠ Superseded Aug 4, 2026 — see Section 27.** The portal header was rebuilt and this dark-default behavior no longer reflects the shipped design. Kept here for historical record only.
 - **Verification**:
   - `npm test`: 28 test files / 136 unit tests passed 100%.
   - `npm run build`: Production build clean with 0 errors.
@@ -537,7 +538,7 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
 
 ### 2. Default Theme Resolution Logic
 - **Public Site (`/`, `/categories`, `/wholesale`, `/konfigurator`)**: Defaults to **light mode** (`data-theme="light"`). In the absence of an explicit saved preference in `localStorage` (`satriano-theme`), it falls back to the operating system's `prefers-color-scheme`.
-- **B2B Customer Portal (`/portal/*`)**: Defaults to **dark mode** (`data-theme="dark"`) regardless of system preference unless an explicit user preference is saved in `localStorage`.
+- **B2B Customer Portal (`/portal/*`)**: ~~Defaults to **dark mode** (`data-theme="dark"`) regardless of system preference unless an explicit user preference is saved in `localStorage`.~~ **Superseded Aug 4, 2026** — the portal header/layout was redesigned (see Section 27); portal now follows the same light-first pattern as the public site. This rule is kept for historical record only.
 - **Anti-Flash Mechanism**: An inline, blocking `<script>` block in `<head>` of `app/layout.tsx` inspects `pathname` and `localStorage.getItem('satriano-theme')` to set `document.documentElement.setAttribute('data-theme', ...)` prior to DOM paint, preventing white/dark flash on page load.
 
 ### 3. Comprehensive Theme Token Reference
@@ -582,14 +583,78 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
 
 ---
 
-## 27. Exhaustive Portal Token Refactor & 100% Theme Coverage (Aug 2, 2026)
+## 27. Portal Header Redesign & Admin Nav Rename (Aug 4, 2026)
 
-- **Comprehensive Inner Card & Subcomponent Token Refactor**:
-  - Refactored all remaining inner cards, tabs, forms, and page wrappers across 13 files in `app/portal` and `components/portal`.
-  - Files converted: `app/portal/page.tsx`, `app/portal/support/page.tsx`, `CompanyInfoTab.tsx`, `TabNavigation.tsx`, `CompanyCard.tsx`, `QuickActionButtons.tsx`, `QuickLinksSection.tsx`, `RecentOrdersSection.tsx`, `FilterBar.tsx`, `PaginationBar.tsx`, `SupportForm.tsx`, `ContactChannels.tsx`, and `FaqLinks.tsx`.
-- **Exhaustive Grep Verification**:
-  - Re-scanned `app/portal` and `components/portal` for all navy hex patterns (`#0B1E3D`, `#132A52`, `#1E3A8A`, `#081733`, `#152D57`, `#1A3A5C`).
-  - **Re-scan Count**: **0 matches remaining** across the entire customer portal codebase.
-- **Verification**:
-  - `npm test`: 28 test files / 136 unit tests passed 100%.
-  - `npm run build`: Production build clean with 0 errors.
+**Confirmed via screenshot review.** This section supersedes the portal dark-default behavior documented in Section 25 (Fix 3) and Section 26 (point 2) — those entries are kept in place for historical record but no longer reflect the shipped design.
+
+### Portal header — rebuilt
+- `PortalHeader.tsx` replaced: light-first appearance now matches the public site's visual register rather than the previous dark-navy (`#0B1E3D`) header with gold "S" mark and `AccountDropdown`.
+- Logo mark simplified to a solid blue square "S" icon (replacing the gold wordmark treatment used in the dark header).
+- Top nav simplified to plain text links: `Catalog`, `Orders`, `Account`.
+- Top-right identity control changed from the `AccountDropdown` menu to a `NAME ▾` chip (e.g. `BE.BAGHERZADEH ▾`), with global `⌘K` search and Sun/Moon theme toggle alongside it.
+- Dashboard body (`PortalDashboard.tsx`) restyled to a light card layout: `COMPANY ACCOUNT OVERVIEW` card with approval badge, a 2×2 action button grid (`CREATE NEW ORDER`, `VIEW ALL ORDERS`, `ACCOUNT SETTINGS`, `CONTACT SUPPORT`), `Recent Orders (Last 5)` panel with empty-state illustration, and a `Helpful Resources` link section.
+- **Open item:** the previous dark-mode toggle (Sun/Moon) is still present in the header, so dark mode itself hasn't been removed — only the *default* state changed from forced-dark to light-first. Exact fallback logic (system preference vs. hard light default) not yet re-confirmed against Section 26's resolution-script pattern; revisit if a flash-of-wrong-theme bug shows up.
+
+### Admin nav — renamed
+- `3D Anti-Gravity Viz` (Section 14) renamed to **`3D Telemetry`** in the admin navigation.
+- **Observed but not yet confirmed:** the same screenshot shows admin top-level navigation (`Order Ledger`, `Wholesale`, `Applications`, `Settings`, `3D Telemetry`) rendered as a top mega-menu-style bar with dropdown panels, rather than the left-hand collapsible sidebar described in Section 14. This may just be the `Settings` dropdown expanded inline, or it may reflect a further nav restructure — flag for confirmation next session before treating it as a documented architecture change.
+
+### Public homepage — unchanged, re-verified
+- Screenshot review confirms the public homepage still matches the documented design system: light mode, gold confined to the `SATRIANO` logo mark, `#2E5AAC` accent CTA (`START CUSTOM ORDER SPEC`), 0px corner geometry, hero copy exactly as specified ("Your product. Your price. Your brand. We manufacture it."), and the `B2B Support` dock present. No drift found here.
+---
+
+## 28. Portal Login Gate Cleanup, ⌘K Security Scoping, PWA & Codebase Health Pass (Aug 4, 2026)
+
+### 28.1 — ⌘K admin command palette leak (SECURITY)
+
+**Problem found:** `components/admin/GlobalCommandPalette.tsx` (Section 14 — indexes products, categories, subcategories, B2B company names, and order IDs, all admin-only data) registered a **global `window` keydown listener** for `Cmd+K`/`Ctrl+K` without any route check. Pressing `⌘K` on the public site or in the customer portal opened the admin palette. This was an admin-data exposure issue, not a cosmetic one — same severity class as the Section 20/21 supplier-privacy boundary.
+
+**Fix:** route scoping via `usePathname()` in two places:
+- Render guard: `if (!pathname?.startsWith("/admin")) return null;`
+- Keyboard handler guard: `if (!pathname?.startsWith("/admin")) return;`
+
+The `⌘K Search` box visible in `SiteHeader.tsx`/`PortalHeader.tsx` is, for now, a deliberate **non-functional placeholder** on customer-facing routes. A customer-scoped search was explicitly out of scope for this pass — the goal was stopping the leak, not building a replacement.
+
+**Regression protection (important):** a new `components/admin/GlobalCommandPalette.test.tsx` locks all three states permanently:
+- returns null on public homepage (`/`) — PASSED
+- returns null on customer portal (`/portal/orders`) — PASSED
+- renders on admin route (`/admin`) — PASSED
+
+This follows the Section 21 discipline: an explicit automated "confirm zero leakage" assertion, not a one-time manual check.
+
+### 28.2 — Unauthenticated `/portal` login gate is now fully chrome-free
+
+The customer magic-link login page (`Client Portal Access`) was rendering both the public navy `SiteHeader` and the full `SiteFooter`, plus an absolute-positioned "Return to Homepage" box that overlapped the header and partially covered the logo.
+
+- `components/portal/PortalHeader.tsx` — guard `if (pathname === "/portal" && !companyName) return null;`
+- `components/layout/SiteFooter.tsx` — guard `if (pathname === "/portal" && !session?.authenticated) return null;` (same `usePathname()` + `useCustomerSession()` pattern, deliberately consistent rather than a second mechanism)
+- `app/portal/page.tsx` — the broken "Return to Homepage" element removed entirely; `SiteHeader` also removed from the application-submission confirmation view.
+- **Scope preserved:** authenticated portal routes (`/portal/orders`, `/portal/account`, dashboard) and all public routes keep header + footer unchanged.
+
+**Brand logo:** the blue-square `"S"` + system-text placeholder above the login card was replaced with the real brand asset (`/Satrinao.png`), wrapped in `<Link href="/">` — clicking the logo returns the user to the homepage, which removes the need for any separate back link.
+
+### 28.3 — PWA support added
+
+Added by the user directly (commit `b58de86`): `app/manifest.ts`, `public/sw.js` offline service worker, `components/layout/ServiceWorkerRegister.tsx` (client-side registration + install hook), brand icon set (`192×192`, `512×512`, `apple-touch-icon`, `maskable`), and `scripts/generate-pwa-icons.js` generator.
+
+### 28.4 — Codebase health audit pass
+
+Run via `codebase-health-audit`. Removed: `components/layout/TransactionalHeader.tsx` and `components/HomeEstimatorPreview.tsx` (both 0 imports, superseded by `SiteHeader`/`PortalHeader` and the inline homepage catalog section), the `@vercel/analytics` dependency, and `public/images/catalog/tops copy.png`.
+
+**Deferred (schema, needs DB-level verification first):** `Subcategory.moq` and `Product.moq` are redundant against `moqPerFabric`/`moqCombinedMultiFabric`, but consolidating them requires a Prisma migration — and per the standing pattern (cf. the `OrderType.MADE_TO_ORDER` deferral, Aug 2), production records must be checked for existing values *before* any migration is written. Not actioned.
+
+**⚠ `public/Satrinao.png` — audit finding now invalid.** The audit flagged it as a 0-reference misspelled duplicate and recommended deletion. It is now actively referenced by the portal login page (28.2). Do not delete it. The filename misspelling (`Satrinao` → `Satriano`) remains an open cosmetic debt.
+
+### 28.5 — Incident: dead-code removal broke the build
+
+Removing `@vercel/analytics` produced `Module not found: Can't resolve '@vercel/analytics/react'` — `app/layout.tsx` still imported and rendered `<Analytics />`. The audit had reported "0 imports," which was wrong.
+
+**Lesson:** a dead-dependency finding must be verified with a direct grep of the *import specifier* (`@vercel/analytics/react`, including subpaths) across the codebase, not just the bare package name, before uninstalling. This is the second time a health-audit cleanup and live code have missed each other in the same session (see also the `Satrinao.png` reversal in 28.4) — treat audit output as a **candidate list requiring independent confirmation**, not an action list.
+
+### 28.6 — Agent handoff note
+
+An Antigravity session auto-switched to a GPT model mid-task and produced nothing usable — no commits, working tree left clean. Per the standing fallback rule, the work was handed to Claude Code, which completed both 28.1 and 28.2 successfully.
+
+**Verification gap to note:** Claude Code's evidence was `npm run build` (clean, 49 routes), `npm test` (29 files / 140 tests passing), and SSR HTML string assertions — but **no screenshots**, despite the Section 11 rule requiring a screenshot checkpoint for every visual change. SSR string matching proves an attribute was written, not that an asset resolves or a layout renders correctly. Screenshot verification for the portal login gate is still outstanding.
+
+**Open item:** the `PortalHeader` guard depends on `companyName` being populated. If session hydration briefly leaves it empty, an authenticated user landing on `/portal` may see the header flash out and back in. Not yet checked against a real session.

@@ -50,8 +50,8 @@ export async function GET(req: Request) {
     // Create 24h signed customer JWT token
     const customerToken = await createCustomerToken(tokenRecord.email);
 
-    // Redirect to /portal/orders with sat_customer_token httpOnly cookie
-    const redirectUrl = new URL("/portal/orders", req.url);
+    // Redirect to / (site homepage) with sat_customer_token httpOnly cookie
+    const redirectUrl = new URL("/", req.url);
     const response = NextResponse.redirect(redirectUrl);
 
     const isProd = process.env.NODE_ENV === "production";

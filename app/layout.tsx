@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Baskervville } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
 import { CookieConsentModal } from "@/components/layout/CookieConsentModal";
 import { B2BSupportDock } from "@/components/layout/B2BSupportDock";
 import { AIFaqAssistantModal } from "@/components/layout/AIFaqAssistantModal";
@@ -86,7 +85,6 @@ export default function RootLayout({
         <B2BSupportDock />
         <AIFaqAssistantModal />
         <ServiceWorkerRegister />
-        <Analytics />
       </body>
     </html>
   );

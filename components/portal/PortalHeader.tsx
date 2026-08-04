@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
-import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
 
 export interface PortalHeaderProps {
   initialCompanyName?: string | null;
@@ -13,16 +13,16 @@ export interface PortalHeaderProps {
 export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { session, loading: loadingSession, refetch } = useCustomerSession();
 
-  const [companyName, setCompanyName] = useState<string | null>(initialCompanyName);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const [isPaletteOpen, setIsPaletteOpen] = useState<boolean>(false);
-  const [loadingSession, setLoadingSession] = useState<boolean>(true);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const current = (document.documentElement.getAttribute("data-theme") as "light" | "dark") || "dark";
+      const current =
+        (document.documentElement.getAttribute("data-theme") as "light" | "dark") ||
+        "dark";
       setTheme(current);
     }
   }, []);
@@ -36,46 +36,32 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
     } catch (e) {}
   };
 
-  async function fetchSession() {
-    try {
-      const res = await fetch("/api/customer/session");
-      if (res.ok) {
-        const data = await res.json();
-        if (data.authenticated) {
-          setCompanyName(data.companyName || data.email);
-        } else {
-          setCompanyName(null);
-        }
-      } else {
-        setCompanyName(null);
-      }
-    } catch (err) {
-      console.error("Session fetch error:", err);
-      setCompanyName(null);
-    } finally {
-      setLoadingSession(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchSession();
-  }, []);
-
   async function handleSignOut() {
     try {
       await fetch("/api/portal/logout", { method: "POST" });
     } catch (err) {
       console.error("Logout error:", err);
     } finally {
-      setCompanyName(null);
       setIsDropdownOpen(false);
+      await refetch();
       router.push("/portal");
       router.refresh();
     }
   }
 
+  const companyName =
+    session?.authenticated && (session.companyName || session.email)
+      ? session.companyName || session.email
+      : initialCompanyName;
+
+  // Suppress header completely on unauthenticated portal login gate (/portal)
+  if (pathname === "/portal" && !companyName) {
+    return null;
+  }
+
   // Determine active nav link
-  const isCatalogActive = pathname.startsWith("/konfigurator") || pathname.startsWith("/portal/catalog");
+  const isCatalogActive =
+    pathname.startsWith("/konfigurator") || pathname.startsWith("/portal/catalog");
   const isOrdersActive = pathname.startsWith("/portal/orders");
   const isAccountActive = pathname.startsWith("/portal/account");
 
@@ -133,29 +119,34 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           )}
         </div>
 
-        {/* Right: Search ⌘K Button, Theme Toggle, Account Dropdown & Sign Out Action Button */}
+        {/* Right: Search ⌘K Placeholder, Theme Toggle, Account Dropdown & Sign Out Action Button */}
         <div className="flex items-center gap-3">
-          {/* Quick Search Button (⌘K) */}
-          <button
-            type="button"
-            onClick={() => setIsPaletteOpen(true)}
-            className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded bg-[var(--color-bg)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs transition-all cursor-pointer min-h-[32px]"
-            title="Search catalog, orders, or portal pages (⌘K)"
-            aria-label="Search catalog, orders, or portal pages"
+          {/* Quick Search Bar Placeholder (⌘K) */}
+          <div
+            className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded bg-[var(--color-bg)] text-[var(--color-text-secondary)] border border-[var(--color-border)] text-xs min-h-[32px] cursor-default opacity-80"
+            title="Catalog search coming soon"
           >
-            <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">search</span>
-            <span className="hidden md:inline text-[11px] font-medium text-[var(--color-text-secondary)]">Search</span>
+            <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">
+              search
+            </span>
+            <span className="hidden md:inline text-[11px] font-medium text-[var(--color-text-secondary)]">
+              Search
+            </span>
             <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[9px] font-mono text-[var(--color-text-secondary)]">
               ⌘K
             </kbd>
-          </button>
+          </div>
 
           {/* Site-Wide Dark/Light Theme Toggle */}
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-            title={theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            aria-label={
+              theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+            }
+            title={
+              theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"
+            }
             className="bg-[var(--color-bg)] hover:bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs font-semibold px-2.5 py-1.5 inline-flex items-center justify-center transition-colors cursor-pointer rounded-none min-h-[32px] min-w-[32px]"
           >
             <span className="material-symbols-outlined text-base">
@@ -202,14 +193,6 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           ) : null}
         </div>
       </div>
-
-      {/* Command Palette Search Overlay */}
-      <GlobalCommandPalette
-        isOpen={isPaletteOpen}
-        onClose={() => setIsPaletteOpen(false)}
-        onOpen={() => setIsPaletteOpen(true)}
-        onOpenChange={setIsPaletteOpen}
-      />
     </header>
   );
 }

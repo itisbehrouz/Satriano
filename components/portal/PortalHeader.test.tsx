@@ -58,3 +58,19 @@ describe("PortalHeader Component", () => {
     expect(screen.getByText("Support")).toBeInTheDocument();
   });
 });
+
+describe("PortalHeader Suppression Guard", () => {
+  it("returns null when on unauthenticated /portal login gate", async () => {
+    // Override usePathname to /portal for unauthenticated test
+    const { PortalHeader } = await import("./PortalHeader");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockImplementation(() =>
+        Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve({ authenticated: false }),
+        })
+      )
+    );
+  });
+});

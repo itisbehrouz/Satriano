@@ -330,8 +330,8 @@
     "semantic_hash": "29e7821a51094549668d223c7795baa6"
   },
   "app/portal/page.tsx": {
-    "mtime": 1785872424.1890974,
-    "ast_hash": "2ee8521f00a0cb5cc864dfc8495aa28c",
+    "mtime": 1785871748.411841,
+    "ast_hash": "f6a38afed980f334e989ab9a354af787",
     "semantic_hash": ""
   },
   "app/portal/support/page.tsx": {
@@ -665,9 +665,9 @@
     "semantic_hash": "7a0dbf849fb4a0ff8937ddea37b08dcd"
   },
   "components/layout/SiteFooter.tsx": {
-    "mtime": 1785872402.4033432,
-    "ast_hash": "99590af452d33e1c9153c38371b10a6e",
-    "semantic_hash": ""
+    "mtime": 1785688576.258794,
+    "ast_hash": "bd211301dc15906e95654012e87ddd46",
+    "semantic_hash": "bd211301dc15906e95654012e87ddd46"
   },
   "components/layout/SiteHeader.tsx": {
     "mtime": 1785870807.421992,

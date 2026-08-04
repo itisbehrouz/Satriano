@@ -1,11 +1,11 @@
 # Graph Report - Satriano Atelier  (2026-08-04)
 
 ## Corpus Check
-- 214 files · ~550,577 words
+- 214 files · ~550,521 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 800 nodes · 1206 edges · 82 communities (71 shown, 11 thin omitted)
+- 800 nodes · 1203 edges · 81 communities (70 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
@@ -45,7 +45,6 @@
 - Architecture Viz Page
 - Design System Master
 - Mode Satriano Atelier
-- app/page.tsx
 - Görevler Project Roadmap
 - Next Getting Started
 - Seed Adapter Main()
@@ -63,8 +62,8 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `verifyAdminRequest()` - 27 edges
-2. `SiteFooter()` - 16 edges
-3. `compilerOptions` - 16 edges
+2. `compilerOptions` - 16 edges
+3. `SiteFooter()` - 15 edges
 4. `SiteHeader()` - 13 edges
 5. `verifyCustomerToken()` - 13 edges
 6. `formatCents()` - 12 edges
@@ -88,7 +87,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (82 total, 11 thin omitted)
+## Communities (81 total, 11 thin omitted)
 
 ### Community 0 - "Route Post() Get()"
 Cohesion: 0.07
@@ -155,8 +154,8 @@ Cohesion: 0.20
 Nodes (10): GET(), AdminKpiDashboard(), DashboardMetrics, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, ALL_STATUSES, DashboardMetricsData (+2 more)
 
 ### Community 16 - "Page Ethics Ethicspage()"
-Cohesion: 0.17
-Nodes (6): ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, SiteHeader(), AccountDropdown(), AccountDropdownProps, CustomerSession
+Cohesion: 0.15
+Nodes (8): CAPABILITIES, CATEGORY_IMAGES, FAQS, OPERATIONAL_STEPS, LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS, QUALITY_OPERATIONS_LINKS, SiteFooter()
 
 ### Community 17 - "App Layout Baskervville"
 Cohesion: 0.12
@@ -187,8 +186,8 @@ Cohesion: 0.33
 Nodes (4): CategoriesSearchFilter(), Category, CATEGORY_IMAGES, Subcategory
 
 ### Community 24 - "Links Cookieconsentmodal Cookiecategorystate"
-Cohesion: 0.26
-Nodes (9): ProductConfiguratorPageProps, ConfiguratorClient(), LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS, QUALITY_OPERATIONS_LINKS, SiteFooter(), PortalHeader(), PortalHeaderProps (+1 more)
+Cohesion: 0.20
+Nodes (11): ProductConfiguratorPageProps, ConfiguratorClient(), ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, SiteHeader(), AccountDropdown(), AccountDropdownProps, PortalHeader() (+3 more)
 
 ### Community 26 - "Roadmap Architecture Satriano"
 Cohesion: 0.48
@@ -205,10 +204,6 @@ Nodes (6): Buttons & Components, Color Palette (Light Mode Default), Design Syst
 ### Community 29 - "Mode Satriano Atelier"
 Cohesion: 0.33
 Nodes (6): Color Palette & Roles, Dark mode, Light mode, Satriano Atelier Design System, Visual Theme & Atmosphere, Satriano Atelier Design System
-
-### Community 30 - "app/page.tsx"
-Cohesion: 0.33
-Nodes (4): CAPABILITIES, CATEGORY_IMAGES, FAQS, OPERATIONAL_STEPS
 
 ### Community 31 - "Görevler Project Roadmap"
 Cohesion: 0.40

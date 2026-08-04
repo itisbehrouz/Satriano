@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Command } from "cmdk";
 
 interface GlobalCommandPaletteProps {
@@ -32,6 +32,7 @@ export function GlobalCommandPalette({
   onOpen: externalOnOpen,
   onOpenChange: externalOnOpenChange,
 }: GlobalCommandPaletteProps) {
+  const pathname = usePathname();
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [products, setProducts] = useState<CatalogProductItem[]>([]);
   const [orders, setOrders] = useState<OrderSummaryItem[]>([]);
@@ -51,8 +52,13 @@ export function GlobalCommandPalette({
     setInternalIsOpen(val);
   };
 
-  // Listen for global Cmd+K / Ctrl+K / Alt+K and Escape keyboard shortcuts
+  // Listen for global Cmd+K / Ctrl+K / Alt+K and Escape keyboard shortcuts (ADMIN ONLY)
   useEffect(() => {
+    // Strict guard: Do not listen on non-admin routes
+    if (!pathname?.startsWith("/admin")) {
+      return;
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const isK = e.code === "KeyK" || e.key.toLowerCase() === "k";
       const isModifierPressed = e.metaKey || e.ctrlKey || e.altKey;
@@ -75,7 +81,12 @@ export function GlobalCommandPalette({
 
     window.addEventListener("keydown", handleKeyDown, true);
     return () => window.removeEventListener("keydown", handleKeyDown, true);
-  }, [isOpen, externalOnOpen, externalOnClose, externalOnOpenChange]);
+  }, [pathname, isOpen, externalOnOpen, externalOnClose, externalOnOpenChange]);
+
+  // Strict render guard: Never render or mount command palette modal outside /admin/*
+  if (!pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   // Fetch real catalog & orders data when command palette is opened
   useEffect(() => {

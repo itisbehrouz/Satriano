@@ -165,7 +165,7 @@ describe("B2B Customer Portal Auth & Orders API", () => {
 
     const res1 = await verifyGET(req1);
     expect(res1.status).toBe(307);
-    expect(res1.headers.get("location")).toContain("/portal/orders");
+    expect(res1.headers.get("location")).toBe("http://localhost/");
     const cookie = res1.headers.get("set-cookie");
     expect(cookie).toContain("sat_customer_token");
 

@@ -1,5 +1,9 @@
+"use client";
+
 import NextImage from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { OpenCookiePreferencesButton } from "@/components/layout/CookieConsentModal";
 
 const NAVIGATION_LINKS = [
@@ -26,6 +30,18 @@ const QUALITY_OPERATIONS_LINKS = [
 ];
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  const { session, loading } = useCustomerSession();
+
+  // Suppress footer completely on unauthenticated portal login gate (/portal)
+  if (pathname === "/portal" && (!session?.authenticated && !loading)) {
+    return null;
+  }
+  // While session is loading on /portal, also suppress footer
+  if (pathname === "/portal" && loading) {
+    return null;
+  }
+
   return (
     <footer className="bg-[var(--color-bg)] text-[var(--color-text-primary)] w-full mt-auto font-sans transition-colors">
       {/* Main Multi-Column Footer Grid */}

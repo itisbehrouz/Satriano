@@ -3,7 +3,6 @@
 import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PortalDashboard } from "@/components/portal/PortalDashboard";
 
@@ -11,7 +10,7 @@ type PortalView = "LOGIN" | "REGISTER" | "SUBMITTED";
 
 function PortalPageContent() {
   const searchParams = useSearchParams();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(false);
   const [view, setView] = useState<PortalView>("LOGIN");
 
   // Magic link login state
@@ -158,19 +157,10 @@ function PortalPageContent() {
   if (view === "LOGIN" || view === "REGISTER") {
     return (
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-12 px-4 md:px-8 flex flex-col justify-center items-center font-sans relative">
-        {/* Fixed Top-Left Return Link */}
-        <Link
-          href="/"
-          className="fixed top-6 left-6 inline-flex items-center gap-2 min-h-[44px] px-4 py-2.5 text-xs font-semibold text-[#5B6B85] hover:text-[#1A2233] bg-white border border-[#D1D5DB] rounded shadow-sm transition-colors z-50"
-        >
-          <span className="material-symbols-outlined text-base">arrow_back</span>
-          <span>Return to Homepage</span>
-        </Link>
-
         <div className="w-full max-w-xl mx-auto my-auto">
-          {/* Centered Brand Logo */}
+          {/* Centered Real Brand Logo Mark */}
           <div className="text-center mb-6">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-block hover:opacity-90 transition-opacity">
               <img
                 src="/Satrinao.png"
                 alt="Satriano Atelier"
@@ -498,7 +488,6 @@ function PortalPageContent() {
   // 4. SUBMITTED CONFIRMATION VIEW
   return (
     <>
-      <SiteHeader />
       <main className="min-h-screen bg-[#F5F7FA] text-[#1A2233] py-16 px-4 md:px-8 flex flex-col justify-center items-center font-sans">
         <div className="w-full max-w-xl mx-auto">
           <div className="bg-white border border-[#D1D5DB] rounded-lg p-8 shadow-sm text-center">
