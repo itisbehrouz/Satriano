@@ -17,12 +17,12 @@
   "app/admin/layout.tsx": {
     "mtime": 1785683827.543213,
     "ast_hash": "cab689f727b58a52f29333fc2581316b",
-    "semantic_hash": ""
+    "semantic_hash": "cab689f727b58a52f29333fc2581316b"
   },
   "app/admin/page.tsx": {
     "mtime": 1785683813.0617332,
     "ast_hash": "3202cf1a02d273c5cc5bbedc65c93f18",
-    "semantic_hash": ""
+    "semantic_hash": "3202cf1a02d273c5cc5bbedc65c93f18"
   },
   "app/admin/product-settings/page.tsx": {
     "mtime": 1785681371.217979,
@@ -232,7 +232,7 @@
   "app/api/upload/route.ts": {
     "mtime": 1785688122.005989,
     "ast_hash": "5f83dc42f8a4beb77646106517051e06",
-    "semantic_hash": ""
+    "semantic_hash": "5f83dc42f8a4beb77646106517051e06"
   },
   "app/categories/[categoryId]/page.tsx": {
     "mtime": 1785680390.2474546,
@@ -272,7 +272,7 @@
   "app/layout.tsx": {
     "mtime": 1785688524.7351685,
     "ast_hash": "31550eeadebdaa77f293acc3873bc134",
-    "semantic_hash": ""
+    "semantic_hash": "31550eeadebdaa77f293acc3873bc134"
   },
   "app/legal/cookies/page.tsx": {
     "mtime": 1785680532.8425348,
@@ -307,7 +307,7 @@
   "app/page.tsx": {
     "mtime": 1785683547.2835224,
     "ast_hash": "454837e66835ecb790ea2849e53152fa",
-    "semantic_hash": ""
+    "semantic_hash": "454837e66835ecb790ea2849e53152fa"
   },
   "app/portal/account/page.tsx": {
     "mtime": 1785679148.737708,
@@ -372,7 +372,7 @@
   "components/CategoriesSearchFilter.tsx": {
     "mtime": 1785683346.9671545,
     "ast_hash": "e9cbb9ff04b4b99c7283f7f6b1352aa9",
-    "semantic_hash": ""
+    "semantic_hash": "e9cbb9ff04b4b99c7283f7f6b1352aa9"
   },
   "components/HomeEstimatorPreview.tsx": {
     "mtime": 1785680320.3313322,
@@ -402,7 +402,7 @@
   "components/admin/AdminKpiDashboard.tsx": {
     "mtime": 1785688345.9506261,
     "ast_hash": "8d1d4bc7524121b29d1e7c195cf59d5b",
-    "semantic_hash": ""
+    "semantic_hash": "8d1d4bc7524121b29d1e7c195cf59d5b"
   },
   "components/admin/AdminOrderTable.tsx": {
     "mtime": 1785680697.5806463,
@@ -452,7 +452,7 @@
   "components/admin/GlobalCommandPalette.tsx": {
     "mtime": 1785683189.806869,
     "ast_hash": "600c9d99930987ec3af980189965e31e",
-    "semantic_hash": ""
+    "semantic_hash": "600c9d99930987ec3af980189965e31e"
   },
   "components/admin/ProductFitTree.tsx": {
     "mtime": 1785681391.5371568,
@@ -477,7 +477,7 @@
   "components/admin/wholesale/AdminWholesaleClient.tsx": {
     "mtime": 1785684434.1377232,
     "ast_hash": "115d4bb061e48a115f490ca96cc31f5d",
-    "semantic_hash": ""
+    "semantic_hash": "115d4bb061e48a115f490ca96cc31f5d"
   },
   "components/admin/wholesale/InventoryEditModal.tsx": {
     "mtime": 1785681860.9332895,
@@ -532,7 +532,7 @@
   "components/admin/wholesale/inventory/CategoryInventoryClient.tsx": {
     "mtime": 1785684481.6284404,
     "ast_hash": "9654fcb4017af5f78193981a91c10f98",
-    "semantic_hash": ""
+    "semantic_hash": "9654fcb4017af5f78193981a91c10f98"
   },
   "components/admin/wholesale/inventory/ProductCard.tsx": {
     "mtime": 1785681795.001668,
@@ -562,7 +562,7 @@
   "components/admin/wholesale/suppliers/SupplierClient.tsx": {
     "mtime": 1785684565.9565253,
     "ast_hash": "31d699da817c46ee6fb735878c6b3cb8",
-    "semantic_hash": ""
+    "semantic_hash": "31d699da817c46ee6fb735878c6b3cb8"
   },
   "components/admin/wholesale/suppliers/SupplierDetailModal.tsx": {
     "mtime": 1785681972.5547137,
@@ -672,12 +672,12 @@
   "components/layout/SiteFooter.tsx": {
     "mtime": 1785688576.258794,
     "ast_hash": "bd211301dc15906e95654012e87ddd46",
-    "semantic_hash": ""
+    "semantic_hash": "bd211301dc15906e95654012e87ddd46"
   },
   "components/layout/SiteHeader.tsx": {
     "mtime": 1785688541.5845768,
     "ast_hash": "b3bf0ac72a6129086df49bc9836fa0d8",
-    "semantic_hash": ""
+    "semantic_hash": "b3bf0ac72a6129086df49bc9836fa0d8"
   },
   "components/layout/TransactionalHeader.tsx": {
     "mtime": 1785448801.654339,
@@ -712,7 +712,7 @@
   "components/portal/PortalHeader.tsx": {
     "mtime": 1785683207.186731,
     "ast_hash": "d151b24033955deaf8dd2c9e63628b0b",
-    "semantic_hash": ""
+    "semantic_hash": "d151b24033955deaf8dd2c9e63628b0b"
   },
   "components/portal/account/AccountPage.test.tsx": {
     "mtime": 1785630734.8309813,
@@ -857,7 +857,7 @@
   "lib/customerAuth.ts": {
     "mtime": 1785688116.7509189,
     "ast_hash": "55c56891c04bf1c4cb180a55eaec8b57",
-    "semantic_hash": ""
+    "semantic_hash": "55c56891c04bf1c4cb180a55eaec8b57"
   },
   "lib/email.ts": {
     "mtime": 1785527923.1555948,
@@ -932,7 +932,7 @@
   "next.config.ts": {
     "mtime": 1785688111.6700535,
     "ast_hash": "606def11031517ca1f56a963e46d09d8",
-    "semantic_hash": ""
+    "semantic_hash": "606def11031517ca1f56a963e46d09d8"
   },
   "package.json": {
     "mtime": 1785628109.8112085,
@@ -977,216 +977,221 @@
   ".agents/rules/graphify.md": {
     "mtime": 1785675885.6864452,
     "ast_hash": "f1e53ecc9194573d3c28fc116c743a2e",
-    "semantic_hash": ""
+    "semantic_hash": "f1e53ecc9194573d3c28fc116c743a2e"
   },
   ".agents/workflows/graphify.md": {
     "mtime": 1785675885.686643,
     "ast_hash": "0bc020d491fca99550c1ea3de0a5f862",
-    "semantic_hash": ""
+    "semantic_hash": "0bc020d491fca99550c1ea3de0a5f862"
   },
   "AGENTS.md": {
     "mtime": 1785448801.6435063,
     "ast_hash": "c316aba5ad7f9ac7bea477c1b926f5a9",
-    "semantic_hash": ""
+    "semantic_hash": "c316aba5ad7f9ac7bea477c1b926f5a9"
   },
   "CLAUDE.md": {
     "mtime": 1785448781.594247,
     "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
-    "semantic_hash": ""
+    "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
   },
   "DESIGN.md": {
     "mtime": 1785483590.7570913,
     "ast_hash": "58a1974a5ffc0ebac25605b3e621006d",
-    "semantic_hash": ""
+    "semantic_hash": "58a1974a5ffc0ebac25605b3e621006d"
   },
   "README.md": {
     "mtime": 1785448801.64405,
     "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
-    "semantic_hash": ""
+    "semantic_hash": "f15aaa42d5d299d091b1171097ea56ad"
   },
   "design-system/satriano-atelier/MASTER.md": {
     "mtime": 1785448801.6545599,
     "ast_hash": "74e8bb0356af934fb19a454224020bd1",
-    "semantic_hash": ""
+    "semantic_hash": "74e8bb0356af934fb19a454224020bd1"
   },
   "docs/skills/codebase-health-audit.md": {
     "mtime": 1785514126.7676172,
     "ast_hash": "6d13ffbe1f736b1bb51184e51c405e9d",
-    "semantic_hash": ""
+    "semantic_hash": "6d13ffbe1f736b1bb51184e51c405e9d"
   },
   "docs/skills/feature-inventory-audit.md": {
     "mtime": 1785514134.6878464,
     "ast_hash": "ac5013840a66f79e36b90438bd13bdc0",
-    "semantic_hash": ""
+    "semantic_hash": "ac5013840a66f79e36b90438bd13bdc0"
   },
   "satriano-atelier-roadmap-consolidated.md": {
     "mtime": 1785680208.8221948,
     "ast_hash": "cc8d34f70ec3aa1211b28b0cdf2ca868",
-    "semantic_hash": ""
+    "semantic_hash": "cc8d34f70ec3aa1211b28b0cdf2ca868"
   },
   "satriano-atelier-roadmap.md": {
     "mtime": 1785682044.1889837,
     "ast_hash": "72b9d21424e14ad7f206c8d706d1d314",
-    "semantic_hash": ""
+    "semantic_hash": "72b9d21424e14ad7f206c8d706d1d314"
   },
   "public/Satrinao.png": {
     "mtime": 1785448801.6621096,
     "ast_hash": "00356f7aa81adeb47deed71dbc21acdb",
-    "semantic_hash": ""
+    "semantic_hash": "00356f7aa81adeb47deed71dbc21acdb"
   },
   "public/file.svg": {
     "mtime": 1785448781.5992866,
     "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
-    "semantic_hash": ""
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
   },
   "public/globe.svg": {
     "mtime": 1785448781.5998485,
     "ast_hash": "2aaafa6a49b6563925fe440891e32717",
-    "semantic_hash": ""
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
   },
   "public/hero-atelier.png": {
     "mtime": 1785571668.9703264,
     "ast_hash": "afc282bdf551fdb3a1eee579a9b22c62",
-    "semantic_hash": ""
+    "semantic_hash": "afc282bdf551fdb3a1eee579a9b22c62"
   },
   "public/images/catalog/accessories.png": {
     "mtime": 1785448801.667111,
     "ast_hash": "1b34555d0eb7c66ff6db577083d50355",
-    "semantic_hash": ""
+    "semantic_hash": "1b34555d0eb7c66ff6db577083d50355"
   },
   "public/images/catalog/bottoms.png": {
     "mtime": 1785448801.6710684,
     "ast_hash": "13f45cf0baf27c98bc6a383be15b055b",
-    "semantic_hash": ""
+    "semantic_hash": "13f45cf0baf27c98bc6a383be15b055b"
   },
   "public/images/catalog/formal_wear.png": {
     "mtime": 1785448801.6780384,
     "ast_hash": "304bdc2e15b552cafbecf97389672ad0",
-    "semantic_hash": ""
+    "semantic_hash": "304bdc2e15b552cafbecf97389672ad0"
   },
   "public/images/catalog/loungewear.png": {
     "mtime": 1785448801.683965,
     "ast_hash": "e35c606181493b87c5243169b4cfb328",
-    "semantic_hash": ""
+    "semantic_hash": "e35c606181493b87c5243169b4cfb328"
   },
   "public/images/catalog/outerwear.png": {
     "mtime": 1785448801.6888747,
     "ast_hash": "02f712685ffd1c4e8a7c76d40c535573",
-    "semantic_hash": ""
+    "semantic_hash": "02f712685ffd1c4e8a7c76d40c535573"
   },
   "public/images/catalog/sportswear.png": {
     "mtime": 1785448801.693839,
     "ast_hash": "d5842dd8ba355beaab2005f93b8a0888",
-    "semantic_hash": ""
+    "semantic_hash": "d5842dd8ba355beaab2005f93b8a0888"
   },
   "public/images/catalog/tops copy.png": {
     "mtime": 1785448801.6988254,
     "ast_hash": "38e9b6ba9e808fe41963cf5d85756a4a",
-    "semantic_hash": ""
+    "semantic_hash": "38e9b6ba9e808fe41963cf5d85756a4a"
   },
   "public/images/catalog/tops.png": {
     "mtime": 1785448801.7014794,
     "ast_hash": "38e9b6ba9e808fe41963cf5d85756a4a",
-    "semantic_hash": ""
+    "semantic_hash": "38e9b6ba9e808fe41963cf5d85756a4a"
   },
   "public/images/subcategories/accessories-scarves.jpg": {
     "mtime": 1785486486.8087752,
     "ast_hash": "4d766512a9a2aad1fa2ee81754823ff5",
-    "semantic_hash": ""
+    "semantic_hash": "4d766512a9a2aad1fa2ee81754823ff5"
   },
   "public/images/subcategories/accessories-ties.jpg": {
     "mtime": 1785448801.7082243,
     "ast_hash": "ad5c23d6ae3aadf0b5896fe1dac11d0e",
-    "semantic_hash": ""
+    "semantic_hash": "ad5c23d6ae3aadf0b5896fe1dac11d0e"
   },
   "public/images/subcategories/bottoms-shorts.png": {
     "mtime": 1785448801.7130587,
     "ast_hash": "d915df84934599558386b4b4965890b8",
-    "semantic_hash": ""
+    "semantic_hash": "d915df84934599558386b4b4965890b8"
   },
   "public/images/subcategories/bottoms-skirts.png": {
     "mtime": 1785448801.72893,
     "ast_hash": "bebb7cbd8c196fd1e1cbddcd3d5d4996",
-    "semantic_hash": ""
+    "semantic_hash": "bebb7cbd8c196fd1e1cbddcd3d5d4996"
   },
   "public/images/subcategories/bottoms-trousers.png": {
     "mtime": 1785448801.7329826,
     "ast_hash": "edf26c8cd4ca714839d8709fc7e94201",
-    "semantic_hash": ""
+    "semantic_hash": "edf26c8cd4ca714839d8709fc7e94201"
   },
   "public/images/subcategories/formal-blazers.jpg": {
     "mtime": 1785448801.7390463,
     "ast_hash": "be553f951b8ed69dfdb4eca6d9e3f556",
-    "semantic_hash": ""
+    "semantic_hash": "be553f951b8ed69dfdb4eca6d9e3f556"
   },
   "public/images/subcategories/formal-tuxedos.jpg": {
     "mtime": 1785448801.7406914,
     "ast_hash": "82e7fffd3402e69fabf63a924593fc3c",
-    "semantic_hash": ""
+    "semantic_hash": "82e7fffd3402e69fabf63a924593fc3c"
   },
   "public/images/subcategories/loungewear-sleepwear.jpg": {
     "mtime": 1785486486.8010826,
     "ast_hash": "854648e91e85a6878422b4fbde11435a",
-    "semantic_hash": ""
+    "semantic_hash": "854648e91e85a6878422b4fbde11435a"
   },
   "public/images/subcategories/loungewear-underwear.jpg": {
     "mtime": 1785486486.8053262,
     "ast_hash": "a1820eb97cfdc8b9031158ffcd668ac3",
-    "semantic_hash": ""
+    "semantic_hash": "a1820eb97cfdc8b9031158ffcd668ac3"
   },
   "public/images/subcategories/outerwear-coats.jpg": {
     "mtime": 1785448801.7428877,
     "ast_hash": "d2ca206a08aa49b7445c7eb3511a9c29",
-    "semantic_hash": ""
+    "semantic_hash": "d2ca206a08aa49b7445c7eb3511a9c29"
   },
   "public/images/subcategories/outerwear-overcoats.jpg": {
     "mtime": 1785448801.743792,
     "ast_hash": "57d537c0fe78f4286767f501c582fb99",
-    "semantic_hash": ""
+    "semantic_hash": "57d537c0fe78f4286767f501c582fb99"
   },
   "public/images/subcategories/sportswear-activewear.jpg": {
     "mtime": 1785448801.7440848,
     "ast_hash": "ced13ea336172b5e518a22652327ee12",
-    "semantic_hash": ""
+    "semantic_hash": "ced13ea336172b5e518a22652327ee12"
   },
   "public/images/subcategories/sportswear-performance.jpg": {
     "mtime": 1785448801.7444248,
     "ast_hash": "af871edb95add4d23643e63cb575bf7a",
-    "semantic_hash": ""
+    "semantic_hash": "af871edb95add4d23643e63cb575bf7a"
   },
   "public/images/subcategories/tops-polos.png": {
     "mtime": 1785448801.7486393,
     "ast_hash": "9d6870923fc02727e9f014ad21a3715a",
-    "semantic_hash": ""
+    "semantic_hash": "9d6870923fc02727e9f014ad21a3715a"
   },
   "public/images/subcategories/tops-shirts.png": {
     "mtime": 1785448801.7559686,
     "ast_hash": "8dd589556a8d17c89f243f2403cfdb91",
-    "semantic_hash": ""
+    "semantic_hash": "8dd589556a8d17c89f243f2403cfdb91"
   },
   "public/images/subcategories/tops-sweaters.png": {
     "mtime": 1785448801.760487,
     "ast_hash": "fe675fef8ad625203daca8e1e57bb35b",
-    "semantic_hash": ""
+    "semantic_hash": "fe675fef8ad625203daca8e1e57bb35b"
   },
   "public/next.svg": {
     "mtime": 1785448781.600199,
     "ast_hash": "8e061864f388b47f33a1c3780831193e",
-    "semantic_hash": ""
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
   },
   "public/vercel.svg": {
     "mtime": 1785448781.600578,
     "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
-    "semantic_hash": ""
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
   },
   "public/window.svg": {
     "mtime": 1785448781.6023438,
     "ast_hash": "a2760511c65806022ad20adf74370ff3",
-    "semantic_hash": ""
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   },
   "app/admin/orders/page.tsx": {
     "mtime": 1785683802.9606018,
     "ast_hash": "573024a005e2c06a37a0d1c83040ce95",
-    "semantic_hash": ""
+    "semantic_hash": "573024a005e2c06a37a0d1c83040ce95"
+  },
+  "ROADMAP.md": {
+    "mtime": 1785792188.398338,
+    "ast_hash": "4e15215faf64bf4f85e3961001b63dab",
+    "semantic_hash": "4e15215faf64bf4f85e3961001b63dab"
   }
 }

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Baskervville } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { CookieConsentModal } from "@/components/layout/CookieConsentModal";
 import { B2BSupportDock } from "@/components/layout/B2BSupportDock";
 import { AIFaqAssistantModal } from "@/components/layout/AIFaqAssistantModal";
+import { ServiceWorkerRegister } from "@/components/layout/ServiceWorkerRegister";
 import Script from "next/script";
 import "./globals.css";
 
@@ -19,10 +20,33 @@ const baskervville = Baskervville({
   weight: ["400"],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F5F7FA" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B1E3D" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: "Satriano Atelier - B2B Made-to-Order Manufacturing Portal",
   description:
     "Industrial B2B white-label garment manufacturing portal with transparent live pricing and precision CAD sizing.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Satriano Atelier",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -45,6 +69,10 @@ export default function RootLayout({
           }}
         />
         <link
+          rel="apple-touch-icon"
+          href="/icons/apple-touch-icon.png"
+        />
+        <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
@@ -57,8 +85,10 @@ export default function RootLayout({
         <CookieConsentModal />
         <B2BSupportDock />
         <AIFaqAssistantModal />
+        <ServiceWorkerRegister />
         <Analytics />
       </body>
     </html>
   );
 }
+

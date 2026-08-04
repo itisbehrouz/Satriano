@@ -1,0 +1,1 @@
+{"nodes": [{"id": "asset:public/file.svg", "label": "file.svg", "node_type": "IMAGE", "source_file": "public/file.svg", "summary": "Visual asset file.svg", "confidence": 0.9, "provenance": "EXTRACTED"}], "edges": [], "hyperedges": []}

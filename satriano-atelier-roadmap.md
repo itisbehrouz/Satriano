@@ -1,11 +1,11 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 2, 2026 — Theme System & Full Roadmap Consolidation)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 4, 2026 — Portal Header Redesign & Admin Nav Update)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog + B2B partner portal + workflow automation
 **Capacity assumption:** Solo developer, ~2 hours/day
 **Development environment:** Google Antigravity (primary), Claude Code (approved fallback when Antigravity quota exhausted), Claude (architecture/planning), Vercel (hosting), Supabase (DB + Storage)
 **Cost principle:** Zero fixed cost — usage/commission-based services only (Vercel free tier, Supabase free tier, Stripe transaction fees when live)
 
-This document consolidates everything decided and built through August 2, 2026 (adds Section 26). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
+This document consolidates everything decided and built through August 4, 2026 (adds Section 27). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
 
 ---
 
@@ -264,7 +264,7 @@ Several times, something was reported as "done" but wasn't (category count, admi
   - Removed top Satriano logo from admin sidebar navigation per brand customization directive.
 - **Top Header Bar & Page Title Removal**:
   - Removed top white header bar (`Admin Console / [Page Name]`) and top page title banners across all admin pages (`/admin`, `/admin/applications`, `/admin/product-settings`, `/admin/architecture-viz`).
-  - Relocated page action triggers (`3D Anti-Gravity Viz`, `Refresh Ledger`, `Refresh Applications`, `Back to Order Ledger`) directly into category/status filter bars.
+  - Relocated page action triggers (`3D Anti-Gravity Viz` — **renamed to `3D Telemetry`, Aug 4, 2026**, `Refresh Ledger`, `Refresh Applications`, `Back to Order Ledger`) directly into category/status filter bars.
   - Integrated Global Search trigger (`⌘K`) and Sign Out button cleanly into the bottom sidebar footer.
 - **Accordion Sub-Menu Navigation & Deep-Linking**:
   - Refactored sidebar sub-item list to an accordion pattern where sub-items expand only for the active section (or user-toggled section), keeping inactive section menus collapsed.
@@ -523,6 +523,7 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
   - Updated inline resolution script in `<head>`: when `pathname.startsWith('/portal')` and no `satriano-theme` localStorage key exists, `data-theme` defaults to `"dark"` directly regardless of OS system preference.
   - Public marketing routes retain system-preference fallback (`prefers-color-scheme`).
   - Executive Admin panel (`/admin/*`) remains 100% exempt on its isolated Swiss Design token system.
+  - **⚠ Superseded Aug 4, 2026 — see Section 27.** The portal header was rebuilt and this dark-default behavior no longer reflects the shipped design. Kept here for historical record only.
 - **Verification**:
   - `npm test`: 28 test files / 136 unit tests passed 100%.
   - `npm run build`: Production build clean with 0 errors.
@@ -537,7 +538,7 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
 
 ### 2. Default Theme Resolution Logic
 - **Public Site (`/`, `/categories`, `/wholesale`, `/konfigurator`)**: Defaults to **light mode** (`data-theme="light"`). In the absence of an explicit saved preference in `localStorage` (`satriano-theme`), it falls back to the operating system's `prefers-color-scheme`.
-- **B2B Customer Portal (`/portal/*`)**: Defaults to **dark mode** (`data-theme="dark"`) regardless of system preference unless an explicit user preference is saved in `localStorage`.
+- **B2B Customer Portal (`/portal/*`)**: ~~Defaults to **dark mode** (`data-theme="dark"`) regardless of system preference unless an explicit user preference is saved in `localStorage`.~~ **Superseded Aug 4, 2026** — the portal header/layout was redesigned (see Section 27); portal now follows the same light-first pattern as the public site. This rule is kept for historical record only.
 - **Anti-Flash Mechanism**: An inline, blocking `<script>` block in `<head>` of `app/layout.tsx` inspects `pathname` and `localStorage.getItem('satriano-theme')` to set `document.documentElement.setAttribute('data-theme', ...)` prior to DOM paint, preventing white/dark flash on page load.
 
 ### 3. Comprehensive Theme Token Reference
@@ -579,3 +580,24 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
     - `components/portal/account/BillingTab.tsx` (Address & invoice table cards).
     - `components/portal/orders/OrderDetailModal.tsx` (Modal dialog content wrapper).
   - These sub-components must be tokenized in upcoming sessions to achieve 100% theme consistency across all portal tabs.
+
+---
+
+## 27. Portal Header Redesign & Admin Nav Rename (Aug 4, 2026)
+
+**Confirmed via screenshot review.** This section supersedes the portal dark-default behavior documented in Section 25 (Fix 3) and Section 26 (point 2) — those entries are kept in place for historical record but no longer reflect the shipped design.
+
+### Portal header — rebuilt
+- `PortalHeader.tsx` replaced: light-first appearance now matches the public site's visual register rather than the previous dark-navy (`#0B1E3D`) header with gold "S" mark and `AccountDropdown`.
+- Logo mark simplified to a solid blue square "S" icon (replacing the gold wordmark treatment used in the dark header).
+- Top nav simplified to plain text links: `Catalog`, `Orders`, `Account`.
+- Top-right identity control changed from the `AccountDropdown` menu to a `NAME ▾` chip (e.g. `BE.BAGHERZADEH ▾`), with global `⌘K` search and Sun/Moon theme toggle alongside it.
+- Dashboard body (`PortalDashboard.tsx`) restyled to a light card layout: `COMPANY ACCOUNT OVERVIEW` card with approval badge, a 2×2 action button grid (`CREATE NEW ORDER`, `VIEW ALL ORDERS`, `ACCOUNT SETTINGS`, `CONTACT SUPPORT`), `Recent Orders (Last 5)` panel with empty-state illustration, and a `Helpful Resources` link section.
+- **Open item:** the previous dark-mode toggle (Sun/Moon) is still present in the header, so dark mode itself hasn't been removed — only the *default* state changed from forced-dark to light-first. Exact fallback logic (system preference vs. hard light default) not yet re-confirmed against Section 26's resolution-script pattern; revisit if a flash-of-wrong-theme bug shows up.
+
+### Admin nav — renamed
+- `3D Anti-Gravity Viz` (Section 14) renamed to **`3D Telemetry`** in the admin navigation.
+- **Observed but not yet confirmed:** the same screenshot shows admin top-level navigation (`Order Ledger`, `Wholesale`, `Applications`, `Settings`, `3D Telemetry`) rendered as a top mega-menu-style bar with dropdown panels, rather than the left-hand collapsible sidebar described in Section 14. This may just be the `Settings` dropdown expanded inline, or it may reflect a further nav restructure — flag for confirmation next session before treating it as a documented architecture change.
+
+### Public homepage — unchanged, re-verified
+- Screenshot review confirms the public homepage still matches the documented design system: light mode, gold confined to the `SATRIANO` logo mark, `#2E5AAC` accent CTA (`START CUSTOM ORDER SPEC`), 0px corner geometry, hero copy exactly as specified ("Your product. Your price. Your brand. We manufacture it."), and the `B2B Support` dock present. No drift found here.
