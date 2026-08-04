@@ -5,9 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { OpenCookiePreferencesButton } from "@/components/layout/CookieConsentModal";
+import { AtelierLogo } from "@/components/layout/AtelierLogo";
 
 const NAVIGATION_LINKS = [
-  { label: "Manufacturing Configurator", href: "/categories" },
+  { label: "Manufacturing Catalog", href: "/categories" },
   { label: "Garment Categories", href: "/categories" },
   { label: "Client Portal Access", href: "/portal" },
   { label: "Wholesale & Custom Lines", href: "/portal" },
@@ -53,13 +54,7 @@ export function SiteFooter() {
               href="/"
               className="inline-block hover:opacity-95 transition-opacity self-start"
             >
-              <NextImage
-                src="/Satrinao.png"
-                alt="Satriano Atelier"
-                width={180}
-                height={50}
-                className="h-[45px] md:h-[48px] w-auto object-contain"
-              />
+              <AtelierLogo className="h-[45px] md:h-[48px] w-auto object-contain" />
             </Link>
             <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
               Industrial B2B white-label garment manufacturing portal. Delivering transparent live pricing, precision sizing matrices, and European atelier execution for global apparel brands.

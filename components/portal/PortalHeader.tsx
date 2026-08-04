@@ -6,6 +6,7 @@ import NextImage from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
+import { AtelierLogo } from "@/components/layout/AtelierLogo";
 
 export interface PortalHeaderProps {
   initialCompanyName?: string | null;
@@ -75,14 +76,7 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
             href="/"
             className="flex items-center gap-3 hover:opacity-95 transition-opacity"
           >
-            <NextImage
-              src="/Satrinao.png"
-              alt="Satriano Atelier"
-              width={160}
-              height={45}
-              priority
-              className="h-8 md:h-[40px] w-auto object-contain"
-            />
+            <AtelierLogo className="h-8 md:h-[40px] w-auto object-contain" />
           </Link>
 
           {/* Center: Main Navigation (Catalog | Orders | Account) */}

@@ -37,7 +37,7 @@ export default async function CategoriesPage() {
             </nav>
 
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-              <div className="max-w-3xl space-y-4">
+              <div className="max-w-4xl space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] rounded-none">
                   <span className="w-2 h-2 rounded-none bg-[var(--color-accent)] animate-pulse" />
                   B2B White-Label Portfolio
@@ -65,17 +65,6 @@ export default async function CategoriesPage() {
                     <strong className="text-[var(--color-accent)] font-mono text-sm">65</strong> Producible Products
                   </span>
                 </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="shrink-0">
-                <Link
-                  href="/konfigurator"
-                  className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-none transition-all inline-flex items-center gap-2"
-                >
-                  <span>Launch Order Configurator</span>
-                  <span>→</span>
-                </Link>
               </div>
             </div>
           </div>

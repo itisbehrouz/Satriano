@@ -207,7 +207,7 @@ export function GlobalCommandPalette({
                 {products.map((p) => (
                   <Command.Item
                     key={p.id}
-                    onSelect={() => navigateTo("/konfigurator")}
+                    onSelect={() => navigateTo(`/konfigurator/${p.slug}`)}
                     className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
@@ -260,7 +260,7 @@ export function GlobalCommandPalette({
             {/* Group 3: Portal Navigation & Shortcuts */}
             <Command.Group heading="Client Portal Navigation" className="py-1">
               <Command.Item
-                onSelect={() => navigateTo("/konfigurator")}
+                onSelect={() => navigateTo("/categories")}
                 className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)] cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2.5">
@@ -269,7 +269,7 @@ export function GlobalCommandPalette({
                   </span>
                   <span>Garment Customization Catalog</span>
                 </div>
-                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/konfigurator</span>
+                <span className="text-[10px] text-[var(--color-text-secondary)] font-mono font-normal">/categories</span>
               </Command.Item>
 
               <Command.Item

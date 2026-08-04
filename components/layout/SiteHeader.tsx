@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
 import { getM2OCart, type M2OCartItem } from "@/lib/m2oCart";
+import { AtelierLogo } from "@/components/layout/AtelierLogo";
 
 const ANONYMOUS_NAV_ITEMS = [
   { label: "MANUFACTURING", href: "/categories" },
@@ -96,14 +97,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-3 hover:opacity-95 transition-opacity"
         >
-          <NextImage
-            src="/Satrinao.png"
-            alt="Satriano Atelier"
-            width={180}
-            height={50}
-            priority
-            className="h-9 md:h-[50px] w-auto object-contain"
-          />
+          <AtelierLogo />
         </Link>
 
         {/* Desktop Navigation Items */}

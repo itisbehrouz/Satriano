@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PortalDashboard } from "@/components/portal/PortalDashboard";
+import { AtelierLogo } from "@/components/layout/AtelierLogo";
 
 type PortalView = "LOGIN" | "REGISTER" | "SUBMITTED";
 
@@ -161,11 +162,7 @@ function PortalPageContent() {
           {/* Centered Real Brand Logo Mark */}
           <div className="text-center mb-6">
             <Link href="/" className="inline-block hover:opacity-90 transition-opacity">
-              <img
-                src="/Satrinao.png"
-                alt="Satriano Atelier"
-                className="h-10 md:h-11 w-auto mx-auto object-contain"
-              />
+              <AtelierLogo className="h-10 md:h-11 w-auto mx-auto object-contain" />
             </Link>
           </div>
 
@@ -519,7 +516,7 @@ function PortalPageContent() {
                 href="/categories"
                 className="min-h-[44px] inline-flex items-center justify-center bg-[#F5F7FA] hover:bg-[#E6F1FB] text-[#1A2233] hover:text-[#2E5AAC] border border-[#D1D5DB] text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded transition-colors"
               >
-                Launch Order Configurator
+                Browse Product Catalog
               </Link>
             </div>
           </div>
