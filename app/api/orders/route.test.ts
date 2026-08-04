@@ -26,11 +26,13 @@ describe("POST /api/orders", () => {
     const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
 
     const response = await postOrders({
-      fabricId: fabric.id,
       companyName: "Test Order Route Co",
       companyEmail: `test-order-route-${Date.now()}@example.com`,
-      sizeQuantities: [{ size: "M", quantity: 300 }],
       customerTargetPriceCents: 1850,
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "M", quantity: 300 }],
+      }],
     });
 
     expect(response.status).toBe(201);
@@ -56,10 +58,12 @@ describe("POST /api/orders", () => {
     const fabric = await prisma.fabric.findFirstOrThrow({ where: { name: "Pique Cotton" } });
 
     const response = await postOrders({
-      fabricId: fabric.id,
       companyName: "Low Qty Co",
       companyEmail: `low-qty-${Date.now()}@example.com`,
-      sizeQuantities: [{ size: "M", quantity: 30 }], // 30 < 80 MOQ
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "M", quantity: 30 }], // 30 < 80 MOQ
+      }],
     });
 
     expect(response.status).toBe(400);
@@ -72,20 +76,24 @@ describe("POST /api/orders", () => {
     const email = `test-order-route-${Date.now()}@example.com`;
 
     const first = await postOrders({
-      fabricId: fabric.id,
       companyName: "First Name",
       companyEmail: email,
-      sizeQuantities: [{ size: "S", quantity: 100 }],
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "S", quantity: 100 }],
+      }],
     });
     const firstJson = await first.json();
     const firstOrder = await prisma.order.findUniqueOrThrow({ where: { id: firstJson.orderId } });
     createdCompanyIds.push(firstOrder.companyId);
 
     const second = await postOrders({
-      fabricId: fabric.id,
       companyName: "Updated Name",
       companyEmail: email,
-      sizeQuantities: [{ size: "L", quantity: 120 }],
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "L", quantity: 120 }],
+      }],
     });
     const secondJson = await second.json();
     const secondOrder = await prisma.order.findUniqueOrThrow({
@@ -101,20 +109,21 @@ describe("POST /api/orders", () => {
 
   it("returns 400 for an invalid body", async () => {
     const response = await postOrders({
-      fabricId: "",
       companyName: "",
       companyEmail: "",
-      sizeQuantities: [],
+      items: [],
     });
     expect(response.status).toBe(400);
   });
 
   it("returns 404 when the fabric does not exist", async () => {
     const response = await postOrders({
-      fabricId: "does-not-exist",
       companyName: "Test Order Route Co",
       companyEmail: `test-order-route-${Date.now()}@example.com`,
-      sizeQuantities: [{ size: "M", quantity: 10 }],
+      items: [{
+        fabricId: "does-not-exist",
+        sizeQuantities: [{ size: "M", quantity: 10 }],
+      }],
     });
     expect(response.status).toBe(404);
   });
@@ -124,10 +133,12 @@ describe("POST /api/orders", () => {
     const email = `test-order-route-${Date.now()}@example.com`;
 
     const response = await postOrders({
-      fabricId: fabric.id,
       companyName: "Test Order Route Co",
       companyEmail: email,
-      sizeQuantities: [{ size: "M", quantity: 0 }],
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "M", quantity: 0 }],
+      }],
     });
 
     expect(response.status).toBe(400);
@@ -140,12 +151,14 @@ describe("POST /api/orders", () => {
     const email = `test-order-logo-${Date.now()}@example.com`;
 
     const response = await postOrders({
-      fabricId: fabric.id,
       companyName: "Branded Company",
       companyEmail: email,
-      sizeQuantities: [{ size: "M", quantity: 100 }],
-      logoUrl: "/uploads/test-logo.svg",
-      logoPlacement: "RIGHT_SLEEVE",
+      items: [{
+        fabricId: fabric.id,
+        sizeQuantities: [{ size: "M", quantity: 100 }],
+        logoUrl: "/uploads/test-logo.svg",
+        logoPlacement: "RIGHT_SLEEVE",
+      }],
     });
 
     expect(response.status).toBe(201);

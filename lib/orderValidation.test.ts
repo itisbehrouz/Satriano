@@ -2,12 +2,16 @@ import { describe, expect, it } from "vitest";
 import { validateCreateOrderInput } from "@/lib/orderValidation";
 
 const validBody = {
-  fabricId: "fabric-pique",
   companyName: "Atelier Holdings LLC",
   companyEmail: "buyer@atelier-holdings.com",
-  sizeQuantities: [
-    { size: "S", quantity: 50 },
-    { size: "M", quantity: 100 },
+  items: [
+    {
+      fabricId: "fabric-pique",
+      sizeQuantities: [
+        { size: "S", quantity: 50 },
+        { size: "M", quantity: 100 },
+      ],
+    },
   ],
 };
 
@@ -21,8 +25,8 @@ describe("validateCreateOrderInput", () => {
     expect(result.valid).toBe(true);
     if (result.valid) {
       expect(result.data.companyEmail).toBe("buyer@atelier-holdings.com");
-      expect(result.data.fabricId).toBe("fabric-pique");
-      expect(result.data.sizeQuantities).toHaveLength(2);
+      expect(result.data.items[0].fabricId).toBe("fabric-pique");
+      expect(result.data.items[0].sizeQuantities).toHaveLength(2);
     }
   });
 
@@ -32,8 +36,15 @@ describe("validateCreateOrderInput", () => {
   });
 
   it("rejects a missing fabricId", () => {
-    const { fabricId: _fabricId, ...rest } = validBody;
-    const result = validateCreateOrderInput(rest);
+    const result = validateCreateOrderInput({
+      ...validBody,
+      items: [
+        {
+          fabricId: "",
+          sizeQuantities: [{ size: "S", quantity: 50 }],
+        },
+      ],
+    });
     expect(result.valid).toBe(false);
     if (!result.valid) expect(result.error).toMatch(/fabricId/i);
   });
@@ -51,14 +62,27 @@ describe("validateCreateOrderInput", () => {
   });
 
   it("rejects an empty sizeQuantities array", () => {
-    const result = validateCreateOrderInput({ ...validBody, sizeQuantities: [] });
+    const result = validateCreateOrderInput({
+      ...validBody,
+      items: [
+        {
+          fabricId: "fabric-pique",
+          sizeQuantities: [],
+        },
+      ],
+    });
     expect(result.valid).toBe(false);
   });
 
   it("rejects a sizeQuantities entry with a negative quantity", () => {
     const result = validateCreateOrderInput({
       ...validBody,
-      sizeQuantities: [{ size: "M", quantity: -1 }],
+      items: [
+        {
+          fabricId: "fabric-pique",
+          sizeQuantities: [{ size: "M", quantity: -1 }],
+        },
+      ],
     });
     expect(result.valid).toBe(false);
   });
@@ -66,7 +90,12 @@ describe("validateCreateOrderInput", () => {
   it("rejects a sizeQuantities entry with a non-integer quantity", () => {
     const result = validateCreateOrderInput({
       ...validBody,
-      sizeQuantities: [{ size: "M", quantity: 1.5 }],
+      items: [
+        {
+          fabricId: "fabric-pique",
+          sizeQuantities: [{ size: "M", quantity: 1.5 }],
+        },
+      ],
     });
     expect(result.valid).toBe(false);
   });

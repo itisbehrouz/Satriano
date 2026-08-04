@@ -8,9 +8,8 @@ import { FitPicker, type FitOption } from "@/components/configurator/FitPicker";
 import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/SizeQtyTable";
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
-import { ConfiguratorSuccess } from "@/components/configurator/ConfiguratorSuccess";
-import { GuestLoginModal } from "@/components/configure/GuestLoginModal";
 import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
+import { addToM2OCart } from "@/lib/m2oCart";
 
 interface ConfiguratorClientProps {
   productId?: string;
@@ -44,19 +43,10 @@ export function ConfiguratorClient({
   const [selectedFitId, setSelectedFitId] = useState(fits[0]?.id ?? "");
   const [activeRegion, setActiveRegion] = useState<"EU" | "US">("EU");
   const [sizeQuantities, setSizeQuantities] = useState<Record<string, number>>(DEFAULT_SIZE_QUANTITIES);
-  const [customerTargetPrice, setCustomerTargetPrice] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [placement, setPlacement] = useState<LogoPlacement>("LEFT_CHEST");
-  const [companyName, setCompanyName] = useState(initialCompanyName);
-  const [companyEmail, setCompanyEmail] = useState(initialCompanyEmail);
-  const [submitting, setSubmitting] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submittedOrderId, setSubmittedOrderId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (initialCompanyEmail) setCompanyEmail(initialCompanyEmail);
-    if (initialCompanyName) setCompanyName(initialCompanyName);
-  }, [initialCompanyEmail, initialCompanyName]);
 
   const selectedFabric = fabrics.find((fabric) => fabric.id === selectedFabricId) ?? fabrics[0];
   const selectedFit = fits.find((fit) => fit.id === selectedFitId) ?? fits[0];
@@ -64,76 +54,10 @@ export function ConfiguratorClient({
   const totalUnits = Object.values(sizeQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
   const meetsMoq = totalUnits >= moqPerFabric;
 
-  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
-
-  async function handleSendMagicLink(email: string) {
-    const res = await fetch("/api/portal/magic-link", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const json = await res.json();
-    if (!res.ok) {
-      throw new Error(json.error || "Failed to send magic link email.");
-    }
-    router.push(`/configure/guest-confirmation?email=${encodeURIComponent(email)}`);
-  }
-
-  async function handleGuestOrderSubmit(email: string) {
-    setCompanyEmail(email);
-    if (!companyName) {
-      setCompanyName(email.split("@")[0].toUpperCase());
-    }
-
-    const targetPriceVal = parseFloat(customerTargetPrice);
-    const targetPriceCents =
-      !isNaN(targetPriceVal) && targetPriceVal > 0
-        ? Math.round(targetPriceVal * 100)
-        : undefined;
-
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fabricId: selectedFabricId,
-        productId: productId || undefined,
-        fitId: selectedFitId || undefined,
-        companyName: companyName || email.split("@")[0].toUpperCase(),
-        companyEmail: email,
-        sizeQuantities: toSizeQuantityArray(sizeQuantities),
-        customerTargetPriceCents: targetPriceCents,
-        logoPlacement: placement,
-      }),
-    });
-
-    const json = await response.json();
-    if (!response.ok) {
-      throw new Error(json.error ?? "Failed to submit guest order.");
-    }
-
-    // Trigger magic link email for guest verification
-    fetch("/api/portal/magic-link", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    }).catch(() => {});
-
-    router.push(`/configure/guest-confirmation?email=${encodeURIComponent(email)}`);
-  }
-
-  async function handleSubmit() {
-    if (!isLoggedIn && (!companyName.trim() || !companyEmail.trim())) {
-      setIsGuestModalOpen(true);
-      return;
-    }
-
-    if (!companyName.trim() || !companyEmail.trim()) {
-      setSubmitError("Company name and corporate email are required to submit proforma spec.");
-      return;
-    }
-
+  async function handleAddToCart() {
     setSubmitError(null);
-    setSubmitting(true);
+    setAddingToCart(true);
+    
     try {
       let uploadedLogoUrl: string | undefined = undefined;
 
@@ -147,7 +71,7 @@ export function ConfiguratorClient({
 
         if (!uploadRes.ok) {
           setSubmitError("Failed to upload vector logo file. Please try again.");
-          setSubmitting(false);
+          setAddingToCart(false);
           return;
         }
 
@@ -155,61 +79,27 @@ export function ConfiguratorClient({
         uploadedLogoUrl = uploadJson.url || uploadJson.storageUrl;
       }
 
-      const targetPriceVal = parseFloat(customerTargetPrice);
-      const targetPriceCents =
-        !isNaN(targetPriceVal) && targetPriceVal > 0
-          ? Math.round(targetPriceVal * 100)
-          : undefined;
+      const cartItem = {
+        id: Date.now().toString(),
+        fabricId: selectedFabricId,
+        productId: productId || undefined,
+        fitId: selectedFitId || undefined,
+        sizeQuantities: toSizeQuantityArray(sizeQuantities),
+        logoUrl: uploadedLogoUrl,
+        logoPlacement: placement,
+        fabricName: selectedFabric.name,
+        productName: titleText,
+        fitName: selectedFit?.name,
+        totalUnits,
+      };
 
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fabricId: selectedFabricId,
-          productId: productId || undefined,
-          fitId: selectedFitId || undefined,
-          companyName,
-          companyEmail,
-          sizeQuantities: toSizeQuantityArray(sizeQuantities),
-          customerTargetPriceCents: targetPriceCents,
-          logoUrl: uploadedLogoUrl,
-          logoPlacement: placement,
-        }),
-      });
-
-      const json = await response.json();
-      if (!response.ok) {
-        setSubmitError(json.error ?? "Something went wrong during proforma generation. Please try again.");
-        return;
-      }
-
-      if (isLoggedIn) {
-        router.push(`/configure/success?orderId=${json.orderId}`);
-      } else {
-        setSubmittedOrderId(json.orderId);
-      }
+      addToM2OCart(cartItem);
+      router.push("/configure/checkout");
     } catch {
-      setSubmitError("Network connection error. Please try again.");
+      setSubmitError("Failed to add to spec. Please try again.");
     } finally {
-      setSubmitting(false);
+      setAddingToCart(false);
     }
-  }
-
-  // Render Success Screen if order submitted
-  if (submittedOrderId) {
-    return (
-      <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-10 bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
-        <ConfiguratorSuccess
-          orderId={submittedOrderId}
-          isLoggedIn={isLoggedIn}
-          companyEmail={companyEmail}
-          onReset={() => {
-            setSubmittedOrderId(null);
-            setSizeQuantities(DEFAULT_SIZE_QUANTITIES);
-          }}
-        />
-      </main>
-    );
   }
 
   const titleText = subcategoryTitle ? subcategoryTitle : "Classic Polo Shirt";
@@ -254,7 +144,7 @@ export function ConfiguratorClient({
         </div>
 
         {/* Visual Spec Stepper Bar */}
-        <div className="mt-8 pt-6 border-t border-[var(--color-border)] grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
+        <div className="mt-8 pt-6 border-t border-[var(--color-border)] grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-mono">
           <div className="flex items-center gap-2 text-[var(--color-gold)]">
             <span className="w-5 h-5 bg-[var(--color-gold)] text-[var(--color-bg)] font-bold flex items-center justify-center rounded-none text-[10px]">
               1
@@ -272,12 +162,6 @@ export function ConfiguratorClient({
               3
             </span>
             <span className="font-semibold uppercase tracking-wider">Vector Logo</span>
-          </div>
-          <div className="flex items-center gap-2 text-[var(--color-text-secondary)]">
-            <span className="w-5 h-5 bg-[var(--color-border)] text-[var(--color-text-primary)] font-bold flex items-center justify-center rounded-none text-[10px]">
-              4
-            </span>
-            <span className="font-semibold uppercase tracking-wider">Proforma Review</span>
           </div>
         </div>
       </div>
@@ -377,88 +261,7 @@ export function ConfiguratorClient({
               onPlacementChange={setPlacement}
             />
           </section>
-
-          {/* Step 5: Corporate Info & Proforma Submission */}
-          <section className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
-            <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
-              <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
-                <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
-                  {fits.length > 0 ? "5" : "4"}
-                </span>
-                Corporate Info &amp; Proforma Submission
-              </h2>
-              {isLoggedIn && (
-                <span className="text-xs font-mono text-[var(--color-status-success)] font-semibold bg-[var(--color-status-success-bg)] px-2.5 py-1 border border-[var(--color-status-success)]/30">
-                  ✓ Logged In as Partner
-                </span>
-              )}
-            </div>
-
-            {!isLoggedIn && (
-              <div className="mb-6 p-4 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 rounded-none flex items-center justify-between gap-4">
-                <div className="text-xs text-[var(--color-text-primary)]">
-                  <strong className="block font-bold">Have an existing B2B partner account?</strong>
-                  <span className="text-[var(--color-text-secondary)]">Log in to automatically attach this order spec to your client portal.</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => router.push("/portal")}
-                  className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-none transition-colors shrink-0"
-                >
-                  Login &amp; Submit
-                </button>
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label className="block text-xs font-semibold text-[var(--color-text-primary)] mb-1.5 uppercase tracking-wider">
-                  Company Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Acme Retail Apparel Group"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full border border-[var(--color-border)] bg-[var(--color-bg)] rounded-none px-4 py-2.5 text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none transition-all"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-[var(--color-text-primary)] mb-1.5 uppercase tracking-wider">
-                  Corporate Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="e.g. procurement@acme.com"
-                  value={companyEmail}
-                  onChange={(e) => setCompanyEmail(e.target.value)}
-                  className="w-full border border-[var(--color-border)] bg-[var(--color-bg)] rounded-none px-4 py-2.5 text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none">
-              <label className="block text-xs font-semibold text-[var(--color-text-primary)] mb-1 uppercase tracking-wider">
-                Target Unit Price / Budget ($ USD) <span className="text-[var(--color-text-secondary)] font-normal lowercase">(optional)</span>
-              </label>
-              <input
-                type="number"
-                step="0.50"
-                min="1"
-                placeholder="e.g. 18.50"
-                value={customerTargetPrice}
-                onChange={(e) => setCustomerTargetPrice(e.target.value)}
-                className="w-full sm:w-1/2 border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] rounded-none px-4 py-2 text-sm focus:border-[var(--color-accent)] focus:outline-none"
-              />
-              <p className="text-xs text-[var(--color-text-secondary)] mt-1.5">
-                Our production engineering team evaluates custom pricing feasibility for high-volume orders during proforma review.
-              </p>
-            </div>
-          </section>
         </div>
-
         {/* Sticky Price Sidebar & Live Spec Summary */}
         <div className="lg:col-span-4 space-y-6">
           {/* Live Configured Spec Summary Box */}
@@ -499,23 +302,16 @@ export function ConfiguratorClient({
           <PriceSidebar
             fabric={selectedFabric}
             sizeQuantities={toSizeQuantityArray(sizeQuantities)}
-            customerTargetPrice={customerTargetPrice}
-            onSubmit={handleSubmit}
-            submitting={submitting}
+            customerTargetPrice={""}
+            onSubmit={handleAddToCart}
+            submitting={addingToCart}
             errorMessage={submitError}
             totalUnits={totalUnits}
             moqPerFabric={moqPerFabric}
+            submitLabel="ADD TO ORDER SPEC"
           />
         </div>
       </div>
-
-      <GuestLoginModal
-        isOpen={isGuestModalOpen}
-        onClose={() => setIsGuestModalOpen(false)}
-        onSendMagicLink={handleSendMagicLink}
-        onSubmitGuestOrder={handleGuestOrderSubmit}
-        initialEmail={companyEmail}
-      />
     </main>
   );
 }

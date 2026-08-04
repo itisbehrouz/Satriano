@@ -1,13 +1,19 @@
 import type { SizeQuantity } from "@/lib/pricing";
 
-export interface CreateOrderInput {
+export interface CreateOrderInputItem {
   fabricId: string;
-  companyName: string;
-  companyEmail: string;
+  productId?: string;
+  fitId?: string;
   sizeQuantities: SizeQuantity[];
-  customerTargetPriceCents?: number;
   logoUrl?: string;
   logoPlacement?: "LEFT_CHEST" | "RIGHT_SLEEVE";
+}
+
+export interface CreateOrderInput {
+  companyName: string;
+  companyEmail: string;
+  customerTargetPriceCents?: number;
+  items: CreateOrderInputItem[];
 }
 
 export type CreateOrderValidationResult =
@@ -34,18 +40,11 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
   }
 
   const {
-    fabricId,
     companyName,
     companyEmail,
-    sizeQuantities,
     customerTargetPriceCents,
-    logoUrl,
-    logoPlacement,
+    items,
   } = body as Record<string, unknown>;
-
-  if (typeof fabricId !== "string" || fabricId.trim() === "") {
-    return { valid: false, error: "fabricId is required" };
-  }
 
   if (typeof companyName !== "string" || companyName.trim() === "") {
     return { valid: false, error: "companyName is required" };
@@ -55,15 +54,59 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
     return { valid: false, error: "companyEmail must be a valid email address" };
   }
 
-  if (!Array.isArray(sizeQuantities) || sizeQuantities.length === 0) {
-    return { valid: false, error: "sizeQuantities must be a non-empty array" };
+  if (!Array.isArray(items) || items.length === 0) {
+    return { valid: false, error: "Order must contain at least one item" };
   }
 
-  if (!sizeQuantities.every(isValidSizeQuantity)) {
-    return {
-      valid: false,
-      error: "sizeQuantities entries must have a string size and a non-negative integer quantity",
-    };
+  const validatedItems: CreateOrderInputItem[] = [];
+
+  for (const item of items) {
+    if (typeof item !== "object" || item === null) {
+      return { valid: false, error: "Each item must be an object" };
+    }
+
+    const {
+      fabricId,
+      productId,
+      fitId,
+      sizeQuantities,
+      logoUrl,
+      logoPlacement,
+    } = item as Record<string, unknown>;
+
+    if (typeof fabricId !== "string" || fabricId.trim() === "") {
+      return { valid: false, error: "fabricId is required for all items" };
+    }
+
+    if (!Array.isArray(sizeQuantities) || sizeQuantities.length === 0) {
+      return { valid: false, error: "sizeQuantities must be a non-empty array for all items" };
+    }
+
+    if (!sizeQuantities.every(isValidSizeQuantity)) {
+      return {
+        valid: false,
+        error: "sizeQuantities entries must have a string size and a non-negative integer quantity",
+      };
+    }
+
+    let validatedLogoUrl: string | undefined = undefined;
+    if (typeof logoUrl === "string" && logoUrl.trim() !== "") {
+      validatedLogoUrl = logoUrl.trim();
+    }
+
+    let validatedPlacement: "LEFT_CHEST" | "RIGHT_SLEEVE" | undefined = undefined;
+    if (logoPlacement === "LEFT_CHEST" || logoPlacement === "RIGHT_SLEEVE") {
+      validatedPlacement = logoPlacement;
+    }
+
+    validatedItems.push({
+      fabricId: fabricId.trim(),
+      productId: typeof productId === "string" && productId.trim() !== "" ? productId.trim() : undefined,
+      fitId: typeof fitId === "string" && fitId.trim() !== "" ? fitId.trim() : undefined,
+      sizeQuantities,
+      logoUrl: validatedLogoUrl,
+      logoPlacement: validatedPlacement,
+    });
   }
 
   let validatedTargetPrice: number | undefined = undefined;
@@ -71,26 +114,13 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
     validatedTargetPrice = Math.round(customerTargetPriceCents);
   }
 
-  let validatedLogoUrl: string | undefined = undefined;
-  if (typeof logoUrl === "string" && logoUrl.trim() !== "") {
-    validatedLogoUrl = logoUrl.trim();
-  }
-
-  let validatedPlacement: "LEFT_CHEST" | "RIGHT_SLEEVE" | undefined = undefined;
-  if (logoPlacement === "LEFT_CHEST" || logoPlacement === "RIGHT_SLEEVE") {
-    validatedPlacement = logoPlacement;
-  }
-
   return {
     valid: true,
     data: {
-      fabricId: fabricId.trim(),
       companyName: companyName.trim(),
       companyEmail: companyEmail.trim().toLowerCase(),
-      sizeQuantities,
       customerTargetPriceCents: validatedTargetPrice,
-      logoUrl: validatedLogoUrl,
-      logoPlacement: validatedPlacement,
+      items: validatedItems,
     },
   };
 }

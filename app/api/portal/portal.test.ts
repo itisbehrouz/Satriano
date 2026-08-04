@@ -6,9 +6,10 @@ import { prisma } from "@/lib/prisma";
 import { createCustomerToken } from "@/lib/customerAuth";
 
 describe("B2B Customer Portal Auth & Orders API", () => {
-  const approvedEmail = "approved-client@example.com";
-  const rejectedEmail = "rejected-client@example.com";
-  const unknownEmail = "unknown-client@example.com";
+  const testId = Date.now();
+  const approvedEmail = `approved-client-${testId}@example.com`;
+  const rejectedEmail = `rejected-client-${testId}@example.com`;
+  const unknownEmail = `unknown-client-${testId}@example.com`;
 
   beforeEach(async () => {
     // Clean up test tokens and applications

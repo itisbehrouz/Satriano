@@ -73,7 +73,7 @@ describe("PriceSidebar", () => {
     );
 
     expect(screen.getByRole("button", { name: /submit order for feasibility review/i })).toBeDisabled();
-    expect(screen.getByText(/submitting for review/i)).toBeInTheDocument();
+    expect(screen.getByText(/adding\.\.\./i)).toBeInTheDocument();
   });
 
   it("renders an error message when provided", () => {

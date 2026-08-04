@@ -11,57 +11,81 @@ export async function POST(request: Request) {
   }
 
   const {
-    fabricId,
     companyName,
     companyEmail,
-    sizeQuantities,
     customerTargetPriceCents,
-    logoUrl,
-    logoPlacement,
+    items,
   } = validation.data;
 
-  const rawFitId = body?.fitId as string | undefined;
-  const rawProductId = body?.productId as string | undefined;
+  // Calculate pricing and validate MOQs for each item
+  let totalOrderSetupFeeCents = 0;
+  const dbLines: any[] = [];
+  const logoAssets: any[] = [];
 
-  const fabric = await prisma.fabric.findUnique({
-    where: { id: fabricId },
-    include: { product: true },
-  });
-  if (!fabric || !fabric.active) {
-    return NextResponse.json({ error: "Fabric not found" }, { status: 404 });
-  }
+  for (const item of items) {
+    const { fabricId, productId, fitId, sizeQuantities, logoUrl, logoPlacement } = item;
+    
+    const fabric = await prisma.fabric.findUnique({
+      where: { id: fabricId },
+      include: { product: true },
+    });
+    if (!fabric || !fabric.active) {
+      return NextResponse.json({ error: `Fabric not found (ID: ${fabricId})` }, { status: 404 });
+    }
 
-  // Determine Product and per-fabric MOQ
-  let product = fabric.product;
-  if (!product && rawProductId) {
-    product = await prisma.product.findUnique({ where: { id: rawProductId } });
-  }
+    let product = fabric.product;
+    if (!product && productId) {
+      product = await prisma.product.findUnique({ where: { id: productId } }) || null;
+    }
 
-  const requiredMoqPerFabric = product?.moqPerFabric ?? product?.moq ?? 50;
-  const productName = product?.name || "this item";
+    const requiredMoqPerFabric = product?.moqPerFabric ?? product?.moq ?? 50;
+    const productName = product?.name || "this item";
 
-  const pricing = computeOrderPricing({ fabric, sizeQuantities });
-  if (pricing.totalUnits === 0) {
-    return NextResponse.json(
-      { error: "Order must include at least one unit" },
-      { status: 400 },
-    );
-  }
+    const pricing = computeOrderPricing({ fabric, sizeQuantities });
+    if (pricing.totalUnits === 0) {
+      return NextResponse.json(
+        { error: "Each configuration must include at least one unit" },
+        { status: 400 },
+      );
+    }
 
-  if (pricing.totalUnits < requiredMoqPerFabric) {
-    return NextResponse.json(
-      {
-        error: `Minimum order quantity for ${productName} in this fabric selection is ${requiredMoqPerFabric} units.`,
-      },
-      { status: 400 },
-    );
-  }
+    if (pricing.totalUnits < requiredMoqPerFabric) {
+      return NextResponse.json(
+        {
+          error: `Minimum order quantity for ${productName} in this fabric selection is ${requiredMoqPerFabric} units.`,
+        },
+        { status: 400 },
+      );
+    }
 
-  let selectedFitName: string | undefined = undefined;
-  if (rawFitId) {
-    const fitRecord = await prisma.fit.findUnique({ where: { id: rawFitId } });
-    if (fitRecord) {
-      selectedFitName = fitRecord.name;
+    let selectedFitName: string | undefined = undefined;
+    if (fitId) {
+      const fitRecord = await prisma.fit.findUnique({ where: { id: fitId } });
+      if (fitRecord) {
+        selectedFitName = fitRecord.name;
+      }
+    }
+
+    // Accumulate total setup fee across all configurations in the cart
+    totalOrderSetupFeeCents += pricing.setupFeeCents;
+
+    for (const line of pricing.lineItems) {
+      dbLines.push({
+        fabricId: fabric.id,
+        productId: product?.id || null,
+        fitId: fitId || null,
+        selectedFit: selectedFitName || null,
+        size: line.size,
+        quantity: line.quantity,
+        unitPriceCents: line.priceMinCents,
+      });
+    }
+
+    if (logoUrl) {
+      logoAssets.push({
+        storageUrl: logoUrl,
+        placement: logoPlacement || "LEFT_CHEST",
+      });
     }
   }
 
@@ -75,27 +99,16 @@ export async function POST(request: Request) {
     data: {
       companyId: company.id,
       status: "PENDING_REVIEW",
-      setupFeeCents: pricing.setupFeeCents,
+      setupFeeCents: totalOrderSetupFeeCents,
       totalCents: 0, // Set to 0 until admin feasibility review sets finalPriceCents
       customerTargetPriceCents: customerTargetPriceCents || null,
       lines: {
-        create: pricing.lineItems.map((line) => ({
-          fabricId: fabric.id,
-          productId: product?.id || null,
-          fitId: rawFitId || null,
-          selectedFit: selectedFitName || null,
-          size: line.size,
-          quantity: line.quantity,
-          unitPriceCents: line.priceMinCents, // Store min range as reference
-        })),
+        create: dbLines,
       },
-      ...(logoUrl
+      ...(logoAssets.length > 0
         ? {
             logoAssets: {
-              create: {
-                storageUrl: logoUrl,
-                placement: logoPlacement || "LEFT_CHEST",
-              },
+              create: logoAssets,
             },
           }
         : {}),

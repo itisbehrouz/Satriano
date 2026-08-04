@@ -62,25 +62,25 @@ export function SizeQtyTable({
   }
 
   return (
-    <div className="border border-[#D1D5DB] rounded-none bg-white overflow-hidden shadow-sm">
+    <div className="border border-[var(--color-border)] rounded-none bg-[var(--color-surface)] overflow-hidden shadow-sm">
       {sizeSystems.length > 0 && (
-        <div className="bg-[#F5F7FA] border-b border-[#E5E7EB] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="bg-[var(--color-bg)] border-b border-[var(--color-border)] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[var(--color-text-primary)]">
           <div>
-            <span className="text-xs uppercase font-semibold tracking-wider text-[#5B6B85]">
+            <span className="text-xs uppercase font-semibold tracking-wider text-[var(--color-text-secondary)]">
               Sizing System: {currentSystem?.name || "Standard"} ({activeRegion})
             </span>
-            <p className="text-[11px] text-[#5B6B85] mt-0.5">
+            <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5">
               Select regional measurement standard for your production lot.
             </p>
           </div>
 
-          <div className="inline-flex rounded-none border border-[#D1D5DB] bg-white p-1">
+          <div className="inline-flex rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-1 text-[var(--color-text-primary)]">
             <button
               type="button"
               onClick={() => onRegionChange("EU")}
               className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "EU"
-                  ? "bg-[#2E5AAC] text-white shadow-sm"
-                  : "text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)] shadow-sm"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                 }`}
             >
               EU Standard
@@ -89,8 +89,8 @@ export function SizeQtyTable({
               type="button"
               onClick={() => onRegionChange("US")}
               className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "US"
-                  ? "bg-[#2E5AAC] text-white shadow-sm"
-                  : "text-[#5B6B85] hover:text-[#1A2233]"
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)] shadow-sm"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                 }`}
             >
               US Standard
@@ -102,51 +102,54 @@ export function SizeQtyTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-[#E5E7EB] bg-[#F5F7FA] text-xs uppercase font-semibold text-[#5B6B85]">
-              <th className="py-3 px-4 w-1/3">Size Code ({activeRegion})</th>
-              <th className="py-3 px-4 text-right">Unit Quantity</th>
+            <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg)] text-xs uppercase font-semibold text-[var(--color-text-secondary)]">
+              <th className="py-2.5 px-4 w-1/2">Size Code ({activeRegion})</th>
+              <th className="py-2.5 px-4 text-right">Unit Quantity</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1A2233]">
-            {sizeOptions.map((size) => (
-              <tr key={size} className="hover:bg-[#F5F7FA]/60 transition-colors">
-                <td className="py-3 px-4 font-semibold text-[#1A2233]">
-                  {size} <span className="text-[11px] font-normal text-[#5B6B85]">({activeRegion})</span>
-                </td>
-                <td className="py-3 px-4 text-right">
-                  {/* Direct number input — still editable by typing */}
-                  <input
-                    aria-label={`${size} ${activeRegion}`}
-                    className="w-28 bg-[#F5F7FA] border border-[#D1D5DB] text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none py-1.5 px-3 rounded-none text-sm text-right font-medium tabular-nums"
-                    min={0}
-                    type="number"
-                    value={quantities[size] ?? 0}
-                    onChange={(event) =>
-                      handleQtyChange(size, event.target.value)
-                    }
-                  />
-                  {/* +/- Stepper buttons — 44x44px touch target minimum via button-element */}
-                  <div className="inline-flex px-2 py-1" style={{ minWidth: "88px" }}>
-                    <button
-                      type="button"
-                      aria-label={`decrease quantity for size ${size}`}
-                      onClick={() => handleStepClick(size, "down")}
-                      className="px-4.5 py-4 text-xs font-mono rounded-none border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
-                    >
-                      −
-                    </button>
-                    <button
-                      type="button"
-                      aria-label={`increase quantity for size ${size}`}
-                      onClick={() => handleStepClick(size, "up")}
-                      className="px-4.5 py-4 text-xs font-mono rounded-none border border-[#D1D5DB] bg-[#E6F1FB] text-[#185FA5] transition-colors"
-                    >
-                      +
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+          <tbody className="divide-y divide-[var(--color-border)] text-sm">
+            {sizeOptions.map((size) => {
+              const qty = quantities[size] ?? 0;
+              const hasQty = qty > 0;
+              return (
+                <tr 
+                  key={size} 
+                  className={`transition-colors bg-[var(--color-surface)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
+                >
+                  <td className="py-2 px-4 font-semibold">
+                    {size} <span className="text-[11px] font-normal opacity-75">({activeRegion})</span>
+                  </td>
+                  <td className="py-2 px-4 text-right">
+                    <div className="inline-flex items-center border border-[var(--color-border)] rounded-none">
+                      <button
+                        type="button"
+                        aria-label={`decrease quantity for size ${size}`}
+                        onClick={() => handleStepClick(size, "down")}
+                        className={`w-[44px] h-[44px] flex items-center justify-center text-xs font-mono transition-colors hover:text-[var(--color-accent)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
+                      >
+                        −
+                      </button>
+                      <input
+                        aria-label={`${size} ${activeRegion}`}
+                        className={`w-14 h-[44px] bg-transparent text-center focus:outline-none py-1.5 px-1 text-sm font-medium tabular-nums focus:text-[var(--color-accent)] border-x border-[var(--color-border)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
+                        min={0}
+                        type="number"
+                        value={qty}
+                        onChange={(event) => handleQtyChange(size, event.target.value)}
+                      />
+                      <button
+                        type="button"
+                        aria-label={`increase quantity for size ${size}`}
+                        onClick={() => handleStepClick(size, "up")}
+                        className={`w-[44px] h-[44px] flex items-center justify-center text-xs font-mono transition-colors hover:text-[var(--color-accent)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

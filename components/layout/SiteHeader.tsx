@@ -6,9 +6,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
+import { getM2OCart, type M2OCartItem } from "@/lib/m2oCart";
 
 const ANONYMOUS_NAV_ITEMS = [
-  { label: "MANUFACTURING", href: "/konfigurator" },
+  { label: "MANUFACTURING", href: "/categories" },
   { label: "COLLECTIONS", href: "/categories" },
   { label: "SOURCING", href: "/legal/supply-terms" },
   { label: "WHOLESALE", href: "/wholesale" },
@@ -28,6 +29,7 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,6 +39,17 @@ export function SiteHeader() {
         "light";
       setTheme(current);
     }
+  }, []);
+
+  useEffect(() => {
+    function updateCartCount() {
+      const cart = getM2OCart();
+      setCartCount(cart.length);
+    }
+    updateCartCount();
+    
+    window.addEventListener("m2o-cart-updated", updateCartCount);
+    return () => window.removeEventListener("m2o-cart-updated", updateCartCount);
   }, []);
 
   useEffect(() => {
@@ -152,6 +165,22 @@ export function SiteHeader() {
               {theme === "dark" ? "light_mode" : "dark_mode"}
             </span>
           </button>
+
+          {/* M2O Cart Icon */}
+          <Link
+            href="/configure/checkout"
+            className="relative inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-3 py-2 text-[var(--color-text-primary)] bg-[var(--color-surface)] hover:opacity-80 border border-[var(--color-border)] rounded-none transition-colors"
+            title="View Order Spec"
+          >
+            <span className="material-symbols-outlined text-lg">
+              shopping_cart
+            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 w-5 h-5 flex items-center justify-center bg-[var(--color-accent)] text-white text-[10px] font-bold rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </Link>
 
           {/* Identity Chip (Authenticated) OR Client Portal Login Button (Anonymous) */}
           {isAuthenticated ? (

@@ -15,6 +15,7 @@ interface PriceSidebarProps {
   errorMessage?: string | null;
   totalUnits?: number;
   moqPerFabric?: number;
+  submitLabel?: string;
 }
 
 export function PriceSidebar({
@@ -26,6 +27,7 @@ export function PriceSidebar({
   errorMessage = null,
   totalUnits: propTotalUnits,
   moqPerFabric = 50,
+  submitLabel = "Submit Order for Feasibility Review →",
 }: PriceSidebarProps) {
   const result = computeOrderPricing({ fabric, sizeQuantities });
 
@@ -138,15 +140,14 @@ export function PriceSidebar({
           </p>
         </div>
 
-        {/* Submit button with MOQ gating */}
         <button
           type="button"
           disabled={!meetsMoq || totalUnits === 0 || submitting}
           onClick={onSubmit}
-          aria-label="submit order for feasibility review"
+          aria-label={submitLabel.toLowerCase()}
           className="w-full bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs uppercase font-bold tracking-wider py-3.5 px-6 rounded-none transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {submitting ? "Submitting for Review..." : "Submit Order for Feasibility Review →"}
+          {submitting ? "Adding..." : submitLabel}
         </button>
 
         {/* Inline gating message when below MOQ */}
