@@ -17,7 +17,7 @@ const FAQ_KNOWLEDGE_BASE: { keywords: string[]; answer: string; actions?: { labe
     answer: "Our standard Minimum Order Quantity (MOQ) starts at 50 units per fabric line/colorway. For multi-fabric orders within the same product line, combined MOQ options are available.",
     actions: [
       { label: "View Wholesale MOQ Filters", href: "/wholesale" },
-      { label: "Configure Order Spec", href: "/konfigurator" },
+      { label: "Configure Order Spec", href: "/categories" },
     ],
   },
   {
@@ -47,14 +47,14 @@ const FAQ_KNOWLEDGE_BASE: { keywords: string[]; answer: string; actions?: { labe
     keywords: ["size", "sizing", "eu", "us", "matrix", "measurements", "fit"],
     answer: "We utilize fixed producible size matrices (XS through 3XL) across European (EU) and American (US) standard sizing systems. We offer 8 menswear cut options including Slim, Regular, Tailored, and Oversized.",
     actions: [
-      { label: "Launch Size Matrix Configurator", href: "/konfigurator" },
+      { label: "Launch Size Matrix Configurator", href: "/categories" },
     ],
   },
   {
     keywords: ["logo", "branding", "embroidery", "print", "vector", "ai", "svg", "eps"],
     answer: "We support full white-label branding! Upload your vector logo (.AI, .EPS, .SVG) during configuration for Left-Chest or Right-Sleeve placement, custom neck tags, and care labels.",
     actions: [
-      { label: "Upload Vector Logo Spec", href: "/konfigurator" },
+      { label: "Upload Vector Logo Spec", href: "/categories" },
     ],
   },
   {
@@ -128,7 +128,7 @@ export function AIFaqAssistantModal() {
         text: aiResponseText,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         suggestedActions: match?.actions || [
-          { label: "Start Custom Order Spec", href: "/konfigurator" },
+          { label: "Start Custom Order Spec", href: "/categories" },
           { label: "View Wholesale Catalog", href: "/wholesale" },
         ],
       };

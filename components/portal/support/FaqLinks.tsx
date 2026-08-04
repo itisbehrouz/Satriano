@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function FaqLinks() {
   const links = [
-    { label: "How to configure a custom order", href: "/konfigurator", icon: "tune" },
+    { label: "How to configure a custom order", href: "/categories", icon: "tune" },
     { label: "MOQ & Lead Time FAQs", href: "/portal/faq#moq", icon: "schedule" },
     { label: "Payment methods & proforma invoicing", href: "/portal/account?tab=billing", icon: "payments" },
     { label: "International shipping & delivery SLAs", href: "/portal/faq#shipping", icon: "local_shipping" },

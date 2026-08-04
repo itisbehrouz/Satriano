@@ -70,7 +70,7 @@ export function ConfiguratorSuccess({
               </button>
             ) : (
               <Link
-                href="/konfigurator"
+                href="/categories"
                 className="h-12 px-6 bg-[#132A52] hover:bg-[#1E3A6D] text-[#E8ECF3] border border-[#2E5AAC] text-xs font-semibold uppercase tracking-wider inline-flex items-center justify-center gap-2 rounded-none transition-colors"
               >
                 <span className="material-symbols-outlined text-base">add_circle</span>
