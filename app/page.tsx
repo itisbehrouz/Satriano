@@ -2,68 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { HomeEstimatorPreview } from "@/components/HomeEstimatorPreview";
+import { CategoryArcCarousel } from "@/components/home/CategoryArcCarousel";
+import { ProcessTimeline } from "@/components/home/ProcessTimeline";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-const OPERATIONAL_STEPS = [
-  {
-    step: "01",
-    icon: "straighten",
-    title: "Select Product & Size Matrix",
-    description:
-      "Choose from predefined producible sizes (XS through 3XL) and fabric options. Live price ledger updates instantly.",
-  },
-  {
-    step: "02",
-    icon: "upload_file",
-    title: "Upload Vector Logo & Placement",
-    description:
-      "Attach brand logo asset (SVG, AI, PDF) and specify left-chest or right-sleeve placement.",
-  },
-  {
-    step: "03",
-    icon: "description",
-    title: "Instant Proforma Invoice",
-    description:
-      "System issues itemized Proforma PDF with 30-day validity, sent automatically to corporate email.",
-  },
-  {
-    step: "04",
-    icon: "credit_card",
-    title: "Authorization & Card Payment",
-    description:
-      "Complete payment via card checkout. Order status transitions to In Production automatically.",
-  },
-];
-
-const CAPABILITIES = [
-  {
-    icon: "straighten",
-    title: "Fixed Size Lists",
-    description:
-      "Admin-managed producible sizing per product. No free-text measurement entry friction.",
-  },
-  {
-    icon: "receipt_long",
-    title: "Instant Proforma",
-    description:
-      "Automatic PDF generation and email dispatch for procurement audit compliance.",
-  },
-  {
-    icon: "verified_user",
-    title: "Transparent Ledger",
-    description:
-      "No hidden fees. Upfront itemized line-item and digitization setup cost breakdown.",
-  },
-  {
-    icon: "local_shipping",
-    title: "Global B2B Logistics",
-    description:
-      "Direct freight logistics integration for seamless delivery to your distribution centers.",
-  },
-];
 
 const FAQS = [
   {
@@ -84,15 +28,6 @@ const FAQS = [
   },
 ];
 
-const CATEGORY_IMAGES: Record<string, string> = {
-  tops: "/images/catalog/tops.png",
-  bottoms: "/images/catalog/bottoms.png",
-  "formal-wear": "/images/catalog/formal_wear.png",
-  outerwear: "/images/catalog/outerwear.png",
-  sportswear: "/images/catalog/sportswear.png",
-  "underwear-loungewear": "/images/catalog/loungewear.png",
-  accessories: "/images/catalog/accessories.png",
-};
 
 export default async function HomePage() {
   const categories = await prisma.category.findMany({
@@ -135,7 +70,7 @@ export default async function HomePage() {
                 {/* Primary CTA Buttons */}
                 <div className="flex flex-wrap items-center gap-4 pt-2">
                   <Link
-                    href="/konfigurator"
+                    href="/categories"
                     className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider px-8 py-4 rounded-none transition-all inline-flex items-center gap-2 group shadow-sm"
                   >
                     <span>Start Custom Order Spec</span>
@@ -200,170 +135,11 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Value Proposition Highlights */}
-        <section className="w-full py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
-          <div className="max-w-[1440px] mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-text-primary)]">
-                Enterprise Supplier Infrastructure
-              </h2>
-              <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                Engineered for corporate apparel programs with strict compliance, transparent ledgers, and rapid production cycles.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {CAPABILITIES.map((cap) => (
-                <div
-                  key={cap.title}
-                  className="bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none p-6 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-none bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                    <span className="material-symbols-outlined text-2xl">{cap.icon}</span>
-                  </div>
-                  <h3 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">{cap.title}</h3>
-                  <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">{cap.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Live Interactive Ledger Estimator */}
-        <section className="w-full py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
-          <div className="max-w-[1440px] mx-auto">
-            <HomeEstimatorPreview />
-          </div>
-        </section>
+        <ProcessTimeline />
 
         {/* Manufacturing Catalog Section */}
-        <section className="w-full py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
-          <div className="max-w-[1440px] mx-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)]">Catalog Portfolio</span>
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-text-primary)] mt-1">
-                  Manufacturing Product Lines
-                </h2>
-                <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                  Select any category or subcategory line to launch custom order configuration.
-                </p>
-              </div>
-              <Link
-                href="/categories"
-                className="text-xs font-semibold text-[var(--color-accent)] hover:underline uppercase tracking-wider inline-flex items-center gap-1"
-              >
-                <span>View All 65 Products</span>
-                <span>→</span>
-              </Link>
-            </div>
+        <CategoryArcCarousel categories={categories} />
 
-            {/* Categories Card Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((cat) => {
-                const coverImg = CATEGORY_IMAGES[cat.slug] || "/images/catalog/tops.png";
-                return (
-                  <div
-                    key={cat.id}
-                    className="bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] rounded-none overflow-hidden flex flex-col justify-between transition-all group"
-                  >
-                    <div>
-                      {/* Image Thumbnail Header (Crisp & Un-faded) */}
-                      <div className="aspect-[16/9] w-full relative bg-[var(--color-bg)] overflow-hidden">
-                        <Image
-                          src={coverImg}
-                          alt={cat.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                        <div className="absolute top-3 right-3">
-                          <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-none bg-[var(--color-surface)]/95 text-[var(--color-text-primary)] border border-[var(--color-border)] shadow-xs">
-                            {cat.subcategories.length} Subcategories
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Subcategory Pills & Category Header */}
-                      <div className="p-5 space-y-4">
-                        <h3 className="text-xl font-bold text-[var(--color-text-primary)] tracking-tight">{cat.name}</h3>
-                        <p className="text-xs text-[var(--color-text-secondary)] line-clamp-2">{cat.description || "Bespoke B2B manufacturing product line."}</p>
-                        
-                        <div>
-                          <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)] mb-2">
-                            Product Lines
-                          </p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {cat.subcategories.slice(0, 4).map((sub) => (
-                              <Link
-                                key={sub.id}
-                                href={`/categories/${cat.id}`}
-                                className="text-xs px-2.5 py-1 bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-accent)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-none transition-colors font-medium"
-                              >
-                                {sub.name}
-                              </Link>
-                            ))}
-                            {cat.subcategories.length > 4 && (
-                              <span className="text-xs px-2 py-1 text-[var(--color-text-secondary)]">
-                                +{cat.subcategories.length - 4} more
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card Action Footer */}
-                    <div className="p-5 pt-0">
-                      <Link
-                        href={`/categories/${cat.id}`}
-                        className="w-full bg-[var(--color-surface)] hover:bg-[var(--color-accent)] hover:text-white text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs font-semibold uppercase tracking-wider py-3 rounded-none transition-all inline-flex items-center justify-center gap-2"
-                      >
-                        <span>Configure {cat.name} Specs</span>
-                        <span>→</span>
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* 4-Step Operational Pipeline */}
-        <section className="w-full py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
-          <div className="max-w-[1440px] mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)]">Workflow Protocol</span>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--color-text-primary)] mt-1">
-                4-Step B2B Procurement Pipeline
-              </h2>
-              <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                From custom specification input to automated proforma issuance and factory dispatch.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {OPERATIONAL_STEPS.map((step) => (
-                <div
-                  key={step.step}
-                  className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 flex flex-col justify-between relative transition-shadow"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-2xl font-bold font-mono text-[var(--color-accent)]">{step.step}</span>
-                      <span className="w-10 h-10 rounded-none bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center border border-[var(--color-accent)]/20">
-                        <span className="material-symbols-outlined text-xl">{step.icon}</span>
-                      </span>
-                    </div>
-                    <h3 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
-                    <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* B2B Procurement FAQ Section */}
         <section className="w-full py-16 px-6 lg:px-8 bg-[var(--color-bg)] transition-colors">
@@ -406,7 +182,7 @@ export default async function HomePage() {
 
             <div className="flex flex-wrap justify-center gap-4 pt-2">
               <Link
-                href="/konfigurator"
+                href="/categories"
                 className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs uppercase font-semibold tracking-wider px-8 py-4 rounded-none transition-colors"
               >
                 Start Order Configurator →
