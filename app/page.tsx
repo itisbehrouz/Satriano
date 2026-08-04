@@ -60,7 +60,7 @@ export default async function HomePage() {
                   Your product.<br />
                   Your price.<br />
                   Your brand.<br />
-                  <span className="text-[#291a2d] [html[data-theme='dark']_&]:text-[var(--color-gold)]">We manufacture it.</span>
+                  <span className="text-[var(--color-gold)]">We manufacture it.</span>
                 </h1>
 
                 <p className="text-base md:text-xl text-[var(--color-text-secondary)] font-normal leading-relaxed max-w-2xl">
