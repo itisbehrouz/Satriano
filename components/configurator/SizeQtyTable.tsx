@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { parseQuantityInput } from "@/lib/configuratorLogic";
 
 export interface SizeOptionDef {
@@ -27,9 +28,7 @@ interface SizeQtyTableProps {
 const DEFAULT_ALPHA_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
 
 /**
- * Stepper increment for quantity inputs.
- * +1 per click is the most usable default — precise enough for wholesale MOQ tracking.
- * Long-press behavior: browsers auto-repeat keydown; user gets +N naturally without extra logic.
+ * Stepper increment for quantity inputs (+1 per click).
  */
 const STEP_INCREMENT = 1;
 
@@ -44,6 +43,9 @@ export function SizeQtyTable({
   // Find system matching active region (e.g. EU or US)
   const currentSystem = sizeSystems.find((sys) => sys.region === activeRegion) || sizeSystems[0];
   const sizeOptions = currentSystem?.options.map((o) => o.label) || DEFAULT_ALPHA_SIZES;
+
+  const totalUnits = Object.values(quantities).reduce((acc, qty) => acc + (qty || 0), 0);
+  const isMoqMet = totalUnits >= moqPerFabric;
 
   function handleQtyChange(size: string, rawValue: string) {
     onChange({
@@ -61,97 +63,174 @@ export function SizeQtyTable({
     });
   }
 
+  // Calculate balanced column layout for two rows on desktop based on size count
+  const count = sizeOptions.length;
+  const isOneSize = count === 1;
+
+  let desktopGridCols = "lg:grid-cols-4";
+  if (count <= 4) {
+    desktopGridCols = "lg:grid-cols-2";
+  } else if (count <= 6) {
+    desktopGridCols = "lg:grid-cols-3";
+  } else if (count <= 8) {
+    desktopGridCols = "lg:grid-cols-4";
+  } else {
+    desktopGridCols = "lg:grid-cols-5";
+  }
+
   return (
-    <div className="border border-[var(--color-border)] rounded-none bg-[var(--color-surface)] overflow-hidden shadow-sm">
-      {sizeSystems.length > 0 && (
-        <div className="bg-[var(--color-bg)] border-b border-[var(--color-border)] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[var(--color-text-primary)]">
-          <div>
-            <span className="text-xs uppercase font-semibold tracking-wider text-[var(--color-text-secondary)]">
-              Sizing System: {currentSystem?.name || "Standard"} ({activeRegion})
+    <div className="border border-[var(--color-border)] rounded-none bg-[var(--color-surface)] shadow-none transition-colors">
+      {/* Header Bar */}
+      <div className="bg-[var(--color-bg)] border-b border-[var(--color-border)] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[var(--color-text-primary)]">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs uppercase font-bold tracking-wider text-[var(--color-text-primary)] font-mono">
+              REGIONAL SIZING &amp; UNIT QUANTITY MATRIX
             </span>
-            <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5">
-              Select regional measurement standard for your production lot.
-            </p>
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] rounded-none">
+              {currentSystem?.name || "Alpha Standard"} ({activeRegion})
+            </span>
+          </div>
+          <p className="text-[11px] text-[var(--color-text-secondary)] mt-1">
+            Specify per-size unit production run. Minimum order quantity (MOQ) is {moqPerFabric} units.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 shrink-0">
+          {/* Total Units Configured Badge */}
+          <div className="flex items-center gap-2 px-3 py-1.5 border border-[var(--color-border)] bg-[var(--color-surface)] text-xs font-mono">
+            <span className="text-[var(--color-text-secondary)] uppercase text-[10px] font-semibold">
+              Units Configured:
+            </span>
+            <span
+              className={`font-bold tabular-nums ${
+                isMoqMet
+                  ? "text-[var(--color-status-success)]"
+                  : "text-[var(--color-text-primary)]"
+              }`}
+            >
+              {totalUnits} / {moqPerFabric}
+            </span>
           </div>
 
-          <div className="inline-flex rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-1 text-[var(--color-text-primary)]">
+          {/* Regional System Toggle */}
+          <div className="inline-flex rounded-none border border-[var(--color-border)] bg-[var(--color-surface)] p-0.5 text-[var(--color-text-primary)]">
             <button
               type="button"
               onClick={() => onRegionChange("EU")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "EU"
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)] shadow-sm"
+              className={`px-3 py-1.5 text-xs font-semibold rounded-none transition-colors cursor-pointer ${
+                activeRegion === "EU"
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)]"
                   : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-                }`}
+              }`}
             >
               EU Standard
             </button>
             <button
               type="button"
               onClick={() => onRegionChange("US")}
-              className={`px-4 py-1.5 text-xs font-semibold rounded-none transition-colors ${activeRegion === "US"
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)] shadow-sm"
+              className={`px-3 py-1.5 text-xs font-semibold rounded-none transition-colors cursor-pointer ${
+                activeRegion === "US"
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg)]"
                   : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-                }`}
+              }`}
             >
               US Standard
             </button>
           </div>
         </div>
-      )}
+      </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg)] text-xs uppercase font-semibold text-[var(--color-text-secondary)]">
-              <th className="py-2.5 px-4 w-1/2">Size Code ({activeRegion})</th>
-              <th className="py-2.5 px-4 text-right">Unit Quantity</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--color-border)] text-sm">
-            {sizeOptions.map((size) => {
-              const qty = quantities[size] ?? 0;
-              const hasQty = qty > 0;
-              return (
-                <tr 
-                  key={size} 
-                  className={`transition-colors bg-[var(--color-surface)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
-                >
-                  <td className="py-2 px-4 font-semibold">
-                    {size} <span className="text-[11px] font-normal opacity-75">({activeRegion})</span>
-                  </td>
-                  <td className="py-2 px-4 text-right">
-                    <div className="inline-flex items-center border border-[var(--color-border)] rounded-none">
-                      <button
-                        type="button"
-                        aria-label={`decrease quantity for size ${size}`}
-                        onClick={() => handleStepClick(size, "down")}
-                        className={`w-[44px] h-[44px] flex items-center justify-center text-xs font-mono transition-colors hover:text-[var(--color-accent)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
-                      >
-                        −
-                      </button>
-                      <input
-                        aria-label={`${size} ${activeRegion}`}
-                        className={`w-14 h-[44px] bg-transparent text-center focus:outline-none py-1.5 px-1 text-sm font-medium tabular-nums focus:text-[var(--color-accent)] border-x border-[var(--color-border)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
-                        min={0}
-                        type="number"
-                        value={qty}
-                        onChange={(event) => handleQtyChange(size, event.target.value)}
-                      />
-                      <button
-                        type="button"
-                        aria-label={`increase quantity for size ${size}`}
-                        onClick={() => handleStepClick(size, "up")}
-                        className={`w-[44px] h-[44px] flex items-center justify-center text-xs font-mono transition-colors hover:text-[var(--color-accent)] ${hasQty ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      {/* Two-Row Adaptable Size Matrix Layout */}
+      <div className="p-4 sm:p-6 bg-[var(--color-surface)]">
+        <div
+          className={
+            isOneSize
+              ? "max-w-md mx-auto"
+              : `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ${desktopGridCols} gap-4`
+          }
+        >
+          {sizeOptions.map((size) => {
+            const qty = quantities[size] ?? 0;
+            const hasQty = qty > 0;
+
+            return (
+              <div
+                key={size}
+                className={`flex flex-col justify-between p-4 border transition-all rounded-none min-h-[120px] ${
+                  hasQty
+                    ? "border-[var(--color-accent)] bg-[var(--color-bg)] shadow-xs"
+                    : "border-[var(--color-border)] bg-[var(--color-bg)]/40 hover:border-[var(--color-text-secondary)]/50"
+                }`}
+              >
+                {/* Size Cell Top Header: Size Label & Region */}
+                <div className="flex items-center justify-between pb-2.5 border-b border-[var(--color-border)] mb-3">
+                  <span
+                    className={`font-mono text-base font-bold tracking-tight ${
+                      hasQty
+                        ? "text-[var(--color-text-primary)]"
+                        : "text-[var(--color-text-secondary)]"
+                    }`}
+                  >
+                    {size}
+                  </span>
+                  <span className="text-[10px] font-mono text-[var(--color-text-secondary)] uppercase">
+                    {activeRegion} CODE
+                  </span>
+                </div>
+
+                {/* Quantity Value & Stepper Control Group */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[var(--color-text-secondary)] uppercase font-semibold">
+                    <span>UNIT QUANTITY</span>
+                    <span className={hasQty ? "text-[var(--color-accent)] font-bold" : ""}>
+                      {qty > 0 ? `${qty} UNITS` : "0 UNITS"}
+                    </span>
+                  </div>
+
+                  <div className="inline-flex items-center border border-[var(--color-border)] rounded-none w-full bg-[var(--color-surface)]">
+                    <button
+                      type="button"
+                      aria-label={`decrease quantity for size ${size}`}
+                      onClick={() => handleStepClick(size, "down")}
+                      className={`w-11 h-11 flex items-center justify-center text-base font-mono transition-colors cursor-pointer shrink-0 hover:bg-[var(--color-bg)] ${
+                        hasQty
+                          ? "text-[var(--color-text-primary)] font-bold"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      −
+                    </button>
+                    <input
+                      aria-label={`${size} ${activeRegion}`}
+                      className={`flex-1 min-w-0 h-11 bg-transparent text-center focus:outline-none px-2 text-base font-bold font-mono tabular-nums border-x border-[var(--color-border)] focus:border-[var(--color-accent)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+                        hasQty
+                          ? "text-[var(--color-text-primary)]"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                      min={0}
+                      type="number"
+                      value={qty}
+                      onChange={(event) => handleQtyChange(size, event.target.value)}
+                    />
+                    <button
+                      type="button"
+                      aria-label={`increase quantity for size ${size}`}
+                      onClick={() => handleStepClick(size, "up")}
+                      className={`w-11 h-11 flex items-center justify-center text-base font-mono transition-colors cursor-pointer shrink-0 hover:bg-[var(--color-bg)] ${
+                        hasQty
+                          ? "text-[var(--color-text-primary)] font-bold"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

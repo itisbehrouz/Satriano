@@ -29,9 +29,8 @@ describe("parseQuantityInput", () => {
 });
 
 describe("sumQuantities", () => {
-  it("sums the mockup default size quantities to 300", () => {
-    // configurator_polo_t_shirt/code.html defaults: S=50, M=100, L=100, XL=50
-    expect(sumQuantities(DEFAULT_SIZE_QUANTITIES)).toBe(300);
+  it("sums default size quantities to 0", () => {
+    expect(sumQuantities(DEFAULT_SIZE_QUANTITIES)).toBe(0);
   });
 
   it("sums to 0 when every size is 0", () => {

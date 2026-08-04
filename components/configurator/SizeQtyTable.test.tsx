@@ -21,7 +21,7 @@ function ControlledSizeQtyTable({ onChange }: { onChange: (q: Record<string, num
 }
 
 describe("SizeQtyTable", () => {
-  it("renders a row per size with the current quantity", () => {
+  it("renders a cell per size starting at 0 quantity", () => {
     render(
       <SizeQtyTable
         activeRegion="EU"
@@ -31,11 +31,11 @@ describe("SizeQtyTable", () => {
       />,
     );
 
-    expect(screen.getByLabelText("S EU")).toHaveValue(50);
-    expect(screen.getByLabelText("M EU")).toHaveValue(100);
-    expect(screen.getByLabelText("L EU")).toHaveValue(100);
-    expect(screen.getByLabelText("XL EU")).toHaveValue(50);
     expect(screen.getByLabelText("XS EU")).toHaveValue(0);
+    expect(screen.getByLabelText("S EU")).toHaveValue(0);
+    expect(screen.getByLabelText("M EU")).toHaveValue(0);
+    expect(screen.getByLabelText("L EU")).toHaveValue(0);
+    expect(screen.getByLabelText("XL EU")).toHaveValue(0);
   });
 
   it("calls onChange with only the edited size updated, others preserved", async () => {

@@ -8,11 +8,12 @@ export type SizeQuantities = Record<string, number>;
 
 export const DEFAULT_SIZE_QUANTITIES: Record<string, number> = {
   XS: 0,
-  S: 50,
-  M: 100,
-  L: 100,
-  XL: 50,
-  XXL: 0,
+  S: 0,
+  M: 0,
+  L: 0,
+  XL: 0,
+  "2XL": 0,
+  "3XL": 0,
 };
 
 export function parseQuantityInput(raw: string): number {
