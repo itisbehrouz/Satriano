@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCustomerSession } from "@/hooks/useCustomerSession";
 import { AccountDropdown } from "@/components/portal/AccountDropdown";
@@ -71,15 +72,17 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
         {/* Left: Brand Identity Logo Mark */}
         <div className="flex items-center gap-6">
           <Link
-            href="/portal"
-            className="flex items-center gap-2.5 hover:opacity-90 transition-opacity rounded-none"
+            href="/"
+            className="flex items-center gap-3 hover:opacity-95 transition-opacity"
           >
-            <div className="w-6 h-6 bg-[var(--color-gold)] text-[var(--color-bg)] font-mono font-extrabold flex items-center justify-center text-xs rounded-none">
-              S
-            </div>
-            <span className="text-base font-extrabold tracking-wider text-[var(--color-text-primary)]">
-              SATRIANO
-            </span>
+            <NextImage
+              src="/Satrinao.png"
+              alt="Satriano Atelier"
+              width={160}
+              height={45}
+              priority
+              className="h-8 md:h-[40px] w-auto object-contain"
+            />
           </Link>
 
           {/* Center: Main Navigation (Catalog | Orders | Account) */}
@@ -119,23 +122,8 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
           )}
         </div>
 
-        {/* Right: Search ⌘K Placeholder, Theme Toggle, Account Dropdown & Sign Out Action Button */}
+        {/* Right: Theme Toggle, Account Dropdown & Sign Out Action Button */}
         <div className="flex items-center gap-3">
-          {/* Quick Search Bar Placeholder (⌘K) */}
-          <div
-            className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded bg-[var(--color-bg)] text-[var(--color-text-secondary)] border border-[var(--color-border)] text-xs min-h-[32px] cursor-default opacity-80"
-            title="Catalog search coming soon"
-          >
-            <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">
-              search
-            </span>
-            <span className="hidden md:inline text-[11px] font-medium text-[var(--color-text-secondary)]">
-              Search
-            </span>
-            <kbd className="px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded text-[9px] font-mono text-[var(--color-text-secondary)]">
-              ⌘K
-            </kbd>
-          </div>
 
           {/* Site-Wide Dark/Light Theme Toggle */}
           <button
