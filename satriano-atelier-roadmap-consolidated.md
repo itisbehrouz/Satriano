@@ -1,11 +1,11 @@
-# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 4, 2026 — Portal Login Gate Cleanup, ⌘K Security Scoping & PWA)
+# Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 5, 2026 — Multi-Colourway Ordering, Homepage Redesign & Setup Fee Removal)
 
 **Scope:** B2B Made-to-Order e-commerce + multi-category product catalog + B2B partner portal + workflow automation
 **Capacity assumption:** Solo developer, ~2 hours/day
 **Development environment:** Google Antigravity (primary), Claude Code (approved fallback when Antigravity quota exhausted), Claude (architecture/planning), Vercel (hosting), Supabase (DB + Storage)
 **Cost principle:** Zero fixed cost — usage/commission-based services only (Vercel free tier, Supabase free tier, Stripe transaction fees when live)
 
-This document consolidates everything decided and built through August 4, 2026 (adds Sections 27–28). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
+This document consolidates everything decided and built through August 5, 2026 (adds Sections 27–30). It replaces all prior versioned roadmap files — this is the single source of truth going forward. Update this file in place going forward; do not create new versioned files.
 
 ---
 
@@ -658,3 +658,193 @@ An Antigravity session auto-switched to a GPT model mid-task and produced nothin
 **Verification gap to note:** Claude Code's evidence was `npm run build` (clean, 49 routes), `npm test` (29 files / 140 tests passing), and SSR HTML string assertions — but **no screenshots**, despite the Section 11 rule requiring a screenshot checkpoint for every visual change. SSR string matching proves an attribute was written, not that an asset resolves or a layout renders correctly. Screenshot verification for the portal login gate is still outstanding.
 
 **Open item:** the `PortalHeader` guard depends on `companyName` being populated. If session hydration briefly leaves it empty, an authenticated user landing on `/portal` may see the header flash out and back in. Not yet checked against a real session.
+
+---
+
+## 29. Homepage Redesign, Setup Fee Removal & Multi-Colourway Foundation (Aug 5, 2026)
+
+### 29.1 — Setup fee removed from the business model
+
+`setupFeeCents` was never part of the business model but had been built into pricing, admin UI, the proforma PDF, and customer-facing surfaces, showing real charges of $120–$350 per fabric across all 68 rows.
+
+**Audit before removal (the right question, asked first):** 3 Order records existed, all `PENDING_REVIEW` with `totalCents: 0`, and **0 Proforma records**. No historical invoice or financial record depended on the value, so removal was safe.
+
+Removed from: `lib/pricing.ts`, `lib/adminMetrics.ts`, `lib/pdfGenerator.ts`, `PriceSidebar`, `FabricPicker`, `FabricPricingPanel`, `FabricPricingTree`, `AdminOrderTable`, `ProductFitTree`, product-settings, portal orders, `/api/orders`, `/api/admin/catalog`, `/api/proforma`, and 11 test files. The unrelated hardcoded "Vector Digitization Setup ($45.00)" marketing copy in `app/legal/terms` was removed too — same class of claim, also untrue.
+
+**Deliberately NOT done:** `Fabric.setupFeeCents` and `Order.setupFeeCents` remain in the schema, marked `@deprecated`. Dropping them is a separate pass. Optional `setupFeeCents?: number` fields also remain in several TypeScript interfaces for legacy-row type safety — clean those up in the same later pass.
+
+**Pricing correction caught during review:** the proposed implementation collapsed the total to `totalUnits * priceMinCents`, which would have destroyed the price *range*. Corrected to preserve both bounds — min and max computed separately, with no fee added to either.
+
+### 29.2 — Multi-colourway ordering: architecture settled after two false starts
+
+This took three passes to get right, and the wrong answers are worth recording.
+
+**Rejected — Approach 1 (each colourway = its own `Fabric` row).** Initially recommended because `Fabric.colorway` already existed and needed no migration. Killed by three business rules that only surfaced through questioning:
+1. Colour does not affect price. Duplicating fabric rows per colourway would duplicate pricing data with no added information — 68 rows would become ~204, with update-anomaly risk on every price change.
+2. MOQ is tiered by colour. If each colour is an unrelated `Fabric` row, the system cannot know two rows are colours of the same fabric, so a per-colour threshold is unexpressible.
+3. Colours are fabric-specific, not a shared global palette.
+
+**Also corrected during this discussion:** the `Fabric` model's name is misleading. It represents a *product + material variant of a finished garment* — `priceMinCents`/`priceMaxCents` are the finished garment's unit price, not a raw material cost. The architecture is correct; only the name reads wrong. Do not rename or restructure it on the assumption it models raw fabric.
+
+**Confirmed MOQ rules (final):**
+- `moqPerFabric` — total units across ALL selected colours of that fabric
+- `moqPerColor` — EACH selected colour must individually meet it
+- Both must pass. With `moqPerFabric` 50 and `moqPerColor` 20: `30 navy + 30 white` VALID; `45 navy + 5 white` INVALID (white below per-colour floor); `20 navy + 20 white` INVALID (total below fabric floor).
+
+Industry research supports this shape: custom apparel orders are mapped as a grid of style × fabric × colour × decoration × size, fabric is the first production constraint, and MOQ is per design with free size distribution but colour as a separate constraint tier.
+
+**Phase 1 — schema (SHIPPED to production).** `FabricColor` model (`fabricId`, `name`, `hex?`, `active`, `sortOrder`, unique on `[fabricId, name]`, cascade delete from `Fabric`); `Fabric.moqPerColor` default 20; `OrderLine.colorId` (nullable, `onDelete: SetNull`) and `OrderLine.selectedColor` (denormalized snapshot, matching the `selectedFit`/`selectedSize` pattern). `Fabric.colorway` retained and marked `@deprecated` — not dropped.
+
+`npx prisma db push` run against production. Verified after: `FabricColor` exists and is empty, 68 Fabric rows intact all with `moqPerColor = 20`, 3 Orders and 3 OrderLines intact with colour fields null, `colorway` values unchanged. No data-loss warning, no destructive statement.
+
+**Phase 2 — validation engine (COMPLETE, not yet used by any UI).** Extracted to `lib/moqValidation.ts` exporting `validateOrderMoq(items: MoqValidationItem[]): MoqValidationResult`. Both `/api/orders` and the future configurator UI call this same function — deliberately one implementation, not two. Error codes `MOQ_COLOR_MINIMUM` / `MOQ_FABRIC_MINIMUM`; messages name the colour and both numbers. Tests lock down: all three worked examples, single-colour, legacy `colorId: null` (fabric MOQ alone), zero-quantity colours ignored, and exact-threshold boundaries. 147/147 tests passing.
+
+**Note:** the fallback chain `moqPerFabric ?? moq ?? 50` is still live, so the health audit's "redundant `Product.moq`" finding cannot be actioned until that fallback is cleaned up.
+
+**Remaining phases:**
+- Phase 3 — configurator colour step UI. Flow becomes `1 Fabric → 2 Colour (multi-select) → 3 Fit → 4 Sizes/Quantities → 5 Logo`. Each selected colour renders its own `SizeQtyTable` instance; the existing two-row layout is reused unchanged. **Blocked on colour data existing.**
+- Phase 4 — admin CRUD for `FabricColor`, plus surfacing colour in `/portal/orders`, admin order detail, and the proforma PDF (all three currently show `fabric.name` only).
+- **Sequencing note:** Phase 3 cannot be demonstrated until at least one fabric has colours. Admin CRUD or a pilot seed must come first.
+- **Known gap:** fabric cards render empty image placeholders. Colour will initially be text + hex chip only, with no real swatch imagery.
+
+### 29.3 — Homepage: category arc carousel replaces the catalog grid
+
+`components/home/CategoryArcCarousel.tsx` — cards in a shallow fan, max ±8° rotation, 0px corners (deliberately diverging from the rounded reference), horizontal drag with momentum, arrow controls, keyboard arrows, no autoplay. Mobile falls back to a flat scroll strip. Images from `public/images/slider/*.webp`. Subcategory count on hover; "View Full Catalog Index" link below.
+
+**Positioned below the hero, replacing the old Manufacturing Catalog grid entirely** rather than sitting alongside it — showing the same 7 categories twice in two formats would have been redundant.
+
+Currently 6 cards: Underwear & Loungewear has no image yet.
+
+**Two rounds of fixes were needed.** First build rendered cards but had no working navigation — `overflow-x-auto` with a hidden scrollbar meant trackpads could scroll but a mouse could not drag. Also flagged and fixed: first card clipped behind the `B2BSupportDock`.
+
+**Image asset production:** 14 AI-generated images, all under one visual grammar — cold neutral daylight, desaturated charcoal/raw-white/muted-navy, macro material detail, no faces, no readable brand marks, 3:4 vertical. Consistency across the set held up well. One frame (wide cutting-table shot with background figures) was set aside from the category set because it reads as a specific facility — same honesty line as the earlier certification-claims cleanup.
+
+### 29.4 — Homepage: process timeline replaces the feature grid
+
+The "Enterprise Supplier Infrastructure" four-card grid was generic and, worse, made two claims the system does not support: "Instant Proforma — automatic PDF generation and email dispatch" (proformas are manual — orders land in `PENDING_REVIEW` and an admin issues them) and "Global B2B Logistics — direct freight integration" (no such integration exists).
+
+Replaced with a four-step process timeline: `01 CONFIGURE → 02 SUBMIT YOUR TARGET PRICE → 03 PROFORMA REVIEW → 04 PRODUCTION`. Numbers in monospace, thin connecting rule, no cards, no icons. Step 03 wording reflects real behaviour and **must not be reworded toward "instant" or "automatic".**
+
+Rationale: the differentiating thing about this platform is its order flow, which was explained nowhere on the homepage.
+
+### 29.5 — Homepage price estimator removed (scope drift caught)
+
+A "Transparent Production Cost Matrix / Live Price Ledger Estimator" section had appeared on the homepage — fabric selector, volume slider, and an "ESTIMATED ORDER TOTAL RANGE $1,495 – $2,245" output. This directly contradicts the core pricing architecture: the platform does **not** auto-calculate order totals; the customer names a target price and an admin sets the final price before a proforma. It was the inlined remnant of `HomeEstimatorPreview.tsx`.
+
+Removed. **Do not re-add.**
+
+### 29.6 — Configurator: entry points, size matrix, stepper, theme
+
+**Entry points.** The hero CTA and MANUFACTURING nav both pointed at bare `/konfigurator`, which hard-redirects to `/konfigurator/classic-polo-shirt` — dropping every visitor into an arbitrary polo shirt. All customer-facing links repointed to `/categories`: hero CTA, MANUFACTURING nav, `SiteFooter`, `PortalHeader`, portal page, `FaqLinks`, `AIFaqAssistantModal`, `ConfiguratorSuccess`. The `/categories` hero's own "Launch Order Configurator" button was removed rather than repointed (self-link). Labels corrected: "Launch Order Configurator" → "Browse Product Catalog", "Manufacturing Configurator" → "Manufacturing Catalog".
+
+**Real bug found in the admin command palette:** selecting a product search result called `navigateTo("/konfigurator")` — the generic route — instead of that product's own configurator. Fixed to `/konfigurator/${p.slug}`. The "Garment Customization Catalog" shortcut repointed to `/categories`.
+
+`app/konfigurator/page.tsx` and its redirect are intentionally left in place. `/konfigurator/[productId]` untouched.
+
+**Size matrix — dangerous default removed.** `DEFAULT_SIZE_QUANTITIES` in `lib/configuratorLogic.ts` shipped pre-filled (`S:50, M:100, L:100, XL:50` — 300 units). A customer could have submitted an order they never configured. All sizes now start at 0, the badge reads 0, and MOQ gating blocks submission until met. Layout changed from a vertical table to a two-row grid of compact size cells, adapting to any size-system count.
+
+**Sticky progress stepper** in `ConfiguratorClient.tsx`: 4 steps (was showing 3 while the page had 4), condenses on scroll, checkmarks on completion, click-to-scroll, `prefers-reduced-motion` respected. Completion conditions: fabric selected; fit selected or none exist; total units ≥ `moqPerFabric`; logo attached. **Must become 5 steps when the colour step ships.**
+
+**Theme leakage.** Steps 1–2 kept rendering unselected cards on white inside the dark shell. A first pass reported this fixed; it was not. Root cause on re-inspection: `bg-white` and `text-[#5B6B85]` — a mix of hardcoded hex *and* raw Tailwind colour utilities. **A grep for `#` alone does not catch `bg-white` or `text-gray-900`; both greps are required.** Radio buttons also replaced with `sr-only` inputs plus custom tokenized indicators.
+
+### 29.7 — Brand: gold relocated
+
+Two deliberate changes, made directly rather than through an agent:
+- The site logo is now a theme-aware `AtelierLogo` component rendering dark/neutral in light mode rather than the gold Baskerville wordmark.
+- The hero's final line "We manufacture it." is now gold (`--color-gold`), settled after three successive commits.
+
+**This inverts the standing DESIGN.md rule that gold is confined to the logo mark.** Gold has effectively swapped places. The rule as written is now stale — either update DESIGN.md to describe the new placement or revert the hero, because leaving the contradiction in place invites a future agent to "fix" one of the two.
+
+### 29.8 — Open items and known issues
+
+- **Vector logo upload is broken.** Submitting a configured order fails with "Failed to upload vector logo file. Please try again." Root cause not yet diagnosed — candidates include Supabase Storage bucket configuration, MIME-type rejection (`.ai`/`.eps` often arrive with empty or unexpected types), RLS policy on an unauthenticated upload path, or fallout from today's `/api/orders` changes. **This blocks order submission.** The customer-facing message is also generic and unactionable.
+- **No screenshot verification all day.** Playwright's driver download returned 404 for every attempt (`playwright-1.57.0-mac-arm64.zip`). Every visual change today — carousel, theme fixes, stepper, size matrix, portal gate — was verified only by reading code and SSR HTML. Reports claiming "production matches local 100%" are not evidence; `web_fetch` proves HTML was returned, not that a layout rendered or a drag handler works.
+- **Health audit reliability.** Three separate "0 references, safe to delete" findings were wrong in one session: `@vercel/analytics` (broke the build — `app/layout.tsx` still imported it), `public/Satrinao.png` (now actively used by the portal login page — **do not delete**), and `HomeEstimatorPreview.tsx` (was still imported). **Treat audit output as a candidate list requiring independent confirmation.** For dead dependencies, grep the full import specifier including subpaths (`@vercel/analytics/react`), not just the bare package name.
+- **Credential exposure — rotate the Supabase password.** During two separate tasks an agent read `.env.local` and pasted the database password in plaintext on the command line, once after being explicitly instructed not to. The value is in shell history and session logs. Rotate it, and update `.env.local` **and** Vercel production env vars together followed by a redeploy, or production breaks with `P1000`.
+- `PortalHeader`'s guard depends on `companyName`; if session hydration briefly leaves it empty, an authenticated user landing on `/portal` may see the header flash. Unverified.
+
+---
+
+## 30. Multi-Colourway Ordering — Phases 3a & 3b Complete (Aug 5, 2026)
+
+### 30.1 — Pilot colour data seeded
+
+`scripts/seed-pilot-colors.ts` — a standalone idempotent script, deliberately NOT added to `prisma/seed.ts`. Rationale: the main seed upserts across all 50+ products and 68 fabrics, so running it to add colours to one product would fire thousands of unrelated upserts and could overwrite descriptions elsewhere. A scoped script touches only `FabricColor`.
+
+Resolves Classic Polo Shirt by `slug` and its fabrics dynamically rather than hardcoding IDs. Upserts on the `@@unique([fabricId, name])` constraint.
+
+**Seeded:** 12 rows — Navy Blue `#0B1E3D`, Crisp White `#FFFFFF`, Oatmeal Beige `#D6C7B2`, Blackberry `#25122B`, with explicit `sortOrder` 0–3, applied identically across all three fabric lines (Pique Cotton, Organic Cotton, Performance Jersey).
+
+**Note:** the originally approved palette was per-fabric-distinct (different colours for each fabric line); the implementation applied one shared set of four to all three. Accepted as-is for a pilot — real colourways will come from supplier colour cards and be entered through admin CRUD.
+
+**Verified after:** FabricColor 12, Fabric still 68, Order still 3, OrderLine still 3. Script re-run a second time; count stayed 12, zero duplicates — idempotency actually tested, not just claimed.
+
+**Two corrections were caught before execution:** the script initially used `hexCode` where the schema field is `hex` (would have thrown), and `sortOrder` was unset so every colour would have defaulted to 0 and rendered in arbitrary order.
+
+### 30.2 — Configurator: colour step and bulk order matrix
+
+Flow is now 5 steps: `1 Fabric → 2 Colourway → 3 Fit → 4 Bulk Order Matrix → 5 Vector Logo`.
+
+**`ColorPicker.tsx`** — multi-select cards, hex swatch plus the colour name as text (colour is never the sole identifier). Select All / Deselect All. Selection resets when the fabric changes, since colours are fabric-scoped.
+
+**Fallback for fabrics with no colours:** renders a "Standard Fabric Colorway" badge rather than breaking. This matters — only 3 of 68 fabrics have colours; the other 65 rely on this path.
+
+**`ColorSizeMatrix.tsx`** — colours as rows, sizes as columns, quantity input per cell, all starting at 0. Sticky left column keeps colour labels readable during horizontal scroll. Each row shows its running total against `moqPerColor` with a live PASS / MIN state; below the grid, the fabric total against `moqPerFabric`. Clear All resets every cell.
+
+**Single source of truth preserved:** the matrix calls `validateOrderMoq()` from `lib/moqValidation.ts` for live feedback rather than reimplementing threshold logic client-side. Server-side enforcement in `/api/orders` uses the same function.
+
+**Also in this pass:** the product title block moved into the sticky stepper's left side so it stays visible on scroll; the MOQ figure — previously duplicated across the stepper badge, the "Atelier Engineering Desk" panel, and a "Configured: X / Y pcs" line — consolidated to the stepper badge plus the matrix's own per-row and per-fabric indicators. The stepper was updated from 4 to 5 steps at build time rather than after the fact, unlike the earlier 3-vs-4 mismatch.
+
+**Tests:** `ColorPicker.test.tsx` and `ColorSizeMatrix.test.tsx` added. 155/155 passing across 33 files. Build clean, 50 routes.
+
+### 30.3 — Remaining work on this feature
+
+- **Phase 4 — admin CRUD for `FabricColor`.** Without it, colours can only be added by editing and re-running the pilot script. This blocks real use.
+- **Downstream surfaces still show `fabric.name` only** — `/portal/orders`, admin order detail, and the proforma PDF do not display colour. An order can now be placed with colours that never appear on the document the customer receives.
+- **65 of 68 fabrics have no colours.** They fall back correctly, but the feature is only real for Classic Polo Shirt until data exists.
+- **No swatch imagery.** Fabric cards render empty placeholders; colour is a hex chip plus text. A hex chip cannot convey how a dyed fabric actually looks.
+- **Still unverified visually.** Playwright's driver download failed all day, so the colour picker, the matrix, the sticky column, and the live MOQ feedback have been confirmed only through unit tests and code inspection. The three worked examples (30+30 passes, 45+5 fails on the colour row, 20+20 fails on the fabric total) should be exercised by hand in a browser before this is considered done.
+
+### 30.4 — Core Color Palette Seed & Sticky Header Fixes (Aug 5, 2026, evening)
+
+**Core color palette seeded (placeholder data).** `scripts/seed-core-colors.ts` 
+added 5 industry-standard colors (Black `#0A0A0A`, White `#FFFFFF`, Navy 
+`#0B1E3D`, Heather Grey `#8B8B8B`, Charcoal `#36454F`) to all active fabrics 
+outside the Accessories category (59 of 68 fabrics — Accessories excluded 
+since its configurator remains deferred to Faz 2+). Explicitly marked as 
+placeholder data in the script header, pending real supplier colour-card 
+input via the still-unbuilt Phase 4 admin CRUD (see Section 30.3).
+
+- **Result:** 295 new `FabricColor` rows created (307 total after seed).
+- **Duplicate hex conflict found and fixed:** name-based idempotency check 
+  (`"Navy" !== "Navy Blue"`) caused 6 duplicate rows across the 3 
+  pilot-seeded Classic Polo Shirt fabrics (same hex, different name). 
+  Detected via a dedicated hex-comparison scan, the 6 newer duplicate rows 
+  were deleted (kept the original pilot names). Verified: 301 clean rows, 
+  0 duplicate hex conflicts, idempotency re-confirmed (2nd run: 0 created, 
+  295 skipped).
+- **Test suite:** `page.test.tsx` updated to reflect the new color counts 
+  (was asserting exactly 4 colors / empty array for unseeded fabrics — both 
+  assumptions were invalidated by the seed). New test added distinguishing 
+  Accessories (still empty) from seeded non-Accessories products. 
+  33 files / 156 tests passing.
+- **Deployed:** commit `9ef87ec`, pushed to `main`, live on production.
+- **Screenshot-verified:** core colors (Black, Charcoal, Heather Grey, Navy, 
+  White) confirmed rendering correctly in the Colourway Selection step on 
+  `/konfigurator/v-neck-t-shirt`.
+
+**Sticky configurator header — bug found and fix in progress.** Screenshot 
+evidence confirmed the Section 30.2 "sticky progress stepper" claim was 
+unverified and, in its pre-fix state, not actually sticky — it scrolled 
+away with the page instead of staying fixed. A fix was dispatched; 
+additionally, two related visual issues were found in the same header 
+during triage: (1) an inconsistent divider line under the product title 
+that behaves differently across the sticky vs. non-sticky states, and 
+(2) inconsistent spacing between the title block and the step-badge group 
+that varies unpredictably by viewport width (near-collision on narrow 
+viewports, excessive gap on wide ones) — pointing to a missing fixed 
+minimum-gap constraint in the flex layout.
+
+**Status: NOT YET CONFIRMED FIXED.** Per the Section 11/28.6 discipline, 
+this stays open until a real before/after screenshot at both mobile 
+(375px) and desktop (1920px+) widths is produced and reviewed.
