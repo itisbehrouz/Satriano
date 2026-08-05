@@ -68,7 +68,7 @@ describe("POST /api/orders", () => {
 
     expect(response.status).toBe(400);
     const json = await response.json();
-    expect(json.error).toContain("Minimum order quantity");
+    expect(json.error).toContain("requires at least");
   });
 
   it("upserts the company by email instead of creating duplicates", async () => {

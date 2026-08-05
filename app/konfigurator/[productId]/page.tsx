@@ -43,6 +43,12 @@ export default async function ProductConfiguratorPage({
     include: {
       fabrics: {
         where: { active: true },
+        include: {
+          colors: {
+            where: { active: true },
+            select: { id: true, name: true, hex: true, sortOrder: true },
+          },
+        },
         orderBy: { priceMinCents: "asc" },
       },
       fits: {
@@ -78,7 +84,16 @@ export default async function ProductConfiguratorPage({
         products: {
           where: { active: true },
           include: {
-            fabrics: { where: { active: true }, orderBy: { priceMinCents: "asc" } },
+            fabrics: {
+              where: { active: true },
+              include: {
+                colors: {
+                  where: { active: true },
+                  select: { id: true, name: true, hex: true, sortOrder: true },
+                },
+              },
+              orderBy: { priceMinCents: "asc" },
+            },
             fits: { include: { fit: true } },
           },
           take: 1,
@@ -132,24 +147,31 @@ export default async function ProductConfiguratorPage({
     imageUrl: f.imageUrl,
     priceMinCents: f.priceMinCents,
     priceMaxCents: f.priceMaxCents,
+    moqPerColor: f.moqPerColor ?? 20,
+    colors: (f.colors ?? []).map((c) => ({ id: c.id, name: c.name, hexCode: c.hex || "", sortOrder: c.sortOrder })),
     setupFeeCents: 0,
   }));
 
   if (fabrics.length === 0) {
     const globalFabrics = await prisma.fabric.findMany({
       where: { active: true },
-      orderBy: { priceMinCents: "asc" },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        imageUrl: true,
-        priceMinCents: true,
-        priceMaxCents: true,
+      include: {
+        colors: {
+          where: { active: true },
+          select: { id: true, name: true, hex: true, sortOrder: true },
+        },
       },
+      orderBy: { priceMinCents: "asc" },
     });
     fabrics = globalFabrics.map((gf) => ({
-      ...gf,
+      id: gf.id,
+      name: gf.name,
+      description: gf.description,
+      imageUrl: gf.imageUrl,
+      priceMinCents: gf.priceMinCents,
+      priceMaxCents: gf.priceMaxCents,
+      moqPerColor: gf.moqPerColor ?? 20,
+      colors: (gf.colors ?? []).map((c) => ({ id: c.id, name: c.name, hexCode: c.hex || "", sortOrder: c.sortOrder })),
       setupFeeCents: 0,
     }));
   }

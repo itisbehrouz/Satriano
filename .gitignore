@@ -48,3 +48,6 @@ next-env.d.ts
 !/public/proformas/.gitkeep
 /public/uploads/*
 !/public/uploads/.gitkeep
+
+# scratch scripts
+/scratch/

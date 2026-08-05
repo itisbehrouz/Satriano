@@ -2,6 +2,7 @@ import type { SizeQuantity } from "@/lib/pricing";
 
 export interface CreateOrderInputItem {
   fabricId: string;
+  colorId?: string;
   productId?: string;
   fitId?: string;
   sizeQuantities: SizeQuantity[];
@@ -67,6 +68,7 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
 
     const {
       fabricId,
+      colorId,
       productId,
       fitId,
       sizeQuantities,
@@ -101,6 +103,7 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
 
     validatedItems.push({
       fabricId: fabricId.trim(),
+      colorId: typeof colorId === "string" && colorId.trim() !== "" ? colorId.trim() : undefined,
       productId: typeof productId === "string" && productId.trim() !== "" ? productId.trim() : undefined,
       fitId: typeof fitId === "string" && fitId.trim() !== "" ? fitId.trim() : undefined,
       sizeQuantities,

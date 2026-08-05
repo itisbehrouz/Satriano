@@ -4,7 +4,6 @@ import { CookieConsentModal } from "@/components/layout/CookieConsentModal";
 import { B2BSupportDock } from "@/components/layout/B2BSupportDock";
 import { AIFaqAssistantModal } from "@/components/layout/AIFaqAssistantModal";
 import { ServiceWorkerRegister } from "@/components/layout/ServiceWorkerRegister";
-import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,9 +59,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <Script
+        <script
           id="satriano-theme-script"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var p=window.location.pathname;if(p.startsWith('/admin'))return;var t=localStorage.getItem('satriano-theme');if(!t){t=p.startsWith('/portal')?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
           }}

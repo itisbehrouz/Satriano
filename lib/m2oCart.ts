@@ -3,6 +3,7 @@ import { type LogoPlacement } from "@/app/generated/prisma/enums";
 export interface M2OCartItem {
   id: string;
   fabricId: string;
+  colorId?: string;
   productId?: string;
   fitId?: string;
   sizeQuantities: { size: string; quantity: number; priceMinCents?: number }[];
@@ -11,6 +12,7 @@ export interface M2OCartItem {
   
   // UI Display fields
   fabricName: string;
+  colorName?: string;
   productName: string;
   fitName?: string;
   totalUnits: number;

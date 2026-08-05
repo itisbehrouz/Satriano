@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { LogoPlacement } from "@/app/generated/prisma/enums";
 import { FabricPicker, type FabricOption } from "@/components/configurator/FabricPicker";
+import { ColorPicker } from "@/components/configurator/ColorPicker";
 import { FitPicker, type FitOption } from "@/components/configurator/FitPicker";
-import { SizeQtyTable, type SizeSystemDef } from "@/components/configurator/SizeQtyTable";
+import { ColorSizeMatrix } from "@/components/configurator/ColorSizeMatrix";
+import type { SizeSystemDef } from "@/components/configurator/SizeQtyTable";
 import { LogoUploader } from "@/components/configurator/LogoUploader";
 import { PriceSidebar } from "@/components/configurator/PriceSidebar";
-import { DEFAULT_SIZE_QUANTITIES, toSizeQuantityArray } from "@/lib/configuratorLogic";
+import { toSizeQuantityArray } from "@/lib/configuratorLogic";
 import { addToM2OCart } from "@/lib/m2oCart";
+import { validateOrderMoq, type MoqValidationItem } from "@/lib/moqValidation";
 
 interface ConfiguratorClientProps {
   productId?: string;
@@ -34,20 +37,20 @@ export function ConfiguratorClient({
   categoryTitle,
   sizeSystems = [],
   moqPerFabric = 50,
-  isLoggedIn = false,
-  initialCompanyEmail = "",
-  initialCompanyName = "",
 }: ConfiguratorClientProps) {
   const router = useRouter();
   const [selectedFabricId, setSelectedFabricId] = useState(fabrics[0]?.id ?? "");
+  const [selectedColorIds, setSelectedColorIds] = useState<string[]>([]);
   const [selectedFitId, setSelectedFitId] = useState(fits[0]?.id ?? "");
   const [activeRegion, setActiveRegion] = useState<"EU" | "US">("EU");
-  const [sizeQuantities, setSizeQuantities] = useState<Record<string, number>>(DEFAULT_SIZE_QUANTITIES);
+  
+  // Matrix quantities: colorId -> sizeLabel -> qty
+  const [matrixQuantities, setMatrixQuantities] = useState<Record<string, Record<string, number>>>({});
+  
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [placement, setPlacement] = useState<LogoPlacement>("LEFT_CHEST");
   const [addingToCart, setAddingToCart] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -61,14 +64,106 @@ export function ConfiguratorClient({
   const selectedFabric = fabrics.find((fabric) => fabric.id === selectedFabricId) ?? fabrics[0];
   const selectedFit = fits.find((fit) => fit.id === selectedFitId) ?? fits[0];
 
-  const totalUnits = Object.values(sizeQuantities).reduce((sum, qty) => sum + (qty || 0), 0);
-  const meetsMoq = totalUnits >= moqPerFabric;
+  // Colors available for currently selected fabric
+  const availableColors = selectedFabric?.colors ?? [];
+  const moqPerColor = selectedFabric?.moqPerColor ?? 20;
+
+  // Selected color objects
+  const activeSelectedColors = availableColors.filter((c) => selectedColorIds.includes(c.id));
+
+  // Reset colors when fabric changes
+  function handleFabricSelect(fabricId: string) {
+    setSelectedFabricId(fabricId);
+    setSelectedColorIds([]);
+    setMatrixQuantities({});
+  }
+
+  // Toggle color selection
+  function handleToggleColor(colorId: string) {
+    setSelectedColorIds((prev) => {
+      if (prev.includes(colorId)) {
+        return prev.filter((id) => id !== colorId);
+      } else {
+        return [...prev, colorId];
+      }
+    });
+  }
+
+  function handleSelectAllColors() {
+    if (selectedColorIds.length === availableColors.length) {
+      setSelectedColorIds([]);
+    } else {
+      setSelectedColorIds(availableColors.map((c) => c.id));
+    }
+  }
+
+  function handleQuantityChange(colorId: string, sizeLabel: string, qty: number) {
+    setMatrixQuantities((prev) => ({
+      ...prev,
+      [colorId]: {
+        ...(prev[colorId] || {}),
+        [sizeLabel]: qty,
+      },
+    }));
+  }
+
+  function handleClearAllQuantities() {
+    setMatrixQuantities({});
+  }
+
+  // Active rows for matrix and MOQ validation
+  const activeRows =
+    activeSelectedColors.length > 0
+      ? activeSelectedColors
+      : [{ id: "default", name: "Standard Color", hexCode: null }];
+
+  const moqValidationItems: MoqValidationItem[] = activeRows.map((row) => {
+    const rowQtys = matrixQuantities[row.id] || {};
+    const totalQty = Object.values(rowQtys).reduce((sum, q) => sum + (q || 0), 0);
+    return {
+      fabricId: selectedFabricId,
+      fabricName: selectedFabric?.name || "Selected Fabric",
+      colorId: row.id === "default" ? null : row.id,
+      colorName: row.name,
+      quantity: totalQty,
+      moqPerFabric,
+      moqPerColor,
+    };
+  });
+
+  const moqValidation = validateOrderMoq(moqValidationItems);
+  const totalUnits = moqValidationItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const titleText = subcategoryTitle ? subcategoryTitle : "Classic Polo Shirt";
+  const descriptionText =
+    subcategoryDescription ||
+    "Custom luxury B2B apparel production. Select fabric line, colourways, garment fit, bulk matrix quantities, and vector branding.";
+
+  const hasFitStep = fits.length > 0;
 
   const steps = [
     { id: "step-fabric", label: "Fabric Line", num: 1, isComplete: !!selectedFabricId },
-    ...(fits.length > 0 ? [{ id: "step-fit", label: "Garment Fit", num: 2, isComplete: !!selectedFitId }] : []),
-    { id: "step-sizing", label: "Sizing & Quantities", num: fits.length > 0 ? 3 : 2, isComplete: meetsMoq },
-    { id: "step-branding", label: "Vector Logo", num: fits.length > 0 ? 4 : 3, isComplete: logoFile !== null },
+    {
+      id: "step-color",
+      label: "Colourways",
+      num: 2,
+      isComplete: availableColors.length === 0 || selectedColorIds.length > 0,
+    },
+    ...(hasFitStep
+      ? [{ id: "step-fit", label: "Garment Fit", num: 3, isComplete: !!selectedFitId }]
+      : []),
+    {
+      id: "step-sizing",
+      label: "Sizing & Quantities",
+      num: hasFitStep ? 4 : 3,
+      isComplete: moqValidation.valid && totalUnits > 0,
+    },
+    {
+      id: "step-branding",
+      label: "Vector Logo",
+      num: hasFitStep ? 5 : 4,
+      isComplete: logoFile !== null,
+    },
   ];
 
   function scrollToSection(id: string) {
@@ -80,9 +175,14 @@ export function ConfiguratorClient({
   }
 
   async function handleAddToCart() {
+    if (!moqValidation.valid) {
+      setSubmitError(moqValidation.error);
+      return;
+    }
+
     setSubmitError(null);
     setAddingToCart(true);
-    
+
     try {
       let uploadedLogoUrl: string | undefined = undefined;
 
@@ -104,21 +204,32 @@ export function ConfiguratorClient({
         uploadedLogoUrl = uploadJson.url || uploadJson.storageUrl;
       }
 
-      const cartItem = {
-        id: Date.now().toString(),
-        fabricId: selectedFabricId,
-        productId: productId || undefined,
-        fitId: selectedFitId || undefined,
-        sizeQuantities: toSizeQuantityArray(sizeQuantities),
-        logoUrl: uploadedLogoUrl,
-        logoPlacement: placement,
-        fabricName: selectedFabric.name,
-        productName: titleText,
-        fitName: selectedFit?.name,
-        totalUnits,
-      };
+      // Create cart items per selected colorway in matrix
+      for (const row of activeRows) {
+        const rowQtys = matrixQuantities[row.id] || {};
+        const sizeQtyArray = toSizeQuantityArray(rowQtys);
+        const rowTotal = sizeQtyArray.reduce((sum, sq) => sum + sq.quantity, 0);
 
-      addToM2OCart(cartItem);
+        if (rowTotal > 0) {
+          const cartItem = {
+            id: `${Date.now()}-${row.id}`,
+            fabricId: selectedFabricId,
+            colorId: row.id === "default" ? undefined : row.id,
+            productId: productId || undefined,
+            fitId: selectedFitId || undefined,
+            sizeQuantities: sizeQtyArray,
+            logoUrl: uploadedLogoUrl,
+            logoPlacement: placement,
+            fabricName: selectedFabric.name,
+            colorName: row.name,
+            productName: titleText,
+            fitName: selectedFit?.name,
+            totalUnits: rowTotal,
+          };
+          addToM2OCart(cartItem);
+        }
+      }
+
       router.push("/configure/checkout");
     } catch {
       setSubmitError("Failed to add to spec. Please try again.");
@@ -127,93 +238,93 @@ export function ConfiguratorClient({
     }
   }
 
-  const titleText = subcategoryTitle ? subcategoryTitle : "Classic Polo Shirt";
-  const descriptionText =
-    subcategoryDescription ||
-    "Custom luxury B2B apparel production. Select fabric line, garment fit, regional size quantities, and vector branding.";
+  // Combined size quantities for PriceSidebar single-item estimate
+  const combinedSizeQuantities: Record<string, number> = {};
+  for (const row of activeRows) {
+    const rowQtys = matrixQuantities[row.id] || {};
+    for (const [size, qty] of Object.entries(rowQtys)) {
+      combinedSizeQuantities[size] = (combinedSizeQuantities[size] || 0) + (qty || 0);
+    }
+  }
 
   return (
     <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-6 bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
-      {/* Sticky Progress Stepper Header Bar */}
-      <div className={`sticky top-0 z-30 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] -mx-4 md:-mx-8 px-4 md:px-8 transition-all duration-200 motion-reduce:transition-none mb-6 ${
-        isScrolled ? "py-2.5 shadow-md" : "py-4"
-      }`}>
-        <div className="max-w-container-max mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 md:gap-6 overflow-x-auto scrollbar-none py-1">
-            {steps.map((step) => (
-              <button
-                key={step.id}
-                type="button"
-                onClick={() => scrollToSection(step.id)}
-                className="flex items-center gap-2 group cursor-pointer shrink-0 text-left focus:outline-none"
-              >
-                <span className={`w-5 h-5 rounded-none font-mono font-bold flex items-center justify-center text-[10px] transition-colors ${
-                  step.isComplete
-                    ? "bg-[var(--color-status-success)] text-white"
-                    : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] group-hover:border-[var(--color-accent)]"
-                }`}>
-                  {step.isComplete ? (
-                    <span className="material-symbols-outlined text-xs font-bold">check</span>
-                  ) : (
-                    step.num
-                  )}
-                </span>
-                <span className={`font-mono uppercase tracking-wider transition-colors ${
-                  isScrolled ? "text-[10px]" : "text-xs"
-                } ${
-                  step.isComplete
-                    ? "font-semibold text-[var(--color-text-primary)]"
-                    : "font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]"
-                }`}>
-                  {step.label}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
-            <span className={`font-mono text-xs px-2.5 py-1 rounded-none border transition-colors ${
-              meetsMoq
-                ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border-[var(--color-status-success)]/30"
-                : "bg-amber-500/10 text-amber-500 border-amber-500/30"
-            }`}>
-              {totalUnits} / {moqPerFabric} pcs
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Executive Product Header Shell */}
-      <div className="mb-8 bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-6 md:p-8 transition-colors">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-[var(--color-gold)] uppercase tracking-wider">
-              <span>B2B Production Spec</span>
+      {/* Sticky Stepper Header with Integrated Product Title Block */}
+      <div
+        className={`sticky top-0 z-30 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] -mx-4 md:-mx-8 px-4 md:px-8 transition-all duration-200 motion-reduce:transition-none mb-6 ${
+          isScrolled ? "py-2.5 shadow-md" : "py-4"
+        }`}
+      >
+        <div className="max-w-container-max mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+          {/* Integrated Product Header Block */}
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--color-gold)] uppercase tracking-wider">
+              <span>B2B SPEC</span>
               <span>•</span>
               <span>{categoryTitle || "Menswear Atelier"}</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
+            <h1
+              className={`font-bold tracking-tight text-[var(--color-text-primary)] transition-all ${
+                isScrolled ? "text-base md:text-lg" : "text-xl md:text-2xl"
+              }`}
+            >
               {titleText}
             </h1>
-            <p className="text-xs md:text-sm text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
-              {descriptionText}
-            </p>
+            {!isScrolled && (
+              <p className="text-xs text-[var(--color-text-secondary)] max-w-xl truncate hidden md:block">
+                {descriptionText}
+              </p>
+            )}
           </div>
 
-          {/* Quick Feasibility & Live Progress Badge */}
-          <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none min-w-[240px] text-right space-y-1.5 shrink-0">
-            <div className="flex items-center justify-end gap-2">
-              <span className="w-2 h-2 rounded-none bg-[var(--color-status-success)] animate-pulse" />
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[var(--color-status-success)]">
-                Atelier Engineering Desk
-              </span>
+          {/* 5-Step Navigation Badges */}
+          <div className="flex items-center justify-between md:justify-end gap-2 md:gap-4 overflow-x-auto scrollbar-none py-1">
+            <div className="flex items-center gap-2 md:gap-4 shrink-0">
+              {steps.map((step) => (
+                <button
+                  key={step.id}
+                  type="button"
+                  onClick={() => scrollToSection(step.id)}
+                  className="flex items-center gap-1.5 group cursor-pointer shrink-0 text-left focus:outline-none"
+                >
+                  <span
+                    className={`w-5 h-5 rounded-none font-mono font-bold flex items-center justify-center text-[10px] transition-colors ${
+                      step.isComplete
+                        ? "bg-[var(--color-status-success)] text-white"
+                        : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] group-hover:border-[var(--color-accent)]"
+                    }`}
+                  >
+                    {step.isComplete ? (
+                      <span className="material-symbols-outlined text-xs font-bold">check</span>
+                    ) : (
+                      step.num
+                    )}
+                  </span>
+                  <span
+                    className={`font-mono uppercase tracking-wider transition-colors ${
+                      isScrolled ? "text-[10px]" : "text-xs"
+                    } ${
+                      step.isComplete
+                        ? "font-semibold text-[var(--color-text-primary)]"
+                        : "font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]"
+                    }`}
+                  >
+                    {step.label}
+                  </span>
+                </button>
+              ))}
             </div>
-            <p className="text-xs text-[var(--color-text-secondary)]">
-              MOQ Threshold: <strong className="text-[var(--color-text-primary)] font-mono">{moqPerFabric} pcs</strong>
-            </p>
-            <div className="inline-block text-[11px] font-mono px-2.5 py-1 bg-[var(--color-surface)] text-[var(--color-accent)] border border-[var(--color-accent)]/30 rounded-none">
-              Configured: {totalUnits} / {moqPerFabric} pcs
-            </div>
+
+            {/* Single Source of Truth Stepper MOQ Badge */}
+            <span
+              className={`font-mono text-xs px-2.5 py-1 rounded-none border transition-colors shrink-0 ${
+                moqValidation.valid && totalUnits > 0
+                  ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border-[var(--color-status-success)]/30"
+                  : "bg-amber-500/10 text-amber-500 border-amber-500/30"
+              }`}
+            >
+              {totalUnits} / {moqPerFabric} pcs
+            </span>
           </div>
         </div>
       </div>
@@ -222,7 +333,10 @@ export function ConfiguratorClient({
         {/* Main Configurator Form Column */}
         <div className="lg:col-span-8 flex flex-col gap-8">
           {/* Step 1: Material Selection */}
-          <section id="step-fabric" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          <section
+            id="step-fabric"
+            className="scroll-mt-28 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors"
+          >
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
@@ -239,18 +353,48 @@ export function ConfiguratorClient({
               <FabricPicker
                 fabrics={fabrics}
                 selectedFabricId={selectedFabricId}
-                onSelect={setSelectedFabricId}
+                onSelect={handleFabricSelect}
               />
             )}
           </section>
 
-          {/* Step 2: Garment Fit Selection */}
-          {fits.length > 0 && (
-            <section id="step-fit" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          {/* Step 2: Colourway Selection */}
+          <section
+            id="step-color"
+            className="scroll-mt-28 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors"
+          >
+            <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
+              <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
+                <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
+                  2
+                </span>
+                Colourway Selection
+              </h2>
+              {selectedColorIds.length > 0 && (
+                <span className="text-xs font-mono text-[var(--color-accent)] font-semibold bg-[var(--color-accent)]/10 px-2.5 py-1 rounded-none border border-[var(--color-accent)]/20">
+                  {selectedColorIds.length} Colourways Selected
+                </span>
+              )}
+            </div>
+
+            <ColorPicker
+              colors={availableColors}
+              selectedColorIds={selectedColorIds}
+              onToggleColor={handleToggleColor}
+              onSelectAll={handleSelectAllColors}
+            />
+          </section>
+
+          {/* Step 3: Garment Fit Selection */}
+          {hasFitStep && (
+            <section
+              id="step-fit"
+              className="scroll-mt-28 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors"
+            >
               <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
                 <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                   <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
-                    2
+                    3
                   </span>
                   Garment Fit Selection
                 </h2>
@@ -268,37 +412,52 @@ export function ConfiguratorClient({
             </section>
           )}
 
-          {/* Step 3: Regional Sizing & Unit Matrix */}
-          <section id="step-sizing" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          {/* Step 4: Bulk Order Size Matrix */}
+          <section
+            id="step-sizing"
+            className="scroll-mt-28 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors"
+          >
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
-                  {fits.length > 0 ? "3" : "2"}
+                  {hasFitStep ? "4" : "3"}
                 </span>
-                Regional Sizing &amp; Unit Quantity Matrix
+                Bulk Order Size Matrix
               </h2>
-              <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-none ${
-                meetsMoq ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border border-[var(--color-status-success)]/30" : "bg-amber-500/10 text-amber-500 border border-amber-500/30"
-              }`}>
+              <span
+                className={`text-xs font-mono font-bold px-2.5 py-1 rounded-none ${
+                  moqValidation.valid && totalUnits > 0
+                    ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border border-[var(--color-status-success)]/30"
+                    : "bg-amber-500/10 text-amber-500 border border-amber-500/30"
+                }`}
+              >
                 {totalUnits} Units Configured
               </span>
             </div>
-            <SizeQtyTable
+
+            <ColorSizeMatrix
+              selectedColors={activeSelectedColors}
               sizeSystems={sizeSystems}
               activeRegion={activeRegion}
               onRegionChange={setActiveRegion}
-              quantities={sizeQuantities}
-              onChange={setSizeQuantities}
+              matrixQuantities={matrixQuantities}
+              onQuantityChange={handleQuantityChange}
+              onClearAll={handleClearAllQuantities}
               moqPerFabric={moqPerFabric}
+              moqPerColor={moqPerColor}
+              fabricName={selectedFabric?.name || "Selected Fabric"}
             />
           </section>
 
-          {/* Step 4: Vector Logo & Custom Placement */}
-          <section id="step-branding" className="scroll-mt-24 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors">
+          {/* Step 5: Vector Logo & Custom Placement */}
+          <section
+            id="step-branding"
+            className="scroll-mt-28 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 transition-colors"
+          >
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3 mb-6">
               <h2 className="text-base font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2.5">
                 <span className="w-6 h-6 bg-[var(--color-accent)] text-white text-xs font-mono font-bold flex items-center justify-center rounded-none">
-                  {fits.length > 0 ? "4" : "3"}
+                  {hasFitStep ? "5" : "4"}
                 </span>
                 Vector Logo Branding &amp; Placement
               </h2>
@@ -314,37 +473,64 @@ export function ConfiguratorClient({
             />
           </section>
         </div>
+
         {/* Sticky Price Sidebar & Live Spec Summary */}
         <div className="lg:col-span-4 space-y-6">
           {/* Live Configured Spec Summary Box */}
           <div className="bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none p-5 space-y-4 transition-colors">
             <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-gold)]">Live Spec Summary</h3>
-              <span className="text-[10px] font-mono text-[var(--color-status-success)]">Atelier Ready</span>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-gold)]">
+                Live Spec Summary
+              </h3>
+              <span className="text-[10px] font-mono text-[var(--color-status-success)]">
+                Atelier Ready
+              </span>
             </div>
 
             <div className="space-y-2.5 text-xs text-[var(--color-text-secondary)]">
               <div className="flex justify-between items-center">
                 <span>Selected Fabric:</span>
-                <span className="font-semibold text-[var(--color-text-primary)]">{selectedFabric?.name || "Standard"}</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  {selectedFabric?.name || "Standard"}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Selected Colours:</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  {activeSelectedColors.length > 0
+                    ? `${activeSelectedColors.length} colourways`
+                    : "Standard Colorway"}
+                </span>
               </div>
               {selectedFit && (
                 <div className="flex justify-between items-center">
                   <span>Garment Fit:</span>
-                  <span className="font-semibold text-[var(--color-text-primary)]">{selectedFit.name}</span>
+                  <span className="font-semibold text-[var(--color-text-primary)]">
+                    {selectedFit.name}
+                  </span>
                 </div>
               )}
               <div className="flex justify-between items-center">
                 <span>Region Standard:</span>
-                <span className="font-mono text-[var(--color-accent)] font-bold">{activeRegion} Standard</span>
+                <span className="font-mono text-[var(--color-accent)] font-bold">
+                  {activeRegion} Standard
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Branding Placement:</span>
-                <span className="font-semibold text-[var(--color-text-primary)]">{placement === "LEFT_CHEST" ? "Left Chest" : "Right Sleeve"}</span>
+                <span className="font-semibold text-[var(--color-text-primary)]">
+                  {placement === "LEFT_CHEST" ? "Left Chest" : "Right Sleeve"}
+                </span>
               </div>
               <div className="flex justify-between items-center border-t border-[var(--color-border)] pt-2 font-bold text-[var(--color-text-primary)]">
                 <span>Configured Volume:</span>
-                <span className={`font-mono ${meetsMoq ? "text-[var(--color-status-success)]" : "text-amber-500"}`}>
+                <span
+                  className={`font-mono ${
+                    moqValidation.valid && totalUnits > 0
+                      ? "text-[var(--color-status-success)]"
+                      : "text-amber-500"
+                  }`}
+                >
                   {totalUnits} / {moqPerFabric} pcs
                 </span>
               </div>
@@ -353,7 +539,7 @@ export function ConfiguratorClient({
 
           <PriceSidebar
             fabric={selectedFabric}
-            sizeQuantities={toSizeQuantityArray(sizeQuantities)}
+            sizeQuantities={toSizeQuantityArray(combinedSizeQuantities)}
             customerTargetPrice={""}
             onSubmit={handleAddToCart}
             submitting={addingToCart}

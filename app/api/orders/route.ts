@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { computeOrderPricing } from "@/lib/pricing";
 import { validateCreateOrderInput } from "@/lib/orderValidation";
+import { validateOrderMoq, MoqValidationItem } from "@/lib/moqValidation";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -17,13 +18,12 @@ export async function POST(request: Request) {
     items,
   } = validation.data;
 
-  // Calculate pricing and validate MOQs for each item
-  let totalOrderSetupFeeCents = 0;
   const dbLines: any[] = [];
   const logoAssets: any[] = [];
+  const moqItems: MoqValidationItem[] = [];
 
   for (const item of items) {
-    const { fabricId, productId, fitId, sizeQuantities, logoUrl, logoPlacement } = item;
+    const { fabricId, colorId, productId, fitId, sizeQuantities, logoUrl, logoPlacement } = item;
     
     const fabric = await prisma.fabric.findUnique({
       where: { id: fabricId },
@@ -39,7 +39,16 @@ export async function POST(request: Request) {
     }
 
     const requiredMoqPerFabric = product?.moqPerFabric ?? product?.moq ?? 50;
-    const productName = product?.name || "this item";
+    const requiredMoqPerColor = fabric.moqPerColor ?? 20;
+    const fabricName = fabric.name || product?.name || "this item";
+
+    let selectedColorName: string | undefined = undefined;
+    if (colorId) {
+      const colorRecord = await prisma.fabricColor.findUnique({ where: { id: colorId } });
+      if (colorRecord) {
+        selectedColorName = colorRecord.name;
+      }
+    }
 
     const pricing = computeOrderPricing({ fabric, sizeQuantities });
     if (pricing.totalUnits === 0) {
@@ -49,14 +58,15 @@ export async function POST(request: Request) {
       );
     }
 
-    if (pricing.totalUnits < requiredMoqPerFabric) {
-      return NextResponse.json(
-        {
-          error: `Minimum order quantity for ${productName} in this fabric selection is ${requiredMoqPerFabric} units.`,
-        },
-        { status: 400 },
-      );
-    }
+    moqItems.push({
+      fabricId: fabric.id,
+      fabricName,
+      colorId: colorId || null,
+      colorName: selectedColorName || null,
+      quantity: pricing.totalUnits,
+      moqPerFabric: requiredMoqPerFabric,
+      moqPerColor: requiredMoqPerColor,
+    });
 
     let selectedFitName: string | undefined = undefined;
     if (fitId) {
@@ -66,12 +76,11 @@ export async function POST(request: Request) {
       }
     }
 
-    // Accumulate total setup fee across all configurations in the cart
-    totalOrderSetupFeeCents += pricing.setupFeeCents;
-
     for (const line of pricing.lineItems) {
       dbLines.push({
         fabricId: fabric.id,
+        colorId: colorId || null,
+        selectedColor: selectedColorName || null,
         productId: product?.id || null,
         fitId: fitId || null,
         selectedFit: selectedFitName || null,
@@ -87,6 +96,12 @@ export async function POST(request: Request) {
         placement: logoPlacement || "LEFT_CHEST",
       });
     }
+  }
+
+  // Validate two-threshold MOQ requirements across order payload
+  const moqResult = validateOrderMoq(moqItems);
+  if (!moqResult.valid) {
+    return NextResponse.json({ error: moqResult.error }, { status: 400 });
   }
 
   const company = await prisma.company.upsert({

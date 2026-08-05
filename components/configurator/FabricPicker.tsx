@@ -1,5 +1,11 @@
 import { formatCents } from "@/lib/formatCurrency";
 
+export interface FabricColorOption {
+  id: string;
+  name: string;
+  hexCode: string;
+}
+
 export interface FabricOption {
   id: string;
   name: string;
@@ -8,6 +14,8 @@ export interface FabricOption {
   priceMinCents: number;
   priceMaxCents: number;
   setupFeeCents?: number;
+  moqPerColor?: number;
+  colors?: FabricColorOption[];
 }
 
 interface FabricPickerProps {
