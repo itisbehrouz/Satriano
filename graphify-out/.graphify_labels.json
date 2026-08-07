@@ -102,5 +102,6 @@
   "100": "admin/orders/page.tsx",
   "101": "CookieConsentModal.tsx",
   "102": "api/upload/route.ts",
-  "103": "TurnstileWidget.tsx"
+  "103": "TurnstileWidget.tsx",
+  "104": "global-error.tsx"
 }

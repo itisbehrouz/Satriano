@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_admin_applications_page_getapplicationtabs",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "getapplicationtabs()"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -164,8 +164,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_orders_page",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "admin/orders/page.tsx"
     },
     {
@@ -175,8 +175,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_admin_orders_page_gettabs",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "gettabs()"
     },
     {
@@ -186,8 +186,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_admin_orders_page_adminorderscontent",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminorderscontent()"
     },
     {
@@ -197,8 +197,8 @@
       "source_location": "L261",
       "_origin": "ast",
       "id": "app_admin_orders_page_adminorderspage",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminorderspage()"
     },
     {
@@ -678,7 +678,7 @@
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/admin/login/route.ts",
-      "source_location": "L4",
+      "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_login_route_post",
       "community": 4,
@@ -1041,7 +1041,7 @@
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "app_api_applications_route_post",
       "community": 4,
@@ -1052,7 +1052,7 @@
       "label": "GET()",
       "file_type": "code",
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L77",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "app_api_applications_route_get",
       "community": 4,
@@ -1132,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1143,8 +1143,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "post()"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "upload/route.test.ts"
     },
     {
@@ -1495,8 +1495,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "api/upload/route.ts"
     },
     {
@@ -1506,8 +1506,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_mime_types",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "allowed_mime_types"
     },
     {
@@ -1517,8 +1517,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_api_upload_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "post()"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_page",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "configure/page.tsx"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -1770,8 +1770,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "portal/layout.tsx"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "portallayout()"
     },
     {
@@ -2551,8 +2551,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_orderstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "orderstatusbadge.tsx"
     },
     {
@@ -2562,8 +2562,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_orderstatusbadge_status_config",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "status_config"
     },
     {
@@ -2573,8 +2573,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_orderstatusbadge_orderstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "orderstatusbadge()"
     },
     {
@@ -2683,8 +2683,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -2694,8 +2694,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -2705,8 +2705,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -2716,8 +2716,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -2727,8 +2727,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -2881,8 +2881,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_admin_adminlanguagecontext_useadminlanguage",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "useadminlanguage()"
     },
     {
@@ -2892,8 +2892,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminordertable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminordertable.tsx"
     },
     {
@@ -2903,8 +2903,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminorder",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminorder"
     },
     {
@@ -2914,8 +2914,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertableprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminordertableprops"
     },
     {
@@ -2925,8 +2925,8 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "components_admin_adminordertable_all_statuses",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "all_statuses"
     },
     {
@@ -2936,8 +2936,8 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminordertable()"
     },
     {
@@ -2947,8 +2947,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -2958,8 +2958,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "globalcommandpalette"
     },
     {
@@ -2969,8 +2969,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminsidebarprops"
     },
     {
@@ -2980,8 +2980,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -3827,8 +3827,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderdetailmodal",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesale/orderdetailmodal.tsx"
     },
     {
@@ -3838,8 +3838,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderdetailmodal_wholesaleorderlineitem",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesaleorderlineitem"
     },
     {
@@ -3849,8 +3849,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderdetailmodal_wholesaleorderfull",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesaleorderfull"
     },
     {
@@ -3860,8 +3860,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderdetailmodal_orderdetailmodalprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "orderdetailmodalprops"
     },
     {
@@ -3871,8 +3871,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderdetailmodal_orderdetailmodal",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "orderdetailmodal()"
     },
     {
@@ -3882,8 +3882,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderstatustab",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "orderstatustab.tsx"
     },
     {
@@ -3893,8 +3893,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderstatustab_orderstatustabprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "orderstatustabprops"
     },
     {
@@ -3904,8 +3904,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_orderstatustab_orderstatustab",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "orderstatustab()"
     },
     {
@@ -4597,8 +4597,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "configuratorclient()"
     },
     {
@@ -5279,8 +5279,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "cookieconsentmodal.tsx"
     },
     {
@@ -5290,8 +5290,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_tabtype",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "tabtype"
     },
     {
@@ -5301,8 +5301,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_cookiecategorystate",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "cookiecategorystate"
     },
     {
@@ -5312,8 +5312,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_cookieconsentmodal",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "cookieconsentmodal()"
     },
     {
@@ -5323,8 +5323,8 @@
       "source_location": "L274",
       "_origin": "ast",
       "id": "components_layout_cookieconsentmodal_opencookiepreferencesbutton",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "opencookiepreferencesbutton()"
     },
     {
@@ -5444,8 +5444,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_sitefooter",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter.tsx"
     },
     {
@@ -5455,8 +5455,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_layout_sitefooter_navigation_links",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "navigation_links"
     },
     {
@@ -5466,8 +5466,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_layout_sitefooter_legal_compliance_links",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legal_compliance_links"
     },
     {
@@ -5477,8 +5477,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_layout_sitefooter_quality_operations_links",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "quality_operations_links"
     },
     {
@@ -6252,6 +6252,50 @@
       "norm_label": "supportpage.test.tsx"
     },
     {
+      "label": "TurnstileWidget.tsx",
+      "file_type": "code",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_security_turnstilewidget",
+      "community": 103,
+      "community_name": "TurnstileWidget.tsx",
+      "norm_label": "turnstilewidget.tsx"
+    },
+    {
+      "label": "TurnstileWidgetProps",
+      "file_type": "code",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_security_turnstilewidget_turnstilewidgetprops",
+      "community": 103,
+      "community_name": "TurnstileWidget.tsx",
+      "norm_label": "turnstilewidgetprops"
+    },
+    {
+      "label": "Window",
+      "file_type": "code",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_security_turnstilewidget_window",
+      "community": 103,
+      "community_name": "TurnstileWidget.tsx",
+      "norm_label": "window"
+    },
+    {
+      "label": "TurnstileWidget()",
+      "file_type": "code",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "components_security_turnstilewidget_turnstilewidget",
+      "community": 103,
+      "community_name": "TurnstileWidget.tsx",
+      "norm_label": "turnstilewidget()"
+    },
+    {
       "label": "WholesaleCheckoutClient.tsx",
       "file_type": "code",
       "source_file": "components/wholesale/WholesaleCheckoutClient.tsx",
@@ -6346,8 +6390,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6357,8 +6401,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "customersession"
     },
     {
@@ -6368,8 +6412,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "usecustomersession()"
     },
     {
@@ -6522,8 +6566,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customer-session.ts"
     },
     {
@@ -6533,8 +6577,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customersession"
     },
     {
@@ -6544,8 +6588,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "getcustomersession()"
     },
     {
@@ -6687,8 +6731,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -7251,6 +7295,50 @@
       "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "supabase.ts"
+    },
+    {
+      "label": "turnstile.test.ts",
+      "file_type": "code",
+      "source_file": "lib/turnstile.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_turnstile_test",
+      "community": 4,
+      "community_name": "Route Post() Get()",
+      "norm_label": "turnstile.test.ts"
+    },
+    {
+      "label": "turnstile.ts",
+      "file_type": "code",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_turnstile",
+      "community": 4,
+      "community_name": "Route Post() Get()",
+      "norm_label": "turnstile.ts"
+    },
+    {
+      "label": "TurnstileVerifyResult",
+      "file_type": "code",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "lib_turnstile_turnstileverifyresult",
+      "community": 4,
+      "community_name": "Route Post() Get()",
+      "norm_label": "turnstileverifyresult"
+    },
+    {
+      "label": "verifyTurnstileToken()",
+      "file_type": "code",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "lib_turnstile_verifyturnstiletoken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
+      "norm_label": "verifyturnstiletoken()"
     },
     {
       "label": "wholesaleCart.ts",
@@ -8956,6 +9044,171 @@
       "community": 80,
       "community_name": "Vitest.setup",
       "norm_label": "vitest.setup.ts"
+    },
+    {
+      "label": "SECURITY_AUDIT.md",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_security_audit",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "security_audit.md"
+    },
+    {
+      "label": "Web Security Audit & Codebase Hardening Report",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "web security audit & codebase hardening report"
+    },
+    {
+      "label": "Executive Summary",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "docs_security_audit_executive_summary",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "executive summary"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f Security Pros (Implemented Safeguards)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "docs_security_audit_security_pros_implemented_safeguards",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "\ud83d\udee1\ufe0f security pros (implemented safeguards)"
+    },
+    {
+      "label": "1. Authentication & JWT Architecture (`lib/adminAuth.ts` & `middleware.ts`)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "docs_security_audit_1_authentication_jwt_architecture_lib_adminauth_ts_middleware_ts",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "1. authentication & jwt architecture (`lib/adminauth.ts` & `middleware.ts`)"
+    },
+    {
+      "label": "2. HTTP Security Headers (`next.config.ts`)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "docs_security_audit_2_http_security_headers_next_config_ts",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "2. http security headers (`next.config.ts`)"
+    },
+    {
+      "label": "3. Database & Injection Defenses (`prisma/schema.prisma`)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "docs_security_audit_3_database_injection_defenses_prisma_schema_prisma",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "3. database & injection defenses (`prisma/schema.prisma`)"
+    },
+    {
+      "label": "4. File Upload Security (`app/api/upload/route.ts`)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "docs_security_audit_4_file_upload_security_app_api_upload_route_ts",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "4. file upload security (`app/api/upload/route.ts`)"
+    },
+    {
+      "label": "5. Repository Environment Protection (`.gitignore`)",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "docs_security_audit_5_repository_environment_protection_gitignore",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "5. repository environment protection (`.gitignore`)"
+    },
+    {
+      "label": "\u26a0\ufe0f Security Cons & Vulnerability Hardening Areas",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "\u26a0\ufe0f security cons & vulnerability hardening areas"
+    },
+    {
+      "label": "1. Missing Rate Limiting on Sensitive API Endpoints",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "docs_security_audit_1_missing_rate_limiting_on_sensitive_api_endpoints",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "1. missing rate limiting on sensitive api endpoints"
+    },
+    {
+      "label": "2. Stored XSS Risk via SVG Upload Allowed Types",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "docs_security_audit_2_stored_xss_risk_via_svg_upload_allowed_types",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "2. stored xss risk via svg upload allowed types"
+    },
+    {
+      "label": "3. Broad Content Security Policy Directives",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "docs_security_audit_3_broad_content_security_policy_directives",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "3. broad content security policy directives"
+    },
+    {
+      "label": "4. Direct Master Key Exposure in API Headers",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "docs_security_audit_4_direct_master_key_exposure_in_api_headers",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "4. direct master key exposure in api headers"
+    },
+    {
+      "label": "\ud83d\udccb Actionable Hardening Roadmap",
+      "file_type": "document",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "docs_security_audit_actionable_hardening_roadmap",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "norm_label": "\ud83d\udccb actionable hardening roadmap"
     },
     {
       "label": "---",
@@ -11947,7 +12200,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/admin/login/route.ts",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_admin_login_route",
@@ -11991,12 +12244,36 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/login/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_login_route",
+      "target": "lib_turnstile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/login/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_login_route",
+      "target": "lib_turnstile_verifyturnstiletoken",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/admin/login/route.ts",
-      "source_location": "L16",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_admin_login_route_post",
@@ -12008,11 +12285,23 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/admin/login/route.ts",
-      "source_location": "L9",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_admin_login_route_post",
       "target": "lib_adminauth_verifyadminkey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/admin/login/route.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_login_route_post",
+      "target": "lib_turnstile_verifyturnstiletoken"
     },
     {
       "relation": "contains",
@@ -12780,7 +13069,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L77",
+      "source_location": "L90",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_applications_route",
@@ -12791,7 +13080,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_applications_route",
@@ -12859,12 +13148,36 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/applications/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_applications_route",
+      "target": "lib_turnstile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/applications/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_applications_route",
+      "target": "lib_turnstile_verifyturnstiletoken",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L62",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_applications_route_post",
@@ -12876,7 +13189,19 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/api/applications/route.ts",
-      "source_location": "L79",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_applications_route_post",
+      "target": "lib_turnstile_verifyturnstiletoken"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/api/applications/route.ts",
+      "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_applications_route_get",
@@ -23559,6 +23884,39 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_security_turnstilewidget",
+      "target": "components_security_turnstilewidget_turnstilewidget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_security_turnstilewidget",
+      "target": "components_security_turnstilewidget_turnstilewidgetprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/security/TurnstileWidget.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_security_turnstilewidget",
+      "target": "components_security_turnstilewidget_window",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "components/wholesale/WholesaleCheckoutClient.tsx",
       "source_location": "L13",
       "weight": 1.0,
@@ -24954,6 +25312,52 @@
       "_origin": "ast",
       "source": "lib_prisma",
       "target": "lib_prisma_globalforprisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/turnstile.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_turnstile_test",
+      "target": "lib_turnstile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/turnstile.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_turnstile_test",
+      "target": "lib_turnstile_verifyturnstiletoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_turnstile",
+      "target": "lib_turnstile_turnstileverifyresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_turnstile",
+      "target": "lib_turnstile_verifyturnstiletoken",
       "confidence_score": 1.0
     },
     {
@@ -26609,6 +27013,160 @@
       "_origin": "ast",
       "source": "tsconfig_exclude",
       "target": "ref_node_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit",
+      "target": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "target": "docs_security_audit_actionable_hardening_roadmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "target": "docs_security_audit_executive_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "target": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_web_security_audit_codebase_hardening_report",
+      "target": "docs_security_audit_security_pros_implemented_safeguards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_pros_implemented_safeguards",
+      "target": "docs_security_audit_1_authentication_jwt_architecture_lib_adminauth_ts_middleware_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_pros_implemented_safeguards",
+      "target": "docs_security_audit_2_http_security_headers_next_config_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_pros_implemented_safeguards",
+      "target": "docs_security_audit_3_database_injection_defenses_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_pros_implemented_safeguards",
+      "target": "docs_security_audit_4_file_upload_security_app_api_upload_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_pros_implemented_safeguards",
+      "target": "docs_security_audit_5_repository_environment_protection_gitignore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "target": "docs_security_audit_1_missing_rate_limiting_on_sensitive_api_endpoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "target": "docs_security_audit_2_stored_xss_risk_via_svg_upload_allowed_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "target": "docs_security_audit_3_broad_content_security_policy_directives",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SECURITY_AUDIT.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_security_audit_security_cons_vulnerability_hardening_areas",
+      "target": "docs_security_audit_4_direct_master_key_exposure_in_api_headers",
       "confidence_score": 1.0
     },
     {

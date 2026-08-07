@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-07)
 
 ## Corpus Check
-- 245 files · ~1,572,157 words
+- 252 files · ~1,573,760 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 912 nodes · 1503 edges · 104 communities (86 shown, 18 thin omitted)
+- 927 nodes · 1518 edges · 105 communities (87 shown, 18 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6febb167`
+- Built from commit: `7a495e8d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -108,15 +108,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (104 total, 18 thin omitted)
+## Communities (105 total, 18 thin omitted)
 
 ### Community 0 - "Route Post() Get()"
-Cohesion: 0.22
-Nodes (10): GET(), GET(), GET(), GET(), CustomerSession, getCustomerSession(), createCustomerToken(), getCustomerJwtSecret() (+2 more)
+Cohesion: 0.25
+Nodes (9): GET(), GET(), GET(), GET(), GET(), createCustomerToken(), getCustomerJwtSecret(), verifyCustomerRequest() (+1 more)
 
 ### Community 1 - "Page Default Size"
 Cohesion: 0.05
-Nodes (48): POST(), createdCompanyIds, postOrders(), ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClientProps (+40 more)
+Nodes (49): POST(), createdCompanyIds, postOrders(), ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient() (+41 more)
 
 ### Community 2 - "@types @testing Library"
 Cohesion: 0.06
@@ -128,7 +128,7 @@ Nodes (16): metadata, AddWholesaleProductModal(), AddWholesaleProductModalProps,
 
 ### Community 4 - "Route Post() Get()"
 Cohesion: 0.09
-Nodes (34): POST(), DELETE(), PATCH(), GET(), POST(), DELETE(), GET(), PATCH() (+26 more)
+Nodes (33): POST(), DELETE(), PATCH(), GET(), POST(), DELETE(), GET(), PATCH() (+25 more)
 
 ### Community 5 - "Sizeoption Sizesystem Category"
 Cohesion: 0.05
@@ -139,8 +139,8 @@ Cohesion: 0.16
 Nodes (12): AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminDashboardContent(), AdminAuthContext, AdminAuthContextValue (+4 more)
 
 ### Community 7 - "Wholesale Admin Page"
-Cohesion: 0.13
-Nodes (16): metadata, AdminWholesaleClient(), OrderDetailModal(), OrderDetailModalProps, WholesaleOrderFull, WholesaleOrderLineItem, OrderStatusTab(), OrderStatusTabProps (+8 more)
+Cohesion: 0.11
+Nodes (19): metadata, AddColorVariantModal(), AddColorVariantModalProps, AdminWholesaleClient(), InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct (+11 more)
 
 ### Community 8 - "@prisma Three Cmdk"
 Cohesion: 0.04
@@ -151,8 +151,8 @@ Cohesion: 0.12
 Nodes (19): CustomerOrder, CustomerOrderLine, CompanyCard(), CompanyCardProps, QuickActionButtons(), QuickLinksSection(), RecentOrdersSection(), RecentOrdersSectionProps (+11 more)
 
 ### Community 10 - "Page React Account"
-Cohesion: 0.07
-Nodes (27): GET(), AccountPage(), ProformaPage(), ProformaPageProps, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, TransactionalHeader() (+19 more)
+Cohesion: 0.08
+Nodes (25): GET(), AccountPage(), ProformaPage(), DashboardMetrics(), DashboardMetricsProps, mockMetricsData, mockPush, BillingTab() (+17 more)
 
 ### Community 11 - ".next Types Dom"
 Cohesion: 0.07
@@ -164,7 +164,7 @@ Nodes (4): CatalogProductItem, GlobalCommandPalette(), GlobalCommandPaletteProps
 
 ### Community 13 - "Page Sections Terms"
 Cohesion: 0.15
-Nodes (9): SECTIONS, SECTIONS, SECTIONS, SECTIONS, SECTIONS, LEGAL_DOCUMENTS, LegalPageShell(), LegalPageShellProps (+1 more)
+Nodes (7): SECTIONS, SECTIONS, SECTIONS, SECTIONS, SECTIONS, LegalPageShell(), LegalSection
 
 ### Community 14 - "Proforma Route Post()"
 Cohesion: 0.17
@@ -176,7 +176,7 @@ Nodes (15): metadata, ProductImageItem, ProductImageUploader(), ProductImageUplo
 
 ### Community 16 - "Page Ethics Ethicspage()"
 Cohesion: 0.15
-Nodes (11): CATEGORY_IMAGES, PageProps, LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS, QUALITY_OPERATIONS_LINKS, SiteFooter(), ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS (+3 more)
+Nodes (9): CATEGORY_IMAGES, PageProps, LEGAL_DOCUMENTS, LegalPageShellProps, LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS, QUALITY_OPERATIONS_LINKS, SiteFooter() (+1 more)
 
 ### Community 17 - "App Layout Baskervville"
 Cohesion: 0.18
@@ -247,16 +247,16 @@ Cohesion: 0.38
 Nodes (6): createIconSvg(), fs, generate(), iconsDir, path, sharp
 
 ### Community 82 - "admin/orders/page.tsx"
-Cohesion: 0.23
-Nodes (10): ApplicationsContent(), getApplicationTabs(), AdminApplicationsTable(), AdminApplicationsTableProps, ApplicationStatusBadge(), B2bApplicationItem, useAdminLanguage(), AdminSidebar() (+2 more)
+Cohesion: 0.15
+Nodes (15): ApplicationsContent(), getApplicationTabs(), AdminApplicationsTable(), AdminApplicationsTableProps, ApplicationStatusBadge(), B2bApplicationItem, useAdminLanguage(), AdminSidebar() (+7 more)
 
 ### Community 83 - "products/[id]/route.ts"
 Cohesion: 0.18
-Nodes (11): POST(), ConfigureDefaultPage(), ProductConfiguratorPage(), ProductConfiguratorPageProps, PortalLayout(), ConfiguratorClient(), AccountDropdown(), AccountDropdownProps (+3 more)
+Nodes (9): POST(), ConfigureDefaultPage(), ProductConfiguratorPage(), ProductConfiguratorPageProps, PortalLayout(), PortalHeader(), CustomerSession, getCustomerSession() (+1 more)
 
 ### Community 87 - "InventoryTab.tsx"
-Cohesion: 0.22
-Nodes (8): AddColorVariantModal(), AddColorVariantModalProps, InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct, InventoryTab(), InventoryTabProps
+Cohesion: 0.18
+Nodes (4): Forbidden(), metadata, metadata, NotFound()
 
 ### Community 88 - "seed-core-colors.ts"
 Cohesion: 0.33
@@ -271,8 +271,8 @@ Cohesion: 0.40
 Nodes (3): adapter, pool, prisma
 
 ### Community 93 - "[orderId]/page.tsx"
-Cohesion: 0.33
-Nodes (3): PortalView, AtelierLogo(), AtelierLogoProps
+Cohesion: 0.17
+Nodes (10): PortalView, AtelierLogo(), AtelierLogoProps, ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, AccountDropdown(), AccountDropdownProps, PortalHeaderProps (+2 more)
 
 ### Community 94 - "AdminLanguageContext.tsx"
 Cohesion: 0.43
@@ -295,27 +295,27 @@ Cohesion: 0.23
 Nodes (8): AdminOrdersContent(), getTabs(), AdminOrder, AdminOrderTable(), AdminOrderTableProps, ALL_STATUSES, OrderStatusBadge(), STATUS_CONFIG
 
 ### Community 101 - "CookieConsentModal.tsx"
-Cohesion: 0.40
-Nodes (3): CookieCategoryState, OpenCookiePreferencesButton(), TabType
+Cohesion: 0.22
+Nodes (5): ProformaPageProps, CookieCategoryState, OpenCookiePreferencesButton(), TabType, TransactionalHeader()
 
 ## Knowledge Gaps
-- **293 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+288 more)
+- **295 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+290 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useAdminLanguage()` connect `admin/orders/page.tsx` to `Page Metadata Categoryoption`, `admin/orders/page.tsx`, `Sizeoption Sizesystem Category`, `Page Admin Tabs`, `Wholesale Admin Page`, `Page React Account`, `Orders Api Route`, `CategoryInventoryClient.tsx`, `InventoryTab.tsx`, `AdminLanguageContext.tsx`?**
-  _High betweenness centrality (0.172) - this node is a cross-community bridge._
-- **Why does `formatCents()` connect `Page React Account` to `App Page Capabilities`, `Page Default Size`?**
-  _High betweenness centrality (0.169) - this node is a cross-community bridge._
+- **Why does `useAdminLanguage()` connect `admin/orders/page.tsx` to `Page Metadata Categoryoption`, `admin/orders/page.tsx`, `Sizeoption Sizesystem Category`, `Page Admin Tabs`, `Wholesale Admin Page`, `Page React Account`, `Orders Api Route`, `CategoryInventoryClient.tsx`, `AdminLanguageContext.tsx`?**
+  _High betweenness centrality (0.166) - this node is a cross-community bridge._
+- **Why does `formatCents()` connect `Page React Account` to `App Page Capabilities`, `CookieConsentModal.tsx`, `Page Default Size`?**
+  _High betweenness centrality (0.163) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
-  _High betweenness centrality (0.125) - this node is a cross-community bridge._
+  _High betweenness centrality (0.121) - this node is a cross-community bridge._
 - **What connects `AntiGravityViz`, `GlobalCommandPalette`, `SubItem` to the rest of the system?**
-  _293 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _295 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Page Default Size` be split into smaller, more focused modules?**
-  _Cohesion score 0.0532724505327245 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.052943354313217325 - nodes in this community are weakly interconnected._
 - **Should `@types @testing Library` be split into smaller, more focused modules?**
   _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
 - **Should `Page Metadata Categoryoption` be split into smaller, more focused modules?**

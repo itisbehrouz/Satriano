@@ -65,9 +65,9 @@
     "semantic_hash": "4597b67982f43d2c65b9c20484685db3"
   },
   "app/api/admin/login/route.ts": {
-    "mtime": 1785453274.9061167,
-    "ast_hash": "162497d99ac9796dd06fbc80a7a28403",
-    "semantic_hash": "162497d99ac9796dd06fbc80a7a28403"
+    "mtime": 1786135581.22447,
+    "ast_hash": "4813680db18da5f26e3ec4268b269dae",
+    "semantic_hash": ""
   },
   "app/api/admin/logout/route.ts": {
     "mtime": 1785453278.6068964,
@@ -135,9 +135,9 @@
     "semantic_hash": "2c4e2e7fa845a1c596ed715ef6e3df0f"
   },
   "app/api/applications/route.ts": {
-    "mtime": 1785524869.3301384,
-    "ast_hash": "0e7275cffa354f04eeb5aeef01c8f9b7",
-    "semantic_hash": "0e7275cffa354f04eeb5aeef01c8f9b7"
+    "mtime": 1786135570.8239808,
+    "ast_hash": "aa148efaeee149bf5b83c55d8ef28b2e",
+    "semantic_hash": ""
   },
   "app/api/customer/orders/route.ts": {
     "mtime": 1785631525.297732,
@@ -1170,9 +1170,9 @@
     "semantic_hash": ""
   },
   "ROADMAP.md": {
-    "mtime": 1785792188.398338,
-    "ast_hash": "4e15215faf64bf4f85e3961001b63dab",
-    "semantic_hash": "4e15215faf64bf4f85e3961001b63dab"
+    "mtime": 1786129119.3930185,
+    "ast_hash": "486f2e2878bbf867a14486758d7c94c3",
+    "semantic_hash": ""
   },
   "app/manifest.ts": {
     "mtime": 1785869622.4830098,
@@ -1532,6 +1532,26 @@
   "public/images/home_header.jpeg": {
     "mtime": 1786116404.261141,
     "ast_hash": "d85464a6690977c83fe26b0d1fd9716a",
+    "semantic_hash": ""
+  },
+  "components/security/TurnstileWidget.tsx": {
+    "mtime": 1786135560.139398,
+    "ast_hash": "1b24ca343fa782dd2454a13538c2310b",
+    "semantic_hash": ""
+  },
+  "lib/turnstile.test.ts": {
+    "mtime": 1786135533.4765632,
+    "ast_hash": "12996cf94451b43d4974f78aa82c7e7e",
+    "semantic_hash": ""
+  },
+  "lib/turnstile.ts": {
+    "mtime": 1786135522.661503,
+    "ast_hash": "7def43b528621773d6149d51694e2b1f",
+    "semantic_hash": ""
+  },
+  "docs/SECURITY_AUDIT.md": {
+    "mtime": 1786132371.9713113,
+    "ast_hash": "e26a643a54b9a27a4f20566468e085ef",
     "semantic_hash": ""
   }
 }

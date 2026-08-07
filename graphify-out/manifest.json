@@ -1553,5 +1553,40 @@
     "mtime": 1786132371.9713113,
     "ast_hash": "e26a643a54b9a27a4f20566468e085ef",
     "semantic_hash": ""
+  },
+  "app/admin/error.tsx": {
+    "mtime": 1786135875.125293,
+    "ast_hash": "1164b7f3efebdf999976263d8c7b6927",
+    "semantic_hash": ""
+  },
+  "app/error-pages.test.tsx": {
+    "mtime": 1786135886.272173,
+    "ast_hash": "1903e77941c01a90ffad69a85b50d57f",
+    "semantic_hash": ""
+  },
+  "app/error.tsx": {
+    "mtime": 1786135857.3569894,
+    "ast_hash": "d9869acdd42f5855c95d57ebeadeaed9",
+    "semantic_hash": ""
+  },
+  "app/forbidden.tsx": {
+    "mtime": 1786135870.0470736,
+    "ast_hash": "9ef27f3aa9973a4e5464c6dc83858072",
+    "semantic_hash": ""
+  },
+  "app/global-error.tsx": {
+    "mtime": 1786135863.794258,
+    "ast_hash": "8a5aa9d20debf54968460bd274930ba0",
+    "semantic_hash": ""
+  },
+  "app/not-found.tsx": {
+    "mtime": 1786135851.2456992,
+    "ast_hash": "b10b72ddc84a515d1ee5457b36d0f3fe",
+    "semantic_hash": ""
+  },
+  "app/portal/error.tsx": {
+    "mtime": 1786135881.1525621,
+    "ast_hash": "66de15e45465273389aa75b3bf0d04ea",
+    "semantic_hash": ""
   }
 }

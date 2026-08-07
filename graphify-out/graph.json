@@ -81,6 +81,28 @@
       "norm_label": "antigravityarchitecturepage()"
     },
     {
+      "label": "admin/error.tsx",
+      "file_type": "code",
+      "source_file": "app/admin/error.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_admin_error",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "admin/error.tsx"
+    },
+    {
+      "label": "AdminErrorBoundary()",
+      "file_type": "code",
+      "source_file": "app/admin/error.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "app_admin_error_adminerrorboundary",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "adminerrorboundary()"
+    },
+    {
       "label": "admin/layout.tsx",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
@@ -1374,7 +1396,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1385,7 +1407,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1731,6 +1753,94 @@
       "norm_label": "configuratorsuccesspage()"
     },
     {
+      "label": "error-pages.test.tsx",
+      "file_type": "code",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_error_pages_test",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "error-pages.test.tsx"
+    },
+    {
+      "label": "app/error.tsx",
+      "file_type": "code",
+      "source_file": "app/error.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_error",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "app/error.tsx"
+    },
+    {
+      "label": "ErrorBoundary()",
+      "file_type": "code",
+      "source_file": "app/error.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "app_error_errorboundary",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "errorboundary()"
+    },
+    {
+      "label": "forbidden.tsx",
+      "file_type": "code",
+      "source_file": "app/forbidden.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_forbidden",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "forbidden.tsx"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "app/forbidden.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_forbidden_metadata",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "metadata"
+    },
+    {
+      "label": "Forbidden()",
+      "file_type": "code",
+      "source_file": "app/forbidden.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "app_forbidden_forbidden",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "forbidden()"
+    },
+    {
+      "label": "global-error.tsx",
+      "file_type": "code",
+      "source_file": "app/global-error.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_global_error",
+      "community": 104,
+      "community_name": "global-error.tsx",
+      "norm_label": "global-error.tsx"
+    },
+    {
+      "label": "GlobalError()",
+      "file_type": "code",
+      "source_file": "app/global-error.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_global_error_globalerror",
+      "community": 104,
+      "community_name": "global-error.tsx",
+      "norm_label": "globalerror()"
+    },
+    {
       "label": "page.test.tsx",
       "file_type": "code",
       "source_file": "app/konfigurator/[productId]/page.test.tsx",
@@ -2072,6 +2182,39 @@
       "norm_label": "manifest()"
     },
     {
+      "label": "not-found.tsx",
+      "file_type": "code",
+      "source_file": "app/not-found.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_not_found",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "not-found.tsx"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "app/not-found.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_not_found_metadata",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "metadata"
+    },
+    {
+      "label": "NotFound()",
+      "file_type": "code",
+      "source_file": "app/not-found.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "app_not_found_notfound",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "notfound()"
+    },
+    {
       "label": "app/page.tsx",
       "file_type": "code",
       "source_file": "app/page.tsx",
@@ -2158,6 +2301,28 @@
       "community": 16,
       "community_name": "Page Ethics Ethicspage()",
       "norm_label": "emailverifiedpage()"
+    },
+    {
+      "label": "portal/error.tsx",
+      "file_type": "code",
+      "source_file": "app/portal/error.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_portal_error",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "portal/error.tsx"
+    },
+    {
+      "label": "PortalErrorBoundary()",
+      "file_type": "code",
+      "source_file": "app/portal/error.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "app_portal_error_portalerrorboundary",
+      "community": 87,
+      "community_name": "InventoryTab.tsx",
+      "norm_label": "portalerrorboundary()"
     },
     {
       "label": "portal/layout.tsx",
@@ -2353,8 +2518,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_proforma_orderid_page",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "[orderid]/page.tsx"
     },
     {
@@ -2364,8 +2529,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_proforma_orderid_page_proformapageprops",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "proformapageprops"
     },
     {
@@ -3684,8 +3849,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodal.tsx"
     },
     {
@@ -3695,8 +3860,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodalprops",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodalprops"
     },
     {
@@ -3706,8 +3871,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodal",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodal()"
     },
     {
@@ -3739,8 +3904,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodal.tsx"
     },
     {
@@ -3750,8 +3915,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodalprops",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodalprops"
     },
     {
@@ -3761,8 +3926,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodal",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodal()"
     },
     {
@@ -3772,8 +3937,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytab.tsx"
     },
     {
@@ -3783,8 +3948,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_colorvariant",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "colorvariant"
     },
     {
@@ -3794,8 +3959,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventoryproduct",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryproduct"
     },
     {
@@ -3805,8 +3970,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytabprops",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytabprops"
     },
     {
@@ -3816,8 +3981,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytab",
-      "community": 87,
-      "community_name": "InventoryTab.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytab()"
     },
     {
@@ -3959,8 +4124,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingmodal.tsx"
     },
     {
@@ -3970,8 +4135,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingmodalprops"
     },
     {
@@ -3981,8 +4146,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingmodal()"
     },
     {
@@ -3992,8 +4157,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingtab.tsx"
     },
     {
@@ -4003,8 +4168,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_pricingproduct",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "pricingproduct"
     },
     {
@@ -4014,8 +4179,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtabprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingtabprops"
     },
     {
@@ -4025,8 +4190,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "wholesalepricingtab()"
     },
     {
@@ -4597,8 +4762,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 1,
+      "community_name": "Page Default Size",
       "norm_label": "configuratorclient()"
     },
     {
@@ -5334,8 +5499,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_legalpageshell",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legalpageshell.tsx"
     },
     {
@@ -5356,8 +5521,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_layout_legalpageshell_legalpageshellprops",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legalpageshellprops"
     },
     {
@@ -5367,8 +5532,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_layout_legalpageshell_legal_documents",
-      "community": 13,
-      "community_name": "Page Sections Terms",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "legal_documents"
     },
     {
@@ -5499,8 +5664,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_siteheader",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "siteheader.tsx"
     },
     {
@@ -5510,8 +5675,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_siteheader_anonymous_nav_items",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "anonymous_nav_items"
     },
     {
@@ -5521,8 +5686,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_layout_siteheader_authenticated_nav_items",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "authenticated_nav_items"
     },
     {
@@ -5543,8 +5708,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_transactionalheader",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "transactionalheader.tsx"
     },
     {
@@ -5554,8 +5719,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_layout_transactionalheader_transactionalheader",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 101,
+      "community_name": "CookieConsentModal.tsx",
       "norm_label": "transactionalheader()"
     },
     {
@@ -5598,8 +5763,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -5609,8 +5774,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -5620,8 +5785,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "accountdropdown()"
     },
     {
@@ -5675,8 +5840,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_portalheader",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portal/portalheader.tsx"
     },
     {
@@ -5686,8 +5851,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_portal_portalheader_portalheaderprops",
-      "community": 83,
-      "community_name": "products/[id]/route.ts",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portalheaderprops"
     },
     {
@@ -6390,8 +6555,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6401,8 +6566,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "customersession"
     },
     {
@@ -6412,8 +6577,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "usecustomersession()"
     },
     {
@@ -6566,8 +6731,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "customer-session.ts"
     },
     {
@@ -6577,8 +6742,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "customersession"
     },
     {
@@ -6588,8 +6753,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 83,
+      "community_name": "products/[id]/route.ts",
       "norm_label": "getcustomersession()"
     },
     {
@@ -10360,6 +10525,29 @@
       "_origin": "ast",
       "source": "app_admin_architecture_viz_page",
       "target": "app_admin_architecture_viz_page_antigravityviz",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/error.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_error",
+      "target": "app_admin_error_adminerrorboundary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_admin_error",
       "confidence_score": 1.0
     },
     {
@@ -15109,6 +15297,122 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_forbidden",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_forbidden_forbidden",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_not_found",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_not_found_notfound",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error-pages.test.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error_pages_test",
+      "target": "app_portal_error",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/error.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_error",
+      "target": "app_error_errorboundary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/forbidden.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_forbidden",
+      "target": "app_forbidden_forbidden",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/forbidden.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_forbidden",
+      "target": "app_forbidden_metadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/global-error.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_global_error",
+      "target": "app_global_error_globalerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/konfigurator/[productId]/page.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -15760,6 +16064,28 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "app/not-found.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_not_found",
+      "target": "app_not_found_metadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/not-found.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_not_found",
+      "target": "app_not_found_notfound",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "app/page.tsx",
       "source_location": "L12",
       "weight": 1.0,
@@ -16098,6 +16424,17 @@
       "_origin": "ast",
       "source": "app_portal_email_verified_page",
       "target": "components_layout_siteheader_siteheader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/portal/error.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_portal_error",
+      "target": "app_portal_error_portalerrorboundary",
       "confidence_score": 1.0
     },
     {
@@ -27540,5 +27877,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6febb167ae8f3ff2287919551025405fd483c1de"
+  "built_at_commit": "7a495e8d86228e7937fb8cdf6b771fc678511be7"
 }
