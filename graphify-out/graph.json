@@ -95,7 +95,7 @@
       "label": "GlobalCommandPalette",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "app_admin_layout_globalcommandpalette",
       "community": 6,
@@ -106,7 +106,7 @@
       "label": "SubItem",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "app_admin_layout_subitem",
       "community": 6,
@@ -117,7 +117,7 @@
       "label": "NavItem",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "app_admin_layout_navitem",
       "community": 6,
@@ -125,21 +125,21 @@
       "norm_label": "navitem"
     },
     {
-      "label": "NAV_ITEMS",
+      "label": "getNavItems()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "_origin": "ast",
-      "id": "app_admin_layout_nav_items",
+      "id": "app_admin_layout_getnavitems",
       "community": 6,
       "community_name": "Page Admin Tabs",
-      "norm_label": "nav_items"
+      "norm_label": "getnavitems()"
     },
     {
       "label": "AdminChrome()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L94",
+      "source_location": "L97",
       "_origin": "ast",
       "id": "app_admin_layout_adminchrome",
       "community": 6,
@@ -150,7 +150,7 @@
       "label": "AdminLayout()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L324",
+      "source_location": "L341",
       "_origin": "ast",
       "id": "app_admin_layout_adminlayout",
       "community": 6,
@@ -216,7 +216,7 @@
       "label": "AdminDashboardContent()",
       "file_type": "code",
       "source_file": "app/admin/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "app_admin_page_admindashboardcontent",
       "community": 6,
@@ -227,7 +227,7 @@
       "label": "AdminPage()",
       "file_type": "code",
       "source_file": "app/admin/page.tsx",
-      "source_location": "L206",
+      "source_location": "L208",
       "_origin": "ast",
       "id": "app_admin_page_adminpage",
       "community": 6,
@@ -802,7 +802,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "[imageid]/route.ts"
     },
@@ -813,7 +813,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
@@ -824,7 +824,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "delete()"
     },
@@ -835,7 +835,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "images/route.ts"
     },
@@ -846,7 +846,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
@@ -857,7 +857,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -868,8 +868,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "products/[id]/route.ts"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_checkadminauth",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
     {
@@ -890,8 +890,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_get",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -901,8 +901,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_patch",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "patch()"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "products/route.ts"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_checkadminauth",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_get",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -956,8 +956,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_post",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1132,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1143,8 +1143,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1209,7 +1209,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "create-session/route.ts"
     },
@@ -1220,7 +1220,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route_post",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -1231,7 +1231,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_payment_test",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "payment.test.ts"
     },
@@ -1242,7 +1242,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_payment_test_createdcompanyids",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "createdcompanyids"
     },
@@ -1253,7 +1253,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "webhook/route.ts"
     },
@@ -1264,7 +1264,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route_post",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -1374,7 +1374,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1385,7 +1385,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1396,8 +1396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route_test",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "proforma/route.test.ts"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_createdcompanyids",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_postproforma",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "postproforma()"
     },
     {
@@ -1429,8 +1429,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "proforma/route.ts"
     },
     {
@@ -1440,8 +1440,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_api_proforma_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "post()"
     },
     {
@@ -1616,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guest-confirmation/page.tsx"
     },
     {
@@ -1627,8 +1627,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationcontent",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestconfirmationcontent()"
     },
     {
@@ -1638,8 +1638,8 @@
       "source_location": "L104",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationpage",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestconfirmationpage()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_success_page",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "success/page.tsx"
     },
     {
@@ -1682,8 +1682,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesscontent",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorsuccesscontent()"
     },
     {
@@ -1693,8 +1693,8 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesspage",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorsuccesspage()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "portallayout()"
     },
     {
@@ -2419,8 +2419,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 18,
+      "community_name": "App Wholesale Page",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2430,8 +2430,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 18,
+      "community_name": "App Wholesale Page",
       "norm_label": "wholesalepage()"
     },
     {
@@ -2765,6 +2765,72 @@
       "norm_label": "adminkpidashboard()"
     },
     {
+      "label": "AdminLanguageContext.test.tsx",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext_test",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguagecontext.test.tsx"
+    },
+    {
+      "label": "AdminLanguageContext.tsx",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguagecontext.tsx"
+    },
+    {
+      "label": "AdminLanguageContextType",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext_adminlanguagecontexttype",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguagecontexttype"
+    },
+    {
+      "label": "AdminLanguageContext",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext_adminlanguagecontext",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguagecontext"
+    },
+    {
+      "label": "AdminLanguageProvider()",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext_adminlanguageprovider",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguageprovider()"
+    },
+    {
+      "label": "useAdminLanguage()",
+      "file_type": "code",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "components_admin_adminlanguagecontext_useadminlanguage",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "useadminlanguage()"
+    },
+    {
       "label": "AdminOrderTable.tsx",
       "file_type": "code",
       "source_file": "components/admin/AdminOrderTable.tsx",
@@ -2826,41 +2892,41 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminsidebar.tsx"
     },
     {
       "label": "GlobalCommandPalette",
       "file_type": "code",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "globalcommandpalette"
     },
     {
       "label": "AdminSidebarProps",
       "file_type": "code",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminsidebarprops"
     },
     {
       "label": "AdminSidebar()",
       "file_type": "code",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminsidebar()"
     },
     {
@@ -2988,7 +3054,7 @@
       "label": "DashboardMetricsProps",
       "file_type": "code",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L15",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetricsprops",
       "community": 6,
@@ -2999,7 +3065,7 @@
       "label": "DashboardMetrics()",
       "file_type": "code",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L20",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetrics",
       "community": 6,
@@ -4487,8 +4553,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "configuratorportal.test.tsx"
     },
     {
@@ -4498,8 +4564,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test_mockpush",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "mockpush"
     },
     {
@@ -4872,8 +4938,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodal.tsx"
     },
     {
@@ -4883,8 +4949,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodalprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodalprops"
     },
     {
@@ -4894,8 +4960,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodal",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "guestloginmodal()"
     },
     {
@@ -5367,8 +5433,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "sitefooter()"
     },
     {
@@ -5477,8 +5543,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -5488,8 +5554,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -5499,8 +5565,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "accountdropdown()"
     },
     {
@@ -6225,8 +6291,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6236,8 +6302,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customersession"
     },
     {
@@ -6247,8 +6313,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "usecustomersession()"
     },
     {
@@ -6401,8 +6467,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customer-session.ts"
     },
     {
@@ -6412,8 +6478,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customersession"
     },
     {
@@ -6423,8 +6489,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "getcustomersession()"
     },
     {
@@ -6566,8 +6632,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -6588,7 +6654,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_email",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "email.ts"
     },
@@ -6599,7 +6665,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_email_sendproformaemailparams",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "sendproformaemailparams"
     },
@@ -6610,8 +6676,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_email_sendproformaemail",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "sendproformaemail()"
     },
     {
@@ -6621,7 +6687,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemailparams",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "sendmagiclinkemailparams"
     },
@@ -6643,7 +6709,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "lib_email_sendverificationemailparams",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "sendverificationemailparams"
     },
@@ -6701,6 +6767,39 @@
       "community": 10,
       "community_name": "Page React Account",
       "norm_label": "formatcents()"
+    },
+    {
+      "label": "admin-dictionary.ts",
+      "file_type": "code",
+      "source_file": "lib/i18n/admin-dictionary.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_i18n_admin_dictionary",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "admin-dictionary.ts"
+    },
+    {
+      "label": "AdminLanguage",
+      "file_type": "code",
+      "source_file": "lib/i18n/admin-dictionary.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_i18n_admin_dictionary_adminlanguage",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "adminlanguage"
+    },
+    {
+      "label": "AdminDictionary",
+      "file_type": "code",
+      "source_file": "lib/i18n/admin-dictionary.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_i18n_admin_dictionary_admindictionary",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "admindictionary"
     },
     {
       "label": "m2oCart.ts",
@@ -6929,8 +7028,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator_test",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "pdfgenerator.test.ts"
     },
     {
@@ -6940,8 +7039,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "pdfgenerator.ts"
     },
     {
@@ -6951,8 +7050,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_pdfgenerator_proformapdfdata",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "proformapdfdata"
     },
     {
@@ -6962,8 +7061,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "lib_pdfgenerator_generateproformapdf",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "generateproformapdf()"
     },
     {
@@ -7050,7 +7149,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_prisma",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "prisma.ts"
     },
@@ -7061,7 +7160,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_prisma_globalforprisma",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "globalforprisma"
     },
@@ -7072,7 +7171,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_prisma_createprismaclient",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "createprismaclient()"
     },
@@ -7083,7 +7182,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_stripe",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "stripe.ts"
     },
@@ -9911,7 +10010,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L94",
+      "source_location": "L97",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9922,7 +10021,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L324",
+      "source_location": "L341",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9933,7 +10032,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L9",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "app_admin_layout_getnavitems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9944,18 +10054,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L28",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_admin_layout",
-      "target": "app_admin_layout_nav_items",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/admin/layout.tsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9966,7 +10065,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -10010,16 +10109,76 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "components_admin_adminlanguagecontext_adminlanguageprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout_adminchrome",
+      "target": "app_admin_layout_getnavitems",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L96",
+      "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout_adminchrome",
       "target": "components_admin_adminauthcontext_useadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout_adminchrome",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
     },
     {
       "relation": "contains",
@@ -10130,7 +10289,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_page",
@@ -10141,7 +10300,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/page.tsx",
-      "source_location": "L206",
+      "source_location": "L208",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_page",
@@ -10197,16 +10356,52 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_page",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_page",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/admin/page.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_page_admindashboardcontent",
       "target": "components_admin_adminauthcontext_useadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/admin/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_page_admindashboardcontent",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
     },
     {
       "relation": "contains",
@@ -16758,6 +16953,218 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext_test",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext_test",
+      "target": "components_admin_adminlanguagecontext_adminlanguageprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext_test",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "components_admin_adminlanguagecontext_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "components_admin_adminlanguagecontext_adminlanguagecontexttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "components_admin_adminlanguagecontext_adminlanguageprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "lib_i18n_admin_dictionary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "lib_i18n_admin_dictionary_admindictionary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext",
+      "target": "lib_i18n_admin_dictionary_adminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminSidebar.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminsidebar",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext_adminlanguagecontexttype",
+      "target": "lib_i18n_admin_dictionary_admindictionary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminLanguageContext.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminlanguagecontext_adminlanguagecontexttype",
+      "target": "lib_i18n_admin_dictionary_adminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/AdminSidebar.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminsidebar",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/admin/AdminSidebar.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_adminsidebar_adminsidebar",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics_dashboardmetrics",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminOrderTable.tsx",
@@ -16805,7 +17212,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
@@ -16816,7 +17223,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
@@ -16827,7 +17234,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
@@ -16963,7 +17370,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L20",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_dashboardmetrics",
@@ -16974,7 +17381,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L15",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_dashboardmetrics",
@@ -16986,7 +17393,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_dashboardmetrics",
@@ -16998,7 +17405,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_dashboardmetrics",
@@ -17006,16 +17413,52 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics",
+      "target": "lib_formatcurrency",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics",
+      "target": "lib_formatcurrency_formatcents",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/DashboardMetrics.tsx",
-      "source_location": "L16",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_dashboardmetrics_dashboardmetricsprops",
       "target": "lib_adminmetrics_dashboardmetricsdata",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/admin/DashboardMetrics.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_dashboardmetrics_dashboardmetrics",
+      "target": "lib_formatcurrency_formatcents"
     },
     {
       "relation": "contains",
@@ -22822,6 +23265,28 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/i18n/admin-dictionary.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_i18n_admin_dictionary",
+      "target": "lib_i18n_admin_dictionary_admindictionary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/i18n/admin-dictionary.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_i18n_admin_dictionary",
+      "target": "lib_i18n_admin_dictionary_adminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
       "source_location": "L44",
       "weight": 1.0,
@@ -25313,5 +25778,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "78b2eb610e2b4bfe2026ac7b96ee7f2116bf4394"
+  "built_at_commit": "32c2baa6ed198abb676ce03defe865c1574fa5b6"
 }

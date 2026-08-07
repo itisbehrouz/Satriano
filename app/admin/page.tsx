@@ -4,9 +4,11 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { AdminKpiDashboard } from "@/components/admin/AdminKpiDashboard";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 function AdminDashboardContent() {
   const { isAuthenticated, setAuthenticated } = useAdminAuth();
+  const { t } = useAdminLanguage();
   const [accessKey, setAccessKey] = useState("");
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -53,10 +55,10 @@ function AdminDashboardContent() {
                 <span className="material-symbols-outlined text-2xl">admin_panel_settings</span>
               </div>
               <h1 className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">
-                Satriano Executive Console
+                {t.executiveConsoleTitle}
               </h1>
               <p className="text-xs text-[var(--color-text-secondary)]">
-                Restricted access for Satriano Atelier production team &amp; executive administrators.
+                {t.executiveConsoleSub}
               </p>
             </div>
 
@@ -66,7 +68,7 @@ function AdminDashboardContent() {
                   htmlFor="accessKey"
                   className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)] mb-1.5"
                 >
-                  Corporate Access Key *
+                  {t.corporateAccessKey} *
                 </label>
                 <div className="relative">
                   <span className="material-symbols-outlined absolute left-3 top-2.5 text-[var(--color-text-secondary)] text-lg">
@@ -78,7 +80,7 @@ function AdminDashboardContent() {
                     required
                     value={accessKey}
                     onChange={(e) => setAccessKey(e.target.value)}
-                    placeholder="Enter security key..."
+                    placeholder={t.enterSecurityKey}
                     className="w-full pl-10 pr-3 py-2.5 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-sm text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
                   />
                 </div>
@@ -94,12 +96,12 @@ function AdminDashboardContent() {
                 type="submit"
                 className="w-full py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold uppercase tracking-wider rounded-none transition-colors shadow-sm cursor-pointer"
               >
-                Authenticate &amp; Unlock Console
+                {t.authenticateBtn}
               </button>
             </form>
 
             <div className="mt-6 pt-4 border-t border-[var(--color-border)] text-center text-[11px] text-[var(--color-text-secondary)]">
-              Internal security audit logged. Unauthorized access attempts are monitored.
+              {t.secNotice}
             </div>
           </div>
         </div>
@@ -115,10 +117,10 @@ function AdminDashboardContent() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">
-              Executive Operations Dashboard
+              {t.dashboardTitle}
             </h1>
             <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-              Real-time B2B metrics, pending spec approvals, order lifecycle analytics, and rapid navigation.
+              {t.dashboardSubtitle}
             </p>
           </div>
 
@@ -128,7 +130,7 @@ function AdminDashboardContent() {
               className="min-h-[36px] px-3.5 py-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white border border-[var(--color-accent)] text-xs font-semibold rounded-none flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">receipt_long</span>
-              <span>Open Order Ledger →</span>
+              <span>{t.openOrderLedger} →</span>
             </Link>
           </div>
         </div>

@@ -10,15 +10,18 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { formatCents } from "@/lib/formatCurrency";
 import type { DashboardMetricsData } from "@/lib/adminMetrics";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
-export interface DashboardMetricsProps {
+interface DashboardMetricsProps {
   data?: DashboardMetricsData | null;
   onRefresh?: () => void;
 }
 
 export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
   const [mounted, setMounted] = useState(false);
+  const { t } = useAdminLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -28,10 +31,9 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
     return null;
   }
 
-  const formattedRevenue = (data.thirtyDaysRevenueCents / 100).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  const revenueCents =
+    (data as any).last30DaysRevenueCents ?? (data as any).thirtyDaysRevenueCents ?? 0;
+  const formattedRevenue = formatCents(revenueCents);
 
   const chartData = data.statusDistribution.map((item) => ({
     name: item.label,
@@ -46,7 +48,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
         <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              Pending Applications
+              {t.pendingApplications}
             </span>
             <div className="w-8 h-8 rounded-none bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center border border-[var(--color-accent)]/30">
               <span className="material-symbols-outlined text-base">assignment_ind</span>
@@ -57,7 +59,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
               {data.pendingApplicationsCount}
             </div>
             <p className="text-[11px] text-[var(--color-accent)] font-medium mt-1">
-              Under Review &amp; Submitted
+              {t.pendingApplicationsSub}
             </p>
           </div>
         </div>
@@ -66,7 +68,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
         <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              Pending Proformas
+              {t.pendingProformas}
             </span>
             <div className="w-8 h-8 rounded-none bg-amber-500/10 text-amber-500 flex items-center justify-center border border-amber-500/30">
               <span className="material-symbols-outlined text-base">pending_actions</span>
@@ -77,7 +79,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
               {data.pendingReviewOrdersCount}
             </div>
             <p className="text-[11px] text-amber-500 font-medium mt-1">
-              Awaiting spec verification
+              {t.pendingProformasSub}
             </p>
           </div>
         </div>
@@ -86,7 +88,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
         <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              Active Orders
+              {t.activeOrders}
             </span>
             <div className="w-8 h-8 rounded-none bg-[var(--color-accent)]/10 text-[var(--color-accent)] flex items-center justify-center border border-[var(--color-accent)]/30">
               <span className="material-symbols-outlined text-base">factory</span>
@@ -97,7 +99,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
               {data.inProductionOrdersCount}
             </div>
             <p className="text-[11px] text-[var(--color-accent)] font-medium mt-1">
-              Currently in production
+              {t.activeOrdersSub}
             </p>
           </div>
         </div>
@@ -106,7 +108,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
         <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-5 flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              30-Day Paid Revenue
+              {t.revenue30Days}
             </span>
             <div className="w-8 h-8 rounded-none bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] flex items-center justify-center border border-[var(--color-status-success)]/30">
               <span className="material-symbols-outlined text-base">payments</span>
@@ -117,7 +119,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
               {formattedRevenue}
             </div>
             <p className="text-[11px] text-[var(--color-status-success)] font-medium mt-1">
-              Paid &amp; Shipped (Last 30 Days)
+              {t.revenue30DaysSub}
             </p>
           </div>
         </div>
@@ -128,10 +130,10 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-              Orders by Status Distribution
+              {t.orderStatusDistribution}
             </h3>
             <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5">
-              Live operational order volume breakdown across lifecycle stages.
+              {t.orderStatusDistributionSub}
             </p>
           </div>
           {onRefresh && (
@@ -141,7 +143,7 @@ export function DashboardMetrics({ data, onRefresh }: DashboardMetricsProps) {
               className="text-xs font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1 cursor-pointer"
             >
               <span className="material-symbols-outlined text-sm">refresh</span>
-              <span>Refresh</span>
+              <span>{t.refresh}</span>
             </button>
           )}
         </div>

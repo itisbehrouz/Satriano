@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { AdminAuthProvider, useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { AdminLanguageProvider, useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 const GlobalCommandPalette = dynamic(
   () => import("@/components/admin/GlobalCommandPalette").then((mod) => mod.GlobalCommandPalette),
@@ -25,75 +26,79 @@ interface NavItem {
   isActive: (pathname: string) => boolean;
 }
 
-const NAV_ITEMS: NavItem[] = [
-  {
-    href: "/admin",
-    label: "Order Ledger",
-    icon: "receipt_long",
-    isActive: (pathname: string) => pathname === "/admin" || pathname.startsWith("/admin/orders"),
-    subItems: [
-      { label: "Executive Dashboard", icon: "dashboard", href: "/admin" },
-      { label: "All Orders Ledger", icon: "table_rows", href: "/admin/orders?status=ALL" },
-      { label: "Pending Review", icon: "pending_actions", href: "/admin/orders?status=PENDING_REVIEW" },
-      { label: "Proforma Sent", icon: "description", href: "/admin/orders?status=PROFORMA_SENT" },
-      { label: "In Production", icon: "precision_manufacturing", href: "/admin/orders?status=IN_PRODUCTION" },
-      { label: "Shipped Orders", icon: "local_shipping", href: "/admin/orders?status=SHIPPED" },
-    ],
-  },
-  {
-    href: "/admin/wholesale",
-    label: "Wholesale",
-    icon: "storefront",
-    isActive: (pathname: string) => pathname.startsWith("/admin/wholesale"),
-    subItems: [
-      { label: "Supplier Management", icon: "store", href: "/admin/wholesale/suppliers" },
-      { label: "Inventory by Category", icon: "category", href: "/admin/wholesale/inventory" },
-      { label: "Pricing Manager", icon: "sell", href: "/admin/wholesale?tab=pricing" },
-      { label: "Inventory by Size", icon: "grid_on", href: "/admin/wholesale?tab=inventory" },
-      { label: "Price Offer Inbox", icon: "mark_email_unread", href: "/admin/wholesale?tab=offers" },
-      { label: "Wholesale Orders", icon: "local_shipping", href: "/admin/wholesale?tab=orders" },
-    ],
-  },
-  {
-    href: "/admin/applications",
-    label: "Applications",
-    icon: "assignment_ind",
-    isActive: (pathname: string) => pathname.startsWith("/admin/applications"),
-    subItems: [
-      { label: "All Applications", icon: "assignment", href: "/admin/applications?status=ALL" },
-      { label: "Submitted (New)", icon: "mark_unread_chat_alt", href: "/admin/applications?status=SUBMITTED" },
-      { label: "Under Review", icon: "rule", href: "/admin/applications?status=UNDER_REVIEW" },
-      { label: "Approved Partners", icon: "verified", href: "/admin/applications?status=APPROVED" },
-      { label: "Rejected", icon: "cancel", href: "/admin/applications?status=REJECTED" },
-    ],
-  },
-  {
-    href: "/admin/product-settings",
-    label: "Settings",
-    icon: "inventory_2",
-    isActive: (pathname: string) => pathname.startsWith("/admin/product-settings"),
-    subItems: [
-      { label: "Garment Catalog", icon: "account_tree", href: "/admin/product-settings?tab=catalog" },
-      { label: "Garment Fits", icon: "straighten", href: "/admin/product-settings?tab=fits" },
-      { label: "Regional Sizing", icon: "aspect_ratio", href: "/admin/product-settings?tab=sizing" },
-      { label: "Fabric Pricing", icon: "texture", href: "/admin/product-settings?tab=fabrics" },
-    ],
-  },
-  {
-    href: "/admin/architecture-viz",
-    label: "3D Telemetry",
-    icon: "view_in_ar",
-    isActive: (pathname: string) => pathname.startsWith("/admin/architecture-viz"),
-    subItems: [
-      { label: "3D Zero-G Canvas", icon: "view_in_ar", href: "/admin/architecture-viz" },
-      { label: "Node Telemetry", icon: "hub", href: "/admin/architecture-viz" },
-    ],
-  },
-];
+function getNavItems(t: import("@/lib/i18n/admin-dictionary").AdminDictionary): NavItem[] {
+  return [
+    {
+      href: "/admin",
+      label: t.orderLedger,
+      icon: "receipt_long",
+      isActive: (pathname: string) => pathname === "/admin" || pathname.startsWith("/admin/orders"),
+      subItems: [
+        { label: t.executiveDashboard, icon: "dashboard", href: "/admin" },
+        { label: t.allOrdersLedger, icon: "table_rows", href: "/admin/orders?status=ALL" },
+        { label: t.pendingReview, icon: "pending_actions", href: "/admin/orders?status=PENDING_REVIEW" },
+        { label: t.proformaSent, icon: "description", href: "/admin/orders?status=PROFORMA_SENT" },
+        { label: t.inProduction, icon: "precision_manufacturing", href: "/admin/orders?status=IN_PRODUCTION" },
+        { label: t.shippedOrders, icon: "local_shipping", href: "/admin/orders?status=SHIPPED" },
+      ],
+    },
+    {
+      href: "/admin/wholesale",
+      label: t.wholesale,
+      icon: "storefront",
+      isActive: (pathname: string) => pathname.startsWith("/admin/wholesale"),
+      subItems: [
+        { label: t.supplierManagement, icon: "store", href: "/admin/wholesale/suppliers" },
+        { label: t.inventoryByCategory, icon: "category", href: "/admin/wholesale/inventory" },
+        { label: t.pricingManager, icon: "sell", href: "/admin/wholesale?tab=pricing" },
+        { label: t.inventoryBySize, icon: "grid_on", href: "/admin/wholesale?tab=inventory" },
+        { label: t.priceOfferInbox, icon: "mark_email_unread", href: "/admin/wholesale?tab=offers" },
+        { label: t.wholesaleOrders, icon: "local_shipping", href: "/admin/wholesale?tab=orders" },
+      ],
+    },
+    {
+      href: "/admin/applications",
+      label: t.b2bPartners,
+      icon: "assignment_ind",
+      isActive: (pathname: string) => pathname.startsWith("/admin/applications"),
+      subItems: [
+        { label: t.allApplications, icon: "assignment", href: "/admin/applications?status=ALL" },
+        { label: t.submittedNew, icon: "mark_unread_chat_alt", href: "/admin/applications?status=SUBMITTED" },
+        { label: t.underReview, icon: "rule", href: "/admin/applications?status=UNDER_REVIEW" },
+        { label: t.approvedPartners, icon: "verified", href: "/admin/applications?status=APPROVED" },
+        { label: t.rejected, icon: "cancel", href: "/admin/applications?status=REJECTED" },
+      ],
+    },
+    {
+      href: "/admin/product-settings",
+      label: t.catalogFits,
+      icon: "inventory_2",
+      isActive: (pathname: string) => pathname.startsWith("/admin/product-settings"),
+      subItems: [
+        { label: t.garmentCatalog, icon: "account_tree", href: "/admin/product-settings?tab=catalog" },
+        { label: t.garmentFits, icon: "straighten", href: "/admin/product-settings?tab=fits" },
+        { label: t.regionalSizing, icon: "aspect_ratio", href: "/admin/product-settings?tab=sizing" },
+        { label: t.fabricPricing, icon: "texture", href: "/admin/product-settings?tab=fabrics" },
+      ],
+    },
+    {
+      href: "/admin/architecture-viz",
+      label: t.telemetry,
+      icon: "view_in_ar",
+      isActive: (pathname: string) => pathname.startsWith("/admin/architecture-viz"),
+      subItems: [
+        { label: t.telemetryCanvas, icon: "view_in_ar", href: "/admin/architecture-viz" },
+        { label: t.nodeTelemetry, icon: "hub", href: "/admin/architecture-viz" },
+      ],
+    },
+  ];
+}
 
 function AdminChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/admin";
   const { isAuthenticated, signOut } = useAdminAuth();
+  const { language, setLanguage, t } = useAdminLanguage();
+  const navItems = getNavItems(t);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
@@ -155,7 +160,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
         <div className="max-w-container-max mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-6">
           {/* Desktop Navigation Menu */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main Menu">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const isActive = item.isActive(pathname);
               const isOpen = activeDropdown === item.href;
 
@@ -233,6 +238,18 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
               </span>
             </button>
 
+            {/* EN / TR Language Switcher Button */}
+            <button
+              type="button"
+              onClick={() => setLanguage(language === "en" ? "tr" : "en")}
+              className="px-2 py-1 h-8 rounded text-xs font-mono font-bold uppercase tracking-wider bg-[var(--color-bg)] text-[var(--color-accent)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-all cursor-pointer inline-flex items-center gap-1"
+              title={language === "en" ? "Türkçe diline geç" : "Switch to English"}
+              aria-label="Toggle UI Language"
+            >
+              <span>{language.toUpperCase()}</span>
+              <span className="material-symbols-outlined text-sm">translate</span>
+            </button>
+
             {/* Sign Out Button */}
             <button
               type="button"
@@ -279,7 +296,7 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
 
             {/* Mobile Links */}
             <div className="space-y-2">
-              {NAV_ITEMS.map((item) => (
+              {navItems.map((item) => (
                 <div key={item.href} className="space-y-1">
                   <div className="text-xs font-semibold uppercase tracking-wider text-[var(--color-accent)] flex items-center gap-2 py-1">
                     <span className="material-symbols-outlined text-sm">{item.icon}</span>
@@ -324,7 +341,9 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <AdminAuthProvider>
-      <AdminChrome>{children}</AdminChrome>
+      <AdminLanguageProvider>
+        <AdminChrome>{children}</AdminChrome>
+      </AdminLanguageProvider>
     </AdminAuthProvider>
   );
 }

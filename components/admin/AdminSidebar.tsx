@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import dynamic from "next/dynamic";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 const GlobalCommandPalette = dynamic(
   () => import("@/components/admin/GlobalCommandPalette").then((mod) => mod.GlobalCommandPalette),
@@ -18,6 +19,7 @@ interface AdminSidebarProps {
 export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useAdminLanguage();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const [isPaletteOpen, setIsPaletteOpen] = useState(false);
@@ -57,31 +59,31 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
 
   const navItems = [
     {
-      label: "Order Ledger",
+      label: t.orderLedger,
       href: "/admin",
       icon: "receipt_long",
       badge: "M2O",
     },
     {
-      label: "Wholesale",
+      label: t.wholesale,
       href: "/admin/wholesale",
       icon: "storefront",
       badge: "B2B",
     },
     {
-      label: "B2B Partners",
+      label: t.b2bPartners,
       href: "/admin/applications",
       icon: "assignment_ind",
       badge: null,
     },
     {
-      label: "Catalog & Fits",
+      label: t.catalogFits,
       href: "/admin/product-settings",
       icon: "inventory_2",
       badge: null,
     },
     {
-      label: "3D Telemetry",
+      label: t.telemetry,
       href: "/admin/architecture-viz",
       icon: "view_in_ar",
       badge: "LIVE",
@@ -97,15 +99,14 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
       {/* Top Header Section */}
       <div className="space-y-4 p-3">
         {/* Brand Header & Collapse Toggle */}
-        {/* Brand Header & Collapse Toggle */}
         <div className={`flex items-center min-h-[40px] px-1 ${isCollapsed ? "justify-center" : "justify-between"}`}>
           {!isCollapsed && (
             <div className="leading-tight">
               <span className="text-xs font-bold uppercase tracking-wider block text-white">
-                Admin Console
+                {t.consoleTitle}
               </span>
               <span className="text-[10px] text-[#93C5FD] font-mono block">
-                M2O Portal
+                {t.m2oSubTitle}
               </span>
             </div>
           )}
@@ -129,13 +130,13 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
             type="button"
             onClick={handleOpenSearch}
             className="w-full bg-[#172A4D] hover:bg-[#1E3A8A] text-[#94A3B8] hover:text-white border border-[#1E3A8A] rounded px-3 py-2 text-xs flex items-center justify-between transition-colors group cursor-pointer"
-            title="Search orders, catalog or B2B partners (Cmd+K)"
+            title={t.searchTooltip}
           >
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-base text-[#60A5FA]">
                 search
               </span>
-              <span className="text-xs">Search ledger...</span>
+              <span className="text-xs">{t.searchPlaceholder}</span>
             </div>
             <kbd className="bg-[#0B1E3D] text-[#93C5FD] border border-[#1E3A8A] px-1.5 py-0.5 rounded text-[10px] font-mono group-hover:border-[#60A5FA]/50">
               ⌘K

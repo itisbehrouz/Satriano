@@ -15,14 +15,14 @@
     "semantic_hash": ""
   },
   "app/admin/layout.tsx": {
-    "mtime": 1785683827.543213,
-    "ast_hash": "cab689f727b58a52f29333fc2581316b",
-    "semantic_hash": "cab689f727b58a52f29333fc2581316b"
+    "mtime": 1786108653.576815,
+    "ast_hash": "358088680e6ec38c7088f89613ba76aa",
+    "semantic_hash": ""
   },
   "app/admin/page.tsx": {
-    "mtime": 1785683813.0617332,
-    "ast_hash": "3202cf1a02d273c5cc5bbedc65c93f18",
-    "semantic_hash": "3202cf1a02d273c5cc5bbedc65c93f18"
+    "mtime": 1786108671.8860946,
+    "ast_hash": "e6d78c4bce30c8304e9b2e99f4718abb",
+    "semantic_hash": ""
   },
   "app/admin/product-settings/page.tsx": {
     "mtime": 1785890231.4646742,
@@ -240,8 +240,8 @@
     "semantic_hash": "eace96d32c389fe33ee9ae18ff5c096d"
   },
   "app/categories/page.tsx": {
-    "mtime": 1785882057.141613,
-    "ast_hash": "e2725e6efd20890a75a0cd5d5a38eb87",
+    "mtime": 1786107637.1680872,
+    "ast_hash": "297fb49beb276df288e4325c6867c018",
     "semantic_hash": ""
   },
   "app/configure/guest-confirmation/page.tsx": {
@@ -270,7 +270,7 @@
     "semantic_hash": "b275a3fb1a354e9de12ff7bb754437da"
   },
   "app/layout.tsx": {
-    "mtime": 1786106631.597432,
+    "mtime": 1786107987.1243496,
     "ast_hash": "420aadcf3392d58c397769b4bb4f64a4",
     "semantic_hash": ""
   },
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1785885393.0046713,
-    "ast_hash": "e222477d555c55cfac5d06c7dad36beb",
+    "mtime": 1786107632.8362365,
+    "ast_hash": "3d67da8b7e441ebfda0c096228c372b3",
     "semantic_hash": ""
   },
   "app/portal/account/page.tsx": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "components/admin/AdminSidebar.tsx": {
-    "mtime": 1786104973.8239841,
-    "ast_hash": "9040bcb9234cb6cc750bd21f1b8b9d5e",
+    "mtime": 1786108662.7437778,
+    "ast_hash": "8ac2921aa376b55d39f096c5a34c6a5e",
     "semantic_hash": ""
   },
   "components/admin/AntiGravityViz.tsx": {
@@ -425,9 +425,9 @@
     "semantic_hash": "35bbb95184e0ebdcdf058c3462eaa9fd"
   },
   "components/admin/DashboardMetrics.tsx": {
-    "mtime": 1785680714.3695757,
-    "ast_hash": "f20a5ce0dc7df0b682f051e8a4e5cdc3",
-    "semantic_hash": "f20a5ce0dc7df0b682f051e8a4e5cdc3"
+    "mtime": 1786108777.4284973,
+    "ast_hash": "1d9b18e0830ff92e0cc1ea8278f3a37b",
+    "semantic_hash": ""
   },
   "components/admin/FabricPricingPanel.tsx": {
     "mtime": 1785883768.2296038,
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1786104977.5559223,
-    "ast_hash": "7dee4dca4f7b1b5915d1712b63007dd1",
+    "mtime": 1786108063.465996,
+    "ast_hash": "05ef6869532d784de646c66c4d8e9b86",
     "semantic_hash": ""
   },
   "components/layout/WhatsAppLiveChat.tsx": {
@@ -1502,6 +1502,21 @@
   "public/logo/Satriano Light .webp": {
     "mtime": 1785881216.877624,
     "ast_hash": "f3585ea749e96faffb4a9de2abc5eae9",
+    "semantic_hash": ""
+  },
+  "components/admin/AdminLanguageContext.test.tsx": {
+    "mtime": 1786108691.1026356,
+    "ast_hash": "b51fa0667b31fb6a7e8a76825e8d9fec",
+    "semantic_hash": ""
+  },
+  "components/admin/AdminLanguageContext.tsx": {
+    "mtime": 1786108624.572312,
+    "ast_hash": "322475eb0b421c83cc28b58b667d64e0",
+    "semantic_hash": ""
+  },
+  "lib/i18n/admin-dictionary.ts": {
+    "mtime": 1786108759.5561476,
+    "ast_hash": "7f723ce460cbe572568b7b749741b277",
     "semantic_hash": ""
   }
 }
