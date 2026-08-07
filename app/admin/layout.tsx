@@ -238,16 +238,25 @@ function AdminChrome({ children }: { children: React.ReactNode }) {
               </span>
             </button>
 
-            {/* EN / TR Language Switcher Button */}
+            {/* EN / TR Language Switcher Button with Flags */}
             <button
               type="button"
               onClick={() => setLanguage(language === "en" ? "tr" : "en")}
-              className="px-2 py-1 h-8 rounded text-xs font-mono font-bold uppercase tracking-wider bg-[var(--color-bg)] text-[var(--color-accent)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-all cursor-pointer inline-flex items-center gap-1"
+              className="px-2.5 py-1 h-8 rounded text-xs font-mono font-bold uppercase tracking-wider bg-[var(--color-bg)] text-[var(--color-accent)] border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-xs"
               title={language === "en" ? "Türkçe diline geç" : "Switch to English"}
               aria-label="Toggle UI Language"
             >
-              <span>{language.toUpperCase()}</span>
-              <span className="material-symbols-outlined text-sm">translate</span>
+              {language === "tr" ? (
+                <>
+                  <span>EN</span>
+                  <span className="text-base leading-none">🇺🇸</span>
+                </>
+              ) : (
+                <>
+                  <span>TR</span>
+                  <span className="text-base leading-none">🇹🇷</span>
+                </>
+              )}
             </button>
 
             {/* Sign Out Button */}

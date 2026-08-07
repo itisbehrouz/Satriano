@@ -101,6 +101,28 @@ export interface AdminDictionary {
   createVariantBtn: string;
   sizeLabel: string;
   totalInventoryStock: string;
+  addSupplierTitle: string;
+  editSupplierTitle: string;
+  firmNameLabel: string;
+  contactPersonLabel: string;
+  addressLabel: string;
+  notesLabel: string;
+  updateSupplier: string;
+  editWholesalePrice: string;
+  m2oReferenceRange: string;
+  wholesaleCostPrice: string;
+  savePricingBtn: string;
+  addColorway: string;
+  hexColor: string;
+  sourceType: string;
+  saveFitsBtn: string;
+  assignedFits: string;
+  regionalSizeSystem: string;
+  assignedSubcategories: string;
+  priceOfferInboxTitle: string;
+  priceOfferInboxSub: string;
+  counterOfferBtn: string;
+  sendCounterBtn: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -325,6 +347,28 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     createVariantBtn: "CREATE VARIANT",
     sizeLabel: "SIZE",
     totalInventoryStock: "TOTAL INVENTORY STOCK",
+    addSupplierTitle: "ADD NEW SUPPLIER",
+    editSupplierTitle: "EDIT SUPPLIER",
+    firmNameLabel: "Company Name *",
+    contactPersonLabel: "Contact Person",
+    addressLabel: "Address",
+    notesLabel: "Notes",
+    updateSupplier: "Update Supplier",
+    editWholesalePrice: "EDIT WHOLESALE PRICE",
+    m2oReferenceRange: "M2O Customer Price Range",
+    wholesaleCostPrice: "Wholesale Cost Price ($ USD)",
+    savePricingBtn: "Save Wholesale Price",
+    addColorway: "+ Add New Colorway",
+    hexColor: "Hex Color",
+    sourceType: "Source Type",
+    saveFitsBtn: "Save Fits",
+    assignedFits: "Assigned Fits",
+    regionalSizeSystem: "Regional Size System",
+    assignedSubcategories: "Assigned Subcategories",
+    priceOfferInboxTitle: "PRICE OFFER INBOX (Multi-Supplier Negotiation)",
+    priceOfferInboxSub: "Admin multi-supplier price offer desk. Supplier details & notes are visible to Admin only.",
+    counterOfferBtn: "COUNTER OFFER",
+    sendCounterBtn: "SEND COUNTER",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -547,6 +591,28 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     createVariantBtn: "VARYANT OLUŞTUR",
     sizeLabel: "BEDEN",
     totalInventoryStock: "TOPLAM STOK MİKTARI",
+    addSupplierTitle: "YENİ TEDARİKÇİ EKLE",
+    editSupplierTitle: "TEDARİKÇİ DÜZENLE",
+    firmNameLabel: "Firma Adı (Şirket Unvanı) *",
+    contactPersonLabel: "İletişim Kişisi",
+    addressLabel: "Adres",
+    notesLabel: "Notlar",
+    updateSupplier: "Tedarikçiyi Güncelle",
+    editWholesalePrice: "TOPTAN FİYAT DÜZENLE",
+    m2oReferenceRange: "M2O Müşteri Fiyat Aralığı",
+    wholesaleCostPrice: "Toptan Satış Fiyatı ($ USD)",
+    savePricingBtn: "Toptan Fiyatı Kaydet",
+    addColorway: "+ Yeni Renk Ekle",
+    hexColor: "Hex Renk Kodu",
+    sourceType: "Kaynak Türü",
+    saveFitsBtn: "Kalıpları Kaydet",
+    assignedFits: "Atanan Kalıplar",
+    regionalSizeSystem: "Bölgesel Beden Sistemi",
+    assignedSubcategories: "Atanan Alt Kategoriler",
+    priceOfferInboxTitle: "ÖZEL FİYAT TEKLİF GELEN KUTUSU (Tedarikçi Pazarlığı)",
+    priceOfferInboxSub: "Yönetici çoklu tedarikçi fiyat teklif masası. Tedarikçi detayları yalnızca Yöneticiler tarafından görülebilir.",
+    counterOfferBtn: "KARŞI TEKLİF YAP",
+    sendCounterBtn: "KARŞI TEKLİFİ GÖNDER",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

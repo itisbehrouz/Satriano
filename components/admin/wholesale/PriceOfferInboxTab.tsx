@@ -82,10 +82,10 @@ export function PriceOfferInboxTab({
       <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            PRICE OFFER INBOX (Multi-Supplier Negotiation)
+            {t.priceOfferInboxTitle}
           </h2>
           <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-            Admin multi-supplier price offer desk. Supplier details & notes are visible to Admin only.
+            {t.priceOfferInboxSub}
           </p>
         </div>
       </div>
@@ -249,7 +249,7 @@ export function PriceOfferInboxTab({
                       }}
                       className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
-                      COUNTER OFFER
+                      {t.counterOfferBtn}
                     </button>
                   </>
                 ) : (
@@ -333,13 +333,13 @@ export function PriceOfferInboxTab({
                   onClick={() => setCounteringOffer(null)}
                   className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase text-xs hover:bg-[var(--color-surface)] cursor-pointer"
                 >
-                  CANCEL
+                  {t.cancel}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
                 >
-                  SEND COUNTER
+                  {t.sendCounterBtn}
                 </button>
               </div>
             </form>

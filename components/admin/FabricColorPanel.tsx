@@ -250,7 +250,7 @@ export function FabricColorPanel({
             onClick={handleClearPlaceholders}
             className="px-3 py-1.5 bg-amber-50 text-amber-700 border border-amber-300 rounded text-xs font-semibold hover:bg-amber-100 transition-colors shrink-0"
           >
-            Clear Placeholders ({placeholderCount})
+            {t.clearPlaceholders} ({placeholderCount})
           </button>
         )}
       </div>
@@ -264,13 +264,13 @@ export function FabricColorPanel({
       {/* Add Color Form */}
       <form onSubmit={handleAddColor} className="bg-[#F7F8FA] border border-[#EAECF0] rounded-md p-4 space-y-4">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[#1A2233]">
-          + Add New Colorway
+          {t.addColorway}
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label className="block text-[11px] font-semibold text-[#5B6B85] uppercase mb-1">
-              Color Name *
+              {t.colorNameLabel} *
             </label>
             <input
               type="text"
@@ -284,7 +284,7 @@ export function FabricColorPanel({
 
           <div>
             <label className="block text-[11px] font-semibold text-[#5B6B85] uppercase mb-1">
-              Hex Color
+              {t.hexColor}
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -305,7 +305,7 @@ export function FabricColorPanel({
 
           <div>
             <label className="block text-[11px] font-semibold text-[#5B6B85] uppercase mb-1">
-              Source Type
+              {t.sourceType}
             </label>
             <select
               value={newSource}

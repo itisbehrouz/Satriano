@@ -54,7 +54,7 @@ export function EditSupplierModal({
       <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[540px] text-[var(--color-text-primary)] shadow-2xl relative p-6 space-y-5 my-8">
         <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            EDIT SUPPLIER: {formData.firmName}
+            {t.editSupplierTitle}: {formData.firmName}
           </h2>
           <button
             type="button"

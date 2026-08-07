@@ -59,7 +59,7 @@ export function AddSupplierModal({ isOpen, onClose, onCreate }: AddSupplierModal
       <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none w-full max-w-[540px] text-[var(--color-text-primary)] shadow-2xl relative p-6 space-y-5 my-8">
         <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            ADD NEW SUPPLIER
+            {t.addSupplierTitle}
           </h2>
           <button
             type="button"
@@ -74,7 +74,7 @@ export function AddSupplierModal({ isOpen, onClose, onCreate }: AddSupplierModal
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
             <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
-              Firma Adı (Company Name) *
+              {t.firmNameLabel}
             </label>
             <input
               type="text"

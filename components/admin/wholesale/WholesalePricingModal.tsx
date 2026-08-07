@@ -51,7 +51,7 @@ export function WholesalePricingModal({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            EDIT WHOLESALE PRICE: {product.productName}
+            {t.editWholesalePrice}: {product.productName}
           </h2>
           <button
             type="button"
@@ -66,7 +66,7 @@ export function WholesalePricingModal({
         {/* Read-Only Info */}
         <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-4 rounded-none space-y-2 text-xs font-mono">
           <div className="flex justify-between">
-            <span className="text-[var(--color-text-secondary)]">M2O Price Range:</span>
+            <span className="text-[var(--color-text-secondary)]">{t.m2oReferenceRange}:</span>
             <span className="font-bold text-[var(--color-text-primary)]">{product.m2oPriceRange}</span>
           </div>
           <div className="flex justify-between">
