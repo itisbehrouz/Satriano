@@ -601,3 +601,32 @@ Run directly against `satriano.vercel.app`, `E2E-WHOLESALE-` marker prefix used 
 
 ### Public homepage — unchanged, re-verified
 - Screenshot review confirms the public homepage still matches the documented design system: light mode, gold confined to the `SATRIANO` logo mark, `#2E5AAC` accent CTA (`START CUSTOM ORDER SPEC`), 0px corner geometry, hero copy exactly as specified ("Your product. Your price. Your brand. We manufacture it."), and the `B2B Support` dock present. No drift found here.
+
+---
+
+### Session Log: August 7, 2026
+
+#### Admin Console UI Turkish Localization Sweep (`/admin/*`)
+- **Language Switcher Flag Toggle (`app/admin/layout.tsx`):** Replaced generic translate icon with dynamic `EN 🇺🇸` (when UI is set to Turkish) and `TR 🇹🇷` (when UI is set to English) flag icons.
+- **Dictionary Enriched (`lib/i18n/admin-dictionary.ts`):** Added keys for Product Settings hierarchy, MOQ forms, category/subcategory/product modals, B2B applications drawer headings, status badges, and empty states.
+- **Components Localized:**
+  - `components/admin/wholesale/suppliers/SuppliersTable.tsx` & `SupplierClient.tsx`: Localized status badges (`✓ AKTİF`, `⏳ ONAY BEKLİYOR`, `✗ PASİF`), filter bars, and action buttons (`DOĞRULAMA`, `PASİFE AL`).
+  - `components/admin/wholesale/WholesalePricingTab.tsx`: Localized stock level badges (`12 adet ✓`, `Stok Tükenmiş ✗`).
+  - `components/admin/wholesale/inventory/ProductCard.tsx`: Localized photo badges, wholesale cost, markup, sell price, and total stock counter.
+  - `components/admin/AdminApplicationsTable.tsx`: Localized verification badges, status badges, expanded drawer specification titles (`Tam B2B Başvuru Detayları`), section headings, warning badges, review buttons (`İncelemeye Al`), and empty state messages.
+  - `app/admin/product-settings/page.tsx`: Localized hierarchy header (`Ana Giysi Hiyerarşisi`), add buttons (`+ Kategori Ekle`, `+ Alt Kategori Ekle`, `+ Ürün Ekle`), product item table headers, and modal titles.
+- **Strict Database Safeguard Enforced:** Zero database schema, seed, or model changes were made. All localizations were strictly contained within UI components and i18n dictionary dictionaries.
+
+#### Temporary "Under Development" Password Gate for Vercel & Public Site
+- **Public Site Lock Screen (`app/under-development/page.tsx`):** Added a luxury dark-mode landing screen (`#07090E`) with Satriano Atelier branding, serif typography, password input field, hide/show toggle, and admin console link.
+- **Auth API (`app/api/site-auth/route.ts`):** Validates input password against `SITE_ACCESS_PASSWORD` (default: `satriano2026!`) and sets HTTP-only 30-day cookie `satriano_site_pass`.
+- **Next.js Middleware Interceptor (`middleware.ts`):** Added automatic maintenance lock check (`SITE_MAINTENANCE_LOCK !== "false"`). All unauthenticated public requests redirect to `/under-development`, while `/admin`, `/api/admin`, `/api/site-auth`, and static assets bypass the lock seamlessly. Configured to lock Vercel production deployments automatically out-of-the-box.
+- **Strict 100% English Public Language Rule (`AGENTS.md`):** Ensured all public-facing text, error messages, and UI on `/under-development` and `/api/site-auth` are 100% English.
+
+#### Homepage Hero Image Asset Update
+- **Hero Image Update (`public/images/home_header.jpeg`):** Updated `public/images/home_header.jpeg` and `app/page.tsx` hero image tag `<Image src="/images/home_header.jpeg" ... />` with the high-resolution bespoke atelier store photo provided by the user.
+
+#### Build & Verification Status
+- **Vitest Suite:** All 35 test files passed (**166 / 166 tests passed 100%**).
+- **Next.js Production Build:** `npm run build` compiled 56 static and dynamic routes with 0 TypeScript errors.
+- **Git Deployment:** Commits `78ca711`, `0126906`, `3b5a323`, `e1cd445`, `62cf8c0`, and `cb0351a` pushed to `main`.
