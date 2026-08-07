@@ -110,7 +110,7 @@ export default async function HomePage() {
                 <div className="relative rounded-none overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] shadow-md group">
                   <div className="aspect-[4/3] w-full relative bg-[var(--color-bg)] overflow-hidden">
                     <Image
-                      src="/hero-atelier.png"
+                      src="/images/home_header.jpeg"
                       alt="Satriano Atelier European B2B Garment Manufacturing"
                       fill
                       priority
