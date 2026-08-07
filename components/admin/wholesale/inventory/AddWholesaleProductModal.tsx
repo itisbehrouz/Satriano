@@ -220,7 +220,7 @@ export function AddWholesaleProductModal({
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-[var(--color-border)] flex-shrink-0">
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            ADD NEW WHOLESALE PRODUCT (Supplier-Linked)
+            {t.addWholesaleProductTitle}
           </h2>
           <button
             type="button"
@@ -244,7 +244,7 @@ export function AddWholesaleProductModal({
             }`}
           >
             <span className="material-symbols-outlined text-base">info</span>
-            <span>Basic Info</span>
+            <span>{t.basicInfo}</span>
           </button>
 
           <button
@@ -257,7 +257,7 @@ export function AddWholesaleProductModal({
             }`}
           >
             <span className="material-symbols-outlined text-base">payments</span>
-            <span>Pricing &amp; Stock</span>
+            <span>{t.pricingAndStock}</span>
           </button>
         </div>
 
@@ -270,7 +270,7 @@ export function AddWholesaleProductModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
-                    Supplier *
+                    {t.supplierLabel} *
                   </label>
                   <select
                     required
@@ -296,7 +296,7 @@ export function AddWholesaleProductModal({
 
                 <div>
                   <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
-                    Category *
+                    {t.categoryFilter} *
                   </label>
                   <select
                     required
@@ -317,7 +317,7 @@ export function AddWholesaleProductModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
-                    Product Name *
+                    {t.productNameLabel} *
                   </label>
                   <input
                     type="text"
@@ -331,7 +331,7 @@ export function AddWholesaleProductModal({
 
                 <div>
                   <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1">
-                    SKU (Supplier / Atelier Code) *
+                    {t.skuLabel} *
                   </label>
                   <input
                     type="text"
@@ -348,7 +348,7 @@ export function AddWholesaleProductModal({
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-                    Description (Optional)
+                    {t.descriptionOptional}
                   </label>
                   {!isDescriptionExpanded && (
                     <button
@@ -356,7 +356,7 @@ export function AddWholesaleProductModal({
                       onClick={() => setIsDescriptionExpanded(true)}
                       className="text-[11px] font-bold text-[var(--color-accent)] hover:underline cursor-pointer"
                     >
-                      + Add Description
+                      {t.addDescription}
                     </button>
                   )}
                 </div>

@@ -10,7 +10,7 @@ import { AddWholesaleProductModal, SupplierOption } from "./AddWholesaleProductM
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export function CategoryInventoryClient() {
-  const { t } = useAdminLanguage();
+  const { t, language } = useAdminLanguage();
   const categories: CategoryOption[] = [
     { id: "cat-tops", name: "Tops", productCount: 45, supplierCount: 3 },
     { id: "cat-bottoms", name: "Bottoms", productCount: 32, supplierCount: 5 },
@@ -198,7 +198,7 @@ export function CategoryInventoryClient() {
           onSelectCategory={setSelectedCategoryId}
         />
         <div className="text-xs font-mono font-bold text-[var(--color-text-secondary)]">
-          Showing {filteredProducts.length} Products
+          {filteredProducts.length} {language === "tr" ? "Ürün Gösteriliyor" : "Products Showing"}
         </div>
       </div>
 

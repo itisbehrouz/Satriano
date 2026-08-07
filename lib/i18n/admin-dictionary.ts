@@ -74,6 +74,33 @@ export interface AdminDictionary {
   reviewB2bApplication: string;
   inventoryByCategorySub: string;
   manageSuppliers: string;
+  addWholesaleProductTitle: string;
+  basicInfo: string;
+  pricingAndStock: string;
+  supplierLabel: string;
+  skuLabel: string;
+  descriptionOptional: string;
+  addDescription: string;
+  productImagesHeader: string;
+  productImagesSub: string;
+  addPhotoBtn: string;
+  categoryFilter: string;
+  allCategories: string;
+  inventoryBySizeColor: string;
+  inventoryBySizeColorSub: string;
+  selectProduct: string;
+  productLabel: string;
+  productNameLabel: string;
+  colorVariantLabel: string;
+  totalStock: string;
+  unitsQty: string;
+  addColorVariantTitle: string;
+  colorNameLabel: string;
+  initialStockPerSize: string;
+  defaultStockHint: string;
+  createVariantBtn: string;
+  sizeLabel: string;
+  totalInventoryStock: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -271,6 +298,33 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     reviewB2bApplication: "Review B2B Application & Authorize",
     inventoryByCategorySub: "Browse ready-made product inventory aggregated across wholesale manufacturing partners by category.",
     manageSuppliers: "Manage Suppliers",
+    addWholesaleProductTitle: "ADD NEW WHOLESALE PRODUCT (Supplier-Linked)",
+    basicInfo: "Basic Info",
+    pricingAndStock: "Pricing & Stock",
+    supplierLabel: "Supplier",
+    skuLabel: "SKU (Supplier / Atelier Code)",
+    descriptionOptional: "Description (Optional)",
+    addDescription: "+ Add Description",
+    productImagesHeader: "Product Images (4 Photos)",
+    productImagesSub: "Upload 4+ high-quality photos (JPG, PNG, WebP • 2MB–5MB each)",
+    addPhotoBtn: "+ Photo",
+    categoryFilter: "Category Filter",
+    allCategories: "All Categories (Aggregate Overview)",
+    inventoryBySizeColor: "INVENTORY BY SIZE/COLOR",
+    inventoryBySizeColorSub: "Manage granular ready-made stock levels per garment color variant",
+    selectProduct: "Select Product",
+    productLabel: "Product",
+    productNameLabel: "Product Name",
+    colorVariantLabel: "Color Variant",
+    totalStock: "Total Stock",
+    unitsQty: "units",
+    addColorVariantTitle: "ADD NEW COLOR VARIANT",
+    colorNameLabel: "Color Name",
+    initialStockPerSize: "Initial Stock Quantity per Size (Optional)",
+    defaultStockHint: "Default stock allocated per standard size option.",
+    createVariantBtn: "CREATE VARIANT",
+    sizeLabel: "SIZE",
+    totalInventoryStock: "TOTAL INVENTORY STOCK",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -466,6 +520,33 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     reviewB2bApplication: "B2B Başvurusunu İncele & Yetkilendir",
     inventoryByCategorySub: "Toptan üretici ortaklardan kategorilere göre gruplanmış stoktaki hazır ürünleri inceleyin.",
     manageSuppliers: "Tedarikçileri Yönet",
+    addWholesaleProductTitle: "YENİ TOPTAN ÜRÜN EKLE (Tedarikçi Bağlantılı)",
+    basicInfo: "Temel Bilgiler",
+    pricingAndStock: "Fiyat & Stok",
+    supplierLabel: "Tedarikçi",
+    skuLabel: "SKU (Tedarikçi / Atölye Kodu)",
+    descriptionOptional: "Açıklama (İsteğe Bağlı)",
+    addDescription: "+ Açıklama Ekle",
+    productImagesHeader: "Ürün Görselleri (4 Fotoğraf)",
+    productImagesSub: "4+ yüksek kaliteli fotoğraf yükleyin (JPG, PNG, WebP • her biri 2MB–5MB)",
+    addPhotoBtn: "+ Fotoğraf",
+    categoryFilter: "Kategori Filtresi",
+    allCategories: "Tüm Kategoriler (Genel Bakış)",
+    inventoryBySizeColor: "BEDEN/RENK BAZINDA STOK",
+    inventoryBySizeColorSub: "Giysi renk varyantı başına hazır stok seviyelerini yönetin",
+    selectProduct: "Ürün Seçin",
+    productLabel: "Ürün",
+    productNameLabel: "Ürün Adı",
+    colorVariantLabel: "Renk Varyantı",
+    totalStock: "Toplam Stok",
+    unitsQty: "adet",
+    addColorVariantTitle: "YENİ RENK VARYANTI EKLE",
+    colorNameLabel: "Renk Adı",
+    initialStockPerSize: "Beden Başına Başlangıç Stok Miktarı (İsteğe Bağlı)",
+    defaultStockHint: "Varsayılan beden seçenekleri için atanan stok.",
+    createVariantBtn: "VARYANT OLUŞTUR",
+    sizeLabel: "BEDEN",
+    totalInventoryStock: "TOPLAM STOK MİKTARI",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

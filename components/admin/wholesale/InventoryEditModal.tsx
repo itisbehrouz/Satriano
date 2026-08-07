@@ -66,10 +66,10 @@ export function InventoryEditModal({
         <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-              EDIT INVENTORY: {productName}
+              {t.editInventory}: {productName}
             </h2>
             <div className="text-xs font-semibold text-[var(--color-accent)] mt-0.5">
-              Color Variant: {activeColorVariant}
+              {t.colorVariantLabel}: {activeColorVariant}
             </div>
           </div>
           <button
@@ -94,14 +94,14 @@ export function InventoryEditModal({
                 >
                   <div>
                     <span className="font-bold font-mono text-xs uppercase block text-[var(--color-text-primary)]">
-                      SIZE {sz}
+                      {t.sizeLabel} {sz}
                     </span>
                     <span
                       className={`text-[10px] font-bold uppercase ${
                         inStock ? "text-emerald-500" : "text-red-500"
                       }`}
                     >
-                      {inStock ? "✓ In Stock" : "✗ Out of Stock"}
+                      {inStock ? `✓ ${t.inStock}` : `✗ ${t.outOfStock}`}
                     </span>
                   </div>
 
@@ -136,8 +136,8 @@ export function InventoryEditModal({
 
           {/* Live Total Counter */}
           <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-3 rounded-none flex justify-between items-center font-mono font-bold text-xs">
-            <span className="text-[var(--color-text-secondary)] uppercase">TOTAL INVENTORY STOCK:</span>
-            <span className="text-[var(--color-accent)] text-sm tabular-nums">{totalUnits} units</span>
+            <span className="text-[var(--color-text-secondary)] uppercase">{t.totalInventoryStock}:</span>
+            <span className="text-[var(--color-accent)] text-sm tabular-nums">{totalUnits} {t.unitsQty}</span>
           </div>
 
           {/* Action Buttons */}

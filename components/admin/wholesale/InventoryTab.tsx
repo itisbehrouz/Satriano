@@ -96,15 +96,15 @@ export function InventoryTab({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            INVENTORY BY SIZE/COLOR
+            {t.inventoryBySizeColor}
           </h2>
           <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-            Manage granular ready-made stock levels per garment color variant
+            {t.inventoryBySizeColorSub}
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold uppercase text-[var(--color-text-secondary)]">Select Product:</label>
+          <label className="text-xs font-bold uppercase text-[var(--color-text-secondary)]">{t.selectProduct}:</label>
           <select
             value={selectedProductId}
             onChange={(e) => {
@@ -131,11 +131,11 @@ export function InventoryTab({
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[var(--color-border)] pb-4">
             <div>
               <h3 className="text-base font-bold text-[var(--color-text-primary)]">
-                PRODUCT: {currentProduct.name}
+                {t.productLabel}: {currentProduct.name}
               </h3>
               <div className="flex items-center gap-3 mt-1">
                 <span className="text-xs font-semibold text-[var(--color-accent)]">
-                  Color Variant: {currentVariant.colorName}
+                  {t.colorVariantLabel}: {currentVariant.colorName}
                 </span>
 
                 {/* Color Variant Selector Dropdown */}
@@ -149,7 +149,7 @@ export function InventoryTab({
                     const stock = Object.values(v.sizeInventory).reduce((a, b) => a + b, 0);
                     return (
                       <option key={v.id} value={v.id}>
-                        {v.colorName} {isCurrent ? "(current, ✓)" : `(${stock} units)`}
+                        {v.colorName} {isCurrent ? "(current, ✓)" : `(${stock} ${t.unitsQty})`}
                       </option>
                     );
                   })}
@@ -159,7 +159,7 @@ export function InventoryTab({
 
             <div className="text-right space-y-1">
               <div className="font-mono font-bold text-sm text-[var(--color-text-primary)]">
-                Total Stock: <span className="text-[var(--color-accent)]">{totalStock} units</span>
+                {t.totalStock}: <span className="text-[var(--color-accent)]">{totalStock} {t.unitsQty}</span>
               </div>
               <div className="text-[11px] text-[var(--color-text-secondary)] font-mono">
                 Last Restocked: {currentVariant.lastRestocked}
@@ -181,16 +181,16 @@ export function InventoryTab({
                   }`}
                 >
                   <div className="font-bold uppercase tracking-wide font-mono text-[11px]">
-                    SIZE {sz}
+                    {t.sizeLabel} {sz}
                   </div>
-                  <div className="font-mono text-sm font-bold">{qty} units</div>
+                  <div className="font-mono text-sm font-bold">{qty} {t.unitsQty}</div>
                   <div className="pt-1">
                     <span
                       className={`inline-block px-2 py-0.5 text-[10px] font-bold uppercase rounded-none ${
                         inStock ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30" : "bg-red-500/10 text-red-500 border border-red-500/30"
                       }`}
                     >
-                      {inStock ? "✓ In Stock" : "✗ Out of Stock"}
+                      {inStock ? `✓ ${t.inStock}` : `✗ ${t.outOfStock}`}
                     </span>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface AddColorVariantModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ export function AddColorVariantModal({
   onClose,
   onCreate,
 }: AddColorVariantModalProps) {
+  const { t } = useAdminLanguage();
   const [colorName, setColorName] = useState<string>("");
   const [initialQty, setInitialQty] = useState<string>("0");
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +45,7 @@ export function AddColorVariantModal({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            ADD NEW COLOR VARIANT: {productName}
+            {t.addColorVariantTitle}: {productName}
           </h2>
           <button
             type="button"
@@ -58,7 +60,7 @@ export function AddColorVariantModal({
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
             <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1.5">
-              Color Name *
+              {t.colorNameLabel} *
             </label>
             <input
               type="text"
@@ -72,7 +74,7 @@ export function AddColorVariantModal({
 
           <div>
             <label className="block font-bold uppercase tracking-wider text-[var(--color-text-primary)] mb-1.5">
-              Initial Stock Quantity per Size (Optional)
+              {t.initialStockPerSize}
             </label>
             <input
               type="number"
@@ -84,7 +86,7 @@ export function AddColorVariantModal({
               className="w-full px-3 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-mono rounded-none focus:border-[var(--color-accent)] focus:outline-none"
             />
             <span className="text-[11px] text-[var(--color-text-secondary)] mt-1 block">
-              Default stock allocated per standard size option.
+              {t.defaultStockHint}
             </span>
           </div>
 
@@ -96,13 +98,13 @@ export function AddColorVariantModal({
               onClick={onClose}
               className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
             >
-              CANCEL
+              {t.cancel}
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
             >
-              CREATE VARIANT
+              {t.createVariantBtn}
             </button>
           </div>
         </form>
