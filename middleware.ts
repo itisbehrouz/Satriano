@@ -75,7 +75,7 @@ export async function middleware(request: NextRequest) {
       const sitePassCookie = request.cookies.get("satriano_site_pass")?.value;
       if (sitePassCookie !== "authenticated") {
         const lockUrl = new URL("/under-development", request.url);
-        return NextResponse.redirect(lockUrl);
+        return NextResponse.rewrite(lockUrl);
       }
     }
   }
