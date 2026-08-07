@@ -198,7 +198,7 @@ export function SupplierClient() {
 
           {/* Status Filters */}
           <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="text-[var(--color-text-secondary)] font-bold uppercase mr-1">Filter:</span>
+            <span className="text-[var(--color-text-secondary)] font-bold uppercase mr-1">{t.filterLabel}</span>
             {(["ALL", "ACTIVE", "PENDING"] as const).map((st) => (
               <button
                 key={st}
@@ -210,7 +210,7 @@ export function SupplierClient() {
                     : "bg-[var(--color-surface)] text-[var(--color-text-primary)] border-[var(--color-border)] hover:bg-[var(--color-bg)]"
                 }`}
               >
-                {st}
+                {st === "ALL" ? t.allCategories.split(" ")[0] : st === "ACTIVE" ? t.activeStatus : t.pendingStatus}
               </button>
             ))}
           </div>

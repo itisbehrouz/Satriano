@@ -751,9 +751,9 @@ function ProductSettingsContent() {
                   {/* Top Header Bar */}
                   <div className="p-4 sm:p-5 border-b border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--color-bg)]">
                     <div>
-                      <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Master Garment Hierarchy</h2>
+                      <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{t.masterGarmentHierarchyTitle}</h2>
                       <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-                        Define 3-level product structure, custom fabric lines, and two-tier MOQs.
+                        {t.masterGarmentHierarchySub}
                       </p>
                     </div>
                     <button
@@ -769,7 +769,7 @@ function ProductSettingsContent() {
                       className="min-h-[44px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-4 py-2.5 rounded-none transition-colors inline-flex items-center gap-1.5"
                     >
                       <span className="material-symbols-outlined text-base">add_circle</span>
-                      <span>+ Add Category</span>
+                      <span>{t.addCategoryBtn}</span>
                     </button>
                   </div>
 
@@ -828,7 +828,7 @@ function ProductSettingsContent() {
                               className="min-h-[36px] flex-shrink-0 bg-[var(--color-surface)] border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 text-xs font-semibold px-3 py-1.5 rounded-none transition-colors inline-flex items-center gap-1 cursor-pointer"
                             >
                               <span className="material-symbols-outlined text-sm">add</span>
-                              <span>Add Subcategory</span>
+                              <span>{t.addSubcategoryBtn}</span>
                             </button>
                           </div>
 

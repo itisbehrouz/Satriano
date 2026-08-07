@@ -46,7 +46,7 @@ export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps)
             className="w-full h-full object-cover"
           />
           <span className="absolute top-2 right-2 bg-black/80 text-white font-mono text-[10px] px-1.5 py-0.5 font-bold">
-            📷 {product.images.length} Photos
+            📷 {product.images.length} {t.photosCount}
           </span>
           <span className="absolute bottom-2 left-2 bg-[var(--color-accent)] text-white font-mono text-[10px] px-1.5 py-0.5 font-bold uppercase">
             SKU: {product.supplierSku}
@@ -66,15 +66,15 @@ export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps)
         {/* Pricing Block */}
         <div className="bg-[var(--color-bg)] border border-[var(--color-border)] p-2.5 rounded-none space-y-1 text-xs font-mono">
           <div className="flex justify-between text-[var(--color-text-secondary)]">
-            <span>Wholesale Cost:</span>
+            <span>{t.wholesaleCostLabel}</span>
             <span>${product.wholesaleCostPriceUSD.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-emerald-500 font-bold text-[11px]">
-            <span>Your Markup:</span>
+            <span>{t.yourMarkupLabel}</span>
             <span>+${markupUSD.toFixed(2)} ({product.markupPercent}%)</span>
           </div>
           <div className="flex justify-between font-bold text-[var(--color-text-primary)] pt-1 border-t border-[var(--color-border)]">
-            <span>Sell Price:</span>
+            <span>{t.sellPriceLabel}</span>
             <span className="text-[var(--color-accent)]">${product.sellPriceUSD.toFixed(2)}</span>
           </div>
         </div>
@@ -82,15 +82,15 @@ export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps)
         {/* Inventory Summary */}
         <div className="space-y-1">
           <div className="flex justify-between items-center text-xs font-mono font-bold">
-            <span className="text-[var(--color-text-secondary)]">Total Stock:</span>
+            <span className="text-[var(--color-text-secondary)]">{t.totalStock}:</span>
             {isGoodStock && (
-              <span className="text-emerald-500">{product.stockLevel} units ✓</span>
+              <span className="text-emerald-500">{product.stockLevel} {t.unitsQty} ✓</span>
             )}
             {isLowStock && (
-              <span className="text-amber-500">{product.stockLevel} units ⚠</span>
+              <span className="text-amber-500">{product.stockLevel} {t.unitsQty} ⚠</span>
             )}
             {isOutOfStock && (
-              <span className="text-red-500">0 units ✗</span>
+              <span className="text-red-500">0 {t.unitsQty} ✗</span>
             )}
           </div>
 

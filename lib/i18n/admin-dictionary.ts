@@ -123,6 +123,22 @@ export interface AdminDictionary {
   priceOfferInboxSub: string;
   counterOfferBtn: string;
   sendCounterBtn: string;
+  filterLabel: string;
+  activeStatus: string;
+  inactiveStatus: string;
+  pendingStatus: string;
+  deactivateBtn: string;
+  authorizeBtn: string;
+  verifiedBadge: string;
+  unverifiedBadge: string;
+  approvedBadge: string;
+  submittedBadge: string;
+  photosCount: string;
+  wholesaleCostLabel: string;
+  yourMarkupLabel: string;
+  sellPriceLabel: string;
+  masterGarmentHierarchyTitle: string;
+  masterGarmentHierarchySub: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -369,6 +385,22 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     priceOfferInboxSub: "Admin multi-supplier price offer desk. Supplier details & notes are visible to Admin only.",
     counterOfferBtn: "COUNTER OFFER",
     sendCounterBtn: "SEND COUNTER",
+    filterLabel: "FILTER:",
+    activeStatus: "ACTIVE",
+    inactiveStatus: "INACTIVE",
+    pendingStatus: "PENDING",
+    deactivateBtn: "DEACTIVATE",
+    authorizeBtn: "AUTHORIZE",
+    verifiedBadge: "VERIFIED",
+    unverifiedBadge: "UNVERIFIED",
+    approvedBadge: "APPROVED",
+    submittedBadge: "SUBMITTED",
+    photosCount: "Photos",
+    wholesaleCostLabel: "Wholesale Cost:",
+    yourMarkupLabel: "Your Markup:",
+    sellPriceLabel: "Sell Price:",
+    masterGarmentHierarchyTitle: "Master Garment Hierarchy",
+    masterGarmentHierarchySub: "Define 3-level product structure, custom fabric lines, and two-tier MOQs.",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -613,6 +645,22 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     priceOfferInboxSub: "Yönetici çoklu tedarikçi fiyat teklif masası. Tedarikçi detayları yalnızca Yöneticiler tarafından görülebilir.",
     counterOfferBtn: "KARŞI TEKLİF YAP",
     sendCounterBtn: "KARŞI TEKLİFİ GÖNDER",
+    filterLabel: "FİLTRE:",
+    activeStatus: "AKTİF",
+    inactiveStatus: "PASİF",
+    pendingStatus: "BEKLEYENLER",
+    deactivateBtn: "PASİFE AL",
+    authorizeBtn: "DOĞRULAMA",
+    verifiedBadge: "DOĞRULANDI",
+    unverifiedBadge: "DOĞRULANMADI",
+    approvedBadge: "ONAYLANDI",
+    submittedBadge: "BAŞVURU YAPILDI",
+    photosCount: "Fotoğraf",
+    wholesaleCostLabel: "Toptan Maliyet:",
+    yourMarkupLabel: "Kar Marjınız:",
+    sellPriceLabel: "Satış Fiyatı:",
+    masterGarmentHierarchyTitle: "Ana Giysi Hiyerarşisi",
+    masterGarmentHierarchySub: "3 seviyeli ürün yapısını, özel kumaş serilerini ve MOQ değerlerini tanımlayın.",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

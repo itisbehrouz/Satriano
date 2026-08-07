@@ -27,26 +27,27 @@ interface AdminApplicationsTableProps {
 }
 
 export function ApplicationStatusBadge({ status }: { status: B2bApplicationItem["status"] }) {
+  const { t } = useAdminLanguage();
   switch (status) {
     case "APPROVED":
       return (
         <span className="inline-flex items-center gap-1.5 bg-[#E1F5EE] text-[#0F6E56] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#A6E5CE]">
           <span className="material-symbols-outlined text-xs">check_circle</span>
-          <span>APPROVED</span>
+          <span>{t.approvedBadge}</span>
         </span>
       );
     case "REJECTED":
       return (
         <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F8B4B4]">
           <span className="material-symbols-outlined text-xs">cancel</span>
-          <span>REJECTED</span>
+          <span>{t.rejectPartner ? t.rejectPartner.toUpperCase() : "REDDEDİLDİ"}</span>
         </span>
       );
     case "UNDER_REVIEW":
       return (
         <span className="inline-flex items-center gap-1.5 bg-[#E6F1FB] text-[#185FA5] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#B3D6F6]">
           <span className="material-symbols-outlined text-xs">hourglass_top</span>
-          <span>UNDER REVIEW</span>
+          <span>İNCELENİYOR</span>
         </span>
       );
     case "SUBMITTED":
@@ -54,7 +55,7 @@ export function ApplicationStatusBadge({ status }: { status: B2bApplicationItem[
       return (
         <span className="inline-flex items-center gap-1.5 bg-[#FAEEDA] text-[#854F0B] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F5D8A0]">
           <span className="material-symbols-outlined text-xs">new_releases</span>
-          <span>SUBMITTED</span>
+          <span>{t.submittedBadge}</span>
         </span>
       );
   }
@@ -238,12 +239,12 @@ export function AdminApplicationsTable({
                       {isEmailVerified ? (
                         <span className="inline-flex items-center gap-1.5 bg-[#E1F5EE] text-[#0F6E56] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#A6E5CE]">
                           <span className="material-symbols-outlined text-xs">mark_email_read</span>
-                          <span>Verified</span>
+                          <span>{t.verifiedBadge}</span>
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1.5 bg-[#FAEEDA] text-[#854F0B] text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-[#F5D8A0]" title="Applicant must verify corporate email address before admin review">
                           <span className="material-symbols-outlined text-xs">pending_actions</span>
-                          <span>Unverified</span>
+                          <span>{t.unverifiedBadge}</span>
                         </span>
                       )}
                     </td>

@@ -61,17 +61,17 @@ export function SuppliersTable({
                 <td className="py-3 px-4 font-bold text-xs uppercase font-mono">
                   {isActive && (
                     <span className="bg-emerald-500/10 text-emerald-500 px-2.5 py-1 rounded-none border border-emerald-500/30 inline-flex items-center gap-1">
-                      ✓ ACTIVE
+                      ✓ {t.activeStatus}
                     </span>
                   )}
                   {isPending && (
                     <span className="bg-amber-500/10 text-amber-500 px-2.5 py-1 rounded-none border border-amber-500/30 inline-flex items-center gap-1">
-                      ⏳ PENDING
+                      ⏳ {t.pendingStatus}
                     </span>
                   )}
                   {sup.status === "INACTIVE" && (
                     <span className="bg-red-500/10 text-red-500 px-2.5 py-1 rounded-none border border-red-500/30 inline-flex items-center gap-1">
-                      ✗ INACTIVE
+                      ✗ {t.inactiveStatus}
                     </span>
                   )}
                 </td>
@@ -85,7 +85,7 @@ export function SuppliersTable({
                         onClick={() => onVerify(sup.id)}
                         className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                       >
-                        {t.verification}
+                        {t.authorizeBtn}
                       </button>
                     )}
                     <button
@@ -117,7 +117,7 @@ export function SuppliersTable({
                             : "bg-emerald-600 text-white hover:bg-emerald-700"
                         }`}
                       >
-                        {sup.status === "ACTIVE" ? "Deactivate" : "Activate"}
+                        {sup.status === "ACTIVE" ? t.deactivateBtn : t.activeStatus}
                       </button>
                     )}
                   </div>

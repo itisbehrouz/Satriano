@@ -89,17 +89,17 @@ export function WholesalePricingTab({
                   <td className="py-3 px-4 font-mono font-bold">
                     {isGoodStock && (
                       <span className="text-emerald-500 inline-flex items-center gap-1">
-                        {item.stockLevel} units ✓
+                        {item.stockLevel} {t.unitsQty} ✓
                       </span>
                     )}
                     {isLowStock && (
                       <span className="text-amber-500 inline-flex items-center gap-1">
-                        {item.stockLevel} units ⚠
+                        {item.stockLevel} {t.unitsQty} ⚠
                       </span>
                     )}
                     {isOutOfStock && (
                       <span className="text-red-500 inline-flex items-center gap-1">
-                        0 units (Out of Stock) ✗
+                        0 {t.unitsQty} ({t.outOfStock || "Stok Tükenmiş"}) ✗
                       </span>
                     )}
                   </td>
