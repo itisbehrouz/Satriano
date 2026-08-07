@@ -7,8 +7,10 @@ import { ProductGrid } from "./ProductGrid";
 import { ProductCard, InventoryGarmentProduct } from "./ProductCard";
 import { ProductDetailModal } from "./ProductDetailModal";
 import { AddWholesaleProductModal, SupplierOption } from "./AddWholesaleProductModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export function CategoryInventoryClient() {
+  const { t } = useAdminLanguage();
   const categories: CategoryOption[] = [
     { id: "cat-tops", name: "Tops", productCount: 45, supplierCount: 3 },
     { id: "cat-bottoms", name: "Bottoms", productCount: 32, supplierCount: 5 },
@@ -156,10 +158,10 @@ export function CategoryInventoryClient() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
         <div>
           <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
-            INVENTORY BY CATEGORY
+            {t.inventoryByCategory}
           </h1>
           <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-            Browse ready-made product inventory aggregated across wholesale manufacturing partners by category.
+            {t.inventoryByCategorySub}
           </p>
         </div>
 
@@ -170,20 +172,20 @@ export function CategoryInventoryClient() {
             className="h-10 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">add_box</span>
-            + Add Wholesale Product
+            {t.addProduct}
           </button>
           <Link
             href="/admin/wholesale/suppliers"
             className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <span className="material-symbols-outlined text-base">store</span>
-            Manage Suppliers
+            {t.manageSuppliers}
           </Link>
           <Link
             href="/admin/wholesale"
             className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
           >
-            Dashboard Home
+            {t.backToDashboard}
           </Link>
         </div>
       </div>

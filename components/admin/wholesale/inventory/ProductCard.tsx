@@ -1,6 +1,7 @@
 "use client";
 
 import { ProductImageItem } from "../images/ProductImageUploader";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface InventoryGarmentProduct {
   id: string;
@@ -26,6 +27,7 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps) {
+  const { t } = useAdminLanguage();
   const mainImage = product.images[0]?.imageUrl || "/placeholder-suit.jpg";
   const isOutOfStock = product.stockLevel === 0;
   const isLowStock = product.stockLevel > 0 && product.stockLevel <= 5;
@@ -105,14 +107,14 @@ export function ProductCard({ product, onView, onEditMarkup }: ProductCardProps)
           onClick={() => onView(product)}
           className="flex-1 py-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer text-center"
         >
-          VIEW
+          {t.viewDetails}
         </button>
         <button
           type="button"
           onClick={() => onEditMarkup(product)}
           className="flex-1 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase rounded-none transition-colors cursor-pointer text-center"
         >
-          EDIT
+          {t.editBtn}
         </button>
       </div>
     </div>

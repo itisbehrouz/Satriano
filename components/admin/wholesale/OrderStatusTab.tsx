@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { OrderDetailModal, WholesaleOrderFull } from "./OrderDetailModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface OrderStatusTabProps {
   orders: WholesaleOrderFull[];
@@ -14,6 +15,7 @@ export function OrderStatusTab({
   onUpdateStatus,
   showToast,
 }: OrderStatusTabProps) {
+  const { t } = useAdminLanguage();
   const [selectedOrder, setSelectedOrder] = useState<WholesaleOrderFull | null>(null);
 
   const handleStatusSelect = (orderId: string, newStatus: WholesaleOrderFull["status"]) => {
@@ -37,10 +39,10 @@ export function OrderStatusTab({
       <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            WHOLESALE ORDER STATUS
+            {t.wholesaleTitle}
           </h2>
           <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-            Track ready-made stock orders and update fulfillment stages
+            {t.wholesaleSubtitle}
           </p>
         </div>
       </div>
@@ -49,12 +51,12 @@ export function OrderStatusTab({
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[var(--color-text-primary)] font-bold uppercase tracking-wider h-11">
-              <th className="py-3 px-4">Order</th>
-              <th className="py-3 px-4">Customer</th>
-              <th className="py-3 px-4 text-center">Units</th>
-              <th className="py-3 px-4 text-right">Total $</th>
-              <th className="py-3 px-4">Status</th>
-              <th className="py-3 px-4 text-right">Fulfillment</th>
+              <th className="py-3 px-4">{t.orderId}</th>
+              <th className="py-3 px-4">{t.clientCompany}</th>
+              <th className="py-3 px-4 text-center">{t.units}</th>
+              <th className="py-3 px-4 text-right">{t.totalOrderPrice}</th>
+              <th className="py-3 px-4">{t.status}</th>
+              <th className="py-3 px-4 text-right">{t.actions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--color-border)]">

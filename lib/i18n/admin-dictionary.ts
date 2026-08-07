@@ -72,6 +72,8 @@ export interface AdminDictionary {
   applicationLabel: string;
   reviewSpecAndProforma: string;
   reviewB2bApplication: string;
+  inventoryByCategorySub: string;
+  manageSuppliers: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -267,6 +269,8 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     applicationLabel: "Application",
     reviewSpecAndProforma: "Review Spec & Issue Proforma",
     reviewB2bApplication: "Review B2B Application & Authorize",
+    inventoryByCategorySub: "Browse ready-made product inventory aggregated across wholesale manufacturing partners by category.",
+    manageSuppliers: "Manage Suppliers",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -460,6 +464,8 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     applicationLabel: "Başvuru",
     reviewSpecAndProforma: "Spesifikasyonu İncele & Proforma Düzenle",
     reviewB2bApplication: "B2B Başvurusunu İncele & Yetkilendir",
+    inventoryByCategorySub: "Toptan üretici ortaklardan kategorilere göre gruplanmış stoktaki hazır ürünleri inceleyin.",
+    manageSuppliers: "Tedarikçileri Yönet",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

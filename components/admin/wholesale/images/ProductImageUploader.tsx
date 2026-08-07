@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface ProductImageItem {
   id: string;
@@ -14,6 +15,7 @@ export interface ProductImageUploaderProps {
 }
 
 export function ProductImageUploader({ images, onChangeImages }: ProductImageUploaderProps) {
+  const { t } = useAdminLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [failedImageIds, setFailedImageIds] = useState<Record<string, boolean>>({});
@@ -217,7 +219,7 @@ export function ProductImageUploader({ images, onChangeImages }: ProductImageUpl
                 onClick={() => setIsModalOpen(false)}
                 className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase text-xs hover:bg-[var(--color-surface)] cursor-pointer"
               >
-                CANCEL
+                {t.cancel}
               </button>
             </div>
           </div>

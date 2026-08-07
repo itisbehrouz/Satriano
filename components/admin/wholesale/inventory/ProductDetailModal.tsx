@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { InventoryGarmentProduct } from "./ProductCard";
 import { ProductImageUploader } from "../images/ProductImageUploader";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface ProductDetailModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ export function ProductDetailModal({
   onUpdateProduct,
   showToast,
 }: ProductDetailModalProps) {
+  const { t } = useAdminLanguage();
   const [markupPercentInput, setMarkupPercentInput] = useState<string>("");
   const [isEditingMarkup, setIsEditingMarkup] = useState(false);
 
@@ -208,7 +210,7 @@ export function ProductDetailModal({
             onClick={onClose}
             className="px-5 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer"
           >
-            CLOSE
+            {t.close}
           </button>
         </div>
       </div>

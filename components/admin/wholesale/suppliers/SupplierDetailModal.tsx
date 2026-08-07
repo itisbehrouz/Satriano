@@ -1,6 +1,7 @@
 "use client";
 
 import { SupplierRecord } from "./EditSupplierModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface SupplierDetailModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ export function SupplierDetailModal({
   onToggleStatus,
   onAddProduct,
 }: SupplierDetailModalProps) {
+  const { t } = useAdminLanguage();
   if (!isOpen || !supplier) return null;
 
   const isDeactivated = supplier.status === "INACTIVE";
@@ -121,7 +123,7 @@ export function SupplierDetailModal({
               }}
               className="px-4 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase rounded-none cursor-pointer flex items-center gap-1"
             >
-              + ADD PRODUCT
+              + {t.addProduct}
             </button>
           )}
           <button
@@ -129,7 +131,7 @@ export function SupplierDetailModal({
             onClick={() => onEdit(supplier)}
             className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase rounded-none cursor-pointer"
           >
-            EDIT
+            {t.editBtn}
           </button>
           <button
             type="button"
@@ -149,7 +151,7 @@ export function SupplierDetailModal({
             onClick={onClose}
             className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase text-xs hover:bg-[var(--color-surface)] cursor-pointer"
           >
-            CLOSE
+            {t.close}
           </button>
         </div>
       </div>

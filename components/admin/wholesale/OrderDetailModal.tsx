@@ -1,5 +1,7 @@
 "use client";
 
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
 export interface WholesaleOrderLineItem {
   productName: string;
   colorVariant: string;
@@ -30,6 +32,7 @@ export interface OrderDetailModalProps {
 }
 
 export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalProps) {
+  const { t } = useAdminLanguage();
   if (!isOpen || !order) return null;
 
   const statusLabel =
@@ -220,7 +223,7 @@ export function OrderDetailModal({ isOpen, order, onClose }: OrderDetailModalPro
             onClick={onClose}
             className="px-5 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
           >
-            CLOSE
+            {t.close}
           </button>
         </div>
       </div>
