@@ -434,10 +434,10 @@ export function AdminApplicationsTable({
                                 disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "APPROVED")}
                                 title={!isEmailVerified ? "Cannot approve: email not verified by applicant" : "Approve application"}
-                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-white bg-[#0F6E56] hover:bg-[#0B5341] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
                               >
                                 <span className="material-symbols-outlined text-base">check_circle</span>
-                                <span>Approve Application</span>
+                                <span>{t.approvePartner}</span>
                               </button>
                             )}
                             {app.status !== "REJECTED" && (
@@ -446,10 +446,10 @@ export function AdminApplicationsTable({
                                 disabled={isUpdating || !isEmailVerified}
                                 onClick={() => handleStatusUpdate(app.id, "REJECTED")}
                                 title={!isEmailVerified ? "Cannot reject: email not verified by applicant" : "Reject application"}
-                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
+                                className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#A32D2D] bg-white border border-[#F8B4B4] hover:bg-[#FCEBEB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5 cursor-pointer"
                               >
                                 <span className="material-symbols-outlined text-base">cancel</span>
-                                <span>Reject Application</span>
+                                <span>{t.rejectPartner}</span>
                               </button>
                             )}
                           </div>

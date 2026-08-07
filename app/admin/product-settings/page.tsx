@@ -1209,16 +1209,16 @@ function ProductSettingsContent() {
                 <button
                   type="button"
                   onClick={() => setShowAddCategoryModal(false)}
-                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded cursor-pointer"
                 >
-                  Cancel
+                  {t.cancel}
                 </button>
                 <button
                   type="submit"
                   disabled={catSubmitting}
-                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm cursor-pointer"
                 >
-                  {catSubmitting ? "Creating..." : "Create Category"}
+                  {catSubmitting ? t.creating : t.addCategoryBtn}
                 </button>
               </div>
             </form>
@@ -1339,16 +1339,16 @@ function ProductSettingsContent() {
                 <button
                   type="button"
                   onClick={() => setAddSubcategoryCategory(null)}
-                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded cursor-pointer"
                 >
-                  Cancel
+                  {t.cancel}
                 </button>
                 <button
                   type="submit"
                   disabled={subSubmitting}
-                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm cursor-pointer"
                 >
-                  {subSubmitting ? "Creating..." : "Create Subcategory"}
+                  {subSubmitting ? t.creating : t.addSubcategoryBtn}
                 </button>
               </div>
             </form>
@@ -1657,16 +1657,16 @@ function ProductSettingsContent() {
                 <button
                   type="button"
                   onClick={() => setAddProductContext(null)}
-                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded"
+                  className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#5B6B85] bg-[#F5F7FA] border border-[#D1D5DB] hover:bg-[#E5E7EB] rounded cursor-pointer"
                 >
-                  Cancel
+                  {t.cancel}
                 </button>
                 <button
                   type="submit"
                   disabled={prodSubmitting}
-                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
+                  className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm cursor-pointer"
                 >
-                  {prodSubmitting ? "Creating Product..." : "Create Product"}
+                  {prodSubmitting ? t.creating : t.createProduct}
                 </button>
               </div>
             </form>
@@ -1762,16 +1762,16 @@ function ProductSettingsContent() {
                 <button
                   type="button"
                   onClick={() => setEditProductContext(null)}
-                  className="px-4 py-2 border border-[#D1D5DB] rounded text-xs font-semibold text-[#5B6B85] hover:bg-gray-50 min-h-[44px]"
+                  className="px-4 py-2 border border-[#D1D5DB] rounded text-xs font-semibold text-[#5B6B85] hover:bg-gray-50 min-h-[44px] cursor-pointer"
                 >
-                  Cancel
+                  {t.cancel}
                 </button>
                 <button
                   type="submit"
                   disabled={savingProductEdit}
-                  className="px-5 py-2 bg-[#2E5AAC] text-white rounded text-xs font-bold hover:bg-[#1E3F7A] transition-colors min-h-[44px] disabled:opacity-50"
+                  className="px-5 py-2 bg-[#2E5AAC] text-white rounded text-xs font-bold hover:bg-[#1E3F7A] transition-colors min-h-[44px] disabled:opacity-50 cursor-pointer"
                 >
-                  {savingProductEdit ? "Saving..." : "Save Product Changes"}
+                  {savingProductEdit ? t.saving : t.saveProductChanges}
                 </button>
               </div>
             </form>

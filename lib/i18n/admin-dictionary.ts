@@ -143,6 +143,21 @@ export interface AdminDictionary {
   hexCode: string;
   basePrice: string;
   sortOrder: string;
+
+  // Buttons & Common Actions
+  cancel: string;
+  saving: string;
+  creating: string;
+  createProduct: string;
+  saveProductChanges: string;
+  addCategoryBtn: string;
+  addSubcategoryBtn: string;
+  addProductBtn: string;
+  dismiss: string;
+  refreshBtn: string;
+  searchBtn: string;
+  backToDashboard: string;
+  viewCatalog: string;
 }
 
 export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
@@ -289,6 +304,21 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     hexCode: "HEX Code",
     basePrice: "Base Price ($)",
     sortOrder: "Sort Order",
+
+    // Buttons & Common Actions
+    cancel: "Cancel",
+    saving: "Saving...",
+    creating: "Creating...",
+    createProduct: "Create Product",
+    saveProductChanges: "Save Product Changes",
+    addCategoryBtn: "Add Category",
+    addSubcategoryBtn: "Add Subcategory",
+    addProductBtn: "Add Product",
+    dismiss: "Dismiss",
+    refreshBtn: "Refresh",
+    searchBtn: "Search",
+    backToDashboard: "Executive Dashboard",
+    viewCatalog: "View Live Wholesale Catalog",
   },
   tr: {
     // Header & Navigation
@@ -433,5 +463,20 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     hexCode: "HEX Kodu",
     basePrice: "Taban Fiyat ($)",
     sortOrder: "Sıralama Düzeni",
+
+    // Buttons & Common Actions
+    cancel: "İptal",
+    saving: "Kaydediliyor...",
+    creating: "Oluşturuluyor...",
+    createProduct: "Ürün Oluştur",
+    saveProductChanges: "Ürün Değişikliklerini Kaydet",
+    addCategoryBtn: "Kategori Ekle",
+    addSubcategoryBtn: "Alt Kategori Ekle",
+    addProductBtn: "Ürün Ekle",
+    dismiss: "Kapat",
+    refreshBtn: "Yenile",
+    searchBtn: "Ara",
+    backToDashboard: "Yönetici Paneli",
+    viewCatalog: "Canlı Toptan Kataloğu Gör",
   },
 };

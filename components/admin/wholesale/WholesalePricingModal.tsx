@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface WholesalePricingModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export function WholesalePricingModal({
   onClose,
   onSave,
 }: WholesalePricingModalProps) {
+  const { t } = useAdminLanguage();
   const [priceInput, setPriceInput] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
@@ -109,13 +111,13 @@ export function WholesalePricingModal({
               onClick={onClose}
               className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
             >
-              CANCEL
+              {t.cancel}
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
             >
-              SAVE PRICE
+              {t.saveChanges}
             </button>
           </div>
         </form>

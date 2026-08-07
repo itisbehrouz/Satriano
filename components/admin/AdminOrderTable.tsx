@@ -237,16 +237,16 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                           );
                           setActionError(null);
                         }}
-                        className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-3 py-1.5 rounded-none transition-colors whitespace-nowrap"
+                        className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-3 py-1.5 rounded-none transition-colors whitespace-nowrap cursor-pointer"
                       >
-                        Set Price &amp; Send Proforma
+                        {t.generateProforma}
                       </button>
                     )}
 
                     {activeModalOrderId === order.id && (
                       <div className="bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 p-3 rounded-none text-left mt-2 w-full max-w-xs">
                         <label className="block text-[11px] font-semibold text-[var(--color-text-primary)] mb-1">
-                          Set Final Price / Unit ($ USD):
+                          {t.finalUnitPrice} ($ USD):
                         </label>
                         <div className="flex gap-2">
                           <input
@@ -261,9 +261,9 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
                             type="button"
                             disabled={updatingId === order.id}
                             onClick={() => handleApproveAndSendProforma(order)}
-                            className="bg-[var(--color-status-success)] hover:opacity-90 text-white text-xs font-semibold px-2.5 py-1 rounded-none whitespace-nowrap"
+                            className="bg-[var(--color-status-success)] hover:opacity-90 text-white text-xs font-semibold px-2.5 py-1 rounded-none whitespace-nowrap cursor-pointer"
                           >
-                            Approve
+                            {t.issueProformaBtn}
                           </button>
                         </div>
                         {actionError && (

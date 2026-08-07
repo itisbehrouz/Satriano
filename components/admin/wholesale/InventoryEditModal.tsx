@@ -1,31 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface InventoryEditModalProps {
   isOpen: boolean;
   productName: string;
-  colorVariant: string;
-  sizeStock: Record<string, number>;
+  colorVariant?: string;
+  colorVariantName?: string;
+  sizeStock?: Record<string, number>;
+  sizeInventory?: Record<string, number>;
   onClose: () => void;
-  onSave: (newSizeStock: Record<string, number>) => void;
+  onSave: (newInventory: Record<string, number>) => void;
 }
 
 export function InventoryEditModal({
   isOpen,
   productName,
   colorVariant,
+  colorVariantName,
   sizeStock,
+  sizeInventory,
   onClose,
   onSave,
 }: InventoryEditModalProps) {
+  const { t } = useAdminLanguage();
   const [tempStock, setTempStock] = useState<Record<string, number>>({});
+  const activeColorVariant = colorVariantName ?? colorVariant ?? "";
+  const activeSizeStock = sizeInventory ?? sizeStock ?? {};
 
   useEffect(() => {
-    if (sizeStock) {
-      setTempStock({ ...sizeStock });
+    if (activeSizeStock) {
+      setTempStock({ ...activeSizeStock });
     }
-  }, [sizeStock, isOpen]);
+  }, [sizeInventory, sizeStock, isOpen]);
 
   if (!isOpen) return null;
 
@@ -61,7 +69,7 @@ export function InventoryEditModal({
               EDIT INVENTORY: {productName}
             </h2>
             <div className="text-xs font-semibold text-[var(--color-accent)] mt-0.5">
-              Color Variant: {colorVariant}
+              Color Variant: {activeColorVariant}
             </div>
           </div>
           <button
@@ -139,13 +147,13 @@ export function InventoryEditModal({
               onClick={onClose}
               className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
             >
-              CANCEL
+              {t.cancel}
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
             >
-              SAVE STOCK
+              {t.saveChanges}
             </button>
           </div>
         </form>

@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-07)
 
 ## Corpus Check
-- 239 files · ~1,462,839 words
+- 239 files · ~1,463,514 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 884 nodes · 1380 edges · 89 communities (74 shown, 15 thin omitted)
+- 884 nodes · 1400 edges · 89 communities (74 shown, 15 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `32c2baa6`
+- Built from commit: `d675ced5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -70,27 +70,27 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `verifyAdminRequest()` - 35 edges
-2. `SiteFooter()` - 16 edges
-3. `compilerOptions` - 16 edges
-4. `formatCents()` - 15 edges
-5. `SiteHeader()` - 13 edges
-6. `verifyCustomerToken()` - 13 edges
-7. `useAdminAuth()` - 11 edges
-8. `useAdminLanguage()` - 10 edges
+2. `useAdminLanguage()` - 22 edges
+3. `SiteFooter()` - 16 edges
+4. `compilerOptions` - 16 edges
+5. `formatCents()` - 15 edges
+6. `SiteHeader()` - 13 edges
+7. `verifyCustomerToken()` - 13 edges
+8. `useAdminAuth()` - 11 edges
 9. `verifyCustomerRequest()` - 10 edges
 10. `useCustomerSession()` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ApplicationsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
-  app/admin/applications/page.tsx → components/admin/AdminAuthContext.tsx
-- `AdminOrdersContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
-  app/admin/orders/page.tsx → components/admin/AdminAuthContext.tsx
 - `ProductSettingsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
   app/admin/product-settings/page.tsx → components/admin/AdminAuthContext.tsx
+- `ProductSettingsContent()` --calls--> `useAdminLanguage()`  [EXTRACTED]
+  app/admin/product-settings/page.tsx → components/admin/AdminLanguageContext.tsx
 - `PATCH()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
   app/api/admin/catalog/route.ts → lib/adminAuth.ts
 - `POST()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
   app/api/admin/catalog/upload/route.ts → lib/adminAuth.ts
+- `GET()` --calls--> `verifyAdminRequest()`  [EXTRACTED]
+  app/api/admin/metrics/route.ts → lib/adminAuth.ts
 
 ## Import Cycles
 - None detected.
@@ -122,8 +122,8 @@ Cohesion: 0.05
 Nodes (45): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOption, SizeSystem, slugify() (+37 more)
 
 ### Community 6 - "Page Admin Tabs"
-Cohesion: 0.05
-Nodes (42): APPLICATION_TABS, ApplicationsContent(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminOrdersContent() (+34 more)
+Cohesion: 0.06
+Nodes (42): ApplicationsContent(), getApplicationTabs(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminOrdersContent() (+34 more)
 
 ### Community 7 - "Wholesale Admin Page"
 Cohesion: 0.08
@@ -246,7 +246,7 @@ Cohesion: 0.40
 Nodes (3): adapter, pool, prisma
 
 ## Knowledge Gaps
-- **281 isolated node(s):** `APPLICATION_TABS`, `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem` (+276 more)
+- **279 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+274 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -254,11 +254,11 @@ Nodes (3): adapter, pool, prisma
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `formatCents()` connect `Page React Account` to `App Page Capabilities`, `Page Admin Tabs`, `Page Default Size`?**
-  _High betweenness centrality (0.125) - this node is a cross-community bridge._
+  _High betweenness centrality (0.150) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
-  _High betweenness centrality (0.113) - this node is a cross-community bridge._
-- **What connects `APPLICATION_TABS`, `AntiGravityViz`, `GlobalCommandPalette` to the rest of the system?**
-  _281 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.120) - this node is a cross-community bridge._
+- **What connects `AntiGravityViz`, `GlobalCommandPalette`, `SubItem` to the rest of the system?**
+  _279 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Route Post() Get()` be split into smaller, more focused modules?**
   _Cohesion score 0.06966618287373004 - nodes in this community are weakly interconnected._
 - **Should `Page Default Size` be split into smaller, more focused modules?**

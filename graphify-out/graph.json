@@ -714,8 +714,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "metrics/route.ts"
     },
     {
@@ -725,8 +725,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route_get",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "get()"
     },
     {
@@ -2419,8 +2419,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2430,8 +2430,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "wholesalepage()"
     },
     {
@@ -3024,8 +3024,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.test.tsx"
     },
     {
@@ -3035,8 +3035,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test_mockmetricsdata",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "mockmetricsdata"
     },
     {
@@ -3046,8 +3046,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.tsx"
     },
     {
@@ -3057,8 +3057,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetricsprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsprops"
     },
     {
@@ -3068,8 +3068,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics()"
     },
     {
@@ -3684,30 +3684,30 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "inventoryeditmodal.tsx"
     },
     {
       "label": "InventoryEditModalProps",
       "file_type": "code",
       "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "inventoryeditmodalprops"
     },
     {
       "label": "InventoryEditModal()",
       "file_type": "code",
       "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
-      "source_location": "L14",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "inventoryeditmodal()"
     },
     {
@@ -3904,30 +3904,30 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "wholesalepricingmodal.tsx"
     },
     {
       "label": "WholesalePricingModalProps",
       "file_type": "code",
       "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "wholesalepricingmodalprops"
     },
     {
       "label": "WholesalePricingModal()",
       "file_type": "code",
       "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "wholesalepricingmodal()"
     },
     {
@@ -6401,8 +6401,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics_test",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminmetrics.test.ts"
     },
     {
@@ -6412,8 +6412,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminmetrics.ts"
     },
     {
@@ -6423,8 +6423,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminmetrics_statusdistributionitem",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "statusdistributionitem"
     },
     {
@@ -6434,8 +6434,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_adminmetrics_dashboardmetricsdata",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsdata"
     },
     {
@@ -6445,8 +6445,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_adminmetrics_all_statuses",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "all_statuses"
     },
     {
@@ -6456,8 +6456,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "lib_adminmetrics_getadmindashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "getadmindashboardmetrics()"
     },
     {
@@ -17285,6 +17285,30 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_inventoryeditmodal",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_wholesalepricingmodal",
+      "target": "components_admin_adminlanguagecontext",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "field",
       "confidence": "EXTRACTED",
@@ -17402,6 +17426,54 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_wholesale_adminwholesaleclient_adminwholesaleclient",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_inventoryeditmodal",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodal",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_wholesalepricingmodal",
+      "target": "components_admin_adminlanguagecontext_useadminlanguage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodal",
       "target": "components_admin_adminlanguagecontext_useadminlanguage"
     },
     {
@@ -18525,7 +18597,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
-      "source_location": "L14",
+      "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_wholesale_inventoryeditmodal",
@@ -18536,7 +18608,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/wholesale/InventoryEditModal.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_wholesale_inventoryeditmodal",
@@ -18762,7 +18834,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_wholesale_wholesalepricingmodal",
@@ -18773,7 +18845,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/wholesale/WholesalePricingModal.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_wholesale_wholesalepricingmodal",
@@ -23506,7 +23578,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/i18n/admin-dictionary.ts",
-      "source_location": "L148",
+      "source_location": "L163",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_i18n_admin_dictionary",
@@ -26018,5 +26090,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d675ced5ab5a7552621e55b33db24eef26a261e8"
+  "built_at_commit": "dce0dd4b941d314c3174be8efdeda500ede5e1e6"
 }

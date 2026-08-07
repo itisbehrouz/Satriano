@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-07)
 
 ## Corpus Check
-- 239 files · ~1,463,514 words
+- 239 files · ~1,463,670 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 884 nodes · 1400 edges · 89 communities (74 shown, 15 thin omitted)
+- 884 nodes · 1406 edges · 89 communities (74 shown, 15 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d675ced5`
+- Built from commit: `dce0dd4b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -70,7 +70,7 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `verifyAdminRequest()` - 35 edges
-2. `useAdminLanguage()` - 22 edges
+2. `useAdminLanguage()` - 26 edges
 3. `SiteFooter()` - 16 edges
 4. `compilerOptions` - 16 edges
 5. `formatCents()` - 15 edges
@@ -123,11 +123,11 @@ Nodes (45): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOpt
 
 ### Community 6 - "Page Admin Tabs"
 Cohesion: 0.06
-Nodes (42): ApplicationsContent(), getApplicationTabs(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminOrdersContent() (+34 more)
+Nodes (38): ApplicationsContent(), getApplicationTabs(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminOrdersContent() (+30 more)
 
 ### Community 7 - "Wholesale Admin Page"
-Cohesion: 0.08
-Nodes (24): metadata, AddColorVariantModal(), AddColorVariantModalProps, AdminWholesaleClient(), InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct (+16 more)
+Cohesion: 0.10
+Nodes (20): metadata, AddColorVariantModal(), AddColorVariantModalProps, AdminWholesaleClient(), ColorVariant, InventoryProduct, InventoryTab(), InventoryTabProps (+12 more)
 
 ### Community 8 - "@prisma Three Cmdk"
 Cohesion: 0.04
@@ -138,8 +138,8 @@ Cohesion: 0.12
 Nodes (19): CustomerOrder, CustomerOrderLine, CompanyCard(), CompanyCardProps, QuickActionButtons(), QuickLinksSection(), RecentOrdersSection(), RecentOrdersSectionProps (+11 more)
 
 ### Community 10 - "Page React Account"
-Cohesion: 0.10
-Nodes (19): AccountPage(), ProformaPage(), ProformaPageProps, TransactionalHeader(), mockPush, BillingTab(), CompanyInfoTab(), CompanyInfoTabProps (+11 more)
+Cohesion: 0.07
+Nodes (27): GET(), AccountPage(), ProformaPage(), ProformaPageProps, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, TransactionalHeader() (+19 more)
 
 ### Community 11 - ".next Types Dom"
 Cohesion: 0.07
@@ -158,7 +158,7 @@ Cohesion: 0.33
 Nodes (6): POST(), createdCompanyIds, postProforma(), sendProformaEmail(), generateProformaPdf(), ProformaPdfData
 
 ### Community 16 - "Page Ethics Ethicspage()"
-Cohesion: 0.15
+Cohesion: 0.14
 Nodes (7): CATEGORY_IMAGES, PageProps, ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, SiteHeader(), AccountDropdown(), AccountDropdownProps
 
 ### Community 17 - "App Layout Baskervville"
@@ -166,7 +166,7 @@ Cohesion: 0.18
 Nodes (9): baskervville, inter, metadata, viewport, AIFaqAssistantModal, B2BSupportDock, ClientLayoutModals(), CookieConsentModal (+1 more)
 
 ### Community 18 - "App Wholesale Page"
-Cohesion: 0.20
+Cohesion: 0.22
 Nodes (8): Category, CATEGORY_IMAGES, Fabric, Fit, ProductWithRelations, ReadyStockProduct, Subcategory, WholesaleCatalogClient()
 
 ### Community 19 - "Audit Codebase Health"
@@ -253,7 +253,7 @@ Nodes (3): adapter, pool, prisma
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `formatCents()` connect `Page React Account` to `App Page Capabilities`, `Page Admin Tabs`, `Page Default Size`?**
+- **Why does `formatCents()` connect `Page React Account` to `App Page Capabilities`, `Page Default Size`?**
   _High betweenness centrality (0.150) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
   _High betweenness centrality (0.120) - this node is a cross-community bridge._
