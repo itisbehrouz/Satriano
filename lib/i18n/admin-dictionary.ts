@@ -68,6 +68,10 @@ export interface AdminDictionary {
   submittedDate: string;
   action: string;
   review: string;
+  orderLabel: string;
+  applicationLabel: string;
+  reviewSpecAndProforma: string;
+  reviewB2bApplication: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -259,6 +263,10 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     submittedDate: "Submitted Date",
     action: "Action",
     review: "Review",
+    orderLabel: "Order",
+    applicationLabel: "Application",
+    reviewSpecAndProforma: "Review Spec & Issue Proforma",
+    reviewB2bApplication: "Review B2B Application & Authorize",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -448,6 +456,10 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     submittedDate: "Gönderim Tarihi",
     action: "Eylem",
     review: "İncele",
+    orderLabel: "Sipariş",
+    applicationLabel: "Başvuru",
+    reviewSpecAndProforma: "Spesifikasyonu İncele & Proforma Düzenle",
+    reviewB2bApplication: "B2B Başvurusunu İncele & Yetkilendir",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

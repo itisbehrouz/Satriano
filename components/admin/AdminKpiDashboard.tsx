@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import type { DashboardMetricsData } from "@/lib/adminMetrics";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 const DashboardMetrics = dynamic(
   () => import("@/components/admin/DashboardMetrics").then((mod) => mod.DashboardMetrics),
@@ -16,6 +17,7 @@ const DashboardMetrics = dynamic(
 );
 
 export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?: boolean }) {
+  const { t } = useAdminLanguage();
   const [metrics, setMetrics] = useState<DashboardMetricsData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -89,10 +91,10 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-primary)] flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              Recent Pending Actions
+              {t.recentPendingActions}
             </h3>
             <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5">
-              5 most recent items requiring executive admin review and approval.
+              {t.recentPendingActionsSub}
             </p>
           </div>
           <button
@@ -101,7 +103,7 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
             className="text-xs font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1 cursor-pointer"
           >
             <span className="material-symbols-outlined text-sm">refresh</span>
-            <span>Refresh</span>
+            <span>{t.refresh}</span>
           </button>
         </div>
 
@@ -110,19 +112,19 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
             <span className="material-symbols-outlined text-2xl text-[var(--color-status-success)] mb-1 block">
               task_alt
             </span>
-            <span>No pending admin actions. All specs and applications are up to date.</span>
+            <span>{t.noPendingActions}</span>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[11px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                  <th className="py-2.5 px-4">Item &amp; Type</th>
-                  <th className="py-2.5 px-4">Corporate Client</th>
-                  <th className="py-2.5 px-4">Action Needed</th>
-                  <th className="py-2.5 px-4 text-right">Value</th>
-                  <th className="py-2.5 px-4">Submitted Date</th>
-                  <th className="py-2.5 px-4 text-right">Action</th>
+                  <th className="py-2.5 px-4">{t.itemType}</th>
+                  <th className="py-2.5 px-4">{t.corporateClient}</th>
+                  <th className="py-2.5 px-4">{t.actionNeeded}</th>
+                  <th className="py-2.5 px-4 text-right">{t.value}</th>
+                  <th className="py-2.5 px-4">{t.submittedDate}</th>
+                  <th className="py-2.5 px-4 text-right">{t.action}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-primary)]">
@@ -137,7 +139,7 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
                               : "bg-[var(--color-accent)]/10 text-[var(--color-accent)] border-[var(--color-accent)]/30"
                           }`}
                         >
-                          {action.type}
+                          {action.type === "ORDER" ? t.orderLabel : t.applicationLabel}
                         </span>
                         <span className="font-semibold text-[var(--color-text-primary)]">{action.title}</span>
                       </div>
@@ -149,7 +151,13 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span className="text-[var(--color-text-secondary)] font-medium">{action.actionNeeded}</span>
+                      <span className="text-[var(--color-text-secondary)] font-medium">
+                        {action.actionNeeded === "Review Spec & Issue Proforma"
+                          ? t.reviewSpecAndProforma
+                          : action.actionNeeded === "Review B2B Application & Authorize"
+                          ? t.reviewB2bApplication
+                          : action.actionNeeded}
+                      </span>
                     </td>
                     <td className="py-3 px-4 text-right font-mono font-semibold text-[var(--color-text-primary)] tabular-nums">
                       {action.amountCents !== null
@@ -171,7 +179,7 @@ export function AdminKpiDashboard({ isAuthenticated = true }: { isAuthenticated?
                         href={action.link}
                         className="inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--color-accent)] hover:underline"
                       >
-                        <span>Review</span>
+                        <span>{t.review}</span>
                         <span>→</span>
                       </Link>
                     </td>

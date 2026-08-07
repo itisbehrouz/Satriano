@@ -148,10 +148,10 @@ function AdminDashboardContent() {
               <span className="material-symbols-outlined text-xl">receipt_long</span>
             </div>
             <h3 className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-              Order Ledger
+              {t.orderLedger}
             </h3>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              View and manage all active B2B orders, issue proformas, and set statuses.
+              {t.orderLedgerSubtitle}
             </p>
           </Link>
 
@@ -163,10 +163,10 @@ function AdminDashboardContent() {
               <span className="material-symbols-outlined text-xl">storefront</span>
             </div>
             <h3 className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-              Wholesale Management
+              {t.wholesaleTitle}
             </h3>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              Suppliers, category inventory, wholesale price matrix, and offer inbox.
+              {t.wholesaleSubtitle}
             </p>
           </Link>
 
@@ -178,10 +178,10 @@ function AdminDashboardContent() {
               <span className="material-symbols-outlined text-xl">assignment_ind</span>
             </div>
             <h3 className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-              B2B Applications
+              {t.applicationsTitle}
             </h3>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              Review company verification requests and issue magic link authorizations.
+              {t.applicationsSubtitle}
             </p>
           </Link>
 
@@ -193,10 +193,10 @@ function AdminDashboardContent() {
               <span className="material-symbols-outlined text-xl">inventory_2</span>
             </div>
             <h3 className="text-sm font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-              Garment &amp; Fabric Settings
+              {t.productSettingsTitle}
             </h3>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              Configure categories, subcategories, size matrices, and fabric price tiers.
+              {t.productSettingsSubtitle}
             </p>
           </Link>
         </div>
