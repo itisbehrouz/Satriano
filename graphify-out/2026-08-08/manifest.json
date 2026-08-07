@@ -105,9 +105,9 @@
     "semantic_hash": "a7614c205a470c723a34e33101efe1ba"
   },
   "app/api/admin/wholesale/products/[id]/route.ts": {
-    "mtime": 1786145442.8062313,
-    "ast_hash": "cc208ae8f89c643117d6b63476dd7d04",
-    "semantic_hash": ""
+    "mtime": 1785665581.1124291,
+    "ast_hash": "68afe88b2a7fe8da65f01b9f661e4559",
+    "semantic_hash": "68afe88b2a7fe8da65f01b9f661e4559"
   },
   "app/api/admin/wholesale/products/products.test.ts": {
     "mtime": 1785666244.1291227,
@@ -380,9 +380,9 @@
     "semantic_hash": "ab8edcaf87a6ed2a4cd53d925f27b847"
   },
   "components/WholesaleCatalogClient.tsx": {
-    "mtime": 1786145462.9292202,
-    "ast_hash": "359999ee0e62cb3a3ab7ad2c72660fd8",
-    "semantic_hash": ""
+    "mtime": 1785680410.7910545,
+    "ast_hash": "6bff9c2ecd75087042d9165fb4b1a433",
+    "semantic_hash": "6bff9c2ecd75087042d9165fb4b1a433"
   },
   "components/admin/AdminApplicationsTable.tsx": {
     "mtime": 1786115459.690253,
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "components/configurator/ConfiguratorClient.tsx": {
-    "mtime": 1786145562.5194216,
-    "ast_hash": "0ab5c31e7a08a9c61ec1839cdd389252",
+    "mtime": 1785889266.1012146,
+    "ast_hash": "10449d3acdb03f456a7c834a236d0736",
     "semantic_hash": ""
   },
   "components/configurator/ConfiguratorPortal.test.tsx": {
@@ -1245,8 +1245,8 @@
     "semantic_hash": ""
   },
   "lib/m2oCart.ts": {
-    "mtime": 1786145474.1852276,
-    "ast_hash": "5b76f9fc551c96989f054a7946abc576",
+    "mtime": 1785886500.2045217,
+    "ast_hash": "e5e9eca606b0b7b76e52c09c77f032dd",
     "semantic_hash": ""
   },
   "public/images/slider/bags.png": {
@@ -1420,8 +1420,8 @@
     "semantic_hash": ""
   },
   "components/admin/FabricColorPanel.tsx": {
-    "mtime": 1786145455.0267165,
-    "ast_hash": "297d1a0baa1eb825637105c083942684",
+    "mtime": 1786113794.5822647,
+    "ast_hash": "691fe7fc604629a0cdc5b40589201bd1",
     "semantic_hash": ""
   },
   "components/admin/FabricColorTree.tsx": {
@@ -1590,8 +1590,8 @@
     "semantic_hash": ""
   },
   "lib/types.ts": {
-    "mtime": 1786145498.4519653,
-    "ast_hash": "34197e6665039949a4f12000983bad41",
+    "mtime": 1786145077.29358,
+    "ast_hash": "83b264ab06c679de2680658384f6c730",
     "semantic_hash": ""
   },
   "docs/AGENT_1_MULTI_MATERIAL_ARCHITECTURE.md": {
@@ -1617,41 +1617,6 @@
   "sa-roadmap.md": {
     "mtime": 1786140271.988286,
     "ast_hash": "576d467409c6c38aee712489c06b399c",
-    "semantic_hash": ""
-  },
-  "app/api/admin/catalog/fabric/[id]/route.ts": {
-    "mtime": 1786145517.9283652,
-    "ast_hash": "db97ceab3b040f457143914a4f35652c",
-    "semantic_hash": ""
-  },
-  "app/api/wholesale/filters/route.ts": {
-    "mtime": 1786145444.886242,
-    "ast_hash": "478931da74645a6df02d6567663b4a2f",
-    "semantic_hash": ""
-  },
-  "components/admin/FabricPriceRangeEditor.tsx": {
-    "mtime": 1786145534.343725,
-    "ast_hash": "2cbda96ba888c04fdcb4d202ae14d5d9",
-    "semantic_hash": ""
-  },
-  "components/admin/wholesale/DeleteWholesaleProductModal.tsx": {
-    "mtime": 1786145438.9263873,
-    "ast_hash": "8545557b617bf245186c436ad4eebe9c",
-    "semantic_hash": ""
-  },
-  "components/admin/wholesale/EditWholesaleProductModal.tsx": {
-    "mtime": 1786145436.6089592,
-    "ast_hash": "e85405962a57e071420a50a6beb06596",
-    "semantic_hash": ""
-  },
-  "components/configurator/MaterialComponentSelector.tsx": {
-    "mtime": 1786145624.0145478,
-    "ast_hash": "8e0e3ab6fdd5599ab93e7ee59b5b1783",
-    "semantic_hash": ""
-  },
-  "lib/orderSubmission.ts": {
-    "mtime": 1786145476.288396,
-    "ast_hash": "818b518e5f9fc75ca5c8886209092b35",
     "semantic_hash": ""
   }
 }

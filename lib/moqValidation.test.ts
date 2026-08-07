@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateOrderMoq, MoqValidationItem } from "./moqValidation";
+import { validateOrderMoq, validateMultiMaterialMoq, MoqValidationItem } from "./moqValidation";
 
 describe("Two-Threshold MOQ Validation Engine (lib/moqValidation.ts)", () => {
   const fabricConfig = {
@@ -156,4 +156,77 @@ describe("Two-Threshold MOQ Validation Engine (lib/moqValidation.ts)", () => {
     ]);
     expect(exactColorResult.valid).toBe(true);
   });
+
+  describe("Multi-Material MOQ Validation Engine", () => {
+    it("validates multi-material items with sufficient quantity", () => {
+      const items = [
+        {
+          materialId: "fab_wool",
+          materialName: "Italian Wool Blend",
+          colorId: "col_navy",
+          component: "MAIN_FABRIC",
+          quantity: 60,
+          moqPerFabric: 50,
+          moqPerColor: 20,
+        },
+        {
+          materialId: "fab_viscose",
+          materialName: "Viscose Lining",
+          colorId: "col_black",
+          component: "LINING",
+          quantity: 60,
+          moqPerFabric: 50,
+          moqPerColor: 20,
+        },
+      ];
+
+      const result = validateMultiMaterialMoq(items);
+      expect(result.valid).toBe(true);
+    });
+
+    it("rejects multi-material item when quantity is below fabric MOQ", () => {
+      const items = [
+        {
+          materialId: "fab_wool",
+          materialName: "Italian Wool Blend",
+          colorId: "col_navy",
+          component: "MAIN_FABRIC",
+          quantity: 30,
+          moqPerFabric: 50,
+          moqPerColor: 20,
+        },
+      ];
+
+      const result = validateMultiMaterialMoq(items);
+      expect(result.valid).toBe(false);
+      if (!result.valid) {
+        expect(result.code).toBe("MOQ_FABRIC_MINIMUM");
+        expect(result.materialId).toBe("fab_wool");
+      }
+    });
+
+    it("evaluates combined multi-fabric MOQ when option provided", () => {
+      const items = [
+        {
+          materialId: "fab_wool",
+          component: "MAIN_FABRIC",
+          quantity: 50,
+          moqPerFabric: 50,
+        },
+        {
+          materialId: "fab_viscose",
+          component: "LINING",
+          quantity: 50,
+          moqPerFabric: 50,
+        },
+      ];
+
+      const result = validateMultiMaterialMoq(items, { combinedMultiFabricMoq: 200 });
+      expect(result.valid).toBe(false);
+      if (!result.valid) {
+        expect(result.code).toBe("MOQ_COMBINED_MULTI_FABRIC");
+      }
+    });
+  });
 });
+

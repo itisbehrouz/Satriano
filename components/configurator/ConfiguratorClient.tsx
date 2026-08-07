@@ -13,6 +13,7 @@ import { PriceSidebar } from "@/components/configurator/PriceSidebar";
 import { toSizeQuantityArray } from "@/lib/configuratorLogic";
 import { addToM2OCart } from "@/lib/m2oCart";
 import { validateOrderMoq, type MoqValidationItem } from "@/lib/moqValidation";
+import { MaterialComponentSelector, type MaterialSelection } from "@/components/configurator/MaterialComponentSelector";
 
 interface ConfiguratorClientProps {
   productId?: string;
@@ -43,6 +44,8 @@ export function ConfiguratorClient({
   const [selectedColorIds, setSelectedColorIds] = useState<string[]>([]);
   const [selectedFitId, setSelectedFitId] = useState(fits[0]?.id ?? "");
   const [activeRegion, setActiveRegion] = useState<"EU" | "US">("EU");
+  const [useMultiMaterial, setUseMultiMaterial] = useState(false);
+  const [multiMaterialSelections, setMultiMaterialSelections] = useState<MaterialSelection[]>([]);
   
   // Matrix quantities: colorId -> sizeLabel -> qty
   const [matrixQuantities, setMatrixQuantities] = useState<Record<string, Record<string, number>>>({});
@@ -344,17 +347,36 @@ export function ConfiguratorClient({
                 </span>
                 Material &amp; Fabric Selection
               </h2>
-              <span className="text-xs font-mono text-[var(--color-accent)] font-semibold bg-[var(--color-accent)]/10 px-2.5 py-1 rounded-none border border-[var(--color-accent)]/20">
-                {fabrics.length} Fabrics Available
-              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setUseMultiMaterial(!useMultiMaterial)}
+                  className="text-xs font-semibold text-blue-600 hover:text-blue-800 underline mr-2"
+                >
+                  {useMultiMaterial ? "← Standard Fabric Selection" : "→ Multi-Material Specifications (Advanced)"}
+                </button>
+                <span className="text-xs font-mono text-[var(--color-accent)] font-semibold bg-[var(--color-accent)]/10 px-2.5 py-1 rounded-none border border-[var(--color-accent)]/20">
+                  {fabrics.length} Fabrics Available
+                </span>
+              </div>
             </div>
 
-            {selectedFabric && (
-              <FabricPicker
-                fabrics={fabrics}
-                selectedFabricId={selectedFabricId}
-                onSelect={handleFabricSelect}
+            {useMultiMaterial ? (
+              <MaterialComponentSelector
+                productId={productId || "prod_default"}
+                availableMaterials={fabrics}
+                requiredComponents={["MAIN_FABRIC", "LINING"]}
+                onMaterialsChange={setMultiMaterialSelections}
+                isMultiMaterial={true}
               />
+            ) : (
+              selectedFabric && (
+                <FabricPicker
+                  fabrics={fabrics}
+                  selectedFabricId={selectedFabricId}
+                  onSelect={handleFabricSelect}
+                />
+              )
             )}
           </section>
 

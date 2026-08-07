@@ -104,6 +104,24 @@ model Product {
   fabrics                Fabric[]
   fits                   ProductFit[]
   orderLines             OrderLine[]
+  materialComponents     ProductMaterialComponent[]
+}
+
+enum MaterialComponent {
+  MAIN_FABRIC
+  LINING
+  TRIM
+  COLLAR
+  CUFF
+  SOLE
+  HEEL
+  UPPER
+  BACKING
+  FILL
+  INTERFACING
+  BINDING
+  LABEL
+  OTHER
 }
 
 model Fit {
@@ -173,8 +191,9 @@ model Fabric {
   active        Boolean  @default(true)
   createdAt     DateTime @default(now())
 
-  colors     FabricColor[]
-  orderLines OrderLine[]
+  colors            FabricColor[]
+  orderLines        OrderLine[]
+  lineItemMaterials LineItemMaterial[] @relation("LineItemMaterials")
 
   @@unique([name, productId])
 }
@@ -183,6 +202,7 @@ enum ColorSource {
   PLACEHOLDER
   SUPPLIER_VERIFIED
   MANUAL
+  MANUAL_OVERRIDE
 }
 
 model FabricColor {
@@ -196,7 +216,8 @@ model FabricColor {
   sortOrder Int         @default(0)
   createdAt DateTime    @default(now())
 
-  orderLines OrderLine[]
+  orderLines        OrderLine[]
+  lineItemMaterials LineItemMaterial[]
 
   @@unique([fabricId, name])
 }
@@ -230,7 +251,7 @@ model Order {
 model OrderLine {
   id             String       @id @default(cuid())
   orderId        String
-  fabricId       String
+  fabricId       String?
   colorId        String?
   selectedColor  String?
   productId      String?
@@ -243,11 +264,54 @@ model OrderLine {
   unitPriceCents Int
 
   order      Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  fabric     Fabric       @relation(fields: [fabricId], references: [id])
+  fabric     Fabric?      @relation(fields: [fabricId], references: [id])
   color      FabricColor? @relation(fields: [colorId], references: [id], onDelete: SetNull)
   product    Product?     @relation(fields: [productId], references: [id], onDelete: SetNull)
   fit        Fit?         @relation(fields: [fitId], references: [id], onDelete: SetNull)
   sizeSystem SizeSystem?  @relation(fields: [sizeSystemId], references: [id], onDelete: SetNull)
+
+  materials LineItemMaterial[]
+}
+
+/// Line-item material assignments (supports multi-material specs)
+model LineItemMaterial {
+  id          String   @id @default(cuid())
+  orderLineId String
+  orderLine   OrderLine @relation(fields: [orderLineId], references: [id], onDelete: Cascade)
+
+  materialId  String
+  material    Fabric    @relation("LineItemMaterials", fields: [materialId], references: [id])
+
+  colorId     String?
+  color       FabricColor? @relation(fields: [colorId], references: [id])
+
+  component   MaterialComponent @default(MAIN_FABRIC)
+  composition String? // e.g., "80% Wool / 20% Cashmere" or "100% Genuine Leather"
+  ratio       Float? // e.g., 0.80 for 80% of line item quantity
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([orderLineId, component])
+  @@index([orderLineId])
+  @@index([materialId])
+}
+
+/// Product material compatibility matrix
+model ProductMaterialComponent {
+  id                 String            @id @default(cuid())
+  productId          String
+  product            Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  component          MaterialComponent
+  isRequired         Boolean           @default(false)
+  allowedMaterialIds String[]          // FK array: ["fabric_id_1", "fabric_id_2"]
+
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@unique([productId, component])
+  @@index([productId])
 }
 
 model LogoAsset {
@@ -357,6 +421,8 @@ model WholesaleProduct {
   name           String
   sku            String                 @unique
   description    String?
+  gender         String? // "Men", "Women", "Unisex", "Boys", "Girls"
+  ageGroup       String? // "Baby", "Kids", "Teen", "Adult"
   costPriceCents Int
   markupPercent  Float                  @default(35.0)
   sellPriceCents Int
@@ -366,6 +432,9 @@ model WholesaleProduct {
 
   images WholesaleProductImage[]
   stock  WholesaleStock[]
+
+  @@index([gender])
+  @@index([ageGroup])
 }
 
 model WholesaleProductImage {

@@ -1418,6 +1418,62 @@ async function main() {
     }
   }
 
+  console.log("Seeding product material component requirements...");
+
+  const componentRequirements = [
+    {
+      productName: "Classic Polo",
+      components: [
+        { component: "MAIN_FABRIC", isRequired: true, allowedFabricNames: ["Royal Oxford", "Pique"] },
+        { component: "COLLAR", isRequired: false, allowedFabricNames: ["Royal Oxford"] },
+      ],
+    },
+    {
+      productName: "Double-Breasted Blazer",
+      components: [
+        { component: "MAIN_FABRIC", isRequired: true, allowedFabricNames: ["Italian Wool Blend"] },
+        { component: "LINING", isRequired: true, allowedFabricNames: ["Viscose Lining"] },
+        { component: "COLLAR", isRequired: false, allowedFabricNames: ["Interfacing"] },
+      ],
+    },
+    {
+      productName: "Oxford Shirt",
+      components: [
+        { component: "MAIN_FABRIC", isRequired: true, allowedFabricNames: ["Oxford Cotton"] },
+        { component: "COLLAR", isRequired: false, allowedFabricNames: ["Oxford Cotton"] },
+      ],
+    },
+  ];
+
+  for (const req of componentRequirements) {
+    const product = await prisma.product.findFirst({
+      where: { name: req.productName },
+    });
+
+    if (!product) continue;
+
+    await prisma.productMaterialComponent.deleteMany({
+      where: { productId: product.id },
+    });
+
+    for (const comp of req.components) {
+      const allowedFabrics = await prisma.fabric.findMany({
+        where: { name: { in: comp.allowedFabricNames } },
+      });
+
+      await prisma.productMaterialComponent.create({
+        data: {
+          productId: product.id,
+          component: comp.component as any,
+          isRequired: comp.isRequired,
+          allowedMaterialIds: allowedFabrics.map((f) => f.id),
+        },
+      });
+    }
+  }
+
+  console.log("✓ Product material components seeded");
+
   console.log("🌱 Two-Tier MOQ Seeding completed successfully!");
 }
 

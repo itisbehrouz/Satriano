@@ -143,6 +143,8 @@ export function WholesaleCatalogClient({
   // Filter state management
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFabricLines, setSelectedFabricLines] = useState<string[]>([]);
+  const [selectedGender, setSelectedGender] = useState<string | null>(null);
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   const [maxPrice, setMaxPrice] = useState<number>(500);
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
 
@@ -187,6 +189,8 @@ export function WholesaleCatalogClient({
   const resetFilters = () => {
     setSelectedCategories([]);
     setSelectedFabricLines([]);
+    setSelectedGender(null);
+    setSelectedAgeGroup(null);
     setMaxPrice(500);
     setInStockOnly(false);
     setCurrentPage(1);
@@ -235,6 +239,8 @@ export function WholesaleCatalogClient({
   const activeFilterCount =
     selectedCategories.length +
     selectedFabricLines.length +
+    (selectedGender ? 1 : 0) +
+    (selectedAgeGroup ? 1 : 0) +
     (maxPrice < 500 ? 1 : 0) +
     (inStockOnly ? 1 : 0);
 

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { FabricWithColors, FabricColorItem } from "./FabricColorTree";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+import { FabricPriceRangeEditor } from "./FabricPriceRangeEditor";
 
 interface FabricColorPanelProps {
   fabric: FabricWithColors | null;
@@ -233,6 +234,8 @@ export function FabricColorPanel({
     }
   };
 
+  const [showPriceEditor, setShowPriceEditor] = useState(false);
+
   return (
     <div className="bg-white border border-[#EAECF0] rounded-md p-6 space-y-6">
       {/* Header */}
@@ -241,7 +244,16 @@ export function FabricColorPanel({
           <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#2E5AAC]">
             {categoryName} → {subcategoryName} → {productName}
           </div>
-          <h2 className="text-lg font-bold text-[#1A2233]">{fabric.name}</h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-lg font-bold text-[#1A2233]">{fabric.name}</h2>
+            <button
+              type="button"
+              onClick={() => setShowPriceEditor(!showPriceEditor)}
+              className="text-xs font-medium text-blue-600 hover:text-blue-800 underline"
+            >
+              {showPriceEditor ? "Close Pricing Editor" : "Edit Pricing & MOQ"}
+            </button>
+          </div>
         </div>
 
         {placeholderCount > 0 && (
@@ -254,6 +266,17 @@ export function FabricColorPanel({
           </button>
         )}
       </div>
+
+      {showPriceEditor && (
+        <FabricPriceRangeEditor
+          fabric={fabric}
+          onSave={() => {
+            setShowPriceEditor(false);
+            onRefresh();
+          }}
+          onCancel={() => setShowPriceEditor(false)}
+        />
+      )}
 
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded">

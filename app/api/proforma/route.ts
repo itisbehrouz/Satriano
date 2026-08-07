@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       include: {
         company: true,
         lines: {
-          include: { fabric: true },
+          include: { fabric: true, product: true },
         },
         proforma: true,
       },
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       createdAt: order.createdAt,
       validUntil,
       lines: order.lines.map((line) => ({
-        fabricName: line.fabric.name,
+        fabricName: line.fabric?.name || line.product?.name || "Garment Unit",
         size: line.size,
         quantity: line.quantity,
         unitPriceCents: finalPriceCents,

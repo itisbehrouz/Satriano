@@ -137,15 +137,5 @@
   "135": "11. DATA VISIBILITY & SECURITY",
   "136": "14. PROFORMA & PAYMENT",
   "137": "18. TECHNICAL ROUTE MODEL",
-  "138": "3. Production Infrastructure",
-  "139": "prisma.ts",
-  "140": "ProductFitTree.tsx",
-  "141": "verifyCustomerToken",
-  "142": "FabricPricingPanel.tsx",
-  "143": "RegionalSizePanel.tsx",
-  "144": "RegionalSizeTree.tsx",
-  "145": "CatalogImageUploader.tsx",
-  "146": "images/route.ts",
-  "147": "DeleteWholesaleProductModal.tsx",
-  "148": "EditWholesaleProductModal.tsx"
+  "138": "3. Production Infrastructure"
 }

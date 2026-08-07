@@ -1,11 +1,13 @@
-import { type LogoPlacement } from "@/app/generated/prisma/enums";
+import { type LogoPlacement } from "@/app/generated/prisma/client";
+import { MaterialSelection } from "@/components/configurator/MaterialComponentSelector";
 
 export interface M2OCartItem {
   id: string;
-  fabricId: string;
+  fabricId?: string;
   colorId?: string;
   productId?: string;
   fitId?: string;
+  materials?: MaterialSelection[];
   sizeQuantities: { size: string; quantity: number; priceMinCents?: number }[];
   logoUrl?: string;
   logoPlacement?: LogoPlacement;
@@ -16,6 +18,15 @@ export interface M2OCartItem {
   productName: string;
   fitName?: string;
   totalUnits: number;
+}
+
+export interface M2oCart {
+  items: M2OCartItem[];
+  companyName?: string;
+  companyEmail?: string;
+  customerTargetPriceCents?: number;
+  logoAssetId?: string;
+  logoPlacement?: string;
 }
 
 const STORAGE_KEY = "satriano_m2o_cart";
@@ -59,5 +70,42 @@ export function clearM2OCart(): void {
     window.dispatchEvent(new Event("m2o-cart-updated"));
   } catch (err) {
     console.error("Failed to clear M2O cart:", err);
+  }
+}
+
+export function convertM2oCartToOrderPayload(
+  cart: M2oCart,
+  useMultiMaterial: boolean
+): any {
+  if (useMultiMaterial && cart.items[0]?.materials) {
+    return {
+      companyName: cart.companyName,
+      companyEmail: cart.companyEmail,
+      orderType: "M2O",
+      customerTargetPriceCents: cart.customerTargetPriceCents,
+      items: cart.items.map((item) => ({
+        productId: item.productId,
+        selectedFit: item.fitId,
+        materials: item.materials || [],
+      })),
+      logoAssetId: cart.logoAssetId,
+      logoPlacement: cart.logoPlacement,
+    };
+  } else {
+    return {
+      companyName: cart.companyName,
+      companyEmail: cart.companyEmail,
+      orderType: "M2O",
+      customerTargetPriceCents: cart.customerTargetPriceCents,
+      items: cart.items.map((item) => ({
+        productId: item.productId,
+        fabricId: item.fabricId,
+        colorId: item.colorId,
+        fitId: item.fitId,
+        sizeQuantities: item.sizeQuantities,
+      })),
+      logoAssetId: cart.logoAssetId,
+      logoPlacement: cart.logoPlacement,
+    };
   }
 }

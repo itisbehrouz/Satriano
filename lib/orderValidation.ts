@@ -127,3 +127,90 @@ export function validateCreateOrderInput(body: unknown): CreateOrderValidationRe
     },
   };
 }
+
+export interface CreateOrderInputMultiMaterial {
+  companyName: string;
+  companyEmail: string;
+  customerTargetPriceCents?: number;
+  items: Array<{
+    productId: string;
+    materials: Array<{
+      materialId: string;
+      colorId?: string | null;
+      component: string; // MaterialComponent enum value
+      composition?: string;
+      ratio?: number;
+      sizeQuantities: Array<{ size: string; quantity: number }>;
+    }>;
+    selectedFit?: string;
+  }>;
+}
+
+/**
+ * Validate multi-material order payload
+ */
+export function validateCreateOrderInputMultiMaterial(payload: unknown): {
+  success: boolean;
+  data?: CreateOrderInputMultiMaterial;
+  error?: string;
+} {
+  if (!payload || typeof payload !== "object") {
+    return { success: false, error: "Payload must be an object" };
+  }
+
+  const p = payload as Record<string, any>;
+
+  // Basic company validation
+  if (!p.companyName || typeof p.companyName !== "string" || !p.companyName.trim()) {
+    return { success: false, error: "companyName is required and must be non-empty string" };
+  }
+
+  if (!p.companyEmail || typeof p.companyEmail !== "string" || !EMAIL_PATTERN.test(p.companyEmail.trim())) {
+    return { success: false, error: `Invalid companyEmail: ${p.companyEmail}` };
+  }
+
+  // Validate items array
+  if (!Array.isArray(p.items) || p.items.length === 0) {
+    return { success: false, error: "items must be a non-empty array" };
+  }
+
+  for (const item of p.items) {
+    if (!item.productId || typeof item.productId !== "string") {
+      return { success: false, error: "Each item must have a valid productId" };
+    }
+
+    if (!Array.isArray(item.materials) || item.materials.length === 0) {
+      return { success: false, error: `Item ${item.productId} must have at least one material` };
+    }
+
+    for (const mat of item.materials) {
+      if (!mat.materialId || typeof mat.materialId !== "string") {
+        return { success: false, error: "Each material must have a valid materialId" };
+      }
+
+      if (!mat.component || typeof mat.component !== "string") {
+        return { success: false, error: `Material ${mat.materialId} must specify a component` };
+      }
+
+      if (mat.colorId && typeof mat.colorId !== "string") {
+        return { success: false, error: `Material ${mat.materialId} colorId must be a string` };
+      }
+
+      if (!Array.isArray(mat.sizeQuantities) || mat.sizeQuantities.length === 0) {
+        return { success: false, error: `Material ${mat.materialId} must have size quantities` };
+      }
+
+      for (const sq of mat.sizeQuantities) {
+        if (typeof sq.quantity !== "number" || sq.quantity <= 0) {
+          return { success: false, error: `Size ${sq.size} quantity must be > 0` };
+        }
+      }
+    }
+  }
+
+  return {
+    success: true,
+    data: p as CreateOrderInputMultiMaterial,
+  };
+}
+

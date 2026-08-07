@@ -66,6 +66,8 @@ export async function PATCH(
       name,
       sku,
       description,
+      gender,
+      ageGroup,
       costPriceCents,
       markupPercent,
       sellPriceCents,
@@ -81,7 +83,6 @@ export async function PATCH(
       return NextResponse.json({ error: "Wholesale product not found" }, { status: 404 });
     }
 
-    // Check unique SKU if updating SKU
     if (sku && sku !== existing.sku) {
       const duplicate = await prisma.wholesaleProduct.findUnique({
         where: { sku },
@@ -94,17 +95,22 @@ export async function PATCH(
       }
     }
 
+    const calculatedSellPrice = costPriceCents !== undefined && markupPercent !== undefined
+      ? Math.round(costPriceCents * (1 + markupPercent / 100))
+      : sellPriceCents;
+
     const updated = await prisma.$transaction(async (tx) => {
-      // Update scalar fields
       const prod = await tx.wholesaleProduct.update({
         where: { id },
         data: {
           ...(name && { name }),
           ...(sku && { sku }),
           ...(description !== undefined && { description }),
+          ...(gender !== undefined && { gender }),
+          ...(ageGroup !== undefined && { ageGroup }),
           ...(costPriceCents !== undefined && { costPriceCents }),
           ...(markupPercent !== undefined && { markupPercent }),
-          ...(sellPriceCents !== undefined && { sellPriceCents }),
+          ...(calculatedSellPrice !== undefined && { sellPriceCents: calculatedSellPrice }),
           ...(status && { status }),
         },
         include: {
@@ -115,7 +121,6 @@ export async function PATCH(
         },
       });
 
-      // Update stock items if provided
       if (Array.isArray(stock)) {
         for (const stk of stock) {
           await tx.wholesaleStock.upsert({
@@ -148,5 +153,29 @@ export async function PATCH(
   } catch (error: any) {
     console.error("PATCH /api/admin/wholesale/products/[id] error:", error);
     return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+  }
+}
+
+// DELETE /api/admin/wholesale/products/[id]
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  if (!(await checkAdminAuth(req))) {
+    return NextResponse.json({ error: "Unauthorized admin session" }, { status: 401 });
+  }
+
+  const { id } = await params;
+
+  try {
+    const product = await prisma.wholesaleProduct.update({
+      where: { id },
+      data: { status: "INACTIVE" },
+    });
+
+    return NextResponse.json({ product });
+  } catch (error: any) {
+    console.error("DELETE /api/admin/wholesale/products/[id] error:", error);
+    return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
   }
 }
