@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const CHANNELS = [
   {
     id: "whatsapp",
-    name: "WhatsApp Desk",
-    badge: "Fastest • 24/7",
+    name: "WhatsApp Concierge",
+    badge: "Direct Line • 24/7",
     bgColor: "bg-[#25D366]",
     borderColor: "border-[#25D366]",
     hoverBg: "hover:bg-[#20BD5A]",
@@ -19,9 +19,19 @@ const CHANNELS = [
     ),
   },
   {
+    id: "email",
+    name: "Corporate Email",
+    badge: "Official Spec Inquiry",
+    bgColor: "bg-[#2E5AAC]",
+    borderColor: "border-[#2E5AAC]",
+    hoverBg: "hover:bg-[#24498E]",
+    url: "mailto:concierge@satrianoatelier.com?subject=B2B%20Custom%20Manufacturing%20Inquiry",
+    icon: <span className="material-symbols-outlined text-sm">mail</span>,
+  },
+  {
     id: "telegram",
     name: "Telegram Channel",
-    badge: "Instant Direct",
+    badge: "Instant Updates",
     bgColor: "bg-[#229ED9]",
     borderColor: "border-[#229ED9]",
     hoverBg: "hover:bg-[#1B89BE]",
@@ -32,40 +42,15 @@ const CHANNELS = [
       </svg>
     ),
   },
-  {
-    id: "signal",
-    name: "Signal Encrypted",
-    badge: "E2EE Secure",
-    bgColor: "bg-[#3A76F0]",
-    borderColor: "border-[#3A76F0]",
-    hoverBg: "hover:bg-[#2B61D1]",
-    url: "https://signal.me/#p/+390212345678",
-    icon: (
-      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 3.6a8.4 8.4 0 1 1 0 16.8 8.4 8.4 0 0 1 0-16.8zm-3.6 4.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm7.2 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM7.2 14.4a4.8 4.8 0 0 0 9.6 0h-9.6z" />
-      </svg>
-    ),
-  },
-  {
-    id: "email",
-    name: "Corporate Email",
-    badge: "Formal Proforma",
-    bgColor: "bg-[#2E5AAC]",
-    borderColor: "border-[#2E5AAC]",
-    hoverBg: "hover:bg-[#24498E]",
-    url: "mailto:concierge@satrianoatelier.com?subject=B2B%20Custom%20Manufacturing%20Inquiry",
-    icon: <span className="material-symbols-outlined text-sm">mail</span>,
-  },
 ];
 
 export function B2BSupportDock() {
   const pathname = usePathname();
-  // Always default to minimized tab view on every page load
   const [isMinimized, setIsMinimized] = useState(true);
   const [activeTab, setActiveTab] = useState<"none" | "channels">("none");
 
-  // Do not render support dock on admin pages
-  if (pathname?.startsWith("/admin")) {
+  // Do not render support dock on admin pages or under-development page
+  if (pathname?.startsWith("/admin") || pathname === "/under-development") {
     return null;
   }
 
@@ -81,20 +66,22 @@ export function B2BSupportDock() {
     window.dispatchEvent(new CustomEvent("open-ai-assistant"));
   };
 
-  // Minimized side tab pinned to left screen edge
+  // Minimized side tab pinned to left screen edge - Sleek Atelier Glass Aesthetic
   if (isMinimized) {
     return (
       <div className="fixed left-0 top-1/2 -translate-y-1/2 z-50 font-sans">
         <button
           onClick={() => handleMinimize(false)}
-          className="bg-[#0B1E3D] hover:bg-[#152744] text-[#DBB671] border border-l-0 border-[#DBB671] py-3.5 px-2.5 rounded-none shadow-2xl flex flex-col items-center gap-2 cursor-pointer transition-all hover:translate-x-1 group"
-          title="Click to open B2B Support &amp; AI Desk"
+          className="bg-[#090D16]/90 backdrop-blur-md text-[#D4AF37] border border-l-0 border-[#D4AF37]/40 hover:border-[#D4AF37] py-4 px-3 rounded-r-none shadow-2xl flex flex-col items-center gap-2.5 cursor-pointer transition-all hover:translate-x-1 group"
+          title="Open B2B Support & AI Desk"
         >
-          <span className="material-symbols-outlined text-lg animate-pulse">chevron_right</span>
-          <span className="writing-mode-vertical text-[10px] uppercase font-bold tracking-widest text-white group-hover:text-[#DBB671]">
+          <span className="material-symbols-outlined text-sm text-[#D4AF37] group-hover:scale-110 transition-transform">
+            headset_mic
+          </span>
+          <span className="writing-mode-vertical text-[10px] uppercase font-mono tracking-[0.2em] font-bold text-white group-hover:text-[#D4AF37] transition-colors">
             B2B SUPPORT
           </span>
-          <div className="w-2 h-2 rounded-none bg-emerald-400 animate-pulse mt-1" />
+          <div className="w-1.5 h-1.5 rounded-none bg-emerald-400 animate-pulse mt-0.5" />
         </button>
       </div>
     );
@@ -102,13 +89,13 @@ export function B2BSupportDock() {
 
   return (
     <div className="fixed left-4 top-1/2 -translate-y-1/2 z-50 font-sans flex flex-col items-start space-y-2">
-      {/* Expanded Multi-Channel Drawer Panel (above vertical stack) */}
+      {/* Expanded Multi-Channel Drawer Panel */}
       {activeTab === "channels" && (
-        <div className="w-72 bg-[#0B1E3D] text-white border border-[#1E3A8A] rounded-none shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-200 mb-1">
-          <div className="bg-[#071325] px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <div className="w-76 bg-[#090D16]/95 backdrop-blur-md text-white border border-[#D4AF37]/30 rounded-none shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-200 mb-1">
+          <div className="bg-[#05080E] px-4 py-3 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#DBB671] text-base">forum</span>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">Direct Concierge Channels</h4>
+              <span className="material-symbols-outlined text-[#D4AF37] text-base">forum</span>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white">Direct Concierge Desks</h4>
             </div>
             <button
               onClick={() => setActiveTab("none")}
@@ -119,7 +106,7 @@ export function B2BSupportDock() {
             </button>
           </div>
 
-          <div className="p-3 space-y-2 bg-[#0B1E3D] text-xs">
+          <div className="p-3 space-y-2 text-xs">
             {CHANNELS.map((ch) => (
               <a
                 key={ch.id}
@@ -132,7 +119,7 @@ export function B2BSupportDock() {
                   {ch.icon}
                   <span>{ch.name}</span>
                 </div>
-                <span className="text-[10px] bg-black/20 font-mono font-medium px-2 py-0.5 rounded-none text-white/90">
+                <span className="text-[10px] bg-black/25 font-mono font-medium px-2 py-0.5 rounded-none text-white/90">
                   {ch.badge}
                 </span>
               </a>
@@ -141,51 +128,52 @@ export function B2BSupportDock() {
         </div>
       )}
 
-      {/* Vertical Dock Container: 1. Support Channels ON TOP, 2. 24/7 AI Desk UNDER THAT */}
-      <div className="w-72 bg-[#0B1E3D] text-white border border-[#1E3A8A] rounded-none p-2 shadow-2xl space-y-2 relative">
-        {/* Header Header Bar with Close / Hide Control */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 px-1">
-          <div className="flex items-center gap-1.5">
+      {/* Main Glassmorphic Dock Container */}
+      <div className="w-76 bg-[#090D16]/95 backdrop-blur-md text-white border border-[#D4AF37]/40 rounded-none p-3 shadow-2xl space-y-2.5 relative">
+        {/* Header Bar */}
+        <div className="flex items-center justify-between border-b border-white/10 pb-2 px-1">
+          <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-none bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#DBB671]">Satriano Support Desk</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#D4AF37] font-mono">
+              B2B Concierge Desk
+            </span>
           </div>
           <button
             onClick={() => handleMinimize(true)}
-            className="text-[#94A3B8] hover:text-white text-xs p-0.5 cursor-pointer flex items-center gap-0.5"
-            aria-label="Hide support dock to left sidebar tab"
-            title="Hide support dock"
+            className="text-[#94A3B8] hover:text-white text-xs p-0.5 cursor-pointer flex items-center gap-1 transition-colors"
+            title="Minimize B2B Support Desk"
           >
             <span className="text-[10px] uppercase font-mono">Hide</span>
             <span className="material-symbols-outlined text-sm">chevron_left</span>
           </button>
         </div>
 
-        {/* 1. TOP BUTTON: Support Channels */}
+        {/* 1. Direct Concierge Channels */}
         <button
           onClick={() => setActiveTab(activeTab === "channels" ? "none" : "channels")}
           className={`w-full text-xs font-bold uppercase tracking-wider py-3 px-4 rounded-none transition-all flex items-center justify-between border ${
             activeTab === "channels"
               ? "bg-[#2E5AAC] text-white border-[#60A5FA] shadow-md"
-              : "bg-[#152744] hover:bg-[#1E3A8A] text-white border-white/15"
+              : "bg-[#141C2E] hover:bg-[#1E2B45] text-white border-white/15"
           }`}
         >
           <div className="flex items-center gap-2.5">
             <span className="material-symbols-outlined text-base text-[#60A5FA]">forum</span>
-            <span>Support Channels</span>
+            <span>Direct Channels</span>
           </div>
-          <span className="text-[10px] font-mono text-[#93C5FD]">WhatsApp/TG/Email →</span>
+          <span className="text-[10px] font-mono text-[#93C5FD]">WhatsApp/Email →</span>
         </button>
 
-        {/* 2. BOTTOM BUTTON: 24/7 AI Desk */}
+        {/* 2. 24/7 AI Manufacturing Desk */}
         <button
           onClick={triggerAIAssistant}
-          className="w-full bg-[#DBB671] hover:bg-[#c9a35e] text-[#0B1E3D] font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-none transition-all flex items-center justify-between border border-[#DBB671] shadow-md"
+          className="w-full bg-gradient-to-r from-[#D4AF37] to-[#C59B27] hover:from-[#C59B27] hover:to-[#B38A1D] text-[#05080E] font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-none transition-all flex items-center justify-between border border-[#D4AF37] shadow-md cursor-pointer"
         >
           <div className="flex items-center gap-2.5">
             <span className="material-symbols-outlined text-base">smart_toy</span>
             <span>24/7 AI Desk</span>
           </div>
-          <span className="text-[10px] font-mono text-[#0B1E3D]/80">Instant Automated AI →</span>
+          <span className="text-[10px] font-mono text-[#05080E]/80">Instant Spec FAQ →</span>
         </button>
       </div>
     </div>
