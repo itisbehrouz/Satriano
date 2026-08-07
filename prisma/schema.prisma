@@ -246,6 +246,7 @@ model Order {
   logoAssets LogoAsset[]
   proforma   Proforma?
   payment    Payment?
+  productionMilestones ProductionMilestone[]
 }
 
 model OrderLine {
@@ -454,5 +455,61 @@ model WholesaleStock {
   lowStockThreshold  Int              @default(3)
 
   @@unique([wholesaleProductId, size])
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  CATALOG_MANAGER
+  ORDER_OPERATOR
+  SUPPLIER_MANAGER
+}
+
+model ProductionMilestone {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  stage     String
+  status    String
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderId])
+}
+
+model StockReservation {
+  id        String   @id @default(cuid())
+  skuId     String
+  quantity  Int
+  orderId   String
+  expiresAt DateTime
+  status    String   @default("RESERVED")
+  createdAt DateTime @default(now())
+
+  @@index([skuId])
+  @@index([orderId])
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  recipientEmail String
+  title          String
+  message        String
+  read           Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([recipientEmail])
+}
+
+model AuditLog {
+  id           String   @id @default(cuid())
+  adminEmail   String
+  action       String
+  targetEntity String
+  targetId     String?
+  details      String?
+  createdAt    DateTime @default(now())
+
+  @@index([adminEmail])
 }
 
