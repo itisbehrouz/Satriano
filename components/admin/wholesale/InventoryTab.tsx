@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { InventoryEditModal } from "./InventoryEditModal";
 import { AddColorVariantModal } from "./AddColorVariantModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface ColorVariant {
   id: string;
@@ -33,6 +34,7 @@ export function InventoryTab({
   onArchiveColorVariant,
   showToast,
 }: InventoryTabProps) {
+  const { t } = useAdminLanguage();
   const [selectedProductId, setSelectedProductId] = useState<string>(products[0]?.id || "p1");
 
   const currentProduct = useMemo(() => {
@@ -204,7 +206,7 @@ export function InventoryTab({
                 onClick={() => setIsEditOpen(true)}
                 className="px-5 py-2.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
               >
-                EDIT STOCK LEVELS
+                {t.editInventory}
               </button>
 
               <button
@@ -212,7 +214,7 @@ export function InventoryTab({
                 onClick={() => setIsAddColorOpen(true)}
                 className="px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
               >
-                ADD NEW COLOR VARIANT
+                {t.addVariant}
               </button>
             </div>
 
@@ -221,7 +223,7 @@ export function InventoryTab({
               onClick={() => setIsArchiveConfirmOpen(true)}
               className="px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-red-500 hover:bg-red-500/10 text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
             >
-              ARCHIVE COLOR
+              {t.deleteBtn}
             </button>
           </div>
         </div>

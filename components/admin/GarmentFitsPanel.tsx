@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Product, FitDef } from "./ProductFitTree";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 interface GarmentFitsPanelProps {
   isOpen: boolean;
@@ -22,6 +23,7 @@ export function GarmentFitsPanel({
   onClose,
   onSave,
 }: GarmentFitsPanelProps) {
+  const { t } = useAdminLanguage();
   const [selectedFitIds, setSelectedFitIds] = useState<string[]>([]);
   const [initialFitIds, setInitialFitIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -181,13 +183,13 @@ export function GarmentFitsPanel({
             }`}
           >
             {isSubmitting ? (
-              <span>Saving...</span>
+              <span>{t.saving}</span>
             ) : (
               <>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                 </svg>
-                <span>Save Changes</span>
+                <span>{t.saveChanges}</span>
               </>
             )}
           </button>

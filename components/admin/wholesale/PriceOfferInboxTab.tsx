@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface PriceOfferV2 {
   id: string; // e.g. "po-1"
@@ -38,6 +39,7 @@ export function PriceOfferInboxTab({
   onSaveAdminNote,
   showToast,
 }: PriceOfferInboxTabProps) {
+  const { t } = useAdminLanguage();
   const [rejectingOffer, setRejectingOffer] = useState<PriceOfferV2 | null>(null);
   const [counteringOffer, setCounteringOffer] = useState<PriceOfferV2 | null>(null);
   const [counterPriceInput, setCounterPriceInput] = useState<string>("");
@@ -229,14 +231,14 @@ export function PriceOfferInboxTab({
                       onClick={() => handleAccept(offer)}
                       className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
-                      ACCEPT
+                      {t.approveOffer}
                     </button>
                     <button
                       type="button"
                       onClick={() => setRejectingOffer(offer)}
                       className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors cursor-pointer"
                     >
-                      REJECT
+                      {t.rejectOffer}
                     </button>
                     <button
                       type="button"

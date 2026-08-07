@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ProductImageUploader, ProductImageItem } from "../images/ProductImageUploader";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface SupplierOption {
   id: string;
@@ -33,6 +34,7 @@ export function AddWholesaleProductModal({
   onSuccess,
   showToast,
 }: AddWholesaleProductModalProps) {
+  const { t } = useAdminLanguage();
   // Tab State: 'basic' | 'pricing'
   const [activeTab, setActiveTab] = useState<"basic" | "pricing">("basic");
 
@@ -564,14 +566,14 @@ export function AddWholesaleProductModal({
             onClick={onClose}
             className="px-4 py-2 bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-bg)] cursor-pointer"
           >
-            CANCEL
+            {t.cancel}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer disabled:opacity-50"
           >
-            {submitting ? "CREATING..." : "CREATE PRODUCT"}
+            {submitting ? t.creating : t.createProduct}
           </button>
         </div>
       </form>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Command } from "cmdk";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 interface GlobalCommandPaletteProps {
   isOpen?: boolean;
@@ -32,6 +33,7 @@ export function GlobalCommandPalette({
   onOpen: externalOnOpen,
   onOpenChange: externalOnOpenChange,
 }: GlobalCommandPaletteProps) {
+  const { t } = useAdminLanguage();
   const pathname = usePathname();
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [products, setProducts] = useState<CatalogProductItem[]>([]);
@@ -179,7 +181,7 @@ export function GlobalCommandPalette({
             </span>
             <Command.Input
               autoFocus
-              placeholder="Search products, orders, companies, or commands... (ESC to exit)"
+              placeholder={t.searchPlaceholder}
               className="w-full bg-transparent text-xs text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none"
             />
             {loadingData && (
@@ -198,7 +200,7 @@ export function GlobalCommandPalette({
           {/* Results Command List */}
           <Command.List className="max-h-80 overflow-y-auto p-2 divide-y divide-[var(--color-border)]">
             <Command.Empty className="p-6 text-center text-xs text-[var(--color-text-secondary)]">
-              No matching products, orders, or commands found.
+              {t.noDataFound}
             </Command.Empty>
 
             {/* Dynamic Group 1: Live Catalog Products */}

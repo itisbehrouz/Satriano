@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { FabricWithColors, FabricColorItem } from "./FabricColorTree";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 interface FabricColorPanelProps {
   fabric: FabricWithColors | null;
@@ -18,6 +19,7 @@ export function FabricColorPanel({
   subcategoryName,
   onRefresh,
 }: FabricColorPanelProps) {
+  const { t } = useAdminLanguage();
   const [colors, setColors] = useState<FabricColorItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -320,9 +322,9 @@ export function FabricColorPanel({
         <button
           type="submit"
           disabled={submitting}
-          className="px-4 py-2 bg-[#2E5AAC] text-white rounded text-xs font-bold hover:bg-[#1E3F7A] transition-colors disabled:opacity-50"
+          className="px-4 py-2 bg-[#2E5AAC] text-white rounded text-xs font-bold hover:bg-[#1E3F7A] transition-colors disabled:opacity-50 cursor-pointer"
         >
-          {submitting ? "Adding..." : "+ Add Colorway"}
+          {submitting ? t.creating : t.addColor}
         </button>
       </form>
 

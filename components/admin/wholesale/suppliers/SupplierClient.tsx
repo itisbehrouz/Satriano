@@ -7,8 +7,10 @@ import { AddSupplierModal, SupplierData } from "./AddSupplierModal";
 import { EditSupplierModal, SupplierRecord } from "./EditSupplierModal";
 import { SupplierDetailModal } from "./SupplierDetailModal";
 import { AddWholesaleProductModal, SupplierOption, CategoryOption } from "../inventory/AddWholesaleProductModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export function SupplierClient() {
+  const { t } = useAdminLanguage();
   const [suppliers, setSuppliers] = useState<SupplierRecord[]>([
     {
       id: "sup-1",
@@ -153,10 +155,10 @@ export function SupplierClient() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
-              SUPPLIER MANAGEMENT
+              {t.supplierManagement}
             </h1>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              Manage wholesale manufacturing partners, review applications, and verify new suppliers.
+              {t.wholesaleSubtitle}
             </p>
           </div>
 
@@ -167,13 +169,13 @@ export function SupplierClient() {
               className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">add</span>
-              + ADD NEW SUPPLIER
+              {t.addSupplier}
             </button>
             <Link
               href="/admin/wholesale"
               className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
             >
-              Back to Wholesale Dashboard
+              {t.backToDashboard}
             </Link>
           </div>
         </div>
@@ -187,7 +189,7 @@ export function SupplierClient() {
             </span>
             <input
               type="text"
-              placeholder="Search suppliers by name, contact, email..."
+              placeholder={t.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-none text-xs text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"

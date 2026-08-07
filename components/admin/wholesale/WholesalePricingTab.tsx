@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { WholesalePricingModal } from "./WholesalePricingModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface PricingProduct {
   id: string;
@@ -24,6 +25,7 @@ export function WholesalePricingTab({
   onDeleteProduct,
   showToast,
 }: WholesalePricingTabProps) {
+  const { t } = useAdminLanguage();
   const [editingProduct, setEditingProduct] = useState<PricingProduct | null>(null);
   const [deletingProduct, setDeletingProduct] = useState<PricingProduct | null>(null);
 
@@ -45,10 +47,10 @@ export function WholesalePricingTab({
       <div className="flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider text-[var(--color-text-primary)]">
-            WHOLESALE PRICING MANAGER
+            {t.pricingManager}
           </h2>
           <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-            Configure fixed wholesale unit prices vs made-to-order ranges
+            {t.wholesaleSubtitle}
           </p>
         </div>
       </div>
@@ -57,11 +59,11 @@ export function WholesalePricingTab({
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[var(--color-text-primary)] font-bold uppercase tracking-wider h-11">
-              <th className="py-3 px-4">Product</th>
-              <th className="py-3 px-4">M2O Price Range</th>
-              <th className="py-3 px-4">Wholesale Price</th>
-              <th className="py-3 px-4">Stock Level</th>
-              <th className="py-3 px-4 text-right">Actions</th>
+              <th className="py-3 px-4">{t.productName}</th>
+              <th className="py-3 px-4">{t.m2oPriceRange}</th>
+              <th className="py-3 px-4">{t.wholesalePrice}</th>
+              <th className="py-3 px-4">{t.stockLevel}</th>
+              <th className="py-3 px-4 text-right">{t.actions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--color-border)]">
@@ -108,14 +110,14 @@ export function WholesalePricingTab({
                         onClick={() => setEditingProduct(item)}
                         className="px-3 py-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                       >
-                        Edit
+                        {t.editBtn}
                       </button>
                       <button
                         type="button"
                         onClick={() => setDeletingProduct(item)}
                         className="px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-red-500 hover:bg-red-500/10 text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                       >
-                        Delete
+                        {t.deleteBtn}
                       </button>
                     </div>
                   </td>

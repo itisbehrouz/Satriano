@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface SupplierRecord {
   id: string;
@@ -31,6 +32,7 @@ export function EditSupplierModal({
   onClose,
   onSave,
 }: EditSupplierModalProps) {
+  const { t } = useAdminLanguage();
   const [formData, setFormData] = useState<SupplierRecord | null>(null);
 
   useEffect(() => {
@@ -178,13 +180,13 @@ export function EditSupplierModal({
               onClick={onClose}
               className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
             >
-              CANCEL
+              {t.cancel}
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
             >
-              SAVE CHANGES
+              {t.saveSupplier}
             </button>
           </div>
         </form>

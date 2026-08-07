@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface SupplierData {
   firmName: string;
@@ -19,6 +20,7 @@ export interface AddSupplierModalProps {
 }
 
 export function AddSupplierModal({ isOpen, onClose, onCreate }: AddSupplierModalProps) {
+  const { t } = useAdminLanguage();
   const [formData, setFormData] = useState<SupplierData>({
     firmName: "",
     contactPerson: "",
@@ -172,13 +174,13 @@ export function AddSupplierModal({ isOpen, onClose, onCreate }: AddSupplierModal
               onClick={onClose}
               className="px-4 py-2 bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] rounded-none font-bold uppercase tracking-wider text-xs hover:bg-[var(--color-surface)] cursor-pointer"
             >
-              CANCEL
+              {t.cancel}
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-none font-bold uppercase tracking-wider text-xs transition-colors cursor-pointer"
             >
-              CREATE SUPPLIER
+              {t.saveSupplier}
             </button>
           </div>
         </form>

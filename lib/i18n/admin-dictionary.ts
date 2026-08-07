@@ -116,6 +116,18 @@ export interface AdminDictionary {
   exportCsv: string;
   offersInboxTitle: string;
   requestedPrice: string;
+  sku: string;
+  stockLevel: string;
+  wholesalePrice: string;
+  m2oPriceRange: string;
+  category: string;
+  subcategory: string;
+  inStock: string;
+  outOfStock: string;
+  lowStock: string;
+  editInventory: string;
+  editPricing: string;
+  addVariant: string;
 
   // Applications Review
   applicationsTitle: string;
@@ -127,6 +139,11 @@ export interface AdminDictionary {
   approvePartner: string;
   rejectPartner: string;
   resendVerification: string;
+  annualVolume: string;
+  industry: string;
+  website: string;
+  jobTitle: string;
+  applicantDetails: string;
 
   // Catalog & Product Settings
   productSettingsTitle: string;
@@ -143,8 +160,15 @@ export interface AdminDictionary {
   hexCode: string;
   basePrice: string;
   sortOrder: string;
+  leadTime: string;
+  singleFabricMoq: string;
+  combinedMoq: string;
+  patternDescription: string;
+  recommendedDrop: string;
+  fitCode: string;
+  fitName: string;
 
-  // Buttons & Common Actions
+  // Common UI & States
   cancel: string;
   saving: string;
   creating: string;
@@ -158,6 +182,12 @@ export interface AdminDictionary {
   searchBtn: string;
   backToDashboard: string;
   viewCatalog: string;
+  noDataFound: string;
+  loadingData: string;
+  confirmDelete: string;
+  deleteBtn: string;
+  editBtn: string;
+  viewDetails: string;
 }
 
 export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
@@ -277,6 +307,18 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     exportCsv: "Export CSV",
     offersInboxTitle: "B2B Price Offer Inbox",
     requestedPrice: "Requested Price",
+    sku: "SKU",
+    stockLevel: "Stock Level",
+    wholesalePrice: "Wholesale Price",
+    m2oPriceRange: "M2O Price Range",
+    category: "Category",
+    subcategory: "Subcategory",
+    inStock: "In Stock",
+    outOfStock: "Out of Stock",
+    lowStock: "Low Stock",
+    editInventory: "Edit Inventory",
+    editPricing: "Edit Pricing",
+    addVariant: "Add Color Variant",
 
     // Applications Review
     applicationsTitle: "B2B Partner Applications",
@@ -288,6 +330,11 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     approvePartner: "Approve Partner",
     rejectPartner: "Reject Partner",
     resendVerification: "Resend Verification Email",
+    annualVolume: "Annual Volume",
+    industry: "Industry",
+    website: "Website",
+    jobTitle: "Job Title",
+    applicantDetails: "Applicant Details",
 
     // Catalog & Product Settings
     productSettingsTitle: "Garment Catalog & Technical Settings",
@@ -304,8 +351,15 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     hexCode: "HEX Code",
     basePrice: "Base Price ($)",
     sortOrder: "Sort Order",
+    leadTime: "Lead Time (Days)",
+    singleFabricMoq: "Single-Fabric MOQ",
+    combinedMoq: "Combined Multi-Fabric MOQ",
+    patternDescription: "Pattern Description",
+    recommendedDrop: "Recommended Drop",
+    fitCode: "Fit Code",
+    fitName: "Fit Name",
 
-    // Buttons & Common Actions
+    // Common UI & States
     cancel: "Cancel",
     saving: "Saving...",
     creating: "Creating...",
@@ -319,6 +373,12 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     searchBtn: "Search",
     backToDashboard: "Executive Dashboard",
     viewCatalog: "View Live Wholesale Catalog",
+    noDataFound: "No records found matching current filters.",
+    loadingData: "Loading operational data...",
+    confirmDelete: "Are you sure you want to delete this record?",
+    deleteBtn: "Delete",
+    editBtn: "Edit",
+    viewDetails: "View Details",
   },
   tr: {
     // Header & Navigation
@@ -436,6 +496,18 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     exportCsv: "CSV Dışa Aktar",
     offersInboxTitle: "B2B Fiyat Teklifi Kutusu",
     requestedPrice: "Talep Edilen Fiyat",
+    sku: "SKU / Ürün Kodu",
+    stockLevel: "Stok Seviyesi",
+    wholesalePrice: "Toptan Satış Fiyatı",
+    m2oPriceRange: "M2O Fiyat Aralığı",
+    category: "Kategori",
+    subcategory: "Alt Kategori",
+    inStock: "Stokta Var",
+    outOfStock: "Stok Tükenmiş",
+    lowStock: "Kritik Stok",
+    editInventory: "Stok Düzenle",
+    editPricing: "Fiyat Düzenle",
+    addVariant: "Renk Varyantı Ekle",
 
     // Applications Review
     applicationsTitle: "B2B Ortaklık Başvuruları",
@@ -447,6 +519,11 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     approvePartner: "Ortayı Onayla",
     rejectPartner: "Başvuruyu Reddet",
     resendVerification: "Doğrulama E-postasını Tekrar Gönder",
+    annualVolume: "Yıllık Hacim",
+    industry: "Sektör",
+    website: "Web Sitesi",
+    jobTitle: "Unvan",
+    applicantDetails: "Başvuran Detayları",
 
     // Catalog & Product Settings
     productSettingsTitle: "Giysi Kataloğu ve Teknik Ayarlar",
@@ -463,8 +540,15 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     hexCode: "HEX Kodu",
     basePrice: "Taban Fiyat ($)",
     sortOrder: "Sıralama Düzeni",
+    leadTime: "Üretim Süresi (Gün)",
+    singleFabricMoq: "Tek Kumaşlı MOQ",
+    combinedMoq: "Kombinasyonlu MOQ",
+    patternDescription: "Desen Açıklaması",
+    recommendedDrop: "Önerilen Drop",
+    fitCode: "Kalıp Kodu",
+    fitName: "Kalıp Adı",
 
-    // Buttons & Common Actions
+    // Common UI & States
     cancel: "İptal",
     saving: "Kaydediliyor...",
     creating: "Oluşturuluyor...",
@@ -478,5 +562,11 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     searchBtn: "Ara",
     backToDashboard: "Yönetici Paneli",
     viewCatalog: "Canlı Toptan Kataloğu Gör",
+    noDataFound: "Seçili filtrelere uygun kayıt bulunamadı.",
+    loadingData: "Veriler yükleniyor...",
+    confirmDelete: "Bu kaydı silmek istediğinizden emin misiniz?",
+    deleteBtn: "Sil",
+    editBtn: "Düzenle",
+    viewDetails: "Detayları Gör",
   },
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { SupplierRecord } from "./EditSupplierModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface SuppliersTableProps {
   suppliers: SupplierRecord[];
@@ -17,16 +18,18 @@ export function SuppliersTable({
   onVerify,
   onToggleStatus,
 }: SuppliersTableProps) {
+  const { t } = useAdminLanguage();
+
   return (
     <div className="overflow-x-auto select-none font-sans">
       <table className="w-full text-left text-xs border-collapse">
         <thead>
           <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[var(--color-text-primary)] font-bold uppercase tracking-wider h-11">
-            <th className="py-3 px-4">Firma Adı (Supplier)</th>
-            <th className="py-3 px-4">Contact</th>
-            <th className="py-3 px-4">Email</th>
-            <th className="py-3 px-4">Status</th>
-            <th className="py-3 px-4 text-right">Actions</th>
+            <th className="py-3 px-4">{t.supplierName}</th>
+            <th className="py-3 px-4">{t.contactPerson}</th>
+            <th className="py-3 px-4">{t.email}</th>
+            <th className="py-3 px-4">{t.status}</th>
+            <th className="py-3 px-4 text-right">{t.actions}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[var(--color-border)]">
@@ -82,7 +85,7 @@ export function SuppliersTable({
                         onClick={() => onVerify(sup.id)}
                         className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                       >
-                        Verify
+                        {t.verification}
                       </button>
                     )}
                     <button
@@ -90,14 +93,14 @@ export function SuppliersTable({
                       onClick={() => onEdit(sup)}
                       className="px-3 py-1.5 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                     >
-                      Edit
+                      {t.editBtn}
                     </button>
                     <button
                       type="button"
                       onClick={() => onView(sup)}
                       className="px-3 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase rounded-none transition-colors cursor-pointer"
                     >
-                      View
+                      {t.viewDetails}
                     </button>
                     {!isPending && (
                       <button

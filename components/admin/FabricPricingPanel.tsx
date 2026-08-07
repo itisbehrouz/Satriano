@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import type { FabricItem } from "./FabricPricingTree";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 interface FabricPricingPanelProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ export function FabricPricingPanel({
   onClose,
   onSave,
 }: FabricPricingPanelProps) {
+  const { t } = useAdminLanguage();
   const [name, setName] = useState("");
   const [colorway, setColorway] = useState("");
   const [minPriceDollars, setMinPriceDollars] = useState("");
@@ -312,7 +314,7 @@ export function FabricPricingPanel({
             onClick={handleAttemptClose}
             className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-none transition-colors cursor-pointer"
           >
-            Cancel
+            {t.cancel}
           </button>
 
           <button
@@ -321,7 +323,7 @@ export function FabricPricingPanel({
             disabled={saving || !hasUnsavedChanges}
             className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-semibold px-5 py-2 rounded-none transition-colors shadow-xs cursor-pointer disabled:opacity-50"
           >
-            {saving ? "Saving Changes…" : "Save Tiering & Fees"}
+            {saving ? t.saving : t.saveChanges}
           </button>
         </div>
       </div>
