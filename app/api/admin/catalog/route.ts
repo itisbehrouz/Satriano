@@ -168,22 +168,26 @@ export async function POST(request: Request) {
         name,
         slug,
         description,
+        imageUrl,
         leadTimeDays,
         moqPerFabric,
         moqCombinedMultiFabric,
-        fitIds,
         initialFabric,
-        imageUrl,
+        fitIds,
+        initialColors,
       } = data;
 
-      if (!subcategoryId || typeof subcategoryId !== "string") {
-        return NextResponse.json({ error: "Parent subcategory ID is required." }, { status: 400 });
-      }
-      if (!name || typeof name !== "string" || !name.trim()) {
-        return NextResponse.json({ error: "Product name is required." }, { status: 400 });
-      }
-      if (!slug || typeof slug !== "string" || !slug.trim()) {
-        return NextResponse.json({ error: "Product slug is required." }, { status: 400 });
+      if (
+        !subcategoryId ||
+        typeof subcategoryId !== "string" ||
+        !name ||
+        typeof name !== "string" ||
+        !name.trim() ||
+        !slug ||
+        typeof slug !== "string" ||
+        !slug.trim()
+      ) {
+        return NextResponse.json({ error: "subcategoryId, name, and slug are required." }, { status: 400 });
       }
 
       if (
@@ -219,6 +223,17 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: `Product slug '${cleanSlug}' already exists.` }, { status: 400 });
       }
 
+      const formattedInitialColors = Array.isArray(initialColors)
+        ? initialColors
+            .filter((c) => c && typeof c.name === "string" && c.name.trim())
+            .map((c, idx) => ({
+              name: c.name.trim(),
+              hex: typeof c.hex === "string" && c.hex.trim() ? c.hex.trim() : null,
+              source: "MANUAL" as const,
+              sortOrder: idx + 1,
+            }))
+        : [];
+
       const product = await prisma.product.create({
         data: {
           subcategoryId,
@@ -237,6 +252,13 @@ export async function POST(request: Request) {
               priceMinCents: initialFabric.priceMinCents,
               priceMaxCents: initialFabric.priceMaxCents,
               setupFeeCents: 0,
+              ...(formattedInitialColors.length > 0
+                ? {
+                    colors: {
+                      create: formattedInitialColors,
+                    },
+                  }
+                : {}),
             },
           },
           ...(Array.isArray(fitIds) && fitIds.length > 0
@@ -248,7 +270,9 @@ export async function POST(request: Request) {
             : {}),
         },
         include: {
-          fabrics: true,
+          fabrics: {
+            include: { colors: true },
+          },
           fits: { include: { fit: true } },
         },
       });
@@ -258,8 +282,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ error: "Invalid target for creation." }, { status: 400 });
   } catch (error) {
-    console.error("Failed to create catalog item", error);
-    return NextResponse.json({ error: "Failed to create item" }, { status: 500 });
+    console.error("Failed to create catalog entity", error);
+    return NextResponse.json({ error: "Failed to create entity" }, { status: 500 });
   }
 }
 
@@ -303,9 +327,22 @@ export async function PATCH(request: Request) {
     }
 
     if (target === "product" && typeof id === "string") {
+      if (typeof data.slug === "string" && data.slug.trim()) {
+        const cleanSlug = data.slug.trim().toLowerCase();
+        const existing = await prisma.product.findUnique({ where: { slug: cleanSlug } });
+        if (existing && existing.id !== id) {
+          return NextResponse.json({ error: `Product slug '${cleanSlug}' already exists.` }, { status: 400 });
+        }
+      }
+
       const updated = await prisma.product.update({
         where: { id },
         data: {
+          ...(typeof data.name === "string" && data.name.trim() ? { name: data.name.trim() } : {}),
+          ...(typeof data.slug === "string" && data.slug.trim() ? { slug: data.slug.trim().toLowerCase() } : {}),
+          ...(typeof data.description === "string" || data.description === null
+            ? { description: typeof data.description === "string" ? data.description.trim() || null : null }
+            : {}),
           ...(typeof data.active === "boolean" ? { active: data.active } : {}),
           ...(typeof data.leadTimeDays === "number" ? { leadTimeDays: data.leadTimeDays } : {}),
           ...(typeof data.moq === "number" ? { moq: data.moq } : {}),

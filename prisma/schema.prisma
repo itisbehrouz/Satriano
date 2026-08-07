@@ -179,15 +179,22 @@ model Fabric {
   @@unique([name, productId])
 }
 
+enum ColorSource {
+  PLACEHOLDER
+  SUPPLIER_VERIFIED
+  MANUAL
+}
+
 model FabricColor {
-  id        String   @id @default(cuid())
+  id        String      @id @default(cuid())
   fabricId  String
-  fabric    Fabric   @relation(fields: [fabricId], references: [id], onDelete: Cascade)
+  fabric    Fabric      @relation(fields: [fabricId], references: [id], onDelete: Cascade)
   name      String
   hex       String?
-  active    Boolean  @default(true)
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
+  source    ColorSource @default(PLACEHOLDER)
+  active    Boolean     @default(true)
+  sortOrder Int         @default(0)
+  createdAt DateTime    @default(now())
 
   orderLines OrderLine[]
 

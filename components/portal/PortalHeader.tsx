@@ -63,7 +63,8 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
 
   // Determine active nav link
   const isCatalogActive =
-    pathname.startsWith("/konfigurator") || pathname.startsWith("/portal/catalog");
+    pathname.startsWith("/konfigurator") || pathname.startsWith("/portal/catalog") || pathname.startsWith("/categories");
+  const isWholesaleActive = pathname.startsWith("/wholesale");
   const isOrdersActive = pathname.startsWith("/portal/orders");
   const isAccountActive = pathname.startsWith("/portal/account");
 
@@ -79,7 +80,7 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
             <AtelierLogo className="h-8 md:h-[40px] w-auto object-contain" />
           </Link>
 
-          {/* Center: Main Navigation (Catalog | Orders | Account) */}
+          {/* Center: Main Navigation (Catalog | Wholesale | Orders | Account) */}
           {companyName && (
             <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
               <Link
@@ -91,6 +92,16 @@ export function PortalHeader({ initialCompanyName = null }: PortalHeaderProps) {
                 }`}
               >
                 Catalog
+              </Link>
+              <Link
+                href="/wholesale"
+                className={`transition-colors pb-1 rounded-none ${
+                  isWholesaleActive
+                    ? "border-b-2 border-[var(--color-accent)] text-[var(--color-text-primary)]"
+                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                }`}
+              >
+                Wholesale
               </Link>
               <Link
                 href="/portal/orders"

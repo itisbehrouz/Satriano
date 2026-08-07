@@ -42,6 +42,21 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  compress: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizePackageImports: [
+      "recharts",
+      "three",
+      "cmdk",
+      "pdf-lib",
+      "jose",
+      "@supabase/supabase-js",
+    ],
+  },
   async headers() {
     return [
       {

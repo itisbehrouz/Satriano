@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Baskervville } from "next/font/google";
-import { CookieConsentModal } from "@/components/layout/CookieConsentModal";
-import { B2BSupportDock } from "@/components/layout/B2BSupportDock";
-import { AIFaqAssistantModal } from "@/components/layout/AIFaqAssistantModal";
+import { ClientLayoutModals } from "@/components/layout/ClientLayoutModals";
 import { ServiceWorkerRegister } from "@/components/layout/ServiceWorkerRegister";
 import "./globals.css";
 
@@ -10,12 +8,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const baskervville = Baskervville({
   variable: "--font-baskervville",
   subsets: ["latin"],
   weight: ["400"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -65,6 +65,8 @@ export default function RootLayout({
             __html: `(function(){try{var p=window.location.pathname;if(p.startsWith('/admin'))return;var t=localStorage.getItem('satriano-theme');if(!t){t=p.startsWith('/portal')?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
           }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="apple-touch-icon"
           href="/icons/apple-touch-icon.png"
@@ -79,9 +81,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
-        <CookieConsentModal />
-        <B2BSupportDock />
-        <AIFaqAssistantModal />
+        <ClientLayoutModals />
         <ServiceWorkerRegister />
       </body>
     </html>

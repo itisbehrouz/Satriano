@@ -251,13 +251,13 @@ export function ConfiguratorClient({
     <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-6 bg-[var(--color-bg)] text-[var(--color-text-primary)] font-sans transition-colors">
       {/* Sticky Stepper Header with Integrated Product Title Block */}
       <div
-        className={`sticky top-0 z-30 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] -mx-4 md:-mx-8 px-4 md:px-8 transition-all duration-200 motion-reduce:transition-none mb-6 ${
-          isScrolled ? "py-2.5 shadow-md" : "py-4"
+        className={`sticky top-[61px] md:top-[76px] z-30 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] -mx-4 md:-mx-8 px-4 md:px-8 transition-all duration-200 motion-reduce:transition-none mb-6 ${
+          isScrolled ? "py-3 shadow-md" : "py-4 lg:py-5"
         }`}
       >
-        <div className="max-w-container-max mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          {/* Integrated Product Header Block */}
-          <div className="space-y-0.5">
+        <div className="max-w-container-max mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-10">
+          {/* Integrated Product Header Block (Proportional max-width) */}
+          <div className="space-y-1.5 shrink-0 max-w-full lg:max-w-md xl:max-w-lg pb-3 lg:pb-0 border-b lg:border-b-0 border-[var(--color-border)]/40">
             <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--color-gold)] uppercase tracking-wider">
               <span>B2B SPEC</span>
               <span>•</span>
@@ -265,27 +265,27 @@ export function ConfiguratorClient({
             </div>
             <h1
               className={`font-bold tracking-tight text-[var(--color-text-primary)] transition-all ${
-                isScrolled ? "text-base md:text-lg" : "text-xl md:text-2xl"
+                isScrolled ? "text-base md:text-lg leading-tight" : "text-xl md:text-2xl leading-tight"
               }`}
             >
               {titleText}
             </h1>
             {!isScrolled && (
-              <p className="text-xs text-[var(--color-text-secondary)] max-w-xl truncate hidden md:block">
+              <p className="text-xs text-[var(--color-text-secondary)] truncate hidden md:block pt-0.5">
                 {descriptionText}
               </p>
             )}
           </div>
 
           {/* 5-Step Navigation Badges */}
-          <div className="flex items-center justify-between md:justify-end gap-2 md:gap-4 overflow-x-auto scrollbar-none py-1">
-            <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center justify-start lg:justify-end gap-3 lg:gap-6 overflow-x-auto scrollbar-none py-1">
+            <div className="flex items-center gap-3 lg:gap-5 shrink-0">
               {steps.map((step) => (
                 <button
                   key={step.id}
                   type="button"
                   onClick={() => scrollToSection(step.id)}
-                  className="flex items-center gap-1.5 group cursor-pointer shrink-0 text-left focus:outline-none"
+                  className="flex items-center gap-2 group cursor-pointer shrink-0 text-left focus:outline-none"
                 >
                   <span
                     className={`w-5 h-5 rounded-none font-mono font-bold flex items-center justify-center text-[10px] transition-colors ${
@@ -317,7 +317,7 @@ export function ConfiguratorClient({
 
             {/* Single Source of Truth Stepper MOQ Badge */}
             <span
-              className={`font-mono text-xs px-2.5 py-1 rounded-none border transition-colors shrink-0 ${
+              className={`font-mono text-xs px-2.5 py-1 rounded-none border transition-colors shrink-0 ml-1 lg:ml-3 ${
                 moqValidation.valid && totalUnits > 0
                   ? "bg-[var(--color-status-success-bg)] text-[var(--color-status-success)] border-[var(--color-status-success)]/30"
                   : "bg-amber-500/10 text-amber-500 border-amber-500/30"

@@ -10,8 +10,8 @@ import { AtelierLogo } from "@/components/layout/AtelierLogo";
 const NAVIGATION_LINKS = [
   { label: "Manufacturing Catalog", href: "/categories" },
   { label: "Garment Categories", href: "/categories" },
+  { label: "Wholesale & Ready Stock", href: "/wholesale" },
   { label: "Client Portal Access", href: "/portal" },
-  { label: "Wholesale & Custom Lines", href: "/portal" },
 ];
 
 const LEGAL_COMPLIANCE_LINKS = [

@@ -58,6 +58,12 @@ export function AdminSidebar({ onSearchClick }: AdminSidebarProps) {
       badge: "M2O",
     },
     {
+      label: "Wholesale",
+      href: "/admin/wholesale",
+      icon: "storefront",
+      badge: "B2B",
+    },
+    {
       label: "B2B Partners",
       href: "/admin/applications",
       icon: "assignment_ind",

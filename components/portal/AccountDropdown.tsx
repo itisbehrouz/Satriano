@@ -61,6 +61,15 @@ export function AccountDropdown({
         </Link>
 
         <Link
+          href="/wholesale"
+          onClick={onClose}
+          className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"
+        >
+          <span className="material-symbols-outlined text-base text-[var(--color-text-secondary)]">storefront</span>
+          <span>Wholesale Catalog</span>
+        </Link>
+
+        <Link
           href="/portal/orders"
           onClick={onClose}
           className="flex items-center gap-2.5 px-4 py-2 text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] transition-colors rounded-none"

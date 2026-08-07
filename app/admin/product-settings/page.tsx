@@ -10,6 +10,8 @@ import { RegionalSizeTree } from "@/components/admin/RegionalSizeTree";
 import { RegionalSizePanel } from "@/components/admin/RegionalSizePanel";
 import { FabricPricingTree, FabricItem } from "@/components/admin/FabricPricingTree";
 import { FabricPricingPanel } from "@/components/admin/FabricPricingPanel";
+import { FabricColorTree, FabricWithColors, CategoryWithColors } from "@/components/admin/FabricColorTree";
+import { FabricColorPanel } from "@/components/admin/FabricColorPanel";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
 
 interface SizeOption {
@@ -39,6 +41,15 @@ interface Fabric {
   priceMaxCents: number;
   setupFeeCents?: number;
   active: boolean;
+  colors?: Array<{
+    id: string;
+    fabricId: string;
+    name: string;
+    hex: string | null;
+    source: "PLACEHOLDER" | "SUPPLIER_VERIFIED" | "MANUAL";
+    active: boolean;
+    sortOrder: number;
+  }>;
 }
 
 interface Product {
@@ -46,6 +57,7 @@ interface Product {
   name: string;
   slug: string;
   description?: string;
+  imageUrl?: string | null;
   leadTimeDays?: number;
   moq?: number;
   moqPerFabric?: number;
@@ -86,7 +98,7 @@ function slugify(text: string): string {
 function ProductSettingsContent() {
   const { isAuthenticated } = useAdminAuth();
   const searchParams = useSearchParams();
-  const tabParam = searchParams?.get("tab") as "catalog" | "sizing" | "fits" | "fabrics" | null;
+  const tabParam = searchParams?.get("tab") as "catalog" | "sizing" | "fits" | "fabrics" | "colourways" | null;
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [sizeSystems, setSizeSystems] = useState<SizeSystem[]>([]);
@@ -98,10 +110,35 @@ function ProductSettingsContent() {
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [editMoqPerFabric, setEditMoqPerFabric] = useState<number>(50);
   const [editMoqCombined, setEditMoqCombined] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics">(tabParam || "catalog");
+  const [activeTab, setActiveTab] = useState<"catalog" | "sizing" | "fits" | "fabrics" | "colourways">(
+    tabParam || "catalog"
+  );
+
+  // Colourways Tab State
+  const [selectedColourwaysFabric, setSelectedColourwaysFabric] = useState<FabricWithColors | null>(null);
+  const [selectedColourwaysProdName, setSelectedColourwaysProdName] = useState<string>("");
+  const [selectedColourwaysCatName, setSelectedColourwaysCatName] = useState<string>("");
+  const [selectedColourwaysSubName, setSelectedColourwaysSubName] = useState<string>("");
+
+  // Initial Colors State (for Add Product Modal)
+  const [showInitialColors, setShowInitialColors] = useState<boolean>(false);
+  const [initialColors, setInitialColors] = useState<Array<{ name: string; hex: string }>>([]);
+
+  // Edit Product Modal State
+  const [editProductContext, setEditProductContext] = useState<{
+    prod: Product;
+    cat: Category;
+    sub: Subcategory;
+  } | null>(null);
+  const [editProdName, setEditProdName] = useState("");
+  const [editProdSlug, setEditProdSlug] = useState("");
+  const [editProdDesc, setEditProdDesc] = useState("");
+  const [editProdImageUrl, setEditProdImageUrl] = useState<string | null>(null);
+  const [editProdLeadTime, setEditProdLeadTime] = useState(14);
+  const [savingProductEdit, setSavingProductEdit] = useState(false);
 
   useEffect(() => {
-    if (tabParam && ["catalog", "sizing", "fits", "fabrics"].includes(tabParam)) {
+    if (tabParam && ["catalog", "sizing", "fits", "fabrics", "colourways"].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [tabParam]);
@@ -447,6 +484,7 @@ function ProductSettingsContent() {
               priceMaxCents,
               setupFeeCents: 0,
             },
+            initialColors: showInitialColors ? initialColors : [],
           },
         }),
       });
@@ -463,12 +501,60 @@ function ProductSettingsContent() {
       setProdFabricName("");
       setProdFitIds([]);
       setProdImageUrl(null);
+      setShowInitialColors(false);
+      setInitialColors([]);
       setAddProductContext(null);
       fetchCatalog();
     } catch {
       setProdError("Network error creating product.");
     } finally {
       setProdSubmitting(false);
+    }
+  }
+
+  function openEditProductModal(prod: Product, cat: Category, sub: Subcategory) {
+    setEditProductContext({ prod, cat, sub });
+    setEditProdName(prod.name);
+    setEditProdSlug(prod.slug);
+    setEditProdDesc(prod.description || "");
+    setEditProdImageUrl(prod.imageUrl || "");
+    setEditProdLeadTime(prod.leadTimeDays || 14);
+  }
+
+  async function handleSaveProductEdit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editProductContext) return;
+
+    setSavingProductEdit(true);
+    try {
+      const res = await fetch("/api/admin/catalog", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target: "product",
+          id: editProductContext.prod.id,
+          data: {
+            name: editProdName,
+            slug: editProdSlug,
+            description: editProdDesc,
+            imageUrl: editProdImageUrl,
+            leadTimeDays: editProdLeadTime,
+          },
+        }),
+      });
+
+      if (!res.ok) {
+        const json = await res.json();
+        alert(json.error || "Failed to update product.");
+        return;
+      }
+
+      setEditProductContext(null);
+      fetchCatalog();
+    } catch {
+      alert("Network error updating product.");
+    } finally {
+      setSavingProductEdit(false);
     }
   }
 
@@ -637,6 +723,17 @@ function ProductSettingsContent() {
               }`}
             >
               Product Fabrics &amp; Ranges
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("colourways")}
+              className={`pb-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 transition-colors ${
+                activeTab === "colourways"
+                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                  : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+              }`}
+            >
+              Colourways
             </button>
           </div>
 
@@ -875,6 +972,13 @@ function ProductSettingsContent() {
                                                         <div className="flex items-center justify-end gap-2">
                                                           <button
                                                             type="button"
+                                                            onClick={() => openEditProductModal(prod, cat, sub)}
+                                                            className="text-[#2E5AAC] hover:text-[#1E3F7A] hover:underline px-1 py-1 text-[11px] font-semibold transition-colors"
+                                                          >
+                                                            Edit Product
+                                                          </button>
+                                                          <button
+                                                            type="button"
                                                             onClick={() => {
                                                               setEditingProductId(prod.id);
                                                               setEditMoqPerFabric(prod.moqPerFabric ?? prod.moq ?? 50);
@@ -987,6 +1091,34 @@ function ProductSettingsContent() {
                     onClose={() => setSelectedFabric(null)}
                     onSave={handleSaveFabric}
                   />
+                </div>
+              )}
+
+              {/* TAB 5: Colourways Admin CRUD */}
+              {activeTab === "colourways" && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                  <div className="lg:col-span-5">
+                    <FabricColorTree
+                      categories={categories as unknown as CategoryWithColors[]}
+                      selectedFabricId={selectedColourwaysFabric?.id || null}
+                      onSelectFabric={(fab, prodName, catName, subName) => {
+                        setSelectedColourwaysFabric(fab);
+                        setSelectedColourwaysProdName(prodName);
+                        setSelectedColourwaysCatName(catName);
+                        setSelectedColourwaysSubName(subName);
+                      }}
+                    />
+                  </div>
+
+                  <div className="lg:col-span-7">
+                    <FabricColorPanel
+                      fabric={selectedColourwaysFabric}
+                      productName={selectedColourwaysProdName}
+                      categoryName={selectedColourwaysCatName}
+                      subcategoryName={selectedColourwaysSubName}
+                      onRefresh={fetchCatalog}
+                    />
+                  </div>
                 </div>
               )}
             </>
@@ -1364,7 +1496,7 @@ function ProductSettingsContent() {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label htmlFor="priceMin" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
                       Min Price ($) *
@@ -1395,21 +1527,83 @@ function ProductSettingsContent() {
                       className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="setupFee" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
-                      Setup Fee ($)
-                    </label>
-                    <input
-                      id="setupFee"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={prodSetupFeeDollars}
-                      onChange={(e) => setProdSetupFeeDollars(e.target.value)}
-                      className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
-                    />
-                  </div>
                 </div>
+              </div>
+
+              {/* Initial Colorways Option */}
+              <div className="border-t border-[#E5E7EB] pt-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2E5AAC]">
+                    Initial Colorways (Optional)
+                  </h4>
+                  <button
+                    type="button"
+                    onClick={() => setShowInitialColors((prev) => !prev)}
+                    className="text-xs font-semibold text-[#2E5AAC] hover:underline"
+                  >
+                    {showInitialColors ? "– Hide Initial Colors" : "+ Add Initial Colors"}
+                  </button>
+                </div>
+
+                {showInitialColors && (
+                  <div className="space-y-3 bg-[#F5F7FA] border border-[#D1D5DB] rounded p-3">
+                    {initialColors.map((col, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Color Name (e.g. Navy Blue)"
+                          value={col.name}
+                          onChange={(e) => {
+                            const updated = [...initialColors];
+                            updated[idx].name = e.target.value;
+                            setInitialColors(updated);
+                          }}
+                          className="flex-grow px-3 py-1.5 bg-white border border-[#D1D5DB] rounded text-xs text-[#1A2233]"
+                        />
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <input
+                            type="color"
+                            value={col.hex}
+                            onChange={(e) => {
+                              const updated = [...initialColors];
+                              updated[idx].hex = e.target.value.toUpperCase();
+                              setInitialColors(updated);
+                            }}
+                            className="w-7 h-7 rounded border border-[#D1D5DB] cursor-pointer p-0 bg-transparent"
+                          />
+                          <input
+                            type="text"
+                            placeholder="#0B1E3D"
+                            value={col.hex}
+                            onChange={(e) => {
+                              const updated = [...initialColors];
+                              updated[idx].hex = e.target.value.toUpperCase();
+                              setInitialColors(updated);
+                            }}
+                            className="w-20 px-2 py-1.5 bg-white border border-[#D1D5DB] rounded text-xs font-mono text-[#1A2233]"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setInitialColors(initialColors.filter((_, i) => i !== idx));
+                          }}
+                          className="text-red-500 hover:text-red-700 px-1 text-xs font-bold"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+
+                    <button
+                      type="button"
+                      onClick={() => setInitialColors([...initialColors, { name: "", hex: "#000000" }])}
+                      className="text-xs font-bold text-[#2E5AAC] hover:underline pt-1"
+                    >
+                      + Add Another Color
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Fit Assignment */}
@@ -1471,6 +1665,111 @@ function ProductSettingsContent() {
                   className="min-h-[44px] px-5 py-2 text-xs font-semibold text-white bg-[#2E5AAC] hover:bg-[#1E3F7A] disabled:opacity-50 rounded shadow-sm"
                 >
                   {prodSubmitting ? "Creating Product..." : "Create Product"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* --- MODAL 4: EDIT PRODUCT --- */}
+      {editProductContext && (
+        <div className="fixed inset-0 bg-[#0B1E3D]/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-white border border-[#D1D5DB] rounded-lg p-6 max-w-xl w-full shadow-lg space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-3">
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#2E5AAC]">
+                  {editProductContext.cat.name} → {editProductContext.sub.name}
+                </div>
+                <h3 className="text-base font-bold text-[#1A2233]">Edit Product Item</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEditProductContext(null)}
+                className="text-[#5B6B85] hover:text-[#1A2233] min-h-[32px] px-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveProductEdit} className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="editProdName" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Product Name *
+                  </label>
+                  <input
+                    id="editProdName"
+                    type="text"
+                    required
+                    value={editProdName}
+                    onChange={(e) => setEditProdName(e.target.value)}
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="editProdSlug" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                    Product Slug *
+                  </label>
+                  <input
+                    id="editProdSlug"
+                    type="text"
+                    required
+                    value={editProdSlug}
+                    onChange={(e) => setEditProdSlug(slugify(e.target.value))}
+                    className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm font-mono text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none min-h-[44px]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="editProdDesc" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Product Description
+                </label>
+                <textarea
+                  id="editProdDesc"
+                  rows={2}
+                  value={editProdDesc}
+                  onChange={(e) => setEditProdDesc(e.target.value)}
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] focus:border-[#2E5AAC] focus:bg-white focus:outline-none"
+                />
+              </div>
+
+              <CatalogImageUploader
+                imageUrl={editProdImageUrl}
+                onImageUrlChange={setEditProdImageUrl}
+                label="Product Image"
+              />
+
+              <div>
+                <label htmlFor="editProdLeadTime" className="block text-xs font-semibold uppercase tracking-wider text-[#5B6B85] mb-1">
+                  Lead Time (Days)
+                </label>
+                <input
+                  id="editProdLeadTime"
+                  type="number"
+                  min={1}
+                  value={editProdLeadTime}
+                  onChange={(e) => setEditProdLeadTime(parseInt(e.target.value, 10) || 14)}
+                  className="w-full px-3 py-2 bg-[#F5F7FA] border border-[#D1D5DB] rounded text-sm text-[#1A2233] min-h-[44px]"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E5E7EB]">
+                <button
+                  type="button"
+                  onClick={() => setEditProductContext(null)}
+                  className="px-4 py-2 border border-[#D1D5DB] rounded text-xs font-semibold text-[#5B6B85] hover:bg-gray-50 min-h-[44px]"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={savingProductEdit}
+                  className="px-5 py-2 bg-[#2E5AAC] text-white rounded text-xs font-bold hover:bg-[#1E3F7A] transition-colors min-h-[44px] disabled:opacity-50"
+                >
+                  {savingProductEdit ? "Saving..." : "Save Product Changes"}
                 </button>
               </div>
             </form>

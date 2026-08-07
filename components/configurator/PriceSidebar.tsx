@@ -44,7 +44,7 @@ export function PriceSidebar({
   // Sticky positioning: use CSS sticky on wide viewports (lg: ~1024px+).
   // On narrow/mobile viewports the grid collapses and sticky top-24 degrades
   // gracefully to normal flow since there is no scroll context.
-  const stickyClass = "sticky top-24";
+  const stickyClass = "sticky top-[148px]";
 
   return (
     <div className={`${stickyClass} bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-6 flex flex-col h-auto transition-colors`}>

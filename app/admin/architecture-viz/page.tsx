@@ -1,7 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { AntiGravityViz } from "@/components/admin/AntiGravityViz";
+import dynamic from "next/dynamic";
+
+const AntiGravityViz = dynamic(
+  () => import("@/components/admin/AntiGravityViz").then((mod) => mod.AntiGravityViz),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[600px] bg-[#0b1329] border border-[#1e293b] flex items-center justify-center text-xs text-[#00f0ff] font-mono">
+        <span className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent rounded-full animate-spin mr-2" />
+        Loading 3D Telemetry Canvas...
+      </div>
+    ),
+  }
+);
 
 export default function AntiGravityArchitecturePage() {
   return (

@@ -17,7 +17,8 @@ const ANONYMOUS_NAV_ITEMS = [
 ];
 
 const AUTHENTICATED_NAV_ITEMS = [
-  { label: "Catalog", href: "/wholesale" },
+  { label: "Catalog", href: "/categories" },
+  { label: "Wholesale", href: "/wholesale" },
   { label: "Orders", href: "/portal/orders" },
   { label: "Account", href: "/portal/account" },
 ];
