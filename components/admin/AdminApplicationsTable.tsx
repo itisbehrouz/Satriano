@@ -149,7 +149,7 @@ export function AdminApplicationsTable({
   if (applications.length === 0) {
     return (
       <div className="p-12 text-center border border-[var(--color-border)] bg-[var(--color-surface)] rounded-none text-[var(--color-text-secondary)]">
-        No B2B partner applications found for the selected criteria.
+        {t.noApplicationsFound}
       </div>
     );
   }
@@ -334,10 +334,10 @@ export function AdminApplicationsTable({
                               <span className="material-symbols-outlined text-base text-[#2E5AAC]">
                                 badge
                               </span>
-                              <span>Complete B2B Application Specification — {app.companyName}</span>
+                              <span>{t.b2bSpecTitle} — {app.companyName}</span>
                             </h4>
                             <span className="text-xs text-[#5B6B85]">
-                              Submitted on {new Date(app.createdAt).toLocaleString("en-US")}
+                              {new Date(app.createdAt).toLocaleDateString()}
                             </span>
                           </div>
 
@@ -345,65 +345,65 @@ export function AdminApplicationsTable({
                             {/* Column 1: Company Info */}
                             <div className="space-y-2 border-r border-[#E5E7EB] pr-4">
                               <h5 className="font-bold text-[#2E5AAC] uppercase tracking-wider text-[11px]">
-                                1. Company Identification
+                                {t.companyIdentificationHeading}
                               </h5>
                               <div>
-                                <span className="text-[#5B6B85] block">Company Name:</span>
+                                <span className="text-[#5B6B85] block">{t.clientCompany}:</span>
                                 <span className="font-semibold text-[#1A2233]">{app.companyName}</span>
                               </div>
                               <div>
                                 <span className="text-[#5B6B85] block">Website:</span>
-                                <span className="font-semibold text-[#1A2233]">{app.website || "N/A"}</span>
+                                <span className="font-semibold text-[#1A2233]">{app.website || "—"}</span>
                               </div>
                               <div>
-                                <span className="text-[#5B6B85] block">Industry Sector:</span>
-                                <span className="font-semibold text-[#1A2233]">{app.industry || "N/A"}</span>
+                                <span className="text-[#5B6B85] block">{t.industryLabel}</span>
+                                <span className="font-semibold text-[#1A2233]">{app.industry || "—"}</span>
                               </div>
                               <div>
                                 <span className="text-[#5B6B85] block">Target Annual Volume:</span>
-                                <span className="font-semibold text-[#2E5AAC]">{app.annualVolume || "N/A"}</span>
+                                <span className="font-semibold text-[#2E5AAC]">{app.annualVolume || "—"}</span>
                               </div>
                             </div>
 
                             {/* Column 2: Contact Info */}
                             <div className="space-y-2 border-r border-[#E5E7EB] pr-4">
                               <h5 className="font-bold text-[#2E5AAC] uppercase tracking-wider text-[11px]">
-                                2. Authorized Representative
+                                {t.authorizedRepresentativeHeading}
                               </h5>
                               <div>
-                                <span className="text-[#5B6B85] block">Full Name:</span>
+                                <span className="text-[#5B6B85] block">{t.contactPerson}:</span>
                                 <span className="font-semibold text-[#1A2233]">{app.fullName}</span>
                               </div>
                               <div>
                                 <span className="text-[#5B6B85] block">Job Title:</span>
-                                <span className="font-semibold text-[#1A2233]">{app.jobTitle || "N/A"}</span>
+                                <span className="font-semibold text-[#1A2233]">{app.jobTitle || "—"}</span>
                               </div>
                               <div>
-                                <span className="text-[#5B6B85] block">Corporate Email:</span>
+                                <span className="text-[#5B6B85] block">{t.email}:</span>
                                 <span className="font-semibold text-[#2E5AAC]">{app.corpEmail}</span>
                               </div>
                               <div>
                                 <span className="text-[#5B6B85] block">Direct Phone:</span>
-                                <span className="font-semibold text-[#1A2233]">{app.phone || "N/A"}</span>
+                                <span className="font-semibold text-[#1A2233]">{app.phone || "—"}</span>
                               </div>
                             </div>
 
                             {/* Column 3: Custom Requirements & Audit */}
                             <div className="space-y-2">
                               <h5 className="font-bold text-[#2E5AAC] uppercase tracking-wider text-[11px]">
-                                3. Manufacturing Needs &amp; Audit Log
+                                {t.manufacturingNeedsHeading}
                               </h5>
                               <div>
                                 <span className="text-[#5B6B85] block">Custom Needs Payload:</span>
                                 <pre className="bg-[#F5F7FA] p-2 rounded border border-[#E5E7EB] text-[11px] font-mono text-[#1A2233] overflow-x-auto max-h-24 mt-1">
-                                  {app.needs ? JSON.stringify(app.needs, null, 2) : "No custom specs provided."}
+                                  {app.needs ? JSON.stringify(app.needs, null, 2) : "—"}
                                 </pre>
                               </div>
                               {app.reviewedAt && (
                                 <div className="pt-2 border-t border-[#E5E7EB] mt-2">
                                   <span className="text-[#5B6B85] block">Review Officer:</span>
                                   <span className="font-semibold text-[#0F6E56]">
-                                    {app.reviewedBy || "admin"} on {new Date(app.reviewedAt).toLocaleString("en-US")}
+                                    {app.reviewedBy || "admin"} ({new Date(app.reviewedAt).toLocaleDateString()})
                                   </span>
                                 </div>
                               )}
@@ -415,7 +415,7 @@ export function AdminApplicationsTable({
                             {!isEmailVerified && (
                               <span className="text-xs text-[#854F0B] bg-[#FAEEDA] px-3 py-1.5 rounded border border-[#F5D8A0] font-medium flex items-center gap-1.5 mr-auto">
                                 <span className="material-symbols-outlined text-base">info</span>
-                                <span>Email verification required before approval or rejection</span>
+                                <span>{t.emailVerificationRequiredWarning}</span>
                               </span>
                             )}
                             {app.status !== "UNDER_REVIEW" && (
@@ -426,7 +426,7 @@ export function AdminApplicationsTable({
                                 className="min-h-[44px] px-4 py-2 text-xs font-semibold text-[#185FA5] bg-white border border-[#B3D6F6] hover:bg-[#E6F1FB] disabled:opacity-40 disabled:cursor-not-allowed rounded transition-colors inline-flex items-center gap-1.5"
                               >
                                 <span className="material-symbols-outlined text-base">hourglass_top</span>
-                                <span>Mark Under Review</span>
+                                <span>{t.markUnderReviewBtn}</span>
                               </button>
                             )}
                             {app.status !== "APPROVED" && (

@@ -139,6 +139,40 @@ export interface AdminDictionary {
   sellPriceLabel: string;
   masterGarmentHierarchyTitle: string;
   masterGarmentHierarchySub: string;
+  productItemHeader: string;
+  singleFabricMoqHeader: string;
+  multiFabricMoqHeader: string;
+  fitsHeader: string;
+  statusEditMoqsHeader: string;
+  saveMoqsBtn: string;
+  moqPerFabricLabel: string;
+  combinedMoqLabel: string;
+  addNewCategoryTitle: string;
+  createCategoryBtn: string;
+  addSubcategoryToTitle: string;
+  createSubcategoryBtn: string;
+  addProductToTitle: string;
+  createProductBtn: string;
+  selectProductLeftTree: string;
+  fitSelectionsSaved: string;
+  selectSizeSystemLeftList: string;
+  sizeSystemAssignmentsSaved: string;
+  selectFabricLineLeftTree: string;
+  selectFabricLineColorways: string;
+  colorwayNameHeader: string;
+  hexCodeHeader: string;
+  sourceHeader: string;
+  loadingB2bApplications: string;
+  applicationsErrorTitle: string;
+  noApplicationsFound: string;
+  noWebsiteProvided: string;
+  industryLabel: string;
+  b2bSpecTitle: string;
+  companyIdentificationHeading: string;
+  authorizedRepresentativeHeading: string;
+  manufacturingNeedsHeading: string;
+  emailVerificationRequiredWarning: string;
+  markUnderReviewBtn: string;
   
   // Login Guard
   executiveConsoleTitle: string;
@@ -401,6 +435,40 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     sellPriceLabel: "Sell Price:",
     masterGarmentHierarchyTitle: "Master Garment Hierarchy",
     masterGarmentHierarchySub: "Define 3-level product structure, custom fabric lines, and two-tier MOQs.",
+    productItemHeader: "Product Item",
+    singleFabricMoqHeader: "Single-Fabric MOQ",
+    multiFabricMoqHeader: "Combined Multi-Fabric MOQ",
+    fitsHeader: "Fits",
+    statusEditMoqsHeader: "Status / Edit MOQs",
+    saveMoqsBtn: "Save MOQs",
+    moqPerFabricLabel: "Moq per fabric:",
+    combinedMoqLabel: "Combined Moq:",
+    addNewCategoryTitle: "ADD NEW CATEGORY",
+    createCategoryBtn: "CREATE CATEGORY",
+    addSubcategoryToTitle: "ADD SUBCATEGORY TO",
+    createSubcategoryBtn: "CREATE SUBCATEGORY",
+    addProductToTitle: "ADD PRODUCT TO",
+    createProductBtn: "CREATE PRODUCT",
+    selectProductLeftTree: "Select a product from the left tree to manage its assigned garment fits.",
+    fitSelectionsSaved: "Fit selections saved successfully!",
+    selectSizeSystemLeftList: "Select a size system from the left list to manage subcategory assignments.",
+    sizeSystemAssignmentsSaved: "Size system assignments saved successfully!",
+    selectFabricLineLeftTree: "Select a fabric line from the accordion tree on the left to edit its pricing tiers.",
+    selectFabricLineColorways: "Select a fabric line from the accordion tree on the left to manage its colourways.",
+    colorwayNameHeader: "COLORWAY NAME",
+    hexCodeHeader: "HEX CODE",
+    sourceHeader: "SOURCE",
+    loadingB2bApplications: "Loading B2B partner applications...",
+    applicationsErrorTitle: "Applications Error",
+    noApplicationsFound: "No B2B partner applications found for the selected criteria.",
+    noWebsiteProvided: "No website provided",
+    industryLabel: "Industry:",
+    b2bSpecTitle: "Complete B2B Application Specification",
+    companyIdentificationHeading: "1. Company Identification",
+    authorizedRepresentativeHeading: "2. Authorized Representative",
+    manufacturingNeedsHeading: "3. Manufacturing Needs & Audit Log",
+    emailVerificationRequiredWarning: "Email verification required before approval or rejection",
+    markUnderReviewBtn: "Mark Under Review",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Executive Console",
@@ -661,6 +729,40 @@ export const adminDictionary: Record<AdminLanguage, AdminDictionary> = {
     sellPriceLabel: "Satış Fiyatı:",
     masterGarmentHierarchyTitle: "Ana Giysi Hiyerarşisi",
     masterGarmentHierarchySub: "3 seviyeli ürün yapısını, özel kumaş serilerini ve MOQ değerlerini tanımlayın.",
+    productItemHeader: "Ürün",
+    singleFabricMoqHeader: "Tek Kumaş MOQ",
+    multiFabricMoqHeader: "Çoklu Kumaş MOQ",
+    fitsHeader: "Kalıplar",
+    statusEditMoqsHeader: "Durum / MOQ Düzenle",
+    saveMoqsBtn: "MOQ'ları Kaydet",
+    moqPerFabricLabel: "Kumaş Başına MOQ:",
+    combinedMoqLabel: "Birleşik MOQ:",
+    addNewCategoryTitle: "YENİ KATEGORİ EKLE",
+    createCategoryBtn: "KATEGORİ OLUŞTUR",
+    addSubcategoryToTitle: "ALT KATEGORİ EKLE",
+    createSubcategoryBtn: "ALT KATEGORİ OLUŞTUR",
+    addProductToTitle: "ÜRÜN EKLE",
+    createProductBtn: "ÜRÜN OLUŞTUR",
+    selectProductLeftTree: "Atanan giysi kalıplarını yönetmek için soldaki ağaçtan bir ürün seçin.",
+    fitSelectionsSaved: "Kalıp seçimleri başarıyla kaydedildi!",
+    selectSizeSystemLeftList: "Alt kategori atamalarını yönetmek için soldaki listeden bir beden sistemi seçin.",
+    sizeSystemAssignmentsSaved: "Beden sistemi atamaları başarıyla kaydedildi!",
+    selectFabricLineLeftTree: "Fiyat kademelerini düzenlemek için soldaki akordeon ağacından bir kumaş serisi seçin.",
+    selectFabricLineColorways: "Renk varyantlarını yönetmek için soldaki akordeon ağacından bir kumaş serisi seçin.",
+    colorwayNameHeader: "RENK VARYANTI ADI",
+    hexCodeHeader: "HEX KODU",
+    sourceHeader: "KAYNAK",
+    loadingB2bApplications: "B2B müşteri başvuruları yükleniyor...",
+    applicationsErrorTitle: "Başvuru Hatası",
+    noApplicationsFound: "Seçilen kriterlere uygun B2B müşteri başvurusu bulunamadı.",
+    noWebsiteProvided: "Web sitesi belirtilmedi",
+    industryLabel: "Sektör:",
+    b2bSpecTitle: "Tam B2B Başvuru Detayları",
+    companyIdentificationHeading: "1. Şirket Bilgileri",
+    authorizedRepresentativeHeading: "2. Yetkili Temsilci",
+    manufacturingNeedsHeading: "3. Üretim İhtiyaçları & İnceleme Kaydı",
+    emailVerificationRequiredWarning: "Onay veya red işleminden önce e-posta doğrulaması gereklidir",
+    markUnderReviewBtn: "İncelemeye Al",
     
     // Login Guard
     executiveConsoleTitle: "Satriano Yönetici Konsolu",

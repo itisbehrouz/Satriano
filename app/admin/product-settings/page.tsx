@@ -888,7 +888,7 @@ function ProductSettingsContent() {
                                         className="min-h-[32px] flex-shrink-0 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-none transition-colors inline-flex items-center gap-1 cursor-pointer"
                                       >
                                         <span className="material-symbols-outlined text-sm">add</span>
-                                        <span>Add Product</span>
+                                        <span>{t.addProductBtn}</span>
                                       </button>
                                     </div>
 
@@ -898,11 +898,11 @@ function ProductSettingsContent() {
                                           <table className="w-full text-left text-xs">
                                             <thead className="bg-[var(--color-bg)] text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)] uppercase text-[11px]">
                                               <tr>
-                                                <th className="py-2.5 px-4">Product Item</th>
-                                                <th className="py-2.5 px-4">Single-Fabric MOQ</th>
-                                                <th className="py-2.5 px-4">Combined Multi-Fabric MOQ</th>
-                                                <th className="py-2.5 px-4">Fits</th>
-                                                <th className="py-2.5 px-4 text-right">Status / Edit MOQs</th>
+                                                <th className="py-2.5 px-4">{t.productItemHeader}</th>
+                                                <th className="py-2.5 px-4">{t.singleFabricMoqHeader}</th>
+                                                <th className="py-2.5 px-4">{t.multiFabricMoqHeader}</th>
+                                                <th className="py-2.5 px-4">{t.fitsHeader}</th>
+                                                <th className="py-2.5 px-4 text-right">{t.statusEditMoqsHeader}</th>
                                               </tr>
                                             </thead>
                                             <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-primary)]">
