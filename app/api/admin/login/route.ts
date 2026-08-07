@@ -1,10 +1,21 @@
 import { NextResponse } from "next/server";
 import { verifyAdminKey, createAdminToken } from "@/lib/adminAuth";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { accessKey } = body;
+    const { accessKey, turnstileToken } = body;
+
+    // Verify Human Challenge via Cloudflare Turnstile
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0] || undefined;
+    const turnstileCheck = await verifyTurnstileToken(turnstileToken, clientIp);
+    if (!turnstileCheck.success) {
+      return NextResponse.json(
+        { error: "Human verification failed. Please complete the security check." },
+        { status: 403 }
+      );
+    }
 
     if (!accessKey || !verifyAdminKey(accessKey)) {
       return NextResponse.json(
@@ -12,6 +23,7 @@ export async function POST(req: Request) {
         { status: 401 }
       );
     }
+
 
     const token = await createAdminToken();
 

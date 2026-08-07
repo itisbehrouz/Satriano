@@ -98,5 +98,9 @@
   "96": "products/[id]/route.ts",
   "97": "products/route.ts",
   "98": "[imageId]/route.ts",
-  "99": "images/route.ts"
+  "99": "images/route.ts",
+  "100": "admin/orders/page.tsx",
+  "101": "CookieConsentModal.tsx",
+  "102": "api/upload/route.ts",
+  "103": "TurnstileWidget.tsx"
 }
