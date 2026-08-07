@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
     if (!password || password !== expectedPassword) {
       return NextResponse.json(
-        { error: "Geçersiz şifre. Lütfen tekrar deneyin." },
+        { error: "Invalid access password. Please try again." },
         { status: 401 }
       );
     }
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return response;
   } catch (err) {
     return NextResponse.json(
-      { error: "Sunucu hatası oluştu." },
+      { error: "An internal server error occurred." },
       { status: 500 }
     );
   }

@@ -26,13 +26,13 @@ export default function UnderDevelopmentPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Geçersiz şifre.");
+        throw new Error(data.error || "Invalid access password.");
       }
 
       // Successful unlock - reload page to enter site
       window.location.href = "/";
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Giriş başarısız.");
+      setError(err instanceof Error ? err.message : "Authentication failed.");
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ export default function UnderDevelopmentPage() {
           </h2>
 
           <p className="text-xs text-[#94A3B8] leading-relaxed max-w-xs mx-auto">
-            Platformumuz hazırlanıyor. Özel erişim şifreniz ile siteye giriş yapabilirsiniz.
+            Our digital platform is currently under development. Enter your access password below to preview the site.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export default function UnderDevelopmentPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-              Erişim Şifresi (Access Password)
+              Access Password
             </label>
             <div className="relative">
               <input
@@ -86,7 +86,7 @@ export default function UnderDevelopmentPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-3 text-[#64748B] hover:text-[#94A3B8] text-xs font-mono transition-colors"
               >
-                {showPassword ? "GİZLE" : "GÖSTER"}
+                {showPassword ? "HIDE" : "SHOW"}
               </button>
             </div>
           </div>
@@ -102,18 +102,18 @@ export default function UnderDevelopmentPage() {
             disabled={loading || !password.trim()}
             className="w-full py-3 px-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold uppercase tracking-wider text-xs transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md cursor-pointer"
           >
-            {loading ? "Giriş Yapılıyor..." : "Siteye Giriş Yap →"}
+            {loading ? "Authenticating..." : "Enter Site →"}
           </button>
         </form>
 
         {/* Admin Access Footer Link */}
         <div className="pt-4 border-t border-[#1E293B] flex items-center justify-between text-[11px] text-[#64748B] font-mono">
-          <span>Yönetici misiniz?</span>
+          <span>Are you an Administrator?</span>
           <Link
             href="/admin"
             className="text-amber-400/80 hover:text-amber-400 font-semibold transition-colors underline underline-offset-4"
           >
-            Yönetici Konsolu →
+            Executive Console →
           </Link>
         </div>
       </div>
