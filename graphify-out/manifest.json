@@ -5,9 +5,9 @@
     "semantic_hash": "fe26966d7d93dc07937347594e216745"
   },
   "app/admin/applications/page.tsx": {
-    "mtime": 1785680723.2744477,
-    "ast_hash": "038282eca4cf932474a285d9749e1a6e",
-    "semantic_hash": "038282eca4cf932474a285d9749e1a6e"
+    "mtime": 1786109058.3708706,
+    "ast_hash": "cf97100736e35810184b64a7f4c9b145",
+    "semantic_hash": ""
   },
   "app/admin/architecture-viz/page.tsx": {
     "mtime": 1786106599.1088378,
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "app/admin/product-settings/page.tsx": {
-    "mtime": 1785890231.4646742,
-    "ast_hash": "a91edcdaf7b7aa2e1f14c17fc396fa19",
+    "mtime": 1786109158.2580419,
+    "ast_hash": "2cb7ad5882e3104ed6db11f479eaa9dc",
     "semantic_hash": ""
   },
   "app/admin/wholesale/inventory/page.tsx": {
@@ -385,9 +385,9 @@
     "semantic_hash": "6bff9c2ecd75087042d9165fb4b1a433"
   },
   "components/admin/AdminApplicationsTable.tsx": {
-    "mtime": 1785680732.9972234,
-    "ast_hash": "245fcbe3091f028d73c2f47b5a159c09",
-    "semantic_hash": "245fcbe3091f028d73c2f47b5a159c09"
+    "mtime": 1786109035.2724507,
+    "ast_hash": "50b1d3851cfe965d3cf8816f3ec7cbdb",
+    "semantic_hash": ""
   },
   "components/admin/AdminAuthContext.tsx": {
     "mtime": 1785602862.1226473,
@@ -400,8 +400,8 @@
     "semantic_hash": "8d1d4bc7524121b29d1e7c195cf59d5b"
   },
   "components/admin/AdminOrderTable.tsx": {
-    "mtime": 1785883650.461945,
-    "ast_hash": "63cc1b7af871c8f7a390999342dd9f1d",
+    "mtime": 1786108993.846659,
+    "ast_hash": "52ff604ce4825afcc46c8c27507782cd",
     "semantic_hash": ""
   },
   "components/admin/AdminSidebar.tsx": {
@@ -470,9 +470,9 @@
     "semantic_hash": "3f80235cd495bc5b34bca840eaf9ac0e"
   },
   "components/admin/wholesale/AdminWholesaleClient.tsx": {
-    "mtime": 1785684434.1377232,
-    "ast_hash": "115d4bb061e48a115f490ca96cc31f5d",
-    "semantic_hash": "115d4bb061e48a115f490ca96cc31f5d"
+    "mtime": 1786109081.9067917,
+    "ast_hash": "de05d80723f1abb0de93a870c3d1eca5",
+    "semantic_hash": ""
   },
   "components/admin/wholesale/InventoryEditModal.tsx": {
     "mtime": 1785681860.9332895,
@@ -1165,9 +1165,9 @@
     "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   },
   "app/admin/orders/page.tsx": {
-    "mtime": 1785683802.9606018,
-    "ast_hash": "573024a005e2c06a37a0d1c83040ce95",
-    "semantic_hash": "573024a005e2c06a37a0d1c83040ce95"
+    "mtime": 1786109008.1398304,
+    "ast_hash": "847f21a5e176c4803b59c31ce1534112",
+    "semantic_hash": ""
   },
   "ROADMAP.md": {
     "mtime": 1785792188.398338,
@@ -1515,8 +1515,8 @@
     "semantic_hash": ""
   },
   "lib/i18n/admin-dictionary.ts": {
-    "mtime": 1786108759.5561476,
-    "ast_hash": "7f723ce460cbe572568b7b749741b277",
+    "mtime": 1786108961.3576946,
+    "ast_hash": "4f1b30dfe1d7564f001bfdbed7ddb0f3",
     "semantic_hash": ""
   }
 }

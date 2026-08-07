@@ -8,17 +8,22 @@ import {
   B2bApplicationItem,
 } from "@/components/admin/AdminApplicationsTable";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
-const APPLICATION_TABS = [
-  { id: "ALL", label: "All Applications" },
-  { id: "SUBMITTED", label: "Submitted (New)" },
-  { id: "UNDER_REVIEW", label: "Under Review" },
-  { id: "APPROVED", label: "Approved Partners" },
-  { id: "REJECTED", label: "Rejected" },
-];
+function getApplicationTabs(t: import("@/lib/i18n/admin-dictionary").AdminDictionary) {
+  return [
+    { id: "ALL", label: t.allApplications },
+    { id: "SUBMITTED", label: t.submittedNew },
+    { id: "UNDER_REVIEW", label: t.underReview },
+    { id: "APPROVED", label: t.approvedPartners },
+    { id: "REJECTED", label: t.rejected },
+  ];
+}
 
 function ApplicationsContent() {
   const { isAuthenticated, setAuthenticated } = useAdminAuth();
+  const { t } = useAdminLanguage();
+  const applicationTabs = getApplicationTabs(t);
   const searchParams = useSearchParams();
   const statusParam = searchParams?.get("status") || "ALL";
 
@@ -93,7 +98,7 @@ function ApplicationsContent() {
           {/* Status Filter Tabs & Action Control Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
             <div className="flex flex-wrap gap-2">
-              {APPLICATION_TABS.map((tab) => (
+              {applicationTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
@@ -117,7 +122,7 @@ function ApplicationsContent() {
               className="min-h-[38px] px-3.5 py-1.5 bg-[var(--color-surface)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] text-xs font-semibold text-[var(--color-text-primary)] rounded-none flex items-center gap-1.5 transition-all cursor-pointer flex-shrink-0"
             >
               <span className="material-symbols-outlined text-base">refresh</span>
-              <span>Refresh Applications</span>
+              <span>{t.refresh}</span>
             </button>
           </div>
 

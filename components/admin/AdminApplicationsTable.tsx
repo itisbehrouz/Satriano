@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, Fragment } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface B2bApplicationItem {
   id: string;
@@ -63,6 +64,7 @@ export function AdminApplicationsTable({
   applications,
   onStatusChange,
 }: AdminApplicationsTableProps) {
+  const { t } = useAdminLanguage();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
@@ -176,12 +178,12 @@ export function AdminApplicationsTable({
         <table className="w-full text-left border-collapse min-w-[960px]">
           <thead>
             <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg)] text-xs uppercase font-semibold text-[var(--color-text-primary)]">
-              <th className="p-4 w-[14%]">App Ref / Date</th>
-              <th className="p-4 w-[28%]">Company &amp; Industry</th>
-              <th className="p-4 w-[22%]">Contact Officer</th>
-              <th className="p-4 w-[12%]">Email Verification</th>
-              <th className="p-4 w-[10%]">Status</th>
-              <th className="p-4 w-[14%] text-right">Actions</th>
+              <th className="p-4 w-[14%]">{t.orderId}</th>
+              <th className="p-4 w-[28%]">{t.companyName}</th>
+              <th className="p-4 w-[22%]">{t.contactPerson}</th>
+              <th className="p-4 w-[12%]">{t.verification}</th>
+              <th className="p-4 w-[10%]">{t.status}</th>
+              <th className="p-4 w-[14%] text-right">{t.actions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--color-border)] text-sm text-[var(--color-text-primary)]">

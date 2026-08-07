@@ -5,19 +5,24 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AdminOrderTable, AdminOrder } from "@/components/admin/AdminOrderTable";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
-const TABS = [
-  { id: "ALL", label: "All Orders" },
-  { id: "PENDING_REVIEW", label: "Pending Review" },
-  { id: "PROFORMA_SENT", label: "Proforma Sent" },
-  { id: "PAID", label: "Paid / Confirmed" },
-  { id: "IN_PRODUCTION", label: "In Production" },
-  { id: "SHIPPED", label: "Shipped" },
-  { id: "CANCELLED", label: "Cancelled" },
-];
+function getTabs(t: import("@/lib/i18n/admin-dictionary").AdminDictionary) {
+  return [
+    { id: "ALL", label: t.allOrdersLedger },
+    { id: "PENDING_REVIEW", label: t.pendingReview },
+    { id: "PROFORMA_SENT", label: t.proformaSent },
+    { id: "PAID", label: t.activeOrders },
+    { id: "IN_PRODUCTION", label: t.inProduction },
+    { id: "SHIPPED", label: t.shippedOrders },
+    { id: "CANCELLED", label: t.rejected },
+  ];
+}
 
 function AdminOrdersContent() {
   const { isAuthenticated, setAuthenticated } = useAdminAuth();
+  const { t } = useAdminLanguage();
+  const tabs = getTabs(t);
   const searchParams = useSearchParams();
   const statusParam = searchParams?.get("status") || "ALL";
 
@@ -173,10 +178,10 @@ function AdminOrdersContent() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-[var(--color-text-primary)]">
-              Order Ledger &amp; Production Operations
+              {t.orderLedgerTitle}
             </h1>
             <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">
-              Live lifecycle management for B2B client orders, custom proforma invoices, and production status.
+              {t.orderLedgerSubtitle}
             </p>
           </div>
 
@@ -186,7 +191,7 @@ function AdminOrdersContent() {
               className="min-h-[36px] px-3.5 py-1.5 bg-[var(--color-surface)] hover:bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs font-semibold rounded-none flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <span className="material-symbols-outlined text-base text-[var(--color-accent)]">dashboard</span>
-              <span>Executive Dashboard</span>
+              <span>{t.executiveDashboard}</span>
             </Link>
           </div>
         </div>
@@ -194,7 +199,7 @@ function AdminOrdersContent() {
         {/* Filter Tabs & Action Buttons Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
           <div className="flex flex-wrap gap-1.5">
-            {TABS.map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"

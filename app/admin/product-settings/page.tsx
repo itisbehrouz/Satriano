@@ -13,6 +13,7 @@ import { FabricPricingPanel } from "@/components/admin/FabricPricingPanel";
 import { FabricColorTree, FabricWithColors, CategoryWithColors } from "@/components/admin/FabricColorTree";
 import { FabricColorPanel } from "@/components/admin/FabricColorPanel";
 import { useAdminAuth } from "@/components/admin/AdminAuthContext";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 interface SizeOption {
   id: string;
@@ -97,6 +98,7 @@ function slugify(text: string): string {
 
 function ProductSettingsContent() {
   const { isAuthenticated } = useAdminAuth();
+  const { t } = useAdminLanguage();
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get("tab") as "catalog" | "sizing" | "fits" | "fabrics" | "colourways" | null;
 
@@ -689,7 +691,7 @@ function ProductSettingsContent() {
                   : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Catalog &amp; Two-Tier MOQs
+              {t.garmentCatalog}
             </button>
             <button
               type="button"
@@ -700,7 +702,7 @@ function ProductSettingsContent() {
                   : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Garment Fits
+              {t.garmentFits}
             </button>
             <button
               type="button"
@@ -711,7 +713,7 @@ function ProductSettingsContent() {
                   : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Regional Size Systems
+              {t.regionalSizing}
             </button>
             <button
               type="button"
@@ -722,7 +724,7 @@ function ProductSettingsContent() {
                   : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Product Fabrics &amp; Ranges
+              {t.fabricPricing}
             </button>
             <button
               type="button"
@@ -733,7 +735,7 @@ function ProductSettingsContent() {
                   : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Colourways
+              {t.addColor}
             </button>
           </div>
 

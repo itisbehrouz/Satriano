@@ -125,21 +125,21 @@
       "norm_label": "navitem"
     },
     {
-      "label": "NAV_ITEMS",
+      "label": "getNavItems()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "app_admin_layout_nav_items",
+      "id": "app_admin_layout_getnavitems",
       "community": 6,
       "community_name": "Page Admin Tabs",
-      "norm_label": "nav_items"
+      "norm_label": "getnavitems()"
     },
     {
       "label": "AdminChrome()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L95",
+      "source_location": "L97",
       "_origin": "ast",
       "id": "app_admin_layout_adminchrome",
       "community": 6,
@@ -150,7 +150,7 @@
       "label": "AdminLayout()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L338",
+      "source_location": "L341",
       "_origin": "ast",
       "id": "app_admin_layout_adminlayout",
       "community": 6,
@@ -2419,8 +2419,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 18,
+      "community_name": "App Wholesale Page",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2430,8 +2430,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 18,
+      "community_name": "App Wholesale Page",
       "norm_label": "wholesalepage()"
     },
     {
@@ -10010,7 +10010,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L95",
+      "source_location": "L97",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -10021,11 +10021,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L338",
+      "source_location": "L341",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
       "target": "app_admin_layout_adminlayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "app_admin_layout_getnavitems",
       "confidence_score": 1.0
     },
     {
@@ -10037,17 +10048,6 @@
       "_origin": "ast",
       "source": "app_admin_layout",
       "target": "app_admin_layout_globalcommandpalette",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/admin/layout.tsx",
-      "source_location": "L29",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_admin_layout",
-      "target": "app_admin_layout_nav_items",
       "confidence_score": 1.0
     },
     {
@@ -10148,9 +10148,21 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout_adminchrome",
+      "target": "app_admin_layout_getnavitems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L97",
+      "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout_adminchrome",
@@ -10162,7 +10174,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L98",
+      "source_location": "L100",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout_adminchrome",

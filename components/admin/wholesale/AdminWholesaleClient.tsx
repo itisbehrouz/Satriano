@@ -8,10 +8,12 @@ import { InventoryTab, InventoryProduct } from "./InventoryTab";
 import { PriceOfferInboxTab, PriceOfferV2 } from "./PriceOfferInboxTab";
 import { OrderStatusTab } from "./OrderStatusTab";
 import { WholesaleOrderFull } from "./OrderDetailModal";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export function AdminWholesaleClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { t } = useAdminLanguage();
 
   // Active Tab state synced with URL query parameter
   const tabParam = (searchParams.get("tab") as "pricing" | "inventory" | "offers" | "orders") || "pricing";
@@ -371,10 +373,10 @@ export function AdminWholesaleClient() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[var(--color-border)] pb-4">
           <div>
             <h1 className="text-2xl font-bold text-[var(--color-text-primary)] uppercase tracking-wide">
-              WHOLESALE MANAGEMENT DASHBOARD
+              {t.wholesaleTitle}
             </h1>
             <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-              Full admin wholesale control panel: pricing tiers, granular size inventory, buyer price offers, and order fulfillment.
+              {t.wholesaleSubtitle}
             </p>
           </div>
 
@@ -384,7 +386,7 @@ export function AdminWholesaleClient() {
               className="h-10 px-4 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg)] text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-base">store</span>
-              Manage Suppliers
+              {t.supplierManagement}
             </Link>
             <Link
               href="/wholesale"
@@ -392,7 +394,7 @@ export function AdminWholesaleClient() {
               className="h-10 px-4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors inline-flex items-center gap-2 cursor-pointer"
             >
               <span className="material-symbols-outlined text-base">open_in_new</span>
-              View Live Wholesale Catalog
+              {t.wholesale}
             </Link>
           </div>
         </div>
@@ -400,10 +402,10 @@ export function AdminWholesaleClient() {
         {/* Navigation Tabs Header */}
         <div className="flex items-center gap-2 border-b border-[var(--color-border)] overflow-x-auto pb-1">
           {[
-            { id: "pricing", label: "Wholesale Pricing Manager", icon: "sell" },
-            { id: "inventory", label: "Inventory by Size/Color", icon: "grid_on" },
-            { id: "offers", label: "Price Offer Inbox", icon: "mark_email_unread" },
-            { id: "orders", label: "Wholesale Order Status", icon: "local_shipping" },
+            { id: "pricing", label: t.pricingManager, icon: "sell" },
+            { id: "inventory", label: t.inventoryBySize, icon: "grid_on" },
+            { id: "offers", label: t.priceOfferInbox, icon: "mark_email_unread" },
+            { id: "orders", label: t.wholesaleOrders, icon: "local_shipping" },
           ].map((tab) => {
             const isActive = activeTab === tab.id;
             return (

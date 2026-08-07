@@ -1,11 +1,11 @@
 # Graph Report - Satriano Atelier  (2026-08-07)
 
 ## Corpus Check
-- 239 files · ~1,462,861 words
+- 239 files · ~1,462,839 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 884 nodes · 1379 edges · 89 communities (74 shown, 15 thin omitted)
+- 884 nodes · 1380 edges · 89 communities (74 shown, 15 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
@@ -123,7 +123,7 @@ Nodes (45): Category, Fabric, FitDef, Product, ProductSettingsContent(), SizeOpt
 
 ### Community 6 - "Page Admin Tabs"
 Cohesion: 0.05
-Nodes (42): APPLICATION_TABS, ApplicationsContent(), AdminChrome(), GlobalCommandPalette, NAV_ITEMS, NavItem, SubItem, AdminOrdersContent() (+34 more)
+Nodes (42): APPLICATION_TABS, ApplicationsContent(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminOrdersContent() (+34 more)
 
 ### Community 7 - "Wholesale Admin Page"
 Cohesion: 0.08
@@ -158,7 +158,7 @@ Cohesion: 0.33
 Nodes (6): POST(), createdCompanyIds, postProforma(), sendProformaEmail(), generateProformaPdf(), ProformaPdfData
 
 ### Community 16 - "Page Ethics Ethicspage()"
-Cohesion: 0.14
+Cohesion: 0.15
 Nodes (7): CATEGORY_IMAGES, PageProps, ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, SiteHeader(), AccountDropdown(), AccountDropdownProps
 
 ### Community 17 - "App Layout Baskervville"
@@ -166,7 +166,7 @@ Cohesion: 0.18
 Nodes (9): baskervville, inter, metadata, viewport, AIFaqAssistantModal, B2BSupportDock, ClientLayoutModals(), CookieConsentModal (+1 more)
 
 ### Community 18 - "App Wholesale Page"
-Cohesion: 0.22
+Cohesion: 0.20
 Nodes (8): Category, CATEGORY_IMAGES, Fabric, Fit, ProductWithRelations, ReadyStockProduct, Subcategory, WholesaleCatalogClient()
 
 ### Community 19 - "Audit Codebase Health"
@@ -246,7 +246,7 @@ Cohesion: 0.40
 Nodes (3): adapter, pool, prisma
 
 ## Knowledge Gaps
-- **282 isolated node(s):** `APPLICATION_TABS`, `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem` (+277 more)
+- **281 isolated node(s):** `APPLICATION_TABS`, `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem` (+276 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -258,7 +258,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
   _High betweenness centrality (0.113) - this node is a cross-community bridge._
 - **What connects `APPLICATION_TABS`, `AntiGravityViz`, `GlobalCommandPalette` to the rest of the system?**
-  _282 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _281 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Route Post() Get()` be split into smaller, more focused modules?**
   _Cohesion score 0.06966618287373004 - nodes in this community are weakly interconnected._
 - **Should `Page Default Size` be split into smaller, more focused modules?**

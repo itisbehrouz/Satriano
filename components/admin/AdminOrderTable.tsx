@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { OrderStatus } from "@/app/generated/prisma/enums";
 import { OrderStatusBadge } from "@/components/OrderStatusBadge";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export interface AdminOrder {
   id: string;
@@ -47,6 +48,7 @@ const ALL_STATUSES: OrderStatus[] = [
 ];
 
 export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps) {
+  const { t } = useAdminLanguage();
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [activeModalOrderId, setActiveModalOrderId] = useState<string | null>(null);
   const [inputFinalPricePerUnit, setInputFinalPricePerUnit] = useState<string>("");
@@ -115,11 +117,11 @@ export function AdminOrderTable({ orders, onStatusChange }: AdminOrderTableProps
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg)] text-xs uppercase font-semibold text-[var(--color-text-primary)]">
-            <th className="p-4">Order Ref / Date</th>
-            <th className="p-4">Corporate Client</th>
-            <th className="p-4">Target Budget &amp; Spec</th>
-            <th className="p-4">Status &amp; Final Price</th>
-            <th className="p-4 text-right">Actions</th>
+            <th className="p-4">{t.orderId}</th>
+            <th className="p-4">{t.clientCompany}</th>
+            <th className="p-4">{t.targetBudget}</th>
+            <th className="p-4">{t.status}</th>
+            <th className="p-4 text-right">{t.actions}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[var(--color-border)] text-sm text-[var(--color-text-primary)]">
