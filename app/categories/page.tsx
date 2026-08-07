@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CategoriesSearchFilter } from "@/components/CategoriesSearchFilter";
 import { prisma } from "@/lib/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function CategoriesPage() {
   const categories = await prisma.category.findMany({

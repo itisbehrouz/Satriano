@@ -6,7 +6,7 @@ import { CategoryArcCarousel } from "@/components/home/CategoryArcCarousel";
 import { ProcessTimeline } from "@/components/home/ProcessTimeline";
 import { prisma } from "@/lib/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 
 const FAQS = [

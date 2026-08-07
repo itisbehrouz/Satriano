@@ -3,8 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import { AdminAuthProvider, useAdminAuth } from "@/components/admin/AdminAuthContext";
-import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
+
+const GlobalCommandPalette = dynamic(
+  () => import("@/components/admin/GlobalCommandPalette").then((mod) => mod.GlobalCommandPalette),
+  { ssr: false }
+);
 
 interface SubItem {
   label: string;

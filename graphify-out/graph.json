@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_admin_applications_page_application_tabs",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "application_tabs"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L146",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -92,10 +92,21 @@
       "norm_label": "admin/layout.tsx"
     },
     {
-      "label": "SubItem",
+      "label": "GlobalCommandPalette",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
       "source_location": "L9",
+      "_origin": "ast",
+      "id": "app_admin_layout_globalcommandpalette",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
+      "norm_label": "globalcommandpalette"
+    },
+    {
+      "label": "SubItem",
+      "file_type": "code",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "app_admin_layout_subitem",
       "community": 6,
@@ -106,7 +117,7 @@
       "label": "NavItem",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L15",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "app_admin_layout_navitem",
       "community": 6,
@@ -117,7 +128,7 @@
       "label": "NAV_ITEMS",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L23",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "app_admin_layout_nav_items",
       "community": 6,
@@ -128,7 +139,7 @@
       "label": "AdminChrome()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L89",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "app_admin_layout_adminchrome",
       "community": 6,
@@ -139,7 +150,7 @@
       "label": "AdminLayout()",
       "file_type": "code",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L319",
+      "source_location": "L324",
       "_origin": "ast",
       "id": "app_admin_layout_adminlayout",
       "community": 6,
@@ -197,8 +208,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_page",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "admin/page.tsx"
     },
     {
@@ -208,8 +219,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_admin_page_admindashboardcontent",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "admindashboardcontent()"
     },
     {
@@ -219,8 +230,8 @@
       "source_location": "L206",
       "_origin": "ast",
       "id": "app_admin_page_adminpage",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminpage()"
     },
     {
@@ -703,8 +714,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "metrics/route.ts"
     },
     {
@@ -714,8 +725,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route_get",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "get()"
     },
     {
@@ -791,7 +802,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "[imageid]/route.ts"
     },
@@ -802,7 +813,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
@@ -813,7 +824,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "delete()"
     },
@@ -824,7 +835,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "images/route.ts"
     },
@@ -835,7 +846,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "checkadminauth()"
     },
@@ -846,7 +857,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -857,8 +868,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 15,
+      "community_name": "Dashboardmetrics Metrics Route",
       "norm_label": "products/[id]/route.ts"
     },
     {
@@ -868,8 +879,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 15,
+      "community_name": "Dashboardmetrics Metrics Route",
       "norm_label": "checkadminauth()"
     },
     {
@@ -879,8 +890,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_get",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 15,
+      "community_name": "Dashboardmetrics Metrics Route",
       "norm_label": "get()"
     },
     {
@@ -890,8 +901,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_route_patch",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 15,
+      "community_name": "Dashboardmetrics Metrics Route",
       "norm_label": "patch()"
     },
     {
@@ -912,8 +923,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "products/route.ts"
     },
     {
@@ -923,8 +934,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_checkadminauth",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -934,8 +945,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_get",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "get()"
     },
     {
@@ -945,8 +956,8 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 82,
+      "community_name": "payment.test.ts",
       "norm_label": "post()"
     },
     {
@@ -1121,8 +1132,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1132,8 +1143,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "post()"
     },
     {
@@ -1198,7 +1209,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "create-session/route.ts"
     },
@@ -1209,7 +1220,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route_post",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -1220,7 +1231,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_payment_test",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "payment.test.ts"
     },
@@ -1231,7 +1242,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_payment_test_createdcompanyids",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "createdcompanyids"
     },
@@ -1242,7 +1253,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "webhook/route.ts"
     },
@@ -1253,7 +1264,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route_post",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
@@ -1363,7 +1374,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1374,7 +1385,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1385,8 +1396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route_test",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "proforma/route.test.ts"
     },
     {
@@ -1396,8 +1407,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_createdcompanyids",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1407,8 +1418,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_postproforma",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "postproforma()"
     },
     {
@@ -1418,8 +1429,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "proforma/route.ts"
     },
     {
@@ -1429,8 +1440,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_api_proforma_route_post",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1605,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guest-confirmation/page.tsx"
     },
     {
@@ -1616,8 +1627,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationcontent",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guestconfirmationcontent()"
     },
     {
@@ -1627,8 +1638,8 @@
       "source_location": "L104",
       "_origin": "ast",
       "id": "app_configure_guest_confirmation_page_guestconfirmationpage",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guestconfirmationpage()"
     },
     {
@@ -1649,8 +1660,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -1660,8 +1671,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_success_page",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "success/page.tsx"
     },
     {
@@ -1671,8 +1682,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesscontent",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "configuratorsuccesscontent()"
     },
     {
@@ -1682,8 +1693,8 @@
       "source_location": "L79",
       "_origin": "ast",
       "id": "app_configure_success_page_configuratorsuccesspage",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "configuratorsuccesspage()"
     },
     {
@@ -1726,8 +1737,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2133,8 +2144,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "portallayout()"
     },
     {
@@ -2408,8 +2419,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2419,8 +2430,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "wholesalepage()"
     },
     {
@@ -2485,8 +2496,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_orderstatusbadge",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "orderstatusbadge.tsx"
     },
     {
@@ -2496,8 +2507,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_orderstatusbadge_status_config",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "status_config"
     },
     {
@@ -2507,8 +2518,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_orderstatusbadge_orderstatusbadge",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "orderstatusbadge()"
     },
     {
@@ -2617,8 +2628,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -2628,8 +2639,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -2639,8 +2650,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -2650,8 +2661,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -2661,8 +2672,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 82,
-      "community_name": "payment.test.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -2727,8 +2738,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminkpidashboard.tsx"
     },
     {
@@ -2738,8 +2749,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_dashboardmetrics",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetrics"
     },
     {
@@ -2749,8 +2760,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_adminkpidashboard",
-      "community": 87,
-      "community_name": "admin/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminkpidashboard()"
     },
     {
@@ -2760,8 +2771,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminordertable",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminordertable.tsx"
     },
     {
@@ -2771,8 +2782,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminorder",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminorder"
     },
     {
@@ -2782,8 +2793,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertableprops",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminordertableprops"
     },
     {
@@ -2793,8 +2804,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_admin_adminordertable_all_statuses",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "all_statuses"
     },
     {
@@ -2804,8 +2815,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertable",
-      "community": 84,
-      "community_name": "AdminOrderTable.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminordertable()"
     },
     {
@@ -2815,30 +2826,41 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 12,
-      "community_name": "Orders Api Route",
+      "community": 84,
+      "community_name": "AdminOrderTable.tsx",
       "norm_label": "adminsidebar.tsx"
+    },
+    {
+      "label": "GlobalCommandPalette",
+      "file_type": "code",
+      "source_file": "components/admin/AdminSidebar.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "components_admin_adminsidebar_globalcommandpalette",
+      "community": 84,
+      "community_name": "AdminOrderTable.tsx",
+      "norm_label": "globalcommandpalette"
     },
     {
       "label": "AdminSidebarProps",
       "file_type": "code",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L9",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 12,
-      "community_name": "Orders Api Route",
+      "community": 84,
+      "community_name": "AdminOrderTable.tsx",
       "norm_label": "adminsidebarprops"
     },
     {
       "label": "AdminSidebar()",
       "file_type": "code",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L13",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 12,
-      "community_name": "Orders Api Route",
+      "community": 84,
+      "community_name": "AdminOrderTable.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -2936,8 +2958,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetrics.test.tsx"
     },
     {
@@ -2947,8 +2969,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test_mockmetricsdata",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "mockmetricsdata"
     },
     {
@@ -2958,8 +2980,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetrics.tsx"
     },
     {
@@ -2969,8 +2991,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetricsprops",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetricsprops"
     },
     {
@@ -2980,8 +3002,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetrics",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetrics()"
     },
     {
@@ -4465,8 +4487,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "configuratorportal.test.tsx"
     },
     {
@@ -4476,8 +4498,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_configurator_configuratorportal_test_mockpush",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "mockpush"
     },
     {
@@ -4850,8 +4872,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guestloginmodal.tsx"
     },
     {
@@ -4861,8 +4883,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodalprops",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guestloginmodalprops"
     },
     {
@@ -4872,8 +4894,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_configure_guestloginmodal_guestloginmodal",
-      "community": 25,
-      "community_name": "App Page Capabilities",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "guestloginmodal()"
     },
     {
@@ -5345,8 +5367,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 16,
+      "community_name": "Page Ethics Ethicspage()",
       "norm_label": "sitefooter()"
     },
     {
@@ -5455,8 +5477,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -5466,8 +5488,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -5477,8 +5499,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 16,
-      "community_name": "Page Ethics Ethicspage()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "accountdropdown()"
     },
     {
@@ -6203,8 +6225,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6214,8 +6236,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "customersession"
     },
     {
@@ -6225,8 +6247,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 24,
-      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession()"
     },
     {
@@ -6313,8 +6335,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics_test",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminmetrics.test.ts"
     },
     {
@@ -6324,8 +6346,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminmetrics.ts"
     },
     {
@@ -6335,8 +6357,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminmetrics_statusdistributionitem",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "statusdistributionitem"
     },
     {
@@ -6346,8 +6368,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_adminmetrics_dashboardmetricsdata",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetricsdata"
     },
     {
@@ -6357,8 +6379,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_adminmetrics_all_statuses",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "all_statuses"
     },
     {
@@ -6368,8 +6390,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "lib_adminmetrics_getadmindashboardmetrics",
-      "community": 15,
-      "community_name": "Dashboardmetrics Metrics Route",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "getadmindashboardmetrics()"
     },
     {
@@ -6379,8 +6401,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customer-session.ts"
     },
     {
@@ -6390,8 +6412,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "customersession"
     },
     {
@@ -6401,8 +6423,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "getcustomersession()"
     },
     {
@@ -6544,8 +6566,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 24,
+      "community_name": "Links Cookieconsentmodal Cookiecategorystate",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -6566,7 +6588,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_email",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "email.ts"
     },
@@ -6577,7 +6599,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_email_sendproformaemailparams",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "sendproformaemailparams"
     },
@@ -6588,8 +6610,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_email_sendproformaemail",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendproformaemail()"
     },
     {
@@ -6599,7 +6621,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemailparams",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "sendmagiclinkemailparams"
     },
@@ -6621,7 +6643,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "lib_email_sendverificationemailparams",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "sendverificationemailparams"
     },
@@ -6907,8 +6929,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator_test",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "pdfgenerator.test.ts"
     },
     {
@@ -6918,8 +6940,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "pdfgenerator.ts"
     },
     {
@@ -6929,8 +6951,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_pdfgenerator_proformapdfdata",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "proformapdfdata"
     },
     {
@@ -6940,8 +6962,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "lib_pdfgenerator_generateproformapdf",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "generateproformapdf()"
     },
     {
@@ -7028,7 +7050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_prisma",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "prisma.ts"
     },
@@ -7039,7 +7061,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_prisma_globalforprisma",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "globalforprisma"
     },
@@ -7050,7 +7072,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_prisma_createprismaclient",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "createprismaclient()"
     },
@@ -7061,7 +7083,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_stripe",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "stripe.ts"
     },
@@ -9889,7 +9911,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L89",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9900,7 +9922,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L319",
+      "source_location": "L324",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9911,7 +9933,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L23",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_admin_layout",
+      "target": "app_admin_layout_globalcommandpalette",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9922,7 +9955,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L15",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9933,7 +9966,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L9",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9945,7 +9978,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9957,7 +9990,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
@@ -9969,35 +10002,11 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout",
       "target": "components_admin_adminauthcontext_useadminauth",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/admin/layout.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_admin_layout",
-      "target": "components_admin_globalcommandpalette",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/admin/layout.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_admin_layout",
-      "target": "components_admin_globalcommandpalette_globalcommandpalette",
       "confidence_score": 1.0
     },
     {
@@ -10006,7 +10015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/admin/layout.tsx",
-      "source_location": "L91",
+      "source_location": "L96",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_admin_layout_adminchrome",
@@ -16796,7 +16805,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L13",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
@@ -16807,7 +16816,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L9",
+      "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
@@ -16815,27 +16824,14 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_adminsidebar",
-      "target": "components_admin_globalcommandpalette",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/admin/AdminSidebar.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_admin_adminsidebar",
-      "target": "components_admin_globalcommandpalette_globalcommandpalette",
+      "target": "components_admin_adminsidebar_globalcommandpalette",
       "confidence_score": 1.0
     },
     {
@@ -25317,5 +25313,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6b2939a71d62ea2999320469f235ccfc7244b13b"
+  "built_at_commit": "78b2eb610e2b4bfe2026ac7b96ee7f2116bf4394"
 }

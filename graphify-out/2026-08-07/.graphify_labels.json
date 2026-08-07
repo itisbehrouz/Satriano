@@ -83,6 +83,13 @@
   "81": "sw.js",
   "82": "payment.test.ts",
   "83": "products/[id]/route.ts",
+  "84": "AdminOrderTable.tsx",
   "85": "api/upload/route.ts",
-  "86": "ConfiguratorSuccess.tsx"
+  "86": "ConfiguratorSuccess.tsx",
+  "87": "admin/page.tsx",
+  "88": "seed-core-colors.ts",
+  "89": "AIFaqAssistantModal.tsx",
+  "90": "seed-pilot-colors.ts",
+  "91": "architecture-viz/page.tsx",
+  "92": "B2BSupportDock.tsx"
 }

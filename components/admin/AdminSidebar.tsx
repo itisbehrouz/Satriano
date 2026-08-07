@@ -4,7 +4,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import { GlobalCommandPalette } from "@/components/admin/GlobalCommandPalette";
+import dynamic from "next/dynamic";
+
+const GlobalCommandPalette = dynamic(
+  () => import("@/components/admin/GlobalCommandPalette").then((mod) => mod.GlobalCommandPalette),
+  { ssr: false }
+);
 
 interface AdminSidebarProps {
   onSearchClick?: () => void;

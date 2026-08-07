@@ -15,9 +15,9 @@
     "semantic_hash": ""
   },
   "app/admin/layout.tsx": {
-    "mtime": 1785683827.543213,
-    "ast_hash": "cab689f727b58a52f29333fc2581316b",
-    "semantic_hash": "cab689f727b58a52f29333fc2581316b"
+    "mtime": 1786107656.428249,
+    "ast_hash": "a309264b44a8f8e1cd26da944e5e63e4",
+    "semantic_hash": ""
   },
   "app/admin/page.tsx": {
     "mtime": 1785683813.0617332,
@@ -240,8 +240,8 @@
     "semantic_hash": "eace96d32c389fe33ee9ae18ff5c096d"
   },
   "app/categories/page.tsx": {
-    "mtime": 1785882057.141613,
-    "ast_hash": "e2725e6efd20890a75a0cd5d5a38eb87",
+    "mtime": 1786107637.1680872,
+    "ast_hash": "297fb49beb276df288e4325c6867c018",
     "semantic_hash": ""
   },
   "app/configure/guest-confirmation/page.tsx": {
@@ -270,7 +270,7 @@
     "semantic_hash": "b275a3fb1a354e9de12ff7bb754437da"
   },
   "app/layout.tsx": {
-    "mtime": 1786106631.597432,
+    "mtime": 1786107987.1243496,
     "ast_hash": "420aadcf3392d58c397769b4bb4f64a4",
     "semantic_hash": ""
   },
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1785885393.0046713,
-    "ast_hash": "e222477d555c55cfac5d06c7dad36beb",
+    "mtime": 1786107632.8362365,
+    "ast_hash": "3d67da8b7e441ebfda0c096228c372b3",
     "semantic_hash": ""
   },
   "app/portal/account/page.tsx": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "components/admin/AdminSidebar.tsx": {
-    "mtime": 1786104973.8239841,
-    "ast_hash": "9040bcb9234cb6cc750bd21f1b8b9d5e",
+    "mtime": 1786107643.7109873,
+    "ast_hash": "57340727e83e7f2e4a8f5ff73bfebba8",
     "semantic_hash": ""
   },
   "components/admin/AntiGravityViz.tsx": {
@@ -670,8 +670,8 @@
     "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1786104977.5559223,
-    "ast_hash": "7dee4dca4f7b1b5915d1712b63007dd1",
+    "mtime": 1786108063.465996,
+    "ast_hash": "05ef6869532d784de646c66c4d8e9b86",
     "semantic_hash": ""
   },
   "components/layout/WhatsAppLiveChat.tsx": {
