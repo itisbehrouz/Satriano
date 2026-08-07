@@ -873,7 +873,28 @@ this stays open until a real before/after screenshot at both mobile
 ### 31.3 Homepage Hero Image Asset Update
 - **Hero Image Update (`public/images/home_header.jpeg`):** Updated `public/images/home_header.jpeg` and `app/page.tsx` hero image tag `<Image src="/images/home_header.jpeg" ... />` with the high-resolution bespoke atelier store photo provided by the user.
 
-### 31.4 Build & Verification Status
-- **Vitest Suite:** All 35 test files passed (**166 / 166 tests passed 100%**).
-- **Next.js Production Build:** `npm run build` compiled 56 static and dynamic routes with 0 TypeScript errors.
-- **Git Deployment:** Commits `78ca711`, `0126906`, `3b5a323`, `e1cd445`, `62cf8c0`, and `cb0351a` pushed to `main`.
+### 31.4 Web Security Audit & Codebase Hardening (`docs/SECURITY_AUDIT.md`)
+- **Security Audit Report (`docs/SECURITY_AUDIT.md`):** Conducted a read-only web security audit based on OWASP Top 10 standards.
+- **Implemented Defenses (Pros):** Documented algorithm pinning (`jose` HS256), edge constant-time string comparison (`verifyAdminKey`), HttpOnly session cookies (`sat_admin_token`), strict HSTS/CSP security headers, Prisma ORM SQLi protection, non-sequential CUID/UUID keys, file size/extension controls, and secret isolation in `.gitignore`.
+- **Hardening Roadmap (Cons):** Documented rate limiting recommendations, SVG XSS payload sanitization, CSP `'unsafe-eval'` removal, and static bearer key restrictions.
+
+### 31.5 Cloudflare Turnstile Free Human Verification System
+- **Server Verification Helper (`lib/turnstile.ts`):** Created `verifyTurnstileToken` calling `https://challenges.cloudflare.com/turnstile/v0/siteverify` with automatic local development fallbacks.
+- **React Widget Component (`components/security/TurnstileWidget.tsx`):** Created client component for non-intrusive Turnstile bot challenges, defaulting to Cloudflare test key `1x00000000000000000000AA` when local env keys are unconfigured.
+- **API Protection:** Integrated `verifyTurnstileToken` into `/api/applications` (B2B application submission) and `/api/admin/login` (corporate admin authentication).
+- **Environment Reference (`.env.example`):** Added `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` documentation.
+- **Unit Test Suite (`lib/turnstile.test.ts`):** Verified mock token validation, missing key development bypasses, and failure handling.
+
+### 31.6 Enterprise Error Pages & Error Boundaries Suite
+- **Global 404 Not Found (`app/not-found.tsx`):** Luxury dark Atelier 404 page with metallic gold accents (`#D4AF37`) and catalog quick links.
+- **Global 500 Runtime Error Boundary (`app/error.tsx`):** React error boundary for route exceptions with `reset()` error recovery, diagnostic digest ID display, and support contact details.
+- **Root Layout Error Boundary (`app/global-error.tsx`):** Self-contained HTML/CSS error wrapper for fatal crashes within `app/layout.tsx`.
+- **403 Access Denied (`app/forbidden.tsx`):** Corporate privilege warning page with direct admin login redirection.
+- **Admin Console Error Boundary (`app/admin/error.tsx`):** Specialized error boundary for `/admin` management workflows.
+- **B2B Customer Portal Error Boundary (`app/portal/error.tsx`):** Customer-facing error boundary for `/portal` order history and magic link recovery.
+- **Unit Test Suite (`app/error-pages.test.tsx`):** Verified rendering and recovery callbacks across all error components.
+
+### 31.7 Build & Verification Status
+- **Vitest Suite:** All 36 test files passed (**171 / 171 tests passed 100%**).
+- **AST Knowledge Graph:** Rebuilt graphify AST graph (`graphify update .`) with 927 nodes, 1518 edges, and 105 communities.
+- **Git Deployment:** Commits `7a495e8` (Turnstile & Security Audit) and `f325f0d` (Error Pages Suite) pushed to `main`.
