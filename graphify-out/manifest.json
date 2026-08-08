@@ -244,21 +244,6 @@
     "ast_hash": "297fb49beb276df288e4325c6867c018",
     "semantic_hash": ""
   },
-  "app/configure/guest-confirmation/page.tsx": {
-    "mtime": 1785680504.1538615,
-    "ast_hash": "94271c78334c2c955a46f5593814c7e0",
-    "semantic_hash": "94271c78334c2c955a46f5593814c7e0"
-  },
-  "app/configure/page.tsx": {
-    "mtime": 1785883737.755206,
-    "ast_hash": "9c74ee833f7480a68dff48752774923e",
-    "semantic_hash": ""
-  },
-  "app/configure/success/page.tsx": {
-    "mtime": 1785680509.3357544,
-    "ast_hash": "e4fdcfcb5f13ae48760bd3fee3a82f5a",
-    "semantic_hash": "e4fdcfcb5f13ae48760bd3fee3a82f5a"
-  },
   "app/konfigurator/[productId]/page.tsx": {
     "mtime": 1785886827.602152,
     "ast_hash": "3eb6ec65e7ff866390a79dfb305cd772",
@@ -325,8 +310,8 @@
     "semantic_hash": "dfbee6612d279eaf57570f23e7169709"
   },
   "app/portal/orders/page.tsx": {
-    "mtime": 1785883643.742455,
-    "ast_hash": "bf1cc67db6dc5476aba37b9d8963cc89",
+    "mtime": 1786186753.568414,
+    "ast_hash": "4b94c4d8418258ce053c0e54efa38398",
     "semantic_hash": ""
   },
   "app/portal/page.tsx": {
@@ -570,19 +555,9 @@
     "semantic_hash": ""
   },
   "components/configurator/ConfiguratorClient.tsx": {
-    "mtime": 1786145562.5194216,
-    "ast_hash": "0ab5c31e7a08a9c61ec1839cdd389252",
+    "mtime": 1786186782.7060564,
+    "ast_hash": "72c6ea6efebf94dcf86527c560e2b900",
     "semantic_hash": ""
-  },
-  "components/configurator/ConfiguratorPortal.test.tsx": {
-    "mtime": 1785631744.4659472,
-    "ast_hash": "0f84a4ae28950e0f557491a4aa669c4b",
-    "semantic_hash": "0f84a4ae28950e0f557491a4aa669c4b"
-  },
-  "components/configurator/ConfiguratorSuccess.test.tsx": {
-    "mtime": 1785630050.0516422,
-    "ast_hash": "4b1dc30276ff07042ba21e89adc632e4",
-    "semantic_hash": "4b1dc30276ff07042ba21e89adc632e4"
   },
   "components/configurator/ConfiguratorSuccess.tsx": {
     "mtime": 1785878278.402156,
@@ -634,11 +609,6 @@
     "ast_hash": "d82032adea625642e8e9e6281022f991",
     "semantic_hash": ""
   },
-  "components/configure/GuestLoginModal.tsx": {
-    "mtime": 1785631705.3939476,
-    "ast_hash": "1758b0613c2fb41eedf0ef94e862a024",
-    "semantic_hash": "1758b0613c2fb41eedf0ef94e862a024"
-  },
   "components/layout/AIFaqAssistantModal.tsx": {
     "mtime": 1785878276.338385,
     "ast_hash": "74676bc03150d608a431a10fc549b119",
@@ -670,8 +640,8 @@
     "semantic_hash": ""
   },
   "components/layout/SiteHeader.tsx": {
-    "mtime": 1786186647.366148,
-    "ast_hash": "9020d124b6f15a92ada17f17ca8f210f",
+    "mtime": 1786186778.3298104,
+    "ast_hash": "7fde8c93824c43ccd9a0c57060d30d01",
     "semantic_hash": ""
   },
   "components/layout/WhatsAppLiveChat.tsx": {
@@ -735,24 +705,24 @@
     "semantic_hash": "1a94c360ba73718d0eab1742d6369f59"
   },
   "components/portal/dashboard/PortalDashboard.test.tsx": {
-    "mtime": 1785883596.006532,
-    "ast_hash": "c1d963f42614c0031c466bf7aa047fd7",
+    "mtime": 1786186772.1984828,
+    "ast_hash": "2629a24abe5fad0acac34a54873f43d1",
     "semantic_hash": ""
   },
   "components/portal/dashboard/QuickActionButtons.tsx": {
-    "mtime": 1785679857.7596848,
-    "ast_hash": "e213c7f8cfe0417400a7b2eb6ccaff57",
-    "semantic_hash": "e213c7f8cfe0417400a7b2eb6ccaff57"
+    "mtime": 1786186757.229249,
+    "ast_hash": "2757dbed7c66396563330e8ec1908e15",
+    "semantic_hash": ""
   },
   "components/portal/dashboard/QuickLinksSection.tsx": {
-    "mtime": 1785679863.5833828,
-    "ast_hash": "6d1045a48364c212de70b8e1c007f6b1",
-    "semantic_hash": "6d1045a48364c212de70b8e1c007f6b1"
+    "mtime": 1786186762.6126657,
+    "ast_hash": "e57080e9567fb4df845096b2762ec22a",
+    "semantic_hash": ""
   },
   "components/portal/dashboard/RecentOrdersSection.tsx": {
-    "mtime": 1785679876.451292,
-    "ast_hash": "6696b6dd5823f0b0000beaa7b96fddb8",
-    "semantic_hash": "6696b6dd5823f0b0000beaa7b96fddb8"
+    "mtime": 1786186767.4096055,
+    "ast_hash": "146ab1ebefcf07b0562b130d68ff742d",
+    "semantic_hash": ""
   },
   "components/portal/orders/FilterBar.tsx": {
     "mtime": 1785679897.6374567,
@@ -1222,16 +1192,6 @@
   "public/Satrinao.png": {
     "mtime": 1785871618.3386595,
     "ast_hash": "00356f7aa81adeb47deed71dbc21acdb",
-    "semantic_hash": ""
-  },
-  "app/configure/checkout/CheckoutClient.tsx": {
-    "mtime": 1785879273.4873848,
-    "ast_hash": "0fd4851f0a67f4655c96b3e45aad5c08",
-    "semantic_hash": ""
-  },
-  "app/configure/checkout/page.tsx": {
-    "mtime": 1785879302.515388,
-    "ast_hash": "aefe3ac713dc41a3d117070c38114b21",
     "semantic_hash": ""
   },
   "components/home/CategoryArcCarousel.tsx": {

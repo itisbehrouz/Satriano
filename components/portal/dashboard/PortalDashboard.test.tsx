@@ -112,7 +112,7 @@ describe("PortalDashboard Component & Dashboard Subcomponents", () => {
     const settingsBtn = screen.getByText("ACCOUNT SETTINGS").closest("a");
     const supportBtn = screen.getByText("CONTACT SUPPORT").closest("a");
 
-    expect(createBtn).toHaveAttribute("href", "/configure");
+    expect(createBtn).toHaveAttribute("href", "/konfigurator");
     expect(viewBtn).toHaveAttribute("href", "/portal/orders");
     expect(settingsBtn).toHaveAttribute("href", "/portal/account");
     expect(supportBtn).toHaveAttribute("href", "/portal/support");
@@ -156,7 +156,7 @@ describe("PortalDashboard Component & Dashboard Subcomponents", () => {
 
     expect(screen.getByText("No Orders Yet")).toBeInTheDocument();
     expect(screen.getByText("Start by configuring your first order")).toBeInTheDocument();
-    expect(screen.getByText("CREATE FIRST ORDER")).toHaveAttribute("href", "/configure");
+    expect(screen.getByText("CREATE FIRST ORDER")).toHaveAttribute("href", "/konfigurator");
   });
 
   it("renders quick links section with helpful links", async () => {

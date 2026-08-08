@@ -307,7 +307,7 @@ function CustomerOrdersContent() {
             </Link>
 
             <Link
-              href="/configure"
+              href="/konfigurator"
               className="h-12 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider px-5 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
             >
               <span>Create M2O Order →</span>
@@ -354,7 +354,7 @@ function CustomerOrdersContent() {
             </p>
             <div>
               <Link
-                href={orderTypeTab === "WHOLESALE" ? "/wholesale" : "/configure"}
+                href={orderTypeTab === "WHOLESALE" ? "/wholesale" : "/konfigurator"}
                 className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-colors"
               >
                 {orderTypeTab === "WHOLESALE" ? "BROWSE WHOLESALE CATALOG" : "CREATE FIRST ORDER"}

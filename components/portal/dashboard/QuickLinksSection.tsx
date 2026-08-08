@@ -11,7 +11,7 @@ export function QuickLinksSection() {
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
         <Link
-          href="/configure"
+          href="/konfigurator"
           className="text-[var(--color-accent)] hover:underline flex items-center gap-1.5 font-medium"
         >
           <span>•</span>

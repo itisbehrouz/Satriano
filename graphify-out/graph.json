@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_admin_applications_page_getapplicationtabs",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "getapplicationtabs()"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -1918,149 +1918,6 @@
       "norm_label": "categoriespage()"
     },
     {
-      "label": "CheckoutClient.tsx",
-      "file_type": "code",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_configure_checkout_checkoutclient",
-      "community": 25,
-      "community_name": "App Page Capabilities",
-      "norm_label": "checkoutclient.tsx"
-    },
-    {
-      "label": "CheckoutClient()",
-      "file_type": "code",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "app_configure_checkout_checkoutclient_checkoutclient",
-      "community": 25,
-      "community_name": "App Page Capabilities",
-      "norm_label": "checkoutclient()"
-    },
-    {
-      "label": "configure/checkout/page.tsx",
-      "file_type": "code",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_configure_checkout_page",
-      "community": 25,
-      "community_name": "App Page Capabilities",
-      "norm_label": "configure/checkout/page.tsx"
-    },
-    {
-      "label": "metadata",
-      "file_type": "code",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "app_configure_checkout_page_metadata",
-      "community": 25,
-      "community_name": "App Page Capabilities",
-      "norm_label": "metadata"
-    },
-    {
-      "label": "CheckoutPage()",
-      "file_type": "code",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "app_configure_checkout_page_checkoutpage",
-      "community": 25,
-      "community_name": "App Page Capabilities",
-      "norm_label": "checkoutpage()"
-    },
-    {
-      "label": "guest-confirmation/page.tsx",
-      "file_type": "code",
-      "source_file": "app/configure/guest-confirmation/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_configure_guest_confirmation_page",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guest-confirmation/page.tsx"
-    },
-    {
-      "label": "GuestConfirmationContent()",
-      "file_type": "code",
-      "source_file": "app/configure/guest-confirmation/page.tsx",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "app_configure_guest_confirmation_page_guestconfirmationcontent",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guestconfirmationcontent()"
-    },
-    {
-      "label": "GuestConfirmationPage()",
-      "file_type": "code",
-      "source_file": "app/configure/guest-confirmation/page.tsx",
-      "source_location": "L104",
-      "_origin": "ast",
-      "id": "app_configure_guest_confirmation_page_guestconfirmationpage",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guestconfirmationpage()"
-    },
-    {
-      "label": "configure/page.tsx",
-      "file_type": "code",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_configure_page",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
-      "norm_label": "configure/page.tsx"
-    },
-    {
-      "label": "ConfigureDefaultPage()",
-      "file_type": "code",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "app_configure_page_configuredefaultpage",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
-      "norm_label": "configuredefaultpage()"
-    },
-    {
-      "label": "success/page.tsx",
-      "file_type": "code",
-      "source_file": "app/configure/success/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_configure_success_page",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "success/page.tsx"
-    },
-    {
-      "label": "ConfiguratorSuccessContent()",
-      "file_type": "code",
-      "source_file": "app/configure/success/page.tsx",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "app_configure_success_page_configuratorsuccesscontent",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "configuratorsuccesscontent()"
-    },
-    {
-      "label": "ConfiguratorSuccessPage()",
-      "file_type": "code",
-      "source_file": "app/configure/success/page.tsx",
-      "source_location": "L79",
-      "_origin": "ast",
-      "id": "app_configure_success_page_configuratorsuccesspage",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "configuratorsuccesspage()"
-    },
-    {
       "label": "error-pages.test.tsx",
       "file_type": "code",
       "source_file": "app/error-pages.test.tsx",
@@ -2188,7 +2045,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 105,
+      "community": 141,
       "community_name": "verifyCustomerToken",
       "norm_label": "productconfiguratorpage()"
     },
@@ -2639,7 +2496,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 141,
+      "community": 105,
       "community_name": "verifyCustomerToken",
       "norm_label": "portal/layout.tsx"
     },
@@ -2881,8 +2738,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_productid_page",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "wholesale/[productid]/page.tsx"
     },
     {
@@ -2892,8 +2749,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_pageprops",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "pageprops"
     },
     {
@@ -2903,8 +2760,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_category_images",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "category_images"
     },
     {
@@ -2914,20 +2771,20 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_wholesaleproductdetailpage",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "wholesaleproductdetailpage()"
     },
     {
-      "label": "wholesale/checkout/page.tsx",
+      "label": "checkout/page.tsx",
       "file_type": "code",
       "source_file": "app/wholesale/checkout/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
-      "norm_label": "wholesale/checkout/page.tsx"
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "norm_label": "checkout/page.tsx"
     },
     {
       "label": "WholesaleCheckoutPage()",
@@ -2936,8 +2793,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page_wholesalecheckoutpage",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "wholesalecheckoutpage()"
     },
     {
@@ -3156,8 +3013,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -3167,8 +3024,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -3178,8 +3035,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -3189,8 +3046,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -3200,8 +3057,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -3266,8 +3123,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard.tsx"
     },
     {
@@ -3277,8 +3134,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics"
     },
     {
@@ -3288,8 +3145,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard()"
     },
     {
@@ -3354,8 +3211,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_admin_adminlanguagecontext_useadminlanguage",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "useadminlanguage()"
     },
     {
@@ -3420,8 +3277,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3431,8 +3288,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "globalcommandpalette"
     },
     {
@@ -3442,8 +3299,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebarprops"
     },
     {
@@ -3453,8 +3310,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -4201,8 +4058,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "addcolorvariantmodal.tsx"
     },
     {
@@ -4212,8 +4069,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "addcolorvariantmodalprops"
     },
     {
@@ -4223,8 +4080,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "addcolorvariantmodal()"
     },
     {
@@ -4322,8 +4179,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventoryeditmodal.tsx"
     },
     {
@@ -4333,8 +4190,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventoryeditmodalprops"
     },
     {
@@ -4344,8 +4201,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventoryeditmodal()"
     },
     {
@@ -4355,8 +4212,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventorytab.tsx"
     },
     {
@@ -4366,8 +4223,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_colorvariant",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "colorvariant"
     },
     {
@@ -4377,8 +4234,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventoryproduct",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventoryproduct"
     },
     {
@@ -4388,8 +4245,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytabprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventorytabprops"
     },
     {
@@ -4399,8 +4256,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "inventorytab()"
     },
     {
@@ -4542,8 +4399,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingmodal.tsx"
     },
     {
@@ -4553,8 +4410,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodalprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingmodalprops"
     },
     {
@@ -4564,8 +4421,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodal",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingmodal()"
     },
     {
@@ -4575,8 +4432,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingtab.tsx"
     },
     {
@@ -4586,8 +4443,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_pricingproduct",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "pricingproduct"
     },
     {
@@ -4597,8 +4454,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtabprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingtabprops"
     },
     {
@@ -4608,8 +4465,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtab",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "wholesalepricingtab()"
     },
     {
@@ -4663,8 +4520,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodal.tsx"
     },
     {
@@ -4674,8 +4531,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_supplieroption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "supplieroption"
     },
     {
@@ -4685,8 +4542,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_categoryoption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "categoryoption"
     },
     {
@@ -4696,8 +4553,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_addwholesaleproductmodalprops",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodalprops"
     },
     {
@@ -5114,8 +4971,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix_test",
-      "community": 153,
-      "community_name": "api/orders/route.ts",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix.test.tsx"
     },
     {
@@ -5125,8 +4982,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix",
-      "community": 153,
-      "community_name": "api/orders/route.ts",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix.tsx"
     },
     {
@@ -5147,8 +5004,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix_colorsizematrix",
-      "community": 153,
-      "community_name": "api/orders/route.ts",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix()"
     },
     {
@@ -5180,42 +5037,9 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "configuratorclient()"
-    },
-    {
-      "label": "ConfiguratorPortal.test.tsx",
-      "file_type": "code",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "components_configurator_configuratorportal_test",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "configuratorportal.test.tsx"
-    },
-    {
-      "label": "mockPush",
-      "file_type": "code",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "components_configurator_configuratorportal_test_mockpush",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "mockpush"
-    },
-    {
-      "label": "ConfiguratorSuccess.test.tsx",
-      "file_type": "code",
-      "source_file": "components/configurator/ConfiguratorSuccess.test.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "components_configurator_configuratorsuccess_test",
-      "community": 86,
-      "community_name": "ConfiguratorSuccess.tsx",
-      "norm_label": "configuratorsuccess.test.tsx"
     },
     {
       "label": "ConfiguratorSuccess.tsx",
@@ -5400,8 +5224,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_logouploader",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploader.tsx"
     },
     {
@@ -5411,8 +5235,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_logouploader_placement_options",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "placement_options"
     },
     {
@@ -5422,8 +5246,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploaderprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploaderprops"
     },
     {
@@ -5433,8 +5257,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploader",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploader()"
     },
     {
@@ -5645,39 +5469,6 @@
       "community": 99,
       "community_name": "images/route.ts",
       "norm_label": "sizeqtytable()"
-    },
-    {
-      "label": "GuestLoginModal.tsx",
-      "file_type": "code",
-      "source_file": "components/configure/GuestLoginModal.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "components_configure_guestloginmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guestloginmodal.tsx"
-    },
-    {
-      "label": "GuestLoginModalProps",
-      "file_type": "code",
-      "source_file": "components/configure/GuestLoginModal.tsx",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "components_configure_guestloginmodal_guestloginmodalprops",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guestloginmodalprops"
-    },
-    {
-      "label": "GuestLoginModal()",
-      "file_type": "code",
-      "source_file": "components/configure/GuestLoginModal.tsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "components_configure_guestloginmodal_guestloginmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
-      "norm_label": "guestloginmodal()"
     },
     {
       "label": "CategoryArcCarousel.tsx",
@@ -6159,8 +5950,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_siteheader",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "siteheader.tsx"
     },
     {
@@ -6170,8 +5961,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_siteheader_anonymous_nav_items",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "anonymous_nav_items"
     },
     {
@@ -6181,8 +5972,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_layout_siteheader_authenticated_nav_items",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "authenticated_nav_items"
     },
     {
@@ -6940,8 +6731,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "wholesaleproductdetailclient.tsx"
     },
     {
@@ -6951,8 +6742,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_sizestockitem",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "sizestockitem"
     },
     {
@@ -6962,8 +6753,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_wholesaleproductdetaildata",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "wholesaleproductdetaildata"
     },
     {
@@ -6973,8 +6764,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_wholesaleproductdetailclient",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "wholesaleproductdetailclient()"
     },
     {
@@ -7006,8 +6797,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -7017,8 +6808,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "customersession"
     },
     {
@@ -7028,8 +6819,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 21,
-      "community_name": "Wholesale [productid] Page",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "usecustomersession()"
     },
     {
@@ -15663,8 +15454,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "lib_moqvalidation_validateordermoq",
-      "community": 153,
-      "community_name": "api/orders/route.ts",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "validateordermoq"
     },
     {
@@ -21483,466 +21274,6 @@
       "_origin": "ast",
       "source": "app_categories_page",
       "target": "lib_prisma",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "app_configure_checkout_checkoutclient_checkoutclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "components_configure_guestloginmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "components_configure_guestloginmodal_guestloginmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "hooks_usecustomersession",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "hooks_usecustomersession_usecustomersession",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_formatcurrency",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_formatcurrency_formatcents",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_m2ocart",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_m2ocart_clearm2ocart",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_m2ocart_getm2ocart",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_m2ocart_m2ocartitem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient",
-      "target": "lib_m2ocart_removefromm2ocart",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_page",
-      "target": "app_configure_checkout_checkoutclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient_checkoutclient",
-      "target": "hooks_usecustomersession_usecustomersession"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L28",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient_checkoutclient",
-      "target": "lib_m2ocart_getm2ocart"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/configure/checkout/CheckoutClient.tsx",
-      "source_location": "L35",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_checkoutclient_checkoutclient",
-      "target": "lib_m2ocart_removefromm2ocart"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_page",
-      "target": "app_configure_checkout_checkoutclient_checkoutclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_page",
-      "target": "app_configure_checkout_page_checkoutpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/checkout/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_checkout_page",
-      "target": "app_configure_checkout_page_metadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/guest-confirmation/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_guest_confirmation_page",
-      "target": "app_configure_guest_confirmation_page_guestconfirmationcontent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/guest-confirmation/page.tsx",
-      "source_location": "L104",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_guest_confirmation_page",
-      "target": "app_configure_guest_confirmation_page_guestconfirmationpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "app_configure_guest_confirmation_page",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "app_configure_page_configuredefaultpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_configurator_configuratorclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_configurator_configuratorclient_configuratorclient",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_layout_sitefooter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_layout_sitefooter_sitefooter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_layout_siteheader",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_layout_siteheader_siteheader",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_portal_portalheader",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "components_portal_portalheader_portalheader",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "lib_customerauth",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "lib_customerauth_verifycustomertoken",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page",
-      "target": "lib_prisma",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/configure/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_page_configuredefaultpage",
-      "target": "lib_customerauth_verifycustomertoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/success/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_success_page",
-      "target": "app_configure_success_page_configuratorsuccesscontent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/configure/success/page.tsx",
-      "source_location": "L79",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_configure_success_page",
-      "target": "app_configure_success_page_configuratorsuccesspage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "app_configure_success_page",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "app_configure_success_page_configuratorsuccesspage",
       "confidence_score": 1.0
     },
     {
@@ -28768,65 +28099,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "components_configurator_configuratorportal_test_mockpush",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "components_configure_guestloginmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorPortal.test.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorportal_test",
-      "target": "components_configure_guestloginmodal_guestloginmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorSuccess.test.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorsuccess_test",
-      "target": "components_configurator_configuratorsuccess",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configurator/ConfiguratorSuccess.test.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configurator_configuratorsuccess_test",
-      "target": "components_configurator_configuratorsuccess_configuratorsuccess",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorSuccess.tsx",
       "source_location": "L13",
       "weight": 1.0,
@@ -29466,28 +28738,6 @@
       "_origin": "ast",
       "source": "components_configurator_sizeqtytable",
       "target": "lib_configuratorlogic_parsequantityinput",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configure/GuestLoginModal.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configure_guestloginmodal",
-      "target": "components_configure_guestloginmodal_guestloginmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "components/configure/GuestLoginModal.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "components_configure_guestloginmodal",
-      "target": "components_configure_guestloginmodal_guestloginmodalprops",
       "confidence_score": 1.0
     },
     {
@@ -41181,5 +40431,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8b6f4a4ff96f9e449e26dc20f7ed48d9dbcb51a0"
+  "built_at_commit": "930e144d63a43b93761c49f6c86106fd9834977e"
 }

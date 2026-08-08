@@ -45,7 +45,7 @@ export function RecentOrdersSection({ orders, loading = false }: RecentOrdersSec
           </p>
           <div className="pt-2">
             <Link
-              href="/configure"
+              href="/konfigurator"
               className="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-sm font-bold uppercase tracking-wider rounded-none transition-colors"
             >
               CREATE FIRST ORDER

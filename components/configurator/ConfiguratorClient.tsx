@@ -233,7 +233,7 @@ export function ConfiguratorClient({
         }
       }
 
-      router.push("/configure/checkout");
+      router.push("/wholesale/checkout");
     } catch {
       setSubmitError("Failed to add to spec. Please try again.");
     } finally {

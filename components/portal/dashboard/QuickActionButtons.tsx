@@ -8,7 +8,7 @@ export function QuickActionButtons() {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-sans select-none">
       {/* 1. Primary Button: CREATE NEW ORDER */}
       <Link
-        href="/configure"
+        href="/konfigurator"
         className="h-12 bg-[var(--color-accent)] hover:bg-[#1E3F7F] text-white text-sm font-bold uppercase tracking-wider px-4 flex items-center justify-center gap-2 rounded-none transition-colors shadow-none"
       >
         <span className="text-xl">➕</span>
