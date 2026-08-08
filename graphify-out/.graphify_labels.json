@@ -169,5 +169,8 @@
   "167": "analytics.ts",
   "168": "applications/route.ts",
   "169": "inventoryForecasting.ts",
-  "170": "api/upload/route.ts"
+  "170": "api/upload/route.ts",
+  "171": "inventoryReservation.ts",
+  "172": "ediAdapter.ts",
+  "173": "quickbooksSync.ts"
 }

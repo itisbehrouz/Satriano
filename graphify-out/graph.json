@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_admin_applications_page_getapplicationtabs",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "getapplicationtabs()"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -1022,8 +1022,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 166,
-      "community_name": "[imageId]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "[imageid]/route.ts"
     },
     {
@@ -1033,8 +1033,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 166,
-      "community_name": "[imageId]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -1044,8 +1044,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 166,
-      "community_name": "[imageId]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "delete()"
     },
     {
@@ -1379,6 +1379,50 @@
       "norm_label": "post()"
     },
     {
+      "label": "webhooks/route.ts",
+      "file_type": "code",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_integrations_webhooks_route",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "webhooks/route.ts"
+    },
+    {
+      "label": "JWT_SECRET",
+      "file_type": "code",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_api_integrations_webhooks_route_jwt_secret",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "jwt_secret"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "app_api_integrations_webhooks_route_post",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "post()"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "app_api_integrations_webhooks_route_get",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "get()"
+    },
+    {
       "label": "orders/route.test.ts",
       "file_type": "code",
       "source_file": "app/api/orders/route.test.ts",
@@ -1492,7 +1536,7 @@
       "label": "POST()",
       "file_type": "code",
       "source_file": "app/api/payment/webhook/route.ts",
-      "source_location": "L5",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route_post",
       "community": 95,
@@ -1946,8 +1990,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -2111,8 +2155,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2562,8 +2606,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "portal/layout.tsx"
     },
     {
@@ -3079,8 +3123,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -3090,8 +3134,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -3101,8 +3145,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -3112,8 +3156,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -3123,8 +3167,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -3189,8 +3233,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard.tsx"
     },
     {
@@ -3200,8 +3244,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics"
     },
     {
@@ -3211,8 +3255,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard()"
     },
     {
@@ -3277,8 +3321,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_admin_adminlanguagecontext_useadminlanguage",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "useadminlanguage()"
     },
     {
@@ -3343,8 +3387,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3354,8 +3398,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "globalcommandpalette"
     },
     {
@@ -3365,8 +3409,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebarprops"
     },
     {
@@ -3376,8 +3420,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 164,
-      "community_name": "notifications.ts",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -4586,8 +4630,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodal.tsx"
     },
     {
@@ -4597,8 +4641,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_supplieroption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "supplieroption"
     },
     {
@@ -4608,8 +4652,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_categoryoption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "categoryoption"
     },
     {
@@ -4619,8 +4663,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_addwholesaleproductmodalprops",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodalprops"
     },
     {
@@ -6071,8 +6115,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "sitefooter()"
     },
     {
@@ -6181,8 +6225,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -6192,8 +6236,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -6203,8 +6247,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "accountdropdown()"
     },
     {
@@ -6973,8 +7017,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6984,8 +7028,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "customersession"
     },
     {
@@ -6995,9 +7039,53 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession()"
+    },
+    {
+      "label": "quickbooksSync.ts",
+      "file_type": "code",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_accounting_quickbookssync",
+      "community": 173,
+      "community_name": "quickbooksSync.ts",
+      "norm_label": "quickbookssync.ts"
+    },
+    {
+      "label": "QuickBooksConfig",
+      "file_type": "code",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_accounting_quickbookssync_quickbooksconfig",
+      "community": 173,
+      "community_name": "quickbooksSync.ts",
+      "norm_label": "quickbooksconfig"
+    },
+    {
+      "label": "syncOrderToQuickBooks()",
+      "file_type": "code",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "lib_accounting_quickbookssync_syncordertoquickbooks",
+      "community": 173,
+      "community_name": "quickbooksSync.ts",
+      "norm_label": "syncordertoquickbooks()"
+    },
+    {
+      "label": "syncPaymentToQuickBooks()",
+      "file_type": "code",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "lib_accounting_quickbookssync_syncpaymenttoquickbooks",
+      "community": 173,
+      "community_name": "quickbooksSync.ts",
+      "norm_label": "syncpaymenttoquickbooks()"
     },
     {
       "label": "adminAuth.ts",
@@ -7251,6 +7339,72 @@
       "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "getcustomersession()"
+    },
+    {
+      "label": "cache.ts",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_cache",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "cache.ts"
+    },
+    {
+      "label": "memoryCache",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "lib_cache_memorycache",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "memorycache"
+    },
+    {
+      "label": "getCached()",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_cache_getcached",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "getcached()"
+    },
+    {
+      "label": "setCached()",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "lib_cache_setcached",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "setcached()"
+    },
+    {
+      "label": "invalidateCache()",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "lib_cache_invalidatecache",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "invalidatecache()"
+    },
+    {
+      "label": "CACHE_KEYS",
+      "file_type": "code",
+      "source_file": "lib/cache.ts",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "lib_cache_cache_keys",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "cache_keys"
     },
     {
       "label": "configuratorLogic.test.ts",
@@ -7770,6 +7924,39 @@
       "norm_label": "formatcents()"
     },
     {
+      "label": "gdprCompliance.ts",
+      "file_type": "code",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_gdprcompliance",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "gdprcompliance.ts"
+    },
+    {
+      "label": "exportCustomerData()",
+      "file_type": "code",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_gdprcompliance_exportcustomerdata",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "exportcustomerdata()"
+    },
+    {
+      "label": "deleteCustomerData()",
+      "file_type": "code",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "lib_gdprcompliance_deletecustomerdata",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "deletecustomerdata()"
+    },
+    {
       "label": "admin-dictionary.ts",
       "file_type": "code",
       "source_file": "lib/i18n/admin-dictionary.ts",
@@ -7864,8 +8051,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_inventoryreservation_test",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 171,
+      "community_name": "inventoryReservation.ts",
       "norm_label": "inventoryreservation.test.ts"
     },
     {
@@ -7875,8 +8062,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_inventoryreservation",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 171,
+      "community_name": "inventoryReservation.ts",
       "norm_label": "inventoryreservation.ts"
     },
     {
@@ -7886,8 +8073,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_inventoryreservation_stockreservationstatus",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 171,
+      "community_name": "inventoryReservation.ts",
       "norm_label": "stockreservationstatus"
     },
     {
@@ -7897,8 +8084,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_inventoryreservation_reservestockfororder",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 171,
+      "community_name": "inventoryReservation.ts",
       "norm_label": "reservestockfororder()"
     },
     {
@@ -7908,8 +8095,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "lib_inventoryreservation_releaseexpiredreservations",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 171,
+      "community_name": "inventoryReservation.ts",
       "norm_label": "releaseexpiredreservations()"
     },
     {
@@ -8507,6 +8694,72 @@
       "norm_label": "requirerole()"
     },
     {
+      "label": "securityHardening.test.ts",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_securityhardening_test",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "securityhardening.test.ts"
+    },
+    {
+      "label": "securityHardening.ts",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_securityhardening",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "securityhardening.ts"
+    },
+    {
+      "label": "getEncryptionKey()",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_securityhardening_getencryptionkey",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "getencryptionkey()"
+    },
+    {
+      "label": "encryptField()",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "lib_securityhardening_encryptfield",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "encryptfield()"
+    },
+    {
+      "label": "decryptField()",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "lib_securityhardening_decryptfield",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "decryptfield()"
+    },
+    {
+      "label": "applySecurityHeaders()",
+      "file_type": "code",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "lib_securityhardening_applysecurityheaders",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
+      "norm_label": "applysecurityheaders()"
+    },
+    {
       "label": "stripe.ts",
       "file_type": "code",
       "source_file": "lib/stripe.ts",
@@ -8527,6 +8780,61 @@
       "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "supabase.ts"
+    },
+    {
+      "label": "ediAdapter.ts",
+      "file_type": "code",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_suppliers_ediadapter",
+      "community": 172,
+      "community_name": "ediAdapter.ts",
+      "norm_label": "ediadapter.ts"
+    },
+    {
+      "label": "EDIMessage",
+      "file_type": "code",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_suppliers_ediadapter_edimessage",
+      "community": 172,
+      "community_name": "ediAdapter.ts",
+      "norm_label": "edimessage"
+    },
+    {
+      "label": "parseEDI855()",
+      "file_type": "code",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "lib_suppliers_ediadapter_parseedi855",
+      "community": 172,
+      "community_name": "ediAdapter.ts",
+      "norm_label": "parseedi855()"
+    },
+    {
+      "label": "parseEDI856()",
+      "file_type": "code",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "lib_suppliers_ediadapter_parseedi856",
+      "community": 172,
+      "community_name": "ediAdapter.ts",
+      "norm_label": "parseedi856()"
+    },
+    {
+      "label": "generateEDI997()",
+      "file_type": "code",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "lib_suppliers_ediadapter_generateedi997",
+      "community": 172,
+      "community_name": "ediAdapter.ts",
+      "norm_label": "generateedi997()"
     },
     {
       "label": "turnstile.test.ts",
@@ -8725,6 +9033,50 @@
       "community": 22,
       "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "getsampledefaultcart()"
+    },
+    {
+      "label": "zapierWebhook.test.ts",
+      "file_type": "code",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_zapierwebhook_test",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "zapierwebhook.test.ts"
+    },
+    {
+      "label": "mockFetch",
+      "file_type": "code",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "lib_zapierwebhook_test_mockfetch",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "mockfetch"
+    },
+    {
+      "label": "zapierWebhook.ts",
+      "file_type": "code",
+      "source_file": "lib/zapierWebhook.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_zapierwebhook",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "zapierwebhook.ts"
+    },
+    {
+      "label": "dispatchZapierEvent()",
+      "file_type": "code",
+      "source_file": "lib/zapierWebhook.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "lib_zapierwebhook_dispatchzapierevent",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "dispatchzapierevent()"
     },
     {
       "label": "middleware.ts",
@@ -19126,6 +19478,51 @@
       "target": "lib_customerauth_verifycustomertoken"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_integrations_webhooks_route",
+      "target": "app_api_integrations_webhooks_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_integrations_webhooks_route",
+      "target": "app_api_integrations_webhooks_route_jwt_secret",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_integrations_webhooks_route",
+      "target": "app_api_integrations_webhooks_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/integrations/webhooks/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_integrations_webhooks_route",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -19508,7 +19905,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/payment/webhook/route.ts",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_api_payment_webhook_route",
@@ -30255,6 +30652,39 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_accounting_quickbookssync",
+      "target": "lib_accounting_quickbookssync_quickbooksconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_accounting_quickbookssync",
+      "target": "lib_accounting_quickbookssync_syncordertoquickbooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/accounting/quickbooksSync.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_accounting_quickbookssync",
+      "target": "lib_accounting_quickbookssync_syncpaymenttoquickbooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/adminAuth.ts",
       "source_location": "L49",
       "weight": 1.0,
@@ -30834,6 +31264,61 @@
       "_origin": "ast",
       "source": "lib_auth_customer_session_getcustomersession",
       "target": "lib_customerauth_verifycustomertoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/cache.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_cache",
+      "target": "lib_cache_cache_keys",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/cache.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_cache",
+      "target": "lib_cache_getcached",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/cache.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_cache",
+      "target": "lib_cache_invalidatecache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/cache.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_cache",
+      "target": "lib_cache_memorycache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/cache.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_cache",
+      "target": "lib_cache_setcached",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -31725,6 +32210,40 @@
       "_origin": "ast",
       "source": "lib_formatcurrency",
       "target": "lib_formatcurrency_usdformatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_gdprcompliance",
+      "target": "lib_gdprcompliance_deletecustomerdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_gdprcompliance",
+      "target": "lib_gdprcompliance_exportcustomerdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/gdprCompliance.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_gdprcompliance",
+      "target": "lib_prisma",
       "confidence_score": 1.0
     },
     {
@@ -32803,6 +33322,30 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook_test",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "lib/rbac.test.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -32867,6 +33410,166 @@
       "_origin": "ast",
       "source": "lib_rbac_requirerole",
       "target": "lib_rbac_hasrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_test",
+      "target": "lib_securityhardening",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_test",
+      "target": "lib_securityhardening_applysecurityheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_test",
+      "target": "lib_securityhardening_decryptfield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_test",
+      "target": "lib_securityhardening_encryptfield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening",
+      "target": "lib_securityhardening_applysecurityheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening",
+      "target": "lib_securityhardening_decryptfield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening",
+      "target": "lib_securityhardening_encryptfield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening",
+      "target": "lib_securityhardening_getencryptionkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_decryptfield",
+      "target": "lib_securityhardening_getencryptionkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/securityHardening.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_securityhardening_encryptfield",
+      "target": "lib_securityhardening_getencryptionkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_suppliers_ediadapter",
+      "target": "lib_suppliers_ediadapter_edimessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_suppliers_ediadapter",
+      "target": "lib_suppliers_ediadapter_generateedi997",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_suppliers_ediadapter",
+      "target": "lib_suppliers_ediadapter_parseedi855",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/suppliers/ediAdapter.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_suppliers_ediadapter",
+      "target": "lib_suppliers_ediadapter_parseedi856",
       "confidence_score": 1.0
     },
     {
@@ -33081,6 +33784,52 @@
       "_origin": "ast",
       "source": "lib_wholesalecart_addtowholesalecart",
       "target": "lib_wholesalecart_savewholesalecart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook_test",
+      "target": "lib_zapierwebhook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook_test",
+      "target": "lib_zapierwebhook_dispatchzapierevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.test.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook_test",
+      "target": "lib_zapierwebhook_test_mockfetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/zapierWebhook.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_zapierwebhook",
+      "target": "lib_zapierwebhook_dispatchzapierevent",
       "confidence_score": 1.0
     },
     {
@@ -39009,5 +39758,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "456799758f7c2d793e5130940149a0867ce4b84a"
+  "built_at_commit": "9e861f452cf36f9d665eb3e4a2bec2e6f30700eb"
 }
