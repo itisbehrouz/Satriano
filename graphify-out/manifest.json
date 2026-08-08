@@ -1828,5 +1828,10 @@
     "mtime": 1786213007.5329285,
     "ast_hash": "1d1df885192ef49bbb52c13c84cba1c0",
     "semantic_hash": ""
+  },
+  "docs/AUDIT-4-PRICING-ARCHITECTURE.md": {
+    "mtime": 1786213116.262843,
+    "ast_hash": "660f4c4aedc3f8cf88e94dd1b074a03a",
+    "semantic_hash": ""
   }
 }
