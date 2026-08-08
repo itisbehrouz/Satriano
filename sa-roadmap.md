@@ -894,3 +894,42 @@ this stays open until a real before/after screenshot at both mobile
 - **Vitest Suite:** All 36 test files passed (**171 / 171 tests passed 100%**).
 - **AST Knowledge Graph:** Rebuilt graphify AST graph (`graphify update .`) with 927 nodes, 1518 edges, and 105 communities.
 - **Git Deployment:** Commits `7a495e8` (Turnstile & Security Audit) and `f325f0d` (Error Pages Suite) pushed to `main`.
+
+---
+
+## 32. Session Log: August 8, 2026
+
+### 32.1 Dedicated Project Port Allocation & Local Dev Server Hardening
+- **Port Reservation Standardized:** Port `3002` explicitly assigned to Satriano Atelier as per corporate project port rules.
+- **`package.json` Updated:** Modified `"dev"` script to `"next dev -p 3002"`.
+- **Local Runtime Verification:** Verified local server startup on `http://localhost:3002` with 200 OK responses.
+
+### 32.2 Full Codebase UI Audit & Bugfix Pass (`AGENT_18_UI_AUDIT_BUGFIX`)
+- **Logo Aspect Ratio Warning Fixed (`components/layout/AtelierLogo.tsx`):** Added `style={{ width: "auto", height: "auto" }}` to `<NextImage>` elements to resolve Next.js CSS width/height warning.
+- **React Effect Cascading State Render Fixed (`hooks/useCustomerSession.ts`):** Refactored customer session hook with a cleanup flag to avoid calling `setState` synchronously within effect bodies.
+- **ES Import Enforcement (`components/wholesale/WholesaleProductDetailClient.tsx`):** Removed dynamic `require("@/lib/wholesaleCart")` in favor of top-level ES module import.
+- **Strict TypeScript Type Enforcement:** Replaced `any` types with `unknown` and `Record<string, unknown>` across `lib/adminAuth.ts`, `lib/customerAuth.ts`, `lib/emailService.ts`, `lib/i18n/index.ts`, `lib/inventoryForecasting.ts`, `lib/orderSubmission.ts`, and `lib/m2oCart.ts`.
+- **Dead & Unused Code Purge:** Removed unused imports and parameters in `lib/accounting/quickbooksSync.ts`, `middleware.ts`, `lib/pricing.ts`, and `lib/rbac.test.ts`.
+
+### 32.3 Cloudflare Turnstile Bot Verification Infrastructure Purged
+- **Component & Lib Deletion:** Removed `components/security/TurnstileWidget.tsx`, `lib/turnstile.ts`, and `lib/turnstile.test.ts`.
+- **API Handler Cleanup:** Purged Turnstile verification calls from `app/api/admin/login/route.ts` and `app/api/applications/route.ts`.
+- **Environment Reference Purge:** Removed Turnstile environment variables from `.env.example`.
+
+### 32.4 Comprehensive Link Audit & Navigation Route Resolution (`AGENT_19_LINK_AUDIT`)
+- **Route Audit:** Scanned all `href` attributes, `router.push`, `router.replace`, and `redirect()` calls across the entire codebase.
+- **Broken Link Fixes:**
+  - `app/portal/error.tsx`: Replaced broken `href="/portal/login"` with `href="/portal"`.
+  - `components/layout/PortalHeader.tsx`: Replaced broken `href="/portal/settings"` with `href="/portal/account?tab=settings"`.
+- **Endpoint Response Verification:** Tested all 21 core application routes (`/`, `/categories`, `/wholesale`, `/configure`, `/portal`, `/portal/account`, `/portal/orders`, `/portal/support`, `/admin`, legal pages) via curl with 100% 200 OK responses.
+
+### 32.5 MANUFACTURING Nav Item & Deprecated `/configure` Route Removal
+- **Navigation Cleanup (`components/layout/SiteHeader.tsx`):** Purged `{ label: "MANUFACTURING", href: "/configure" }` item from `ANONYMOUS_NAV_ITEMS`.
+- **Route Directory Deletion:** Removed `app/configure` directory (`checkout`, `guest-confirmation`, `success`, `page.tsx`).
+- **Portal Link Redirects:** Updated all portal order creation links across dashboard, orders ledger, and configurator to point to `/konfigurator` or `/wholesale/checkout`.
+
+### 32.6 Verification & Build Status
+- **Vitest Suite:** All 44 test files / 203 unit & integration tests passed (**100% pass rate**).
+- **Next.js Production Build:** Next.js 16.2.12 (Turbopack) successfully compiled 64 static/dynamic routes with zero TypeScript errors.
+- **AST Knowledge Graph:** Rebuilt graphify AST topology (`1473 nodes, 2104 edges, 174 communities`).
+- **Git Deployment:** Commits `e543489`, `58be7f2`, `8b6f4a4`, `3844ba2`, `930e144` pushed to `main`. Vercel deployment live ✅.

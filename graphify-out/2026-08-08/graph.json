@@ -5158,8 +5158,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_test",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker.test.tsx"
     },
     {
@@ -5169,8 +5169,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_test_samplefits",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "samplefits"
     },
     {
@@ -5180,8 +5180,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fitpicker",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker.tsx"
     },
     {
@@ -5191,8 +5191,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitoption",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitoption"
     },
     {
@@ -5202,8 +5202,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitpickerprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpickerprops"
     },
     {
@@ -5213,8 +5213,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitpicker",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 170,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker()"
     },
     {
@@ -5224,8 +5224,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_logouploader",
-      "community": 170,
-      "community_name": "LogoUploader.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "logouploader.tsx"
     },
     {
@@ -5235,8 +5235,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_logouploader_placement_options",
-      "community": 170,
-      "community_name": "LogoUploader.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "placement_options"
     },
     {
@@ -5246,8 +5246,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploaderprops",
-      "community": 170,
-      "community_name": "LogoUploader.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "logouploaderprops"
     },
     {
@@ -5257,8 +5257,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploader",
-      "community": 170,
-      "community_name": "LogoUploader.tsx",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "logouploader()"
     },
     {
@@ -15415,21 +15415,21 @@
       "norm_label": "31.4 web security audit & codebase hardening (`docs/security_audit.md`)"
     },
     {
-      "label": "31.5 Cloudflare Turnstile Free Human Verification System",
+      "label": "31.5 Cloudflare Turnstile Human Verification System (Disabled / Removed)",
       "file_type": "document",
       "source_file": "sa-roadmap.md",
       "source_location": "L881",
       "_origin": "ast",
-      "id": "sa_roadmap_31_5_cloudflare_turnstile_free_human_verification_system",
+      "id": "sa_roadmap_31_5_cloudflare_turnstile_human_verification_system_disabled_removed",
       "community": 115,
       "community_name": "31. Session Log: August 7, 2026",
-      "norm_label": "31.5 cloudflare turnstile free human verification system"
+      "norm_label": "31.5 cloudflare turnstile human verification system (disabled / removed)"
     },
     {
       "label": "31.6 Enterprise Error Pages & Error Boundaries Suite",
       "file_type": "document",
       "source_file": "sa-roadmap.md",
-      "source_location": "L888",
+      "source_location": "L884",
       "_origin": "ast",
       "id": "sa_roadmap_31_6_enterprise_error_pages_error_boundaries_suite",
       "community": 115,
@@ -15440,7 +15440,7 @@
       "label": "31.7 Build & Verification Status",
       "file_type": "document",
       "source_file": "sa-roadmap.md",
-      "source_location": "L897",
+      "source_location": "L893",
       "_origin": "ast",
       "id": "sa_roadmap_31_7_build_verification_status",
       "community": 115,
@@ -40125,14 +40125,14 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "sa_roadmap_31_session_log_august_7_2026",
-      "target": "sa_roadmap_31_5_cloudflare_turnstile_free_human_verification_system",
+      "target": "sa_roadmap_31_5_cloudflare_turnstile_human_verification_system_disabled_removed",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "sa-roadmap.md",
-      "source_location": "L888",
+      "source_location": "L884",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sa_roadmap_31_session_log_august_7_2026",
@@ -40143,7 +40143,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "sa-roadmap.md",
-      "source_location": "L897",
+      "source_location": "L893",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sa_roadmap_31_session_log_august_7_2026",
@@ -40431,5 +40431,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "930e144d63a43b93761c49f6c86106fd9834977e"
+  "built_at_commit": "bb098ef36f640aeae08e7770c063e97ea17e63b3"
 }

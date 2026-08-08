@@ -1130,8 +1130,8 @@
     "semantic_hash": ""
   },
   "ROADMAP.md": {
-    "mtime": 1786137025.3366525,
-    "ast_hash": "29fff2e1d42b2430c2f495e45748b9fe",
+    "mtime": 1786187172.441744,
+    "ast_hash": "2c69ac51742f4e3ea95f5c660cadb5d8",
     "semantic_hash": ""
   },
   "app/manifest.ts": {
@@ -1560,8 +1560,8 @@
     "semantic_hash": ""
   },
   "sa-roadmap.md": {
-    "mtime": 1786140271.988286,
-    "ast_hash": "576d467409c6c38aee712489c06b399c",
+    "mtime": 1786187176.224801,
+    "ast_hash": "1a563304239edb3d786cda79abafa8a5",
     "semantic_hash": ""
   },
   "app/api/admin/catalog/fabric/[id]/route.ts": {

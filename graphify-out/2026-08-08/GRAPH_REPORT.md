@@ -1,7 +1,7 @@
 # Graph Report - Satriano Atelier  (2026-08-08)
 
 ## Corpus Check
-- 297 files · ~1,605,813 words
+- 297 files · ~1,605,748 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `930e144d`
+- Built from commit: `bb098ef3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -319,7 +319,7 @@ Nodes (6): createIconSvg(), fs, generate(), iconsDir, path, sharp
 
 ### Community 82 - "admin/orders/page.tsx"
 Cohesion: 0.16
-Nodes (17): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+9 more)
+Nodes (16): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+8 more)
 
 ### Community 83 - "products/[id]/route.ts"
 Cohesion: 0.11
@@ -423,7 +423,7 @@ Nodes (8): 18. Catalog Image Upload, Email Infrastructure & Production Hardening
 
 ### Community 115 - "31. Session Log: August 7, 2026"
 Cohesion: 0.25
-Nodes (8): 31.1 Admin Console UI Turkish Localization Sweep (`/admin/*`), 31.2 Temporary "Under Development" Password Gate for Vercel & Public Site, 31.3 Homepage Hero Image Asset Update, 31.4 Web Security Audit & Codebase Hardening (`docs/SECURITY_AUDIT.md`), 31.5 Cloudflare Turnstile Free Human Verification System, 31.6 Enterprise Error Pages & Error Boundaries Suite, 31.7 Build & Verification Status, 31. Session Log: August 7, 2026
+Nodes (8): 31.1 Admin Console UI Turkish Localization Sweep (`/admin/*`), 31.2 Temporary "Under Development" Password Gate for Vercel & Public Site, 31.3 Homepage Hero Image Asset Update, 31.4 Web Security Audit & Codebase Hardening (`docs/SECURITY_AUDIT.md`), 31.5 Cloudflare Turnstile Human Verification System (Disabled / Removed), 31.6 Enterprise Error Pages & Error Boundaries Suite, 31.7 Build & Verification Status, 31. Session Log: August 7, 2026
 
 ### Community 116 - "28. Portal Login Gate Cleanup, ⌘K Security Scoping, PWA & Codebase Health Pass (Aug 4, 2026)"
 Cohesion: 0.29
@@ -602,8 +602,8 @@ Cohesion: 0.57
 Nodes (4): POST(), calculateInventoryForecast(), checkReorderPoints(), getHistoricalDemand()
 
 ### Community 170 - "LogoUploader.tsx"
-Cohesion: 0.50
-Nodes (3): LogoUploader(), LogoUploaderProps, PLACEMENT_OPTIONS
+Cohesion: 0.47
+Nodes (4): FitOption, FitPicker(), FitPickerProps, sampleFits
 
 ### Community 171 - "inventoryReservation.ts"
 Cohesion: 0.70

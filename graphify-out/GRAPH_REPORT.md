@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-08)
 
 ## Corpus Check
-- 297 files · ~1,605,748 words
+- 297 files · ~1,606,181 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1473 nodes · 2104 edges · 174 communities (150 shown, 24 thin omitted)
+- 1480 nodes · 2111 edges · 174 communities (151 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.65)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bb098ef3`
+- Built from commit: `45f67f4a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -137,13 +137,13 @@
 - types.ts
 - MaterialComponentSelector.tsx
 - portal/PortalHeader.tsx
+- milestones/route.ts
 - images/route.ts
 - notifications.ts
 - rbac.ts
 - [imageId]/route.ts
 - analytics.ts
 - inventoryForecasting.ts
-- LogoUploader.tsx
 - inventoryReservation.ts
 - ediAdapter.ts
 - quickbooksSync.ts
@@ -151,7 +151,7 @@
 ## God Nodes (most connected - your core abstractions)
 1. `useAdminLanguage()` - 71 edges
 2. `verifyAdminRequest()` - 35 edges
-3. `Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 5, 2026 — Multi-Colourway Ordering, Homepage Redesign & Setup Fee Removal)` - 34 edges
+3. `Satriano Atelier — MVP Architecture & Roadmap (Consolidated, as of August 5, 2026 — Multi-Colourway Ordering, Homepage Redesign & Setup Fee Removal)` - 35 edges
 4. `compilerOptions` - 16 edges
 5. `SiteFooter()` - 15 edges
 6. `formatCents()` - 14 edges
@@ -163,8 +163,8 @@
 ## Surprising Connections (you probably didn't know these)
 - `ProductConfiguratorPage()` --calls--> `verifyCustomerToken()`  [EXTRACTED]
   app/konfigurator/[productId]/page.tsx → lib/customerAuth.ts
-- `ApplicationsContent()` --calls--> `useAdminLanguage()`  [EXTRACTED]
-  app/admin/applications/page.tsx → components/admin/AdminLanguageContext.tsx
+- `ApplicationsContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
+  app/admin/applications/page.tsx → components/admin/AdminAuthContext.tsx
 - `AdminChrome()` --calls--> `useAdminLanguage()`  [EXTRACTED]
   app/admin/layout.tsx → components/admin/AdminLanguageContext.tsx
 - `AdminOrdersContent()` --calls--> `useAdminAuth()`  [EXTRACTED]
@@ -175,11 +175,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (174 total, 24 thin omitted)
+## Communities (174 total, 23 thin omitted)
 
 ### Community 0 - "Route Post() Get()"
-Cohesion: 0.29
-Nodes (8): GET(), GET(), GET(), GET(), GET(), createCustomerToken(), getCustomerJwtSecret(), verifyCustomerRequest()
+Cohesion: 0.31
+Nodes (7): GET(), GET(), GET(), GET(), GET(), createCustomerToken(), verifyCustomerRequest()
 
 ### Community 1 - "Page Default Size"
 Cohesion: 0.23
@@ -190,8 +190,8 @@ Cohesion: 0.06
 Nodes (35): dotenv, eslint, eslint-config-next, jsdom, devDependencies, dotenv, eslint, eslint-config-next (+27 more)
 
 ### Community 3 - "Page Metadata Categoryoption"
-Cohesion: 0.20
-Nodes (14): metadata, useAdminLanguage(), AddWholesaleProductModal(), AddSupplierModal(), AddSupplierModalProps, SupplierData, EditSupplierModal(), EditSupplierModalProps (+6 more)
+Cohesion: 0.14
+Nodes (16): metadata, AddWholesaleProductModal(), AddWholesaleProductModalProps, CategoryOption, SupplierOption, AddSupplierModal(), AddSupplierModalProps, SupplierData (+8 more)
 
 ### Community 4 - "Route Post() Get()"
 Cohesion: 0.07
@@ -202,12 +202,12 @@ Cohesion: 0.17
 Nodes (12): FabricColorPanel(), FabricColorPanelProps, CategoryWithColors, FabricColorItem, FabricColorTree(), FabricColorTreeProps, FabricWithColors, ProductWithColors (+4 more)
 
 ### Community 6 - "Page Admin Tabs"
-Cohesion: 0.12
-Nodes (16): ApplicationsContent(), getApplicationTabs(), AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminDashboardContent() (+8 more)
+Cohesion: 0.16
+Nodes (12): AdminChrome(), getNavItems(), GlobalCommandPalette, NavItem, SubItem, AdminDashboardContent(), AdminAuthContext, AdminAuthContextValue (+4 more)
 
 ### Community 7 - "Wholesale Admin Page"
-Cohesion: 0.13
-Nodes (16): metadata, AdminWholesaleClient(), OrderDetailModal(), OrderDetailModalProps, WholesaleOrderFull, WholesaleOrderLineItem, OrderStatusTab(), OrderStatusTabProps (+8 more)
+Cohesion: 0.11
+Nodes (19): metadata, AddColorVariantModal(), AddColorVariantModalProps, AdminWholesaleClient(), InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct (+11 more)
 
 ### Community 8 - "@prisma Three Cmdk"
 Cohesion: 0.04
@@ -219,7 +219,7 @@ Nodes (19): CustomerOrder, CustomerOrderLine, CompanyCard(), CompanyCardProps, Q
 
 ### Community 10 - "Page React Account"
 Cohesion: 0.07
-Nodes (29): GET(), AccountPage(), ProformaPage(), ProformaPageProps, AdminKpiDashboard(), DashboardMetrics, DashboardMetrics(), DashboardMetricsProps (+21 more)
+Nodes (27): GET(), AccountPage(), ProformaPage(), ProformaPageProps, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, TransactionalHeader() (+19 more)
 
 ### Community 11 - ".next Types Dom"
 Cohesion: 0.07
@@ -234,16 +234,16 @@ Cohesion: 0.15
 Nodes (9): SECTIONS, SECTIONS, SECTIONS, SECTIONS, SECTIONS, LEGAL_DOCUMENTS, LegalPageShell(), LegalPageShellProps (+1 more)
 
 ### Community 14 - "Proforma Route Post()"
-Cohesion: 0.22
-Nodes (8): AddColorVariantModal(), AddColorVariantModalProps, InventoryEditModal(), InventoryEditModalProps, ColorVariant, InventoryProduct, InventoryTab(), InventoryTabProps
+Cohesion: 0.15
+Nodes (15): ApplicationsContent(), getApplicationTabs(), AdminApplicationsTable(), AdminApplicationsTableProps, ApplicationStatusBadge(), B2bApplicationItem, useAdminLanguage(), AdminSidebar() (+7 more)
 
 ### Community 15 - "CategoryInventoryClient.tsx"
-Cohesion: 0.14
-Nodes (18): metadata, ProductImageItem, ProductImageUploader(), ProductImageUploaderProps, AddWholesaleProductModalProps, CategoryOption, SupplierOption, CategoryFilter() (+10 more)
+Cohesion: 0.16
+Nodes (15): metadata, ProductImageItem, ProductImageUploader(), ProductImageUploaderProps, CategoryFilter(), CategoryFilterProps, CategoryOption, CategoryInventoryClient() (+7 more)
 
 ### Community 16 - "Page Ethics Ethicspage()"
-Cohesion: 0.08
-Nodes (24): 10. Standing Tools (Skills), 11. General Lesson, 12. AI Agentic Skills & Autonomous Infrastructure (Added Aug 1), 13. System Health Check & Codebase Röntgen Snapshot (Aug 2, 2026), 14. Admin Navigation & Workspace Layout Refactoring (Aug 2, 2026), 15. Executive Admin KPI Dashboard & Client Portal Isolation (Aug 2, 2026), 16. B2B Customer Portal UI & Executive Dashboard Redesign (Aug 2, 2026), 17. B2B Customer Portal Account Settings & Support Hub (Aug 2, 2026) (+16 more)
+Cohesion: 0.07
+Nodes (26): 10. Standing Tools (Skills), 11. General Lesson, 12. AI Agentic Skills & Autonomous Infrastructure (Added Aug 1), 13. System Health Check & Codebase Röntgen Snapshot (Aug 2, 2026), 14. Admin Navigation & Workspace Layout Refactoring (Aug 2, 2026), 15. Executive Admin KPI Dashboard & Client Portal Isolation (Aug 2, 2026), 16. B2B Customer Portal UI & Executive Dashboard Redesign (Aug 2, 2026), 17. B2B Customer Portal Account Settings & Support Hub (Aug 2, 2026) (+18 more)
 
 ### Community 17 - "App Layout Baskervville"
 Cohesion: 0.18
@@ -319,7 +319,7 @@ Nodes (6): createIconSvg(), fs, generate(), iconsDir, path, sharp
 
 ### Community 82 - "admin/orders/page.tsx"
 Cohesion: 0.16
-Nodes (16): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+8 more)
+Nodes (17): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+9 more)
 
 ### Community 83 - "products/[id]/route.ts"
 Cohesion: 0.11
@@ -346,8 +346,8 @@ Cohesion: 0.16
 Nodes (9): PortalView, AtelierLogo(), AtelierLogoProps, CookieCategoryState, OpenCookiePreferencesButton(), TabType, LEGAL_COMPLIANCE_LINKS, NAVIGATION_LINKS (+1 more)
 
 ### Community 94 - "AdminLanguageContext.tsx"
-Cohesion: 0.24
-Nodes (8): AdminLanguageContext, AdminLanguageContextType, AdminLanguageProvider(), AdminSidebar(), AdminSidebarProps, GlobalCommandPalette, AdminDictionary, AdminLanguage
+Cohesion: 0.43
+Nodes (5): AdminLanguageContext, AdminLanguageContextType, AdminLanguageProvider(), AdminDictionary, AdminLanguage
 
 ### Community 95 - "payment.test.ts"
 Cohesion: 0.43
@@ -369,6 +369,10 @@ Nodes (16): 1.1 Create `components/configurator/MaterialComponentSelector.tsx`, 
 Cohesion: 0.19
 Nodes (11): DEFAULT_ALPHA_SIZES, SizeOptionDef, SizeQtyTable(), SizeQtyTableProps, DEFAULT_SIZE_QUANTITIES, parseQuantityInput(), SIZE_CODES, SizeCode (+3 more)
 
+### Community 100 - "admin/orders/page.tsx"
+Cohesion: 0.29
+Nodes (7): 32.1 Dedicated Project Port Allocation & Local Dev Server Hardening, 32.2 Full Codebase UI Audit & Bugfix Pass (`AGENT_18_UI_AUDIT_BUGFIX`), 32.3 Cloudflare Turnstile Bot Verification Infrastructure Purged, 32.4 Comprehensive Link Audit & Navigation Route Resolution (`AGENT_19_LINK_AUDIT`), 32.5 MANUFACTURING Nav Item & Deprecated `/configure` Route Removal, 32.6 Verification & Build Status, 32. Session Log: August 8, 2026
+
 ### Community 101 - "CookieConsentModal.tsx"
 Cohesion: 0.07
 Nodes (27): 1. Create `lib/cache.ts`, 1. Data Export (GDPR), 1. OAuth 2.0 + JWT Refresh, 1. PWA Manifest, 1. Update Prisma, 2. API Security Headers, 2. Create branding loader, 2. Data Deletion (Right to be Forgotten) (+19 more)
@@ -382,8 +386,8 @@ Cohesion: 0.08
 Nodes (24): 1.1 Update `components/Konfigurator/ConfiguratorClient.tsx`, 1.2 Update `components/WholesaleCatalog/WholesaleCatalogClient.tsx`, 1.3 Update `components/ProductCard.tsx`, 1.4 Update `components/Dashboard/CustomerDashboard.tsx`, 2.1 Update `components/Navigation/MainNav.tsx`, 2.2 Update `components/Forms/SupportTicketForm.tsx`, 2.3 Update `components/CategoryFilter.tsx`, 3.1 Update `components/Admin/AdminNav.tsx` (+16 more)
 
 ### Community 105 - "verifyCustomerToken"
-Cohesion: 0.36
-Nodes (5): POST(), PortalLayout(), CustomerSession, getCustomerSession(), verifyCustomerToken()
+Cohesion: 0.31
+Nodes (6): POST(), PortalLayout(), CustomerSession, getCustomerSession(), getCustomerJwtSecret(), verifyCustomerToken()
 
 ### Community 106 - "SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md"
 Cohesion: 0.14
@@ -514,8 +518,8 @@ Cohesion: 0.67
 Nodes (3): 18.1 Client, 18.2 Admin, 18. TECHNICAL ROUTE MODEL
 
 ### Community 139 - "prisma.ts"
-Cohesion: 0.10
-Nodes (3): JWT_SECRET, JWT_SECRET, globalForPrisma
+Cohesion: 0.11
+Nodes (4): JWT_SECRET, checkAdminAuth(), DELETE(), globalForPrisma
 
 ### Community 140 - "ProductFitTree.tsx"
 Cohesion: 0.25
@@ -589,6 +593,10 @@ Nodes (6): CreateM2oOrderPayload, CreateMultiMaterialOrderPayload, CreateWholesa
 Cohesion: 0.20
 Nodes (18): onOrderStatusChanged(), onPaymentSuccess(), onProformaGenerated(), onSupplierPOCreated(), EmailPayload, resend, sendEmail(), sendOrderStatusEmail() (+10 more)
 
+### Community 162 - "milestones/route.ts"
+Cohesion: 0.50
+Nodes (3): LogoUploader(), LogoUploaderProps, PLACEMENT_OPTIONS
+
 ### Community 166 - "[imageId]/route.ts"
 Cohesion: 0.67
 Nodes (4): applySecurityHeaders(), decryptField(), encryptField(), getEncryptionKey()
@@ -601,33 +609,29 @@ Nodes (7): GET(), GET(), getDashboardOverview(), getMaterialUsageMetrics(), getO
 Cohesion: 0.57
 Nodes (4): POST(), calculateInventoryForecast(), checkReorderPoints(), getHistoricalDemand()
 
-### Community 170 - "LogoUploader.tsx"
-Cohesion: 0.47
-Nodes (4): FitOption, FitPicker(), FitPickerProps, sampleFits
-
 ### Community 171 - "inventoryReservation.ts"
 Cohesion: 0.70
 Nodes (3): releaseExpiredReservations(), reserveStockForOrder(), StockReservationStatus
 
 ## Knowledge Gaps
-- **608 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+603 more)
+- **614 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+609 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `formatCents()` connect `Page React Account` to `admin/orders/page.tsx`, `pricing.ts`?**
   _High betweenness centrality (0.073) - this node is a cross-community bridge._
-- **Why does `useAdminLanguage()` connect `Page Metadata Categoryoption` to `Sizeoption Sizesystem Category`, `api/upload/route.ts`, `Page Admin Tabs`, `Wholesale Admin Page`, `Page React Account`, `ProductFitTree.tsx`, `applications/route.ts`, `FabricPricingPanel.tsx`, `Orders Api Route`, `Proforma Route Post()`, `CategoryInventoryClient.tsx`, `AdminLanguageContext.tsx`?**
+- **Why does `useAdminLanguage()` connect `Proforma Route Post()` to `Page Metadata Categoryoption`, `Sizeoption Sizesystem Category`, `api/upload/route.ts`, `Page Admin Tabs`, `Wholesale Admin Page`, `Page React Account`, `ProductFitTree.tsx`, `applications/route.ts`, `FabricPricingPanel.tsx`, `Orders Api Route`, `CategoryInventoryClient.tsx`, `AdminLanguageContext.tsx`?**
   _High betweenness centrality (0.069) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
   _High betweenness centrality (0.048) - this node is a cross-community bridge._
 - **What connects `AntiGravityViz`, `GlobalCommandPalette`, `SubItem` to the rest of the system?**
-  _608 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _614 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `@types @testing Library` be split into smaller, more focused modules?**
   _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
+- **Should `Page Metadata Categoryoption` be split into smaller, more focused modules?**
+  _Cohesion score 0.14130434782608695 - nodes in this community are weakly interconnected._
 - **Should `Route Post() Get()` be split into smaller, more focused modules?**
   _Cohesion score 0.06666666666666667 - nodes in this community are weakly interconnected._
-- **Should `Page Admin Tabs` be split into smaller, more focused modules?**
-  _Cohesion score 0.12318840579710146 - nodes in this community are weakly interconnected._
