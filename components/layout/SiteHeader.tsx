@@ -10,7 +10,6 @@ import { getM2OCart, type M2OCartItem } from "@/lib/m2oCart";
 import { AtelierLogo } from "@/components/layout/AtelierLogo";
 
 const ANONYMOUS_NAV_ITEMS = [
-  { label: "MANUFACTURING", href: "/configure" },
   { label: "COLLECTIONS", href: "/categories" },
   { label: "SOURCING", href: "/legal/supply-terms" },
   { label: "WHOLESALE", href: "/wholesale" },
