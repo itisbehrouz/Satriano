@@ -1,16 +1,16 @@
 # Graph Report - Satriano Atelier  (2026-08-08)
 
 ## Corpus Check
-- 304 files · ~1,610,657 words
+- 305 files · ~1,611,473 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1553 nodes · 2178 edges · 179 communities (158 shown, 21 thin omitted)
+- 1567 nodes · 2191 edges · 182 communities (159 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.65)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `77314d5f`
+- Built from commit: `3782b46c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -154,6 +154,7 @@
 - images/route.ts
 - locale/route.ts
 - images/route.ts
+- [imageId]/route.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `useAdminLanguage()` - 71 edges
@@ -182,11 +183,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (179 total, 21 thin omitted)
+## Communities (182 total, 23 thin omitted)
 
 ### Community 0 - "Route Post() Get()"
-Cohesion: 0.19
-Nodes (13): GET(), GET(), POST(), GET(), ProductConfiguratorPage(), PortalLayout(), GET(), CustomerSession (+5 more)
+Cohesion: 0.29
+Nodes (8): GET(), GET(), GET(), GET(), GET(), createCustomerToken(), getCustomerJwtSecret(), verifyCustomerRequest()
 
 ### Community 1 - "Page Default Size"
 Cohesion: 0.23
@@ -201,8 +202,8 @@ Cohesion: 0.14
 Nodes (16): metadata, AddWholesaleProductModal(), AddWholesaleProductModalProps, CategoryOption, SupplierOption, AddSupplierModal(), AddSupplierModalProps, SupplierData (+8 more)
 
 ### Community 4 - "Route Post() Get()"
-Cohesion: 0.15
-Nodes (16): POST(), DELETE(), PATCH(), GET(), POST(), DELETE(), GET(), PATCH() (+8 more)
+Cohesion: 0.07
+Nodes (40): POST(), DELETE(), PATCH(), GET(), POST(), DELETE(), GET(), PATCH() (+32 more)
 
 ### Community 5 - "Sizeoption Sizesystem Category"
 Cohesion: 0.17
@@ -225,8 +226,8 @@ Cohesion: 0.12
 Nodes (19): CustomerOrder, CustomerOrderLine, CompanyCard(), CompanyCardProps, QuickActionButtons(), QuickLinksSection(), RecentOrdersSection(), RecentOrdersSectionProps (+11 more)
 
 ### Community 10 - "Page React Account"
-Cohesion: 0.09
-Nodes (23): AccountPage(), ProformaPage(), ProformaPageProps, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, TransactionalHeader(), mockPush (+15 more)
+Cohesion: 0.07
+Nodes (27): GET(), AccountPage(), ProformaPage(), ProformaPageProps, DashboardMetrics(), DashboardMetricsProps, mockMetricsData, TransactionalHeader() (+19 more)
 
 ### Community 11 - ".next Types Dom"
 Cohesion: 0.07
@@ -326,7 +327,7 @@ Nodes (6): createIconSvg(), fs, generate(), iconsDir, path, sharp
 
 ### Community 82 - "admin/orders/page.tsx"
 Cohesion: 0.16
-Nodes (16): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+8 more)
+Nodes (17): ColorPicker(), ColorPickerProps, ColorSizeMatrix(), ColorSizeMatrixProps, ConfiguratorClient(), ConfiguratorClientProps, FabricColorOption, FabricOption (+9 more)
 
 ### Community 83 - "products/[id]/route.ts"
 Cohesion: 0.11
@@ -393,20 +394,20 @@ Cohesion: 0.08
 Nodes (24): 1.1 Update `components/Konfigurator/ConfiguratorClient.tsx`, 1.2 Update `components/WholesaleCatalog/WholesaleCatalogClient.tsx`, 1.3 Update `components/ProductCard.tsx`, 1.4 Update `components/Dashboard/CustomerDashboard.tsx`, 2.1 Update `components/Navigation/MainNav.tsx`, 2.2 Update `components/Forms/SupportTicketForm.tsx`, 2.3 Update `components/CategoryFilter.tsx`, 3.1 Update `components/Admin/AdminNav.tsx` (+16 more)
 
 ### Community 105 - "verifyCustomerToken"
-Cohesion: 0.17
-Nodes (12): POST(), GET(), POST(), POST(), POST(), POST(), GET(), sendMagicLinkEmail() (+4 more)
+Cohesion: 0.60
+Nodes (3): POST(), POST(), sendMagicLinkEmail()
 
 ### Community 106 - "SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md"
 Cohesion: 0.14
 Nodes (13): 02. SYSTEM DOMAINS, 16. ADMIN UX STATE MODEL, 17. AI ASSISTANT, 19. CORE DATA MODEL DIRECTION, 22. PRODUCT DECISIONS / NON-NEGOTIABLE RULES, 24. RECOMMENDED CLIENT PORTAL TARGET MODEL, 25. RECOMMENDED ADMIN TARGET MODEL, 26. FINAL SYSTEM ARCHITECTURE (+5 more)
 
 ### Community 107 - "ConfiguratorPortal.test.tsx"
-Cohesion: 0.33
-Nodes (6): POST(), createdCompanyIds, postProforma(), sendProformaEmail(), generateProformaPdf(), ProformaPdfData
+Cohesion: 0.15
+Nodes (12): 1. M2O Order Lifecycle & Proforma Delivery, 2. Domain & Data Boundary Isolation, 3. Pricing & Setup Fee Sanitation, 4. Material Architecture & MOQ Engine, 5. Authentication & System Hardening, 🔍 Critical Path & Security Verification, 🚀 Deployment Status, 📑 Executive Summary & Production Readiness Verdict (+4 more)
 
 ### Community 108 - "InventoryTab.tsx"
-Cohesion: 0.33
-Nodes (10): POST(), PATCH(), GET(), createAdminToken(), getAdminAccessKey(), getAdminJwtSecret(), verifyAdminKey(), verifyAdminToken() (+2 more)
+Cohesion: 0.32
+Nodes (6): POST(), ProductConfiguratorPage(), PortalLayout(), CustomerSession, getCustomerSession(), verifyCustomerToken()
 
 ### Community 109 - "applications/route.ts"
 Cohesion: 0.20
@@ -529,8 +530,8 @@ Cohesion: 0.16
 Nodes (8): CATEGORY_IMAGES, PageProps, CATEGORY_IMAGES, PageProps, SiteFooter(), ANONYMOUS_NAV_ITEMS, AUTHENTICATED_NAV_ITEMS, SiteHeader()
 
 ### Community 139 - "prisma.ts"
-Cohesion: 0.07
-Nodes (7): JWT_SECRET, checkAdminAuth(), DELETE(), JWT_SECRET, globalForPrisma, dispatchZapierEvent(), mockFetch
+Cohesion: 0.11
+Nodes (4): JWT_SECRET, checkAdminAuth(), POST(), globalForPrisma
 
 ### Community 140 - "ProductFitTree.tsx"
 Cohesion: 0.25
@@ -557,8 +558,8 @@ Cohesion: 0.50
 Nodes (3): ALLOWED_TYPES, CatalogImageUploader(), CatalogImageUploaderProps
 
 ### Community 146 - "suppliers/route.ts"
-Cohesion: 0.17
-Nodes (11): 1. AGENT-1: Made-to-Order (M2O) Order Lifecycle Audit (`AUDIT-1-M2O-ORDER-LIFECYCLE.md`), 2. AGENT-2: Wholesale Catalog & Taxonomy Audit (`AUDIT-2-WHOLESALE-CATALOG-TAXONOMY.md`), 3. AGENT-3: Wholesale Checkout, Inventory & Orders Audit (`AUDIT-3-WHOLESALE-CHECKOUT-INVENTORY-ORDERS.md`), 4. AGENT-4: Pricing Architecture & Commercial Rules Audit (`AUDIT-4-PRICING-ARCHITECTURE.md`), 5. AGENT-5: Material, Components & Colourways Audit (`AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md`), 6. AGENT-6: Security, Admin Operations & Data Boundaries Audit (`AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md`), 🚀 Deployment Status, Executive Summary (+3 more)
+Cohesion: 0.15
+Nodes (12): 1. M2O Order Lifecycle & Proforma Delivery, 2. Domain & Data Boundary Isolation, 3. Pricing & Setup Fee Sanitation, 4. Material Architecture & MOQ Engine, 5. Authentication & System Hardening, 🔍 Critical Path & Security Verification, 🚀 Deployment Status, 📑 Executive Summary & Production Readiness Verdict (+4 more)
 
 ### Community 149 - "AGENT 6 — RBAC & REAL-TIME NOTIFICATIONS"
 Cohesion: 0.11
@@ -640,13 +641,9 @@ Nodes (4): POST(), calculateInventoryForecast(), checkReorderPoints(), getHistor
 Cohesion: 0.70
 Nodes (3): releaseExpiredReservations(), reserveStockForOrder(), StockReservationStatus
 
-### Community 171 - "webhooks/route.ts"
-Cohesion: 0.43
-Nodes (4): GET(), ALL_STATUSES, getAdminDashboardMetrics(), StatusDistributionItem
-
 ### Community 174 - "LogoUploader.tsx"
-Cohesion: 0.47
-Nodes (4): FitOption, FitPicker(), FitPickerProps, sampleFits
+Cohesion: 0.50
+Nodes (3): LogoUploader(), LogoUploaderProps, PLACEMENT_OPTIONS
 
 ### Community 175 - "fabric/[id]/route.ts"
 Cohesion: 0.29
@@ -657,24 +654,24 @@ Cohesion: 0.70
 Nodes (3): ALLOWED_EXTENSIONS, ALLOWED_MIME_TYPES, POST()
 
 ## Knowledge Gaps
-- **663 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+658 more)
+- **672 isolated node(s):** `AntiGravityViz`, `GlobalCommandPalette`, `SubItem`, `NavItem`, `SizeOption` (+667 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `useAdminLanguage()` connect `Proforma Route Post()` to `Page Metadata Categoryoption`, `Sizeoption Sizesystem Category`, `api/upload/route.ts`, `Page Admin Tabs`, `Wholesale Admin Page`, `Page React Account`, `ProductFitTree.tsx`, `applications/route.ts`, `FabricPricingPanel.tsx`, `Orders Api Route`, `CategoryInventoryClient.tsx`, `AdminLanguageContext.tsx`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **Why does `formatCents()` connect `Page React Account` to `admin/orders/page.tsx`, `pricing.ts`?**
-  _High betweenness centrality (0.059) - this node is a cross-community bridge._
+  _High betweenness centrality (0.058) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `@prisma Three Cmdk` to `Page React Account`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+  _High betweenness centrality (0.038) - this node is a cross-community bridge._
 - **What connects `AntiGravityViz`, `GlobalCommandPalette`, `SubItem` to the rest of the system?**
-  _663 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _672 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `@types @testing Library` be split into smaller, more focused modules?**
   _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
 - **Should `Page Metadata Categoryoption` be split into smaller, more focused modules?**
   _Cohesion score 0.14130434782608695 - nodes in this community are weakly interconnected._
 - **Should `Route Post() Get()` be split into smaller, more focused modules?**
-  _Cohesion score 0.1452991452991453 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07226107226107226 - nodes in this community are weakly interconnected._

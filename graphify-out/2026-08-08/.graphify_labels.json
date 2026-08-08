@@ -177,6 +177,5 @@
   "175": "fabric/[id]/route.ts",
   "176": "images/route.ts",
   "177": "locale/route.ts",
-  "178": "images/route.ts",
-  "179": "gdprCompliance.ts"
+  "178": "images/route.ts"
 }

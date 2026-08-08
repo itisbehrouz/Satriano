@@ -1843,5 +1843,10 @@
     "mtime": 1786213273.939949,
     "ast_hash": "696afd28119b3bb8f7b360e62baa89e8",
     "semantic_hash": ""
+  },
+  "docs/CONSOLIDATION-REPORT.md": {
+    "mtime": 1786213308.1125736,
+    "ast_hash": "39903c0c2d80d06f6d693113cad55021",
+    "semantic_hash": ""
   }
 }

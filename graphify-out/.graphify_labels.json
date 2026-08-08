@@ -177,5 +177,8 @@
   "175": "fabric/[id]/route.ts",
   "176": "images/route.ts",
   "177": "locale/route.ts",
-  "178": "images/route.ts"
+  "178": "images/route.ts",
+  "179": "milestones/route.ts",
+  "180": "[imageId]/route.ts",
+  "181": "locale/route.ts"
 }
