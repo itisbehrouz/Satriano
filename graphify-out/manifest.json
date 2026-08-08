@@ -1833,5 +1833,20 @@
     "mtime": 1786213116.262843,
     "ast_hash": "660f4c4aedc3f8cf88e94dd1b074a03a",
     "semantic_hash": ""
+  },
+  "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md": {
+    "mtime": 1786213273.937196,
+    "ast_hash": "a59336deccbc60176d69aaab5028ca8c",
+    "semantic_hash": ""
+  },
+  "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md": {
+    "mtime": 1786213273.939949,
+    "ast_hash": "696afd28119b3bb8f7b360e62baa89e8",
+    "semantic_hash": ""
+  },
+  "docs/CONSOLIDATION-REPORT.md": {
+    "mtime": 1786213308.1125736,
+    "ast_hash": "39903c0c2d80d06f6d693113cad55021",
+    "semantic_hash": ""
   }
 }

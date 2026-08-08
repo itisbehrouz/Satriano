@@ -483,8 +483,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_admin_test",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "admin.test.ts"
     },
     {
@@ -648,8 +648,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_catalog_fabric_id_route",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "fabric/[id]/route.ts"
     },
     {
@@ -659,8 +659,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_catalog_fabric_id_route_jwt_secret",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "jwt_secret"
     },
     {
@@ -670,8 +670,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_catalog_fabric_id_route_patch",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "patch()"
     },
     {
@@ -813,8 +813,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_login_route",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "login/route.ts"
     },
     {
@@ -824,8 +824,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_api_admin_login_route_post",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -912,8 +912,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "orders/[orderid]/route.ts"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route_patch",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "patch()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_route",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "admin/orders/route.ts"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_route_get",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -1055,7 +1055,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 176,
+      "community": 178,
       "community_name": "images/route.ts",
       "norm_label": "images/route.ts"
     },
@@ -1066,7 +1066,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 176,
+      "community": 178,
       "community_name": "images/route.ts",
       "norm_label": "checkadminauth()"
     },
@@ -1077,7 +1077,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 176,
+      "community": 178,
       "community_name": "images/route.ts",
       "norm_label": "post()"
     },
@@ -1198,8 +1198,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "resend/route.ts"
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route_post",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1253,8 +1253,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route_test",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "applications/route.test.ts"
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "applications/route.ts"
     },
     {
@@ -1275,8 +1275,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_applications_route_post",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1286,8 +1286,8 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "app_api_applications_route_get",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "post()"
     },
     {
@@ -1517,8 +1517,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "create-session/route.ts"
     },
     {
@@ -1528,8 +1528,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_payment_create_session_route_post",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "post()"
     },
     {
@@ -1539,8 +1539,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_payment_test",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "payment.test.ts"
     },
     {
@@ -1550,8 +1550,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_payment_test_createdcompanyids",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1561,8 +1561,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "webhook/route.ts"
     },
     {
@@ -1572,8 +1572,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_payment_webhook_route_post",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "post()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "resend-verification/route.ts"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route_post",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1682,7 +1682,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1693,7 +1693,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 4,
+      "community": 0,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1792,8 +1792,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route_test",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "upload/route.test.ts"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "api/upload/route.ts"
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_mime_types",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "allowed_mime_types"
     },
     {
@@ -1825,8 +1825,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_extensions",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "allowed_extensions"
     },
     {
@@ -1836,8 +1836,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_api_upload_route_post",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2507,8 +2507,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "portal/layout.tsx"
     },
     {
@@ -2518,8 +2518,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "portallayout()"
     },
     {
@@ -2650,8 +2650,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_verify_email_route",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verify-email/route.ts"
     },
     {
@@ -2661,8 +2661,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_portal_verify_email_route_get",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -2749,8 +2749,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_productid_page",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "wholesale/[productid]/page.tsx"
     },
     {
@@ -2760,8 +2760,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_pageprops",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "pageprops"
     },
     {
@@ -2771,8 +2771,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_category_images",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "category_images"
     },
     {
@@ -2782,8 +2782,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_wholesale_productid_page_wholesaleproductdetailpage",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "wholesaleproductdetailpage()"
     },
     {
@@ -2793,8 +2793,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "checkout/page.tsx"
     },
     {
@@ -2804,8 +2804,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page_wholesalecheckoutpage",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "wholesalecheckoutpage()"
     },
     {
@@ -5235,8 +5235,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_logouploader",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "logouploader.tsx"
     },
     {
@@ -5246,8 +5246,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_logouploader_placement_options",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "placement_options"
     },
     {
@@ -5257,8 +5257,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploaderprops",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "logouploaderprops"
     },
     {
@@ -5268,8 +5268,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploader",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "logouploader()"
     },
     {
@@ -5961,8 +5961,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_siteheader",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "siteheader.tsx"
     },
     {
@@ -5972,8 +5972,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_siteheader_anonymous_nav_items",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "anonymous_nav_items"
     },
     {
@@ -5983,8 +5983,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_layout_siteheader_authenticated_nav_items",
-      "community": 141,
-      "community_name": "verifyCustomerToken",
+      "community": 138,
+      "community_name": "3. Production Infrastructure",
       "norm_label": "authenticated_nav_items"
     },
     {
@@ -6742,8 +6742,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "wholesaleproductdetailclient.tsx"
     },
     {
@@ -6753,8 +6753,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_sizestockitem",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "sizestockitem"
     },
     {
@@ -6764,8 +6764,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_wholesaleproductdetaildata",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "wholesaleproductdetaildata"
     },
     {
@@ -6775,8 +6775,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "components_wholesale_wholesaleproductdetailclient_wholesaleproductdetailclient",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 22,
+      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
       "norm_label": "wholesaleproductdetailclient()"
     },
     {
@@ -6885,8 +6885,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminauth",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "adminauth.ts"
     },
     {
@@ -6896,8 +6896,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminauth_getadminaccesskey",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "getadminaccesskey()"
     },
     {
@@ -6907,8 +6907,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "lib_adminauth_getadminjwtsecret",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "getadminjwtsecret()"
     },
     {
@@ -6918,8 +6918,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadminkey",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifyadminkey()"
     },
     {
@@ -6929,8 +6929,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "lib_adminauth_createadmintoken",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "createadmintoken()"
     },
     {
@@ -6940,8 +6940,8 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadmintoken",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifyadmintoken()"
     },
     {
@@ -7105,8 +7105,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "customer-session.ts"
     },
     {
@@ -7116,8 +7116,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "customersession"
     },
     {
@@ -7127,8 +7127,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "getcustomersession()"
     },
     {
@@ -7336,8 +7336,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -7424,8 +7424,8 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "lib_email_sendverificationemail",
-      "community": 105,
-      "community_name": "verifyCustomerToken",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendverificationemail()"
     },
     {
@@ -7721,8 +7721,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_gdprcompliance",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 179,
+      "community_name": "gdprCompliance.ts",
       "norm_label": "gdprcompliance.ts"
     },
     {
@@ -7732,8 +7732,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_gdprcompliance_exportcustomerdata",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 179,
+      "community_name": "gdprCompliance.ts",
       "norm_label": "exportcustomerdata()"
     },
     {
@@ -7743,8 +7743,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "lib_gdprcompliance_deletecustomerdata",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 179,
+      "community_name": "gdprCompliance.ts",
       "norm_label": "deletecustomerdata()"
     },
     {
@@ -8667,8 +8667,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_stripe",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "stripe.ts"
     },
     {
@@ -8744,8 +8744,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "types.ts"
     },
     {
@@ -8755,8 +8755,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types_materialcomponenttype",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "materialcomponenttype"
     },
     {
@@ -8766,8 +8766,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "lib_types_lineitemmaterialspec",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "lineitemmaterialspec"
     },
     {
@@ -8777,8 +8777,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "lib_types_orderlinemultimaterial",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "orderlinemultimaterial"
     },
     {
@@ -8788,8 +8788,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "lib_types_createm2oorderpayload",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createm2oorderpayload"
     },
     {
@@ -8799,8 +8799,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "lib_types_createmultimaterialorderpayload",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createmultimaterialorderpayload"
     },
     {
@@ -8810,8 +8810,8 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "lib_types_createwholesaleorderpayload",
-      "community": 159,
-      "community_name": "types.ts",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createwholesaleorderpayload"
     },
     {
@@ -8898,8 +8898,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_zapierwebhook_test",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "zapierwebhook.test.ts"
     },
     {
@@ -8909,8 +8909,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "lib_zapierwebhook_test_mockfetch",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "mockfetch"
     },
     {
@@ -8920,8 +8920,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_zapierwebhook",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "zapierwebhook.ts"
     },
     {
@@ -8931,8 +8931,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_zapierwebhook_dispatchzapierevent",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "dispatchzapierevent()"
     },
     {
@@ -8942,8 +8942,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "middleware",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "middleware.ts"
     },
     {
@@ -8953,8 +8953,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "middleware_middleware",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "middleware()"
     },
     {
@@ -8964,8 +8964,8 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "middleware_config",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "config"
     },
     {
@@ -13609,6 +13609,314 @@
       "community": 162,
       "community_name": "AUDIT-3: Wholesale Checkout, Inventory & Orders Audit",
       "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "AUDIT-4-PRICING-ARCHITECTURE.md",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "audit-4-pricing-architecture.md"
+    },
+    {
+      "label": "AUDIT-4: Pricing Architecture & Commercial Rules Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "audit-4: pricing architecture & commercial rules audit"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_summary",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "summary"
+    },
+    {
+      "label": "\ud83d\udcca Commercial Rules Inspection Matrix",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_commercial_rules_inspection_matrix",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "\ud83d\udcca commercial rules inspection matrix"
+    },
+    {
+      "label": "\ud83d\udd12 Margin Security & Immutability Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_margin_security_immutability_audit",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "\ud83d\udd12 margin security & immutability audit"
+    },
+    {
+      "label": "1. Customer Privacy Boundary Protection",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_1_customer_privacy_boundary_protection",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "1. customer privacy boundary protection"
+    },
+    {
+      "label": "2. Price Immutability at Placement",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_2_price_immutability_at_placement",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "2. price immutability at placement"
+    },
+    {
+      "label": "3. Setup Fee Elimination (Section 29.1 Compliance)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_3_setup_fee_elimination_section_29_1_compliance",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "3. setup fee elimination (section 29.1 compliance)"
+    },
+    {
+      "label": "\ud83d\udeab Blockers",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_blockers",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "\ud83d\udeab blockers"
+    },
+    {
+      "label": "P0 (Must Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_p0_must_fix",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "p0 (must fix)"
+    },
+    {
+      "label": "P1 (Should Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_p1_should_fix",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "\ud83d\udd17 Cross-Stream Dependencies",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "docs_audit_4_pricing_architecture_cross_stream_dependencies",
+      "community": 95,
+      "community_name": "payment.test.ts",
+      "norm_label": "\ud83d\udd17 cross-stream dependencies"
+    },
+    {
+      "label": "AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "audit-5-material-components-colourways.md"
+    },
+    {
+      "label": "AUDIT-5: Material, Components & Colourways Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "audit-5: material, components & colourways audit"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_summary",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "summary"
+    },
+    {
+      "label": "\ud83d\udcca Color Ordering & Component Matrix",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_color_ordering_component_matrix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udcca color ordering & component matrix"
+    },
+    {
+      "label": "\ud83d\udeab Blockers",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_blockers",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udeab blockers"
+    },
+    {
+      "label": "P0 (Must Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_p0_must_fix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "p0 (must fix)"
+    },
+    {
+      "label": "P1 (Should Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_p1_should_fix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "\ud83d\udd17 Cross-Stream Dependencies",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_cross_stream_dependencies",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udd17 cross-stream dependencies"
+    },
+    {
+      "label": "AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "audit-6-security-admin-data-boundaries.md"
+    },
+    {
+      "label": "AUDIT-6: Security, Admin Operations & Data Boundaries Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "audit-6: security, admin operations & data boundaries audit"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_summary",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "summary"
+    },
+    {
+      "label": "\ud83d\udcca Security & Data Boundaries Matrix",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_security_data_boundaries_matrix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udcca security & data boundaries matrix"
+    },
+    {
+      "label": "\ud83d\udeab Blockers",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udeab blockers"
+    },
+    {
+      "label": "P0 (Must Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_p0_must_fix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "p0 (must fix)"
+    },
+    {
+      "label": "P1 (Should Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_p1_should_fix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "\ud83d\udd17 Cross-Stream Security Safeguards",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_cross_stream_security_safeguards",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udd17 cross-stream security safeguards"
     },
     {
       "label": "SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md",
@@ -38768,6 +39076,281 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture",
+      "target": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "target": "docs_audit_4_pricing_architecture_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "target": "docs_audit_4_pricing_architecture_commercial_rules_inspection_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "target": "docs_audit_4_pricing_architecture_cross_stream_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "target": "docs_audit_4_pricing_architecture_margin_security_immutability_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_audit_4_pricing_architecture_commercial_rules_audit",
+      "target": "docs_audit_4_pricing_architecture_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_margin_security_immutability_audit",
+      "target": "docs_audit_4_pricing_architecture_1_customer_privacy_boundary_protection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_margin_security_immutability_audit",
+      "target": "docs_audit_4_pricing_architecture_2_price_immutability_at_placement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_margin_security_immutability_audit",
+      "target": "docs_audit_4_pricing_architecture_3_setup_fee_elimination_section_29_1_compliance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_blockers",
+      "target": "docs_audit_4_pricing_architecture_p0_must_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-4-PRICING-ARCHITECTURE.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_4_pricing_architecture_blockers",
+      "target": "docs_audit_4_pricing_architecture_p1_should_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways",
+      "target": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_color_ordering_component_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_cross_stream_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_blockers",
+      "target": "docs_audit_5_material_components_colourways_p0_must_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_blockers",
+      "target": "docs_audit_5_material_components_colourways_p1_should_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries",
+      "target": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_cross_stream_security_safeguards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_security_data_boundaries_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "target": "docs_audit_6_security_admin_data_boundaries_p0_must_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "target": "docs_audit_6_security_admin_data_boundaries_p1_should_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md",
       "source_location": "L11",
       "weight": 1.0,
@@ -41290,5 +41873,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1bb2430cb7dbbf15a90939daf5dba67cf087b658"
+  "built_at_commit": "77314d5f5af8edc7dfd7c0a7a45f3566d4f834dd"
 }

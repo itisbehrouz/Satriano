@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_admin_applications_page_getapplicationtabs",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "getapplicationtabs()"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -483,8 +483,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_admin_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "admin.test.ts"
     },
     {
@@ -813,8 +813,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_login_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "login/route.ts"
     },
     {
@@ -824,8 +824,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "app_api_admin_login_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "post()"
     },
     {
@@ -857,8 +857,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "metrics/route.ts"
     },
     {
@@ -868,8 +868,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route_get",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "get()"
     },
     {
@@ -879,8 +879,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_milestones_route",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "milestones/route.ts"
     },
     {
@@ -890,8 +890,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_milestones_route_get",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "get()"
     },
     {
@@ -901,8 +901,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_milestones_route_post",
-      "community": 175,
-      "community_name": "fabric/[id]/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "post()"
     },
     {
@@ -912,8 +912,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "orders/[orderid]/route.ts"
     },
     {
@@ -923,8 +923,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route_patch",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "patch()"
     },
     {
@@ -934,8 +934,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "admin/orders/route.ts"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_route_get",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "get()"
     },
     {
@@ -978,8 +978,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_suppliers_route",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 177,
+      "community_name": "locale/route.ts",
       "norm_label": "suppliers/route.ts"
     },
     {
@@ -989,8 +989,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_api_admin_suppliers_route_get",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 177,
+      "community_name": "locale/route.ts",
       "norm_label": "get()"
     },
     {
@@ -1000,8 +1000,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_api_admin_suppliers_route_post",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 177,
+      "community_name": "locale/route.ts",
       "norm_label": "post()"
     },
     {
@@ -1011,8 +1011,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_suppliers_suppliers_test",
-      "community": 168,
-      "community_name": "applications/route.ts",
+      "community": 177,
+      "community_name": "locale/route.ts",
       "norm_label": "suppliers.test.ts"
     },
     {
@@ -1022,8 +1022,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 146,
-      "community_name": "suppliers/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "[imageid]/route.ts"
     },
     {
@@ -1033,8 +1033,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 146,
-      "community_name": "suppliers/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -1044,8 +1044,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 146,
-      "community_name": "suppliers/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "delete()"
     },
     {
@@ -1055,8 +1055,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 178,
+      "community_name": "images/route.ts",
       "norm_label": "images/route.ts"
     },
     {
@@ -1066,8 +1066,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 178,
+      "community_name": "images/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -1077,8 +1077,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 178,
+      "community_name": "images/route.ts",
       "norm_label": "post()"
     },
     {
@@ -1198,8 +1198,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "resend/route.ts"
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "post()"
     },
     {
@@ -1253,8 +1253,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "applications/route.test.ts"
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "applications/route.ts"
     },
     {
@@ -1275,8 +1275,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_applications_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "post()"
     },
     {
@@ -1286,8 +1286,8 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "app_api_applications_route_get",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "get()"
     },
     {
@@ -1297,8 +1297,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_locale_route",
-      "community": 177,
-      "community_name": "locale/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "locale/route.ts"
     },
     {
@@ -1308,8 +1308,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_api_customer_locale_route_get",
-      "community": 177,
-      "community_name": "locale/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "get()"
     },
     {
@@ -1319,8 +1319,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_api_customer_locale_route_post",
-      "community": 177,
-      "community_name": "locale/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "post()"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_integrations_webhooks_route",
-      "community": 171,
-      "community_name": "webhooks/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "webhooks/route.ts"
     },
     {
@@ -1429,8 +1429,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_integrations_webhooks_route_jwt_secret",
-      "community": 171,
-      "community_name": "webhooks/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "jwt_secret"
     },
     {
@@ -1440,8 +1440,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_integrations_webhooks_route_post",
-      "community": 171,
-      "community_name": "webhooks/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "post()"
     },
     {
@@ -1451,8 +1451,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "app_api_integrations_webhooks_route_get",
-      "community": 171,
-      "community_name": "webhooks/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "get()"
     },
     {
@@ -1660,8 +1660,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "resend-verification/route.ts"
     },
     {
@@ -1671,8 +1671,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "post()"
     },
     {
@@ -1682,7 +1682,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "pdf/[orderid]/route.ts"
     },
@@ -1693,7 +1693,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_proforma_pdf_orderid_route_get",
-      "community": 0,
+      "community": 4,
       "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
@@ -1704,8 +1704,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "proforma/route.test.ts"
     },
     {
@@ -1715,8 +1715,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_createdcompanyids",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1726,8 +1726,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_api_proforma_route_test_postproforma",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "postproforma()"
     },
     {
@@ -1737,8 +1737,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_proforma_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "proforma/route.ts"
     },
     {
@@ -1748,8 +1748,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_api_proforma_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "post()"
     },
     {
@@ -1792,8 +1792,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "upload/route.test.ts"
     },
     {
@@ -1803,8 +1803,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "api/upload/route.ts"
     },
     {
@@ -1814,8 +1814,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_mime_types",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "allowed_mime_types"
     },
     {
@@ -1825,8 +1825,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_extensions",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "allowed_extensions"
     },
     {
@@ -1836,8 +1836,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_api_upload_route_post",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 176,
+      "community_name": "images/route.ts",
       "norm_label": "post()"
     },
     {
@@ -2056,8 +2056,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2430,8 +2430,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_account_page",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "account/page.tsx"
     },
     {
@@ -2441,8 +2441,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_portal_account_page_accountpagecontent",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "accountpagecontent()"
     },
     {
@@ -2452,8 +2452,8 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "app_portal_account_page_accountpage",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "accountpage()"
     },
     {
@@ -2518,8 +2518,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "portallayout()"
     },
     {
@@ -2650,8 +2650,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_verify_email_route",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "verify-email/route.ts"
     },
     {
@@ -2661,8 +2661,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_portal_verify_email_route_get",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "get()"
     },
     {
@@ -3024,8 +3024,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -3035,8 +3035,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -3046,8 +3046,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -3057,8 +3057,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -3068,8 +3068,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -3134,8 +3134,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminkpidashboard.tsx"
     },
     {
@@ -3145,8 +3145,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_dashboardmetrics",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "dashboardmetrics"
     },
     {
@@ -3156,8 +3156,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_adminkpidashboard",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminkpidashboard()"
     },
     {
@@ -3222,8 +3222,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_admin_adminlanguagecontext_useadminlanguage",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "useadminlanguage()"
     },
     {
@@ -3288,8 +3288,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 94,
-      "community_name": "AdminLanguageContext.tsx",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3299,8 +3299,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 94,
-      "community_name": "AdminLanguageContext.tsx",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "globalcommandpalette"
     },
     {
@@ -3310,8 +3310,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 94,
-      "community_name": "AdminLanguageContext.tsx",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminsidebarprops"
     },
     {
@@ -3321,8 +3321,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 94,
-      "community_name": "AdminLanguageContext.tsx",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "adminsidebar()"
     },
     {
@@ -3420,8 +3420,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.test.tsx"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test_mockmetricsdata",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "mockmetricsdata"
     },
     {
@@ -3442,8 +3442,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.tsx"
     },
     {
@@ -3453,8 +3453,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetricsprops",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsprops"
     },
     {
@@ -3464,8 +3464,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetrics",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics()"
     },
     {
@@ -4069,8 +4069,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodal.tsx"
     },
     {
@@ -4080,8 +4080,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodalprops",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodalprops"
     },
     {
@@ -4091,8 +4091,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_addcolorvariantmodal_addcolorvariantmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "addcolorvariantmodal()"
     },
     {
@@ -4190,8 +4190,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodal.tsx"
     },
     {
@@ -4201,8 +4201,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodalprops",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodalprops"
     },
     {
@@ -4212,8 +4212,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventoryeditmodal_inventoryeditmodal",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryeditmodal()"
     },
     {
@@ -4223,8 +4223,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytab.tsx"
     },
     {
@@ -4234,8 +4234,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_colorvariant",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "colorvariant"
     },
     {
@@ -4245,8 +4245,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventoryproduct",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventoryproduct"
     },
     {
@@ -4256,8 +4256,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytabprops",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytabprops"
     },
     {
@@ -4267,8 +4267,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventorytab_inventorytab",
-      "community": 107,
-      "community_name": "ConfiguratorPortal.test.tsx",
+      "community": 7,
+      "community_name": "Wholesale Admin Page",
       "norm_label": "inventorytab()"
     },
     {
@@ -4410,8 +4410,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingmodal.tsx"
     },
     {
@@ -4421,8 +4421,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodalprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingmodalprops"
     },
     {
@@ -4432,8 +4432,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingmodal_wholesalepricingmodal",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingmodal()"
     },
     {
@@ -4443,8 +4443,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingtab.tsx"
     },
     {
@@ -4454,8 +4454,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_pricingproduct",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "pricingproduct"
     },
     {
@@ -4465,8 +4465,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtabprops",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingtabprops"
     },
     {
@@ -4476,8 +4476,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtab",
-      "community": 7,
-      "community_name": "Wholesale Admin Page",
+      "community": 14,
+      "community_name": "Proforma Route Post()",
       "norm_label": "wholesalepricingtab()"
     },
     {
@@ -4531,8 +4531,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal",
-      "community": 15,
-      "community_name": "CategoryInventoryClient.tsx",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "addwholesaleproductmodal.tsx"
     },
     {
@@ -4542,8 +4542,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_supplieroption",
-      "community": 15,
-      "community_name": "CategoryInventoryClient.tsx",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "supplieroption"
     },
     {
@@ -4553,8 +4553,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_categoryoption",
-      "community": 15,
-      "community_name": "CategoryInventoryClient.tsx",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "categoryoption"
     },
     {
@@ -4564,8 +4564,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_addwholesaleproductmodalprops",
-      "community": 15,
-      "community_name": "CategoryInventoryClient.tsx",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "addwholesaleproductmodalprops"
     },
     {
@@ -5169,8 +5169,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_test",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker.test.tsx"
     },
     {
@@ -5180,8 +5180,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_test_samplefits",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "samplefits"
     },
     {
@@ -5191,8 +5191,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fitpicker",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker.tsx"
     },
     {
@@ -5202,8 +5202,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitoption",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitoption"
     },
     {
@@ -5213,8 +5213,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitpickerprops",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpickerprops"
     },
     {
@@ -5224,8 +5224,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "components_configurator_fitpicker_fitpicker",
-      "community": 163,
-      "community_name": "wholesale/[productId]/page.tsx",
+      "community": 174,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "fitpicker()"
     },
     {
@@ -6170,8 +6170,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_account_accountpage_test",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "accountpage.test.tsx"
     },
     {
@@ -6181,8 +6181,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_account_accountpage_test_mockpush",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "mockpush"
     },
     {
@@ -6214,8 +6214,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_account_companyinfotab",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "companyinfotab.tsx"
     },
     {
@@ -6225,8 +6225,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_portal_account_companyinfotab_companyinfotabprops",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "companyinfotabprops"
     },
     {
@@ -6236,8 +6236,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_account_companyinfotab_companyinfotab",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "companyinfotab()"
     },
     {
@@ -6291,8 +6291,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_account_settingstab",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "settingstab.tsx"
     },
     {
@@ -6302,8 +6302,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_portal_account_settingstab_settingstab",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "settingstab()"
     },
     {
@@ -6313,8 +6313,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_account_tabnavigation",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "tabnavigation.tsx"
     },
     {
@@ -6324,8 +6324,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_portal_account_tabnavigation_accounttab",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "accounttab"
     },
     {
@@ -6335,8 +6335,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_portal_account_tabnavigation_tabnavigationprops",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "tabnavigationprops"
     },
     {
@@ -6346,8 +6346,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_portal_account_tabnavigation_tabnavigation",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "tabnavigation()"
     },
     {
@@ -6885,8 +6885,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminauth",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "adminauth.ts"
     },
     {
@@ -6896,8 +6896,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminauth_getadminaccesskey",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "getadminaccesskey()"
     },
     {
@@ -6907,8 +6907,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "lib_adminauth_getadminjwtsecret",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "getadminjwtsecret()"
     },
     {
@@ -6918,8 +6918,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadminkey",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "verifyadminkey()"
     },
     {
@@ -6929,8 +6929,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "lib_adminauth_createadmintoken",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "createadmintoken()"
     },
     {
@@ -6940,8 +6940,8 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadmintoken",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "verifyadmintoken()"
     },
     {
@@ -6962,8 +6962,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics_test",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "adminmetrics.test.ts"
     },
     {
@@ -6973,8 +6973,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "adminmetrics.ts"
     },
     {
@@ -6984,8 +6984,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminmetrics_statusdistributionitem",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "statusdistributionitem"
     },
     {
@@ -6995,8 +6995,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_adminmetrics_dashboardmetricsdata",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsdata"
     },
     {
@@ -7006,8 +7006,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_adminmetrics_all_statuses",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "all_statuses"
     },
     {
@@ -7017,8 +7017,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "lib_adminmetrics_getadmindashboardmetrics",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 171,
+      "community_name": "webhooks/route.ts",
       "norm_label": "getadmindashboardmetrics()"
     },
     {
@@ -7105,8 +7105,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customer-session.ts"
     },
     {
@@ -7116,8 +7116,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "customersession"
     },
     {
@@ -7127,8 +7127,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "getcustomersession()"
     },
     {
@@ -7336,8 +7336,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 108,
-      "community_name": "InventoryTab.tsx",
+      "community": 0,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -7358,8 +7358,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_email",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "email.ts"
     },
     {
@@ -7369,8 +7369,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_email_sendproformaemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "sendproformaemailparams"
     },
     {
@@ -7380,8 +7380,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_email_sendproformaemail",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "sendproformaemail()"
     },
     {
@@ -7391,8 +7391,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "sendmagiclinkemailparams"
     },
     {
@@ -7413,8 +7413,8 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "lib_email_sendverificationemailparams",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "sendverificationemailparams"
     },
     {
@@ -7424,8 +7424,8 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "lib_email_sendverificationemail",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 105,
+      "community_name": "verifyCustomerToken",
       "norm_label": "sendverificationemail()"
     },
     {
@@ -8194,8 +8194,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_notifications",
-      "community": 176,
-      "community_name": "images/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "notifications.ts"
     },
     {
@@ -8205,8 +8205,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_notifications_createnotification",
-      "community": 176,
-      "community_name": "images/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "createnotification()"
     },
     {
@@ -8216,8 +8216,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_notifications_logaudittrail",
-      "community": 176,
-      "community_name": "images/route.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "logaudittrail()"
     },
     {
@@ -8403,8 +8403,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator_test",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "pdfgenerator.test.ts"
     },
     {
@@ -8414,8 +8414,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pdfgenerator",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "pdfgenerator.ts"
     },
     {
@@ -8425,8 +8425,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_pdfgenerator_proformapdfdata",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "proformapdfdata"
     },
     {
@@ -8436,8 +8436,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "lib_pdfgenerator_generateproformapdf",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 107,
+      "community_name": "ConfiguratorPortal.test.tsx",
       "norm_label": "generateproformapdf()"
     },
     {
@@ -8744,8 +8744,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "types.ts"
     },
     {
@@ -8755,8 +8755,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types_materialcomponenttype",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "materialcomponenttype"
     },
     {
@@ -8766,8 +8766,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "lib_types_lineitemmaterialspec",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "lineitemmaterialspec"
     },
     {
@@ -8777,8 +8777,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "lib_types_orderlinemultimaterial",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "orderlinemultimaterial"
     },
     {
@@ -8788,8 +8788,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "lib_types_createm2oorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createm2oorderpayload"
     },
     {
@@ -8799,8 +8799,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "lib_types_createmultimaterialorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createmultimaterialorderpayload"
     },
     {
@@ -8810,8 +8810,8 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "lib_types_createwholesaleorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 175,
+      "community_name": "fabric/[id]/route.ts",
       "norm_label": "createwholesaleorderpayload"
     },
     {
@@ -8898,8 +8898,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_zapierwebhook_test",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "zapierwebhook.test.ts"
     },
     {
@@ -8909,8 +8909,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "lib_zapierwebhook_test_mockfetch",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "mockfetch"
     },
     {
@@ -8920,8 +8920,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_zapierwebhook",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "zapierwebhook.ts"
     },
     {
@@ -8931,8 +8931,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_zapierwebhook_dispatchzapierevent",
-      "community": 174,
-      "community_name": "LogoUploader.tsx",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "dispatchzapierevent()"
     },
     {
@@ -8942,8 +8942,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "middleware",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "middleware.ts"
     },
     {
@@ -8953,8 +8953,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "middleware_middleware",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "middleware()"
     },
     {
@@ -8964,8 +8964,8 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "middleware_config",
-      "community": 4,
-      "community_name": "Route Post() Get()",
+      "community": 108,
+      "community_name": "InventoryTab.tsx",
       "norm_label": "config"
     },
     {
@@ -9008,8 +9008,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "package",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "package.json"
     },
     {
@@ -9019,8 +9019,8 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "package_name",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "name"
     },
     {
@@ -9030,8 +9030,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "package_version",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "version"
     },
     {
@@ -9041,8 +9041,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "package_private",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "private"
     },
     {
@@ -9052,8 +9052,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "package_scripts",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "scripts"
     },
     {
@@ -9063,8 +9063,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "package_scripts_dev",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "dev"
     },
     {
@@ -9074,8 +9074,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "package_scripts_build",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "build"
     },
     {
@@ -9085,8 +9085,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "package_scripts_postinstall",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "postinstall"
     },
     {
@@ -9096,8 +9096,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "package_scripts_start",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "start"
     },
     {
@@ -9107,8 +9107,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "package_scripts_lint",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "lint"
     },
     {
@@ -9118,8 +9118,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "package_scripts_test",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "test"
     },
     {
@@ -9129,8 +9129,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "package_scripts_test_watch",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "test:watch"
     },
     {
@@ -9140,8 +9140,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "package_prisma",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "prisma"
     },
     {
@@ -9151,8 +9151,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "package_prisma_seed",
-      "community": 2,
-      "community_name": "@types @testing Library",
+      "community": 8,
+      "community_name": "@prisma Three Cmdk",
       "norm_label": "seed"
     },
     {
@@ -9415,8 +9415,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "package_dependencies_react",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "react"
     },
     {
@@ -9426,8 +9426,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "react",
-      "community": 8,
-      "community_name": "@prisma Three Cmdk",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "react"
     },
     {
@@ -13741,6 +13741,314 @@
       "community": 95,
       "community_name": "payment.test.ts",
       "norm_label": "\ud83d\udd17 cross-stream dependencies"
+    },
+    {
+      "label": "AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "audit-5-material-components-colourways.md"
+    },
+    {
+      "label": "AUDIT-5: Material, Components & Colourways Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "audit-5: material, components & colourways audit"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_summary",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "summary"
+    },
+    {
+      "label": "\ud83d\udcca Color Ordering & Component Matrix",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_color_ordering_component_matrix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udcca color ordering & component matrix"
+    },
+    {
+      "label": "\ud83d\udeab Blockers",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_blockers",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udeab blockers"
+    },
+    {
+      "label": "P0 (Must Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_p0_must_fix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "p0 (must fix)"
+    },
+    {
+      "label": "P1 (Should Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_p1_should_fix",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "\ud83d\udd17 Cross-Stream Dependencies",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "docs_audit_5_material_components_colourways_cross_stream_dependencies",
+      "community": 163,
+      "community_name": "wholesale/[productId]/page.tsx",
+      "norm_label": "\ud83d\udd17 cross-stream dependencies"
+    },
+    {
+      "label": "AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "audit-6-security-admin-data-boundaries.md"
+    },
+    {
+      "label": "AUDIT-6: Security, Admin Operations & Data Boundaries Audit",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "audit-6: security, admin operations & data boundaries audit"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_summary",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "summary"
+    },
+    {
+      "label": "\ud83d\udcca Security & Data Boundaries Matrix",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_security_data_boundaries_matrix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udcca security & data boundaries matrix"
+    },
+    {
+      "label": "\ud83d\udeab Blockers",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udeab blockers"
+    },
+    {
+      "label": "P0 (Must Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_p0_must_fix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "p0 (must fix)"
+    },
+    {
+      "label": "P1 (Should Fix)",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_p1_should_fix",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "p1 (should fix)"
+    },
+    {
+      "label": "\ud83d\udd17 Cross-Stream Security Safeguards",
+      "file_type": "document",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "docs_audit_6_security_admin_data_boundaries_cross_stream_security_safeguards",
+      "community": 168,
+      "community_name": "applications/route.ts",
+      "norm_label": "\ud83d\udd17 cross-stream security safeguards"
+    },
+    {
+      "label": "CONSOLIDATION-REPORT.md",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_consolidation_report",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "consolidation-report.md"
+    },
+    {
+      "label": "\ud83c\udfc6 MASTER CONSOLIDATION REPORT: SATRIANO ATELIER FORENSIC AUDIT SUITE",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "\ud83c\udfc6 master consolidation report: satriano atelier forensic audit suite"
+    },
+    {
+      "label": "Executive Summary",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_executive_summary",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "executive summary"
+    },
+    {
+      "label": "\ud83d\udcca Summary of Agent Stream Audits",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "\ud83d\udcca summary of agent stream audits"
+    },
+    {
+      "label": "1. AGENT-1: Made-to-Order (M2O) Order Lifecycle Audit (`AUDIT-1-M2O-ORDER-LIFECYCLE.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_1_agent_1_made_to_order_m2o_order_lifecycle_audit_audit_1_m2o_order_lifecycle_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "1. agent-1: made-to-order (m2o) order lifecycle audit (`audit-1-m2o-order-lifecycle.md`)"
+    },
+    {
+      "label": "2. AGENT-2: Wholesale Catalog & Taxonomy Audit (`AUDIT-2-WHOLESALE-CATALOG-TAXONOMY.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_2_agent_2_wholesale_catalog_taxonomy_audit_audit_2_wholesale_catalog_taxonomy_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "2. agent-2: wholesale catalog & taxonomy audit (`audit-2-wholesale-catalog-taxonomy.md`)"
+    },
+    {
+      "label": "3. AGENT-3: Wholesale Checkout, Inventory & Orders Audit (`AUDIT-3-WHOLESALE-CHECKOUT-INVENTORY-ORDERS.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_3_agent_3_wholesale_checkout_inventory_orders_audit_audit_3_wholesale_checkout_inventory_orders_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "3. agent-3: wholesale checkout, inventory & orders audit (`audit-3-wholesale-checkout-inventory-orders.md`)"
+    },
+    {
+      "label": "4. AGENT-4: Pricing Architecture & Commercial Rules Audit (`AUDIT-4-PRICING-ARCHITECTURE.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_4_agent_4_pricing_architecture_commercial_rules_audit_audit_4_pricing_architecture_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "4. agent-4: pricing architecture & commercial rules audit (`audit-4-pricing-architecture.md`)"
+    },
+    {
+      "label": "5. AGENT-5: Material, Components & Colourways Audit (`AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_5_agent_5_material_components_colourways_audit_audit_5_material_components_colourways_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "5. agent-5: material, components & colourways audit (`audit-5-material-components-colourways.md`)"
+    },
+    {
+      "label": "6. AGENT-6: Security, Admin Operations & Data Boundaries Audit (`AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md`)",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_6_agent_6_security_admin_operations_data_boundaries_audit_audit_6_security_admin_data_boundaries_md",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "6. agent-6: security, admin operations & data boundaries audit (`audit-6-security-admin-data-boundaries.md`)"
+    },
+    {
+      "label": "\ud83c\udfaf Final System Health Matrix",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_final_system_health_matrix",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "\ud83c\udfaf final system health matrix"
+    },
+    {
+      "label": "\ud83d\ude80 Deployment Status",
+      "file_type": "document",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "docs_consolidation_report_deployment_status",
+      "community": 146,
+      "community_name": "suppliers/route.ts",
+      "norm_label": "\ud83d\ude80 deployment status"
     },
     {
       "label": "SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md",
@@ -39021,6 +39329,281 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways",
+      "target": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_color_ordering_component_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_cross_stream_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_audit_5_material_components_colourways_audit",
+      "target": "docs_audit_5_material_components_colourways_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_blockers",
+      "target": "docs_audit_5_material_components_colourways_p0_must_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-5-MATERIAL-COMPONENTS-COLOURWAYS.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_5_material_components_colourways_blockers",
+      "target": "docs_audit_5_material_components_colourways_p1_should_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries",
+      "target": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_cross_stream_security_safeguards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_security_data_boundaries_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_audit_6_security_admin_operations_data_boundaries_audit",
+      "target": "docs_audit_6_security_admin_data_boundaries_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "target": "docs_audit_6_security_admin_data_boundaries_p0_must_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AUDIT-6-SECURITY-ADMIN-DATA-BOUNDARIES.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_audit_6_security_admin_data_boundaries_blockers",
+      "target": "docs_audit_6_security_admin_data_boundaries_p1_should_fix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report",
+      "target": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "target": "docs_consolidation_report_deployment_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "target": "docs_consolidation_report_executive_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "target": "docs_consolidation_report_final_system_health_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_master_consolidation_report_satriano_atelier_forensic_audit_suite",
+      "target": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_1_agent_1_made_to_order_m2o_order_lifecycle_audit_audit_1_m2o_order_lifecycle_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_2_agent_2_wholesale_catalog_taxonomy_audit_audit_2_wholesale_catalog_taxonomy_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_3_agent_3_wholesale_checkout_inventory_orders_audit_audit_3_wholesale_checkout_inventory_orders_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_4_agent_4_pricing_architecture_commercial_rules_audit_audit_4_pricing_architecture_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_5_agent_5_material_components_colourways_audit_audit_5_material_components_colourways_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONSOLIDATION-REPORT.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_consolidation_report_summary_of_agent_stream_audits",
+      "target": "docs_consolidation_report_6_agent_6_security_admin_operations_data_boundaries_audit_audit_6_security_admin_data_boundaries_md",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/SATRIANO_READ-ONLY_ARCHITECTURE_PRODUCT_INTELLIGENCE_EXTRACTION.md",
       "source_location": "L11",
       "weight": 1.0,
@@ -41543,5 +42126,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1ba308f5e8f171237146f726c69b6592a53f11e5"
+  "built_at_commit": "77314d5f5af8edc7dfd7c0a7a45f3566d4f834dd"
 }
