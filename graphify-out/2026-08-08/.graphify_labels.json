@@ -169,6 +169,7 @@
   "167": "analytics.ts",
   "168": "locale/route.ts",
   "169": "inventoryForecasting.ts",
+  "170": "LogoUploader.tsx",
   "171": "inventoryReservation.ts",
   "172": "ediAdapter.ts",
   "173": "quickbooksSync.ts"

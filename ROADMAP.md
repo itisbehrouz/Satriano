@@ -11,7 +11,7 @@
 - *(Planlanan görev bulunmuyor)*
 
 ## ✅ Tamamlanan Görevler (Done)
-- [x] **[HIGH]** Web güvenlik denetimi ve Cloudflare Turnstile bot doğrulama entegrasyonu `<!-- status: done, priority: high, id: sa-4 -->`
+- [x] **[HIGH]** Web güvenlik denetimi (Cloudflare Turnstile devre dışı bırakıldı) `<!-- status: done, priority: high, id: sa-4 -->`
 - [x] **[HIGH]** Kurumsal 404, 500, 403 ve Hata Sınırları (Error Boundaries) geliştirilmesi `<!-- status: done, priority: high, id: sa-5 -->`
 - [x] **[HIGH]** B2B Toptan sipariş akışı ve katalog yönetimi `<!-- status: done, priority: high, id: sa-1 -->`
 - [x] **[HIGH]** Konsolide ürün yol haritası (Roadmap) revizyonu `<!-- status: done, priority: high, id: sa-2 -->`

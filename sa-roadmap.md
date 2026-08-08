@@ -878,12 +878,8 @@ this stays open until a real before/after screenshot at both mobile
 - **Implemented Defenses (Pros):** Documented algorithm pinning (`jose` HS256), edge constant-time string comparison (`verifyAdminKey`), HttpOnly session cookies (`sat_admin_token`), strict HSTS/CSP security headers, Prisma ORM SQLi protection, non-sequential CUID/UUID keys, file size/extension controls, and secret isolation in `.gitignore`.
 - **Hardening Roadmap (Cons):** Documented rate limiting recommendations, SVG XSS payload sanitization, CSP `'unsafe-eval'` removal, and static bearer key restrictions.
 
-### 31.5 Cloudflare Turnstile Free Human Verification System
-- **Server Verification Helper (`lib/turnstile.ts`):** Created `verifyTurnstileToken` calling `https://challenges.cloudflare.com/turnstile/v0/siteverify` with automatic local development fallbacks.
-- **React Widget Component (`components/security/TurnstileWidget.tsx`):** Created client component for non-intrusive Turnstile bot challenges, defaulting to Cloudflare test key `1x00000000000000000000AA` when local env keys are unconfigured.
-- **API Protection:** Integrated `verifyTurnstileToken` into `/api/applications` (B2B application submission) and `/api/admin/login` (corporate admin authentication).
-- **Environment Reference (`.env.example`):** Added `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` documentation.
-- **Unit Test Suite (`lib/turnstile.test.ts`):** Verified mock token validation, missing key development bypasses, and failure handling.
+### 31.5 Cloudflare Turnstile Human Verification System (Disabled / Removed)
+- **Status:** Cloudflare Turnstile bot verification disabled and purged from the active codebase.
 
 ### 31.6 Enterprise Error Pages & Error Boundaries Suite
 - **Global 404 Not Found (`app/not-found.tsx`):** Luxury dark Atelier 404 page with metallic gold accents (`#D4AF37`) and catalog quick links.
