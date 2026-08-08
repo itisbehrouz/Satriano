@@ -10,8 +10,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_applications_page",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applications/page.tsx"
     },
     {
@@ -21,8 +21,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "app_admin_applications_page_getapplicationtabs",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "getapplicationtabs()"
     },
     {
@@ -32,8 +32,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_admin_applications_page_applicationscontent",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationscontent()"
     },
     {
@@ -43,8 +43,8 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "app_admin_applications_page_adminapplicationspage",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationspage()"
     },
     {
@@ -785,6 +785,39 @@
       "norm_label": "get()"
     },
     {
+      "label": "milestones/route.ts",
+      "file_type": "code",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_admin_orders_orderid_milestones_route",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "milestones/route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_api_admin_orders_orderid_milestones_route_get",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "get()"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "app_api_admin_orders_orderid_milestones_route_post",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "post()"
+    },
+    {
       "label": "orders/[orderId]/route.ts",
       "file_type": "code",
       "source_file": "app/api/admin/orders/[orderId]/route.ts",
@@ -851,14 +884,58 @@
       "norm_label": "get()"
     },
     {
+      "label": "suppliers/route.ts",
+      "file_type": "code",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_admin_suppliers_route",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "suppliers/route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_api_admin_suppliers_route_get",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "get()"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "app_api_admin_suppliers_route_post",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "post()"
+    },
+    {
+      "label": "suppliers.test.ts",
+      "file_type": "code",
+      "source_file": "app/api/admin/suppliers/suppliers.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_admin_suppliers_suppliers_test",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "suppliers.test.ts"
+    },
+    {
       "label": "[imageId]/route.ts",
       "file_type": "code",
       "source_file": "app/api/admin/wholesale/products/[id]/images/[imageId]/route.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "[imageid]/route.ts"
     },
     {
@@ -868,8 +945,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -879,8 +956,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 139,
-      "community_name": "prisma.ts",
+      "community": 166,
+      "community_name": "[imageId]/route.ts",
       "norm_label": "delete()"
     },
     {
@@ -1220,8 +1297,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_orders_route_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "orders/route.test.ts"
     },
     {
@@ -1231,8 +1308,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_orders_route_test_createdcompanyids",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "createdcompanyids"
     },
     {
@@ -1242,8 +1319,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_api_orders_route_test_postorders",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "postorders()"
     },
     {
@@ -1253,8 +1330,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_orders_route",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "api/orders/route.ts"
     },
     {
@@ -1264,8 +1341,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_api_orders_route_post",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "post()"
     },
     {
@@ -1660,8 +1737,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_categories_page",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "categories/page.tsx"
     },
     {
@@ -1671,8 +1748,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_categories_page_categoriespage",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "categoriespage()"
     },
     {
@@ -1770,8 +1847,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_configure_page",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "configure/page.tsx"
     },
     {
@@ -1913,8 +1990,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_test",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "page.test.tsx"
     },
     {
@@ -1924,8 +2001,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "konfigurator/[productid]/page.tsx"
     },
     {
@@ -1935,8 +2012,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpageprops",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "productconfiguratorpageprops"
     },
     {
@@ -2683,8 +2760,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "wholesale/checkout/page.tsx"
     },
     {
@@ -2694,8 +2771,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page_wholesalecheckoutpage",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "wholesalecheckoutpage()"
     },
     {
@@ -2705,8 +2782,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_page",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "app/wholesale/page.tsx"
     },
     {
@@ -2716,8 +2793,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "app_wholesale_page_wholesalepage",
-      "community": 18,
-      "community_name": "App Wholesale Page",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "wholesalepage()"
     },
     {
@@ -2727,8 +2804,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_categoriessearchfilter",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "categoriessearchfilter.tsx"
     },
     {
@@ -2738,8 +2815,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_categoriessearchfilter_subcategory",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "subcategory"
     },
     {
@@ -2749,8 +2826,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_categoriessearchfilter_category",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "category"
     },
     {
@@ -2760,8 +2837,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_categoriessearchfilter_category_images",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "category_images"
     },
     {
@@ -2771,8 +2848,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "components_categoriessearchfilter_categoriessearchfilter",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 158,
+      "community_name": "categories/page.tsx",
       "norm_label": "categoriessearchfilter()"
     },
     {
@@ -2914,8 +2991,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable.tsx"
     },
     {
@@ -2925,8 +3002,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_b2bapplicationitem",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "b2bapplicationitem"
     },
     {
@@ -2936,8 +3013,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstableprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstableprops"
     },
     {
@@ -2947,8 +3024,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_applicationstatusbadge",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "applicationstatusbadge()"
     },
     {
@@ -2958,8 +3035,8 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "components_admin_adminapplicationstable_adminapplicationstable",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 6,
+      "community_name": "Page Admin Tabs",
       "norm_label": "adminapplicationstable()"
     },
     {
@@ -3024,8 +3101,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard.tsx"
     },
     {
@@ -3035,8 +3112,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics"
     },
     {
@@ -3046,8 +3123,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminkpidashboard_adminkpidashboard",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminkpidashboard()"
     },
     {
@@ -3112,8 +3189,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_admin_adminlanguagecontext_useadminlanguage",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 3,
+      "community_name": "Page Metadata Categoryoption",
       "norm_label": "useadminlanguage()"
     },
     {
@@ -3178,8 +3255,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminsidebar",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3189,8 +3266,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_globalcommandpalette",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "globalcommandpalette"
     },
     {
@@ -3200,8 +3277,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebarprops",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebarprops"
     },
     {
@@ -3211,8 +3288,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_admin_adminsidebar_adminsidebar",
-      "community": 82,
-      "community_name": "admin/orders/page.tsx",
+      "community": 94,
+      "community_name": "AdminLanguageContext.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -4421,8 +4498,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodal.tsx"
     },
     {
@@ -4432,8 +4509,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_supplieroption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "supplieroption"
     },
     {
@@ -4443,8 +4520,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_categoryoption",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "categoryoption"
     },
     {
@@ -4454,8 +4531,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_wholesale_inventory_addwholesaleproductmodal_addwholesaleproductmodalprops",
-      "community": 3,
-      "community_name": "Page Metadata Categoryoption",
+      "community": 15,
+      "community_name": "CategoryInventoryClient.tsx",
       "norm_label": "addwholesaleproductmodalprops"
     },
     {
@@ -4828,8 +4905,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorpicker_test",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorpicker.test.tsx"
     },
     {
@@ -4839,8 +4916,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorpicker",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorpicker.tsx"
     },
     {
@@ -4850,8 +4927,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_configurator_colorpicker_colorpickerprops",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorpickerprops"
     },
     {
@@ -4861,8 +4938,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_configurator_colorpicker_colorpicker",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorpicker()"
     },
     {
@@ -4872,8 +4949,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix.test.tsx"
     },
     {
@@ -4883,8 +4960,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix.tsx"
     },
     {
@@ -4894,8 +4971,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix_colorsizematrixprops",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrixprops"
     },
     {
@@ -4905,8 +4982,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "components_configurator_colorsizematrix_colorsizematrix",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "colorsizematrix()"
     },
     {
@@ -4916,7 +4993,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient",
-      "community": 100,
+      "community": 82,
       "community_name": "admin/orders/page.tsx",
       "norm_label": "configuratorclient.tsx"
     },
@@ -4927,7 +5004,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclientprops",
-      "community": 100,
+      "community": 82,
       "community_name": "admin/orders/page.tsx",
       "norm_label": "configuratorclientprops"
     },
@@ -4938,8 +5015,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "configuratorclient()"
     },
     {
@@ -5015,8 +5092,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_test",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabricpicker.test.tsx"
     },
     {
@@ -5026,8 +5103,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_test_fabrics",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabrics"
     },
     {
@@ -5037,8 +5114,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabricpicker.tsx"
     },
     {
@@ -5048,8 +5125,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_fabriccoloroption",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabriccoloroption"
     },
     {
@@ -5059,8 +5136,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_fabricoption",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabricoption"
     },
     {
@@ -5070,8 +5147,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_fabricpickerprops",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabricpickerprops"
     },
     {
@@ -5081,8 +5158,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "components_configurator_fabricpicker_fabricpicker",
-      "community": 10,
-      "community_name": "Page React Account",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "fabricpicker()"
     },
     {
@@ -5158,8 +5235,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_logouploader",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 163,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploader.tsx"
     },
     {
@@ -5169,8 +5246,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_logouploader_placement_options",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 163,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "placement_options"
     },
     {
@@ -5180,8 +5257,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploaderprops",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 163,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploaderprops"
     },
     {
@@ -5191,8 +5268,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_logouploader_logouploader",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 163,
+      "community_name": "LogoUploader.tsx",
       "norm_label": "logouploader()"
     },
     {
@@ -5202,8 +5279,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "materialcomponentselector.tsx"
     },
     {
@@ -5224,8 +5301,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector_availablefabriccolor",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "availablefabriccolor"
     },
     {
@@ -5235,8 +5312,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector_availablefabric",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "availablefabric"
     },
     {
@@ -5246,8 +5323,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector_materialcomponentselectorprops",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "materialcomponentselectorprops"
     },
     {
@@ -5257,8 +5334,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector_component_labels",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "component_labels"
     },
     {
@@ -5268,8 +5345,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "components_configurator_materialcomponentselector_materialcomponentselector",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 160,
+      "community_name": "MaterialComponentSelector.tsx",
       "norm_label": "materialcomponentselector()"
     },
     {
@@ -5279,8 +5356,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_pricesidebar_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricesidebar.test.tsx"
     },
     {
@@ -5290,8 +5367,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_pricesidebar",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricesidebar.tsx"
     },
     {
@@ -5301,8 +5378,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "components_configurator_pricesidebar_pricesidebarprops",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricesidebarprops"
     },
     {
@@ -5312,8 +5389,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_configurator_pricesidebar_pricesidebar",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricesidebar()"
     },
     {
@@ -5367,7 +5444,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_sizesystemdef",
-      "community": 100,
+      "community": 82,
       "community_name": "admin/orders/page.tsx",
       "norm_label": "sizesystemdef"
     },
@@ -5862,8 +5939,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_sitefooter",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "sitefooter.tsx"
     },
     {
@@ -5873,8 +5950,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_layout_sitefooter_navigation_links",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "navigation_links"
     },
     {
@@ -5884,8 +5961,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_layout_sitefooter_legal_compliance_links",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "legal_compliance_links"
     },
     {
@@ -5895,8 +5972,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_layout_sitefooter_quality_operations_links",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "quality_operations_links"
     },
     {
@@ -5906,8 +5983,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 23,
-      "community_name": "Categories Page Categoriespage()",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "sitefooter()"
     },
     {
@@ -5917,8 +5994,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_siteheader",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "siteheader.tsx"
     },
     {
@@ -5928,8 +6005,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_siteheader_anonymous_nav_items",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "anonymous_nav_items"
     },
     {
@@ -5939,8 +6016,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_layout_siteheader_authenticated_nav_items",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "authenticated_nav_items"
     },
     {
@@ -6016,8 +6093,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_accountdropdown",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "accountdropdown.tsx"
     },
     {
@@ -6027,8 +6104,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdownprops",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "accountdropdownprops"
     },
     {
@@ -6038,8 +6115,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "components_portal_accountdropdown_accountdropdown",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "accountdropdown()"
     },
     {
@@ -6082,8 +6159,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_portalheader_test",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "portalheader.test.tsx"
     },
     {
@@ -6093,8 +6170,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_portal_portalheader",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "portal/portalheader.tsx"
     },
     {
@@ -6104,8 +6181,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_portal_portalheader_portalheaderprops",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 161,
+      "community_name": "portal/PortalHeader.tsx",
       "norm_label": "portalheaderprops"
     },
     {
@@ -6115,8 +6192,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "components_portal_portalheader_portalheader",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "portalheader()"
     },
     {
@@ -7171,8 +7248,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_email",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "email.ts"
     },
     {
@@ -7182,8 +7259,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "lib_email_sendproformaemailparams",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendproformaemailparams"
     },
     {
@@ -7204,8 +7281,8 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "lib_email_sendmagiclinkemailparams",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendmagiclinkemailparams"
     },
     {
@@ -7226,8 +7303,8 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "lib_email_sendverificationemailparams",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendverificationemailparams"
     },
     {
@@ -7319,6 +7396,61 @@
       "norm_label": "admindictionary"
     },
     {
+      "label": "inventoryReservation.test.ts",
+      "file_type": "code",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_inventoryreservation_test",
+      "community": 162,
+      "community_name": "inventoryReservation.ts",
+      "norm_label": "inventoryreservation.test.ts"
+    },
+    {
+      "label": "inventoryReservation.ts",
+      "file_type": "code",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_inventoryreservation",
+      "community": 162,
+      "community_name": "inventoryReservation.ts",
+      "norm_label": "inventoryreservation.ts"
+    },
+    {
+      "label": "StockReservationStatus",
+      "file_type": "code",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_inventoryreservation_stockreservationstatus",
+      "community": 162,
+      "community_name": "inventoryReservation.ts",
+      "norm_label": "stockreservationstatus"
+    },
+    {
+      "label": "reserveStockForOrder()",
+      "file_type": "code",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "lib_inventoryreservation_reservestockfororder",
+      "community": 162,
+      "community_name": "inventoryReservation.ts",
+      "norm_label": "reservestockfororder()"
+    },
+    {
+      "label": "releaseExpiredReservations()",
+      "file_type": "code",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "lib_inventoryreservation_releaseexpiredreservations",
+      "community": 162,
+      "community_name": "inventoryReservation.ts",
+      "norm_label": "releaseexpiredreservations()"
+    },
+    {
       "label": "m2oCart.ts",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
@@ -7347,8 +7479,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "lib_m2ocart_m2ocart",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "m2ocart"
     },
     {
@@ -7424,8 +7556,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_moqvalidation_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "moqvalidation.test.ts"
     },
     {
@@ -7435,8 +7567,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_moqvalidation",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "moqvalidation.ts"
     },
     {
@@ -7446,8 +7578,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_moqvalidation_moqvalidationitem",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "moqvalidationitem"
     },
     {
@@ -7457,8 +7589,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_moqvalidation_multimaterialmoqitem",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "multimaterialmoqitem"
     },
     {
@@ -7468,8 +7600,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "lib_moqvalidation_moqvalidationresult",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "moqvalidationresult"
     },
     {
@@ -7479,8 +7611,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "lib_moqvalidation_validatesinglefabricmoq",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "validatesinglefabricmoq()"
     },
     {
@@ -7490,8 +7622,8 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "lib_moqvalidation_validatemultimaterialmoq",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "validatemultimaterialmoq()"
     },
     {
@@ -7501,9 +7633,53 @@
       "source_location": "L231",
       "_origin": "ast",
       "id": "lib_moqvalidation_validatehybridmoq",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 153,
+      "community_name": "api/orders/route.ts",
       "norm_label": "validatehybridmoq()"
+    },
+    {
+      "label": "notifications.ts",
+      "file_type": "code",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_notifications",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "notifications.ts"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_notifications_prisma",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "prisma"
+    },
+    {
+      "label": "createNotification()",
+      "file_type": "code",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "lib_notifications_createnotification",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "createnotification()"
+    },
+    {
+      "label": "logAuditTrail()",
+      "file_type": "code",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "lib_notifications_logaudittrail",
+      "community": 164,
+      "community_name": "notifications.ts",
+      "norm_label": "logaudittrail()"
     },
     {
       "label": "orderMigration.test.ts",
@@ -7611,8 +7787,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_ordervalidation_createorderinputitem",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "createorderinputitem"
     },
     {
@@ -7732,8 +7908,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pricing_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricing.test.ts"
     },
     {
@@ -7743,8 +7919,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pricing",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricing.ts"
     },
     {
@@ -7754,8 +7930,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_pricing_sizequantity",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "sizequantity"
     },
     {
@@ -7765,8 +7941,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_pricing_pricinginput",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricinginput"
     },
     {
@@ -7776,8 +7952,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "lib_pricing_pricinglineitem",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricinglineitem"
     },
     {
@@ -7787,8 +7963,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "lib_pricing_pricingresult",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "pricingresult"
     },
     {
@@ -7798,8 +7974,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "lib_pricing_computeorderpricing",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 156,
+      "community_name": "pricing.ts",
       "norm_label": "computeorderpricing()"
     },
     {
@@ -7834,6 +8010,50 @@
       "community": 139,
       "community_name": "prisma.ts",
       "norm_label": "createprismaclient()"
+    },
+    {
+      "label": "rbac.test.ts",
+      "file_type": "code",
+      "source_file": "lib/rbac.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_rbac_test",
+      "community": 165,
+      "community_name": "rbac.ts",
+      "norm_label": "rbac.test.ts"
+    },
+    {
+      "label": "rbac.ts",
+      "file_type": "code",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_rbac",
+      "community": 165,
+      "community_name": "rbac.ts",
+      "norm_label": "rbac.ts"
+    },
+    {
+      "label": "hasRole()",
+      "file_type": "code",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_rbac_hasrole",
+      "community": 165,
+      "community_name": "rbac.ts",
+      "norm_label": "hasrole()"
+    },
+    {
+      "label": "requireRole()",
+      "file_type": "code",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "lib_rbac_requirerole",
+      "community": 165,
+      "community_name": "rbac.ts",
+      "norm_label": "requirerole()"
     },
     {
       "label": "stripe.ts",
@@ -7908,8 +8128,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "types.ts"
     },
     {
@@ -7919,8 +8139,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_types_materialcomponenttype",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "materialcomponenttype"
     },
     {
@@ -7930,8 +8150,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "lib_types_lineitemmaterialspec",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "lineitemmaterialspec"
     },
     {
@@ -7941,8 +8161,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "lib_types_orderlinemultimaterial",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "orderlinemultimaterial"
     },
     {
@@ -7952,8 +8172,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "lib_types_createm2oorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "createm2oorderpayload"
     },
     {
@@ -7963,8 +8183,8 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "lib_types_createmultimaterialorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "createmultimaterialorderpayload"
     },
     {
@@ -7974,8 +8194,8 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "lib_types_createwholesaleorderpayload",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 159,
+      "community_name": "types.ts",
       "norm_label": "createwholesaleorderpayload"
     },
     {
@@ -9684,6 +9904,182 @@
       "norm_label": "vitest.setup.ts"
     },
     {
+      "label": "AGENT_10_API_INTEGRATIONS.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "agent_10_api_integrations.md"
+    },
+    {
+      "label": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "agent 10 \u2014 api & integrations"
+    },
+    {
+      "label": "PHASE 1: STRIPE WEBHOOK ROBUSTNESS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_1_stripe_webhook_robustness",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 1: stripe webhook robustness"
+    },
+    {
+      "label": "1.1 Update `app/api/payment/webhook/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_1_1_update_app_api_payment_webhook_route_ts",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "1.1 update `app/api/payment/webhook/route.ts`"
+    },
+    {
+      "label": "1.2 Add Webhook Log Model to Prisma",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_1_2_add_webhook_log_model_to_prisma",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "1.2 add webhook log model to prisma"
+    },
+    {
+      "label": "PHASE 2: ZAPIER / MAKE.COM INTEGRATION POINTS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L137",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_2_zapier_make_com_integration_points",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 2: zapier / make.com integration points"
+    },
+    {
+      "label": "2.1 Create `app/api/integrations/webhooks/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_2_1_create_app_api_integrations_webhooks_route_ts",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "2.1 create `app/api/integrations/webhooks/route.ts`"
+    },
+    {
+      "label": "2.2 Create `lib/externalWebhooks.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L192",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_2_2_create_lib_externalwebhooks_ts",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "2.2 create `lib/externalwebhooks.ts`"
+    },
+    {
+      "label": "PHASE 3: EDI SUPPLIER APIs",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L237",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_3_edi_supplier_apis",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 3: edi supplier apis"
+    },
+    {
+      "label": "3.1 Create `lib/suppliers/ediAdapter.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L239",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_3_1_create_lib_suppliers_ediadapter_ts",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "3.1 create `lib/suppliers/ediadapter.ts`"
+    },
+    {
+      "label": "PHASE 4: ACCOUNTING SYNC (QuickBooks)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L303",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_4_accounting_sync_quickbooks",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 4: accounting sync (quickbooks)"
+    },
+    {
+      "label": "4.1 Create `lib/accounting/quickbooksSync.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L305",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_4_1_create_lib_accounting_quickbookssync_ts",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "4.1 create `lib/accounting/quickbookssync.ts`"
+    },
+    {
+      "label": "PHASE 5: INTEGRATION MODELS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L345",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_5_integration_models",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 5: integration models"
+    },
+    {
+      "label": "5.1 Add to `prisma/schema.prisma`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L347",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_5_1_add_to_prisma_schema_prisma",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "5.1 add to `prisma/schema.prisma`"
+    },
+    {
+      "label": "PHASE 6: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L381",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_phase_6_validation_checklist",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "phase 6: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L397",
+      "_origin": "ast",
+      "id": "docs_agent_10_api_integrations_execution_rules_non_negotiable",
+      "community": 150,
+      "community_name": "AGENT 10 \u2014 API & INTEGRATIONS",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
       "label": "AGENT_1_MULTI_MATERIAL_ARCHITECTURE.md",
       "file_type": "document",
       "source_file": "docs/AGENT_1_MULTI_MATERIAL_ARCHITECTURE.md",
@@ -10297,6 +10693,952 @@
       "id": "docs_agent_3_configurator_updates_execution_rules_non_negotiable",
       "community": 98,
       "community_name": "[imageId]/route.ts",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_4_PROFORMA_INVENTORY.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "agent_4_proforma_inventory.md"
+    },
+    {
+      "label": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "agent 4 \u2014 proforma pdf & inventory deduction"
+    },
+    {
+      "label": "PHASE 1: PROFORMA PDF GENERATOR UPDATES",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_1_proforma_pdf_generator_updates",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 1: proforma pdf generator updates"
+    },
+    {
+      "label": "1.1 Update `lib/pdfGenerator.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_1_1_update_lib_pdfgenerator_ts",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "1.1 update `lib/pdfgenerator.ts`"
+    },
+    {
+      "label": "1.2 Update `app/api/proforma/pdf/[orderId]/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L438",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_1_2_update_app_api_proforma_pdf_orderid_route_ts",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "1.2 update `app/api/proforma/pdf/[orderid]/route.ts`"
+    },
+    {
+      "label": "PHASE 2: INVENTORY DEDUCTION ON PAYMENT",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L546",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_2_inventory_deduction_on_payment",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 2: inventory deduction on payment"
+    },
+    {
+      "label": "2.1 Create `lib/inventoryDeduction.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L548",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_2_1_create_lib_inventorydeduction_ts",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "2.1 create `lib/inventorydeduction.ts`"
+    },
+    {
+      "label": "2.2 Update `app/api/payment/webhook/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L717",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_2_2_update_app_api_payment_webhook_route_ts",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "2.2 update `app/api/payment/webhook/route.ts`"
+    },
+    {
+      "label": "PHASE 3: PROFORMA GENERATION ON PRICE LOCK",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L851",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_3_proforma_generation_on_price_lock",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 3: proforma generation on price lock"
+    },
+    {
+      "label": "3.1 Update `app/api/admin/orders/[orderId]/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L853",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_3_1_update_app_api_admin_orders_orderid_route_ts",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "3.1 update `app/api/admin/orders/[orderid]/route.ts`"
+    },
+    {
+      "label": "PHASE 4: SCHEMA UPDATES",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L891",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_4_schema_updates",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 4: schema updates"
+    },
+    {
+      "label": "4.1 Extend Prisma Schema",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L893",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_4_1_extend_prisma_schema",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "4.1 extend prisma schema"
+    },
+    {
+      "label": "PHASE 5: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L958",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_5_validation_checklist",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 5: validation checklist"
+    },
+    {
+      "label": "PHASE 6: TODO FOR LATER (After Agent 5 & 6)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L975",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_phase_6_todo_for_later_after_agent_5_6",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "phase 6: todo for later (after agent 5 & 6)"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L986",
+      "_origin": "ast",
+      "id": "docs_agent_4_proforma_inventory_execution_rules_non_negotiable",
+      "community": 151,
+      "community_name": "AGENT 4 \u2014 PROFORMA PDF & INVENTORY DEDUCTION",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_5_PRODUCTION_SUPPLIER.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "agent_5_production_supplier.md"
+    },
+    {
+      "label": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "agent 5 \u2014 production & supplier automation"
+    },
+    {
+      "label": "PHASE 1: DATABASE SCHEMA EXTENSIONS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_1_database_schema_extensions",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 1: database schema extensions"
+    },
+    {
+      "label": "1.1 Update `prisma/schema.prisma`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_1_1_update_prisma_schema_prisma",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "1.1 update `prisma/schema.prisma`"
+    },
+    {
+      "label": "PHASE 2: PRODUCTION WORK ORDER PDF GENERATOR",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L218",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_2_production_work_order_pdf_generator",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 2: production work order pdf generator"
+    },
+    {
+      "label": "2.1 Create `lib/workOrderGenerator.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L220",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_2_1_create_lib_workordergenerator_ts",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "2.1 create `lib/workordergenerator.ts`"
+    },
+    {
+      "label": "PHASE 3: SUPPLIER PO AUTOMATION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L555",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_3_supplier_po_automation",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 3: supplier po automation"
+    },
+    {
+      "label": "3.1 Create `lib/supplierPOGenerator.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L557",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_3_1_create_lib_supplierpogenerator_ts",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "3.1 create `lib/supplierpogenerator.ts`"
+    },
+    {
+      "label": "3.2 Create `lib/supplierPOWorkflow.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L872",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_3_2_create_lib_supplierpoworkflow_ts",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "3.2 create `lib/supplierpoworkflow.ts`"
+    },
+    {
+      "label": "PHASE 4: WORK ORDER CREATION & MANAGEMENT",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L997",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_4_work_order_creation_management",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 4: work order creation & management"
+    },
+    {
+      "label": "4.1 Create `lib/workOrderWorkflow.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L999",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_4_1_create_lib_workorderworkflow_ts",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "4.1 create `lib/workorderworkflow.ts`"
+    },
+    {
+      "label": "PHASE 5: API ENDPOINTS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1108",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_5_api_endpoints",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 5: api endpoints"
+    },
+    {
+      "label": "5.1 Create `app/api/admin/work-orders/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1110",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_5_1_create_app_api_admin_work_orders_route_ts",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "5.1 create `app/api/admin/work-orders/route.ts`"
+    },
+    {
+      "label": "PHASE 6: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1171",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_phase_6_validation_checklist",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "phase 6: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1188",
+      "_origin": "ast",
+      "id": "docs_agent_5_production_supplier_execution_rules_non_negotiable",
+      "community": 152,
+      "community_name": "AGENT 5 \u2014 PRODUCTION & SUPPLIER AUTOMATION",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_6_RBAC_NOTIFICATIONS.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "agent_6_rbac_notifications.md"
+    },
+    {
+      "label": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "agent 6 \u2014 rbac & real-time notifications"
+    },
+    {
+      "label": "PHASE 1: RBAC DATABASE SCHEMA",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_1_rbac_database_schema",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 1: rbac database schema"
+    },
+    {
+      "label": "1.1 Update `prisma/schema.prisma`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_1_1_update_prisma_schema_prisma",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "1.1 update `prisma/schema.prisma`"
+    },
+    {
+      "label": "1.2 Run Migration",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L138",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_1_2_run_migration",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "1.2 run migration"
+    },
+    {
+      "label": "PHASE 2: RBAC MIDDLEWARE & HELPERS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L147",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_2_rbac_middleware_helpers",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 2: rbac middleware & helpers"
+    },
+    {
+      "label": "2.1 Create `lib/rbac.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L149",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_2_1_create_lib_rbac_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "2.1 create `lib/rbac.ts`"
+    },
+    {
+      "label": "2.2 Create `middleware/rbac.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L263",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_2_2_create_middleware_rbac_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "2.2 create `middleware/rbac.ts`"
+    },
+    {
+      "label": "PHASE 3: REAL-TIME NOTIFICATIONS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L394",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_3_real_time_notifications",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 3: real-time notifications"
+    },
+    {
+      "label": "3.1 Create `lib/notifications.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L396",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_3_1_create_lib_notifications_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "3.1 create `lib/notifications.ts`"
+    },
+    {
+      "label": "3.2 Create `app/api/notifications/subscribe/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L497",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_3_2_create_app_api_notifications_subscribe_route_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "3.2 create `app/api/notifications/subscribe/route.ts`"
+    },
+    {
+      "label": "3.3 Create `lib/notificationHooks.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L566",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_3_3_create_lib_notificationhooks_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "3.3 create `lib/notificationhooks.ts`"
+    },
+    {
+      "label": "PHASE 4: NOTIFICATION UI COMPONENT",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_4_notification_ui_component",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 4: notification ui component"
+    },
+    {
+      "label": "4.1 Create `components/admin/NotificationCenter.tsx`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L640",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_4_1_create_components_admin_notificationcenter_tsx",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "4.1 create `components/admin/notificationcenter.tsx`"
+    },
+    {
+      "label": "PHASE 5: SEED RBAC DATA",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L738",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_5_seed_rbac_data",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 5: seed rbac data"
+    },
+    {
+      "label": "5.1 Update `prisma/seed.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L740",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_5_1_update_prisma_seed_ts",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "5.1 update `prisma/seed.ts`"
+    },
+    {
+      "label": "PHASE 6: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L810",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_phase_6_validation_checklist",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "phase 6: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L827",
+      "_origin": "ast",
+      "id": "docs_agent_6_rbac_notifications_execution_rules_non_negotiable",
+      "community": 149,
+      "community_name": "AGENT 6 \u2014 RBAC & REAL-TIME NOTIFICATIONS",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_7_EMAIL_COMMUNICATION.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "agent_7_email_communication.md"
+    },
+    {
+      "label": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "agent 7 \u2014 email & communication automation"
+    },
+    {
+      "label": "PHASE 1: EMAIL TEMPLATE SYSTEM",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_phase_1_email_template_system",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "phase 1: email template system"
+    },
+    {
+      "label": "1.1 Create `lib/emailTemplates.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_1_1_create_lib_emailtemplates_ts",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "1.1 create `lib/emailtemplates.ts`"
+    },
+    {
+      "label": "PHASE 2: RESEND INTEGRATION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L311",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_phase_2_resend_integration",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "phase 2: resend integration"
+    },
+    {
+      "label": "2.1 Create `lib/emailService.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L313",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_2_1_create_lib_emailservice_ts",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "2.1 create `lib/emailservice.ts`"
+    },
+    {
+      "label": "PHASE 3: SUPPORT TICKET SYSTEM",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L479",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_phase_3_support_ticket_system",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "phase 3: support ticket system"
+    },
+    {
+      "label": "3.1 Update `prisma/schema.prisma`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L481",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_3_1_update_prisma_schema_prisma",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "3.1 update `prisma/schema.prisma`"
+    },
+    {
+      "label": "3.2 Create `app/api/support/tickets/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L543",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_3_2_create_app_api_support_tickets_route_ts",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "3.2 create `app/api/support/tickets/route.ts`"
+    },
+    {
+      "label": "PHASE 4: EMAIL HOOKS INTO WORKFLOWS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_phase_4_email_hooks_into_workflows",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "phase 4: email hooks into workflows"
+    },
+    {
+      "label": "4.1 Create `lib/emailHooks.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L640",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_4_1_create_lib_emailhooks_ts",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "4.1 create `lib/emailhooks.ts`"
+    },
+    {
+      "label": "PHASE 5: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L749",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_phase_5_validation_checklist",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "phase 5: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L766",
+      "_origin": "ast",
+      "id": "docs_agent_7_email_communication_execution_rules_non_negotiable",
+      "community": 154,
+      "community_name": "AGENT 7 \u2014 EMAIL & COMMUNICATION AUTOMATION",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_8_ANALYTICS_REPORTING.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "agent_8_analytics_reporting.md"
+    },
+    {
+      "label": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "agent 8 \u2014 analytics & reporting dashboard"
+    },
+    {
+      "label": "PHASE 1: ANALYTICS DATA LAYER",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_phase_1_analytics_data_layer",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "phase 1: analytics data layer"
+    },
+    {
+      "label": "1.1 Create `lib/analytics.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_1_1_create_lib_analytics_ts",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "1.1 create `lib/analytics.ts`"
+    },
+    {
+      "label": "PHASE 2: DASHBOARD API ENDPOINTS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L300",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_phase_2_dashboard_api_endpoints",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "phase 2: dashboard api endpoints"
+    },
+    {
+      "label": "2.1 Create `app/api/admin/analytics/dashboard/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L302",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_2_1_create_app_api_admin_analytics_dashboard_route_ts",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "2.1 create `app/api/admin/analytics/dashboard/route.ts`"
+    },
+    {
+      "label": "2.2 Create `app/api/admin/analytics/export/route.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L364",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_2_2_create_app_api_admin_analytics_export_route_ts",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "2.2 create `app/api/admin/analytics/export/route.ts`"
+    },
+    {
+      "label": "PHASE 3: REPORTING COMPONENTS",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L467",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_phase_3_reporting_components",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "phase 3: reporting components"
+    },
+    {
+      "label": "3.1 Create `components/admin/AnalyticsDashboard.tsx`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L469",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_3_1_create_components_admin_analyticsdashboard_tsx",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "3.1 create `components/admin/analyticsdashboard.tsx`"
+    },
+    {
+      "label": "PHASE 4: SCHEDULED REPORT GENERATION",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L635",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_phase_4_scheduled_report_generation",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "phase 4: scheduled report generation"
+    },
+    {
+      "label": "4.1 Create `lib/reportScheduler.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L637",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_4_1_create_lib_reportscheduler_ts",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "4.1 create `lib/reportscheduler.ts`"
+    },
+    {
+      "label": "PHASE 5: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L684",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_phase_5_validation_checklist",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "phase 5: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L701",
+      "_origin": "ast",
+      "id": "docs_agent_8_analytics_reporting_execution_rules_non_negotiable",
+      "community": 155,
+      "community_name": "AGENT 8 \u2014 ANALYTICS & REPORTING DASHBOARD",
+      "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
+    },
+    {
+      "label": "AGENT_9_INVENTORY_MANAGEMENT.md",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "agent_9_inventory_management.md"
+    },
+    {
+      "label": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "agent 9 \u2014 advanced inventory management"
+    },
+    {
+      "label": "PHASE 1: INVENTORY MODELS & AUDIT",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_phase_1_inventory_models_audit",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "phase 1: inventory models & audit"
+    },
+    {
+      "label": "1.1 Update `prisma/schema.prisma`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_1_1_update_prisma_schema_prisma",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "1.1 update `prisma/schema.prisma`"
+    },
+    {
+      "label": "PHASE 2: INVENTORY FORECASTING",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L157",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_phase_2_inventory_forecasting",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "phase 2: inventory forecasting"
+    },
+    {
+      "label": "2.1 Create `lib/inventoryForecasting.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_2_1_create_lib_inventoryforecasting_ts",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "2.1 create `lib/inventoryforecasting.ts`"
+    },
+    {
+      "label": "PHASE 3: INVENTORY AUDIT & TRACKING",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L272",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_phase_3_inventory_audit_tracking",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "phase 3: inventory audit & tracking"
+    },
+    {
+      "label": "3.1 Create `lib/inventoryAudit.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L274",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_3_1_create_lib_inventoryaudit_ts",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "3.1 create `lib/inventoryaudit.ts`"
+    },
+    {
+      "label": "PHASE 4: SUPPLIER SLA MONITORING",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_phase_4_supplier_sla_monitoring",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "phase 4: supplier sla monitoring"
+    },
+    {
+      "label": "4.1 Create `lib/slaMonitoring.ts`",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L367",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_4_1_create_lib_slamonitoring_ts",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "4.1 create `lib/slamonitoring.ts`"
+    },
+    {
+      "label": "PHASE 5: VALIDATION CHECKLIST",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L446",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_phase_5_validation_checklist",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
+      "norm_label": "phase 5: validation checklist"
+    },
+    {
+      "label": "\ud83c\udfaf EXECUTION RULES (NON-NEGOTIABLE)",
+      "file_type": "document",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L462",
+      "_origin": "ast",
+      "id": "docs_agent_9_inventory_management_execution_rules_non_negotiable",
+      "community": 157,
+      "community_name": "AGENT 9 \u2014 ADVANCED INVENTORY MANAGEMENT",
       "norm_label": "\ud83c\udfaf execution rules (non-negotiable)"
     },
     {
@@ -12506,8 +13848,8 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "lib_moqvalidation_validateordermoq",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 82,
+      "community_name": "admin/orders/page.tsx",
       "norm_label": "validateordermoq"
     },
     {
@@ -15666,6 +17008,40 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_orders_orderid_milestones_route",
+      "target": "app_api_admin_orders_orderid_milestones_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_orders_orderid_milestones_route",
+      "target": "app_api_admin_orders_orderid_milestones_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/orders/[orderId]/milestones/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_orders_orderid_milestones_route",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "app/api/admin/orders/[orderId]/route.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -15827,6 +17203,88 @@
       "_origin": "ast",
       "source": "app_api_admin_session_route_get",
       "target": "lib_adminauth_verifyadminrequest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_route",
+      "target": "app_api_admin_suppliers_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_route",
+      "target": "app_api_admin_suppliers_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_route",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/suppliers.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_suppliers_test",
+      "target": "app_api_admin_suppliers_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/suppliers.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_suppliers_test",
+      "target": "app_api_admin_suppliers_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/suppliers.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_suppliers_test",
+      "target": "app_api_admin_suppliers_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/suppliers/suppliers.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_suppliers_suppliers_test",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -28607,6 +30065,111 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation_test",
+      "target": "lib_inventoryreservation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation_test",
+      "target": "lib_inventoryreservation_releaseexpiredreservations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation_test",
+      "target": "lib_inventoryreservation_reservestockfororder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation_test",
+      "target": "lib_inventoryreservation_stockreservationstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation_test",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation",
+      "target": "lib_inventoryreservation_releaseexpiredreservations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation",
+      "target": "lib_inventoryreservation_reservestockfororder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation",
+      "target": "lib_inventoryreservation_stockreservationstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inventoryReservation.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_inventoryreservation",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
@@ -28926,6 +30489,39 @@
       "_origin": "ast",
       "source": "lib_moqvalidation_validatehybridmoq",
       "target": "lib_moqvalidation_validatemultimaterialmoq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_notifications",
+      "target": "lib_notifications_createnotification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_notifications",
+      "target": "lib_notifications_logaudittrail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/notifications.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_notifications",
+      "target": "lib_notifications_prisma",
       "confidence_score": 1.0
     },
     {
@@ -29434,6 +31030,76 @@
       "_origin": "ast",
       "source": "lib_prisma",
       "target": "lib_prisma_globalforprisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac_test",
+      "target": "lib_rbac",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac_test",
+      "target": "lib_rbac_hasrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac_test",
+      "target": "lib_rbac_requirerole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac",
+      "target": "lib_rbac_hasrole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac",
+      "target": "lib_rbac_requirerole",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/rbac.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_rbac_requirerole",
+      "target": "lib_rbac_hasrole",
       "confidence_score": 1.0
     },
     {
@@ -31206,6 +32872,171 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L397",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_1_stripe_webhook_robustness",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_2_zapier_make_com_integration_points",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L237",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_3_edi_supplier_apis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L303",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_4_accounting_sync_quickbooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L345",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_5_integration_models",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_agent_10_api_integrations",
+      "target": "docs_agent_10_api_integrations_phase_6_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_1_stripe_webhook_robustness",
+      "target": "docs_agent_10_api_integrations_1_1_update_app_api_payment_webhook_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_1_stripe_webhook_robustness",
+      "target": "docs_agent_10_api_integrations_1_2_add_webhook_log_model_to_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_2_zapier_make_com_integration_points",
+      "target": "docs_agent_10_api_integrations_2_1_create_app_api_integrations_webhooks_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L192",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_2_zapier_make_com_integration_points",
+      "target": "docs_agent_10_api_integrations_2_2_create_lib_externalwebhooks_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L239",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_3_edi_supplier_apis",
+      "target": "docs_agent_10_api_integrations_3_1_create_lib_suppliers_ediadapter_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L305",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_4_accounting_sync_quickbooks",
+      "target": "docs_agent_10_api_integrations_4_1_create_lib_accounting_quickbookssync_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_10_API_INTEGRATIONS.md",
+      "source_location": "L347",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_10_api_integrations_phase_5_integration_models",
+      "target": "docs_agent_10_api_integrations_5_1_add_to_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "docs/AGENT_1_MULTI_MATERIAL_ARCHITECTURE.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -31784,6 +33615,886 @@
       "_origin": "ast",
       "source": "docs_agent_3_configurator_updates_phase_5_type_definitions",
       "target": "docs_agent_3_configurator_updates_5_1_update_or_create_lib_types_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory",
+      "target": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L986",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_1_proforma_pdf_generator_updates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L546",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_2_inventory_deduction_on_payment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L851",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_3_proforma_generation_on_price_lock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L891",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_4_schema_updates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L958",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_5_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L975",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_agent_4_proforma_pdf_inventory_deduction",
+      "target": "docs_agent_4_proforma_inventory_phase_6_todo_for_later_after_agent_5_6",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_1_proforma_pdf_generator_updates",
+      "target": "docs_agent_4_proforma_inventory_1_1_update_lib_pdfgenerator_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L438",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_1_proforma_pdf_generator_updates",
+      "target": "docs_agent_4_proforma_inventory_1_2_update_app_api_proforma_pdf_orderid_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L548",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_2_inventory_deduction_on_payment",
+      "target": "docs_agent_4_proforma_inventory_2_1_create_lib_inventorydeduction_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L717",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_2_inventory_deduction_on_payment",
+      "target": "docs_agent_4_proforma_inventory_2_2_update_app_api_payment_webhook_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L853",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_3_proforma_generation_on_price_lock",
+      "target": "docs_agent_4_proforma_inventory_3_1_update_app_api_admin_orders_orderid_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_4_PROFORMA_INVENTORY.md",
+      "source_location": "L893",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_4_proforma_inventory_phase_4_schema_updates",
+      "target": "docs_agent_4_proforma_inventory_4_1_extend_prisma_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier",
+      "target": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1188",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_1_database_schema_extensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L218",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_2_production_work_order_pdf_generator",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L555",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_3_supplier_po_automation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L997",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_4_work_order_creation_management",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1108",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_5_api_endpoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1171",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_agent_5_production_supplier_automation",
+      "target": "docs_agent_5_production_supplier_phase_6_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_1_database_schema_extensions",
+      "target": "docs_agent_5_production_supplier_1_1_update_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L220",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_2_production_work_order_pdf_generator",
+      "target": "docs_agent_5_production_supplier_2_1_create_lib_workordergenerator_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L557",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_3_supplier_po_automation",
+      "target": "docs_agent_5_production_supplier_3_1_create_lib_supplierpogenerator_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L872",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_3_supplier_po_automation",
+      "target": "docs_agent_5_production_supplier_3_2_create_lib_supplierpoworkflow_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L999",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_4_work_order_creation_management",
+      "target": "docs_agent_5_production_supplier_4_1_create_lib_workorderworkflow_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_5_PRODUCTION_SUPPLIER.md",
+      "source_location": "L1110",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_5_production_supplier_phase_5_api_endpoints",
+      "target": "docs_agent_5_production_supplier_5_1_create_app_api_admin_work_orders_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications",
+      "target": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L827",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_1_rbac_database_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_2_rbac_middleware_helpers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L394",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_3_real_time_notifications",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_4_notification_ui_component",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L738",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_5_seed_rbac_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L810",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_agent_6_rbac_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_phase_6_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_1_rbac_database_schema",
+      "target": "docs_agent_6_rbac_notifications_1_1_update_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_1_rbac_database_schema",
+      "target": "docs_agent_6_rbac_notifications_1_2_run_migration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_2_rbac_middleware_helpers",
+      "target": "docs_agent_6_rbac_notifications_2_1_create_lib_rbac_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L263",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_2_rbac_middleware_helpers",
+      "target": "docs_agent_6_rbac_notifications_2_2_create_middleware_rbac_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L396",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_3_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_3_1_create_lib_notifications_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L497",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_3_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_3_2_create_app_api_notifications_subscribe_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L566",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_3_real_time_notifications",
+      "target": "docs_agent_6_rbac_notifications_3_3_create_lib_notificationhooks_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L640",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_4_notification_ui_component",
+      "target": "docs_agent_6_rbac_notifications_4_1_create_components_admin_notificationcenter_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_6_RBAC_NOTIFICATIONS.md",
+      "source_location": "L740",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_6_rbac_notifications_phase_5_seed_rbac_data",
+      "target": "docs_agent_6_rbac_notifications_5_1_update_prisma_seed_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication",
+      "target": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L766",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_phase_1_email_template_system",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L311",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_phase_2_resend_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L479",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_phase_3_support_ticket_system",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_phase_4_email_hooks_into_workflows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L749",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_agent_7_email_communication_automation",
+      "target": "docs_agent_7_email_communication_phase_5_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_phase_1_email_template_system",
+      "target": "docs_agent_7_email_communication_1_1_create_lib_emailtemplates_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L313",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_phase_2_resend_integration",
+      "target": "docs_agent_7_email_communication_2_1_create_lib_emailservice_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L481",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_phase_3_support_ticket_system",
+      "target": "docs_agent_7_email_communication_3_1_update_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L543",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_phase_3_support_ticket_system",
+      "target": "docs_agent_7_email_communication_3_2_create_app_api_support_tickets_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_7_EMAIL_COMMUNICATION.md",
+      "source_location": "L640",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_7_email_communication_phase_4_email_hooks_into_workflows",
+      "target": "docs_agent_7_email_communication_4_1_create_lib_emailhooks_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting",
+      "target": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L701",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_phase_1_analytics_data_layer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L300",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_phase_2_dashboard_api_endpoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L467",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_phase_3_reporting_components",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L635",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_phase_4_scheduled_report_generation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L684",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_agent_8_analytics_reporting_dashboard",
+      "target": "docs_agent_8_analytics_reporting_phase_5_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_phase_1_analytics_data_layer",
+      "target": "docs_agent_8_analytics_reporting_1_1_create_lib_analytics_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_phase_2_dashboard_api_endpoints",
+      "target": "docs_agent_8_analytics_reporting_2_1_create_app_api_admin_analytics_dashboard_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L364",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_phase_2_dashboard_api_endpoints",
+      "target": "docs_agent_8_analytics_reporting_2_2_create_app_api_admin_analytics_export_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L469",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_phase_3_reporting_components",
+      "target": "docs_agent_8_analytics_reporting_3_1_create_components_admin_analyticsdashboard_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_8_ANALYTICS_REPORTING.md",
+      "source_location": "L637",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_8_analytics_reporting_phase_4_scheduled_report_generation",
+      "target": "docs_agent_8_analytics_reporting_4_1_create_lib_reportscheduler_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management",
+      "target": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L462",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_execution_rules_non_negotiable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_phase_1_inventory_models_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_phase_2_inventory_forecasting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L272",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_phase_3_inventory_audit_tracking",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_phase_4_supplier_sla_monitoring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L446",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_agent_9_advanced_inventory_management",
+      "target": "docs_agent_9_inventory_management_phase_5_validation_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_phase_1_inventory_models_audit",
+      "target": "docs_agent_9_inventory_management_1_1_update_prisma_schema_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_phase_2_inventory_forecasting",
+      "target": "docs_agent_9_inventory_management_2_1_create_lib_inventoryforecasting_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L274",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_phase_3_inventory_audit_tracking",
+      "target": "docs_agent_9_inventory_management_3_1_create_lib_inventoryaudit_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/AGENT_9_INVENTORY_MANAGEMENT.md",
+      "source_location": "L367",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_agent_9_inventory_management_phase_4_supplier_sla_monitoring",
+      "target": "docs_agent_9_inventory_management_4_1_create_lib_slamonitoring_ts",
       "confidence_score": 1.0
     },
     {
@@ -34234,5 +36945,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b152f3700b6fad353d22e22c5e0a2750376036e6"
+  "built_at_commit": "9d2369cd609db59302348a80d757b05162c657ed"
 }

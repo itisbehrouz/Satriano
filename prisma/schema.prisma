@@ -644,3 +644,34 @@ model LowStockAlert {
   @@index([acknowledged])
 }
 
+model WebhookLog {
+  id            String   @id @default(cuid())
+  stripeEventId String   @unique
+  eventType     String
+  processed     Boolean  @default(false)
+  errorMessage  String?
+  rawPayload    String?
+  createdAt     DateTime @default(now())
+
+  @@index([eventType])
+}
+
+model ExternalWebhook {
+  id        String   @id @default(cuid())
+  url       String
+  event     String
+  secret    String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([event])
+}
+
+model IntegrationConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

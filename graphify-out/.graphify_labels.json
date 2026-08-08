@@ -165,5 +165,9 @@
   "163": "LogoUploader.tsx",
   "164": "notifications.ts",
   "165": "rbac.ts",
-  "166": "[imageId]/route.ts"
+  "166": "[imageId]/route.ts",
+  "167": "analytics.ts",
+  "168": "applications/route.ts",
+  "169": "inventoryForecasting.ts",
+  "170": "api/upload/route.ts"
 }
