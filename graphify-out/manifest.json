@@ -1653,5 +1653,80 @@
     "mtime": 1786145476.288396,
     "ast_hash": "818b518e5f9fc75ca5c8886209092b35",
     "semantic_hash": ""
+  },
+  "app/api/admin/orders/[orderId]/milestones/route.ts": {
+    "mtime": 1786146743.432796,
+    "ast_hash": "cc09fbdaac4403340241fa175a283fdb",
+    "semantic_hash": ""
+  },
+  "app/api/admin/suppliers/route.ts": {
+    "mtime": 1786146743.4288387,
+    "ast_hash": "84467303fbcd78346015d3082aadfcdd",
+    "semantic_hash": ""
+  },
+  "app/api/admin/suppliers/suppliers.test.ts": {
+    "mtime": 1786146743.4284365,
+    "ast_hash": "ca67d9c65659db8ad2f4accd1212c8f3",
+    "semantic_hash": ""
+  },
+  "lib/inventoryReservation.test.ts": {
+    "mtime": 1786146785.3551416,
+    "ast_hash": "ccea5055b4774f1d7cac947f6db456bf",
+    "semantic_hash": ""
+  },
+  "lib/inventoryReservation.ts": {
+    "mtime": 1786146771.7257595,
+    "ast_hash": "cef3d7ad68c6fbe6f8b453a51108f0bc",
+    "semantic_hash": ""
+  },
+  "lib/notifications.ts": {
+    "mtime": 1786146743.440695,
+    "ast_hash": "b87504ba25fce5c84774c297f48fc63a",
+    "semantic_hash": ""
+  },
+  "lib/rbac.test.ts": {
+    "mtime": 1786146743.436599,
+    "ast_hash": "a81bf100c2b0d6084f9a65856f6faf17",
+    "semantic_hash": ""
+  },
+  "lib/rbac.ts": {
+    "mtime": 1786146743.4368355,
+    "ast_hash": "cfc642e77f70367d1d30d4a21fea45ea",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_10_API_INTEGRATIONS.md": {
+    "mtime": 1786146737.7028887,
+    "ast_hash": "5da978f4f3bfa43329a4f23d6833499d",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_4_PROFORMA_INVENTORY.md": {
+    "mtime": 1786146694.0794537,
+    "ast_hash": "ce5f449af48bce050945d7ed3b1f25f1",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_5_PRODUCTION_SUPPLIER.md": {
+    "mtime": 1786146708.1259608,
+    "ast_hash": "4f79f859ae7e6a1560120400f1f2638f",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_6_RBAC_NOTIFICATIONS.md": {
+    "mtime": 1786146716.1234527,
+    "ast_hash": "41b9a1e9e3e491657ebd6822bf02fb4e",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_7_EMAIL_COMMUNICATION.md": {
+    "mtime": 1786146721.3532603,
+    "ast_hash": "3088c846d11d86221c9cf4956c315ee3",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_8_ANALYTICS_REPORTING.md": {
+    "mtime": 1786146728.0773833,
+    "ast_hash": "1631c937817c8108cf838d214a213896",
+    "semantic_hash": ""
+  },
+  "docs/AGENT_9_INVENTORY_MANAGEMENT.md": {
+    "mtime": 1786146732.8497155,
+    "ast_hash": "2708f64c8e85729192d994b4932a38bd",
+    "semantic_hash": ""
   }
 }

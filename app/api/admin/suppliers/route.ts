@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const newSupplier = await prisma.supplier.create({
       data: {
-        name: data.name,
+        firmName: data.firmName || data.name || "Unnamed Supplier",
         contactPerson: data.contactPerson,
         email: data.email,
         phone: data.phone,

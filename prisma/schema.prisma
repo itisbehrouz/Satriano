@@ -51,6 +51,7 @@ model Company {
   updatedAt DateTime @updatedAt
 
   orders Order[]
+  supportTickets SupportTicket[]
 }
 
 model Category {
@@ -406,11 +407,15 @@ model Supplier {
   address       String?
   website       String?
   notes         String?
+  country       String?
+  leadTimeDays  Int?           @default(14)
+  active        Boolean        @default(true)
   status        SupplierStatus @default(PENDING_VERIFICATION)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
   wholesaleProducts WholesaleProduct[]
+  slas              SupplierSLA[]
 }
 
 model WholesaleProduct {
@@ -433,6 +438,10 @@ model WholesaleProduct {
 
   images WholesaleProductImage[]
   stock  WholesaleStock[]
+  forecasts InventoryForecast[]
+  policy    InventoryPolicy?
+  audits    InventoryAudit[]
+  lowStockAlerts LowStockAlert[]
 
   @@index([gender])
   @@index([ageGroup])
@@ -511,5 +520,127 @@ model AuditLog {
   createdAt    DateTime @default(now())
 
   @@index([adminEmail])
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum SupportTicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+model SupportTicket {
+  id           String                @id @default(cuid())
+  ticketNo     String                @unique
+  companyId    String?
+  company      Company?              @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  companyEmail String
+  subject      String
+  message      String
+  status       SupportTicketStatus   @default(OPEN)
+  priority     SupportTicketPriority @default(MEDIUM)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  messages TicketMessage[]
+
+  @@index([companyEmail])
+  @@index([status])
+}
+
+model TicketMessage {
+  id        String        @id @default(cuid())
+  ticketId  String
+  ticket    SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  sender    String
+  message   String
+  createdAt DateTime      @default(now())
+
+  @@index([ticketId])
+}
+
+model InventoryForecast {
+  id                     String           @id @default(cuid())
+  productId              String
+  product                WholesaleProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size                   String
+  forecastedDemand30Days Int
+  forecastedDemand90Days Int
+  historicalMovementRate Float
+  lastUpdated            DateTime         @default(now())
+
+  @@unique([productId, size])
+}
+
+model InventoryPolicy {
+  id                  String           @id @default(cuid())
+  productId           String           @unique
+  product             WholesaleProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  reorderPoint        Int
+  reorderQuantity     Int
+  safetyStock         Int
+  leadTimeDays        Int
+  autoReorderEnabled  Boolean          @default(false)
+  preferredSupplierId String?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+}
+
+model SupplierSLA {
+  id                      String   @id @default(cuid())
+  supplierId              String
+  supplier                Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  standardLeadTimeDays    Int
+  expeditedLeadTimeDays   Int?
+  expeditedCostMultiplier Float?
+  onTimeDeliveryTarget    Float
+  minOrderValue           Int
+  maxOrderValue           Int?
+  qualityAgreement        String?
+  paymentTerms            String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@index([supplierId])
+}
+
+model InventoryAudit {
+  id               String            @id @default(cuid())
+  productId        String
+  product          WholesaleProduct? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  size             String
+  action           String
+  quantityChanged  Int
+  previousQuantity Int
+  newQuantity      Int
+  reason           String?
+  reference        String?
+  performedBy      String
+  notes            String?
+  createdAt        DateTime          @default(now())
+
+  @@index([productId])
+}
+
+model LowStockAlert {
+  id               String            @id @default(cuid())
+  productId        String
+  product          WholesaleProduct? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size             String
+  currentQuantity  Int
+  threshold        Int
+  severity         String            @default("WARNING")
+  acknowledged     Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+
+  @@index([productId])
+  @@index([acknowledged])
 }
 

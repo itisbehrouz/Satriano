@@ -186,8 +186,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_orders_page",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "admin/orders/page.tsx"
     },
     {
@@ -197,8 +197,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_admin_orders_page_gettabs",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "gettabs()"
     },
     {
@@ -208,8 +208,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_admin_orders_page_adminorderscontent",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminorderscontent()"
     },
     {
@@ -219,8 +219,8 @@
       "source_location": "L261",
       "_origin": "ast",
       "id": "app_admin_orders_page_adminorderspage",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminorderspage()"
     },
     {
@@ -263,8 +263,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_admin_product_settings_page",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "product-settings/page.tsx"
     },
     {
@@ -274,8 +274,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_sizeoption",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "sizeoption"
     },
     {
@@ -285,8 +285,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_sizesystem",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "sizesystem"
     },
     {
@@ -296,8 +296,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_fitdef",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "fitdef"
     },
     {
@@ -307,8 +307,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_fabric",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "fabric"
     },
     {
@@ -318,8 +318,8 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_product",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "product"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_subcategory",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "subcategory"
     },
     {
@@ -340,8 +340,8 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_category",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "category"
     },
     {
@@ -351,8 +351,8 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_slugify",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "slugify()"
     },
     {
@@ -362,8 +362,8 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_productsettingscontent",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "productsettingscontent()"
     },
     {
@@ -373,8 +373,8 @@
       "source_location": "L1785",
       "_origin": "ast",
       "id": "app_admin_product_settings_page_adminproductsettingspage",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 109,
+      "community_name": "applications/route.ts",
       "norm_label": "adminproductsettingspage()"
     },
     {
@@ -483,8 +483,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_admin_test",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "admin.test.ts"
     },
     {
@@ -598,6 +598,39 @@
       "norm_label": "post()"
     },
     {
+      "label": "fabric/[id]/route.ts",
+      "file_type": "code",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_admin_catalog_fabric_id_route",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "fabric/[id]/route.ts"
+    },
+    {
+      "label": "JWT_SECRET",
+      "file_type": "code",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_api_admin_catalog_fabric_id_route_jwt_secret",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "jwt_secret"
+    },
+    {
+      "label": "PATCH()",
+      "file_type": "code",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "app_api_admin_catalog_fabric_id_route_patch",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "patch()"
+    },
+    {
       "label": "catalog/route.ts",
       "file_type": "code",
       "source_file": "app/api/admin/catalog/route.ts",
@@ -659,8 +692,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_catalog_upload_route",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "catalog/upload/route.ts"
     },
     {
@@ -670,8 +703,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_catalog_upload_route_allowed_types",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "allowed_types"
     },
     {
@@ -681,8 +714,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_api_admin_catalog_upload_route_post",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -692,8 +725,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_login_route",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "login/route.ts"
     },
     {
@@ -703,8 +736,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_login_route_post",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -736,8 +769,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "metrics/route.ts"
     },
     {
@@ -747,8 +780,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_admin_metrics_route_get",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "get()"
     },
     {
@@ -758,8 +791,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "orders/[orderid]/route.ts"
     },
     {
@@ -769,8 +802,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_orderid_route_patch",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "patch()"
     },
     {
@@ -780,8 +813,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_orders_route",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "admin/orders/route.ts"
     },
     {
@@ -791,8 +824,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_admin_orders_route_get",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -824,8 +857,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "[imageid]/route.ts"
     },
     {
@@ -835,8 +868,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_checkadminauth",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -846,8 +879,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_imageid_route_delete",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "delete()"
     },
     {
@@ -857,8 +890,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 146,
+      "community_name": "images/route.ts",
       "norm_label": "images/route.ts"
     },
     {
@@ -868,8 +901,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_checkadminauth",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 146,
+      "community_name": "images/route.ts",
       "norm_label": "checkadminauth()"
     },
     {
@@ -879,8 +912,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "app_api_admin_wholesale_products_id_images_route_post",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 146,
+      "community_name": "images/route.ts",
       "norm_label": "post()"
     },
     {
@@ -926,6 +959,17 @@
       "community": 96,
       "community_name": "products/[id]/route.ts",
       "norm_label": "patch()"
+    },
+    {
+      "label": "DELETE()",
+      "file_type": "code",
+      "source_file": "app/api/admin/wholesale/products/[id]/route.ts",
+      "source_location": "L160",
+      "_origin": "ast",
+      "id": "app_api_admin_wholesale_products_id_route_delete",
+      "community": 96,
+      "community_name": "products/[id]/route.ts",
+      "norm_label": "delete()"
     },
     {
       "label": "products.test.ts",
@@ -989,8 +1033,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "resend/route.ts"
     },
     {
@@ -1000,8 +1044,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_api_applications_id_resend_route_post",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1044,8 +1088,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route_test",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "applications/route.test.ts"
     },
     {
@@ -1055,8 +1099,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_applications_route",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "applications/route.ts"
     },
     {
@@ -1066,8 +1110,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_api_applications_route_post",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1077,8 +1121,8 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "app_api_applications_route_get",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -1154,8 +1198,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "support-ticket/route.ts"
     },
     {
@@ -1165,8 +1209,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_api_customer_support_ticket_route_post",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "post()"
     },
     {
@@ -1374,8 +1418,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "resend-verification/route.ts"
     },
     {
@@ -1385,8 +1429,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_portal_resend_verification_route_post",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
     },
     {
@@ -1506,8 +1550,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route_test",
-      "community": 102,
-      "community_name": "api/upload/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "upload/route.test.ts"
     },
     {
@@ -1517,8 +1561,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_api_upload_route",
-      "community": 102,
-      "community_name": "api/upload/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "api/upload/route.ts"
     },
     {
@@ -1528,8 +1572,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "app_api_upload_route_allowed_mime_types",
-      "community": 102,
-      "community_name": "api/upload/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "allowed_mime_types"
     },
     {
@@ -1539,9 +1583,31 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_api_upload_route_post",
-      "community": 102,
-      "community_name": "api/upload/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "post()"
+    },
+    {
+      "label": "filters/route.ts",
+      "file_type": "code",
+      "source_file": "app/api/wholesale/filters/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_api_wholesale_filters_route",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "filters/route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "app/api/wholesale/filters/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_api_wholesale_filters_route_get",
+      "community": 139,
+      "community_name": "prisma.ts",
+      "norm_label": "get()"
     },
     {
       "label": "[categoryId]/page.tsx",
@@ -1550,8 +1616,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_categories_categoryid_page",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "[categoryid]/page.tsx"
     },
     {
@@ -1561,8 +1627,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_categories_categoryid_page_pageprops",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "pageprops"
     },
     {
@@ -1572,8 +1638,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_categories_categoryid_page_category_images",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "category_images"
     },
     {
@@ -1583,8 +1649,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_categories_categoryid_page_categorydetailpage",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "categorydetailpage()"
     },
     {
@@ -1715,8 +1781,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_configure_page_configuredefaultpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "configuredefaultpage()"
     },
     {
@@ -1880,8 +1946,8 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "app_konfigurator_productid_page_productconfiguratorpage",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "productconfiguratorpage()"
     },
     {
@@ -2012,8 +2078,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_legal_ethics_page",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "ethics/page.tsx"
     },
     {
@@ -2023,8 +2089,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "app_legal_ethics_page_ethicspage",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "ethicspage()"
     },
     {
@@ -2287,8 +2353,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_email_verified_page",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "email-verified/page.tsx"
     },
     {
@@ -2298,8 +2364,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_email_verified_page_emailverifiedpage",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "emailverifiedpage()"
     },
     {
@@ -2331,8 +2397,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_layout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "portal/layout.tsx"
     },
     {
@@ -2342,8 +2408,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "app_portal_layout_portallayout",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "portallayout()"
     },
     {
@@ -2408,8 +2474,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_page",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portal/page.tsx"
     },
     {
@@ -2419,8 +2485,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "app_portal_page_portalview",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portalview"
     },
     {
@@ -2430,8 +2496,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "app_portal_page_portalpagecontent",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portalpagecontent()"
     },
     {
@@ -2441,8 +2507,8 @@
       "source_location": "L530",
       "_origin": "ast",
       "id": "app_portal_page_portalpage",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "portalpage()"
     },
     {
@@ -2474,8 +2540,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_portal_verify_email_route",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verify-email/route.ts"
     },
     {
@@ -2485,8 +2551,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "app_portal_verify_email_route_get",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "get()"
     },
     {
@@ -2617,8 +2683,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "wholesale/checkout/page.tsx"
     },
     {
@@ -2628,8 +2694,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "app_wholesale_checkout_page_wholesalecheckoutpage",
-      "community": 22,
-      "community_name": "Wholesalecheckoutclient Wholesalecheckoutclient() Wholesalecart",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "wholesalecheckoutpage()"
     },
     {
@@ -2716,8 +2782,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_orderstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "orderstatusbadge.tsx"
     },
     {
@@ -2727,8 +2793,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "components_orderstatusbadge_status_config",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "status_config"
     },
     {
@@ -2738,8 +2804,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "components_orderstatusbadge_orderstatusbadge",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "orderstatusbadge()"
     },
     {
@@ -3057,8 +3123,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_adminordertable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminordertable.tsx"
     },
     {
@@ -3068,8 +3134,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminorder",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminorder"
     },
     {
@@ -3079,8 +3145,8 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertableprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminordertableprops"
     },
     {
@@ -3090,8 +3156,8 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "components_admin_adminordertable_all_statuses",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "all_statuses"
     },
     {
@@ -3101,8 +3167,8 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "components_admin_adminordertable_adminordertable",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 102,
+      "community_name": "api/upload/route.ts",
       "norm_label": "adminordertable()"
     },
     {
@@ -3200,8 +3266,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_catalogimageuploader",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 145,
+      "community_name": "CatalogImageUploader.tsx",
       "norm_label": "catalogimageuploader.tsx"
     },
     {
@@ -3211,8 +3277,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_catalogimageuploader_catalogimageuploaderprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 145,
+      "community_name": "CatalogImageUploader.tsx",
       "norm_label": "catalogimageuploaderprops"
     },
     {
@@ -3222,8 +3288,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_catalogimageuploader_allowed_types",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 145,
+      "community_name": "CatalogImageUploader.tsx",
       "norm_label": "allowed_types"
     },
     {
@@ -3233,8 +3299,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "components_admin_catalogimageuploader_catalogimageuploader",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 145,
+      "community_name": "CatalogImageUploader.tsx",
       "norm_label": "catalogimageuploader()"
     },
     {
@@ -3244,8 +3310,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.test.tsx"
     },
     {
@@ -3255,8 +3321,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_test_mockmetricsdata",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "mockmetricsdata"
     },
     {
@@ -3266,8 +3332,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics.tsx"
     },
     {
@@ -3277,8 +3343,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetricsprops",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsprops"
     },
     {
@@ -3288,8 +3354,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "components_admin_dashboardmetrics_dashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetrics()"
     },
     {
@@ -3307,7 +3373,7 @@
       "label": "FabricColorPanelProps",
       "file_type": "code",
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "components_admin_fabriccolorpanel_fabriccolorpanelprops",
       "community": 5,
@@ -3318,7 +3384,7 @@
       "label": "FabricColorPanel()",
       "file_type": "code",
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "components_admin_fabriccolorpanel_fabriccolorpanel",
       "community": 5,
@@ -3414,14 +3480,58 @@
       "norm_label": "fabriccolortree()"
     },
     {
+      "label": "FabricPriceRangeEditor.tsx",
+      "file_type": "code",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_admin_fabricpricerangeeditor",
+      "community": 5,
+      "community_name": "Sizeoption Sizesystem Category",
+      "norm_label": "fabricpricerangeeditor.tsx"
+    },
+    {
+      "label": "FabricLike",
+      "file_type": "code",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_admin_fabricpricerangeeditor_fabriclike",
+      "community": 5,
+      "community_name": "Sizeoption Sizesystem Category",
+      "norm_label": "fabriclike"
+    },
+    {
+      "label": "FabricPriceRangeEditorProps",
+      "file_type": "code",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "components_admin_fabricpricerangeeditor_fabricpricerangeeditorprops",
+      "community": 5,
+      "community_name": "Sizeoption Sizesystem Category",
+      "norm_label": "fabricpricerangeeditorprops"
+    },
+    {
+      "label": "FabricPriceRangeEditor()",
+      "file_type": "code",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "components_admin_fabricpricerangeeditor_fabricpricerangeeditor",
+      "community": 5,
+      "community_name": "Sizeoption Sizesystem Category",
+      "norm_label": "fabricpricerangeeditor()"
+    },
+    {
       "label": "FabricPricingPanel.tsx",
       "file_type": "code",
       "source_file": "components/admin/FabricPricingPanel.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_fabricpricingpanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingpanel.tsx"
     },
     {
@@ -3431,8 +3541,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_fabricpricingpanel_fabricpricingpanelprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingpanelprops"
     },
     {
@@ -3442,8 +3552,8 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "components_admin_fabricpricingpanel_fabricpricingpanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingpanel()"
     },
     {
@@ -3453,8 +3563,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_fabricpricingtree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingtree.tsx"
     },
     {
@@ -3464,8 +3574,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_fabricpricingtree_fabricitem",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricitem"
     },
     {
@@ -3475,8 +3585,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_admin_fabricpricingtree_fabricpricingtreeprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingtreeprops"
     },
     {
@@ -3486,8 +3596,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_admin_fabricpricingtree_fabricpricingtree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 142,
+      "community_name": "FabricPricingPanel.tsx",
       "norm_label": "fabricpricingtree()"
     },
     {
@@ -3497,8 +3607,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_garmentfitspanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "garmentfitspanel.tsx"
     },
     {
@@ -3508,8 +3618,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "components_admin_garmentfitspanel_garmentfitspanelprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "garmentfitspanelprops"
     },
     {
@@ -3519,8 +3629,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_admin_garmentfitspanel_garmentfitspanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "garmentfitspanel()"
     },
     {
@@ -3629,8 +3739,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_productfittree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "productfittree.tsx"
     },
     {
@@ -3640,8 +3750,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_productfittree_fitdef",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "fitdef"
     },
     {
@@ -3651,8 +3761,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_admin_productfittree_fabric",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "fabric"
     },
     {
@@ -3662,8 +3772,8 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "components_admin_productfittree_product",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "product"
     },
     {
@@ -3673,8 +3783,8 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "components_admin_productfittree_subcategory",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "subcategory"
     },
     {
@@ -3684,8 +3794,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "components_admin_productfittree_category",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "category"
     },
     {
@@ -3695,8 +3805,8 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "components_admin_productfittree_productfittreeprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "productfittreeprops"
     },
     {
@@ -3706,8 +3816,8 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "components_admin_productfittree_productfittree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 140,
+      "community_name": "ProductFitTree.tsx",
       "norm_label": "productfittree()"
     },
     {
@@ -3717,8 +3827,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "regionalsizepanel.tsx"
     },
     {
@@ -3728,8 +3838,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel_sizeoption",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "sizeoption"
     },
     {
@@ -3739,8 +3849,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel_sizesystem",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "sizesystem"
     },
     {
@@ -3750,8 +3860,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel_categorywithsubcategories",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "categorywithsubcategories"
     },
     {
@@ -3761,8 +3871,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel_regionalsizepanelprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "regionalsizepanelprops"
     },
     {
@@ -3772,8 +3882,8 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "components_admin_regionalsizepanel_regionalsizepanel",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 143,
+      "community_name": "RegionalSizePanel.tsx",
       "norm_label": "regionalsizepanel()"
     },
     {
@@ -3783,8 +3893,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "regionalsizetree.tsx"
     },
     {
@@ -3794,8 +3904,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree_sizeoption",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "sizeoption"
     },
     {
@@ -3805,8 +3915,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree_sizesystem",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "sizesystem"
     },
     {
@@ -3816,8 +3926,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree_subcategorywithsizesystems",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "subcategorywithsizesystems"
     },
     {
@@ -3827,8 +3937,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree_regionalsizetreeprops",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "regionalsizetreeprops"
     },
     {
@@ -3838,8 +3948,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_admin_regionalsizetree_regionalsizetree",
-      "community": 5,
-      "community_name": "Sizeoption Sizesystem Category",
+      "community": 144,
+      "community_name": "RegionalSizeTree.tsx",
       "norm_label": "regionalsizetree()"
     },
     {
@@ -3896,6 +4006,72 @@
       "community": 7,
       "community_name": "Wholesale Admin Page",
       "norm_label": "adminwholesaleclient()"
+    },
+    {
+      "label": "DeleteWholesaleProductModal.tsx",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/DeleteWholesaleProductModal.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_deletewholesaleproductmodal",
+      "community": 147,
+      "community_name": "DeleteWholesaleProductModal.tsx",
+      "norm_label": "deletewholesaleproductmodal.tsx"
+    },
+    {
+      "label": "DeleteWholesaleProductModalProps",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/DeleteWholesaleProductModal.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_deletewholesaleproductmodal_deletewholesaleproductmodalprops",
+      "community": 147,
+      "community_name": "DeleteWholesaleProductModal.tsx",
+      "norm_label": "deletewholesaleproductmodalprops"
+    },
+    {
+      "label": "DeleteWholesaleProductModal()",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/DeleteWholesaleProductModal.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_deletewholesaleproductmodal_deletewholesaleproductmodal",
+      "community": 147,
+      "community_name": "DeleteWholesaleProductModal.tsx",
+      "norm_label": "deletewholesaleproductmodal()"
+    },
+    {
+      "label": "EditWholesaleProductModal.tsx",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/EditWholesaleProductModal.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_editwholesaleproductmodal",
+      "community": 148,
+      "community_name": "EditWholesaleProductModal.tsx",
+      "norm_label": "editwholesaleproductmodal.tsx"
+    },
+    {
+      "label": "EditWholesaleProductModalProps",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/EditWholesaleProductModal.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_editwholesaleproductmodal_editwholesaleproductmodalprops",
+      "community": 148,
+      "community_name": "EditWholesaleProductModal.tsx",
+      "norm_label": "editwholesaleproductmodalprops"
+    },
+    {
+      "label": "EditWholesaleProductModal()",
+      "file_type": "code",
+      "source_file": "components/admin/wholesale/EditWholesaleProductModal.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "components_admin_wholesale_editwholesaleproductmodal_editwholesaleproductmodal",
+      "community": 148,
+      "community_name": "EditWholesaleProductModal.tsx",
+      "norm_label": "editwholesaleproductmodal()"
     },
     {
       "label": "InventoryEditModal.tsx",
@@ -4748,7 +4924,7 @@
       "label": "ConfiguratorClientProps",
       "file_type": "code",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclientprops",
       "community": 100,
@@ -4759,11 +4935,11 @@
       "label": "ConfiguratorClient()",
       "file_type": "code",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "components_configurator_configuratorclient_configuratorclient",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "configuratorclient()"
     },
     {
@@ -5020,6 +5196,83 @@
       "norm_label": "logouploader()"
     },
     {
+      "label": "MaterialComponentSelector.tsx",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "materialcomponentselector.tsx"
+    },
+    {
+      "label": "MaterialSelection",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_materialselection",
+      "community": 25,
+      "community_name": "App Page Capabilities",
+      "norm_label": "materialselection"
+    },
+    {
+      "label": "AvailableFabricColor",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_availablefabriccolor",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "availablefabriccolor"
+    },
+    {
+      "label": "AvailableFabric",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_availablefabric",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "availablefabric"
+    },
+    {
+      "label": "MaterialComponentSelectorProps",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_materialcomponentselectorprops",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "materialcomponentselectorprops"
+    },
+    {
+      "label": "COMPONENT_LABELS",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_component_labels",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "component_labels"
+    },
+    {
+      "label": "MaterialComponentSelector()",
+      "file_type": "code",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "components_configurator_materialcomponentselector_materialcomponentselector",
+      "community": 100,
+      "community_name": "admin/orders/page.tsx",
+      "norm_label": "materialcomponentselector()"
+    },
+    {
       "label": "PriceSidebar.test.tsx",
       "file_type": "code",
       "source_file": "components/configurator/PriceSidebar.test.tsx",
@@ -5070,8 +5323,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizeqtytable.test.tsx"
     },
     {
@@ -5081,8 +5334,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_test_controlledsizeqtytable",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "controlledsizeqtytable()"
     },
     {
@@ -5092,8 +5345,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizeqtytable.tsx"
     },
     {
@@ -5103,8 +5356,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_sizeoptiondef",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizeoptiondef"
     },
     {
@@ -5125,8 +5378,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_sizeqtytableprops",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizeqtytableprops"
     },
     {
@@ -5136,8 +5389,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_default_alpha_sizes",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "default_alpha_sizes"
     },
     {
@@ -5147,8 +5400,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "components_configurator_sizeqtytable_sizeqtytable",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizeqtytable()"
     },
     {
@@ -5323,8 +5576,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_atelierlogo",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "atelierlogo.tsx"
     },
     {
@@ -5334,8 +5587,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "components_layout_atelierlogo_atelierlogoprops",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "atelierlogoprops"
     },
     {
@@ -5345,8 +5598,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "components_layout_atelierlogo_atelierlogo",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 93,
+      "community_name": "[orderId]/page.tsx",
       "norm_label": "atelierlogo()"
     },
     {
@@ -5609,8 +5862,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "components_layout_sitefooter",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "sitefooter.tsx"
     },
     {
@@ -5620,8 +5873,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "components_layout_sitefooter_navigation_links",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "navigation_links"
     },
     {
@@ -5631,8 +5884,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "components_layout_sitefooter_legal_compliance_links",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "legal_compliance_links"
     },
     {
@@ -5642,8 +5895,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_layout_sitefooter_quality_operations_links",
-      "community": 101,
-      "community_name": "CookieConsentModal.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "quality_operations_links"
     },
     {
@@ -5653,8 +5906,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "components_layout_sitefooter_sitefooter",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "sitefooter()"
     },
     {
@@ -5697,8 +5950,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "components_layout_siteheader_siteheader",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 23,
+      "community_name": "Categories Page Categoriespage()",
       "norm_label": "siteheader()"
     },
     {
@@ -6555,8 +6808,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "hooks_usecustomersession",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession.ts"
     },
     {
@@ -6566,8 +6819,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "hooks_usecustomersession_customersession",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "customersession"
     },
     {
@@ -6577,8 +6830,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "hooks_usecustomersession_usecustomersession",
-      "community": 93,
-      "community_name": "[orderId]/page.tsx",
+      "community": 25,
+      "community_name": "App Page Capabilities",
       "norm_label": "usecustomersession()"
     },
     {
@@ -6588,8 +6841,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminauth",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "adminauth.ts"
     },
     {
@@ -6599,8 +6852,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminauth_getadminaccesskey",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "getadminaccesskey()"
     },
     {
@@ -6610,8 +6863,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "lib_adminauth_getadminjwtsecret",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "getadminjwtsecret()"
     },
     {
@@ -6621,8 +6874,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadminkey",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifyadminkey()"
     },
     {
@@ -6632,8 +6885,8 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "lib_adminauth_createadmintoken",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "createadmintoken()"
     },
     {
@@ -6643,8 +6896,8 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "lib_adminauth_verifyadmintoken",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifyadmintoken()"
     },
     {
@@ -6665,8 +6918,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics_test",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminmetrics.test.ts"
     },
     {
@@ -6676,8 +6929,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_adminmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "adminmetrics.ts"
     },
     {
@@ -6687,8 +6940,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_adminmetrics_statusdistributionitem",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "statusdistributionitem"
     },
     {
@@ -6698,8 +6951,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_adminmetrics_dashboardmetricsdata",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "dashboardmetricsdata"
     },
     {
@@ -6709,8 +6962,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_adminmetrics_all_statuses",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "all_statuses"
     },
     {
@@ -6720,8 +6973,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "lib_adminmetrics_getadmindashboardmetrics",
-      "community": 6,
-      "community_name": "Page Admin Tabs",
+      "community": 10,
+      "community_name": "Page React Account",
       "norm_label": "getadmindashboardmetrics()"
     },
     {
@@ -6731,8 +6984,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_auth_customer_session",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "customer-session.ts"
     },
     {
@@ -6742,8 +6995,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_auth_customer_session_customersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "customersession"
     },
     {
@@ -6753,8 +7006,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "lib_auth_customer_session_getcustomersession",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "getcustomersession()"
     },
     {
@@ -6764,8 +7017,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_configuratorlogic_test",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "configuratorlogic.test.ts"
     },
     {
@@ -6775,8 +7028,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_configuratorlogic",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "configuratorlogic.ts"
     },
     {
@@ -6786,8 +7039,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "lib_configuratorlogic_size_codes",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "size_codes"
     },
     {
@@ -6797,8 +7050,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_configuratorlogic_sizecode",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizecode"
     },
     {
@@ -6808,8 +7061,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "lib_configuratorlogic_sizequantities",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sizequantities"
     },
     {
@@ -6819,8 +7072,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_configuratorlogic_default_size_quantities",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "default_size_quantities"
     },
     {
@@ -6830,8 +7083,8 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "lib_configuratorlogic_parsequantityinput",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "parsequantityinput()"
     },
     {
@@ -6841,8 +7094,8 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "lib_configuratorlogic_sumquantities",
-      "community": 1,
-      "community_name": "Page Default Size",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "sumquantities()"
     },
     {
@@ -6852,8 +7105,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "lib_configuratorlogic_tosizequantityarray",
-      "community": 100,
-      "community_name": "admin/orders/page.tsx",
+      "community": 99,
+      "community_name": "images/route.ts",
       "norm_label": "tosizequantityarray()"
     },
     {
@@ -6896,8 +7149,8 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "lib_customerauth_verifycustomertoken",
-      "community": 0,
-      "community_name": "Route Post() Get()",
+      "community": 141,
+      "community_name": "verifyCustomerToken",
       "norm_label": "verifycustomertoken()"
     },
     {
@@ -6984,8 +7237,8 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "lib_email_sendverificationemail",
-      "community": 105,
-      "community_name": "email.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "sendverificationemail()"
     },
     {
@@ -7080,7 +7333,7 @@
       "label": "M2OCartItem",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L3",
+      "source_location": "L4",
       "_origin": "ast",
       "id": "lib_m2ocart_m2ocartitem",
       "community": 25,
@@ -7088,10 +7341,21 @@
       "norm_label": "m2ocartitem"
     },
     {
-      "label": "getM2OCart()",
+      "label": "M2oCart",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
       "source_location": "L23",
+      "_origin": "ast",
+      "id": "lib_m2ocart_m2ocart",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "m2ocart"
+    },
+    {
+      "label": "getM2OCart()",
+      "file_type": "code",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "lib_m2ocart_getm2ocart",
       "community": 25,
@@ -7102,7 +7366,7 @@
       "label": "saveM2OCart()",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L34",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "lib_m2ocart_savem2ocart",
       "community": 25,
@@ -7113,7 +7377,7 @@
       "label": "addToM2OCart()",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L44",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "lib_m2ocart_addtom2ocart",
       "community": 25,
@@ -7124,7 +7388,7 @@
       "label": "removeFromM2OCart()",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L50",
+      "source_location": "L61",
       "_origin": "ast",
       "id": "lib_m2ocart_removefromm2ocart",
       "community": 25,
@@ -7135,12 +7399,23 @@
       "label": "clearM2OCart()",
       "file_type": "code",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L55",
+      "source_location": "L66",
       "_origin": "ast",
       "id": "lib_m2ocart_clearm2ocart",
       "community": 25,
       "community_name": "App Page Capabilities",
       "norm_label": "clearm2ocart()"
+    },
+    {
+      "label": "convertM2oCartToOrderPayload()",
+      "file_type": "code",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L76",
+      "_origin": "ast",
+      "id": "lib_m2ocart_convertm2ocarttoorderpayload",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "convertm2ocarttoorderpayload()"
     },
     {
       "label": "moqValidation.test.ts",
@@ -7262,6 +7537,39 @@
       "community": 1,
       "community_name": "Page Default Size",
       "norm_label": "convertlegacytomultimaterial()"
+    },
+    {
+      "label": "orderSubmission.ts",
+      "file_type": "code",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_ordersubmission",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "ordersubmission.ts"
+    },
+    {
+      "label": "submitM2oOrder()",
+      "file_type": "code",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_ordersubmission_submitm2oorder",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "submitm2oorder()"
+    },
+    {
+      "label": "submitWholesaleOrder()",
+      "file_type": "code",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "lib_ordersubmission_submitwholesaleorder",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "submitwholesaleorder()"
     },
     {
       "label": "orderValidation.test.ts",
@@ -7501,8 +7809,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_prisma",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "prisma.ts"
     },
     {
@@ -7512,8 +7820,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "lib_prisma_globalforprisma",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "globalforprisma"
     },
     {
@@ -7523,8 +7831,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "lib_prisma_createprismaclient",
-      "community": 95,
-      "community_name": "payment.test.ts",
+      "community": 139,
+      "community_name": "prisma.ts",
       "norm_label": "createprismaclient()"
     },
     {
@@ -7545,8 +7853,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_supabase",
-      "community": 14,
-      "community_name": "Proforma Route Post()",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "supabase.ts"
     },
     {
@@ -7556,8 +7864,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_turnstile_test",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "turnstile.test.ts"
     },
     {
@@ -7567,8 +7875,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lib_turnstile",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "turnstile.ts"
     },
     {
@@ -7578,8 +7886,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "lib_turnstile_turnstileverifyresult",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "turnstileverifyresult"
     },
     {
@@ -7589,8 +7897,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "lib_turnstile_verifyturnstiletoken",
-      "community": 109,
-      "community_name": "applications/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "verifyturnstiletoken()"
     },
     {
@@ -7638,15 +7946,37 @@
       "norm_label": "orderlinemultimaterial"
     },
     {
-      "label": "CreateMultiMaterialOrderPayload",
+      "label": "CreateM2oOrderPayload",
       "file_type": "code",
       "source_file": "lib/types.ts",
       "source_location": "L32",
+      "_origin": "ast",
+      "id": "lib_types_createm2oorderpayload",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "createm2oorderpayload"
+    },
+    {
+      "label": "CreateMultiMaterialOrderPayload",
+      "file_type": "code",
+      "source_file": "lib/types.ts",
+      "source_location": "L48",
       "_origin": "ast",
       "id": "lib_types_createmultimaterialorderpayload",
       "community": 1,
       "community_name": "Page Default Size",
       "norm_label": "createmultimaterialorderpayload"
+    },
+    {
+      "label": "CreateWholesaleOrderPayload",
+      "file_type": "code",
+      "source_file": "lib/types.ts",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "lib_types_createwholesaleorderpayload",
+      "community": 1,
+      "community_name": "Page Default Size",
+      "norm_label": "createwholesaleorderpayload"
     },
     {
       "label": "wholesaleCart.ts",
@@ -7732,8 +8062,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "middleware",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "middleware.ts"
     },
     {
@@ -7743,8 +8073,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "middleware_middleware",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "middleware()"
     },
     {
@@ -7754,8 +8084,8 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "middleware_config",
-      "community": 99,
-      "community_name": "images/route.ts",
+      "community": 4,
+      "community_name": "Route Post() Get()",
       "norm_label": "config"
     },
     {
@@ -14903,6 +15233,40 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_catalog_fabric_id_route",
+      "target": "app_api_admin_catalog_fabric_id_route_jwt_secret",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_catalog_fabric_id_route",
+      "target": "app_api_admin_catalog_fabric_id_route_patch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/catalog/fabric/[id]/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_catalog_fabric_id_route",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "app/api/admin/catalog/route.ts",
       "source_location": "L426",
       "weight": 1.0,
@@ -15571,6 +15935,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/api/admin/wholesale/products/[id]/route.ts",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_wholesale_products_id_route",
+      "target": "app_api_admin_wholesale_products_id_route_delete",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/wholesale/products/[id]/route.ts",
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
@@ -15599,6 +15974,18 @@
       "_origin": "ast",
       "source": "app_api_admin_wholesale_products_id_route",
       "target": "lib_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/admin/wholesale/products/[id]/route.ts",
+      "source_location": "L164",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_admin_wholesale_products_id_route_delete",
+      "target": "app_api_admin_wholesale_products_id_route_checkadminauth",
       "confidence_score": 1.0
     },
     {
@@ -17418,6 +17805,29 @@
       "_origin": "ast",
       "source": "app_api_upload_route_post",
       "target": "app_api_upload_route_allowed_mime_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/wholesale/filters/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_wholesale_filters_route",
+      "target": "app_api_wholesale_filters_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/wholesale/filters/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "app_api_wholesale_filters_route",
+      "target": "lib_prisma",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -21246,7 +21656,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_fabriccolorpanel_fabriccolorpanel",
@@ -22104,7 +22514,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_fabriccolorpanel",
@@ -22115,7 +22525,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_fabriccolorpanel",
@@ -22159,11 +22569,35 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/FabricColorPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_fabriccolorpanel",
+      "target": "components_admin_fabricpricerangeeditor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/FabricColorPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_fabriccolorpanel",
+      "target": "components_admin_fabricpricerangeeditor_fabricpricerangeeditor",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "components/admin/FabricColorPanel.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_admin_fabriccolorpanel_fabriccolorpanelprops",
@@ -22245,6 +22679,39 @@
       "_origin": "ast",
       "source": "components_admin_fabriccolortree",
       "target": "components_admin_fabriccolortree_subcategorywithcolors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_fabricpricerangeeditor",
+      "target": "components_admin_fabricpricerangeeditor_fabriclike",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_fabricpricerangeeditor",
+      "target": "components_admin_fabricpricerangeeditor_fabricpricerangeeditor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/FabricPriceRangeEditor.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_fabricpricerangeeditor",
+      "target": "components_admin_fabricpricerangeeditor_fabricpricerangeeditorprops",
       "confidence_score": 1.0
     },
     {
@@ -22919,6 +23386,50 @@
       "_origin": "ast",
       "source": "components_admin_wholesale_adminwholesaleclient",
       "target": "components_admin_wholesale_wholesalepricingtab_wholesalepricingtab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/DeleteWholesaleProductModal.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_deletewholesaleproductmodal",
+      "target": "components_admin_wholesale_deletewholesaleproductmodal_deletewholesaleproductmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/DeleteWholesaleProductModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_deletewholesaleproductmodal",
+      "target": "components_admin_wholesale_deletewholesaleproductmodal_deletewholesaleproductmodalprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/EditWholesaleProductModal.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_editwholesaleproductmodal",
+      "target": "components_admin_wholesale_editwholesaleproductmodal_editwholesaleproductmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/admin/wholesale/EditWholesaleProductModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_admin_wholesale_editwholesaleproductmodal",
+      "target": "components_admin_wholesale_editwholesaleproductmodal_editwholesaleproductmodalprops",
       "confidence_score": 1.0
     },
     {
@@ -24432,7 +24943,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient",
@@ -24443,7 +24954,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient",
@@ -24544,6 +25055,42 @@
       "_origin": "ast",
       "source": "components_configurator_configuratorclient",
       "target": "components_configurator_logouploader_logouploader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/ConfiguratorClient.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_configuratorclient",
+      "target": "components_configurator_materialcomponentselector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/ConfiguratorClient.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_configuratorclient",
+      "target": "components_configurator_materialcomponentselector_materialcomponentselector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/ConfiguratorClient.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_configuratorclient",
+      "target": "components_configurator_materialcomponentselector_materialselection",
       "confidence_score": 1.0
     },
     {
@@ -24683,7 +25230,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient_configuratorclientprops",
@@ -24695,7 +25242,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient_configuratorclientprops",
@@ -24707,7 +25254,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient_configuratorclientprops",
@@ -24720,7 +25267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L542",
+      "source_location": "L564",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient_configuratorclient",
@@ -24732,7 +25279,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/configurator/ConfiguratorClient.tsx",
-      "source_location": "L134",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
       "source": "components_configurator_configuratorclient_configuratorclient",
@@ -25057,6 +25604,108 @@
       "_origin": "ast",
       "source": "components_configurator_logouploader",
       "target": "components_configurator_logouploader_placement_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_availablefabric",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_availablefabriccolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_component_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_materialcomponentselector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_materialcomponentselectorprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/configurator/MaterialComponentSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "components_configurator_materialcomponentselector",
+      "target": "components_configurator_materialcomponentselector_materialselection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "components_configurator_materialcomponentselector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "components_configurator_materialcomponentselector_materialselection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart_m2ocartitem",
+      "target": "components_configurator_materialcomponentselector_materialselection",
       "confidence_score": 1.0
     },
     {
@@ -27961,7 +28610,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L44",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart",
@@ -27972,7 +28621,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L55",
+      "source_location": "L66",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart",
@@ -27983,33 +28632,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L23",
+      "source_location": "L76",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart",
-      "target": "lib_m2ocart_getm2ocart",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/m2oCart.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_m2ocart",
-      "target": "lib_m2ocart_m2ocartitem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "lib/m2oCart.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_m2ocart",
-      "target": "lib_m2ocart_removefromm2ocart",
+      "target": "lib_m2ocart_convertm2ocarttoorderpayload",
       "confidence_score": 1.0
     },
     {
@@ -28020,17 +28647,85 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart",
-      "target": "lib_m2ocart_savem2ocart",
+      "target": "lib_m2ocart_getm2ocart",
       "confidence_score": 1.0
     },
     {
-      "relation": "calls",
-      "context": "call",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "lib_m2ocart_m2ocart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "lib_m2ocart_m2ocartitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "lib_m2ocart_removefromm2ocart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
       "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
+      "source": "lib_m2ocart",
+      "target": "lib_m2ocart_savem2ocart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_m2ocart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_m2ocart_m2ocart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/m2oCart.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast",
       "source": "lib_m2ocart_addtom2ocart",
       "target": "lib_m2ocart_getm2ocart",
       "confidence_score": 1.0
@@ -28040,7 +28735,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L51",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart_removefromm2ocart",
@@ -28052,7 +28747,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L47",
+      "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart_addtom2ocart",
@@ -28064,12 +28759,36 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "lib/m2oCart.ts",
-      "source_location": "L52",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_m2ocart_removefromm2ocart",
       "target": "lib_m2ocart_savem2ocart",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_m2ocart_convertm2ocarttoorderpayload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission_submitm2oorder",
+      "target": "lib_m2ocart_convertm2ocarttoorderpayload"
     },
     {
       "relation": "imports_from",
@@ -28327,6 +29046,88 @@
       "source": "lib_ordermigration",
       "target": "lib_types_createmultimaterialorderpayload",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_ordersubmission_submitm2oorder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_ordersubmission_submitwholesaleorder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_ordervalidation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_ordervalidation_validatecreateorderinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission",
+      "target": "lib_ordervalidation_validatecreateorderinputmultimaterial",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission_submitm2oorder",
+      "target": "lib_ordervalidation_validatecreateorderinput"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/orderSubmission.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_ordersubmission_submitm2oorder",
+      "target": "lib_ordervalidation_validatecreateorderinputmultimaterial"
     },
     {
       "relation": "imports_from",
@@ -28689,7 +29490,29 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_types",
+      "target": "lib_types_createm2oorderpayload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/types.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_types",
       "target": "lib_types_createmultimaterialorderpayload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/types.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "lib_types",
+      "target": "lib_types_createwholesaleorderpayload",
       "confidence_score": 1.0
     },
     {
