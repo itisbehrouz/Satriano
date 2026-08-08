@@ -140,13 +140,17 @@ export function WholesaleCatalogClient({
     return Array.from(set).sort();
   }, [readyStockItems]);
 
-  // Filter state management
+  // Filter & Layout state management
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedFabricLines, setSelectedFabricLines] = useState<string[]>([]);
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   const [maxPrice, setMaxPrice] = useState<number>(500);
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
+
+  // Sorting & Layout View Mode state ("list" | "grid-2" | "grid-3" | "grid-4")
+  const [sortBy, setSortBy] = useState<"default" | "price-asc" | "price-desc" | "name-asc" | "stock-desc">("default");
+  const [viewMode, setViewMode] = useState<"list" | "grid-2" | "grid-3" | "grid-4">("grid-4");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -193,12 +197,13 @@ export function WholesaleCatalogClient({
     setSelectedAgeGroup(null);
     setMaxPrice(500);
     setInStockOnly(false);
+    setSortBy("default");
     setCurrentPage(1);
   };
 
-  // Filtered Products computation
+  // Filtered and Sorted Products computation
   const filteredProducts = useMemo(() => {
-    return readyStockItems.filter((item) => {
+    const result = readyStockItems.filter((item) => {
       // Category filter
       if (selectedCategories.length > 0) {
         if (!selectedCategories.includes(item.categorySlug)) {
@@ -227,7 +232,24 @@ export function WholesaleCatalogClient({
 
       return true;
     });
-  }, [readyStockItems, selectedCategories, selectedFabricLines, maxPrice, inStockOnly]);
+
+    // Apply Sorting
+    return result.sort((a, b) => {
+      if (sortBy === "price-asc") {
+        return a.priceUSD - b.priceUSD;
+      }
+      if (sortBy === "price-desc") {
+        return b.priceUSD - a.priceUSD;
+      }
+      if (sortBy === "name-asc") {
+        return a.name.localeCompare(b.name);
+      }
+      if (sortBy === "stock-desc") {
+        return b.stockCount - a.stockCount;
+      }
+      return 0;
+    });
+  }, [readyStockItems, selectedCategories, selectedFabricLines, maxPrice, inStockOnly, sortBy]);
 
   // Paginated slices
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
@@ -382,21 +404,116 @@ export function WholesaleCatalogClient({
 
         </aside>
 
-        {/* RIGHT CONTENT — PRODUCT GRID */}
+        {/* RIGHT CONTENT — PRODUCT GRID & TOOLBAR */}
         <main className="flex-1 w-full space-y-6">
           
-          {/* Active Status Bar */}
-          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex items-center justify-between gap-4 transition-colors">
-            <div className="text-xs text-[var(--color-text-secondary)]">
-              Showing <strong className="text-[var(--color-text-primary)] font-mono text-sm">{filteredProducts.length}</strong> ready-made stock garments
-            </div>
-            {activeFilterCount > 0 && (
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] font-bold uppercase text-[var(--color-text-secondary)]">
-                  Active Filters ({activeFilterCount})
+          {/* Active Toolbar & View Mode Controls */}
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
+            
+            {/* Left: Count */}
+            <div className="text-xs text-[var(--color-text-secondary)] flex items-center gap-2">
+              <span>Showing <strong className="text-[var(--color-text-primary)] font-mono text-sm">{filteredProducts.length}</strong> ready-made stock garments</span>
+              {activeFilterCount > 0 && (
+                <span className="text-[11px] font-bold uppercase text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-0.5 border border-[var(--color-accent)]/20">
+                  {activeFilterCount} Active {activeFilterCount === 1 ? "Filter" : "Filters"}
                 </span>
+              )}
+            </div>
+
+            {/* Right: Sort & Layout Controls */}
+            <div className="flex flex-wrap items-center gap-3">
+              
+              {/* Sort By Dropdown */}
+              <div className="flex items-center gap-2">
+                <label htmlFor="wholesale-sort-by" className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)] whitespace-nowrap">
+                  Sort By:
+                </label>
+                <select
+                  id="wholesale-sort-by"
+                  value={sortBy}
+                  onChange={(e) => {
+                    setSortBy(e.target.value as typeof sortBy);
+                    setCurrentPage(1);
+                  }}
+                  className="bg-[var(--color-bg)] text-[var(--color-text-primary)] text-xs font-medium border border-[var(--color-border)] rounded-none px-3 py-1.5 focus:outline-none focus:border-[var(--color-accent)] cursor-pointer min-h-[36px]"
+                >
+                  <option value="default">Default Order</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="name-asc">Name: A-Z</option>
+                  <option value="stock-desc">Stock: High to Low</option>
+                </select>
               </div>
-            )}
+
+              {/* Divider */}
+              <div className="h-4 w-px bg-[var(--color-border)] hidden sm:block" />
+
+              {/* View Layout Controls (List, 2, 3, 4) */}
+              <div className="flex items-center gap-1 bg-[var(--color-bg)] border border-[var(--color-border)] p-0.5">
+                <span className="text-[10px] font-bold uppercase text-[var(--color-text-secondary)] px-2">
+                  View:
+                </span>
+
+                {/* List View Toggle */}
+                <button
+                  type="button"
+                  title="List View"
+                  onClick={() => setViewMode("list")}
+                  className={`px-2.5 py-1 text-xs font-bold uppercase rounded-none transition-colors flex items-center gap-1 ${
+                    viewMode === "list"
+                      ? "bg-[var(--color-accent)] text-white"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-sm leading-none">view_list</span>
+                  <span className="hidden sm:inline">List</span>
+                </button>
+
+                {/* Grid 2 Toggle */}
+                <button
+                  type="button"
+                  title="2 Columns"
+                  onClick={() => setViewMode("grid-2")}
+                  className={`px-2.5 py-1 text-xs font-bold font-mono rounded-none transition-colors ${
+                    viewMode === "grid-2"
+                      ? "bg-[var(--color-accent)] text-white"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
+                  }`}
+                >
+                  2
+                </button>
+
+                {/* Grid 3 Toggle */}
+                <button
+                  type="button"
+                  title="3 Columns"
+                  onClick={() => setViewMode("grid-3")}
+                  className={`px-2.5 py-1 text-xs font-bold font-mono rounded-none transition-colors ${
+                    viewMode === "grid-3"
+                      ? "bg-[var(--color-accent)] text-white"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
+                  }`}
+                >
+                  3
+                </button>
+
+                {/* Grid 4 Toggle */}
+                <button
+                  type="button"
+                  title="4 Columns"
+                  onClick={() => setViewMode("grid-4")}
+                  className={`px-2.5 py-1 text-xs font-bold font-mono rounded-none transition-colors ${
+                    viewMode === "grid-4"
+                      ? "bg-[var(--color-accent)] text-white"
+                      : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface)]"
+                  }`}
+                >
+                  4
+                </button>
+              </div>
+
+            </div>
+
           </div>
 
           {/* Empty State */}
@@ -421,13 +538,91 @@ export function WholesaleCatalogClient({
             </div>
           )}
 
-          {/* Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+          {/* Product Grid / List Container */}
+          <div
+            className={
+              viewMode === "list"
+                ? "flex flex-col gap-4 w-full"
+                : viewMode === "grid-2"
+                ? "grid grid-cols-1 sm:grid-cols-2 gap-5 w-full"
+                : viewMode === "grid-3"
+                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full"
+                : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 w-full"
+            }
+          >
             {currentProducts.map((product) => {
+              // LIST VIEW RENDER
+              if (viewMode === "list") {
+                return (
+                  <div
+                    key={product.id}
+                    className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none p-4 flex flex-col sm:flex-row items-center justify-between gap-4 hover:border-[var(--color-accent)] transition-colors group"
+                  >
+                    {/* Thumbnail & Product Details */}
+                    <div className="flex items-center gap-4 w-full sm:w-auto">
+                      <div className="w-24 h-24 relative bg-[var(--color-bg)] overflow-hidden shrink-0 border border-[var(--color-border)]">
+                        <Image
+                          src={product.imageUrl}
+                          alt={product.name}
+                          fill
+                          className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                          sizes="96px"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-mono text-[var(--color-text-secondary)] font-medium">
+                          SKU: {product.sku}
+                        </span>
+                        <h3 className="text-base font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                          {product.name}
+                        </h3>
+                        <div className="text-xs text-[var(--color-text-secondary)] flex items-center gap-2">
+                          <span>{product.categoryName}</span>
+                          <span>•</span>
+                          <span>{product.fabricLine}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Price, Stock & Action Button */}
+                    <div className="flex flex-wrap items-center justify-between sm:justify-end gap-4 w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 border-[var(--color-border)]">
+                      {/* Price */}
+                      <span className="text-xl font-bold font-mono text-[var(--color-accent)] tabular-nums">
+                        {product.formattedPrice}
+                      </span>
+
+                      {/* Stock Status Badge */}
+                      {product.stockStatus === "IN_STOCK" ? (
+                        <span className="text-xs font-bold text-[var(--color-status-success)] bg-[var(--color-status-success-bg)] px-2.5 py-1 rounded-none border border-[var(--color-status-success)]/30">
+                          ✓ In Stock ({product.stockCount})
+                        </span>
+                      ) : product.stockStatus === "LOW_STOCK" ? (
+                        <span className="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-none border border-amber-500/30">
+                          ⚠ Low Stock ({product.stockCount})
+                        </span>
+                      ) : (
+                        <span className="text-xs font-bold text-[var(--color-text-secondary)] bg-[var(--color-bg)] px-2.5 py-1 rounded-none border border-[var(--color-border)]">
+                          Out of Stock
+                        </span>
+                      )}
+
+                      {/* Action Button */}
+                      <Link
+                        href={`/wholesale/${product.slug}`}
+                        className="px-5 h-[40px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center rounded-none transition-colors min-w-[130px]"
+                      >
+                        VIEW &amp; ORDER
+                      </Link>
+                    </div>
+                  </div>
+                );
+              }
+
+              // GRID VIEW RENDER (2, 3, 4 cols)
               return (
                 <div
                   key={product.id}
-                  className="w-full max-w-[280px] h-[380px] mx-auto bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none flex flex-col justify-between overflow-hidden hover:border-[var(--color-accent)] transition-colors group"
+                  className="w-full h-[380px] mx-auto bg-[var(--color-surface)] border border-[var(--color-border)] rounded-none flex flex-col justify-between overflow-hidden hover:border-[var(--color-accent)] transition-colors group"
                 >
                   {/* Top Portion (Image + Info) */}
                   <div className="flex flex-col flex-1 overflow-hidden">
@@ -439,7 +634,7 @@ export function WholesaleCatalogClient({
                         alt={product.name}
                         fill
                         className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                        sizes="280px"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
                       />
                     </div>
 
