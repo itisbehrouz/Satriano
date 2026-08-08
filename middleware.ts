@@ -59,8 +59,8 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 5. Temporary Site Maintenance / Password Gate (Default LOCKED unless explicitly set to "false")
-  const isMaintenanceLocked = process.env.SITE_MAINTENANCE_LOCK !== "false";
+  // 5. Temporary Site Maintenance / Password Gate (Only enabled if SITE_MAINTENANCE_LOCK is explicitly "true")
+  const isMaintenanceLocked = process.env.SITE_MAINTENANCE_LOCK === "true";
   if (isMaintenanceLocked) {
     const isExempt =
       pathname.startsWith("/admin") ||
