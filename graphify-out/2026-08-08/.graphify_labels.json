@@ -170,15 +170,8 @@
   "168": "applications/route.ts",
   "169": "inventoryForecasting.ts",
   "170": "inventoryReservation.ts",
-  "171": "webhooks/route.ts",
   "172": "ediAdapter.ts",
   "173": "quickbooksSync.ts",
-  "174": "LogoUploader.tsx",
   "175": "fabric/[id]/route.ts",
-  "176": "images/route.ts",
-  "177": "locale/route.ts",
-  "178": "images/route.ts",
-  "179": "milestones/route.ts",
-  "180": "[imageId]/route.ts",
-  "181": "locale/route.ts"
+  "177": "locale/route.ts"
 }

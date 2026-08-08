@@ -170,8 +170,14 @@
   "168": "applications/route.ts",
   "169": "inventoryForecasting.ts",
   "170": "inventoryReservation.ts",
+  "171": "AUDIT-1-v2: Made-to-Order (M2O) Order Lifecycle Audit (Post-Fix Verification)",
   "172": "ediAdapter.ts",
   "173": "quickbooksSync.ts",
+  "174": "AUDIT-5-v2: Material, Components & Colourways Audit (Post-Fix Verification)",
   "175": "fabric/[id]/route.ts",
-  "177": "locale/route.ts"
+  "176": "proforma/route.ts",
+  "177": "locale/route.ts",
+  "178": "api/upload/route.ts",
+  "179": "[imageId]/route.ts",
+  "180": "images/route.ts"
 }
