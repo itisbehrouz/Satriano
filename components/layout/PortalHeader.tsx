@@ -125,7 +125,7 @@ export function PortalHeader({ sessionEmail: initialEmail = null }: PortalHeader
                   </Link>
 
                   <Link
-                    href="/portal/settings"
+                    href="/portal/account?tab=settings"
                     onClick={() => setIsDropdownOpen(false)}
                     className="flex items-center gap-2.5 px-3.5 py-2 text-[#E2E8F0] hover:bg-[#172A4D] hover:text-white transition-colors rounded-none"
                   >

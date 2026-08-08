@@ -55,7 +55,7 @@ export default function PortalErrorBoundary({
 
         <p className="text-[11px] text-slate-500 border-t border-slate-800/80 pt-4">
           Session expired? Try{" "}
-          <Link href="/portal/login" className="text-amber-400 hover:underline">
+          <Link href="/portal" className="text-amber-400 hover:underline">
             requesting a new magic link
           </Link>
           .

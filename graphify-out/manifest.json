@@ -660,9 +660,9 @@
     "semantic_hash": "32396ac69be93ac4baf4f4c74e664648"
   },
   "components/layout/PortalHeader.tsx": {
-    "mtime": 1785628599.995231,
-    "ast_hash": "7a0dbf849fb4a0ff8937ddea37b08dcd",
-    "semantic_hash": "7a0dbf849fb4a0ff8937ddea37b08dcd"
+    "mtime": 1786186462.9394643,
+    "ast_hash": "f2cacb4d409f0f1e9fe1b614788fac5b",
+    "semantic_hash": ""
   },
   "components/layout/SiteFooter.tsx": {
     "mtime": 1786104985.5388181,
@@ -1560,8 +1560,8 @@
     "semantic_hash": ""
   },
   "app/portal/error.tsx": {
-    "mtime": 1786135881.1525621,
-    "ast_hash": "66de15e45465273389aa75b3bf0d04ea",
+    "mtime": 1786186461.17312,
+    "ast_hash": "ece2ad3207491cc25298ce1efa9bbd46",
     "semantic_hash": ""
   },
   "lib/orderMigration.test.ts": {
