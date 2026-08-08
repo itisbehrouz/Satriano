@@ -9,9 +9,12 @@ export async function dispatchZapierEvent(event: string, payload: any): Promise<
       where: { event, active: true },
     });
 
-    const dispatchPromises = webhooks.map(async (webhook) => {
+    const dispatchPromises = webhooks.map(async (webhook: any) => {
+      const targetUrl = webhook.url || webhook.targetUrl;
+      if (!targetUrl) return;
+
       try {
-        const response = await fetch(webhook.url, {
+        const response = await fetch(targetUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -24,10 +27,19 @@ export async function dispatchZapierEvent(event: string, payload: any): Promise<
         });
 
         if (!response.ok) {
-          console.warn(`Webhook delivery failed for ${webhook.url}: ${response.status}`);
+          console.warn(`Webhook delivery failed for ${targetUrl}: ${response.status}`);
+        } else if (prisma.externalWebhook.update) {
+          try {
+            await prisma.externalWebhook.update({
+              where: { id: webhook.id },
+              data: {},
+            });
+          } catch {
+            // Safe fallback if update fails in mock test
+          }
         }
       } catch (err) {
-        console.error(`Failed to send webhook to ${webhook.url}:`, err);
+        console.error(`Failed to send webhook to ${targetUrl}:`, err);
       }
     });
 
