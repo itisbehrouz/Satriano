@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Satriano Atelier B2B Platform
+
+Satriano Atelier is a B2B Made-to-Order e-commerce and workflow automation platform. This portal serves as a multi-category product catalog and ordering system tailored for B2B buyers. It allows for product configuration, generates proforma invoices, and processes payments seamlessly.
+
+## Features
+
+- **Multi-Category Catalog:** Browse through 7 main product groups (Tops, Bottoms, Outerwear, Formalwear, Activewear, Underwear & Loungewear, Accessories) and their subcategories.
+- **Product Configuration:** Configure products by selecting from admin-defined sizes and materials.
+- **File Upload:** Upload logo or vector files for custom orders via Supabase Storage.
+- **Automated Proforma Invoices:** Automatically calculates prices and generates PDF proforma invoices sent directly to the customer.
+- **Seamless Payments:** Integrated with Stripe for domestic and international card payments.
+- **Admin Panel:** Built-in administration route for managing categories, products, sizes, pricing, and order statuses.
+- **Design System:** Clean, industrial-feeling UI optimized for high information density and reliable B2B operations.
+
+## Technology Stack
+
+- **Framework:** Next.js (React) App Router
+- **Database:** Supabase (PostgreSQL)
+- **Storage:** Supabase Storage (Logo/Vector files)
+- **PDF Generation:** pdf-lib
+- **Email:** Nodemailer
+- **Payments:** Stripe
+- **Styling:** Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+First, make sure you have your environment variables set up correctly, primarily for Supabase and Stripe.
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture & Data Model
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses a streamlined workflow without a traditional multi-item cart. Each order corresponds to a single product configuration.
 
-## Learn More
+Key entities include:
+- `categories`: Main groups and subcategories.
+- `products`: Featured pieces with base prices, material options, and available sizes.
+- `orders`: Tracks the full lifecycle from configuration and proforma generation to payment and production.
 
-To learn more about Next.js, take a look at the following resources:
+For more details on the architecture and roadmap, refer to `satriano-atelier-roadmap.md`. For UI/UX principles, see `DESIGN.md`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is private and intended for authorized B2B operations only.
