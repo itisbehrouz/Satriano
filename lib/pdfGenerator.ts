@@ -9,6 +9,7 @@ export interface ProformaPdfData {
   validUntil: Date;
   lines: Array<{
     fabricName: string;
+    colorName?: string;
     size: string;
     quantity: number;
     unitPriceCents: number;
@@ -90,8 +91,11 @@ export async function generateProformaPdf(data: ProformaPdfData): Promise<Uint8A
   for (const line of data.lines) {
     const lineTotal = (line.quantity * line.unitPriceCents) / 100;
     const unitPrice = line.unitPriceCents / 100;
+    const itemLabel = line.colorName
+      ? `${line.fabricName} (${line.colorName})`
+      : line.fabricName;
 
-    page.drawText(`Classic Polo - ${line.fabricName}`, { x: 50, y, size: 9, font });
+    page.drawText(itemLabel, { x: 50, y, size: 9, font });
     page.drawText(line.size, { x: 280, y, size: 9, font });
     page.drawText(line.quantity.toString(), { x: 340, y, size: 9, font });
     page.drawText(`$${unitPrice.toFixed(2)}`, { x: 400, y, size: 9, font });

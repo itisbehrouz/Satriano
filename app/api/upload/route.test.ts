@@ -33,4 +33,23 @@ describe("POST /api/upload", () => {
     expect(json.url).toBeDefined();
     expect(json.filename).toBeTypeOf("string");
   });
+
+  it("accepts .ai and .eps vector files successfully", async () => {
+    const formData = new FormData();
+    const aiFile = new File(["%AI-5.0 Vector"], "brand_logo.ai", {
+      type: "application/postscript",
+    });
+    formData.append("file", aiFile, "brand_logo.ai");
+
+    const response = await POST(
+      new Request("http://localhost/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+    );
+    expect(response.status).toBe(200);
+    const json = await response.json();
+    expect(json.url).toBeDefined();
+    expect(json.filename).toContain(".ai");
+  });
 });

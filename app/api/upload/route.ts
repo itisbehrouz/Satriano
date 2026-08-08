@@ -9,7 +9,15 @@ const ALLOWED_MIME_TYPES = [
   "image/webp",
   "image/svg+xml",
   "application/pdf",
+  "application/postscript",
+  "application/illustrator",
+  "application/x-illustrator",
+  "application/vnd.adobe.illustrator",
+  "image/eps",
+  "image/x-eps",
+  "application/octet-stream",
 ];
+const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".svg", ".pdf", ".ai", ".eps"];
 const MAX_UPLOAD_SIZE = 5 * 1024 * 1024; // 5 MB
 
 export async function POST(request: Request) {
@@ -28,16 +36,24 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    const fileExt = path.extname(file.name || "").toLowerCase();
+    const isMimeAllowed = ALLOWED_MIME_TYPES.includes(file.type);
+    const isExtAllowed = ALLOWED_EXTENSIONS.includes(fileExt);
+
+    if (!isMimeAllowed && !isExtAllowed) {
       return NextResponse.json(
-        { error: "Invalid file type. Allowed types: JPG, PNG, WebP, SVG, PDF." },
+        { error: "Invalid file type. Allowed types: JPG, PNG, WebP, SVG, PDF, AI, EPS." },
         { status: 400 }
       );
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const originalName = file.name && file.name !== "blob" ? file.name : "logo.svg";
+    let originalName = file.name && file.name !== "blob" ? file.name : "logo.svg";
+    if (file.name === "blob" && file.type) {
+      if (file.type.includes("postscript") || file.type.includes("illustrator")) originalName = "logo.ai";
+      else if (file.type.includes("eps")) originalName = "logo.eps";
+    }
     const filename = `${Date.now()}-${originalName.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
 
     // If Supabase is configured, upload to Supabase Storage bucket 'logos'
