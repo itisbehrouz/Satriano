@@ -3,7 +3,6 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { verifyAdminRequest } from "@/lib/adminAuth";
 import { sendVerificationEmail } from "@/lib/email";
-import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export async function POST(req: Request) {
   try {
@@ -18,23 +17,12 @@ export async function POST(req: Request) {
       corpEmail,
       phone,
       needs,
-      turnstileToken,
     } = body;
 
     if (!companyName || !corpEmail || !fullName) {
       return NextResponse.json(
         { error: "Company name, corporate email, and full name are required." },
         { status: 400 }
-      );
-    }
-
-    // Verify Human Challenge via Cloudflare Turnstile
-    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0] || undefined;
-    const turnstileCheck = await verifyTurnstileToken(turnstileToken, clientIp);
-    if (!turnstileCheck.success) {
-      return NextResponse.json(
-        { error: "Human verification failed. Please complete the security check." },
-        { status: 403 }
       );
     }
 
