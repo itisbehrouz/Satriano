@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { hasRole, requireRole } from './rbac';
-import { AdminRole } from '@/app/generated/prisma/client';
 
 describe('RBAC Utilities', () => {
   it('hasRole allows SUPER_ADMIN unconditionally', () => {

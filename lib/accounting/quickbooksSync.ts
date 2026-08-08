@@ -5,8 +5,8 @@ export interface QuickBooksConfig {
 }
 
 export async function syncOrderToQuickBooks(
-  orderId: string,
-  qbConfig: QuickBooksConfig
+  _orderId: string,
+  _qbConfig: QuickBooksConfig
 ): Promise<{ success: boolean; qbInvoiceId?: string; error?: string }> {
   return {
     success: false,
@@ -15,9 +15,9 @@ export async function syncOrderToQuickBooks(
 }
 
 export async function syncPaymentToQuickBooks(
-  orderId: string,
-  amountCents: number,
-  qbConfig: QuickBooksConfig
+  _orderId: string,
+  _amountCents: number,
+  _qbConfig: QuickBooksConfig
 ): Promise<{ success: boolean; qbDepositId?: string }> {
   return { success: false };
 }

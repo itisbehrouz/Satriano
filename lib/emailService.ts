@@ -40,9 +40,9 @@ export async function sendEmail(payload: EmailPayload): Promise<{
     }
 
     return { success: true, messageId: response.data?.id };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Email sending failed:", error);
-    return { success: false, error: error.message };
+    return { success: false, error: error instanceof Error ? error.message : String(error) };
   }
 }
 

@@ -4,7 +4,6 @@ import {
   verifyAdminToken,
   verifyAdminKey,
   getAdminJwtSecret,
-  getAdminAccessKey,
 } from "@/lib/adminAuth";
 import { jwtVerify } from "jose";
 

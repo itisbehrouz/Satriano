@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { addToWholesaleCart } from "@/lib/wholesaleCart";
+
 export interface SizeStockItem {
   size: string;
   inStock: number;
@@ -147,7 +149,6 @@ export function WholesaleProductDetailClient({
     };
 
     try {
-      const { addToWholesaleCart } = require("@/lib/wholesaleCart");
       addToWholesaleCart(cartItem);
     } catch (e) {
       console.error(e);

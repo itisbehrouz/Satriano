@@ -67,7 +67,7 @@ async function getHistoricalDemand(
   return orders.reduce((sum, o) => sum + (o.lines[0]?.quantity || 0), 0);
 }
 
-export async function checkReorderPoints(): Promise<any[]> {
+export async function checkReorderPoints(): Promise<Record<string, unknown>[]> {
   const policies = await prisma.inventoryPolicy.findMany({
     include: {
       product: {

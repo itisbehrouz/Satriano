@@ -6,10 +6,10 @@ export const t = (locale: Locale, key: string): string => {
   const dictionary = dictionaries[locale] || dictionaries['en'];
   const keys = key.split('.');
   
-  let result: any = dictionary;
+  let result: unknown = dictionary;
   for (const k of keys) {
-    if (result && typeof result === 'object' && k in result) {
-      result = result[k];
+    if (result && typeof result === 'object' && k in (result as Record<string, unknown>)) {
+      result = (result as Record<string, unknown>)[k];
     } else {
       return key; // Fallback to key if not found
     }

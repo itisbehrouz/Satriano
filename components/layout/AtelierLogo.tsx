@@ -24,6 +24,7 @@ export function AtelierLogo({
         width={width}
         height={height}
         priority={priority}
+        style={{ width: "auto", height: "auto" }}
         className={`${className} block [html[data-theme='dark']_&]:hidden`}
       />
       {/* Dark Theme Logo (light/white text for dark background) */}
@@ -33,6 +34,7 @@ export function AtelierLogo({
         width={width}
         height={height}
         priority={priority}
+        style={{ width: "auto", height: "auto" }}
         className={`${className} hidden [html[data-theme='dark']_&]:block`}
       />
     </div>

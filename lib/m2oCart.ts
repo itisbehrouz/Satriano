@@ -76,7 +76,7 @@ export function clearM2OCart(): void {
 export function convertM2oCartToOrderPayload(
   cart: M2oCart,
   useMultiMaterial: boolean
-): any {
+): Record<string, unknown> {
   if (useMultiMaterial && cart.items[0]?.materials) {
     return {
       companyName: cart.companyName,

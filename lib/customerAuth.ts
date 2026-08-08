@@ -43,8 +43,9 @@ export async function verifyCustomerToken(token: string): Promise<{ email: strin
       algorithms: ["HS256"],
     });
 
-    const email = (payload as any).email;
-    const role = (payload as any).role;
+    const p = payload as Record<string, unknown>;
+    const email = p.email;
+    const role = p.role;
     if (role === "customer" && email && typeof email === "string") {
       return { email };
     }

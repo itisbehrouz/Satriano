@@ -19,11 +19,7 @@ export function useCustomerSession() {
       const res = await fetch("/api/customer/session");
       if (res.ok) {
         const data = await res.json();
-        if (data.authenticated) {
-          setSession(data);
-        } else {
-          setSession({ authenticated: false });
-        }
+        setSession(data.authenticated ? data : { authenticated: false });
       } else {
         setSession({ authenticated: false });
       }
@@ -35,8 +31,25 @@ export function useCustomerSession() {
   }, []);
 
   useEffect(() => {
-    fetchSession();
-  }, [fetchSession]);
+    let active = true;
+    fetch("/api/customer/session")
+      .then((res) => (res.ok ? res.json() : { authenticated: false }))
+      .then((data) => {
+        if (active) {
+          setSession(data.authenticated ? data : { authenticated: false });
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setSession({ authenticated: false });
+          setLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return { session, loading, refetch: fetchSession };
 }

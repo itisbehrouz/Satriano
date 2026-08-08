@@ -11,7 +11,7 @@ export async function submitM2oOrder(
 }> {
   const payload = convertM2oCartToOrderPayload(cart, useMultiMaterial);
 
-  let validation: { success: boolean; data?: any; error?: string };
+  let validation: { success: boolean; data?: unknown; error?: string };
   if (useMultiMaterial) {
     const result = validateCreateOrderInputMultiMaterial(payload);
     validation = { success: result.success, data: result.data, error: result.error };
@@ -38,12 +38,12 @@ export async function submitM2oOrder(
 
     const order = await response.json();
     return { success: true, orderId: order.orderId || order.id };
-  } catch (error: any) {
-    return { success: false, error: error.message || "Network error" };
+  } catch (error: unknown) {
+    return { success: false, error: error instanceof Error ? error.message : "Network error" };
   }
 }
 
-export async function submitWholesaleOrder(cart: any): Promise<{
+export async function submitWholesaleOrder(cart: Record<string, unknown>): Promise<{
   success: boolean;
   orderId?: string;
   error?: string;
@@ -65,7 +65,7 @@ export async function submitWholesaleOrder(cart: any): Promise<{
 
     const order = await response.json();
     return { success: true, orderId: order.orderId || order.id };
-  } catch (error: any) {
-    return { success: false, error: error.message || "Network error" };
+  } catch (error: unknown) {
+    return { success: false, error: error instanceof Error ? error.message : "Network error" };
   }
 }

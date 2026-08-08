@@ -74,7 +74,7 @@ export async function verifyAdminToken(token: string): Promise<boolean> {
     const { payload } = await jwtVerify(token, secret, {
       algorithms: ["HS256"], // Explicitly pin algorithm to prevent algorithm-confusion attacks
     });
-    return (payload as any).role === "admin";
+    return (payload as Record<string, unknown>).role === "admin";
   } catch {
     return false;
   }

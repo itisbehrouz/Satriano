@@ -50,7 +50,6 @@ export function computeOrderPricing({ fabric, sizeQuantities }: PricingInput): P
   const totalUnits = lineItems.reduce((sum, line) => sum + line.quantity, 0);
   const estimatedSubtotalMinCents = totalUnits * fabric.priceMinCents;
   const estimatedSubtotalMaxCents = totalUnits * fabric.priceMaxCents;
-  const setupFeeCents = 0;
 
   return {
     lineItems,
