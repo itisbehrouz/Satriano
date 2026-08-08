@@ -933,3 +933,97 @@ this stays open until a real before/after screenshot at both mobile
 - **Next.js Production Build:** Next.js 16.2.12 (Turbopack) successfully compiled 64 static/dynamic routes with zero TypeScript errors.
 - **AST Knowledge Graph:** Rebuilt graphify AST topology (`1473 nodes, 2104 edges, 174 communities`).
 - **Git Deployment:** Commits `e543489`, `58be7f2`, `8b6f4a4`, `3844ba2`, `930e144` pushed to `main`. Vercel deployment live ✅.
+
+---
+
+## 33. Session Log & Forensic Audit Consolidation: August 8, 2026
+
+### 33.1 Comprehensive 360° Forensic Audit Suite (AGENTS 1 - 7)
+A full 7-agent parallel forensic audit suite was conducted across all core functional domains of Satriano Atelier:
+- **AGENT-1 (M2O Order Lifecycle Audit):** Verified 8-state machine (`DRAFT` → `CANCELLED`), fixed vector logo upload file type constraints (`.ai`, `.eps`, `.svg`, `.pdf`, `.png`, `.jpg` in `app/api/upload/route.ts`), added selected colorway details to proforma PDF rendering (`lib/pdfGenerator.ts`), and verified sticky stepper header offsets.
+- **AGENT-2 (Wholesale Catalog & Taxonomy Audit):** Verified complete domain isolation between M2O `Product` and `WholesaleProduct` models, first-class `Gender` and `AgeGroup` taxonomy, and strict supplier data privacy boundary (`firmName`, `costPriceCents`, `markupPercent` hidden from public APIs and verified via automated test `products.test.ts`).
+- **AGENT-3 (Wholesale Checkout & Inventory Audit):** Verified client-side cart engine (`lib/wholesaleCart.ts`), atomic stock reservation via `reserveStockForOrder()` inside `prisma.$transaction` (`lib/inventoryReservation.ts`), and Stripe payment webhook idempotency using `WebhookLog` `stripeEventId`.
+- **AGENT-4 (Pricing Architecture & Commercial Rules Audit):** Verified target price vs final price workflow, price snapshotting on `OrderLine.unitPriceCents`, and setup fee elimination (hardcoded `setupFeeCents: 0` in `lib/pricing.ts`, annotated `@deprecated` in Prisma schema).
+- **AGENT-5 (Material, Components & Colourways Audit):** Verified 291 `FabricColor` rows seeded with zero duplicate hex codes, 5-step configurator stepper, two-threshold MOQ validation engine (`moqPerFabric` & `moqPerColor` in `lib/moqValidation.ts`), and `LineItemMaterial` & `ProductMaterialComponent` multi-component architecture.
+- **AGENT-6 (Security, Admin Operations & Data Boundaries Audit):** Verified `jose` `HS256` JWT algorithm pinning, edge constant-time key comparison (`verifyAdminKey`), single-use 15-min magic links, IDOR company-scoped order protection, and ⌘K command palette public route protection.
+- **AGENT-7 (Master Consolidation & Final Report):** Compiled comprehensive audit findings into `docs/FINAL-SATRIANO-FORENSIC-AUDIT-REPORT-v2.md`, confirming **100/100 Production Readiness (GO Verdict)** with 0 P0 blockers and 0 P1 issues.
+
+### 33.2 Shipped System Inventory (v1.0 — August 8, 2026) ✅
+
+#### M2O (Made-to-Order)
+- [x] Configurator: 5-step interactive B2B specification workflow (Fabric → Color → Fit → Size Matrix → Logo) ✅ (Aug 8, 2026)
+- [x] Vector logo upload support (.ai, .eps, .svg, .pdf, .png, .jpg) ✅ (Aug 8, 2026)
+- [x] Order submission: real DB transaction with company upsert ✅ (Aug 8, 2026)
+- [x] MOQ validation: per-color (20 units) + per-fabric (50 units) minimum ✅ (Aug 8, 2026)
+- [x] Proforma generation: auto-triggered A4 PDF, colors included, signed URL delivery ✅ (Aug 8, 2026)
+- [x] Admin price workflow: customer target price → admin final price decision ✅ (Aug 8, 2026)
+- [x] Payment: Stripe webhook idempotent with WebhookLog event deduplication ✅ (Aug 8, 2026)
+- [x] Portal: M2O order ledger with colorway details & status tracking ✅ (Aug 8, 2026)
+- [x] Lifecycle states: DRAFT → PENDING_REVIEW → PROFORMA_SENT → APPROVED → PAID → IN_PRODUCTION → SHIPPED / CANCELLED ✅ (Aug 8, 2026)
+
+#### Wholesale (Ready-Made Aggregation)
+- [x] WholesaleProduct model: dedicated schema model separate from M2O Product ✅ (Aug 8, 2026)
+- [x] Supplier privacy boundary: firmName, contactPerson, email, phone, costPrice, markup stripped from public DTOs ✅ (Aug 8, 2026)
+- [x] Taxonomy: Gender, AgeGroup, Category first-class string properties & enums ✅ (Aug 8, 2026)
+- [x] Catalog API: database queries mapped with fixed wholesale pricing & SKUs ✅ (Aug 8, 2026)
+- [x] Checkout flow: client-side cart localStorage → order submission ✅ (Aug 8, 2026)
+- [x] Stock management: atomic stock reservation in prisma.$transaction with row-level locking ✅ (Aug 8, 2026)
+- [x] Payment: Stripe webhook idempotent, stock deduction safe ✅ (Aug 8, 2026)
+- [x] Portal: Wholesale order ledger with size breakdown matrix ✅ (Aug 8, 2026)
+
+#### Materials & Colourways
+- [x] FabricColor model: 291 active rows seeded with zero duplicate hex codes per fabric line ✅ (Aug 8, 2026)
+- [x] Pilot seed: 21 active colors on Classic Polo Shirt ✅ (Aug 8, 2026)
+- [x] Core seed: 291 total FabricColor rows seeded across 59 non-Accessories fabrics ✅ (Aug 8, 2026)
+- [x] Multi-component schema: ProductMaterialComponent & LineItemMaterial support UPPER, LINING, SOLE, TRIM, HARDWARE ✅ (Aug 8, 2026)
+
+#### Pricing & Commercial Rules
+- [x] M2O target budget input + admin final price proforma flow ✅ (Aug 8, 2026)
+- [x] Price range display: min-max cents per fabric line ✅ (Aug 8, 2026)
+- [x] Price snapshot: OrderLine.unitPriceCents frozen at placement time ✅ (Aug 8, 2026)
+- [x] Wholesale sell price: costPriceCents × (1 + markupPercent/100) ✅ (Aug 8, 2026)
+- [x] Setup fee: completely removed (setupFeeCents: 0 hardcoded, @deprecated in schema) ✅ (Aug 8, 2026)
+
+#### Security & Infrastructure
+- [x] Admin Auth: jose HS256 JWT algorithm pinned, constant-time verifyAdminKey compare, httpOnly cookie ✅ (Aug 8, 2026)
+- [x] Customer Auth: APPROVED B2B application magic-link, 15-min single-use expiry, httpOnly session cookie ✅ (Aug 8, 2026)
+- [x] Authorization & IDOR: companyId scoping enforced across all customer endpoints ✅ (Aug 8, 2026)
+- [x] ⌘K Palette Guard: restricted to /admin routes strictly ✅ (Aug 8, 2026)
+- [x] Port Standard: Port 3002 explicitly reserved and configured for local dev ✅ (Aug 8, 2026)
+
+---
+
+## 34. Post-Launch Roadmap & Version Timeline
+
+### v2.0 — Q3 2026 (Post-Launch Enhancements)
+- [ ] **Multi-Language UI:** Localization support for EN, AR, DE, FR, RU 📅 (Oct 2026)
+- [ ] **RBAC Multi-User Admin:** Multi-role admin management (`SUPER_ADMIN`, `CATALOG_MANAGER`, `ORDER_OPERATOR`, `SUPPLIER_MANAGER`) 📅 (Oct 2026)
+- [ ] **Stripe Live Mode:** Switch from Stripe sandbox to live production API keys 📅 (Oct 2026)
+- [ ] **Volume Discounts:** Tiered discount thresholds for Wholesale orders 📅 (Oct 2026)
+- [ ] **Audit Logging:** System-wide admin action audit logging (`AuditLog` table UI) 📅 (Oct 2026)
+- [ ] **Supplier Portal:** PO management, supplier delivery promise SLA tracking 📅 (Oct 2026)
+
+### v2.1+ — Q4 2026 & Beyond (Advanced Features)
+- [ ] **Logistics Integration:** FedEx, DHL, UPS tracking APIs & auto label printing 📅 (Dec 2026)
+- [ ] **ERP & Accounting:** QuickBooks GL sync & automated regional VAT/GST calculation 📅 (Dec 2026)
+- [ ] **Analytics & Forecasting:** Predictive stock-out inventory forecasting dashboard 📅 (Q1 2027)
+- [ ] **Native Mobile Apps:** iOS & Android native buyer portal applications 📅 (Q2 2027)
+- [ ] **White-Label Reseller Portal:** Reseller storefronts, custom branding, and automated payouts 📅 (Q2 2027)
+
+---
+
+## 📊 Version Timeline Summary
+
+| Version | Target Date | Status | Core Deliverables |
+|---|---|---|---|
+| **v1.0** | Aug 8, 2026 | ✅ SHIPPED | M2O + Wholesale Core, Security, 291 Colors, 204 Unit Tests |
+| **v2.0** | Oct 2026 | 📅 PLANNED | Multi-Language, RBAC Roles, Live Stripe, Volume Discounts |
+| **v2.1** | Dec 2026 | 📅 PLANNED | Logistics APIs, QuickBooks Accounting, Advanced Analytics |
+| **v3.0** | Q2 2027 | 📅 FUTURE | Native Mobile Apps, White-Label Storefronts, API Marketplace |
+
+---
+
+## 📝 Document Status & Single-Source-of-Truth Rule
+- **Last Updated:** August 8, 2026 — Forensic Audit v2 Complete, Production Launch Verified ✅
+- **Git Commit:** `8daa033` (Synced with `origin/main` on Vercel Production)
+- **Discipline:** Single-file source of truth. Always update `sa-roadmap.md` in place.
